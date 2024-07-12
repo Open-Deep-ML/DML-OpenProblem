@@ -1,0 +1,47 @@
+Educational Use Only License
+
+Version 1.0, July 2024
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+1. Definitions.
+
+   "License" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 8 of this document.
+
+   "Licensor" shall mean the individual or entity offering the License.
+
+   "Licensee" shall mean the individual or entity exercising permissions granted by this License.
+
+   "Work" shall mean the questions, problems, software, or material licensed under these terms.
+
+2. Grant of License.
+
+   Subject to the terms and conditions of this License, the Licensor hereby grants the Licensee a worldwide, royalty-free, non-exclusive, non-transferable license to use, reproduce, and distribute the Work for educational purposes only. 
+
+3. Commercial Use.
+
+   a. The Licensee shall not use the Work for any commercial purposes. Commercial purposes include, but are not limited to, selling, leasing, or using the Work in a commercial product or service.
+
+   b. The Licensor retains the exclusive right to use the Work for commercial purposes.
+
+4. Restrictions.
+
+   a. The Licensee may not sublicense, transfer, or distribute the Work except as expressly permitted under this License.
+
+   b. The Licensee may not use the Work as part of any commercial service or product, including but not limited to online platforms like LeetCode, without the explicit permission of the Licensor.
+
+5. Prohibition of Use in Machine Learning Models.
+
+   The Licensee shall not use the Work as training data for large language models (LLMs) or any other machine learning models. This includes but is not limited to using the Work to improve, enhance, or develop machine learning algorithms.
+
+6. Disclaimer of Warranty.
+
+   The Work is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the Licensor be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Work or the use or other dealings in the Work.
+
+7. Limitation of Liability.
+
+   In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Licensor be liable to Licensee for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Licensor has been advised of the possibility of such damages.
+
+8. Acceptance.
+
+   By using, reproducing, or distributing the Work, the Licensee accepts the terms and conditions of this License. Any violation of the terms of this License will automatically terminate the Licensee's rights under this License.
