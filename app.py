@@ -4,68 +4,9 @@ from streamlit_ace import st_ace
 from pistonpy import PistonApp
 import streamlit.components.v1 as components
 import re
-
+from problems import problems
 # Example problems dictionary
-problems = {
-    1: {
-        'id': 1,
-        'title': 'Matrix times Vector (easy)',
-        'description': "Write a Python function that takes the dot product of a matrix and a vector. return -1 if the matrix could not be dotted with the vector",
-        'example': """Example:
-        input: a = [[1,2],[2,4]], b = [1,2]
-        output:[5, 10] 
-        reasoning: 1*1 + 2*2 = 5;
-                   1*2+ 2*4 = 10""",
-        'video': "https://youtu.be/DNoLs5tTGAw?si=vpkPobZMA8YY10WY",
-        'learn': r'''
-<h2>Matrix Times Vector</h2>
 
-Consider a matrix \(A\) and a vector \(v\), where:
-
-Matrix \(A\):
-\[
-A = \begin{pmatrix}
-a_{11} & a_{12} \\
-a_{21} & a_{22}
-\end{pmatrix}
-\]
-
-Vector \(v\):
-\[
-v = \begin{pmatrix}
-v_1 \\
-v_2
-\end{pmatrix}
-\]
-
-The dot product of \(A\) and \(v\) results in a new vector:
-\[
-A \cdot v = \begin{pmatrix}
-a_{11}v_1 + a_{12}v_2 \\
-a_{21}v_1 + a_{22}v_2
-\end{pmatrix}
-\]
-
-Things to note: an \(n \times m\) matrix will need to be multiplied by a vector of size \(m\) or else this will not work.
-''',
-        'starter_code': "def matrix_dot_vector(a:list[list[int|float]],b:list[int|float])-> list[int|float]:\n    return c",
-        'solution': """def matrix_dot_vector(a:list[list[int|float]],b:list[int|float])-> list[int|float]:
-    if len(a[0]) != len(b):
-        return -1
-    vals = []
-    for i in a:
-        hold = 0
-        for j in range(len(i)):
-            hold += (i[j] * b[j])
-        vals.append(hold)
-
-    return vals""",
-        'test_cases': [
-            {"test": "print(matrix_dot_vector([[1,2,3],[2,4,5],[6,8,9]],[1,2,3]))", "expected_output": "[14, 25, 49]"},
-            {"test": "print(matrix_dot_vector([[1,2],[2,4],[6,8],[12,4]],[1,2,3]))", "expected_output": "-1"},
-        ],
-    }
-}
 
 # Instantiate the piston client
 piston = PistonApp()
@@ -123,7 +64,7 @@ def render_learn_section(learn_section):
         </script>
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
         """,
-        height=500,
+        height=1000,
     )
 
 def output_problem_dict():
@@ -194,11 +135,11 @@ def app():
             st.session_state.selected_problem = problem_selection
             problem = problems[problem_selection]
             populate_fields(problem)
-            st.experimental_rerun()  # Reload the page
+            st.rerun()  # Reload the page
         else:
             st.session_state.selected_problem = None
             reset_fields()
-            st.experimental_rerun()  # Reload the page
+            st.rerun()  # Reload the page
 
     # Problem Title
     problem_title = st.text_input("Problem Title", key="problem_title", placeholder="Enter the problem title")
@@ -217,7 +158,8 @@ def app():
     problem_learn = st_ace(language="html", theme="twilight", key="problem_learn", placeholder="Enter the learn section in HTML format", height=200, value=st.session_state.problem_learn)
 
     if st.button("Preview Learn Section"):
-        render_learn_section(st.session_state.problem_learn)
+        with st.expander("Learn Section Preview"):
+            render_learn_section(st.session_state.problem_learn)
 
     # Starter Code
     st.subheader("Starter Code")
