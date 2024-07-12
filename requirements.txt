@@ -24,7 +24,6 @@ bleach==6.0.0
 blinker==1.4
 boltons==23.1.1
 cachetools==5.3.3
-caffeine==2.9.8
 cattrs==23.2.2
 certifi==2022.12.7
 cffi==1.15.1
