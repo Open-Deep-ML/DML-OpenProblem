@@ -1,8 +1,6 @@
 attr==0.3.2
 colorama==0.4.6
 ConfigParser==7.0.0
-cryptography==41.0.5
-cryptography==3.4.8
 Cython==3.0.5
 dl==0.1.0
 docutils==0.21.2
@@ -18,7 +16,6 @@ Pillow==9.2.0
 Pillow==10.4.0
 pistonpy==0.0.3
 protobuf==5.27.2
-pyOpenSSL==23.3.0
 pyOpenSSL==24.1.0
 railroad==0.5.0
 redis==5.0.7
