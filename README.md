@@ -12,8 +12,7 @@ Welcome to the **OpenProblem** repository! This repository contains a collection
 
 ## Introduction
 
-This repository is designed to provide hands-on practice with implementing fundamental algorithms in machine learning and deep learning. By working through these problems, you'll gain a deeper understanding of how these algorithms work and how to implement them from scratch.
-
+This repository is designed to provide hands-on practice with implementing fundamental algorithms in machine learning and deep learning. By working through these problems, you'll gain a deeper understanding of how these algorithms work and how to implement them from scratch, all the problems can be solved on https://www.deep-ml.com/
 ## Getting Started
 
 To get started with the problem set, clone this repository to your local machine:
