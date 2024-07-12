@@ -1,6 +1,7 @@
 attr==0.3.2
 colorama==0.4.6
 ConfigParser==7.0.0
+cryptography==41.0.5
 Cython==3.0.5
 dl==0.1.0
 docutils==0.21.2
