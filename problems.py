@@ -306,7 +306,7 @@ Understanding eigenvalues is essential for analyzing the effects of linear trans
         'description': "Write a Python function that transforms a given matrix A using the operation $T^{-1}AS$, where T and S are invertible matrices. The function should first validate if the matrices T and S are invertible, and then perform the transformation.",
         'example': """Example:
         input: A = [[1, 2], [3, 4]], T = [[2, 0], [0, 2]], S = [[1, 1], [0, 1]]
-        output: [[0.5, 1.0], [1.5, 2.0]]
+        output: [[0.5,1.5],[1.5,3.5]]
         reasoning: The matrices T and S are used to transform matrix A by computing $T^{-1}AS$.""",
         'learn': r'''
 <h2>Matrix Transformation using \(T^{-1}AS\)</h2>
@@ -393,9 +393,9 @@ def transform_matrix(A: list[list[int|float]], T: list[list[int|float]], S: list
     
     return transformed_matrix.tolist()""",
         'test_cases': [
-            {"test": "print(transform_matrix([[1, 2], [3, 4]], [[2, 0], [0, 2]], [[1, 1], [0, 1]]))", "expected_output": "[[0.5, 1.0], [1.5, 2.0]]"},
-            {"test": "print(transform_matrix([[1, 0], [0, 1]], [[1, 2], [3, 4]], [[2, 0], [0, 2]]))", "expected_output": "[[0.5, 1.0], [1.5, 2.0]]"},
-            {"test": "print(transform_matrix([[2, 3], [1, 4]], [[3, 0], [0, 3]], [[1, 1], [0, 1]]))", "expected_output": "[[0.6666666666666666, 1.0], [0.3333333333333333, 1.3333333333333333]]"},
+            {"test": "print(transform_matrix([[1, 2], [3, 4]], [[2, 0], [0, 2]], [[1, 1], [0, 1]]))", "expected_output": "[[0.5, 1.5], [1.5, 3.5]]"},
+            {"test": "print(transform_matrix([[1, 0], [0, 1]], [[1, 2], [3, 4]], [[2, 0], [0, 2]]))", "expected_output": "[[-4., 2.],[ 3., -1.]]"},
+            {"test": "print(transform_matrix([[2, 3], [1, 4]], [[3, 0], [0, 3]], [[1, 1], [0, 1]]))", "expected_output": "[[0.66666667,1.66666667],[0.33333333, 1.66666667]]"},
         ],
     },
     8: {
