@@ -1,0 +1,62 @@
+<h2>Matrix Transformation using \(T^{-1}AS\)</h2>
+
+Transforming a matrix \(A\) using the operation \(T^{-1}AS\) involves several steps. This operation changes the basis of matrix \(A\) using two invertible matrices \(T\) and \(S\).
+
+Given matrices \(A\), \(T\), and \(S\):
+
+1. **Check if \(T\) and \(S\) are invertible** by ensuring their determinants are non-zero.
+2. **Compute the inverses** of \(T\) and \(S\), denoted as \(T^{-1}\) and \(S^{-1}\).
+3. **Perform the matrix multiplication** to obtain the transformed matrix:
+\[
+A' = T^{-1}AS
+\]
+
+<h3> Example </h3>
+If:
+\[
+A = \begin{pmatrix} 
+1 & 2 \\ 
+3 & 4 
+\end{pmatrix}
+\]
+\[
+T = \begin{pmatrix} 
+2 & 0 \\ 
+0 & 2 
+\end{pmatrix}
+\]
+\[
+S = \begin{pmatrix} 
+1 & 1 \\ 
+0 & 1 
+\end{pmatrix}
+\]
+
+First, check that \(T\) and \(S\) are invertible:
+- \(\det(T) = 4 \neq 0 \)
+- \(\det(S) = 1 \neq 0 \)
+
+Compute the inverses:
+\[
+T^{-1} = \begin{pmatrix} 
+\frac{1}{2} & 0 \\ 
+0 & \frac{1}{2} 
+\end{pmatrix}
+\]
+
+Then, perform the transformation:
+\[
+A' = T^{-1}AS = \begin{pmatrix} 
+\frac{1}{2} & 0 \\ 
+0 & \frac{1}{2} 
+\end{pmatrix} \begin{pmatrix} 
+1 & 2 \\ 
+3 & 4 
+\end{pmatrix} \begin{pmatrix} 
+1 & 1 \\ 
+0 & 1 
+\end{pmatrix} = \begin{pmatrix} 
+0.5 & 1.0 \\ 
+1.5 & 2.0 
+\end{pmatrix}
+\]
