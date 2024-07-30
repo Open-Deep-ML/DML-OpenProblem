@@ -1,39 +1,8 @@
-import ast
 import streamlit as st
 from streamlit_ace import st_ace
-from pistonpy import PistonApp
 import streamlit.components.v1 as components
+import os
 import re
-from problems import problems
-# Example problems dictionary
-
-
-# Instantiate the piston client
-piston = PistonApp()
-
-def execute_code(user_code):
-    # Execute the user code using pistonpy
-    result = piston.run(language="python", version="3.10.0", code=user_code)
-    return result
-
-def run_test_cases(user_code, test_cases):
-    results = []
-    for test_case in test_cases:
-        # Modify user_code to include the test case at the end
-        code_to_run = f"{user_code}\n\n{test_case['test']}"
-        result = execute_code(code_to_run)
-        
-        stdout = result['run']['stdout'].strip()
-        expected_output = test_case['expected_output'].strip()
-
-        # Check if the test case passed
-        if '{' in stdout:
-            passed = ast.literal_eval(stdout) == ast.literal_eval(expected_output)
-        else:
-            passed = stdout == expected_output
-        results.append((test_case['test'], expected_output, stdout, passed))
-
-    return results
 
 def render_learn_section(learn_section):
     # Replace LaTeX delimiters with the appropriate format for MathJax
@@ -67,142 +36,58 @@ def render_learn_section(learn_section):
         height=1000,
     )
 
-def output_problem_dict():
-    if 'problems' not in st.session_state:
-        st.session_state.problems = {}
+# Define the directory containing the learn.html files
+LEARN_HTML_DIR = "Problems"
 
-    problem_id = len(st.session_state.problems) + 1
-    problem_dict = {
-        'id': problem_id,
-        'title': st.session_state.problem_title,
-        'description': st.session_state.problem_description,
-        'example': st.session_state.problem_example,
-        'video': st.session_state.problem_video,
-        'learn': st.session_state.problem_learn,
-        'starter_code': st.session_state.problem_starter_code,
-        'solution': st.session_state.problem_solution,
-        'test_cases': [{'test': tc['test'], 'expected_output': tc['expected_output']} for tc in st.session_state.custom_test_cases]
-    }
+def load_file(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return file.read()
+    except Exception as e:
+        st.error(f"Error loading file {file_path}: {e}")
+        return ""
 
-    if 'contributor_name' in st.session_state and st.session_state.contributor_name:
-        problem_dict['contributor'] = {
-            'name': st.session_state.contributor_name,
-            'profile_link': st.session_state.contributor_profile_link
-        }
+def save_file(file_path, content):
+    try:
+        with open(file_path, 'w', encoding='utf-8') as file:
+            file.write(content)
+    except Exception as e:
+        st.error(f"Error saving file {file_path}: {e}")
 
-    st.subheader("Generated Python Dictionary:")
-    st.code(f"{problem_id}: {repr(problem_dict)}", language="python")
+# Streamlit app
+st.title("Learn Section Editor")
 
-def populate_fields(problem):
-    st.session_state.problem_title = problem['title']
-    st.session_state.problem_description = problem['description']
-    st.session_state.problem_example = problem['example']
-    st.session_state.problem_video = problem.get('video', '')
-    st.session_state.problem_learn = problem['learn']
-    st.session_state.problem_starter_code = problem['starter_code']
-    st.session_state.problem_solution = problem['solution']
-    st.session_state.custom_test_cases = problem['test_cases']
+# List HTML files in the directory
+html_files = []
+for root, dirs, files in os.walk(LEARN_HTML_DIR):
+    for file in files:
+        if file.endswith(".html"):
+            html_files.append(os.path.join(root, file))
 
-def reset_fields():
-    st.session_state.problem_title = ''
-    st.session_state.problem_description = ''
-    st.session_state.problem_example = ''
-    st.session_state.problem_video = ''
-    st.session_state.problem_learn = ''
-    st.session_state.problem_starter_code = ''
-    st.session_state.problem_solution = ''
-    st.session_state.custom_test_cases = []
+if not html_files:
+    st.warning("No learn.html files found.")
+else:
+    # File selector
+    selected_file = st.selectbox("Select an HTML file to edit", html_files, key="file_selector")
 
-def app():
-    st.title("Problem Creation Platform")
-    st.subheader("Create and test new problems for the ML Challenge Platform")
+    if selected_file:
+        # Load the content of the selected file
+        content = load_file(selected_file)
 
-    if 'custom_test_cases' not in st.session_state:
-        st.session_state.custom_test_cases = []
+        # Use the code editor for editing the content
+        # Add a unique key for the editor to reset its state when a new file is selected
+        editor_key = f"editor_{selected_file}"
 
-    if 'test_results' not in st.session_state:
-        st.session_state.test_results = []
+        # Display the editor with the current file content
+        edited_content = st_ace(value=content, language='html', theme='monokai', key=editor_key)
 
-    if 'problem_title' not in st.session_state:
-        reset_fields()
+        if st.button("Save changes"):
+            save_file(selected_file, edited_content)
+            st.success(f"Changes saved to {selected_file}")
+            st.session_state["rendered_html"] = edited_content
 
-    st.header("Create or Edit a Problem")
-
-    # Dropdown menu for selecting an existing problem
-    problem_selection = st.selectbox("Select a problem to edit or create a new one", [None] + list(problems.keys()), format_func=lambda x: problems[x]['title'] if x else "Create new problem")
-    if st.session_state.get('selected_problem') != problem_selection:
-        if problem_selection:
-            st.session_state.selected_problem = problem_selection
-            problem = problems[problem_selection]
-            populate_fields(problem)
-            st.rerun()  # Reload the page
+        # Render the content
+        if "rendered_html" in st.session_state:
+            render_learn_section(st.session_state["rendered_html"])
         else:
-            st.session_state.selected_problem = None
-            reset_fields()
-            st.rerun()  # Reload the page
-
-    # Problem Title
-    problem_title = st.text_input("Problem Title", key="problem_title", placeholder="Enter the problem title")
-
-    # Problem Description
-    problem_description = st.text_area("Description", key="problem_description", placeholder="Enter the problem description")
-
-    # Problem Example
-    problem_example = st.text_area("Example", key="problem_example", placeholder="Enter example inputs and outputs")
-
-    # Problem Video URL
-    problem_video = st.text_input("Video URL (optional)", key="problem_video", placeholder="Enter a video URL (optional)")
-
-    # Learn Section
-    st.subheader("Learn Section")
-    problem_learn = st_ace(language="html", theme="twilight", key="problem_learn", placeholder="Enter the learn section in HTML format", height=200, value=st.session_state.problem_learn)
-
-    if st.button("Preview Learn Section"):
-        with st.expander("Learn Section Preview"):
-            render_learn_section(st.session_state.problem_learn)
-
-    # Starter Code
-    st.subheader("Starter Code")
-    problem_starter_code = st_ace(language="python", theme="twilight", key="problem_starter_code", placeholder="Enter starter code", height=200, value=st.session_state.problem_starter_code)
-
-    # Solution Code
-    st.subheader("Solution Code")
-    problem_solution = st_ace(language="python", theme="twilight", key="problem_solution", placeholder="Enter solution code", height=200, value=st.session_state.problem_solution)
-
-    # Test Cases
-    st.subheader("Test Cases")
-    if st.button("Add Test Case"):
-        st.session_state.custom_test_cases.append({'test': '', 'expected_output': ''})
-
-    for idx, test_case in enumerate(st.session_state.custom_test_cases):
-        test_case['test'] = st.text_area(f"Test Case {idx + 1} Code", value=test_case['test'], key=f"test_case_{idx}")
-        test_case['expected_output'] = st.text_area(f"Expected Output {idx + 1}", value=test_case['expected_output'], key=f"expected_output_{idx}")
-
-        if st.button(f"Delete Test Case {idx + 1}"):
-            st.session_state.custom_test_cases.pop(idx)
-
-    # Run Test Cases Button
-    if st.button("Run Test Cases"):
-        user_code = st.session_state.problem_solution
-        st.session_state.test_results = run_test_cases(user_code, st.session_state.custom_test_cases)
-
-    # Display Test Results
-    if st.session_state.test_results:
-        st.subheader("Test Results")
-        for idx, (test_code, expected_output, actual_output, passed) in enumerate(st.session_state.test_results):
-            st.write(f"Test Case {idx + 1}")
-            st.code(test_code, language="python")
-            st.write(f"Expected Output: {expected_output}")
-            st.write(f"Actual Output: {actual_output}")
-            st.write(f"Passed: {passed}")
-
-    # Contributor Information
-    st.subheader("Contributor Information")
-    contributor_name = st.text_input("Contributor Name (optional)", key="contributor_name", placeholder="Enter your name (optional)")
-    contributor_profile_link = st.text_input("Profile Link (optional)", key="contributor_profile_link", placeholder="Enter your profile link (optional)")
-
-    if st.button("Generate Python Dictionary"):
-        output_problem_dict()
-
-if __name__ == "__main__":
-    app()
+            render_learn_section(content)

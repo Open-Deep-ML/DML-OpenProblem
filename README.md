@@ -1,101 +1,77 @@
-# OpenProblem
+# DML-OpenProblem
 
-Welcome to the **OpenProblem** repository! This repository contains a collection of coding challenges designed to help you learn and implement various machine learning and deep learning algorithms from scratch. Each problem includes a detailed description, example inputs and outputs, a learning section, starter code, and test cases.
-
+DML-OpenProblem is an open-source repository of problems focused on linear algebra, machine learning, and deep learning. The problems are designed to be solved from scratch, providing a robust learning experience. This project powers the website [Deep-ML](https://www.deep-ml.com/).
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Getting Started](#getting-started)
-- [Example Problem](#example-problem)
-  - [Matrix times Vector (easy)](#matrix-times-vector-easy)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Introduction
+## Installation
 
-This repository is designed to provide hands-on practice with implementing fundamental algorithms in machine learning and deep learning. By working through these problems, you'll gain a deeper understanding of how these algorithms work and how to implement them from scratch, all the problems can be solved on https://www.deep-ml.com/
-## Getting Started
+To get started with DML-OpenProblem, clone the repository and install the necessary dependencies.
 
-To get started with the problem set, clone this repository to your local machine:
-
-```bash
-git clone https://github.com/yourusername/openproblem.git
+```sh
+git clone https://github.com/yourusername/DML-OpenProblem.git
+cd DML-OpenProblem
+pip install -r requirements.txt
 ```
-Each problem is contained within a Python dictionary in the problems.py file. You can work on each problem individually by following the provided instructions.
+## Usage
+You can use the repository to create, edit, and solve problems related to linear algebra, machine learning, and deep learning. The problems are structured in directories, each containing relevant files such as learn.html for the learning section and solution.py for the solution code.
 
-join our [Discord community](https://discord.gg/s4uVTQwk).
+### Running the Streamlit App
 
-## Example Problem
+To launch the Streamlit application for editing and viewing problems, use the following command:
 
-### Matrix times Vector (easy)
-
-**Description**: Write a Python function that takes the dot product of a matrix and a vector. Return -1 if the matrix could not be dotted with the vector.
-
-**Example**:
-```python
-input: a = [[1,2],[2,4]], b = [1,2]
-output: [5, 10]
-reasoning: 1*1 + 2*2 = 5; 1*2 + 2*4 = 10
-```
-### Learn
-```html
-<h2>Transpose of a Matrix</h2>
-Consider a matrix \(M\) and its transpose \(M^T\), where:
-
-Original Matrix \(M\):
-\[
-M = \begin{pmatrix} 
-a & b & c \\ 
-d & e & f 
-\end{pmatrix}
-\]
-
-Transposed Matrix \(M^T\):
-\[
-M^T = \begin{pmatrix} 
-a & d \\ 
-b & e \\ 
-c & f 
-\end{pmatrix}
-\]
-
-Transposing a matrix involves converting its rows into columns and vice versa. This operation is fundamental in linear algebra for various computations and transformations.
+```sh
+streamlit run app.py
 ```
 
+#### Features
+- Problem Editor: Edit the learn.html and solution.py files for each problem using a web-based code editor.
+- Preview Section: Preview the learning section with LaTeX rendering for mathematical expressions.
+- Save Changes: Save your edits to the corresponding files in the repository.
 
-### Starter Code
-
-```python
-def matrix_dot_vector(a: list[list[int|float]], b: list[int|float]) -> list[int|float]:
-    return c
+## Project Structure
+```sh
+DML-OpenProblem/
+│
+├── Problems/
+│   ├── 1_matrix_times_vector/
+│   │   ├── learn.html
+│   │   └── solution.py
+│   ├── 2_transpose_matrix/
+│   │   ├── learn.html
+│   │   └── solution.py
+│   └── ... (additional problem directories)
+│
+├── app.py
+├── requirements.txt
+└── README.md
 ```
+- **Problems/**: Contains directories for each problem. Each directory includes:
+  - `learn.html`: HTML file containing the learning section with explanations and examples.
+  - `solution.py`: Python file containing the solution to the problem along with tests.
+- **app.py**: The main Streamlit application file for editing the learn sections.
+- **requirements.txt**: Lists the dependencies required for the project.
+- **README.md**: This file.
 
-### Solution
-```python
-def matrix_dot_vector(a: list[list[int|float]], b: list[int|float]) -> list[int|float]:
-    if len(a[0]) != len(b):
-        return -1
-    vals = []
-    for i in a:
-        hold = 0
-        for j in range(len(i)):
-            hold += (i[j] * b[j])
-        vals.append(hold)
-    return vals
-```
+## Contributing
+
+We welcome contributions to improve DML-OpenProblem and [deep-ml.com](https://www.deep-ml.com). If you have a new problem to add or improvements to existing problems, please fork the repository and submit a pull request. All contributions will be displayed on [deep-ml.com](https://www.deep-ml.com). For example, check out this problem: [Divide Dataset Based on Feature Threshold](https://www.deep-ml.com/problem/Divide%20Dataset%20Based%20on%20Feature%20Threshold).
 
 
-### Test Cases
+### Steps to Contribute
 
-```pyhton
-print(matrix_dot_vector([[1,2,3],[2,4,5],[6,8,9]], [1,2,3])) # Expected output: [14, 25, 49]
-print(matrix_dot_vector([[1,2],[2,4],[6,8],[12,4]], [1,2,3])) # Expected output: -1
-```
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Make your changes and commit them with clear and concise messages.
+4. Push your changes to your fork.
+5. Submit a pull request with a detailed description of your changes.
 
+## License
 
-### Contribution:
-
-Contributor: User's Name
-
-profile_url: https://profile.url
-
-On [deep-ml.com](https://www.deep-ml.com/), you can view the contributors for each problem they worked on, along with a link to their chosen profile.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
