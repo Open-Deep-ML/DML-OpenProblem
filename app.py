@@ -68,14 +68,18 @@ if not html_files:
     st.warning("No learn.html files found.")
 else:
     # File selector
-    selected_file = st.selectbox("Select an HTML file to edit", html_files)
+    selected_file = st.selectbox("Select an HTML file to edit", html_files, key="file_selector")
 
     if selected_file:
         # Load the content of the selected file
         content = load_file(selected_file)
 
         # Use the code editor for editing the content
-        edited_content = st_ace(value=content, language='html', theme='monokai', key="editor")
+        # Add a unique key for the editor to reset its state when a new file is selected
+        editor_key = f"editor_{selected_file}"
+
+        # Display the editor with the current file content
+        edited_content = st_ace(value=content, language='html', theme='monokai', key=editor_key)
 
         if st.button("Save changes"):
             save_file(selected_file, edited_content)
