@@ -81,9 +81,7 @@ else:
         # Display the editor with the current file content
         edited_content = st_ace(value=content, language='html', theme='monokai', key=editor_key)
 
-        if st.button("Save changes"):
-            save_file(selected_file, edited_content)
-            st.success(f"Changes saved to {selected_file}")
+        if st.button("RENDER"):
             st.session_state["rendered_html"] = edited_content
 
         # Render the content
