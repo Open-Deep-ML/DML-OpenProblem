@@ -1,0 +1,20 @@
+<h2>Implementing k-Means Clustering</h2>
+
+<p>k-Means clustering is a method to partition <code>n</code> points into <code>k</code> clusters. Here is a brief overview of how to implement the k-Means algorithm:</p>
+
+<h3>1. Initialization</h3>
+<p>Start by selecting <code>k</code> initial centroids. These can be randomly selected from the dataset or based on prior knowledge.</p>
+
+<h3>2. Assignment Step</h3>
+<p>For each point in the dataset, find the nearest centroid. The "nearest" can be defined using Euclidean distance. Assign the point to the cluster represented by this nearest centroid.</p>
+
+<h3>3. Update Step</h3>
+<p>Once all points are assigned to clusters, update the centroids by calculating the mean of all points in each cluster. This becomes the new centroid of the cluster.</p>
+
+<h3>4. Iteration</h3>
+<p>Repeat the assignment and update steps until the centroids no longer change significantly, or until a predetermined number of iterations have been completed. This iterative process helps in refining the clusters to minimize within-cluster variance.</p>
+
+<h3>5. Result</h3>
+<p>The final centroids represent the center of the clusters, and the points are partitioned accordingly.</p>
+
+<p>This algorithm assumes that the <code>mean</code> is a meaningful measure, which might not be the case for non-numeric data. The choice of initial centroids can significantly affect the final clusters, hence multiple runs with different starting points can lead to a more comprehensive understanding of the cluster structure in the data.</p>

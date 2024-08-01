@@ -1,0 +1,21 @@
+<h2>Linear Regression Using the Normal Equation</h2>
+
+<p>Linear regression aims to model the relationship between a scalar dependent variable \(y\) and one or more explanatory variables (or independent variables) \(X\). The normal equation provides an analytical solution to finding the coefficients \(\theta\) that minimize the cost function for linear regression.</p>
+
+<p>Given a matrix \(X\) (with each row representing a training example and each column a feature) and a vector \(y\) (representing the target values), the normal equation is:</p>
+
+\[
+\theta = (X^TX)^{-1}X^Ty
+\]
+
+<ul>
+<li> \(X^T\) is the transpose of \(X\), </li>
+<li> \((X^TX)^{-1}\) is the inverse of the matrix \(X^TX\), </li>
+<li> \(y\) is the vector of target values. </li>
+</ul>
+
+<p>Things to note: This method does not require any feature scaling, and there's no need to choose a learning rate. However, computing the inverse of \(X^TX\) can be computationally expensive if the number of features is very large.</p>
+
+<h3>Practical Implementation</h3>
+
+<p>A practical implementation involves augmenting \(X\) with a column of ones to account for the intercept term and then applying the normal equation directly to compute \(\theta\).</p>
