@@ -1,0 +1,23 @@
+<h2>Feature Scaling Techniques</h2>
+
+<p>Feature scaling is crucial in many machine learning algorithms that are sensitive to the magnitude of features. This includes algorithms that use distance measures like k-nearest neighbors and gradient descent-based algorithms like linear regression.</p>
+
+<h3>Standardization:</h3>
+<p>Standardization (or Z-score normalization) is the process where the features are rescaled so that they have the properties of a standard normal distribution with a mean of zero and a standard deviation of one:</p>
+
+\[
+z = \frac{(x - \mu)}{\sigma}
+\]
+
+<p>Where \(x\) is the original feature, \(\mu\) is the mean of that feature, and \(\sigma\) is the standard deviation.</p>
+
+<h3>Min-Max Normalization:</h3>
+<p>Min-max normalization rescales the feature to a fixed range, typically 0 to 1, or it can be shifted to any range \([a, b]\) by transforming the data according to the formula:</p>
+
+\[
+x' = \frac{(x - \text{min}(x))}{(\text{max}(x) - \text{min}(x))} \times (\text{max} - \text{min}) + \text{min}
+\]
+
+<p>Where \(x\) is the original value, \(\text{min}(x)\) is the minimum value for that feature, \(\text{max}(x)\) is the maximum value, and \(\text{min}\) and \(\text{max}\) are the new minimum and maximum values for the scaled data.</p>
+
+<p>Implementing these scaling techniques will ensure that the features contribute equally to the development of the model and improve the convergence speed of learning algorithms.</p>

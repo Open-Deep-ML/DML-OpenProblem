@@ -1,0 +1,17 @@
+<h2>Decision Tree Learning Algorithm</h2>
+
+<p>The decision tree learning algorithm is a method used for classification that predicts the value of a target variable based on several input variables. Each internal node of the tree corresponds to an input variable, and each leaf node corresponds to a class label.</p>
+
+<p>The recursive binary splitting starts by selecting the attribute that best separates the examples according to the entropy and information gain, which are calculated as follows:</p>
+
+<p>Entropy: \(H(X) = -\sum p(x) \log_2 p(x)\)</p> 
+<p>Information Gain: \(IG(D, A) = H(D) - \sum \frac{|D_v|}{|D|} H(D_v)\)</p>
+
+<p>Where:</p>
+<ul>
+    <li>\(H(X)\) is the entropy of the set,</li>
+    <li>\(IG(D, A)\) is the information gain of dataset \(D\) after splitting on attribute \(A\),</li>
+    <li>\(D_v\) is the subset of \(D\) for which attribute \(A\) has value \(v\).</li>
+</ul>
+
+<p>The attribute with the highest information gain is used at each step, and the dataset is split based on this attribute's values. This process continues recursively until all data is perfectly classified or no remaining attributes can be used to make a split.</p>

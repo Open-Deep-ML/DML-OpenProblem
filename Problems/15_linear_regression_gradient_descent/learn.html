@@ -1,0 +1,27 @@
+<h2>Linear Regression Using Gradient Descent</h2>
+
+<p>Linear regression can also be performed using a technique called gradient descent, where the coefficients (or weights) of the model are iteratively adjusted to minimize a cost function (usually mean squared error). This method is particularly useful when the number of features is too large for analytical solutions like the normal equation or when the feature matrix is not invertible.</p>
+
+<p>The gradient descent algorithm updates the weights by moving in the direction of the negative gradient of the cost function with respect to the weights. The updates occur iteratively until the algorithm converges to a minimum of the cost function.</p>
+
+<p>The update rule for each weight is given by:</p>
+
+\[
+\theta_j := \theta_j - \alpha \frac{1}{m} \sum_{i=1}^{m} \left( h_{\theta}(x^{(i)}) - y^{(i)} \right)x_j^{(i)}
+\]
+
+<p>Where:</p>
+<ul>
+<li>\(\alpha\) is the learning rate,</li>
+<li>\(m\) is the number of training examples,</li>
+<li>\(h_{\theta}(x^{(i)})\) is the hypothesis function at iteration \(i\),</li>
+<li>\(x^{(i)}\) is the feature vector of the \(i^{th}\) training example,</li>
+<li>\(y^{(i)}\) is the actual target value for the \(i^{th}\) training example,</li>
+<li>\(x_j^{(i)}\) is the value of feature \(j\) for the \(i^{th}\) training example.</li>
+</ul>
+
+<p>**Things to note**: The choice of learning rate and the number of iterations are crucial for the convergence and performance of gradient descent. Too small a learning rate may lead to slow convergence, while too large a learning rate may cause overshooting and divergence.</p>
+
+<h3>Practical Implementation</h3>
+
+<p>Implementing gradient descent involves initializing the weights, computing the gradient of the cost function, and iteratively updating the weights according to the update rule.</p>

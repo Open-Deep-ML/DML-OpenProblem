@@ -1,0 +1,21 @@
+<h2>Understanding k-Fold Cross-Validation Data Splitting</h2>
+
+<p>k-Fold cross-validation is a technique used to evaluate the generalizability of a model by dividing the data into `k` folds or subsets. Each fold acts as a test set once, with the remaining `k-1` folds serving as the training set. This approach ensures that every data point gets used for both training and testing, improving model validation.</p>
+
+<h3> Steps in k-Fold Cross-Validation Data Split: </h3>
+
+<ol>
+    <li><strong>Shuffle the dataset randomly</strong> (but not in this case because we test for a unique result).</li>
+    <li><strong>Split the dataset into k groups</strong>.</li>
+    <li><strong>Generate Data Splits</strong>: For each group, treat that group as the test set and the remaining groups as the training set.</li>
+</ol>
+
+<h3> Benefits of this Approach: </h3>
+
+<ul>
+    <li>Ensures all data is used for both training and testing.</li>
+    <li>Reduces bias since each data point gets to be in a test set exactly once.</li>
+    <li>Provides a more robust estimate of model performance.</li>
+</ul>
+
+<p>Implementing this data split function will allow a deeper understanding of how data partitioning affects machine learning models and will provide a foundation for more complex validation techniques.</p>
