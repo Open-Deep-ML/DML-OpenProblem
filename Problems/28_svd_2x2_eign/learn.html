@@ -1,0 +1,19 @@
+<h2>Understanding Singular Value Decomposition (SVD)</h2>
+
+<p>Singular Value Decomposition (SVD) is a method in linear algebra for decomposing a matrix into three other matrices. For a given matrix A, SVD is represented as:</p>
+<p>\(A = U \cdot S \cdot V^T\)</p>
+
+<p>Here's a step-by-step method to calculate the SVD of a 2x2 matrix by hand:</p>
+
+<ol>
+    <li><strong>Calculate \(A^T A\) and \(A A^T\)</strong>: Compute the product of the matrix with its transpose and the transpose of the matrix with itself. These matrices share the same eigenvalues.</li>
+    <li><strong>Find the Eigenvalues</strong>: To find the eigenvalues of a 2x2 matrix, solve the characteristic equation \( \det(A - \lambda I) = 0 \). This results in a quadratic equation.</li>
+    <li><strong>Compute the Singular Values</strong>: The singular values, which form the diagonal elements of the matrix S, are the square roots of the eigenvalues.</li>
+    <li><strong>Calculate the Eigenvectors</strong>: For each eigenvalue, solve the equation \((A - \lambda I) \mathbf{x} = 0\) to find the corresponding eigenvector. Normalize these eigenvectors to form the columns of U and V.</li>
+    <li><strong>Form the Matrices U, S, and V</strong>: Combine the singular values and eigenvectors to construct the matrices U, S, and V such that \(A = U \cdot S \cdot V^T\).</li>
+</ol>
+
+<p>This method involves solving quadratic equations to find eigenvalues and eigenvectors and normalizing these vectors to unit length.</p>
+<p>Resources: <a href="https://metamerist.blogspot.com/2006/10/linear-algebra-for-graphics-geeks-svd.html">Linear Algebra for Graphics Geeks (SVD-IX)</a> by METAMERIST <a href="https://scicomp.stackexchange.com/questions/8899/robust-algorithm-for-2-times-2-svd/19646">Robust algorithm for 2×2 SVD</a></p>
+
+<p>Additional Resource: <a href="https://youtu.be/KuGn-2E9Xjg?si=XJn76d8QR">YouTube Video Explanation</a></p>
