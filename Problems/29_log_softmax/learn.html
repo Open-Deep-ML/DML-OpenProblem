@@ -1,0 +1,11 @@
+<h2>Solve Numerical Instability of Softmax</h2>
+
+
+<p>While Softmax is generally well-behaved, it can suffer from numerical instability issues, particularly when dealing with large input values.</p>
+
+<p>Overflow: Exponentiating large numbers can lead to values exceeding the representable range of floating-point numbers, resulting in overflow errors.</p>
+<p>Underflow: Conversely, exponentiating very small numbers can result in values approaching zero, causing underflow errors.</p>
+<p>These numerical issues can lead to incorrect results and hinder the training process.</p>
+
+<p>Write a Python function that computes the softmax activation without numerical instability. The function should return the softmax values as a list, each rounded to four decimal places.</p>
+
