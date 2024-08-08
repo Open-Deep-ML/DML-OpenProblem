@@ -1,16 +1,14 @@
 <h2>Simple Convolutional 2D Layer</h2>
 
-\[\text{output}_\text{height}\]
-
 Convolutional layer is widely used in Computer Vision tasks. Here is crucial parameters:
 
 <h3>Parameters:</h3>
 <ol>
     <li>
-        <b>input_matrix:</b> is a 2D NumPy array representing the input data, such as an image. Each element in this array corresponds to a pixel or a feature value in the input space. The dimensions of the input matrix are typically denoted as \[\text{(height, width)}\].
+        <b>input_matrix:</b> is a 2D NumPy array representing the input data, such as an image. Each element in this array corresponds to a pixel or a feature value in the input space. The dimensions of the input matrix are typically denoted as (\text{height, width}).
     </li>
     <li>
-       <b>kernel:</b> is another 2D NumPy array representing the convolutional filter. The kernel is smaller than the input matrix and slides over it to perform the convolution operation. Each element in the kernel represents a weight that modifies the input as it is convolved over it. The kernel size is denoted as `(kernel_height, kernel_width)`.
+       <b>kernel:</b> is another 2D NumPy array representing the convolutional filter. The kernel is smaller than the input matrix and slides over it to perform the convolution operation. Each element in the kernel represents a weight that modifies the input as it is convolved over it. The kernel size is denoted as (\text{kernel}_\text{height}, \text{kernel}_\text{width}).
     </li>
     <li>
         <b>padding:</b> is an integer specifying the number of rows and columns of zeros added around the input matrix. Padding helps control the spatial dimensions of the output. It can be used to maintain the same output size as the input or to allow the kernel to process edge elements in the input matrix more effectively.
