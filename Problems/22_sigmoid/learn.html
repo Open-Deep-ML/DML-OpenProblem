@@ -1,0 +1,23 @@
+<h2>Understanding the Sigmoid Activation Function</h2>
+
+<p>The sigmoid activation function is crucial in neural networks, especially for binary classification tasks. It maps any real-valued number into the (0, 1) interval, making it useful for modeling probability as an output.</p>
+
+<h3>Mathematical Definition</h3>
+
+<p>The sigmoid function is mathematically defined as:</p>
+
+\[
+\sigma(z) = \frac{1}{1 + e^{-z}}
+\]
+
+<p>Where \(z\) is the input to the function.</p>
+
+<h3>Characteristics</h3>
+
+<ul>
+    <li><strong>Output Range:</strong> The output is always between 0 and 1.</li>
+    <li><strong>Shape:</strong> It has an "S" shaped curve.</li>
+    <li><strong>Gradient:</strong> The function's gradient is highest near \(z = 0\) and decreases toward either end of the z-axis.</li>
+</ul>
+
+<p>This function is particularly useful for turning logits (raw prediction values) into probabilities in binary classification models.</p>

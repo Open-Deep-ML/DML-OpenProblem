@@ -1,0 +1,26 @@
+<h2>Pegasos Algorithm and Kernel SVM</h2>
+
+<p>The Pegasos (Primal Estimated sub-GrAdient SOlver for SVM) algorithm is a simple and efficient stochastic gradient descent method designed for solving the SVM optimization problem in its primal form.</p>
+
+<h3>Key Concepts:</h3>
+<ul>
+<li><b>Kernel Trick</b>: Allows SVM to classify data that is not linearly separable by implicitly mapping input features into high-dimensional feature spaces.</li>
+<li><b>Regularization Parameter (\(\lambda\))</b>: Controls the trade-off between achieving a low training error and a low model complexity.</li>
+<li><b>Sub-Gradient Descent</b>: Used in the Pegasos algorithm to optimize the objective function, which includes both the hinge loss and a regularization term.</li>
+</ul>
+
+<h3>Steps in the Pegasos Algorithm:</h3>
+<ol>
+<li><b>Initialize Parameters</b>: Start with zero weights and choose an appropriate value for the regularization parameter \( \lambda \).</li>
+<li><b>Iterative Updates</b>: For each iteration and for each randomly selected example, update the model parameters using the learning rule derived from the sub-gradient of the loss function.</li>
+<li><b>Kernel Adaptation</b>: Use the chosen kernel to compute the dot products required in the update step, allowing for non-linear decision boundaries.</li>
+</ol>
+
+<h3>Practical Implementation:</h3>
+<p>The implementation involves selecting a kernel function, calculating the kernel matrix, and performing iterative updates on the alpha coefficients according to the Pegasos rule:</p>
+<p>\[
+\alpha_{t+1} = (1 - \eta_t \lambda) \alpha_t + \eta_t (y_i K(x_i, x))
+\]</p>
+<p>where \( \eta_t \) is the learning rate at iteration \( t \), and \( K \) denotes the kernel function.</p>
+
+<p>This method is particularly well-suited for large-scale learning problems due to its efficient use of data and incremental learning nature.</p>
