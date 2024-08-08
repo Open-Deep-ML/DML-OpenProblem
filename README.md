@@ -74,4 +74,4 @@ We welcome contributions to improve DML-OpenProblem and [deep-ml.com](https://ww
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is for educational reasons only. See the [LICENSE](LICENSE) file for details.
