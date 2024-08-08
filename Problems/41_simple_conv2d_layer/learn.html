@@ -1,0 +1,44 @@
+<h2>Simple Convolutional 2D Layer</h2>
+
+Convolutional layer is widely used in Computer Vision tasks. Here is crucial parameters:
+
+<h3>Parameters:</h3>
+<ol>
+    <li>
+        <b>input_matrix:</b> is a 2D NumPy array representing the input data, such as an image. Each element in this array corresponds to a pixel or a feature value in the input space. The dimensions of the input matrix are typically denoted as (\text{height, width}).
+    </li>
+    <li>
+       <b>kernel:</b> is another 2D NumPy array representing the convolutional filter. The kernel is smaller than the input matrix and slides over it to perform the convolution operation. Each element in the kernel represents a weight that modifies the input as it is convolved over it. The kernel size is denoted as (\text{kernel}_\text{height}, \text{kernel}_\text{width}).
+    </li>
+    <li>
+        <b>padding:</b> is an integer specifying the number of rows and columns of zeros added around the input matrix. Padding helps control the spatial dimensions of the output. It can be used to maintain the same output size as the input or to allow the kernel to process edge elements in the input matrix more effectively.
+    </li>
+    <li>
+        <b>stride:</b> is an integer representing the number of steps the kernel moves across the input matrix for each convolution operation. A stride greater than one results in a smaller output size, as the kernel skips over some elements.
+    </li>
+</ol>
+
+<h3>Implementation:</h3>
+
+<ol>
+    <li>
+        <b>Padding the Input:</b> The input matrix is padded with zeros based on the `padding` value. This increases the input size, allowing the kernel to cover elements at the borders and corners that would otherwise be skipped.
+        </li>
+    <li>
+        <b>Calculating Output Dimensions:</b>The height and width of the output matrix are calculated using the formula:
+    \[
+     \text{output}_\text{height} = \left(\frac{\text{input}_{\text{height, padded}} - \text{kernel}_\text{height}}{\text{stride}}\right) + 1
+     \]
+     \[
+     \text{output}_\text{width} = \left(\frac{\text{input}_\text{width, padded} - \text{kernel}_\text{width}}{\text{stride}}\right) + 1
+     \]
+    </li>
+    <li><b>Performing Convolution:</b>
+        <ul>
+            <li>A nested loop iterates over each position where the kernel can be placed on the padded input matrix.</li>
+            <li>At each position, a region of the input matrix the same size as the kernel is selected.</li>
+            <li>Element-wise multiplication between the kernel and the input region is performed, followed by summation to produce a single value. This value is stored in the corresponding position in the output matrix.</li>
+        </ul>
+    </li>
+    <li><b>Output:</b> The function returns the output matrix, which contains the results of the convolution operation applied across the entire input.</li>
+</ol>
