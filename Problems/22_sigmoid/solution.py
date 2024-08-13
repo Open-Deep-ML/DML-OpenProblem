@@ -1,19 +1,35 @@
-import math
+def matrix_dot_vector(
+    a: list[list[int | float]],
+    b: list[int | float],
+) -> list[int | float] | int:
+    # verify MxN matrix is compatible with N vector
+    if (len(a[0]) if a else 0) != len(b):
+        return -1
 
-def sigmoid(z: float) -> float:
-    result = 1 / (1 + math.exp(-z))
-    return round(result, 4)
+    # perform the multiplication
+    c: list[int | float] = [0] * len(a)
+    for i in range(len(a)):
+        for j in range(len(a[i])):
+            c[i] += a[i][j] * b[j]
 
-def test_sigmoid():
-    # Test case 1: z = 0
-    assert sigmoid(0) == 0.5, "Test case 1 failed"
-    
-    # Test case 2: z = 1
-    assert sigmoid(1) == 0.7311, "Test case 2 failed"
-    
-    # Test case 3: z = -1
-    assert sigmoid(-1) == 0.2689, "Test case 3 failed"
+    return c
+
+
+def test_matrix_dot_vector() -> None:
+    # empty product
+    assert matrix_dot_vector([], []) == []
+
+    # invalid product
+    assert matrix_dot_vector([], [1, 2]) == -1
+    assert matrix_dot_vector([[1, 2]], []) == -1
+    assert matrix_dot_vector([[1, 2], [2, 4]], [1]) == -1
+
+    # valid product
+    a: list[list[int | float]] = [[1, 2], [2, 4]]
+    b: list[int | float] = [1, 2]
+    assert matrix_dot_vector(a, b) == [5, 10]
 
 if __name__ == "__main__":
-    test_sigmoid()
-    print("All sigmoid tests passed.")
+    test_matrix_dot_vector()
+    print("All tests passed.")
+
