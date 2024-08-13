@@ -1,0 +1,36 @@
+<h2>Single Neuron Model with Multidimensional Input and Sigmoid Activation</h2>
+
+This task involves a neuron model designed for binary classification with multidimensional input features, using the sigmoid activation function to output probabilities. It also involves calculating the mean squared error (MSE) to evaluate prediction accuracy.
+
+<h3>Mathematical Background</h3>
+
+<ul>
+    <li><strong>Neuron Output Calculation</strong>:
+        \[
+        z = \sum (weight_i \times feature_i) + bias
+        \]
+        \[
+        \sigma(z) = \frac{1}{1 + e^{-z}}
+        \]
+    </li>
+
+    <li><strong>MSE Calculation</strong>:
+        \[
+        MSE = \frac{1}{n} \sum (predicted - true)^2
+        \]
+        Where:
+        <ul>
+            <li>\(z\) is the sum of weighted inputs plus bias,</li>
+            <li>\(\sigma(z)\) is the sigmoid activation output,</li>
+            <li>\(predicted\) are the probabilities after sigmoid activation,</li>
+            <li>\(true\) are the true binary labels.</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>Practical Implementation</h3>
+
+<ul>
+    <li>Each feature vector is processed to calculate a combined weighted sum, which is then passed through the sigmoid function to determine the probability of the input belonging to the positive class.</li>
+    <li>MSE provides a measure of error, offering insights into the model's performance and aiding in its optimization.</li>
+</ul>
