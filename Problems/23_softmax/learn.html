@@ -1,0 +1,20 @@
+<h2>Understanding the Softmax Activation Function</h2>
+
+The softmax function is a generalization of the sigmoid function and is used in the output layer of a neural network model that handles multi-class classification tasks.
+
+<h3>Mathematical Definition</h3>
+
+The softmax function is mathematically represented as:
+
+\[
+\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j} e^{z_j}}
+\]
+
+<h3>Characteristics</h3>
+
+<ul>
+    <li><strong>Output Range:</strong> Each output value is between 0 and 1, and the sum of all outputs is 1.</li>
+    <li><strong>Purpose:</strong> It transforms scores into probabilities, which are easier to interpret and are useful for classification.</li>
+</ul>
+
+This function is essential for models where the output needs to represent a probability distribution across multiple classes.
