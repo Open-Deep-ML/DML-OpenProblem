@@ -1,0 +1,25 @@
+<h2>Ridge Regression Loss</h2>
+
+<p>Ridge Regression is a linear regression method with a regularization term to prevent overfitting by controlling the size of the coefficients.</p>
+
+<h3>Key Concepts:</h3>
+<ol>
+    <li><b>Regularization:</b> Adds a penalty to the loss function to discourage large coefficients, helping to generalize the model.</li>
+    <li><b>Mean Squared Error (MSE):</b> Measures the average squared difference between actual and predicted values.</li>
+    <li><b>Penalty Term:</b> The sum of the squared coefficients, scaled by the regularization parameter \( \lambda \), which controls the strength of the regularization.</li>
+</ol>
+
+<h3>Ridge Loss Function:</h3>
+<p>The Ridge Loss function combines MSE and the penalty term:</p>
+<p>
+\[
+L(\beta) = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^{p} \beta_j^2
+\]
+</p>
+
+<h3>Implementation Steps:</h3>
+<ol>
+    <li><b>Calculate MSE:</b> Compute the average squared difference between actual and predicted values.</li>
+    <li><b>Add Regularization Term:</b> Compute the sum of squared coefficients multiplied by \( \lambda \).</li>
+    <li><b>Combine and Minimize:</b> Sum MSE and the regularization term to form the Ridge loss, then minimize this loss to find the optimal coefficients.</li>
+</ol>
