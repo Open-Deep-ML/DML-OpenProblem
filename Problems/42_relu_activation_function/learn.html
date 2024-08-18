@@ -1,0 +1,28 @@
+<h2>Understanding the RELU Activation Function</h2>
+
+<p>The ReLU (Rectified Linear Unit) activation function is widely used in neural networks, particularly in hidden layers of deep learning models. It maps any real-valued number to the non-negative range \[\[0, infinity]\], which helps introduce non-linearity into the model while maintaining computational efficiency.  </p>
+
+<h3>Mathematical Definition</h3>
+
+<p>The RELU function is mathematically defined as:</p>
+
+\[
+\f(z) = max(0,z)
+\]
+
+<p>Where \(z\) is the input to the function.</p>
+<p>Where \(max(0,z)\) means that the function returns z if z is the greater value, and returns 0 if z is less than or equal to 0.</p>
+
+Here's a similar description for the ReLU activation function:
+
+---
+
+<h3>Characteristics</h3>
+
+<ul>
+    <li><strong>Output Range:</strong> The output is always in the range \([0, \infty)\). Values below 0 are mapped to 0, while positive values are retained.</li>
+    <li><strong>Shape:</strong> The function has a "L" shaped curve with a horizontal axis at \(y = 0\) and a linear increase for positive \(z\).</li>
+    <li><strong>Gradient:</strong> The gradient is 1 for positive values of \(z\) and 0 for non-positive values. This means the function is linear for positive inputs and flat (zero gradient) for negative inputs.</li>
+</ul>
+
+<p>This function is particularly useful in deep learning models as it introduces non-linearity while being computationally efficient, helping to capture complex patterns in the data.</p>
