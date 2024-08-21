@@ -72,6 +72,11 @@ We welcome contributions to improve DML-OpenProblem and [deep-ml.com](https://ww
 4. Push your changes to your fork.
 5. Submit a pull request with a detailed description of your changes.
 
+### Steps to add a Problem
+1. create an issue, the issue should describe the problem you would like to create and use the label "New Problem"
+2. comment below the issue you would like to work on
+3. We will assighn the issue and let you know what number problem to make it
+
 ## License
 
 This project is for educational reasons only. See the [LICENSE](LICENSE) file for details.
