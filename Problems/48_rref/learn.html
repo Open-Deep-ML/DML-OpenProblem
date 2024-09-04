@@ -1,0 +1,34 @@
+<h2>Understanding the RREF Algorithm</h2>
+
+<p>The Reduced Row Echelon Form (RREF) of a matrix is a specific form of a matrix achieved through a sequence of elementary row operations. This algorithm will convert any matrix into its RREF, which is useful in solving linear equations and understanding the properties of the matrix.</p>
+
+<p>Here’s a step-by-step guide to implementing the RREF algorithm:</p>
+
+<h3>1. Start with the leftmost column</h3>
+<p>Set the initial leading column to the first column of the matrix. We'll move this "lead" to the right as we progress through the algorithm.</p>
+
+<h3>2. Select the pivot row</h3>
+<p>Identify the first non-zero entry in the current leading column. This entry is known as the pivot. If necessary, swap the current row with the row containing the pivot to bring the pivot into the leading position.</p>
+
+<h3>3. Scale the pivot row</h3>
+<p>Divide the entire pivot row by the pivot value to make the leading entry equal to 1.</p>
+
+\[
+\text{Row}_r = \frac{\text{Row}_r}{\text{pivot}}
+\]
+
+<p>For example, if the pivot is 3, then divide the entire row by 3 to make the leading entry 1.</p>
+
+<h3>4. Eliminate above and below the pivot</h3>
+<p>Subtract multiples of the pivot row from all the other rows to create zeros in the rest of the pivot column. This ensures that the pivot is the only non-zero entry in its column.</p>
+
+\[
+\text{Row}_i = \text{Row}_i - (\text{Row}_r \times \text{lead coefficient})
+\]
+
+<p>Repeat this step for each row \( i \) where \( i \neq r \), ensuring that all entries above and below the pivot are zero.</p>
+
+<h3>5. Move to the next column</h3>
+<p>Move the lead one column to the right and repeat the process from step 2. Continue until there are no more columns to process or the remaining submatrix is all zeros.</p>
+
+<p>By following these steps, the matrix will be converted into its Reduced Row Echelon Form, where each leading entry is 1, and all other entries in the leading columns are zero.</p>
