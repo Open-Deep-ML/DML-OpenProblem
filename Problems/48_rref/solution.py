@@ -7,7 +7,11 @@ def rref(matrix):
     
     for i in range(n):
         if A[i, i] == 0:
-            A[i] = A[i] + A[(A[i:, 0] != 0).argmax(), ]
+            nonzero_rel_id = np.nonzero(A[i:, i])[0]
+            if len(nonzero_rel_id) == 0: continue
+            
+            A[i] = A[i] + A[nonzero_rel_id[0] + i]
+
         A[i] = A[i] / A[i, i]
         for j in range(n):
             if i != j:
@@ -54,6 +58,18 @@ def test_rref():
         [-0., -0.,  1., -11.]
     ])
     assert np.allclose(rref(matrix), expected_output), "Test case 3 failed"
+    
+   # Test case 4
+    matrix = np.array([
+        [1, 2, -1],
+        [2, 4, -1],
+        [-2, -4, -3]])
+    expected_output = np.array([
+        [ 1.,  2.,  0.],
+        [ 0.,  0.,  0.],
+        [-0., -0.,  1.]
+    ])
+    assert np.allclose(rref(matrix), expected_output), "Test case 4 failed"
 
 if __name__ == "__main__":
     test_rref()
