@@ -15,33 +15,6 @@ def rref(matrix):
 
     return A
 
-# def rref(matrix):
-#     # Convert to float for division operations
-#     A = np.array(matrix, dtype=float)
-#     m, n = A.shape
-    
-#     lead = 0
-#     for r in range(m):
-#         if lead >= n:
-#             return A
-#         i = r
-#         while A[i, lead] == 0:
-#             i += 1
-#             if i == m:
-#                 i = r
-#                 lead += 1
-#                 if n == lead:
-#                     return A
-#         A[i], A[r] = A[r], A[i]
-#         lv = A[r, lead]
-#         A[r] = A[r] / lv
-#         for i in range(m):
-#             if i != r:
-#                 lv = A[i, lead]
-#                 A[i] = A[i] - lv * A[r]
-#         lead += 1
-#     return A
-
 def test_rref():
     # Test case 1
     matrix = np.array([
