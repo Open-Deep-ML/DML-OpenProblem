@@ -1,0 +1,31 @@
+<h2> Lasso Regression Using Gradient Descent </h2>
+
+<p> Lasso Regression (Often called L1 Regularization or L1 Penalization) focuses on adding a penalty (the absolute value of coefficients to a loss function </p>
+
+<p> The goal of Lasso Regression in itself is to minimize the objective function
+\[ J(w, b) = \frac{1}{2n} \sum_{i=1}^n\biggl( y_i - \biggl(\sum_{j=1}^pX_{ij}w_j+b\biggl)\biggl)^2 + \alpha \sum_{j=1}^p |{w_j}|\]
+</p>
+
+<p> The first term here is Mean Squared Error Loss and the second is the L1 Regularization</p>
+
+<p> Here is a step-by-step-guide to implementing Lasso Regression </p>
+<h3> 1. Initialize $w_j$ and $b_j$ to 0 </h3>
+<h3>2. Make Predictions at each step using the formula \[ \hat{y}_i = \sum_{j=1}^pX_{ij}W_j + b\] </h3>
+<p>Where:</p> 
+<ul> 
+    <li>$\hat{y}_i$ is the predicted value for the $i$-th sample</li> 
+    <li>$X_{ij}$ is the value of the $i$-th sample’s $j$-th feature</li> 
+    <li>$w_j$ is the weight associated with the $j$-th feature</li> 
+</ul> 
+
+<h3>3. Find the residuals (Difference between the actual y values and the predicted ones) </h3>
+<h3>4. Update the weights and bias using the formula </p>
+<p> First, find the gradient with respect to weights $w$ using the formula \[ \frac{\partial J}{\partial w_j} = \frac{1}{n} \sum_{i=1}^nX_{ij}(y_i - \hat{y}_i) + \alpha \cdot sign(w_j) \] </h3>
+<p> Then, we need to find the gradient with respect to the bias $b$. Since the bias term $b$ does not have a regularization component (since Lasso regularization is applied only to the weights $w_j$), the gradient with respect to $b$ is just the partial derivative of the Mean Squared Error (MSE) loss function with respect to $b$ \[ \frac{\partial J(w,b)}{\partial b} =  \frac{1}{n} \sum_{i = 1}^{n}(\hat{y}_i-y_i)\]</p>
+<p> Next, we update the weights and bias using the formula \[ w_j = w_j - \eta \cdot \frac{\partial J}{\partial w_j} \] \[ b = b - \eta \cdot \frac{\partial J}{\partial b} \] Where eta is the learning rate defined in the beginning of the function</p>
+<h3> 5. Repeat steps 2-4 until the weights converge. This is determined by evaulating the L1 Norm of the weight gradients </h3>
+
+<p> The L1 Norm of a vector is defined as the sum of the absolute values of the components of the vector. In this case, the L1 Norm of the weight gradients is defined as \[ ||\nabla w ||_1 = \sum_{j=1}^p | \frac{\partial J}{\partial w_j} | \] </p>
+<p>if the sum of the absolute values of the components of the gradient vector $\nabla w$ is smaller than the threshold $tol$, the algorithm will stop or break out of the loop.</p>
+
+<h3> 6. Return the weights and bias </h3>
