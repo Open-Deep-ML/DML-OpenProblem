@@ -2,29 +2,21 @@ import numpy as np
 
 def rref(matrix):
     # Convert to float for division operations
-    A = np.array(matrix, dtype=float)
-    m, n = A.shape
+    A = matrix.astype(np.float32)
+    n, m = A.shape
     
-    lead = 0
-    for r in range(m):
-        if lead >= n:
-            return A
-        i = r
-        while A[i, lead] == 0:
-            i += 1
-            if i == m:
-                i = r
-                lead += 1
-                if n == lead:
-                    return A
-        A[i], A[r] = A[r], A[i]
-        lv = A[r, lead]
-        A[r] = A[r] / lv
-        for i in range(m):
-            if i != r:
-                lv = A[i, lead]
-                A[i] = A[i] - lv * A[r]
-        lead += 1
+    for i in range(n):
+        if A[i, i] == 0:
+            nonzero_rel_id = np.nonzero(A[i:, i])[0]
+            if len(nonzero_rel_id) == 0: continue
+            
+            A[i] = A[i] + A[nonzero_rel_id[0] + i]
+
+        A[i] = A[i] / A[i, i]
+        for j in range(n):
+            if i != j:
+                A[j] -= A[j, i] * A[i]
+
     return A
 
 def test_rref():
@@ -53,6 +45,31 @@ def test_rref():
         [ 0.,  0.,  1.]
     ])
     assert np.allclose(rref(matrix), expected_output), "Test case 2 failed"
+    
+    # Test case 3
+    matrix = np.array([
+        [0, 2, -1, -4],
+        [2, 0, -1, -11],
+        [-2, 0, 0, 22]
+    ])
+    expected_output = np.array([
+        [ 1.,  0.,  0., -11.],
+        [-0.,  1.,  0., -7.5],
+        [-0., -0.,  1., -11.]
+    ])
+    assert np.allclose(rref(matrix), expected_output), "Test case 3 failed"
+    
+   # Test case 4
+    matrix = np.array([
+        [1, 2, -1],
+        [2, 4, -1],
+        [-2, -4, -3]])
+    expected_output = np.array([
+        [ 1.,  2.,  0.],
+        [ 0.,  0.,  0.],
+        [-0., -0.,  1.]
+    ])
+    assert np.allclose(rref(matrix), expected_output), "Test case 4 failed"
 
 if __name__ == "__main__":
     test_rref()
