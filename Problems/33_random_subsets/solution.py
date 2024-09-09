@@ -24,8 +24,6 @@ def test_get_random_subsets():
     y = np.array([10, 20, 30, 40])
     expected_output = [([[3, 3], [4, 4], [1, 1], [3, 3]], [30, 40, 10, 30])]
     assert get_random_subsets(X, y, 1, True, seed=42) == expected_output, "Test case 2 failed"
-    expected_output = [[[1, 1], [3, 3], [2, 2], [2, 2]], [10, 30, 20, 20]]
-    assert np.array_equal(get_random_subsets(X, y, 1, True, seed=42), expected_output), "Test case 2 failed"
 
 if __name__ == "__main__":
     test_get_random_subsets()
