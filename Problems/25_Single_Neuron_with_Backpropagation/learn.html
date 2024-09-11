@@ -1,0 +1,60 @@
+<h2>Neural Network Learning with Backpropagation</h2>
+
+This question involves implementing backpropagation for a single neuron in a neural network. The neuron processes inputs and updates parameters to minimize the Mean Squared Error (MSE) between predicted outputs and true labels.
+
+<h3>Mathematical Background</h3>
+
+<ul>
+    <li><strong>Forward Pass</strong>:
+        <ul>
+            <li>Compute the neuron output by calculating the dot product of the weights and input features and adding the bias:
+                \[
+                z = w_1x_1 + w_2x_2 + ... + w_nx_n + b
+                \]
+                \[
+                \sigma(z) = \frac{1}{1 + e^{-z}}
+                \]
+            </li>
+        </ul>
+    </li>
+
+    <li><strong>Loss Calculation (MSE)</strong>:
+        <ul>
+            <li>The Mean Squared Error is used to quantify the error between the neuron's predictions and the actual labels:
+                \[
+                MSE = \frac{1}{n} \sum_{i=1}^{n} (\sigma(z_i) - y_i)^2
+                \]
+            </li>
+        </ul>
+    </li>
+
+    <li><strong>Backward Pass (Gradient Calculation)</strong>:
+        <ul>
+            <li>Compute the gradient of the MSE with respect to each weight and the bias. This involves the partial derivatives of the loss function with respect to the output of the neuron, multiplied by the derivative of the sigmoid function:
+                \[
+                \frac{\partial MSE}{\partial w_j} = \frac{2}{n} \sum_{i=1}^{n} (\sigma(z_i) - y_i) \sigma'(z_i) x_{ij}
+                \]
+                \[
+                \frac{\partial MSE}{\partial b} = \frac{2}{n} \sum_{i=1}^{n} (\sigma(z_i) - y_i) \sigma'(z_i)
+                \]
+            </li>
+        </ul>
+    </li>
+
+    <li><strong>Parameter Update</strong>:
+        <ul>
+            <li>Update each weight and the bias by subtracting a portion of the gradient determined by the learning rate:
+                \[
+                w_j = w_j - \alpha \frac{\partial MSE}{\partial w_j}
+                \]
+                \[
+                b = b - \alpha \frac{\partial MSE}{\partial b}
+                \]
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<h3>Practical Implementation</h3>
+
+This process refines the neuron's ability to predict accurately by iteratively adjusting the weights and bias based on the error gradients, optimizing the neural network's performance over multiple iterations.
