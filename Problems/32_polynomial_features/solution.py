@@ -2,13 +2,23 @@ import numpy as np
 from itertools import combinations_with_replacement
 
 def polynomial_features(X, degree):
-    n, m = X.shape
-    upper_terms =  [
-        np.concatenate([[np.prod(j) for j in combinations_with_replacement(X[i], d + 1)] for d in range(degree)])
-        for i in range(n)]
+    n_samples, n_features = np.shape(X)
 
-    res = np.concatenate([np.ones(n).reshape(-1, 1), upper_terms], axis=-1)
-    return res
+    # Generate all combinations of feature indices for polynomial terms
+    def index_combinations():
+        combs = [combinations_with_replacement(range(n_features), i) for i in range(0, degree + 1)]
+        flat_combs = [item for sublist in combs for item in sublist]
+        return flat_combs
+    
+    combinations = index_combinations()
+    n_output_features = len(combinations)
+    X_new = np.empty((n_samples, n_output_features))
+    
+    # Compute polynomial features
+    for i, index_combs in enumerate(combinations):  
+        X_new[:, i] = np.prod(X[:, index_combs], axis=1)
+
+    return X_new
 
 def test_polynomial_features():
     # Test case 1
