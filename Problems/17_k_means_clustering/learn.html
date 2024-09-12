@@ -1,20 +1,51 @@
-<h2>Implementing k-Means Clustering</h2>
+<h2>K-Means Clustering Algorithm Implementation</h2>
 
-<p>k-Means clustering is a method to partition <code>n</code> points into <code>k</code> clusters. Here is a brief overview of how to implement the k-Means algorithm:</p>
+<p>Your task is to write a Python function that implements the k-Means clustering algorithm. This function should take specific inputs and produce a list of final centroids. k-Means clustering is a method used to partition <code>n</code> points into <code>k</code> clusters. The goal is to group similar points together and represent each group by its center (called the <em>centroid</em>).</p>
 
-<h3>1. Initialization</h3>
-<p>Start by selecting <code>k</code> initial centroids. These can be randomly selected from the dataset or based on prior knowledge.</p>
+<h3>Function Inputs:</h3>
+<ul>
+    <li><code>points</code>: A list of points, where each point is a tuple of coordinates (e.g., <code>(x, y)</code> for 2D points)</li>
+    <li><code>k</code>: An integer representing the number of clusters to form</li>
+    <li><code>initial_centroids</code>: A list of initial centroid points, each a tuple of coordinates</li>
+    <li><code>max_iterations</code>: An integer representing the maximum number of iterations to perform</li>
+</ul>
 
-<h3>2. Assignment Step</h3>
-<p>For each point in the dataset, find the nearest centroid. The "nearest" can be defined using Euclidean distance. Assign the point to the cluster represented by this nearest centroid.</p>
+<h3>Function Output:</h3>
+<p>A list of the final centroids of the clusters, where each centroid is rounded to the nearest fourth decimal.</p>
 
-<h3>3. Update Step</h3>
-<p>Once all points are assigned to clusters, update the centroids by calculating the mean of all points in each cluster. This becomes the new centroid of the cluster.</p>
+<h3>Algorithm Steps:</h3>
 
-<h3>4. Iteration</h3>
-<p>Repeat the assignment and update steps until the centroids no longer change significantly, or until a predetermined number of iterations have been completed. This iterative process helps in refining the clusters to minimize within-cluster variance.</p>
+<h4>1. Initialization</h4>
+<p>Use the provided <code>initial_centroids</code> as your starting point. This step is already done for you in the input.</p>
 
-<h3>5. Result</h3>
-<p>The final centroids represent the center of the clusters, and the points are partitioned accordingly.</p>
+<h4>2. Assignment Step</h4>
+<p>For each point in your dataset:</p>
+<ul>
+    <li>Calculate its distance to each centroid (Hint: use <em><a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean distance</a></em>.)</li>
+    <li>Assign the point to the cluster of the nearest centroid</li>
+</ul>
+<p><strong>Hint:</strong> Consider creating a helper function to calculate Euclidean distance between two points.</p>
 
-<p>This algorithm assumes that the <code>mean</code> is a meaningful measure, which might not be the case for non-numeric data. The choice of initial centroids can significantly affect the final clusters, hence multiple runs with different starting points can lead to a more comprehensive understanding of the cluster structure in the data.</p>
+<h4>3. Update Step</h4>
+<p>For each cluster:</p>
+<ul>
+    <li>Calculate the mean of all points assigned to the cluster</li>
+    <li>Update the centroid to this new mean position</li>
+</ul>
+<p><strong>Hint:</strong> Be careful with potential empty clusters. Decide how you'll handle them (e.g., keep the previous centroid).</p>
+
+<h4>4. Iteration</h4>
+<p>Repeat steps 2 and 3 until either:</p>
+<ul>
+    <li>The centroids no longer change significantly, or</li>
+    <li>You reach the <code>max_iterations</code> limit</li>
+</ul>
+<p><strong>Hint:</strong> You might want to keep track of the previous centroids to check for significant changes.</p>
+
+<h4>5. Result</h4>
+<p>Return the list of final centroids, ensuring each coordinate is rounded to the nearest fourth decimal.</p>
+
+<h3><em>References:</em></h3>
+
+
+<p>For a visual understanding of how k-Means clustering works, check out this <a href="https://youtu.be/KzJORp8bgqs?si=BBrGGuCAWt_AA8QV" target="_blank">helpful YouTube video</a>.</p>
