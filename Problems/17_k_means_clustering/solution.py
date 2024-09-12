@@ -37,6 +37,15 @@ def test_k_means_clustering() -> None:
     max_iterations = 10
     assert k_means_clustering(points, k, initial_centroids, max_iterations) == [(1.0, 1.0, 1.0), (10.3333, 10.6667, 10.3333)], "Test case 2 failed"
 
+    # Test case 3: Single cluster
+    points = [(1, 1), (2, 2), (3, 3), (4, 4)]
+    k = 1
+    initial_centroids = [(0, 0)]
+    max_iterations = 10
+    assert k_means_clustering(points, k, initial_centroids, max_iterations) == [(2.5, 2.5)], "Test case 3 failed"
+
+    
+
 if __name__ == "__main__":
     test_k_means_clustering()
     print("All k_means_clustering tests passed.")
