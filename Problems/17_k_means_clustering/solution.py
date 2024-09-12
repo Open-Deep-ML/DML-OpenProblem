@@ -54,7 +54,15 @@ def test_k_means_clustering() -> None:
     expected = [(0.5, 0.5), (0.5, 5.5), (5.5, 0.5), (5.5, 5.5)]
     assert all(np.allclose(r, e) for r, e in zip(result, expected)), "Test case 4 failed"
 
-    
+    # Test case 5: Clusters with different densities
+    points = [(0, 0), (0.5, 0), (0, 0.5), (0.5, 0.5),  # Dense cluster
+              (4, 4), (6, 6)]  # Sparse cluster
+    k = 2
+    initial_centroids = [(0, 0), (5, 5)]
+    max_iterations = 10
+    result = k_means_clustering(points, k, initial_centroids, max_iterations)
+    expected = [(0.25, 0.25), (5.0, 5.0)]
+    assert all(np.allclose(r, e) for r, e in zip(result, expected)), "Test case 5 failed"
 
 if __name__ == "__main__":
     test_k_means_clustering()
