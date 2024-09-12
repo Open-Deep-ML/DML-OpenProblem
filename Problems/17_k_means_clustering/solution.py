@@ -44,8 +44,19 @@ def test_k_means_clustering() -> None:
     max_iterations = 10
     assert k_means_clustering(points, k, initial_centroids, max_iterations) == [(2.5, 2.5)], "Test case 3 failed"
 
+    # Test case 4: Four clusters in 2D space
+    points = [(0, 0), (1, 0), (0, 1), (1, 1), (5, 5), (6, 5), (5, 6), (6, 6),
+              (0, 5), (1, 5), (0, 6), (1, 6), (5, 0), (6, 0), (5, 1), (6, 1)]
+    k = 4
+    initial_centroids = [(0, 0), (0, 5), (5, 0), (5, 5)]
+    max_iterations = 10
+    result = k_means_clustering(points, k, initial_centroids, max_iterations)
+    expected = [(0.5, 0.5), (0.5, 5.5), (5.5, 0.5), (5.5, 5.5)]
+    assert all(np.allclose(r, e) for r, e in zip(result, expected)), "Test case 4 failed"
+
     
 
 if __name__ == "__main__":
     test_k_means_clustering()
     print("All k_means_clustering tests passed.")
+    
