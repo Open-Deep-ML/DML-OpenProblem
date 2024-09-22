@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Self-Attention Mechanism</title>
+</head>
+<body>
+    <h2>Self-Attention Mechanism</h2>
+
+    <p>This document provides an overview of the self-attention mechanism, which is fundamental in transformer models for tasks like natural language processing and computer vision.</p>
+
+    <h3>Mathematical Background</h3>
+    <ul>
+        <li><strong>Self-Attention Calculation</strong>:
+            <br>
+            Given an input sequence \(X\):
+            \[
+            Q = XW^Q, \quad K = XW^K, \quad V = XW^V
+            \]
+            Where \(Q\), \(K\), and \(V\) represent the Query, Key, and Value matrices respectively.
+            <br>
+            The attention score is computed as:
+            \[
+            \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+            \]
+            Where \(d_k\) is the dimension of the key vectors.
+        </li>
+    </ul>
+
+    <h3>Practical Implementation</h3>
+    <ul>
+        <li>The self-attention mechanism enables the model to weigh the importance of different words in the input sequence when generating a representation.</li>
+        <li>This allows for capturing long-range dependencies, making it particularly effective for tasks such as translation and summarization.</li>
+    </ul>
+</body>
+</html>
