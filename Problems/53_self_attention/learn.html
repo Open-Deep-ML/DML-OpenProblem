@@ -12,15 +12,21 @@
 
     <p>This document provides an overview of the self-attention mechanism, which is fundamental in transformer models for tasks like natural language processing and computer vision.</p>
 
+    <h3>Practical Implementation</h3>
+    <ul>
+        <li>The self-attention mechanism allows the model to weigh the importance of different parts of the input sequence dynamically. This ability to assign varying levels of importance is key to capturing long-range dependencies, which is highly effective in tasks like language translation, text summarization, and machine vision.</li>
+        <li>The self-attention operation calculates attention scores for every input, determining how much focus to put on other inputs when generating a contextualized representation.</li>
+    </ul>
+
     <h3>Mathematical Background</h3>
     <ul>
         <li><strong>Self-Attention Calculation</strong>:
             <br>
             Given an input sequence \(X\):
             \[
-            Q = XW^Q, \quad K = XW^K, \quad V = XW^V
+            Q = XW_Q, \quad K = XW_K, \quad V = XW_V
             \]
-            Where \(Q\), \(K\), and \(V\) represent the Query, Key, and Value matrices respectively.
+            Where \(Q\), \(K\), and \(V\) represent the Query, Key, and Value matrices respectively, and \(W_Q\), \(W_K\), \(W_V\) are learned weight matrices.
             <br>
             The attention score is computed as:
             \[
@@ -28,12 +34,6 @@
             \]
             Where \(d_k\) is the dimension of the key vectors.
         </li>
-    </ul>
-
-    <h3>Practical Implementation</h3>
-    <ul>
-        <li>The self-attention mechanism enables the model to weigh the importance of different words in the input sequence when generating a representation.</li>
-        <li>This allows for capturing long-range dependencies, making it particularly effective for tasks such as translation and summarization.</li>
     </ul>
 </body>
 </html>
