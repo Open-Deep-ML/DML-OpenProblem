@@ -1,0 +1,64 @@
+<h2>Understanding Recurrent Neural Networks (RNNs)</h2>
+
+Recurrent Neural Networks are a class of neural networks designed to handle sequential data by maintaining a hidden state that captures information from previous inputs.
+
+<h3>Mathematical Formulation</h3>
+
+For each time step \( t \), the RNN updates its hidden state \( h_t \) using the current input \( x_t \) and the previous hidden state \( h_{t-1} \):
+
+\[
+h_t = \tanh(W_x x_t + W_h h_{t-1} + b)
+\]
+
+Where:
+
+- \( W_x \) is the weight matrix for the input-to-hidden connections.
+- \( W_h \) is the weight matrix for the hidden-to-hidden connections.
+- \( b \) is the bias vector.
+- \( \tanh \) is the hyperbolic tangent activation function applied element-wise.
+
+<h3>Implementation Steps</h3>
+
+1. **Initialization**: Start with the initial hidden state \( h_0 \).
+
+2. **Sequence Processing**: For each input \( x_t \) in the sequence:
+   - Compute \( h_t = \tanh(W_x x_t + W_h h_{t-1} + b) \).
+
+3. **Final Output**: After processing all inputs, the final hidden state \( h_T \) (where \( T \) is the length of the sequence) contains information from the entire sequence.
+
+<h3>Example Calculation</h3>
+
+**Given:**
+
+- Inputs: \( x_1 = 1.0 \), \( x_2 = 2.0 \), \( x_3 = 3.0 \)
+- Initial hidden state: \( h_0 = 0.0 \)
+- Weights:
+  - \( W_x = 0.5 \)
+  - \( W_h = 0.8 \)
+- Bias: \( b = 0.0 \)
+
+**Compute:**
+
+1. **First time step (\( t = 1 \))**:
+
+   \[
+   h_1 = \tanh(0.5 \times 1.0 + 0.8 \times 0.0 + 0.0) = \tanh(0.5) = 0.4621
+   \]
+
+2. **Second time step (\( t = 2 \))**:
+
+   \[
+   h_2 = \tanh(0.5 \times 2.0 + 0.8 \times 0.4621 + 0.0) = \tanh(1.0 + 0.3697) = \tanh(1.3697) = 0.8781
+   \]
+
+3. **Third time step (\( t = 3 \))**:
+
+   \[
+   h_3 = \tanh(0.5 \times 3.0 + 0.8 \times 0.8781 + 0.0) = \tanh(1.5 + 0.7025) = \tanh(2.2025) = 0.9750
+   \]
+
+The final hidden state \( h_3 \) is approximately **0.9750**.
+
+<h3>Applications</h3>
+
+RNNs are widely used in natural language processing, time-series prediction, and any task involving sequential data.
