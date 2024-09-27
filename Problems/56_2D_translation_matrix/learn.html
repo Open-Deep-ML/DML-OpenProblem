@@ -1,0 +1,47 @@
+<h2>2D Translation Matrix Implementation</h2>
+
+<p>The translation matrix is a fundamental concept in linear algebra and computer graphics, used to move points or objects in a 2D space. 
+
+<p>For a 2D translation, we use a 3x3 matrix to move a point (x, y) by tx units in the x-direction and ty units in the y-direction. 
+
+The translation matrix is defined as:</p>
+<p>
+\[
+T = \begin{bmatrix}
+1 & 0 & tx \\
+0 & 1 & ty \\
+0 & 0 & 1
+\end{bmatrix}
+\]
+</p>
+
+<p>To apply this translation to a point (x, y) we use homogeneous coordinates by representing the point as (x, y, 1). Then the transformation is performed by matrix multiplication:</p>
+
+<p>
+\[
+\begin{bmatrix}
+1 & 0 & tx \\
+0 & 1 & ty \\
+0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y \\
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+x + tx \\
+y + ty \\
+1
+\end{bmatrix}
+\]
+</p>
+
+<p>Where:</p>
+<ul>
+    <li>(x, y) is the original point,</li>
+    <li>tx is the translation in the x-direction,</li>
+    <li>ty is the translation in the y-direction,</li>
+    <li>(x + tx, y + ty) is the resulting translated point.</li>
+</ul>
