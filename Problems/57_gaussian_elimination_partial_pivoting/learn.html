@@ -1,0 +1,145 @@
+<h2>Understanding Gaussian Elimination</h2>
+
+Gaussian Elimination is used to replace matrix coefficients with a row-echlon
+form matrix, that can be more easily solved via backwards substitution.
+
+<!-- <ul>
+  <li>All non-zero rows are above any rows of all zeros</li>
+  <li>
+    The leading entry of each non-zero row is to the right of the leading entry
+    of the previous row.
+  </li>
+  <li>
+    The leading entry in any non-zero row is 1, and all entries below it in the
+    same column are zeros.
+  </li>
+</ul> -->
+
+<!-- <h3>Augmented Matrix</h3>
+
+For a linear system Ax = b, an augmented matrix is a way of diplaying all the
+numerical information in a linear system, in a single matrix. This combines the
+coefficient matrix (A) and vector source (b) as such: \[ \begin{pmatrix} a₁₁ &
+a₂₁ & a₃₁ & b₁\\ a₁₂ & a₂₂ & a₃₂ & b₂\\ a₃₁ & a₃₂ & a₃₃ & b₃ \end{pmatrix} \]
+
+<h3>Partial Pivoting</h3>
+
+In linear algebra, diagonal elements of a matrix are referred to as the "pivot".
+To solve a linear system, the diagonal is used as a divisor to other elements
+within the matrix. This means that Gaussin Elimination will fail if there is a
+zero pivot.
+
+<br />
+<br />
+In this case, pivoting is used to interchange rows, to ensure a non-zero pivot.
+
+<br />
+<br />
+More specifically, partial pivoting looks at all other rows in the current
+column to find the row with highest absulute value. This row is then
+interchanged with the current row. This not only increases the numerical
+stability of the solution, but also reduces round-off errors caused by dividing
+by small entries. -->
+
+<h3>Gaussian Elimination Mathematical Formulation</h3>
+
+Gaussian Elimination:
+
+<ul>
+  <li>
+    For <span class="math">k = 1</span> to
+    <span class="math">number of rows - 1</span>
+    <ul class="indent">
+      <li>apply partial pivoting to the current row.</li>
+      <li>
+        For <span class="math">i = k + 1</span> to
+        <span class="math">number of rows</span>
+        <ul class="indent">
+          <li>
+            <span class="math"
+              >m<sub>ik</sub> = a<sub>ik</sub> / a<sub>kk</sub></span
+            >
+          </li>
+
+          <li>
+            For <span class="math">j = k</span> to
+            <span class="math">number of columns</span>
+            <ul class="indent">
+              <li>
+                <span class="math"
+                  >a<sub>ij</sub> = a<sub>ij</sub> - m<sub>ik</sub> * a<sub
+                    >kj</sub
+                  ></span
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <span class="math"
+              >b<sub>i</sub> = b<sub>i</sub> - m<sub>ik</sub> * b<sub
+                >k</sub
+              ></span
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+Backwards Subtitution:
+
+<ul>
+  <li>
+    For <span class="math">k = number of rows</span> to
+    <span class="math">1</span>
+    <ul class="indent">
+      <li>
+        For <span class="math">i = number of columns - 1</span> to
+        <span class="math">1</span>
+        <ul class="indent">
+          <li>
+            <span class="math"
+              >b<sub>k</sub> = b<sub>k</sub> - a<sub>ki</sub> * b<sub
+                >i</sub
+              ></span
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <span class="math">b<sub>k</sub> = b<sub>k</sub> / a<sub>kk</sub></span>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Example Calculation</h4>
+
+\[ A = \begin{pmatrix} 2 & 8 & 4\\ 5 & 5 & 1 \\ 4 & 10 & -1 \end{pmatrix} \quad
+\text{and} \quad b = \begin{pmatrix} 2 \\ 5 \\ 1 \end{pmatrix} \] Apply partial
+pivoting to increase the magnitude of the pivot. For A<sub>11</sub> calculate
+the factor for the elimination of A<sub>12</sub>: m<sub>12</sub> = A<sub
+  >12</sub
+>
+/ A<sub>11</sub> = 2 / 5 = 0.4 <br />
+<br />
+Apply this scaling to row 1 and minus this from row 2, eliminating
+A<sub>12</sub>: \[ A = \begin{pmatrix} 5 & 5 & 1 \\ 0 & 6 & 3.6 \\ 4 & 10 & -1
+\end{pmatrix} \quad \text{and} \quad b = \begin{pmatrix} 5 \\ 0 \\ 1
+\end{pmatrix} \] After the full Gaussian Elimination process has been applied to
+A and b, we get the following: \[ A = \begin{pmatrix} 5 & 5 & 1\\ 0 & 6 & 3.6 \\
+0 & 0 & -5.4 \end{pmatrix} \quad \text{and} \quad b = \begin{pmatrix} 5 \\ 0 \\
+3 \end{pmatrix} \] To calculate x we can apply backward substitution, by
+substituting in the currently solved values and dividing by the pivot. This
+would give the following for the first iteration: x<sub>3</sub> = b<sub>3</sub>
+/ A<sub>33</sub> = 3 / -5.4 = -0.56 <br />
+<br />
+This can be repeated iteratively for all rows to solve the linear system,
+substituting in the solved values for the rows below.
+
+<h3>Applications</h3>
+
+Gaussian Elimination and linear solvers as a whole have a wide range of
+real-world application. Most prevelant are there application in
+machine-learning, computational fluid dynamics and 3d graphics.

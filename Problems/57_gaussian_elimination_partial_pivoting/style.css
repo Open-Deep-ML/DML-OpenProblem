@@ -1,0 +1,13 @@
+body {
+  font-family: Arial, sans-serif;
+}
+.step {
+  margin-bottom: 10px; /* Spacing between steps */
+  padding-left: 0; /* Reset padding */
+}
+.indent {
+  padding-left: 20px; /* Indentation for nested steps */
+}
+.math {
+  font-style: italic; /* Italicize mathematical variables */
+}
