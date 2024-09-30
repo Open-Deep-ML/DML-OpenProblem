@@ -1,0 +1,22 @@
+<h2>Understanding F-Score in Classification</h2>
+
+<p>F-Score, also called F-measure, is a measure of predictive performance that's calculated from the Precision and Recall metrics.</p>
+
+<h3>Mathematical Definition</h3>
+
+<p>The \(F_{\beta}\) score applies additional weights, valuing one of precision or recall more than the other. When \beta equals to 1, also known as F1-Score, it symmetrically represents both precision and recall in one metric. The F-Score can be calculated using the following formula:</p>
+
+\[
+F_{\beta} = (1 + \beta^2) * \frac{precision * recall}{(\beta^2 * precision) + recall}
+\]
+
+<p>Where:</p>
+
+<ul>
+    <li><strong>Recall:</strong> The number of true positive results divided by the number of all samples that should have been identified as positive.</li>
+    <li><strong>Precision:</strong> The number of true positive results divided by the number of all samples predicted to be positive, including those not identified correctly.</li>
+</ul>
+
+<p>In this problem, you will implement a function to calculate the <strong>F-Score</strong> given the true labels, predicted labels and the Beta value of a binary classification task. The results should be rounded to three decimal places.</p>
+
+<p>If the denominator is zero, the F-Score should be 0.0 to avoid division by zero.</p>
