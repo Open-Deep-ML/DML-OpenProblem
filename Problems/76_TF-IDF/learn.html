@@ -1,0 +1,61 @@
+<h2>Understanding TF-IDF (Term Frequency-Inverse Document Frequency)</h2>
+TF-IDF is a numerical statistic used to reflect the importance of a word in a document within a collection or corpus. It is commonly used in information retrieval and text mining.
+<h3>Mathematical Formulation</h3>
+TF-IDF is the product of two statistics: Term Frequency (TF) and Inverse Document Frequency (IDF).
+
+Term Frequency (TF):
+[
+TF(t,d) = \frac{\text{Number of times term } t \text{ appears in document } d}{\text{Total number of terms in document } d}
+]
+Inverse Document Frequency (IDF):
+[
+IDF(t) = \log\left(\frac{\text{Total number of documents}}{\text{Number of documents containing term } t}\right)
+]
+TF-IDF:
+[
+TFIDF(t,d) = TF(t,d) \times IDF(t)
+]
+
+<h3>Implementation Steps</h3>
+
+Compute TF: For each term in each document, calculate its term frequency.
+Compute IDF: Calculate the inverse document frequency for each unique term in the corpus.
+Calculate TF-IDF: Multiply TF and IDF for each term in each document.
+Normalize: (Optional) Normalize the TF-IDF vectors for each document.
+
+<h3>Example Calculation</h3>
+Given:
+
+Corpus: 3 documents
+
+Doc1: "The cat sat on the mat"
+Doc2: "The dog chased the cat"
+Doc3: "The bird flew over the mat"
+
+
+
+Compute TF-IDF for the word "cat" in Doc1:
+
+TF("cat", Doc1):
+[
+TF("cat", Doc1) = \frac{1}{6} \approx 0.1667
+]
+IDF("cat"):
+[
+IDF("cat") = \log\left(\frac{3}{2}\right) \approx 0.1761
+]
+TF-IDF("cat", Doc1):
+[
+TFIDF("cat", Doc1) = 0.1667 \times 0.1761 \approx 0.0293
+]
+
+<h3>Applications</h3>
+TF-IDF is widely used in:
+
+Information Retrieval
+Text Mining
+Document Classification
+Search Engines
+Recommendation Systems
+
+This statistic helps in ranking a document's relevance given a user query, document summarization, and feature extraction for machine learning algorithms in natural language processing.
