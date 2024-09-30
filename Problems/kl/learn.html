@@ -1,0 +1,42 @@
+<h2>Understanding Kullback-Leibler Divergence (KL Divergence)</h2>
+
+<p>The Kullback-Leibler divergence, also known as relative entropy, is a statistical tool that measures the difference between two probability distributions.</p>
+
+<h3>Definition of KL Divergence</h3>
+
+<p>For continuous variables, the KL divergence is defined as:</p>
+
+<p>
+    \[
+    KL(P \parallel Q) = \int p(x) \log \frac{p(x)}{q(x)} \, dx
+    \]
+</p>
+
+<h3>KL Divergence Between Two Normal Distributions</h3>
+
+<p>Suppose we have two normal distributions, \( P \) and \( Q \), where:</p>
+
+<p>
+    \( P \sim N(\mu_P, \sigma_P^2) \)<br>
+    \( Q \sim N(\mu_Q, \sigma_Q^2) \)
+</p>
+
+<p>The KL divergence between \( P \) and \( Q \) is given by:</p>
+
+<p>
+    \[
+    KL(P \parallel Q) = \int p(x) \left[ \log \frac{\sigma_Q}{\sigma_P} + \frac{\sigma_P^2 + (\mu_P - \mu_Q)^2}{2\sigma_Q^2} - \frac{1}{2} \right] dx
+    \]
+</p>
+
+<p>Since \( p(x) \) is the probability density function of \( x \), the integral simplifies to summing the constants in the formula:</p>
+
+<p>
+    \[
+    KL(P \parallel Q) = \log \frac{\sigma_Q}{\sigma_P} + \frac{\sigma_P^2 + (\mu_P - \mu_Q)^2}{2\sigma_Q^2} - \frac{1}{2}
+    \]
+</p>
+
+<h3>Interpretation</h3>
+
+<p>This formula quantifies how one normal distribution \( P \) diverges from another normal distribution \( Q \). A KL divergence of zero indicates that the two distributions are identical.</p>
