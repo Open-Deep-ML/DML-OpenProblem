@@ -1,1 +1,65 @@
-<h2>Conjugate Gradient Method</h2>
+<h2>Understanding The Conjugate Gradient Method</h2>
+
+The Conjugate Gradient, CG, method is an iterative algorithm used to solve large
+systems of linear equations, particularly those that are symmetric and
+positive-definite.
+
+<h3>Concepts</h3>
+
+The CG gradient method is often applied to the quadratic form of a linear
+system, Ax = b: \[ f(x) = \frac{1}{2} x^T A x - b^T x \] The quadratic form is
+used due to its' differential reducing to, the following for a symmetric A.
+Therefore, x satisfies Ax = b, at the optimum: \[ f'(x) = Ax - b \]
+
+<br />
+The conjugate gradient method uses search directions that are conjugate to all
+the previous search direction. This is satisfied when search directions are
+A-orthogonal, i.e. \[ p_i^T A p_j = 0 \quad \text{for } i \neq j \] This results
+in a more efficient algorithm, as it ensures that the algorithm gathers all
+information in a search direction at once, and then doesn't need to search in
+that direction again. As opposed to steepest descent, that will step a bit in
+one direction and then may search in that direction later.
+
+<h4>Algorithm Steps</h4>
+
+<ol>
+  <li>
+    <strong>Initialization:</strong>
+    <ul>
+      <li>\( x_0 \): Initial guess for the variable vector.</li>
+      <li>\( r_0 = b - A x_0 \) - Initial residual vector.</li>
+      <li>\( p_0 = r_0 \) - Initial search direction.</li>
+    </ul>
+  </li>
+
+  <li>
+    <strong>Iteration \( k \):</strong>
+    <ul>
+      <li>\( \alpha_k = \frac{r_k^T r_k}{p_k^T A p_k} \) - Step size.</li>
+      <li>\( x_{k+1} = x_k + \alpha_k p_k \) - Update solution.</li>
+      <li>\( r_{k+1} = r_k - \alpha_k A p_k \) - Update residual.</li>
+      <li>Check convergence: \( \| r_{k+1} \| < \text{tolerance} \).</li>
+      <li>
+        \( \beta_k = \frac{r_{k+1}^T r_{k+1}}{r_k^T r_k} \) - New direction
+        scaling. This ensures search directions are A-orthogonal.
+      </li>
+      <li>\( p_{k+1} = r_{k+1} + \beta_k p_k \) - Update search direction.</li>
+    </ul>
+  </li>
+
+  <li>
+    <strong>Termination:</strong>
+    <ul>
+      <li>
+        Stop when \( \| r_{k+1} \| < \text{tolerance} \) or after a set number
+        of iterations.
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4>Applications</h4>
+The conjugate gradient method is often used as it's more efficient that other
+iterative solvers, such as steepest descent, and direct solvers, such as
+Gaussian Elimination. Iterative linear solvers are commonly used in
+optimisation, machine learning and computational fluid dynamics.

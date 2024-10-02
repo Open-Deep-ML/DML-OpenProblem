@@ -39,6 +39,7 @@ def residual(A: np.array, b: np.array, x: np.array) -> np.array:
 
 def alpha(A: np.array, r: np.array, p: np.array) -> float:
 
+    # calculate step size
     alpha_num = np.dot(r, r)
     alpha_den = np.dot(p @ A, p)
 
@@ -46,6 +47,7 @@ def alpha(A: np.array, r: np.array, p: np.array) -> float:
 
 def beta(r: np.array, r_plus1: np.array) -> float:
     
+    # calculate direction scaling
     beta_num = np.dot(r_plus1, r_plus1)
     beta_den = np.dot(r, r)
 
@@ -60,7 +62,7 @@ def test_conjugate_gradient() -> None:
               [1, 3]])
 
     b_1 = np.array([1, 2])
-    expected_1 = np.linalg.solve(A_1,b_1)
+    expected_1 = np.array([0.09090909, 0.63636364])
     output_1 = conjugate_gradient(A_1, b_1, n)
     assert np.allclose(output_1, expected_1, atol=0.01), f"Test case 1 failed: expected {expected_1}, got {output_1}"
 
@@ -69,7 +71,7 @@ def test_conjugate_gradient() -> None:
                 [2, 0, 5]])
     b_2 = np.array([7, 8, 5])
 
-    expected_2 = np.linalg.solve(A_2, b_2)
+    expected_2 = np.array([0.81395349, 2.39534884, 0.6744186 ])
     output_2 = conjugate_gradient(A_2, b_2, n)
     assert np.allclose(output_2, expected_2, atol=0.01), f"Test case 2 failed: expected {expected_2}, got {output_2}"
 
@@ -80,11 +82,11 @@ def test_conjugate_gradient() -> None:
                 [1, 1, 1, 7, 1],
                 [0, 1, 2, 1, 8]])
     b_3 = np.array([1, 2, 3, 4, 5])
-    expected_3 = np.linalg.solve(A_3, b_3)
+    expected_3 = np.array([0.01666667, 0.11666667, 0.21666667, 0.45, 0.5])
     output_3 = conjugate_gradient(A_3, b_3, n)
     assert np.allclose(output_3, expected_3, atol=0.01), f"Test case 3 failed: expected {expected_3}, got {output_3}"
 
 
 if __name__ == "__main__":
     test_conjugate_gradient()
-    print("All tests passed.")
+    print("All Conjugate Gradient tests passed.")
