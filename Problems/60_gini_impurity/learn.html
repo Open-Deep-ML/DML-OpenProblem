@@ -1,0 +1,26 @@
+<h2>Understanding Gini Impurity</h2>
+
+Gini impurity is a statistical measurement of the impurity or disorder in a list
+of elements. It is commonly used in decision tree algorithms to decide the
+optimal split at tree nodes. It is calculated as follows, where p<sub>i</sub> is
+the probability of each class - n<sub>i</sub>/n: \[ \text{Gini Impurity} = 1 -
+\sum_{i=1}^{C} p_i^2 \] A gini impurity of 0 indicates a node where all element
+are the same class, whereas, a gini impurity of 0.5 indicates a maximum
+impurity, where elements are evenly distributed among each class. This means
+that a lower impurity implies a more homogenous distribution of elements,
+suggesting a good split, as decision tress aim to minimise it at each node.
+
+<h3>Advantages and Limitations</h3>
+
+Advantages:
+<ul>
+  <li>Computationally efficient</li>
+  <li>Works for binary and multi-class classification</li>
+</ul>
+
+Limitations:
+
+<ul>
+  <li>Biased to larger classes</li>
+  <li>May cause overfitting in big decision trees</li>
+</ul>
