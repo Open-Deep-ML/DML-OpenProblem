@@ -29,6 +29,33 @@ Gauss-Seidel can also be expressed in matrix form, in terms of the matrix
 diagonal (D), lower triangle (L) and upper triangle (U): \[ x_{i}^{(k)} = D^{-1}
 \left( b - Lx^{(k+1)} - Ux^{(k)} \right) \]
 
+<h3>Example Calculation</h3>
+
+<p>Let’s solve the system of equations:</p>
+\[ 3x_1 + x_2 = 5 \quad x_1 + 2x_2 = 5 \]
+
+<ol>
+  <li>Initialize \( x_1^{(0)} = 0 \) and \( x_2^{(0)} = 0 \).</li>
+
+  <li>First iteration:</li>
+  <ol>
+    <li>For \( x_1^{(1)} \):</li>
+    \[ x_1^{(1)} = \frac{1}{3} \left( 5 - 1 \cdot x_2^{(0)} \right) =
+    \frac{5}{3} \approx 1.6667 \]
+
+    <li>For \( x_2^{(1)} \):</li>
+    \[ x_2^{(1)} = \frac{1}{2} \left( 5 - 1 \cdot x_1^{(1)} \right) =
+    \frac{1}{2} \left( 5 - 1.6667 \right) \approx 1.6667 \]
+  </ol>
+
+  <li>
+    After the first iteration, the values are \( x_1^{(1)} = 1.6667 \) and \(
+    x_2^{(1)} = 1.6667 \).
+  </li>
+
+  <li>Continue iterating until the results converge to a desired tolerance.</li>
+</ol>
+
 <h3>Applications</h3>
 
 Gauss-Seidel and other iterative linear solvers are commonly used in data
