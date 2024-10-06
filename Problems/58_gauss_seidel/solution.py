@@ -23,14 +23,12 @@ def gauss_seidel(A:np.array, b:np.array, n: int, x_ini: np.array=None) -> np.arr
     return x
 
 def test_gauss_seidel():
-
-    # run all for 100 iterations 
-    n = 100
-
+    
     # Test case 1: basic test
     A_1 = np.array([[4, 1, 2],[3, 5, 1],[1, 1, 3]], dtype=float)
     b_1 = np.array([4,7,3], dtype=float)
-    expected_1 = np.linalg.solve(A_1, b_1)
+    n = 5
+    expected_1 = np.array([0.5008, 0.99968, 0.49984])
     output_1 = gauss_seidel(A_1, b_1, n)
     assert np.allclose(output_1, expected_1, atol=0.01), f"Test case 1 failed: expected {expected_1}, got {output_1}"
 
@@ -40,8 +38,8 @@ def test_gauss_seidel():
                 [0, -1, 4, -1],
                 [1, 0, -1, 4]], dtype=float)
     b_2 = np.array([15, 10, 10, 15], dtype=float)
-
-    expected_2 = np.linalg.solve(A_2,b_2)
+    n = 1
+    expected_2 = np.array([3.75, 3.4375, 3.359375, 3.65234375])
     output_2 = gauss_seidel(A_2, b_2, n)
     assert np.allclose(output_2, expected_2, atol=0.01), f"Test case 2 failed: expected {expected_2}, got {output_2}"
 
@@ -50,7 +48,8 @@ def test_gauss_seidel():
                 [-1, 11, -1],
                 [2, -1, 10]], dtype=float)
     b_3 = np.array([6, 25, -11], dtype=float)
-    expected_3 = np.linalg.solve(A_3,b_3)
+    n = 100
+    expected_3 = np.array([1.04326923, 2.26923077, -1.08173077])
     output_3 = gauss_seidel(A_3, b_3, n)
     assert np.allclose(output_3, expected_3, atol=0.01), f"Test case 3 failed: expected {expected_3}, got {output_3}"
 
