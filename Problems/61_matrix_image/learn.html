@@ -1,0 +1,25 @@
+<h2>Matrix Image, Spans, and How to Calculate It</h2> 
+
+<p>In linear algebra, the column space, also called the image or span, of a matrix is the set of all possible linear combinations of its columns. The column space gives important information about the matrix, such as the dimensions and dependencies between columns. It is useful for solving linear systems and understanding the structure of the data in the matrix. The image of a function can also be thought of as all the values the function takes in its codomain. The image of a matrix is the span of its columns - all linear combinations of its columns.</p>
+ <p>The <strong>image</strong> of a matrix is spanned by its pivot columns. To find the image of a matrix, you can use the following steps:</p>
+ 
+<h3>Step 1: Convert to Row Echelon Form (RREF)</h3> 
+ <p>The first step is to convert the matrix to its RREF using Gauss-Jordan Elimination. This finds the independent equations within the matrix. In RREF form:
+    <ul> 
+        <li>Each non-zero row begins with a leading 1,called a pivot</li> 
+        <li>Rows of all zeros are at the bottom of the matrix</li> 
+        <li>Each leading 1 is to the right of the leading 1 in the row above</li> 
+    </ul>
+</p> 
+
+<h3>Step 2: Identify Pivot Columns</h3> 
+
+<p>Once the matrix is in RREF, the <strong>pivot columns</strong> are the columns that contain the leading 1s in each non-zero row. These columns represent the independent directions that span the column space of the matrix.</p>  
+
+<h3>Step 3: Extract Pivot Columns from the Original Matrix</h3> 
+
+<p>Finally, to find the column space of the original matrix, you take the columns from the original matrix corresponding to the pivot columns in RREF.</p> 
+
+<h2>Applications of Matrix Image</h2> 
+<p>The matrix image has important applications in solving systems of linear equations, determining the rank of a matrix, and understanding linear transformations. 
+    It is also used in areas such as data compression, computer graphics, and signal processing to analyze and manipulate data effectively.</p>
