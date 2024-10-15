@@ -1,0 +1,66 @@
+<h2>Understanding Orthogonal Projection in Vector Spaces</h2>
+<p>
+  Orthogonal projection is a fundamental concept in linear algebra, used to
+  project one vector onto another. The projection of vector
+  <strong>v</strong> onto a line defined by vector <strong>L</strong> results in
+  a new vector that lies on <strong>L</strong>, representing the closest point
+  to <strong>v</strong> on that line. This can be thought of
+  <strong>v</strong>'s shadow on <strong>L</strong> if a light was shown
+  directly down on <strong>v</strong>
+</p>
+<p>
+  To project a vector <strong>v</strong> onto a non-zero vector
+  <strong>L</strong> in space, we calculate the scalar projection of
+  <strong>v</strong> onto the unit vector of <strong>L</strong>, which
+  represents the magnitude of the projection. The resulting projection vector
+  lies along the direction of <strong>L</strong>.
+</p>
+<p>
+  For any vector <strong>v</strong> in Cartesian space, the orthogonal
+  projection onto <strong>L</strong>
+  is calculated using the formula:
+</p>
+<p>\[ \text{proj}_{L} (v) = \frac{v \cdot L}{L \cdot L} L \]</p>
+<p>Where:</p>
+<ul>
+  <li><strong>v</strong> is the vector being projected,</li>
+  <li><strong>L</strong> is the vector defining the line of projection,</li>
+  <li>
+    \( v \cdot L \) is the dot product of <strong>v</strong> and
+    <strong>L</strong>,
+  </li>
+  <li>
+    \( L \cdot L \) is the dot product of <strong>L</strong> with itself, which
+    gives the magnitude squared of <strong>L</strong>.
+  </li>
+</ul>
+<p>
+  The resulting projection vector lies along the direction of
+  <strong>L</strong> and represents the component of <strong>v</strong> that is
+  parallel to <strong>L</strong>.
+</p>
+<p>
+  More generally, the projection of <strong>v</strong> onto a unit vector \(
+  \hat{L} \) (the normalized version of <strong>L</strong>) simplifies to:
+</p>
+<p>\[ \text{proj}_{L} (v) = (v \cdot \hat{L}) \hat{L} \]</p>
+
+<h3>Applications of Orthogonal Projection</h3>
+<p>
+  Orthogonal projection has a wide range of applications across various fields
+  in mathematics, physics, computer science, and engineering. Some of the most
+  common applications include:
+</p>
+<ul>
+  <li>
+    <strong>Computer Graphics:</strong> In 3D rendering, orthogonal projections
+    are used to create 2D views of 3D objects. This projection helps in reducing
+    dimensional complexity and displaying models from different angles.
+  </li>
+  <li>
+    <strong>Data Science and Machine Learning:</strong> In high-dimensional
+    data, projection methods are used to reduce dimensions (e.g., Principal
+    Component Analysis) by projecting data onto lower-dimensional subspaces,
+    helping with data visualization and reducing computational complexity.
+  </li>
+</ul>
