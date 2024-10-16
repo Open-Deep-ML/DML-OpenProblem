@@ -77,6 +77,22 @@ We welcome contributions to improve DML-OpenProblem and [deep-ml.com](https://ww
 2. comment below the issue you would like to work on
 3. We will assighn the issue and let you know what number problem to make it
 
+### How to Add a Video Solution
+
+1. **Create a Comprehensive Video Solution**:  
+   Your video should clearly explain the concept and provide a step-by-step solution to the problem. Feel free to include additional elements that enhance understanding, such as animations, hand-written examples, or any other visual aids that will help clarify the topic.
+
+2. **Upload the Video to YouTube**:  
+   Once your video is ready, upload it to YouTube. Make sure the video is accessible and properly titled.
+
+3. **Include a Link to the Problem**:  
+   In the video description, add a link to the corresponding problem on Deep-ML so that viewers can easily access and try solving the problem themselves.
+   
+5. **Submit the Video Link**:  
+In the corresponding problem folder, create a `.txt` file containing the link to your YouTube video. This will help us easily reference your solution.
+   
+
+
 ## License
 
 This project is for educational reasons only. See the [LICENSE](LICENSE) file for details.
