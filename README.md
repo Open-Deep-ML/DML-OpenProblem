@@ -77,7 +77,7 @@ We welcome contributions to improve DML-OpenProblem and [deep-ml.com](https://ww
 2. comment below the issue you would like to work on
 3. We will assighn the issue and let you know what number problem to make it
 
-### How to Add a Video Solution
+### How to Add a Video Solution (Optional)
 
 1. **Create a Comprehensive Video Solution**:  
    Your video should clearly explain the concept and provide a step-by-step solution to the problem. Feel free to include additional elements that enhance understanding, such as animations, hand-written examples, or any other visual aids that will help clarify the topic.
