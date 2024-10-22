@@ -75,7 +75,7 @@ We welcome contributions to improve DML-OpenProblem and [deep-ml.com](https://ww
 ### Steps to add a Problem
 1. create an issue, the issue should describe the problem you would like to create and use the label "New Problem"
 2. comment below the issue you would like to work on
-3. We will assighn the issue and let you know what number problem to make it
+3. We will assign the issue and let you know what number problem to make it
 
 ### How to Add a Video Solution (Optional)
 
