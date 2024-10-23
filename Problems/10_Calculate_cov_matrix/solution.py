@@ -14,7 +14,7 @@ def calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]
 
 
 import numpy as np
-def alternative_solution_calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]:
+def calculate_covariance_matrix_alt(vectors: list[list[float]]) -> list[list[float]]:
 	return [list(x) for x in np.cov(np.array(vectors))]
 
 
