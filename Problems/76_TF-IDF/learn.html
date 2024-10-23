@@ -16,6 +16,13 @@ TF-IDF:
 TFIDF(t,d) = TF(t,d) \times IDF(t)
 ]
 
+Note: For this problem, we use
+Smooth - Inverse Document Frequency (IDF):
+[
+Smooth_IDF(t) = \log\left(\frac{\text{Total number of documents} + 1}{\text{Number of documents containing term } t + 1}\right) + 1
+]
+The constant “1” is added to the numerator and denominator of the idf as if an extra document was seen containing every term in the collection exactly once, which prevents zero divisions.
+
 <h3>Implementation Steps</h3>
 
 Compute TF: For each term in each document, calculate its term frequency.
@@ -48,6 +55,7 @@ TF-IDF("cat", Doc1):
 [
 TFIDF("cat", Doc1) = 0.1667 \times 0.1761 \approx 0.0293
 ]
+
 
 <h3>Applications</h3>
 TF-IDF is widely used in:
