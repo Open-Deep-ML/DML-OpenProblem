@@ -4,7 +4,7 @@ def matrix_dot_vector(
 ) -> list[int | float] | int:
     #Check that dimensions match
     if len(a[0]) != len(b):
-		return -1
+	return -1
         
 	c = []
     #Iterate using a list comprehension
