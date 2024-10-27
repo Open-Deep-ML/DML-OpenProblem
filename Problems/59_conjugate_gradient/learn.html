@@ -1,4 +1,4 @@
-<!-- <h2>Understanding The Conjugate Gradient Method</h2>
+<h2>Understanding The Conjugate Gradient Method</h2>
 
 The Conjugate Gradient, CG, method is an iterative algorithm used to solve large
 systems of linear equations, particularly those that are symmetric and
@@ -27,23 +27,23 @@ one direction and then may search in that direction later.
     <strong>Initialization:</strong>
     <ul>
       <li>\( x_0 \): Initial guess for the variable vector.</li>
-      <li>\( r_0 = b - A x_0 \) - Initial residual vector.</li>
-      <li>\( p_0 = r_0 \) - Initial search direction.</li>
+      <li>\( r_0 = b - A x_0 \): Initial residual vector.</li>
+      <li>\( p_0 = r_0 \): Initial search direction.</li>
     </ul>
   </li>
 
   <li>
     <strong>Iteration \( k \):</strong>
     <ul>
-      <li>\( \alpha_k = \frac{r_k^T r_k}{p_k^T A p_k} \) - Step size.</li>
-      <li>\( x_{k+1} = x_k + \alpha_k p_k \) - Update solution.</li>
-      <li>\( r_{k+1} = r_k - \alpha_k A p_k \) - Update residual.</li>
+      <li>\( \alpha_k = \frac{r_k^T r_k}{p_k^T A p_k} \): Step size.</li>
+      <li>\( x_{k+1} = x_k + \alpha_k p_k \): Update solution.</li>
+      <li>\( r_{k+1} = r_k - \alpha_k A p_k \): Update residual.</li>
       <li>Check convergence: \( \| r_{k+1} \| < \text{tolerance} \).</li>
       <li>
-        \( \beta_k = \frac{r_{k+1}^T r_{k+1}}{r_k^T r_k} \) - New direction
+        \( \beta_k = \frac{r_{k+1}^T r_{k+1}}{r_k^T r_k} \): New direction
         scaling. This ensures search directions are A-orthogonal.
       </li>
-      <li>\( p_{k+1} = r_{k+1} + \beta_k p_k \) - Update search direction.</li>
+      <li>\( p_{k+1} = r_{k+1} + \beta_k p_k \): Update search direction.</li>
     </ul>
   </li>
 
@@ -56,7 +56,7 @@ one direction and then may search in that direction later.
       </li>
     </ul>
   </li>
-</ol> -->
+</ol>
 
 <h3>Example Calculation</h3>
 
