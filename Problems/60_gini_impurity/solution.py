@@ -10,7 +10,7 @@ def gini_impurity(y: list[int]) -> float:
     for cls in classes:
         gini_impurity += (y.count(cls)/n)**2
 
-    return gini_impurity
+    return np.round(1-gini_impurity,3)
 
 
 def test_gini_impurity() -> None:
@@ -19,10 +19,10 @@ def test_gini_impurity() -> None:
     assert gini_impurity(classes_1) == 0.5
 
     classes_2 = [0,0,0,0,0,1]
-    assert gini_impurity(classes_2) == 0.7222222222222223
+    assert gini_impurity(classes_2) == 0.278
 
     classes_3 = [0,1,2,2,2,1,2]
-    assert gini_impurity(classes_3) == 0.42857142857142855
+    assert gini_impurity(classes_3) == 0.571
 
 if __name__ == "__main__":
     test_gini_impurity()
