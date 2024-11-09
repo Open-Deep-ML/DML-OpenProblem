@@ -76,4 +76,4 @@ def test_dice_score():
 
 if __name__ == "__main__":
     test_dice_score()
-    print("All Dice score tests passed.")
+    print("All Dice score test cases passed.")
