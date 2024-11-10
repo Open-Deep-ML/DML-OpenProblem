@@ -2,18 +2,16 @@ def matrix_dot_vector(
     a: list[list[int | float]],
     b: list[int | float],
 ) -> list[int | float] | int:
-    # verify MxN matrix is compatible with N vector
-    if (len(a[0]) if a else 0) != len(b):
-        return -1
-
-    # perform the multiplication
-    c: list[int | float] = [0] * len(a)
-    for i in range(len(a)):
-        for j in range(len(a[i])):
-            c[i] += a[i][j] * b[j]
-
-    return c
-
+    #Check that dimensions match
+    if len(a[0]) != len(b):
+	return -1
+        
+	c = []
+    #Iterate using a list comprehension
+	for s_a in a:
+		temp = sum([s_a[i]*b[i] for i in range(len(b))])
+		c.append(temp)
+	return c
 
 def test_matrix_dot_vector() -> None:
     # empty product

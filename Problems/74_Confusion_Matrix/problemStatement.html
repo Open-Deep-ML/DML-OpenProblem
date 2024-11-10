@@ -1,0 +1,21 @@
+<h2>Generate Confusion Matrix</h2>
+
+<p>Write a Python function that generates the confusion matrix for a list of results of a binary classification task</p>
+
+<p>Each observation has two values: the actual label and the predicted label</p>
+
+<h3>Example:</h3>
+
+<ul>
+    <li>Input: [[1, 1], [1, 0], [0, 1], [0, 0], [0, 1]]</li>
+    <li>Output: [[1, 1], [2, 1]]   </li>
+    <li>Reasoning:
+        <ul>
+            <li>There is one observation of class 1 that was labeled as class 1 ([1,1]), so there is 1 true positive</li>
+            <li>There is one observation of class 1 that was labeled as class 0 ([1,1]), so there is 1 false negative</li>
+            <li>There are two observations of class 0 that were labeled as class 1 ([0,1]), so there are 2 false positives</li>
+            <li>There is one observation of class 0 that was labeled as class 0 ([0,0]), so there is 1 true negative</li>
+
+        </ul>
+    </li>
+</ul>
