@@ -24,7 +24,9 @@ format, a matrix is represented by three one-dimensional arrays:
   </li>
   <li>
     <strong>Row pointer array</strong>: Stores the cumulative number of non-zero
-    elements in each row, allowing quick access to each row's data.
+    elements in each row, allowing quick access to each row's data. This means
+    that it points to the position within the column indices array at which the
+    row starts.
   </li>
 </ul>
 
@@ -36,7 +38,7 @@ Given a matrix: \[ \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 2 & 0 & 0 \\ 3 & 0 & 4 &
 <ul>
   <li><strong>Values array</strong>: [1, 2, 3, 4, 1, 5]</li>
   <li><strong>Column indices array</strong>: [0, 1, 0, 2, 0, 3]</li>
-  <li><strong>Row pointer array</strong>: [0, 1, 2, 4, 5]</li>
+  <li><strong>Row pointer array</strong>: [0, 1, 2, 4, 6]</li>
 </ul>
 
 <h4>Explanation:</h4>
@@ -52,7 +54,8 @@ Given a matrix: \[ \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 2 & 0 & 0 \\ 3 & 0 & 4 &
   <li>
     The <strong>row pointer array</strong> keeps track of where each row starts
     in the values array. For example, row 1 starts at index 0, row 2 starts at
-    index 1, row 3 starts at index 2, and so on.
+    index 1, row 3 starts at index 2, within the columns indices array, and so
+    on.
   </li>
 </ul>
 
