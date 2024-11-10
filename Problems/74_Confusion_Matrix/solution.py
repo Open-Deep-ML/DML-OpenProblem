@@ -1,6 +1,6 @@
 from collections import Counter
 
-def confusion_matrix(data: list[list[int|float]]) -> list[list[int|float]]:
+def confusion_matrix(data: list[list[int|int]]) -> list[list[int|int]]:
     #Count all occurrences
     counts = Counter(tuple(pair) for pair in data)
     #Get metrics
