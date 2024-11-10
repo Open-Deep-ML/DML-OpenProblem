@@ -1,0 +1,94 @@
+<h2>Hyperdimensional Computing</h2>
+<p>
+  Hyperdimensional Computing, HDC, is a computational model inspired by the
+  brain's ability to represent and process information using high-dimensional
+  vectors, based on hypervectors being quasi-orthogonal. It uses vectors with a
+  large number of dimensions to represent data, where each vector is typically
+  filled with binary, 1 or 0, or bipolar values, 1 or -1. To represent complex
+  data pattern, binding and bundling operations are used. In HDC, different data
+  types such as numeric and categorical variables are projected into
+  high-dimensional space through specific encoding processes. Categorical
+  variables are assigned unique hypervectors, often randomly generated binary or
+  bipolar vectors, that serve as representations for each category. Numeric
+  variables, are encoded by discretising the continuous values, and mapping
+  discrete bins to hypervectors. These projections allow HDC models to integrate
+  various data types into a unified high-dimensional representation, preserving
+  information across complex, multi-feature datasets.
+</p>
+<h4>Binding Operation</h4>
+<p>
+  The binding operation between two hypervectors is performed element-wise using
+  multiplication. This operation is used to represent associations between
+  different pieces of information:
+</p>
+\[ \text{bind}(\text{hv1}, \text{hv2}) = \text{hv1} \times \text{hv2} \]
+<p>
+  Where \( \text{hv1} \) and \( \text{hv2} \) are bipolar vectors, and their
+  element-wise multiplication results in a new vector where each element is
+  either 1 or -1.
+</p>
+<h4>Bundling Operation</h4>
+<p>
+  The bundling operation sums multiple hypervectors to combine information,
+  typically using element-wise addition for bipolar vectors and XOR operations
+  for binary vectors. This operation aggregates information and creates a
+  composite hypervector that represents the overall data or concept. For
+  example, for a set of \( n \) hypervectors \( \text{hv1}, \text{hv2}, \dots,
+  \text{hvn} \), the bundled vector is:
+</p>
+\[ \text{bundle}(\text{hv1}, \text{hv2}, \dots, \text{hvn}) = \sum_{i=1}^{n}
+\text{hvi} \]
+<p>This bundled vector is then normalized to ensure it remains bipolar.</p>
+<h4>Normalization</h4>
+<p>
+  Normalization ensures that the final bundled vector contains only bipolar or
+  binary values. The normalization function typically applies a thresholding
+  process that transforms any value greater than zero to +1 and any value less
+  than zero to -1. Zero values are then typically assigned to either +1 or -1.
+</p>
+<h3>Operations in Practice: Example</h3>
+<p>
+  Consider a scenario where we want to represent and combine information from
+  each feature in a row of a dataset. Each feature, whether numeric or
+  categorical, is represented by a hypervector, and these hypervectors are
+  combined to form a composite vector that represents the entire row of data.
+</p>
+<p>
+  For instance, if we have a dataset row with features <em>Feature A</em> and
+  <em>Feature B</em>, we would:
+</p>
+<ul>
+  <li>
+    Create a hypervector for the column <em>Feature A</em> and another for its
+    specific feature value.
+  </li>
+  <li>
+    Create a hypervector for the column <em>Feature B</em> and another for its
+    specific feature value.
+  </li>
+  <li>
+    Bind each feature’s column hypervector with the hypervector representing its
+    value to form a unique vector for each feature.
+  </li>
+  <li>
+    Bundle all the feature hypervectors for this row to create a single
+    composite vector representing the entire row.
+  </li>
+  <li>Normalize the bundled vector to maintain bipolar values.</li>
+</ul>
+<h3>Applications of HDC</h3>
+<p>Hyperdimensional computing has a variety of applications, including:</p>
+<ul>
+  <li>
+    <strong>Data Classification:</strong> Using high-dimensional vectors to
+    represent data points and classifying them based on their properties.
+  </li>
+  <li>
+    <strong>Pattern Recognition:</strong> Recognizing complex patterns in data
+    through binding and bundling operations.
+  </li>
+  <li>
+    <strong>Natural Language Processing:</strong> Representing words and phrases
+    as high-dimensional vectors to analyze and process text data.
+  </li>
+</ul>
