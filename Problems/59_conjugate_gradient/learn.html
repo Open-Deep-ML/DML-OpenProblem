@@ -1,0 +1,108 @@
+<h2>Understanding The Conjugate Gradient Method</h2>
+
+The Conjugate Gradient, CG, method is an iterative algorithm used to solve large
+systems of linear equations, particularly those that are symmetric and
+positive-definite.
+
+<h3>Concepts</h3>
+
+The CG gradient method is often applied to the quadratic form of a linear
+system, Ax = b: \[ f(x) = \frac{1}{2} x^T A x - b^T x \] The quadratic form is
+used due to its' differential reducing to, the following for a symmetric A.
+Therefore, x satisfies Ax = b, at the optimum: \[ f'(x) = Ax - b \]
+
+<br />
+The conjugate gradient method uses search directions that are conjugate to all
+the previous search direction. This is satisfied when search directions are
+A-orthogonal, i.e. \[ p_i^T A p_j = 0 \quad \text{for } i \neq j \] This results
+in a more efficient algorithm, as it ensures that the algorithm gathers all
+information in a search direction at once, and then doesn't need to search in
+that direction again. As opposed to steepest descent, that will step a bit in
+one direction and then may search in that direction later.
+
+<h4>Algorithm Steps</h4>
+
+<ol>
+  <li>
+    <strong>Initialization:</strong>
+    <ul>
+      <li>\( x_0 \): Initial guess for the variable vector.</li>
+      <li>\( r_0 = b - A x_0 \): Initial residual vector.</li>
+      <li>\( p_0 = r_0 \): Initial search direction.</li>
+    </ul>
+  </li>
+
+  <li>
+    <strong>Iteration \( k \):</strong>
+    <ul>
+      <li>\( \alpha_k = \frac{r_k^T r_k}{p_k^T A p_k} \): Step size.</li>
+      <li>\( x_{k+1} = x_k + \alpha_k p_k \): Update solution.</li>
+      <li>\( r_{k+1} = r_k - \alpha_k A p_k \): Update residual.</li>
+      <li>Check convergence: \( \| r_{k+1} \| < \text{tolerance} \).</li>
+      <li>
+        \( \beta_k = \frac{r_{k+1}^T r_{k+1}}{r_k^T r_k} \): New direction
+        scaling. This ensures search directions are A-orthogonal.
+      </li>
+      <li>\( p_{k+1} = r_{k+1} + \beta_k p_k \): Update search direction.</li>
+    </ul>
+  </li>
+
+  <li>
+    <strong>Termination:</strong>
+    <ul>
+      <li>
+        Stop when \( \| r_{k+1} \| < \text{tolerance} \) or after a set number
+        of iterations.
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3>Example Calculation</h3>
+
+<p>Let's solve the system of equations:</p>
+
+\[ 4x_1 + x_2 = 6 \quad x_1 + 3x_2 = 6\]
+
+<ol>
+  <li>
+    Initialize \( x_0 = [0, 0]^T \), \( r_0 = b - A x_0 = [6, 6]^T \), and \(
+    p_0 = r_0 = [6, 6]^T \).
+  </li>
+
+  <li>First iteration:</li>
+  <ol>
+    <li>Compute \( \alpha_0 \):</li>
+    \[ \alpha_0 = \frac{r_0^T r_0}{p_0^T A p_0} = \frac{72}{324} = 0.2222 \]
+
+    <li>Update solution \( x_1 \):</li>
+    \[ x_1 = x_0 + \alpha_0 p_0 = [0, 0]^T + 0.2222 \cdot [6, 6]^T = [1.3333,
+    1.3333]^T \]
+
+    <li>Update residual \( r_1 \):</li>
+    \[ r_1 = r_0 - \alpha_0 A p_0 = [6, 6]^T - 0.2222 \cdot \begin{bmatrix} 4 &
+    1 \\ 1 & 3 \end{bmatrix} \cdot [6, 6]^T = [6.67, 5.33]^T \]
+
+    <li>Compute \( \beta_0 \):</li>
+    \[ \beta_0 = \frac{r_1^T r_1}{r_0^T r_0} = \frac{6.67^2 + 5.33^2}{6^2 + 6^2}
+    \approx 0.99 \]
+
+    <li>Update search direction \( p_1 \):</li>
+    \[ p_1 = r_1 + \beta_0 p_0 = [6.67, 5.33]^T + 0.99 \cdot [6, 6]^T = [12.60,
+    11.26]^T \]
+  </ol>
+
+  <li>Second iteration:</li>
+  <ol>
+    <li>
+      Compute \( \alpha_1 \), \( x_2 \), \( r_2 \), and repeat until
+      convergence.
+    </li>
+  </ol>
+</ol>
+
+<h4>Applications</h4>
+The conjugate gradient method is often used as it's more efficient that other
+iterative solvers, such as steepest descent, and direct solvers, such as
+Gaussian Elimination. Iterative linear solvers are commonly used in
+optimisation, machine learning and computational fluid dynamics.
