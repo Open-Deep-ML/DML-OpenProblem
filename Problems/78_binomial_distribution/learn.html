@@ -1,0 +1,50 @@
+<h2>Understanding the Binomial Distribution</h2>
+The Binomial distribution models the number of successes in a sequence of independent Bernoulli trials, each with the same probability of success.
+
+<h3>Problem Statement</h3>
+Calculate the probability of achieving exactly <i>k</i> successes in <i>n</i> independent Bernoulli trials, each with probability <i>p</i> of success, using the Binomial distribution formula.
+
+<p><b>Parameters:</b></p>
+<ul>
+    <li><b>n</b>: Total number of trials</li>
+    <li><b>k</b>: Number of successes</li>
+    <li><b>p</b>: Probability of success on each trial</li>
+</ul>
+
+<p><b>Return:</b> Probability of <i>k</i> successes in <i>n</i> trials</p>
+
+<h3>Mathematical Formulation</h3>
+The probability of exactly <i>k</i> successes in <i>n</i> trials is calculated using the Binomial formula:
+
+\[
+P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
+\]
+
+where:
+<ul>
+    <li>\(\binom{n}{k}\) is the binomial coefficient, calculated as <code>n! / (k!(n - k)!)</code></li>
+    <li><b>p</b> is the probability of success in a single trial</li>
+    <li><b>(1 - p)</b> is the probability of failure</li>
+</ul>
+
+<h3>Implementation Steps</h3>
+<ol>
+    <li>Calculate the binomial coefficient \(\binom{n}{k}\).</li>
+    <li>Compute the probability using the binomial formula.</li>
+    <li>Return the calculated probability, rounded to five decimal places.</li>
+</ol>
+
+<h3>Example Calculation</h3>
+Suppose you have 10 trials, a target of 5 successes, and a 0.5 probability of success per trial. Then:
+
+\[
+P(X = 5) = \binom{10}{5} (0.5)^5 (1 - 0.5)^{10 - 5} = 0.24609
+\]
+
+<h3>Applications</h3>
+The Binomial distribution is widely used to model situations where outcomes are binary (e.g., success/failure, yes/no), such as:
+<ul>
+    <li>Predicting the probability of a certain number of positive responses in a survey.</li>
+    <li>Estimating the probability of a certain number of defective items in a batch.</li>
+    <li>Modeling financial scenarios with success or failure outcomes.</li>
+</ul>
