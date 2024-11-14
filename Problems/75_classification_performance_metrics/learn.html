@@ -1,6 +1,6 @@
 <h2>Performance Metrics</h2>
 
-<p>Performance metrics such as accuracy, precision, recall and F1 score are vital to understand how a model is performing</p>
+<p>Performance metrics such as accuracy, F1 score, specificity, negative value, precision and recall are vital to understand how a model is performing</p>
 
 <p>How many observations are correctly labeled? Are we mislabelling one category more than the other? Performance metrics can answer those questions and provide an idea of where to focus in order to improve a model's performance</p>
 
@@ -40,7 +40,13 @@ Where:
 \frac{TP}{TP+FP}
 \]
 
-<p>This metric provides more insight into the labelling of the positive class, but if very few observations are actually labeled as positive, then it might be misleading. Note that there is an analogue for the negative class as well, in case you wanted to focus on it.</p>
+<p>This metric provides more insight into the labelling of the positive class, but if very few observations are actually labeled as positive, then it might be misleading.</p>
+
+<p>There is an analogous for the negative class which is the <b>negative predictive value</b>. Defined by:</p>
+
+\[
+\frac{TN}{TN+FN}
+\]
 
 <p><b>Out of all of the positive elements, how many were correctly labeled?</b> The metric to answer this question is the <b>recall</b>. This metric is helpful in narrowing down to one specific class as well. It is defined by:</p>
 
@@ -50,7 +56,13 @@ Where:
 
 <p>Note that this metric introduces some tension, if you wanted to encourage your model to label more observations as positive, you risk mislabelling more negative observations as positive</p>
 
-<p><b>How to account for this trade-off of false negatives and positives?</b> The metric for this is the <b>F1 score</b>. This is the harmonic mean of the precision and recall, which provides insight into the balance of false positives and false negatives. It is defined by:</p>
+<p>Similarly, the <b>specificity</b> provides the same insight for the negative class. It is defined by:</p>
+
+\[
+\frac{TN}{TN+FP}
+\]
+
+<p><b>How to account for the trade-off of false negatives and positives?</b> The metric for this is the <b>F1 score</b>. This is the harmonic mean of the precision and recall, which provides insight into the balance of false positives and false negatives. It is defined by:</p>
 
 \[
 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
