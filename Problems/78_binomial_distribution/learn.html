@@ -1,0 +1,55 @@
+<h2>Understanding the Binomial Distribution</h2>
+<p>The Binomial distribution is a discrete probability distribution that models the number of successes in a fixed number of independent Bernoulli trials, each with the same probability of success.</p>
+
+<h3>Mathematical Formulation</h3>
+<p>The probability of achieving exactly <em>k</em> successes in <em>n</em> trials is given by the formula:</p>
+\[
+P(X = k) = \binom{n}{k} \cdot p^k \cdot (1-p)^{n-k}
+\]
+<ul>
+    <li><strong>n:</strong> Total number of trials</li>
+    <li><strong>k:</strong> Number of successes</li>
+    <li><strong>p:</strong> Probability of success on each trial</li>
+    <li><strong>\(\binom{n}{k}\):</strong> The number of ways to choose <em>k</em> successes from <em>n</em> trials, calculated as \(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</li>
+</ul>
+
+<h3>Implementation Steps</h3>
+<ol>
+    <li>Calculate \(\binom{n}{k}\) using factorials.</li>
+    <li>Raise <em>p</em> to the power of <em>k</em> and \((1-p)\) to the power of \((n-k)\).</li>
+    <li>Multiply these results to get the probability.</li>
+</ol>
+
+<h3>Example Calculation</h3>
+<p>Given:</p>
+<ul>
+    <li>n = 5 </li>
+    <li>k = 2 </li>
+    <li>p = 0.4 </li>
+</ul>
+<p>Step-by-step:</p>
+<ul>
+    <li>Calculate \(\binom{n}{k}\):
+    \[
+    \binom{5}{2} = \frac{5!}{2!(5-2)!} = \frac{5 \cdot 4}{2 \cdot 1} = 10
+    \]</li>
+    <li>Calculate \(p^k \cdot (1-p)^{n-k}\):
+    \[
+    0.4^2 \cdot (1-0.4)^3 = 0.16 \cdot 0.216 = 0.03456
+    \]</li>
+    <li>Multiply results:
+    \[
+    P(X = 2) = 10 \cdot 0.03456 = 0.3456
+    \]</li>
+</ul>
+<p>The probability of exactly 2 successes is 0.3456.</p>
+
+<h3>Applications</h3>
+<p>The Binomial distribution is widely used in:</p>
+<ul>
+    <li>Quality control and defect analysis</li>
+    <li>Survey analysis</li>
+    <li>Medical trials</li>
+    <li>Modeling success/failure experiments</li>
+</ul>
+<p>It provides insights into the likelihood of various outcomes in scenarios with two possible results (e.g., success or failure).</p>
