@@ -1,0 +1,37 @@
+<h2>Understanding Normal Distribution</h2>
+The normal distribution, also known as the Gaussian distribution, is a continuous probability distribution widely used in statistics. It describes data that clusters around a mean or average, with fewer values farther from the mean.
+
+<h3>Mathematical Formulation</h3>
+The probability density function (PDF) of a normal distribution with mean \( \mu \) and standard deviation \( \sigma \) for a given value \( x \) is given by:
+
+\[
+f(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{(x - \mu)^2}{2 \sigma^2}\right)
+\]
+
+<h3>Implementation Steps</h3>
+
+1. **Define Parameters**: Set the mean \( \mu \) and standard deviation \( \sigma \) of the distribution.
+2. **Apply PDF Formula**: For a specified \( x \), plug in the values of \( \mu \), \( \sigma \), and \( x \) into the PDF formula.
+3. **Calculate Probability Density**: Compute the result, which gives the probability density of \( x \).
+
+<h3>Example Calculation</h3>
+Given:
+
+- **Mean** \( \mu \) = 0
+- **Standard Deviation** \( \sigma \) = 1
+- **Value** \( x \) = 1
+
+The probability density at \( x = 1 \) is calculated as:
+
+\[
+f(1) = \frac{1}{1 \times \sqrt{2 \pi}} \exp\left(-\frac{(1 - 0)^2}{2 \times 1^2}\right) \approx 0.24197
+\]
+
+<h3>Applications</h3>
+The normal distribution is essential in various fields, including:
+
+- **Statistics**: Many statistical tests assume normal distribution.
+- **Machine Learning**: Assists in modeling and understanding data distributions.
+- **Natural and Social Sciences**: Often used to model measurement errors, natural events, and human characteristics.
+
+This problem asks you to calculate the probability density for a given \( x \)-value in a normal distribution, using specified mean and standard deviation values.
