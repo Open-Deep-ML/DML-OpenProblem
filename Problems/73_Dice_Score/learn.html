@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Understanding Dice Score in Classification</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #2c5282;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: #2d3748;
+            margin-top: 24px;
+        }
+        p {
+            margin: 16px 0;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        strong {
+            color: #2c5282;
+        }
+        .math-block {
+            background: #f7fafc;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+<body>
+    <h2>Understanding Dice Score in Classification</h2>
+    <p>
+        The Dice Score, also known as the Sørensen–Dice coefficient or F1-score, is a statistical measure used to gauge the similarity of two samples. It's particularly popular in image segmentation tasks and binary classification problems.
+    </p>
+
+    <h3>Mathematical Definition</h3>
+    <p>
+        The Dice coefficient is defined as twice the intersection divided by the sum of the cardinalities of both sets:
+    </p>
+    <div class="math-block">
+        \[
+        \text{Dice Score} = \frac{2|X \cap Y|}{|X| + |Y|} = \frac{2TP}{2TP + FP + FN}
+        \]
+    </div>
+
+    <p>In terms of binary classification:</p>
+    <ul>
+        <li><strong>TP (True Positives):</strong> Number of positions where both predicted and true labels are 1</li>
+        <li><strong>FP (False Positives):</strong> Number of positions where prediction is 1 but true label is 0</li>
+        <li><strong>FN (False Negatives):</strong> Number of positions where prediction is 0 but true label is 1</li>
+    </ul>
+
+    <h3>Relationship with F1-Score</h3>
+    <p>
+        The Dice coefficient is identical to the F1-score, which is the harmonic mean of precision and recall:
+    </p>
+    <div class="math-block">
+        \[
+        \text{F1-score} = 2 \cdot \frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}} = \text{Dice Score}
+        \]
+    </div>
+
+    <h3>Key Properties</h3>
+    <ul>
+        <li><strong>Range:</strong> The Dice score always falls between 0 and 1 (inclusive)</li>
+        <li><strong>Perfect Score:</strong> A value of 1 indicates perfect overlap</li>
+        <li><strong>No Overlap:</strong> A value of 0 indicates no overlap</li>
+        <li><strong>Sensitivity:</strong> More sensitive to overlap than Jaccard Index</li>
+        <li><strong>Symmetry:</strong> The score is symmetric, meaning DSC(A,B) = DSC(B,A)</li>
+    </ul>
+
+    <h3>Example</h3>
+    <p>Consider two binary vectors:</p>
+    <ul>
+        <li>True labels: [1, 1, 0, 1, 0, 1]</li>
+        <li>Predicted labels: [1, 1, 0, 0, 0, 1]</li>
+    </ul>
+    <p>In this case:</p>
+    <ul>
+        <li>True Positives (TP): 3</li>
+        <li>False Positives (FP): 0</li>
+        <li>False Negatives (FN): 1</li>
+        <li>Dice Score = (2 × 3) / (2 × 3 + 0 + 1) = 0.857</li>
+    </ul>
+
+    <h3>Advantages Over Jaccard Index</h3>
+    <p>
+        The Dice score has several advantages:
+    </p>
+    <ul>
+        <li>More sensitive to changes in overlap due to the doubled intersection term</li>
+        <li>Gives more weight to instances where labels agree</li>
+        <li>Often preferred in medical image segmentation due to its sensitivity to overlap</li>
+        <li>More intuitive interpretation as harmonic mean of precision and recall</li>
+    </ul>
+
+    <h3>Common Applications</h3>
+    <p>
+        The Dice score is commonly used in:
+    </p>
+    <ul>
+        <li>Medical image segmentation evaluation</li>
+        <li>Binary classification tasks</li>
+        <li>Object detection overlap assessment</li>
+        <li>Text similarity measurement</li>
+        <li>Semantic segmentation evaluation</li>
+    </ul>
+
+    <p>
+        When implementing the Dice score, it's important to handle edge cases properly, such as when both sets are empty (typically defined as 0.0 (according to sklearn)).
+    </p>
+</body>
+</html>
