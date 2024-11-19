@@ -8,7 +8,7 @@ def pos_encoding(position:int, dmodel:int):
 
 
     def get_angles(pos, i):
-        angles = 1 / np.power(10000, (2 * (i // 2)) / np.float(dmodel))
+        angles = 1 / np.power(10000, (2 * (i // 2)) / np.float32(dmodel))
         return pos * angles
 
     angle1 = get_angles(pos, ind)
