@@ -41,10 +41,10 @@ DML-OpenProblem/
 │
 ├── Problems/
 │   ├── 1_matrix_times_vector/
-│   │   ├── learn.html
+│   │   ├── learn.md
 │   │   └── solution.py
 │   ├── 2_transpose_matrix/
-│   │   ├── learn.html
+│   │   ├── learn.md
 │   │   └── solution.py
 │   └── ... (additional problem directories)
 │
@@ -53,9 +53,8 @@ DML-OpenProblem/
 └── README.md
 ```
 - **Problems/**: Contains directories for each problem. Each directory includes:
-  - `learn.html`: HTML file containing the learning section with explanations and examples.
+  - `learn.md`: markdown file containing the learning section with explanations and examples.
   - `solution.py`: Python file containing the solution to the problem along with tests.
-- **app.py**: The main Streamlit application file for editing the learn sections.
 - **requirements.txt**: Lists the dependencies required for the project.
 - **README.md**: This file.
 
