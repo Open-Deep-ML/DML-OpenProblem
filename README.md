@@ -60,7 +60,7 @@ DML-OpenProblem/
 
 ## Contributing
 
-We welcome contributions to improve DML-OpenProblem and [deep-ml.com](https://www.deep-ml.com). If you have a new problem to add or improvements to existing problems, please fork the repository and submit a pull request. All contributions will be displayed on [deep-ml.com](https://www.deep-ml.com). For example, check out this problem: [Divide Dataset Based on Feature Threshold](https://www.deep-ml.com/problem/Divide%20Dataset%20Based%20on%20Feature%20Threshold). A helpfull tool to work on the learn section and know what it would look like on the front end is [https://openproblem-r4vsjwuthdl9a3qzrd4p3m.streamlit.app/](https://dml-openproblem-a5bwuwjh2xeyt5ta5wdiw9.streamlit.app/).
+We welcome contributions to improve DML-OpenProblem and [deep-ml.com](https://www.deep-ml.com). If you have a new problem to add or improvements to existing problems, please fork the repository and submit a pull request. All contributions will be displayed on [deep-ml.com](https://www.deep-ml.com). For example, check out this problem: [Divide Dataset Based on Feature Threshold](https://www.deep-ml.com/problem/Divide%20Dataset%20Based%20on%20Feature%20Threshold). A helpfull tool to work on the learn section and know what it would look like on the front end is [https://openproblem-r4vsjwuthdl9a3qzrd4p3m.streamlit.app/](https://dml-openproblem-a5bwuwjh2xeyt5ta5wdiw9.streamlit.app/). Also here is an example of a learn section writing in markdown [Example Problem](https://github.com/Open-Deep-ML/DML-OpenProblem/tree/main/example_problem)
 
 
 ### Steps to Contribute
