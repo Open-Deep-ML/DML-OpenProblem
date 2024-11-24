@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Positional Encoding Layer in Transformers</title>
+</head>
+<body>
+    <h2>The Positional Encoding Layer</h2>
+
+    <p>
+        The Positional Encoding layer in Transformers plays a critical role by providing necessary positional information to the model. This is particularly important because the Transformer architecture, unlike RNNs or LSTMs, processes input sequences in parallel and lacks inherent mechanisms to account for the sequential order of tokens.
+        The mathematical intuition behind the Positional Encoding layer in Transformers is centered on enabling the model to incorporate information about the order of tokens in a sequence.
+    </p>
+
+    <h3>Practical Implementation</h3>
+    <ul>
+        <li>
+            Function Parameters:
+            position: Total positions or length of the sequence.
+            d_model: Dimensionality of the model's output.
+        </li>
+        <li>
+            Generating the Base Matrix:
+            angle_rads: Creates a matrix where rows represent sequence positions and columns represent feature dimensions. Values are scaled by dividing each position index by 10000 raised to (2 * index / d_model).
+
+        </li>
+        <li>
+            Applying Sine and Cosine Functions:
+            Even indices: Apply the sine function to encode positions.
+            Odd indices: Apply the cosine function for a phase-shifted encoding.
+            
+        </li>
+        <br>
+        <b> 
+            PE(pos, 2i) = sin(pos/1000^(2i/dmodel))
+            <br>
+            PE(pos, 2i+1) = cos(pos/1000^(2i/dmodel))
+            <br>    
+        </b>
+        <br>
+        <li>
+            Creating the Positional Encoding Tensor:
+            The matrix is expanded to match input shape expectations of models like Transformers and cast to tf.float32.
+        </li>
+        <li>
+            Output:
+            Returns a TensorFlow tensor of shape (1, position, d_model), ready to be added to input embeddings to incorporate positional information.
+        </li>
+
+    </ul>
+    <ul>
+        <b><u>NOTE</u></b>: Please calculate the encodings using the above steps and dont just reshape and return. 
+            Take the input embeddings, calculate the sin and cos and then return the encoding.
+    </ul>
+</body>
+</html>
