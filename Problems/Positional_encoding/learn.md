@@ -30,5 +30,5 @@ The mathematical intuition behind the Positional Encoding layer in Transformers 
     Returns a TensorFlow tensor of shape (1, position, d_model), ready to be added to input embeddings to incorporate positional information.
     
     
-    **_NOTE_**: Please calculate the encodings using the above steps and dont just reshape and return. 
-        Take the input embeddings, calculate the sin and cos and then return the encoding.
+**_NOTE_**: Please calculate the encodings using the above steps and dont just reshape and return. 
+Take the input embeddings, calculate the sin and cos and then return the encoding.
