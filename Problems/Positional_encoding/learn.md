@@ -13,21 +13,22 @@ The mathematical intuition behind the Positional Encoding layer in Transformers 
 
 *  **Generating the Base Matrix**:
 
-    angle_rads: Creates a matrix where rows represent sequence positions and columns represent feature dimensions. Values are scaled by dividing each position index by 10000 raised to (2 * index / d_model).
+    angle_rads: Creates a matrix where rows represent sequence positions and columns represent feature dimensions. Values are scaled by dividing each position index by _10000 raised to (2 * index / d_model)._
 
 *   **Applying Sine and Cosine Functions** :
     Even indices: Apply the sine function to encode positions.
     Odd indices: Apply the cosine function for a phase-shifted encoding.
         
-    PE(pos, 2i) = sin(pos/$1000^(2i/dmodel)$)
+    PE(pos, 2i) = sin(pos/1000<sup>(2i/dmodel)</sup> )
 
-    PE(pos, 2i+1) = cos(pos/$1000^(2i/dmodel)$)
+    PE(pos, 2i+1) = cos(pos/1000<sup>(2i/dmodel)</sup>)
     
 *   **Creating the Positional Encoding Tensor**:
     The matrix is expanded to match input shape expectations of models like Transformers and cast to tf.float32.
         
 *   **Output**:
     Returns a TensorFlow tensor of shape (1, position, d_model), ready to be added to input embeddings to incorporate positional information.
+    
     
     
 **_NOTE_**: Please calculate the encodings using the above steps and dont just reshape and return. 
