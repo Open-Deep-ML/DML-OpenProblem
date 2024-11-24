@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculating Contrast of a Grayscale Image</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #2c5282;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: #2d3748;
+            margin-top: 24px;
+        }
+        p {
+            margin: 16px 0;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        strong {
+            color: #2c5282;
+        }
+        .math-block {
+            background: #f7fafc;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+<body>
+    <h2>Calculating Contrast of a Grayscale Image</h2>
+    
+    <p>Contrast in a grayscale image refers to the difference in luminance or color that makes an object distinguishable. Here are several methods to calculate contrast:</p>
+
+    <h3>1. Basic Contrast Calculation</h3>
+    <p>The simplest way to define the contrast of a grayscale image is by using the difference between the maximum and minimum pixel values:</p>
+    <div class="math-block">
+        \[
+        \text{Contrast} = \max(I) - \min(I)
+        \]
+    </div>
+
+    <h3>2. RMS Contrast</h3>
+    <p>The Root Mean Square (RMS) contrast considers the standard deviation of pixel intensities:</p>
+    <div class="math-block">
+        \[
+        \text{RMS Contrast} = \frac{\sigma}{\mu}
+        \]
+    </div>
+
+    <h3>3. Michelson Contrast</h3>
+    <p>Michelson contrast is defined as:</p>
+    <div class="math-block">
+        \[
+        C = \frac{I_{\text{max}} - I_{\text{min}}}{I_{\text{max}} + I_{\text{min}}}
+        \]
+    </div>
+
+    <h3>4. Histogram Analysis</h3>
+    <p>Another method involves analyzing the histogram of pixel intensities:</p>
+    <ul>
+        <li>Compute the histogram of the grayscale image.</li>
+        <li>Identify peaks to determine background and foreground values.</li>
+        <li>Calculate contrasts based on pixel values relative to these levels.</li>
+    </ul>
+
+    <h3>5. Example Calculation</h3>
+    <p>For instance, consider a grayscale image with pixel values ranging from 50 to 200:</p>
+    <ul>
+        <li><strong>Maximum Pixel Value:</strong> 200</li>
+        <li><strong>Minimum Pixel Value:</strong> 50</li>
+        <li><strong>Contrast Calculation:</strong></li>
+        <div class="math-block">
+            \[
+            \text{Contrast} = 200 - 50 = 150
+            \]
+        </div>
+    </ul>
+
+    <h3>Conclusion</h3>
+    <p>Selecting an appropriate method for calculating contrast depends on your specific needs and the characteristics of the image being analyzed.</p>
+
+</body>
+</html>
