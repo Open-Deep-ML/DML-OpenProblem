@@ -22,6 +22,15 @@ def test_calculate_matrix_mean() -> None:
     mode = 'row'
     assert calculate_matrix_mean(matrix, mode) == [2.0, 5.0, 8.0]
 
+    # Test case 3
+    matrix = [[1, 2], [3, 4], [5, 6]]
+    mode = 'column'
+    assert calculate_matrix_mean(matrix, mode) == [3.0, 4.0]
+
+    # Test case 4
+    mode = 'row'
+    assert calculate_matrix_mean(matrix, mode) == [1.5, 3.5, 5.5]
+
 if __name__ == "__main__":
     test_calculate_matrix_mean()
     print("All calculate_matrix_mean tests passed.")

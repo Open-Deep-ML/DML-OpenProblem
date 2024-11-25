@@ -1,0 +1,26 @@
+<h2>Root Mean Square Error (RMSE)</h2>
+
+RMSE is a used to measure the accuracy of predictions in regression models. 
+It represents the difference between the predictions and the actual values. 
+In other words it is standard deviation of the residuals the residuals/ prediction errors.
+
+<h3>Theory:</h3>
+
+The RMSE is defined as:
+\[
+\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_{\text{true}_i} - y_{\text{pred}_i})^2}
+\]
+where:
+\( n \) is the number of observations,
+\( y_{\text{true}_i} \) represents the actual values, and
+\( y_{\text{pred}_i} \) represents the predicted values.
+
+<h3>Steps for Calculation:</h3>
+
+1. For each pair of actual and predicted values, calculate the difference \( y_{\text{true}_i} - y_{\text{pred}_i} \).
+2. Square each of these differences and find their mean.
+3. Take the square root of the mean value.
+
+<h3>When to Use RMSE vs. MAE:</h3>
+
+RMSE is generally used when large deviations/errors are more problematic and should be penalized more heavily. Whereas MAE is used when errors should be treated equally, regardless of their size.
