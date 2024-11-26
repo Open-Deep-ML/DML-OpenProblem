@@ -2,13 +2,10 @@ import numpy as np
 
 
 def recall(y_true, y_pred):
-    tp = np.sum((y_true == 1) & (y_pred == 1))
-    fn = np.sum((y_true == 1) & (y_pred == 0))
-
-    try:
-        return round(tp / (tp + fn), 3)
-    except ZeroDivisionError:
+    denom = sum(y_true)
+    if denom == 0:
         return 0.0
+    return round(y_pred.dot(y_true)/denom, 3)
 
 
 def test_recall():
@@ -47,6 +44,7 @@ def test_recall():
     y_pred = np.array([1, 0, 1, 1, 0, 0])
     expected_output = 0.667
     assert recall(y_true, y_pred) == expected_output, "Test case 6 failed"
+
 
 if __name__ == "__main__":
     test_recall()
