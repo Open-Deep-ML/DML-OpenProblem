@@ -1,0 +1,29 @@
+<h2>Generate Performance Metrics</h2>
+
+<p>Given the actual and predicted labels of the observations of a binary classification problem, return the confusion matrix, accuracy, F1 score, negative value and specificity of the model</p>
+
+<p>The input consists of two lists: one for the actual values and one for the predicted values</p>
+
+<p>Round the performance metrics to 3 decimals</p>
+
+<h3>Example:</h3>
+
+<ul>
+    <li>Input: 
+        <ul>
+            <li>Actual labels: [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1]</li>
+            <li>Predicted labels: [0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0]</li>
+        </ul>
+    </li>
+    <li>Output: [[4, 5], [4, 2]], 0.4, 0.5, 0.444, 0.471   </li>
+    <li>Reasoning:
+        <ul>
+            <li>There are four observations of class 1 that are labeled as class 1, so there are 4 true positives</li>
+            <li>There are five observations of class 1 that are labeled as class 0, so there are 5 false negatives</li>
+            <li>There are four observations of class 0 that are labeled as class 1, so there are 4 false positives</li>
+            <li>There are two observations of class 0 that are labeled as class 0, so there are 2 true negatives</li>
+
+        </ul>
+    </li>
+    <li>With that information we can calculate all of the performance metrics</li>
+</ul>
