@@ -12,6 +12,7 @@ def calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]
 
     return covariance_matrix
 
+
 def test_calculate_covariance_matrix() -> None:
     # Test cases for calculate_covariance_matrix function
 
