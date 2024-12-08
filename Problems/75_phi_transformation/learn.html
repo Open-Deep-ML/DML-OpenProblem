@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div>
+        <h1>Phi Transformation</h1>
+        <p>
+            The Phi Transformation maps input features into a higher-dimensional space by generating polynomial features.
+            It allows models like linear regression to fit nonlinear data by introducing new feature dimensions that represent polynomial combinations of the original input features.
+        </p>
+
+        <h2>Why Use Phi Transformation?</h2>
+        <ul>
+            <li>To increase the expressive power of simple models such as linear models</li>
+            <li>To enable better fitting of nonlinear relationships in the data.</li>
+        </ul>
+
+        <h2>Equations</h2>
+        <p>
+            For an input value \( x \), the phi transformation expands it as:
+        </p>
+        <p>
+            \[
+            \Phi(x) = [1, x, x^2, x^3, \dots, x^d]
+            \]
+        </p>
+        <p>
+            Where \( d \) is the specified degree, and \( \Phi(x) \) represents the transformed feature vector.
+        </p>
+
+        <h3>Example 1: Polynomial Expansion for One Value</h3>
+        <p>Given \( x = 3 \) and \( d = 3 \), the phi transformation is:</p>
+        <p>
+            \[
+            \Phi(3) = [1, 3, 9, 27]
+            \]
+        </p>
+
+        <h3>Example 2: Transformation for Multiple Values</h3>
+        <p>For \( \text{data} = [1, 2] \) and \( d = 2 \), the phi transformation is:</p>
+        <p>
+            \[
+            \Phi([1, 2]) = \begin{bmatrix} 1 & 1 & 1 \\ 1 & 2 & 4 \end{bmatrix}
+            \]
+        </p>
+    </div>
+</body>
+</html>
