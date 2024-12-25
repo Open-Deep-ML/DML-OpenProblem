@@ -1,0 +1,43 @@
+<h2>Cosine Similarity</h2>
+
+<p>Measures the cosine of the angle between two vectors.
+Doesn't take into consideration the magnitude of the vectors but focuesses on the angle</p>
+
+<h3>Cosine Similarity</h3>
+<p>
+\[
+cos(\theta) = \frac{\sum_{i=1}^{p} A_i B_i}{\sqrt{\sum_{i=1}^{p} A_i^2} \sqrt{\sum_{i=1}^{p} B_i^2}}
+\]
+</p>
+
+<h3>Implementation Steps for Cosine Similarity:</h3>
+<ol>
+    <li><b>Handle Input : </b> Ensure input vectors have same dimensions and handle edge cases (zero vectors).</li>
+    <li><b>Dot Product : </b> Compute \( \sum_{i=1}^{p} A_i B_i \) between vectors.</li>
+    <li><b>Magnitudes : </b> Compute L2 norms \( \sqrt{\sum_{i=1}^{p} A_i^2} \) for both vectors.</li>
+    <li><b>Final Result : </b>Divide dot product by product of magnitudes.</li>
+</ol>
+
+<h3>Use Cases:</h3>
+<ol>
+    <li><b>Text and Image Similarity</b></li>
+    <li><b>Recommendation System</b></li>
+    <li><b>Query Matching</b></li>
+</ol>
+
+<p>Pitfalls</p>
+<ol>
+<li>Magnitude Blindness
+vector1 = (1,1)
+vector2 = (1000, 1000)
+These would have cosine similarity = 1, despite very different magnitudes
+</li>  
+<li>
+Sparse Data Issues: In high-dimensional spaces, where data is often sparse, cosine similarity can be less reliable.
+</li>
+<li>
+Non-Negative Data Limitation:
+With all positive values, can't get negative similarity
+May not capture certain types of inverse relationships    
+</li>
+</ol>
