@@ -1,0 +1,75 @@
+<h2>Understanding Poisson Distribution</h2>
+<p>The Poisson distribution is a discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time or space, provided these events occur with a known constant mean rate and independently of the time since the last event.</p>
+
+<h3>Mathematical Definition</h3>
+<p>The probability of observing \( k \) events in a given interval is defined as:</p>
+\[
+P(k; \lambda) = \frac{\lambda^k e^{-\lambda}}{k!}
+\]
+<ul>
+    <li>\( k \): Number of events (non-negative integer)</li>
+    <li>\( \lambda \): The mean number of events in the given interval (rate parameter)</li>
+    <li>\( e \): Euler's number, approximately 2.718</li>
+</ul>
+
+<h3>Key Properties</h3>
+<ul>
+    <li><strong>Mean:</strong> \( \lambda \)</li>
+    <li><strong>Variance:</strong> \( \lambda \)</li>
+    <li>The Poisson distribution is used for modeling rare or random events.</li>
+</ul>
+
+<h3>Applications</h3>
+<p>The Poisson distribution is widely used in:</p>
+<ul>
+    <li>Modeling the number of arrivals at a queue (e.g., calls at a call center)</li>
+    <li>Counting occurrences over time (e.g., number of emails received per hour)</li>
+    <li>Biology (e.g., distribution of mutations in a DNA strand)</li>
+    <li>Traffic flow analysis (e.g., number of cars passing through an intersection)</li>
+</ul>
+
+<h3>Implementation Steps</h3>
+<ol>
+    <li>Identify the rate parameter \( \lambda \), which represents the mean number of events.</li>
+    <li>For a given \( k \), calculate the probability using the formula:
+    \[
+    P(k; \lambda) = \frac{\lambda^k e^{-\lambda}}{k!}
+    \]
+    </li>
+    <li>Iterate this calculation for all desired values of \( k \) to analyze probabilities across the distribution.</li>
+</ol>
+
+<h3>Example Calculation</h3>
+<p>Suppose the mean number of calls received in an hour (\( \lambda \)) is 5. Calculate the probability of receiving exactly 3 calls in an hour:</p>
+<ul>
+    <li>\( \lambda = 5 \)</li>
+    <li>\( k = 3 \)</li>
+    <li>Substitute into the formula:
+    \[
+    P(3; 5) = \frac{5^3 e^{-5}}{3!}
+    \]</li>
+    <li>Calculate step-by-step:
+    \[
+    P(3; 5) = \frac{125 \cdot e^{-5}}{6} \approx 0.14037
+    \]</li>
+</ul>
+
+<h3>Visualization</h3>
+<p>The Poisson distribution is typically visualized as a bar plot, showing probabilities for discrete values of \( k \). The shape depends on the rate parameter \( \lambda \):</p>
+<ul>
+    <li>Smaller \( \lambda \): Skewed to the right</li>
+    <li>Larger \( \lambda \): Approaches a normal distribution</li>
+</ul>
+
+<h3>Advantages</h3>
+<ul>
+    <li>Models random events effectively</li>
+    <li>Simple to compute probabilities</li>
+    <li>Useful for real-world event forecasting</li>
+</ul>
+
+<h3>Limitations</h3>
+<ul>
+    <li>Assumes events occur independently</li>
+    <li>Not suitable for events with varying rates</li>
+</ul>
