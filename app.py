@@ -92,7 +92,7 @@ def save_file(file_path, content):
         st.error(f"Error saving file {file_path}: {e}")
 
 # Streamlit app
-st.title("LeetCode-like Problem Solver")
+st.title("Learn Section Editor"")
 
 # Define the directory containing the learn.html files
 LEARN_HTML_DIR = "Problems"
