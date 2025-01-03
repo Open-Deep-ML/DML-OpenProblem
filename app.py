@@ -4,6 +4,46 @@ import streamlit.components.v1 as components
 import os
 import re
 
+# Set page configuration to wide layout
+st.set_page_config(layout="wide")
+
+# Custom CSS for styling
+st.markdown("""
+    <style>
+    .stButton button {
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    .stButton button:hover {
+        background-color: #45a049;
+    }
+    .stTextArea textarea {
+        font-family: monospace;
+    }
+    .stCodeBlock {
+        background-color: #f5f5f5;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .split-container {
+        display: flex;
+        gap: 20px;
+    }
+    .left-panel, .right-panel {
+        flex: 1;
+    }
+    .left-panel {
+        max-width: 50%;
+    }
+    .right-panel {
+        max-width: 50%;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 def render_learn_section(learn_section):
     # Replace LaTeX delimiters with the appropriate format for MathJax
     learn_section = re.sub(r'\\\(', r'$', learn_section)
@@ -11,7 +51,7 @@ def render_learn_section(learn_section):
     learn_section = re.sub(r'\\\[', r'$$', learn_section)
     learn_section = re.sub(r'\\\]', r'$$', learn_section)
     
-    st.subheader("Learn Section Preview")
+    st.subheader("Problem Description")
     components.html(
         f"""
         <div id="mathjax-preview">
@@ -33,11 +73,8 @@ def render_learn_section(learn_section):
         </script>
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
         """,
-        height=1000,
+        height=500,
     )
-
-# Define the directory containing the learn.html files
-LEARN_HTML_DIR = "Problems"
 
 def load_file(file_path):
     try:
@@ -55,7 +92,10 @@ def save_file(file_path, content):
         st.error(f"Error saving file {file_path}: {e}")
 
 # Streamlit app
-st.title("Learn Section Editor")
+st.title("LeetCode-like Problem Solver")
+
+# Define the directory containing the learn.html files
+LEARN_HTML_DIR = "Problems"
 
 # List HTML files in the directory
 html_files = []
@@ -68,24 +108,48 @@ if not html_files:
     st.warning("No learn.html files found.")
 else:
     # File selector
-    selected_file = st.selectbox("Select an HTML file to edit", html_files, key="file_selector")
+    selected_file = st.selectbox("Select a problem to solve", html_files, key="file_selector")
 
     if selected_file:
         # Load the content of the selected file
         content = load_file(selected_file)
 
-        # Use the code editor for editing the content
-        # Add a unique key for the editor to reset its state when a new file is selected
-        editor_key = f"editor_{selected_file}"
+        # Split layout into two columns
+        col1, col2 = st.columns([1, 1])
 
-        # Display the editor with the current file content
-        edited_content = st_ace(value=content, language='html', theme='monokai', key=editor_key)
-
-        if st.button("RENDER"):
-            st.session_state["rendered_html"] = edited_content
-
-        # Render the content
-        if "rendered_html" in st.session_state:
-            render_learn_section(st.session_state["rendered_html"])
-        else:
+        # Left column: Problem description
+        with col1:
             render_learn_section(content)
+
+        # Right column: Code editor and execution
+        with col2:
+            st.subheader("Code Editor")
+            editor_key = f"editor_{selected_file}"
+            edited_content = st_ace(
+                value="// Write your code here",
+                language='python',
+                theme='monokai',
+                key=editor_key,
+                height=500  # Increased height for better visibility
+            )
+
+            # Run button
+            if st.button("Run Code"):
+                st.subheader("Output")
+                try:
+                    # Simulate code execution (for demonstration purposes)
+                    exec(edited_content)
+                    st.success("Code executed successfully!")
+                except Exception as e:
+                    st.error(f"Error executing code: {e}")
+
+            # Save button
+            if st.button("Save Code"):
+                save_file(selected_file, edited_content)
+                st.success("Code saved successfully!")
+
+        # Feedback section (below the split layout)
+        st.subheader("Feedback")
+        feedback = st.text_area("Leave your feedback here")
+        if st.button("Submit Feedback"):
+            st.success("Thank you for your feedback!")
