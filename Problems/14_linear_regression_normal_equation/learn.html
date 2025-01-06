@@ -1,21 +1,68 @@
 <h2>Linear Regression Using the Normal Equation</h2>
 
-<p>Linear regression aims to model the relationship between a scalar dependent variable \(y\) and one or more explanatory variables (or independent variables) \(X\). The normal equation provides an analytical solution to finding the coefficients \(\theta\) that minimize the cost function for linear regression.</p>
+<p>Linear regression aims to model the relationship between a scalar dependent variable \(y\) and one or more
+  explanatory variables (or independent variables) \(X\). The normal equation provides an analytical solution to finding
+  the coefficients \(\theta\) that minimize the cost function for linear regression.</p>
 
-<p>Given a matrix \(X\) (with each row representing a training example and each column a feature) and a vector \(y\) (representing the target values), the normal equation is:</p>
+<p>Given a matrix \(X\) (with each row representing a training example and each column a feature) and a vector \(y\)
+  (representing the target values), the normal equation is:</p>
 
 \[
 \theta = (X^TX)^{-1}X^Ty
 \]
 
-<ul>
-<li> \(X^T\) is the transpose of \(X\), </li>
-<li> \((X^TX)^{-1}\) is the inverse of the matrix \(X^TX\), </li>
-<li> \(y\) is the vector of target values. </li>
-</ul>
+<h3>Deriving the Normal Equation in the 2D case</h3>
+<p>Consider three points \((1, 1)\), \((2, 2)\), and \((3, 4)\) in a 2D plane.</p>
+<p>If the points were \((1, 1)\), \((2, 2)\), and \((3, 3)\), we could find the line \(y = 1 \cdot x + 0\) that
+  passes exactly through all of them. However, in our case, no single line can pass through all three points exactly.
+  This is a common scenario in real-world data, where we need to find the "best fit" line that minimizes the overall
+  error.</p>
 
-<p>Things to note: This method does not require any feature scaling, and there's no need to choose a learning rate. However, computing the inverse of \(X^TX\) can be computationally expensive if the number of features is very large.</p>
 
-<h3>Practical Implementation</h3>
+<p>Plug the three points in the usual equation of a line formula \(y=b+mx\) (putting the b first is just a
+  convention here):</p>
+\begin{align*}
+1 &= b + m \cdot 1 \\
+2 &= b + m \cdot 2 \\
+4 &= b + m \cdot 3
+\end{align*}
+<p>This is equivalent to writing \(X \cdot \theta = y\), where \(X\) is \(\begin{bmatrix} 1 & 1 \\ 1 & 2 \\ 1 & 3
+  \end{bmatrix}\),
+  \(y\) is \(\begin{bmatrix} 1 \\ 2 \\ 4 \end{bmatrix}\), and \(\theta\) is \(\begin{bmatrix} b \\ m \end{bmatrix}\)</p>
 
-<p>A practical implementation involves augmenting \(X\) with a column of ones to account for the intercept term and then applying the normal equation directly to compute \(\theta\).</p>
+<p>If the system had a solution, we could solve it like a normal system of equations (e.g. by using elimination).
+  Since the system has no solution, we would like to find \(\theta\) such that \(X \cdot \theta\) is as close to \(y\)
+  as
+  possible.
+
+  That means we need to find the closest vector to \(y\) that can be formed from the
+  columns of \(X\)
+  \(\left(\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} \text{ and } \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}\right)\)
+
+  In mathematical terms, the closest vector is the projection of the vector \(y\) onto the column space of \(X\).
+
+  The projection matrix is found by dropping a perpendicular (called the error vector) from the target vector onto the
+  plane formed by the columns of X.
+</p>
+
+<p>The error vector \(e = y - X\theta\) must be perpendicular to each column of \(X\). This is equivalent to:</p>
+
+\[
+X^T(y - X\theta) = 0
+\]
+
+<p>This is because when two vectors are perpendicular, their dot product is zero, and we apply that for all columns of
+  \(X\)
+  and the vector \(e\). Expanding this equation gives:</p>
+
+\[
+X^Ty - X^TX\theta = 0 \quad \Rightarrow \quad X^TX\theta = X^Ty \quad \Rightarrow \quad \theta = (X^TX)^{-1}X^Ty
+\]
+
+<p>The final solution \(\theta = (X^TX)^{-1}X^Ty\) gives us the optimal values for \(b\) and \(m\) that minimize the sum
+  of squared errors. In our example, this would give us the line that best fits our three points.</p>
+
+<p>Note that we started with some points and wrote their line equations in matrix form. That way, we can
+  leverage linear algebra to find the solution that is closest to the target vector \(y\)</p>
+<p>To learn more about this method, see <a href="https://en.wikipedia.org/wiki/Linear_least_squares"
+    target="_blank">Linear Least Squares on Wikipedia</a></p>
