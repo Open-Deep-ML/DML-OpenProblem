@@ -1,10 +1,6 @@
 
-# Learn Section
 
-
-# Learn Section
-
-### The Phi coefficient
+# The Phi coefficient
 
 The Phi coefficient is a type of correlation coefficient , which is used when we need to find the correlation between two binary variables.
 For example when we have two variables x and y , x being gender and y signifying the presence of heart disease. 
