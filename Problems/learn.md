@@ -7,7 +7,7 @@ For example when we have two variables x and y , x being gender and y signifying
 Both variables are binary and if we need to find a correlation between x and y then we can use the formula below :
 
 
-   - $\phi = \frac{(x_{00} \cdot x_{11}) - (x_{01} \cdot x_{10})}{\sqrt{(x_{00} + x_{01})(x_{10} + x_{11})(x_{00} + x_{10})(x_{01} + x_{11})}}$
+$\phi = \frac{(x_{00} \cdot x_{11}) - (x_{01} \cdot x_{10})}{\sqrt{(x_{00} + x_{01})(x_{10} + x_{11})(x_{00} + x_{10})(x_{01} + x_{11})}}$
 
 
 
