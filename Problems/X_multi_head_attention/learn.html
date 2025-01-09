@@ -1,0 +1,142 @@
+<h2>Understanding Multi-Head Attention</h2>
+
+<p>
+    Multi-head attention is a fundamental mechanism in transformer models, allowing the model to focus on different parts of the input sequence simultaneously. This enables the model to capture a wider variety of relationships and dependencies, which is crucial for handling complex data, such as natural language. By using multiple attention heads, the model learns to attend to various aspects of the input at different levels of abstraction, enhancing its ability to capture complex relationships.
+</p>
+
+<h3>Concepts</h3>
+
+<p>
+    The attention mechanism allows the model to weigh the importance of different input elements based on their relevance to a specific task. In tasks like machine translation, for example, attention helps the model focus on relevant words in a sentence to understand the overall meaning. Multi-head attention extends this concept by using multiple attention heads, each learning different representations of the input data, which improves the model’s ability to capture richer relationships and dependencies.
+</p>
+
+<p>
+    The process of multi-head attention involves several key steps:
+</p>
+
+<ul>
+    <li><b>1. Computing Attention Scores:</b> This involves calculating how much focus each element in the input should receive based on its relationship with other elements.</li>
+    <li><b>2. Applying Softmax:</b> The attention scores are transformed into probabilities using the softmax function, which normalizes the scores so that they sum to one.</li>
+    <li><b>3. Aggregating Results:</b> The final output is computed by taking a weighted sum of the input values, where the weights are determined by the attention scores.</li>
+</ul>
+
+<h3>Structure of Multi-Head Attention</h3>
+
+<p>
+    The attention mechanism can be described with Query (Q), Key (K), and Value (V) matrices. The process of multi-head attention works by repeating the standard attention mechanism multiple times in parallel, with different sets of learned weight matrices for each attention head.
+</p>
+
+<h4>1. Splitting Q, K, and V</h4>
+
+<p>
+    Assume that the input Query (Q), Key (K), and Value (V) matrices have dimensions \((\text{seq_len}, d_{\text{model}})\), where \(d_{\text{model}}\) is the model dimension. In multi-head attention, these matrices are divided into \(n\) smaller matrices, each corresponding to a different attention head. Each smaller matrix has dimensions \((\text{seq_len}, d_k)\), where \(d_k = \frac{d_{\text{model}}}{n}\) is the dimensionality of each head.
+</p>
+
+<p>
+    For each attention head \(i\), we get its subset of Query \(Q_i\), Key \(K_i\), and Value \(V_i\). These subsets are computed independently for each head.
+</p>
+
+<h4>2. Computing Attention for Each Head</h4>
+
+<p>
+    Each head independently computes its attention output. The calculation is similar to the single-head attention mechanism:
+</p>
+<p style="text-align:center;">
+    \[
+    \text{score}_i = \frac{Q_i K_i^T}{\sqrt{d_k}}
+    \]
+</p>
+<p>
+    Where \(d_k\) is the dimensionality of the key space for each head. The scaling factor \(\frac{1}{\sqrt{d_k}}\) ensures the dot product doesn't grow too large, preventing instability in the softmax function.
+</p>
+
+<p>
+    The softmax function is applied to the scores to normalize them, transforming them into attention weights for each head:
+</p>
+<p style="text-align:center;">
+    \[
+    \text{softmax_score}_i = \text{softmax}(\text{score}_i)
+    \]
+</p>
+
+<h4>3. Softmax Calculation and Numerical Stability</h4>
+
+<p>
+    When computing the softmax function, especially in the context of attention mechanisms, there's a risk of numerical overflow or underflow, which can occur when the attention scores become very large or very small. This issue arises because the exponential function (\(\exp\)) grows very quickly, and when dealing with large numbers, it can result in values that are too large for the computer to handle, leading to overflow errors.
+</p>
+
+<p>
+    To prevent this, we apply a common technique: subtracting the maximum score from each attention score before applying the exponential function. This helps to ensure that the largest value in the attention scores becomes zero, reducing the likelihood of overflow. Here's how it's done:
+</p>
+
+<p style="text-align:center;">
+    \[
+    \text{softmax_score}_i = \frac{\exp(\text{score}_i - \text{score}_{i,\text{max}})}{\sum \exp(\text{score}_i - \text{score}_{i,\text{max}})}
+    \]
+</p>
+
+<p>
+    Where \(\text{score}_{i,\text{max}}\) is the maximum value of the attention scores for the \(i\)-th head. Subtracting the maximum score from each individual score ensures that the largest value becomes 0, which prevents the exponentials from becoming too large.
+</p>
+
+<p>
+    This subtraction does not affect the final result of the softmax calculation because the softmax is a relative function—it's the ratios of the exponentials that matter. Therefore, this adjustment ensures numerical stability while maintaining the correctness of the computation.
+</p>
+
+<p>
+    To summarize, when computing softmax in multi-head attention:
+</p>
+<ul>
+    <li>Subtract the maximum score from each attention score before applying the exponential function.</li>
+    <li>This technique prevents overflow by ensuring that the largest value becomes 0, which keeps the exponential values within a manageable range.</li>
+    <li>The relative relationships between the scores remain unchanged, so the softmax output remains correct.</li>
+</ul>
+
+<p>
+    By applying this numerical stability trick, the softmax function becomes more robust and prevents computational issues that could arise during training or inference, especially when dealing with large models or sequences.
+</p>
+
+<p>
+    Finally, the attention output for each head \(i\) is computed as:
+</p>
+<p style="text-align:center;">
+    \[
+    \text{head}_i = \text{softmax_score}_i \cdot V_i
+    \]
+</p>
+
+<h4>4. Concatenation and Linear Transformation</h4>
+
+<p>
+    After computing the attention output for each head, the outputs are concatenated along the feature dimension. This results in a matrix of dimensions \((\text{seq_len}, d_{\text{model}})\), where the concatenated attention outputs are passed through a final linear transformation to obtain the final multi-head attention output.
+</p>
+<p style="text-align:center;">
+    \[
+    \text{multi_head_output} = \text{concat}(\text{head}_1, \text{head}_2, \dots, \text{head}_n)
+    \]
+</p>
+
+<p>
+    The concatenated result is then linearly transformed using a weight matrix \(W_{\text{o}}\) to obtain the final output. However, in our case, obtaining the multi-head attention output without this final transformation is sufficient.:
+</p>
+<p style="text-align:center;">
+    \[
+    \text{multi_head_output} = W_o \cdot \text{multi_head_output}
+    \]
+</p>
+
+<h3>Key Points</h3>
+<ul>
+    <li>Each attention head processes the input independently using its own set of learned weights. This allows each head to focus on different relationships in the data.</li>
+    <li>Each head calculates its attention scores based on its corresponding Query, Key, and Value matrices, producing different attention outputs.</li>
+    <li>The outputs of all attention heads are concatenated to form a unified representation. This concatenated result is then linearly transformed to generate the final output.</li>
+</ul>
+
+<p>
+    Multi-head attention allows the model to attend to different aspects of the input sequence in parallel, making it more capable of learning complex and diverse relationships. This parallelization of attention heads enhances the model's ability to understand the data from multiple angles simultaneously, contributing to improved performance in tasks like machine translation, text generation, and more.
+</p>
+
+<!-- MathJax script -->
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
