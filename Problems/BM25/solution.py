@@ -39,8 +39,8 @@ def test_bm25_scores():
     ]
     query = ["the", "cat"]
     scores = calculate_bm25_scores(corpus, query)
-    assert len(scores) == 3, "Should return scores for all documents"
-    assert scores[0] > scores[1], "First document should score higher for 'cat' query"
+    expected_scores = np.array([2.283, 1.386, 1.386])
+    np.testing.assert_array_almost_equal(scores, expected_scores, decimal=3)
     
     # Test case 2
     try:
@@ -71,9 +71,19 @@ def test_bm25_scores():
     ]
     query = ["term"]
     scores = calculate_bm25_scores(corpus, query, k1=1.0)
-    ratio = scores[0] / scores[1]
-    assert ratio < 5, "Score shouldn't grow linearly with term frequency"
-
+    expected_scores = np.array([0.579, 0.763])
+    np.testing.assert_array_almost_equal(scores, expected_scores, decimal=3)
+    
+    # Test case 5
+    corpus = [
+        ["the"] * 10,
+        ["the"]
+    ]
+    query = ["the"]
+    scores = calculate_bm25_scores(corpus, query)
+    expected_scores = np.array([0.446, 0.893])
+    np.testing.assert_array_almost_equal(scores, expected_scores, decimal=3)
+    
 if __name__ == "__main__":
     test_bm25_scores()
     print("All test cases passed!")
