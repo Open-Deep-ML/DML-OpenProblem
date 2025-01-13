@@ -1,0 +1,63 @@
+<h2>Understanding Normal Distribution</h2>
+<p>The Normal Distribution, also known as the Gaussian Distribution, is a fundamental concept in statistics. It is a continuous probability distribution that is symmetrical and bell-shaped, representing the distribution of data around the mean.</p>
+
+<h3>Key Characteristics</h3>
+<ul>
+    <li><strong>Symmetry:</strong> The distribution is symmetric around the mean, which means the left and right halves of the graph are mirror images.</li>
+    <li><strong>Mean, Median, and Mode:</strong> In a perfectly normal distribution, the mean, median, and mode are all equal.</li>
+    <li><strong>Shape:</strong> The bell-shaped curve is defined by its mean (μ) and standard deviation (σ).</li>
+    <li><strong>Empirical Rule:</strong> Approximately:
+        <ul>
+            <li>68% of data falls within 1 standard deviation (μ ± σ).</li>
+            <li>95% of data falls within 2 standard deviations (μ ± 2σ).</li>
+            <li>99.7% of data falls within 3 standard deviations (μ ± 3σ).</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>Mathematical Formula</h3>
+<p>The probability density function (PDF) of a normal distribution is given by:</p>
+\[
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]
+<ul>
+    <li>\( x \): Random variable</li>
+    <li>\( \mu \): Mean of the distribution</li>
+    <li>\( \sigma \): Standard deviation of the distribution</li>
+</ul>
+
+<h3>Implementation Steps</h3>
+<ol>
+    <li>Determine the mean (μ) and standard deviation (σ) of the dataset.</li>
+    <li>Use the normal distribution formula to calculate the probability density for each value.</li>
+    <li>Plot the distribution curve to visualize the bell shape.</li>
+</ol>
+
+<h3>Example Calculation</h3>
+<p>Given:</p>
+<p>Data: [10, 12, 14, 16, 18, 20]</p>
+<ul>
+    <li><strong>Mean (μ):</strong>
+    \[
+    \mu = \frac{10 + 12 + 14 + 16 + 18 + 20}{6} = 15
+    \]</li>
+    <li><strong>Standard Deviation (σ):</strong>
+    \[
+    \sigma = \sqrt{\frac{\sum (x_i - \mu)^2}{N}} = \sqrt{\frac{25}{6}} \approx 2.04
+    \]</li>
+    <li><strong>Probability for x = 16:</strong>
+    \[
+    f(16) = \frac{1}{\sqrt{2\pi(2.04)^2}} e^{-\frac{(16-15)^2}{2(2.04)^2}} \approx 0.176
+    \]</li>
+</ul>
+
+<h3>Applications</h3>
+<p>Normal Distribution is widely used in:</p>
+<ul>
+    <li>Data Analysis</li>
+    <li>Statistical Inference</li>
+    <li>Machine Learning Algorithms</li>
+    <li>Quality Control</li>
+    <li>Risk Management</li>
+</ul>
+<p>This distribution is crucial in fields like economics, biology, psychology, and engineering to model natural phenomena and make predictions.</p>
