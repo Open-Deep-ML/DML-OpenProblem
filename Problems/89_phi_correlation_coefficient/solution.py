@@ -21,3 +21,14 @@ def phi_corr(x:list[int],y:list[int]):
     phi=round(nr/dr,4)
 
     return phi
+
+def test_phi_corr():
+    # Test case 1: z = 0
+    assert phi_corr([1,1,0,0],[0,0,1,1]) == -1, "Test case 1 failed"
+    
+    # Test case 2: z = 1
+    assert phi_corr([1,1,0,0],[1,0,1,1]) == -0.5774, "Test case 2 failed"
+
+if __name__ == "__main__":
+    test_phi_corr()
+    print("All phi correlation coefficient tests passed.")
