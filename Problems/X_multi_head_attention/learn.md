@@ -45,7 +45,7 @@ When computing the softmax function, especially in the context of attention mech
 To prevent this, we apply a common technique: subtracting the maximum score from each attention score before applying the exponential function. This helps to ensure that the largest value in the attention scores becomes zero, reducing the likelihood of overflow. Here's how it's done:
 
 $$
-\text{SoftmaxScore}_i = \frac{\exp(\text{score}_i - \text{score}_{i,\text{max}})}{\sum \exp(\text{score}_i - \text{score}_{i,\text{max}})}
+\text{SoftmaxScore} = \frac{\exp(\text{score} - \text{score}_{\text{max}})}{\sum\exp(\text{score} - \text{score}_{\text{max}})}
 $$
 
 Where $$\text{score}_{i,\text{max}}$$ is the maximum value of the attention scores for the \(i\)-th head. Subtracting the maximum score from each individual score ensures that the largest value becomes 0, which prevents the exponentials from becoming too large.
