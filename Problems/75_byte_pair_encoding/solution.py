@@ -71,7 +71,7 @@ def learn_bpe_with_separate_tokens(corpus, num_merges):
 
     return bpe_rules, vocab, separate_tokens
 
-# Example usage
+#Example usage (3 tests)
 corpus = '''Tokenization is the process of breaking down 
 a sequence of text into smaller units called tokens,
 which can be words, phrases, or even individual characters.
@@ -81,6 +81,87 @@ The resulting tokens are typically used as input to further processing steps,
 such as vectorization, where the tokens are converted
 into numerical representations for machine learning models to use.'''
 num_merges = 20
+'''
+corpus = "low lower lowest"
+num_merges = 10
+Answer: Counter({'low</w>': 1, 'lower</w>': 1, 'lowest</w>': 1})
+Explanation: 
+Initial Vocabulary:
+Counter({'l o w </w>': 1, 'l o w e r </w>': 1, 'l o w e s t </w>': 1})
+
+Step 1: Most frequent pair: ('l', 'o')
+Updated Vocabulary: {'lo w </w>': 1, 'lo w e r </w>': 1, 'lo w e s t </w>': 1}
+
+Step 2: Most frequent pair: ('lo', 'w')
+Updated Vocabulary: {'low </w>': 1, 'low e r </w>': 1, 'low e s t </w>': 1}
+
+Step 3: Most frequent pair: ('low', 'e')
+Updated Vocabulary: {'low </w>': 1, 'lowe r </w>': 1, 'lowe s t </w>': 1}
+
+Step 4: Most frequent pair: ('low', '</w>')
+Updated Vocabulary: {'low</w>': 1, 'lowe r </w>': 1, 'lowe s t </w>': 1}
+
+Step 5: Most frequent pair: ('lowe', 'r')
+Updated Vocabulary: {'low</w>': 1, 'lower </w>': 1, 'lowe s t </w>': 1}
+
+Step 6: Most frequent pair: ('lower', '</w>')
+Updated Vocabulary: {'low</w>': 1, 'lower</w>': 1, 'lowe s t </w>': 1}
+
+Step 7: Most frequent pair: ('lowe', 's')
+Updated Vocabulary: {'low</w>': 1, 'lower</w>': 1, 'lowes t </w>': 1}
+
+Step 8: Most frequent pair: ('lowes', 't')
+Updated Vocabulary: {'low</w>': 1, 'lower</w>': 1, 'lowest </w>': 1}
+
+Step 9: Most frequent pair: ('lowest', '</w>')
+Updated Vocabulary: {'low</w>': 1, 'lower</w>': 1, 'lowest</w>': 1}
+
+Final Separate Tokens:
+Counter({'low</w>': 1, 'lower</w>': 1, 'lowest</w>': 1})
+'''
+
+'''
+corpus = "eat sleep code repeat"
+num_merges = 10
+Answer: Counter({'eat</w>': 2, 'sleep</w>': 1, 'cod': 1, 'e': 1, '</w>': 1, 'r': 1, 'ep': 1})
+Explanation:
+Initial Vocabulary:
+Counter({'e a t </w>': 1, 's l e e p </w>': 1, 'c o d e </w>': 1, 'r e p e a t </w>': 1})
+
+Step 1: Most frequent pair: ('e', 'a')
+Updated Vocabulary: {'ea t </w>': 1, 's l e e p </w>': 1, 'c o d e </w>': 1, 'r e p ea t </w>': 1}
+
+Step 2: Most frequent pair: ('ea', 't')
+Updated Vocabulary: {'eat </w>': 1, 's l e e p </w>': 1, 'c o d e </w>': 1, 'r e p eat </w>': 1}
+
+Step 3: Most frequent pair: ('eat', '</w>')
+Updated Vocabulary: {'eat</w>': 1, 's l e e p </w>': 1, 'c o d e </w>': 1, 'r e p eat</w>': 1}
+
+Step 4: Most frequent pair: ('e', 'p')
+Updated Vocabulary: {'eat</w>': 1, 's l e ep </w>': 1, 'c o d e </w>': 1, 'r ep eat</w>': 1}
+
+Step 5: Most frequent pair: ('s', 'l')
+Updated Vocabulary: {'eat</w>': 1, 'sl e ep </w>': 1, 'c o d e </w>': 1, 'r ep eat</w>': 1}
+
+Step 6: Most frequent pair: ('sl', 'e')
+Updated Vocabulary: {'eat</w>': 1, 'sle ep </w>': 1, 'c o d e </w>': 1, 'r ep eat</w>': 1}
+
+Step 7: Most frequent pair: ('sle', 'ep')
+Updated Vocabulary: {'eat</w>': 1, 'sleep </w>': 1, 'c o d e </w>': 1, 'r ep eat</w>': 1}
+
+Step 8: Most frequent pair: ('sleep', '</w>')
+Updated Vocabulary: {'eat</w>': 1, 'sleep</w>': 1, 'c o d e </w>': 1, 'r ep eat</w>': 1}
+
+Step 9: Most frequent pair: ('c', 'o')
+Updated Vocabulary: {'eat</w>': 1, 'sleep</w>': 1, 'co d e </w>': 1, 'r ep eat</w>': 1}
+
+Step 10: Most frequent pair: ('co', 'd')
+Updated Vocabulary: {'eat</w>': 1, 'sleep</w>': 1, 'cod e </w>': 1, 'r ep eat</w>': 1}
+
+Final Separate Tokens:
+Counter({'eat</w>': 2, 'sleep</w>': 1, 'cod': 1, 'e': 1, '</w>': 1, 'r': 1, 'ep': 1})
+
+'''
 
 # Learn BPE rules with detailed steps and separate tokens
 bpe_rules, final_vocab, separate_tokens = learn_bpe_with_separate_tokens(corpus, num_merges)
