@@ -18,7 +18,7 @@ The attention mechanism can be described with Query (Q), Key (K), and Value (V) 
 
 #### 1. Splitting Q, K, and V
 
-Assume that the input Query (Q), Key (K), and Value (V) matrices have dimensions $(\text{seq\_len}, d_{model})$, where $d_{\text{model}}$ is the model dimension. In multi-head attention, these matrices are divided into n smaller matrices, each corresponding to a different attention head. Each smaller matrix has dimensions $(\text{seq\_len}, d_k)$, where $d_k = \frac{d_{\text{model}}}{n}$ is the dimensionality of each head.
+Assume that the input Query (Q), Key (K), and Value (V) matrices have dimensions $(\text{seqLen}, d_{model})$, where $d_{\text{model}}$ is the model dimension. In multi-head attention, these matrices are divided into n smaller matrices, each corresponding to a different attention head. Each smaller matrix has dimensions $(\text{seqLen}, d_k)$, where $d_k = \frac{d_{\text{model}}}{n}$ is the dimensionality of each head.
 
 For each attention $\text{head}_i$, we get its subset of Query $\text{Q}_i$, Key $\text{K}_i$, and Value $\text{V}_i$. These subsets are computed independently for each head.
 
@@ -35,7 +35,7 @@ Where $$d_k$$ is the dimensionality of the key space for each head. The scaling 
 The softmax function is applied to the scores to normalize them, transforming them into attention weights for each head:
 
 $$
-\text{softmax\_score}_i = \text{softmax}(\text{score}_i)
+\text{SoftmaxScore}_i = \text{softmax}(\text{score}_i)
 $$
 
 #### 3. Softmax Calculation and Numerical Stability
@@ -45,7 +45,7 @@ When computing the softmax function, especially in the context of attention mech
 To prevent this, we apply a common technique: subtracting the maximum score from each attention score before applying the exponential function. This helps to ensure that the largest value in the attention scores becomes zero, reducing the likelihood of overflow. Here's how it's done:
 
 $$
-\text{softmax\_score}_i = \frac{\exp(\text{score}_i - \text{score}_{i,\text{max}})}{\sum \exp(\text{score}_i - \text{score}_{i,\text{max}})}
+\text{SoftmaxScore}_i = \frac{\exp(\text{score}_i - \text{score}_{i,\text{max}})}{\sum \exp(\text{score}_i - \text{score}_{i,\text{max}})}
 $$
 
 Where $$\text{score}_{i,\text{max}}$$ is the maximum value of the attention scores for the \(i\)-th head. Subtracting the maximum score from each individual score ensures that the largest value becomes 0, which prevents the exponentials from becoming too large.
@@ -63,21 +63,21 @@ By applying this numerical stability trick, the softmax function becomes more ro
 Finally, the attention output for each $$\text{head}_i$$ is computed as:
 
 $$
-\text{head}_i = \text{softmax\_score}_i \cdot V_i
+\text{head}_i = \text{SoftmaxScore}_i \cdot V_i
 $$
 
 #### 4. Concatenation and Linear Transformation
 
-After computing the attention output for each head, the outputs are concatenated along the feature dimension. This results in a matrix of dimensions $$(\text{seq\_len}, d_{\text{model}})$$, where the concatenated attention outputs are passed through a final linear transformation to obtain the final multi-head attention output.
+After computing the attention output for each head, the outputs are concatenated along the feature dimension. This results in a matrix of dimensions $$(\text{seqLen}, d_{\text{model}})$$, where the concatenated attention outputs are passed through a final linear transformation to obtain the final multi-head attention output.
 
 $$
-\text{multi\_head\_output} = \text{concat}(\text{head}_1, \text{head}_2, \dots, \text{head}_n)
+\text{MultiHeadOutput} = \text{concat}(\text{head}_1, \text{head}_2, \dots, \text{head}_n)
 $$
 
 The concatenated result is then linearly transformed using a weight matrix $W_{\text{o}}$ to obtain the final output. However, in our case, obtaining the multi-head attention output without this final transformation is sufficient:
 
 $$
-\text{multi\_head\_output} = W_o \cdot \text{multi\_head\_output}
+\text{MultiHeadOutput} = W_o \cdot \text{MultiHeadOutput}
 $$
 
 ### Key Points
