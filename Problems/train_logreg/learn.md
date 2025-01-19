@@ -1,5 +1,5 @@
 ## Overview
-Softmax regression or multinomial logistic regression is a type of generalized logistic regression for not only 2 classes, but more as well.
+Logistic regression is a model used for a binary classification poblem.
 
 ## Prerequisites for a regular logistic regression
 **tl;dr** regular (binary) logistic regression outputs probabilities using a sigmoid $\frac{1}{e^{-X\beta}+1}$ and is called a regression, because it is originally meant to approximate a logit function of odds.
