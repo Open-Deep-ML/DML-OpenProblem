@@ -1,0 +1,48 @@
+<h2>Binary Classification with Logistic Regression</h2>
+
+<p>
+  Logistic Regression is a fundamental algorithm for binary classification.
+  Given input features and learned model parameters (weights and bias), your
+  task is to implement the prediction function that computes class
+  probabilities.
+</p>
+
+<h3>Mathematical Background</h3>
+
+<p>
+  The logistic regression model makes predictions using the sigmoid function:
+</p>
+
+\[ \sigma(z) = \frac{1}{1 + e^{-z}} \]
+
+<p>where z is the linear combination of features and weights plus bias:</p>
+
+\[ z = \mathbf{w}^T\mathbf{x} + b = \sum_{i=1}^{n} w_ix_i + b \]
+
+<h3>Implementation Requirements</h3>
+
+<p>Your task is to implement a function that:</p>
+<ul>
+  <li>
+    Takes a batch of samples \(\mathbf{X}\) (shape: N × D), weights
+    \(\mathbf{w}\) (shape: D), and bias b
+  </li>
+  <li>Computes \(z = \mathbf{X}\mathbf{w} + b\) for all samples</li>
+  <li>Applies the sigmoid function to get probabilities</li>
+  <li>Returns binary predictions i.e 0 or 1 using a threshold of 0.5</li>
+</ul>
+
+<h3>Important Considerations</h3>
+<ul>
+  <li>Handle numerical stability in sigmoid computation</li>
+  <li>Ensure efficient vectorized operations using numpy</li>
+  <li>Return binary predictions i.e zeroes and ones</li>
+</ul>
+
+<h3>Hint</h3>
+<p>
+  To prevent overflow in the exponential calculation of sigmoid function, use
+  np.clip to limit z values:
+</p>
+<pre>z = np.clip(z, -500, 500)</pre>
+<p>This ensures numerical stability when dealing with large input values.</p>

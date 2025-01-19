@@ -1,0 +1,50 @@
+<h2>Implementing Early Stopping Criterion</h2>
+
+<p>
+  Early stopping is a regularization technique that helps prevent overfitting in
+  machine learning models. Your task is to implement the early stopping decision
+  logic based on the validation loss history.
+</p>
+
+<h3>Problem Description</h3>
+
+<p>
+  Given a sequence of validation losses from model training, determine if
+  training should be stopped based on the following criteria:
+</p>
+
+<ul>
+  <li>
+    Training should stop if the validation loss hasn't improved (decreased) for
+    a specified number of epochs (patience)
+  </li>
+  <li>
+    An improvement is only counted if the loss decreases by more than a minimum
+    threshold (min_delta)
+  </li>
+  <li>The best model is the one with the lowest validation loss</li>
+</ul>
+
+<h3>Example</h3>
+
+<p>
+  Consider the following validation losses: [0.9, 0.8, 0.75, 0.77, 0.76, 0.77,
+  0.78]
+</p>
+<ul>
+  <li>
+    With patience=2 and min_delta=0.01:
+    <ul>
+      <li>Best loss is 0.75 at epoch 2</li>
+      <li>No improvement > 0.01 for next 2 epochs</li>
+      <li>Should stop at epoch 4</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Function Requirements</h3>
+<ul>
+  <li>Return both the epoch to stop at and the best epoch</li>
+  <li>If no stopping is needed, return the last epoch</li>
+  <li>Epochs are 0-indexed</li>
+</ul>
