@@ -46,7 +46,7 @@ Where $d_k$ is the dimensionality of the key space. The scaling factor $\frac{1}
 The mask is used to control which elements the model is allowed to attend to. Typically, the mask is a binary matrix of dimensions $(\text{seqLen}, \text{seqLen})$, where:
 
 - A value of 0 indicates that attention is allowed.
-- A value of $-\infty$ (or a very large negative value) indicates that attention is prohibited.
+- A value of $-\infty$ (or a very large negative value like $-1e9$) indicates that attention is prohibited.
 
 The raw attention scores are modified by adding the mask:
 
