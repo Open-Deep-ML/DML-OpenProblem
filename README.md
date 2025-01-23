@@ -8,6 +8,7 @@ DML-OpenProblem is an open-source repository of problems focused on linear algeb
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
+- [How to Add an Interactive Learn for a Problem](#how-to-add-an-interactive-learn-for-a-problem)
 - [License](#license)
 
 ## Installation
@@ -89,8 +90,16 @@ We welcome contributions to improve DML-OpenProblem and [deep-ml.com](https://ww
    
 5. **Submit the Video Link**:  
 In the corresponding problem folder, create a `.txt` file containing the link to your YouTube video. This will help us easily reference your solution.
-   
 
+## How to Add an Interactive Learn for a Problem (Optional)
+
+1. **Create a Problem Folder**: Navigate to the `Problems/interactive_learn/` directory and create a folder named `problem-N`, where `N` is the problem number assigned to you (e.g., `problem-17`).
+
+2. **Add Learning Materials**: Inside the folder, create a `notebook.py` file. This file should include the learning content with explanations, examples, and any required resources for the problem. You could use https://marimo.app/?slug=aojjhb to ensure the file is compatible with `marimo` for HTML-WASM conversion. For example, you can check [problem-4's notebook.py](Problems/interactive_learn/problem-4/notebook.py)
+
+3. **Submit Changes**: Commit the new folder with its contents to your branch and submit a pull request. Ensure your commit messages clearly indicate the addition of the interactive learn for the problem.
+
+4. **Collaborate for Review**: Engage with reviewers for feedback on your pull request. Make any necessary adjustments as suggested.
 
 ## License
 
