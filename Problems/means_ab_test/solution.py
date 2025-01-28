@@ -14,7 +14,7 @@ def ttest_ind(a:np.ndarray, b:np.ndarray, equal_var:bool=False):
     b : np.ndarray
         Control group
     equal_var : bool
-        We either apply equal variance test or Welch's T test or
+        We either apply equal variance test or Welch's T test
         
     Returns
     -------
