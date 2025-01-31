@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        resizeObserver.observe(obj.contentWindow.document.body);
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <marimo-mode data-mode='read' hidden></marimo-mode>
+    <marimo-version data-version='0.10.17' hidden></marimo-version>
+    <marimo-user-config data-config='{"completion": {"activate_on_typing": true, "copilot": false}, "display": {"dataframes": "rich", "cell_output": "above", "theme": "dark", "default_width": "medium", "code_editor_font_size": 14}, "formatting": {"line_length": 79}, "keymap": {"preset": "default", "overrides": {}}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "on_cell_change": "autorun"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "package_management": {"manager": "pip"}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}}' data-overrides='{}' hidden></marimo-user-config>
+    <marimo-app-config data-config='{"width": "compact"}' hidden></marimo-app-config>
+    <marimo-server-token data-token='123' hidden></marimo-server-token>
+    <title>marimo</title>
+    <script type="module" crossorigin src="./assets/index-UhR0gcZS.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CRGfAcwh.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="" data-show-code="false">import%20marimo%0A%0A__generated_with%20%3D%20%220.10.17%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%20%20%20%20%23%20Understanding%20Ridge%20Regression%20Loss%20Function%0A%0A%20%20%20%20%20%20%20%20%5BRidge%20Regression%5D(https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FRidge_regression)%20is%20a%20powerful%20regularized%20version%20of%20linear%20regression%20that%20helps%20prevent%20overfitting.%20Let's%20explore%20its%20loss%20function%20interactively!%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20).center()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20Mathematical%20definition%20accordion%0A%20%20%20%20definition%20%3D%20mo.md(r%22%22%22%0A%20%20%20%20The%20Ridge%20Regression%20loss%20function%20combines%20Mean%20Squared%20Error%20(MSE)%20with%20L2%20regularization%3A%0A%0A%20%20%20%20%5C%5B%0A%20%20%20%20L(%5Cbeta)%20%3D%20%5Cunderbrace%7B%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5En%20(y_i%20-%20%5Chat%7By%7D_i)%5E2%7D_%7B%5Ctext%7BMSE%7D%7D%20%2B%20%5Cunderbrace%7B%5Clambda%20%5Csum_%7Bj%3D1%7D%5Ep%20%5Cbeta_j%5E2%7D_%7B%5Ctext%7BL2%20Regularization%7D%7D%0A%20%20%20%20%5C%5D%0A%0A%20%20%20%20where%3A%0A%0A%20%20%20%20-%20%24n%24%20is%20the%20number%20of%20samples%0A%0A%20%20%20%20-%20%24y_i%24%20is%20the%20true%20value%0A%0A%20%20%20%20-%20%24%5Chat%7By%7D_i%24%20is%20the%20predicted%20value%0A%0A%20%20%20%20-%20%24%5Clambda%24%20(alpha)%20is%20the%20regularization%20parameter%0A%0A%20%20%20%20-%20%24%5Cbeta_j%24%20are%20the%20model%20coefficients%0A%20%20%20%20%22%22%22)%0A%0A%20%20%20%20mo.accordion(%7B%22%23%23%23%20Mathematical%20Formulation%22%3A%20definition%7D)%0A%20%20%20%20return%20(definition%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20insights%20%3D%20mo.accordion(%7B%0A%20%20%20%20%20%20%20%20%22%F0%9F%94%8D%20Key%20Components%22%3A%20mo.md(%22%22%22%0A%20%20%20%20%20%20%20%20**1.%20Mean%20Squared%20Error%20(MSE)**%0A%20%20%20%20%20%20%20%20-%20Measures%20prediction%20accuracy%0A%20%20%20%20%20%20%20%20-%20Penalizes%20larger%20errors%20more%20heavily%0A%20%20%20%20%20%20%20%20-%20Always%20non-negative%0A%0A%20%20%20%20%20%20%20%20**2.%20L2%20Regularization%20Term**%0A%20%20%20%20%20%20%20%20-%20Controls%20model%20complexity%0A%20%20%20%20%20%20%20%20-%20Prevents%20coefficient%20values%20from%20becoming%20too%20large%0A%20%20%20%20%20%20%20%20-%20Helps%20prevent%20overfitting%0A%20%20%20%20%20%20%20%20%22%22%22)%2C%0A%0A%20%20%20%20%20%20%20%20%22%E2%9A%99%EF%B8%8F%20Role%20of%20Alpha%20(%CE%BB)%22%3A%20mo.md(%22%22%22%0A%20%20%20%20%20%20%20%20The%20regularization%20parameter%20%CE%B1%20controls%3A%0A%0A%20%20%20%20%20%20%20%201.%20%CE%B1%20%3D%200%3A%20Equivalent%20to%20standard%20linear%20regression%0A%20%20%20%20%20%20%20%202.%20Small%20%CE%B1%3A%20Slight%20regularization%20effect%0A%20%20%20%20%20%20%20%203.%20Large%20%CE%B1%3A%20Strong%20regularization%2C%20coefficients%20approach%20zero%0A%20%20%20%20%20%20%20%20%22%22%22)%0A%20%20%20%20%7D)%0A%20%20%20%20return%20(insights%2C)%0A%0A%0A%40app.cell%0Adef%20_(controls)%3A%0A%20%20%20%20controls%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20%23%20controls%20for%20sample%20data%0A%20%20%20%20sample_size%20%3D%20mo.ui.slider(%0A%20%20%20%20%20%20%20%20start%3D4%2C%0A%20%20%20%20%20%20%20%20stop%3D20%2C%0A%20%20%20%20%20%20%20%20value%3D4%2C%0A%20%20%20%20%20%20%20%20step%3D1%2C%0A%20%20%20%20%20%20%20%20label%3D%22Sample%20Size%22%0A%20%20%20%20)%0A%0A%20%20%20%20alpha%20%3D%20mo.ui.number(%0A%20%20%20%20%20%20%20%20value%3D0.1%2C%0A%20%20%20%20%20%20%20%20start%3D0%2C%0A%20%20%20%20%20%20%20%20stop%3D10%2C%0A%20%20%20%20%20%20%20%20step%3D0.1%2C%0A%20%20%20%20%20%20%20%20label%3D%22Regularization%20Parameter%20(%CE%B1)%22%0A%20%20%20%20)%0A%0A%20%20%20%20controls%20%3D%20mo.hstack(%5B%0A%20%20%20%20%20%20%20%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(%22%23%23%23%20Data%20Parameters%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20sample_size%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20alpha%0A%20%20%20%20%20%20%20%20%5D)%0A%20%20%20%20%5D)%0A%20%20%20%20return%20alpha%2C%20controls%2C%20sample_size%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%23%23%23%20Model%20Coefficients%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(coefficient_section)%3A%0A%20%20%20%20coefficient_section%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20coefficient_inputs%20%3D%20mo.ui.array(%5B%0A%20%20%20%20%20%20%20%20mo.ui.number(value%3D0.2%2C%20label%3D%22Coefficient%201%22%2C%20step%3D0.1)%2C%0A%20%20%20%20%20%20%20%20mo.ui.number(value%3D2.0%2C%20label%3D%22Coefficient%202%22%2C%20step%3D0.1)%0A%20%20%20%20%5D%2C%20label%3D%22Model%20Coefficients%22)%0A%0A%20%20%20%20coefficient_section%20%3D%20mo.hstack(%5B%0A%20%20%20%20%20%20%20%20coefficient_inputs%2C%0A%20%20%20%20%20%20%20%20mo.callout(%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(%22Adjust%20coefficients%20to%20see%20how%20they%20affect%20the%20loss%20value.%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20kind%3D%22warn%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%5D)%0A%20%20%20%20return%20coefficient_inputs%2C%20coefficient_section%0A%0A%0A%40app.cell%0Adef%20_(np)%3A%0A%20%20%20%20def%20ridge_loss(X%2C%20w%2C%20y_true%2C%20alpha)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Calculate%20Ridge%20Regression%20loss.%0A%0A%20%20%20%20%20%20%20%20Args%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20X%20(np.ndarray)%3A%20Feature%20matrix%20(n_samples%2C%20n_features)%0A%20%20%20%20%20%20%20%20%20%20%20%20w%20(np.ndarray)%3A%20Coefficient%20vector%0A%20%20%20%20%20%20%20%20%20%20%20%20y_true%20(np.ndarray)%3A%20True%20target%20values%0A%20%20%20%20%20%20%20%20%20%20%20%20alpha%20(float)%3A%20Regularization%20parameter%0A%0A%20%20%20%20%20%20%20%20Returns%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20float%3A%20Ridge%20loss%20value%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20n_samples%20%3D%20X.shape%5B0%5D%0A%20%20%20%20%20%20%20%20y_pred%20%3D%20X%20%40%20w%0A%20%20%20%20%20%20%20%20mse%20%3D%20np.mean((y_true%20-%20y_pred)%20**%202)%0A%20%20%20%20%20%20%20%20regularization%20%3D%20alpha%20*%20np.sum(w%20**%202)%0A%20%20%20%20%20%20%20%20return%20mse%20%2B%20regularization%0A%20%20%20%20return%20(ridge_loss%2C)%0A%0A%0A%40app.cell%0Adef%20_(result_display)%3A%0A%20%20%20%20result_display%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(alpha%2C%20coefficient_inputs%2C%20mo%2C%20np%2C%20ridge_loss%2C%20sample_size)%3A%0A%20%20%20%20%23%20Generate%20sample%20data%0A%20%20%20%20X%20%3D%20np.column_stack(%5B%0A%20%20%20%20%20%20%20%20np.arange(1%2C%20sample_size.value%20%2B%201)%2C%0A%20%20%20%20%20%20%20%20np.ones(sample_size.value)%0A%20%20%20%20%5D)%0A%20%20%20%20y_true%20%3D%20np.arange(2%2C%20sample_size.value%20%2B%202)%0A%20%20%20%20w%20%3D%20np.array(coefficient_inputs.value)%0A%0A%20%20%20%20%23%20Calculate%20loss%0A%20%20%20%20current_loss%20%3D%20ridge_loss(X%2C%20w%2C%20y_true%2C%20alpha.value)%0A%0A%20%20%20%20result_display%20%3D%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20mo.md(%22%23%23%23%20Current%20Loss%20Value%22)%2C%0A%20%20%20%20%20%20%20%20mo.callout(%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(f%22Ridge%20Loss%3A%20**%7Bcurrent_loss%3A.4f%7D**%5Cn%5Cn%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22-%20MSE%20Component%3A%20%7Bnp.mean((y_true%20-%20X%20%40%20w)%20**%202)%3A.4f%7D%5Cn%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22-%20Regularization%20Component%3A%20%7Balpha.value%20*%20np.sum(w%20**%202)%3A.4f%7D%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20kind%3D%22info%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%5D)%0A%20%20%20%20return%20X%2C%20current_loss%2C%20result_display%2C%20w%2C%20y_true%0A%0A%0A%40app.cell%0Adef%20_(visualize_button)%3A%0A%20%20%20%20visualize_button%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(px)%3A%0A%20%20%20%20def%20plot_predictions(X%2C%20w%2C%20y_true)%3A%0A%20%20%20%20%20%20%20%20y_pred%20%3D%20X%20%40%20w%0A%0A%20%20%20%20%20%20%20%20df%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20'x'%3A%20X%5B%3A%2C%200%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20'True%20Values'%3A%20y_true%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20'Predictions'%3A%20y_pred%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20fig%20%3D%20px.scatter(df%2C%20x%3D'x'%2C%20y%3D%5B'True%20Values'%2C%20'Predictions'%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20title%3D'True%20Values%20vs%20Predictions'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20labels%3D%7B'value'%3A%20'Value'%2C%20'x'%3A%20'Sample%20Index'%7D)%0A%0A%20%20%20%20%20%20%20%20return%20fig%0A%20%20%20%20return%20(plot_predictions%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20visualize_button%20%3D%20mo.ui.run_button(label%3D%22Visualize%20Predictions%22)%0A%20%20%20%20return%20(visualize_button%2C)%0A%0A%0A%40app.cell%0Adef%20_(X%2C%20plot_predictions%2C%20visualize_button%2C%20w%2C%20y_true)%3A%0A%20%20%20%20plot_results%20%3D%20None%0A%20%20%20%20if%20visualize_button.value%3A%0A%20%20%20%20%20%20%20%20plot_results%20%3D%20plot_predictions(X%2C%20w%2C%20y_true)%0A%20%20%20%20plot_results%0A%20%20%20%20return%20(plot_results%2C)%0A%0A%0A%40app.cell%0Adef%20_(conclusion)%3A%0A%20%20%20%20conclusion%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20conclusion%20%3D%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20mo.callout(%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20**Congratulations!**%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20You've%20explored%20the%20Ridge%20Regression%20loss%20function%20interactively.%20Key%20takeaways%3A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Understanding%20the%20balance%20between%20MSE%20and%20regularization%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Impact%20of%20the%20regularization%20parameter%20(%CE%B1)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20How%20coefficients%20affect%20predictions%20and%20loss%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20kind%3D%22success%22%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20mo.accordion(%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%F0%9F%8E%AF%20Applications%22%3A%20mo.md(%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20High-dimensional%20data%20analysis%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Feature%20selection%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Preventing%20overfitting%20in%20linear%20models%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Multicollinearity%20handling%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%F0%9F%9A%80%20Next%20Steps%22%3A%20mo.md(%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%201.%20Implement%20gradient%20descent%20optimization%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%202.%20Compare%20with%20Lasso%20regression%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%203.%20Explore%20cross-validation%20for%20%CE%B1%20selection%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%204.%20Apply%20to%20real-world%20datasets%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22)%0A%20%20%20%20%20%20%20%20%7D)%0A%20%20%20%20%5D)%0A%20%20%20%20return%20(conclusion%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20plotly.express%20as%20px%0A%20%20%20%20return%20np%2C%20px%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
