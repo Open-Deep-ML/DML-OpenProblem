@@ -10,8 +10,9 @@ $$
 X' = \frac{X - X_{\min}}{X_{\max} - X_{\min}}
 $$
 
-Note 1 : In case the input array has identical elements just return an array of the same size filled with zeros.
-Note 2 : Round the resultant values upto the 4th decimal place.
+- Note 1 : In case the input array has identical elements just return an array of the same size filled with zeros.
+- Note 2 : Round the resultant values upto the 4th decimal place.
+
 ## Where:
 - \( X \) is the original value.
 - $$(X_{\min})$$ is the minimum value in the dataset.
