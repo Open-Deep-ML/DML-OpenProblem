@@ -23,7 +23,7 @@ def descriptive_statistics(data):
     mode = unique[np.argmax(counts)] if len(data) > 0 else None
 
     # Variance
-    variance = np.var(data)
+    variance = np.var(data, ddof = 1)
 
     # Standard Deviation
     std_dev = np.sqrt(variance)
@@ -57,8 +57,8 @@ def test_descriptive_statistics():
         "mean": 30.0,
         "median": 30.0,
         "mode": 10,  # assuming the smallest element if no mode
-        "variance": 200.0,
-        "standard_deviation": 14.142135623730951,
+        "variance": 250.0,
+        "standard_deviation": 15.811388300841896,
         "25th_percentile": 20.0,
         "50th_percentile": 30.0,
         "75th_percentile": 40.0,
@@ -74,8 +74,8 @@ def test_descriptive_statistics():
         "mean": 3.125,
         "median": 3.5,
         "mode": 4,
-        "variance": 1.609375,
-        "standard_deviation": 1.268857754044952,
+        "variance": 1.8392857142857142,
+        "standard_deviation": 1.3562026818605375,
         "25th_percentile": 2.0,
         "50th_percentile": 3.5,
         "75th_percentile": 4.0,
