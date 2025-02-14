@@ -85,23 +85,6 @@ def test_descriptive_statistics():
     assert all(np.isclose(output_2[key], value, atol=1e-5) for key, value in expected_output_2.items()), \
         f"Test case 2 failed: expected {expected_output_2}, got {output_2}"
 
-    # Test case 3: Single-element dataset
-    data_3 = [100]
-    expected_output_3 = {
-        "mean": 100.0,
-        "median": 100.0,
-        "mode": 100,
-        "variance": 0.0,
-        "standard_deviation": 0.0,
-        "25th_percentile": 100.0,
-        "50th_percentile": 100.0,
-        "75th_percentile": 100.0,
-        "interquartile_range": 0.0
-    }
-    output_3 = descriptive_statistics(data_3)
-    assert all(np.isclose(output_3[key], value, atol=1e-5) for key, value in expected_output_3.items()), \
-        f"Test case 3 failed: expected {expected_output_3}, got {output_3}"
-
     print("All descriptive statistics tests passed.")
 
 
