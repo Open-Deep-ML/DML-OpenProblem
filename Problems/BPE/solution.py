@@ -75,3 +75,33 @@ class BytePairEncoder:
             current_text = self.replace_pair(current_text, most_freq_pair, new_symbol)
 
         return {"encoded": current_text, "mappings": self.mappings}
+
+
+def test_bpe():
+    """
+    Test function with all test cases
+    """
+    encoder = BytePairEncoder()
+    test_cases = [
+        ("aabaabaab", 2),
+        ("aaaaaaa", 2),
+        ("abcde", 1),
+        ("abababcdcd", 2),
+        ("aa", 1),
+        ("abcabcabcabc", 3),
+        ("aaaa", 2),
+        ("abcdefabcdefabcdef", 3),
+        ("abcabc", 10),
+        ("aabaabaabaaz", 3),
+    ]
+
+    for i, (text, k) in enumerate(test_cases, 1):
+        result = encoder.perform_bpe(text, k)
+        print(f"\nTest Case {i}:")
+        print(f"Input: text = '{text}', k = {k}")
+        print(f"Output: {result}")
+
+
+# Run tests
+if __name__ == "__main__":
+    test_bpe()
