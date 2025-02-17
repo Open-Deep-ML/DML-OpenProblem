@@ -9,6 +9,7 @@ DML-OpenProblem is an open-source repository of problems focused on linear algeb
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [How to Add an Interactive Learn for a Problem](#how-to-add-an-interactive-learn-for-a-problem)
+- [How to Add C++ Questions](#how-to-add-c-questions)
 - [License](#license)
 
 ## Installation
@@ -100,6 +101,32 @@ In the corresponding problem folder, create a `.txt` file containing the link to
 3. **Submit Changes**: Commit the new folder with its contents to your branch and submit a pull request. Ensure your commit messages clearly indicate the addition of the interactive learn for the problem.
 
 4. **Collaborate for Review**: Engage with reviewers for feedback on your pull request. Make any necessary adjustments as suggested.
+## How to Add C++ Questions
+
+We are adding C++ support to the problem set, and you can contribute C++ solutions following these guidelines.
+
+### Steps to Add a C++ Solution
+
+1. **Select a problem** from the existing Python-based problems.
+2. **Create a C++ solution file** inside the corresponding problem folder, naming it `solution.cpp`.
+3. **Follow the C++ coding guidelines**:
+   - Use **C++17 or later**.
+   - Prefer **Eigen** for matrix operations (or xtensor-blas if necessary).
+   - Ensure **well-structured, readable, and modular code**.
+   - Keep solutions **self-contained** and avoid unnecessary external dependencies.
+   - Format numerical outputs to **4 decimal places** for consistency.
+4. **Test your solution** to ensure correctness.
+5. **Submit a pull request** with a detailed explanation of your solution.
+
+### C++ Coding Rules
+
+- Use **Eigen** for matrix computations where applicable.
+- Avoid **excessive STL usage** unless necessary for clarity.
+- Prefer **pass-by-reference** over pass-by-value to improve performance.
+- Ensure **error handling** without crashing the program.
+- Keep solutions **deterministic** and **efficient**.
+
+If you have any questions about library choices or implementation details, feel free to start a discussion in the GitHub issues section.
 
 ## License
 
