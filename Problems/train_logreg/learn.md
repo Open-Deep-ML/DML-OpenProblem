@@ -2,8 +2,6 @@
 Logistic regression is a model used for a binary classification poblem.
 
 ## Prerequisites for a regular logistic regression
-**tl;dr** regular (binary) logistic regression outputs probabilities using a sigmoid $\frac{1}{e^{-X\beta}+1}$ and is called a regression, because it is originally meant to approximate a logit function of odds.
-
 Logistic regression is based on the concept of "logits of odds". **Odds** is measure of how frequent we encounter success. It also allows us to shift our probabilities domain of $[0, 1]$ to $[0,\infty]$ Consider a probability of scoring a goal $p=0.8$, then our $odds=\frac{0.8}{0.2}=4$. This means that every $4$ matches we could be expecting a goal followed by a miss. So the higher the odds, the more consistent is our streak of goals. **Logit** is an inverse of the standard logistic function, i.e. sigmoid: $logit(p)=\sigma^{-1}(p)=ln\frac{p}{1-p}$. In our case $p$ is a probability, therefore we call $\frac{p}{1-p}$ the "odds". The logit allows us to further expand our domain from $[0,\infty]$ to $[-\infty,\infty]$.
 
 With this domain expansion we can treat our problem as a linear regression and try to approximate our logit function: $X\beta=logit(p)$. However what we really want for this approximation is to yield predictions for probabilities:
@@ -46,14 +44,21 @@ argmax_\beta [\sum_X y_i \log\sigma(x_i\beta)+\left(1-y_i\right)\log (1-\sigma(x
 = argmin_\beta -[\sum_X y_i \log\sigma(x_i\beta)+\left(1-y_i\right)\log (1-\sigma(x_i\beta))]
 $$
 
-where $\sigma$ is the sigmoid. This function we're trying to minimize is also called **Binary Cross Entropy** loss function (BCE). To find the minimum we would need to take the gradient of this LLF (Log-Likelihood Function), or find a vector of derivatives with respect to every individual $\beta_j$, using a chain rule, i.e.:
+where $\sigma$ is the sigmoid. This function we're trying to minimize is also called **Binary Cross Entropy** loss function (BCE). To find the minimum we would need to take the gradient of this LLF (Log-Likelihood Function), or find a vector of derivatives with respect to every individual $\beta_j$.
+
+### Step 1
+To do that we're going to use a chain rule, that describes relational change in variables that our original function is made of. In our case the log-likeligood function depends on sigmoid $\sigma$, $\sigma$ depends on $X\beta$ and $X\beta$ finally depends on $\beta_j$, hence:
 
 $$
-\frac{\partial LLF}{\partial\beta_j}=\frac{\partial LLF}{\partial\sigma}\frac{\partial\sigma}{\partial[X\beta]}\frac{\partial[X\beta]}{\beta_j} = \\
+\frac{\partial LLF}{\partial\beta_j}=\frac{\partial LLF}{\partial\sigma}\frac{\partial\sigma}{\partial[X\beta]}\frac{\partial[X\beta]}{\beta_j}= \\
 
-=-\sum_{i=1}^n\left(y^{(i)} \frac{1}{\sigma\left(x^{(i)}\beta\right)}-(1-y^{(i)} ) \frac{1}{1-\sigma\left(x^{(i)}\beta\right)}\right) \frac{\partial\sigma}{\partial[x^{(i)}\beta]} = \\
+=-\sum_{i=1}^n\left(y^{(i)} \frac{1}{\sigma\left(x^{(i)}\beta\right)}-(1-y^{(i)} ) \frac{1}{1-\sigma\left(x^{(i)}\beta\right)}\right) \frac{\partial\sigma}{\partial[x^{(i)}\beta]}
+$$
 
-=-\sum_{i=1}^n\left(y^{(i)} \frac{1}{\sigma\left(x^{(i)}\beta\right)}-(1-y^{(i)} ) \frac{1}{1-\sigma\left(x^{(i)}\beta\right)}\right) \sigma\left(x^{(i)}\beta\right)\left(1-\sigma\left(x^{(i)}\beta\right)\right) \frac{\partial[x^{(i)}\beta]}{\partial\beta_j} = \\
+### Step 2
+Then we use a derivative of the sigmoid function, that is $\frac{\partial\sigma(x)}{\partial x}=\sigma(x)(1-\sigma(x))$: 
+$$
+-\sum_{i=1}^n\left(y^{(i)} \frac{1}{\sigma\left(x^{(i)}\beta\right)}-(1-y^{(i)} ) \frac{1}{1-\sigma\left(x^{(i)}\beta\right)}\right) \sigma\left(x^{(i)}\beta\right)\left(1-\sigma\left(x^{(i)}\beta\right)\right)^{(*)} \frac{\partial[x^{(i)}\beta]}{\partial\beta_j} = \\
 
 =-\sum_{i=1}^n\left(y^{(i)}\left(1-\sigma\left(x^{(i)}\beta\right)\right)-(1-y^{(i)} ) \sigma\left(x^{(i)}\beta\right)\right) x_j^{(i)} = \\
 
@@ -62,7 +67,7 @@ $$
 =\sum_{i=1}^n\left(\sigma\left(x^{(i)}\beta\right)-y^{(i)}\right) x_j^{(i)}.
 $$
 
-This sum can be then rewritten in a more convenient gradient matrix form as:
+The result sum can be then rewritten in a more convenient gradient matrix form as:
 $$
 X^T(\sigma(X\beta)-Y)
 $$
