@@ -1,0 +1,95 @@
+name: Deploy Notebooks to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install marimo
+
+      - name: Prepare docs folder and copy all notebooks
+        run: |
+          mkdir -p docs
+          for dir in Problems/interactive_learn/*; do
+            if [ -d "$dir" ]; then
+              base_dir=$(basename "$dir")
+              mkdir -p "docs/$base_dir"
+              if [ -f "$dir/notebook.py" ]; then
+                marimo export html-wasm "$dir/notebook.py" --mode run --no-show-code -o "docs/$base_dir"
+              else
+                cp -r "$dir/"* "docs/$base_dir/"
+              fi
+            fi
+          done
+
+      - name: Adjust themes
+        run: |
+          # Set dark theme for all notebooks
+          find docs -type f -name "index.html" -exec sed -i 's/"theme": "light"/"theme": "dark"/g' {} +
+
+      - name: Inject CSS to hide notebook actions dropdown
+        run: |
+          find docs -type f -name "index.html" -exec sed -i '/<\/head>/i <style>#notebook-actions-dropdown { display: none; }</style>' {} +
+
+      - name: Ensure Proper Placement of Custom Code
+        run: |
+          # Convert CSS/JS comment to an HTML comment so it's not displayed
+          find docs -type f -name "index.html" -exec sed -i 's/\/\* END CUSTOM \*\//<!-- END CUSTOM -->/g' {} +
+          # Inject a script right after the HTML comment
+          find docs -type f -name "index.html" -exec sed -i '/<!-- END CUSTOM -->/a <script>console.log("Custom Scripts Loaded");</script>' {} +
+
+      - name: Create root index.html
+        run: |
+          echo "<html><body><h1>Notebook Index</h1><ul>" > docs/index.html
+          for dir in docs/*; do
+            if [ -d "$dir" ] && [[ "$dir" != "docs/assets" ]]; then
+              base_dir=$(basename "$dir")
+              echo "<li><a href='./$base_dir/index.html'>$base_dir</a></li>" >> docs/index.html
+            fi
+          done
+          echo "</ul></body></html>" >> docs/index.html
+
+      - name: Debug docs directory
+        run: |
+          ls -R docs
+
+      - name: 📦 Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+          name: github-pages
+          retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: 🌐 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages
