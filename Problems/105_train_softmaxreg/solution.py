@@ -22,7 +22,7 @@ def train_softmaxreg(X: np.ndarray, y: np.ndarray,
 
     def ce_loss(y_pred, y_true):
         true_labels_idx = np.argmax(y_true, axis=1)
-        return -np.mean(np.log(y_pred)[list(range(len(y_pred))),true_labels_idx])
+        return -np.sum(np.log(y_pred)[list(range(len(y_pred))),true_labels_idx])
  
     y = y.astype(int)
     C = y.max()+1 # we assume that classes start from 0
@@ -59,7 +59,8 @@ def test_train_softmaxreg():
             [0.2566, 0.0535, -0.2104, -0.4004, 0.2709, -0.1461], 
             [-0.1318, 0.2109, 0.3998, 0.523, -0.1001, 0.0545], 
             [-0.0407, 0.3049, 0.1757, 0.1197, 0.3637, 0.0576]]
-    expected_losses = [1.3863, 1.072, 0.9316, 0.8494, 0.7913, 0.746, 0.7085, 0.6765, 0.6485, 0.6236]
+    expected_losses = [13.8629, 10.7201, 9.3163, 8.4942, 7.9132, 
+            7.4598, 7.0854, 6.7653, 6.4851, 6.2358]
     b, ce = train_softmaxreg(X, y, learning_rate, iterations)
     assert b == expected_b and ce == expected_losses, 'Test case 1 failed'
 
@@ -79,7 +80,7 @@ def test_train_softmaxreg():
     iterations = 7
     expected_b = [[-0.0052, 0.0148, 0.0562, -0.113, -0.2488], 
                 [0.0052, -0.0148, -0.0562, 0.113, 0.2488]]
-    expected_losses = [0.6931, 0.6454, 0.6049, 0.5702, 0.5405, 0.5149, 0.4927]
+    expected_losses = [6.9315, 6.4544, 6.0487, 5.7025, 5.4055, 5.1493, 4.9269]
     b, ce = train_softmaxreg(X, y, learning_rate, iterations)
     assert b == expected_b and ce == expected_losses, 'Test case 2 failed'
 
