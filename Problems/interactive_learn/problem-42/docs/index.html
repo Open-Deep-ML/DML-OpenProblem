@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        resizeObserver.observe(obj.contentWindow.document.body);
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <marimo-mode data-mode='read' hidden></marimo-mode>
+    <marimo-version data-version='0.10.10' hidden></marimo-version>
+    <marimo-user-config data-config='{"completion": {"activate_on_typing": true, "copilot": false}, "display": {"theme": "dark", "code_editor_font_size": 14, "cell_output": "above", "default_width": "medium", "dataframes": "rich"}, "formatting": {"line_length": 79}, "keymap": {"preset": "default", "overrides": {}}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "on_cell_change": "autorun"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "package_management": {"manager": "pip"}, "server": {"browser": "default", "follow_symlink": false}}' data-overrides='{}' hidden></marimo-user-config>
+    <marimo-app-config data-config='{"width": "compact", "css_file": "/Users/adityakhalkar/Library/Application Support/mtheme/themes/deepml.css"}' hidden></marimo-app-config>
+    <marimo-server-token data-token='123' hidden></marimo-server-token>
+    <title>marimo</title>
+    <script type="module" crossorigin src="./assets/index-BEK-FZ0P.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C7Hj70vM.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    <style>/* Load Merriweather and Fira Code from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300..900&family=Fira+Code:wght@300..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+/* Font and Radius Variables */
+:root {
+    --monospace-font: "Fira Code", monospace; /* Clean coding font */
+    --text-font: "Merriweather", serif; /* Soft serif for warmth and comfort */
+    --heading-font: "Merriweather", serif; /* Consistent with text font */
+    --radius: 12px; /* Slightly softer corners for a gentler feel */
+    --code-font: "Source Code Pro", monospace; /* Clean monospace font */
+}
+
+/* Mininini Theme Colors */
+:root {
+    /* Backgrounds and Foregrounds */
+    --background: light-dark(
+        #ffffff,
+        #0a0a0a
+    ); /* Pure white for light, pitch black for dark */
+    --background-darker: light-dark(
+        #e5e5e5,
+        #020202
+    ); /* Softer contrast backgrounds */
+    --foreground: light-dark(#0a0a0a, #f1f1f1); /* High-contrast text */
+    --muted: light-dark(#f0f0f0, #1a1a1a); /* Smooth muted backgrounds */
+    --muted-foreground: light-dark(
+        #777777,
+        #bbbbbb
+    ); /* Slightly off-key muted text */
+
+    /* UI Elements */
+    --card: light-dark(#fafafa, #151515); /* Minimal card design */
+    --card-foreground: light-dark(#222222, #e2e2e2);
+    --popover: light-dark(
+        #e8e8e8,
+        #0d0d0d
+    ); /* Popovers with striking contrast */
+    --popover-foreground: light-dark(#0f0f0f, #eeeeee);
+    --border: light-dark(#444444, #2e2e2e);
+    --input: light-dark(#f5f5f5, #111111);
+
+    /* Primary Colors */
+    --primary: light-dark(#e4e4e7, #a1a1aa); /* Fiery orange for attention */
+    --primary-foreground: light-dark(#ffffff, #f1f1f1);
+    --secondary: light-dark(#ff44ff, #aa33aa); /* Playful magenta */
+    --secondary-foreground: light-dark(#ffffff, #eaeaea);
+    --accent: light-dark(#22aaff, #0055ff); /* Punchy blue for accents */
+    --accent-foreground: light-dark(#ffffff, #f0f0f0);
+
+    /* Semantic Colors */
+    --error: light-dark(#ff0033, #ff3355); /* Alarm red */
+    --success: light-dark(#00cc66, #00aa44); /* Fresh green */
+    --destructive: light-dark(#cc0033, #bb0022);
+    --action: light-dark(#ffee22, #ffcc00); /* Energetic yellow */
+    --link: light-dark(#22aaff, #3366ff); /* Bright link colors */
+    --link-visited: light-dark(#8844ff, #6633cc);
+
+    /* Shadows */
+    --base-shadow: light-dark(
+        hsla(0deg, 0%, 80%, 40%),
+        hsla(0deg, 0%, 10%, 60%)
+    );
+    --base-shadow-darker: light-dark(
+        hsla(0deg, 0%, 65%, 40%),
+        hsla(0deg, 0%, 5%, 60%)
+    );
+    --base-shadow-opacity: 10%; /* Slightly more dramatic depth */
+}
+/* CUSTOM */
+
+/* Hide sidebar panel buttons */
+div[data-panel-group-direction="horizontal"] > :first-child {
+    display: none;
+  }
+  
+  /* Hide save button */
+  #save-button {
+    display: none;
+  }
+  button[data-testid=notebook-menu-dropdown]{
+    display: none;
+  }
+#notebook-actions-dropdown{
+    display: none;
+  }
+  button[data-testid="interrupt-button"]{
+    display: none;
+  }
+  button[data-testid="run-button"]{
+    display: none;
+  }
+  button[data-testid="command-palette-button"]{
+    display: none;
+  }
+  input[data-testid="dir-completion-input"]{
+    display: none;
+  }
+h1#interactive-learn-section{
+  font-family: var(--code-font);
+}
+button[data-state="closed"]{
+  display: none;
+}
+footer{
+  display: none;
+}
+.no-print{
+  display: none;
+}
+button:has(.lucide-database) {
+  display: none;
+}
+div.menu-item:has(.lucide-database) {
+  display: none;
+}
+div.menu-item:has(svg[viewBox="0 0 448 512"]) {
+  display: none;
+}
+
+  /* END CUSTOM */</style><marimo-code hidden="" data-show-code="false">import%20marimo%0A%0A__generated_with%20%3D%20%220.10.10%22%0Aapp%20%3D%20marimo.App(%0A%20%20%20%20css_file%3D%22%2FUsers%2Fadityakhalkar%2FLibrary%2FApplication%20Support%2Fmtheme%2Fthemes%2Fdeepml.css%22%2C%0A)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%20%20%20%20%23%20Understanding%20the%20ReLU%20Activation%20Function%0A%0A%20%20%20%20%20%20%20%20The%20%5BReLU%5D(https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FRectifier_(neural_networks))%20(Rectified%20Linear%20Unit)%20is%20one%20of%20the%20most%20widely%20used%20activation%20functions%20in%20neural%20networks%20due%20to%20its%20computational%20efficiency%20and%20effectiveness%20in%20deep%20learning.%20Let's%20explore%20it%20interactively!%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20).center()%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20value%20%3D%20mo.md(r%22%22%22%0A%20%20%20%20For%20an%20input%20%24z%24%2C%20the%20ReLU%20function%20is%20defined%20as%3A%0A%0A%20%20%20%20%5C%5B%0A%20%20%20%20%5Ctext%7BReLU%7D(z)%20%3D%20%5Cbegin%7Bcases%7D%20%0A%20%20%20%20z%20%26%20%5Ctext%7Bif%20%7D%20z%20%3E%200%20%5C%5C%0A%20%20%20%200%20%26%20%5Ctext%7Bif%20%7D%20z%20%5Cleq%200%0A%20%20%20%20%5Cend%7Bcases%7D%0A%20%20%20%20%5C%5D%0A%0A%20%20%20%20This%20can%20also%20be%20written%20simply%20as%3A%20%24%5Ctext%7BReLU%7D(z)%20%3D%20%5Cmax(0%2C%20z)%24%0A%20%20%20%20%22%22%22)%0A%20%20%20%20mo.accordion(%7B%22%23%23%23%20Mathematical%20Definition%22%3A%20value%7D)%0A%20%20%20%20return%20(value%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20x_range%20%3D%20mo.ui.range_slider(%0A%20%20%20%20%20%20%20%20start%3D-10%2C%0A%20%20%20%20%20%20%20%20stop%3D10%2C%0A%20%20%20%20%20%20%20%20step%3D0.5%2C%0A%20%20%20%20%20%20%20%20value%3D%5B-5%2C%205%5D%2C%0A%20%20%20%20%20%20%20%20label%3D%22X-axis%20Range%22%0A%20%20%20%20)%0A%0A%20%20%20%20_callout%20%3D%20mo.callout(%0A%20%20%20%20%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20Adjust%20the%20range%20to%20explore%20different%20regions%20of%20the%20function.%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20**Observe%20how%3A**%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20-%20All%20negative%20inputs%20are%20mapped%20to%20zero%0A%20%20%20%20%20%20%20%20%20%20%20%20-%20Positive%20inputs%20remain%20unchanged%0A%20%20%20%20%20%20%20%20%20%20%20%20-%20This%20creates%20non-linearity%20in%20neural%20networks%0A%20%20%20%20%20%20%20%20%22%22%22)%2C%0A%20%20%20%20%20%20%20%20kind%3D%22info%22%0A%20%20%20%20)%0A%0A%20%20%20%20controls%20%3D%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20mo.md(%22%23%23%23%20Adjust%20Parameters%22)%2C%0A%20%20%20%20%20%20%20%20mo.hstack(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20x_range%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mo.accordion(%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22About%20Range%22%3A%20_callout%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D)%0A%20%20%20%20%20%20%20%20%5D)%0A%20%20%20%20%5D)%0A%20%20%20%20return%20controls%2C%20x_range%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20test_input%20%3D%20mo.ui.number(%0A%20%20%20%20%20%20%20%20value%3D0.0%2C%0A%20%20%20%20%20%20%20%20start%3D-10%2C%0A%20%20%20%20%20%20%20%20stop%3D10%2C%0A%20%20%20%20%20%20%20%20step%3D0.1%2C%0A%20%20%20%20%20%20%20%20label%3D%22Test%20Input%20Value%22%0A%20%20%20%20)%0A%0A%20%20%20%20input_controls%20%3D%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20mo.md(%22%23%23%23%20Test%20Specific%20Values%22)%2C%0A%20%20%20%20%20%20%20%20test_input%2C%0A%20%20%20%20%20%20%20%20mo.accordion(%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22About%20Testing%22%3A%20%22Enter%20specific%20values%20to%20see%20their%20ReLU%20outputs.%22%0A%20%20%20%20%20%20%20%20%7D)%0A%20%20%20%20%5D)%0A%20%20%20%20return%20input_controls%2C%20test_input%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20formula_display%20%3D%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%23%23%20Current%20ReLU%20Configuration%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20The%20ReLU%20function%20is%20defined%20as%3A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%5C%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20f(z)%20%3D%20%5Cmax(0%2C%20z)%20%3D%20%5C%5Cbegin%7B%7Bcases%7D%7D%20%0A%20%20%20%20%20%20%20%20%20%20%20%20z%20%26%20%5C%5Ctext%7B%7Bif%20%7D%7D%20z%20%3E%200%20%5C%5C%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%200%20%26%20%5C%5Ctext%7B%7Bif%20%7D%7D%20z%20%5C%5Cleq%200%0A%20%20%20%20%20%20%20%20%20%20%20%20%5C%5Cend%7B%7Bcases%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%5C%5D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20-%20For%20positive%20inputs%3A%20output%20%3D%20input%0A%20%20%20%20%20%20%20%20%20%20%20%20-%20For%20negative%20inputs%3A%20output%20%3D%200%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%5D)%0A%20%20%20%20return%20(formula_display%2C)%0A%0A%0A%40app.cell%0Adef%20_(formula_display)%3A%0A%20%20%20%20formula_display%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo%2C%20np%2C%20plt%2C%20test_input%2C%20x_range)%3A%0A%20%20%20%20%40mo.cache(pin_modules%3DTrue)%0A%20%20%20%20def%20plot_relu()%3A%0A%20%20%20%20%20%20%20%20if%20x_range.value%5B0%5D%20%3E%3D%20x_range.value%5B1%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20raise%20ValueError(%22Invalid%20x_range%3A%20start%20value%20must%20be%20less%20than%20stop%20value.%22)%0A%0A%20%20%20%20%20%20%20%20x%20%3D%20np.linspace(x_range.value%5B0%5D%2C%20x_range.value%5B1%5D%2C%201000)%0A%20%20%20%20%20%20%20%20y%20%3D%20np.maximum(0%2C%20x)%0A%0A%20%20%20%20%20%20%20%20plt.figure(figsize%3D(12%2C%207))%0A%0A%20%20%20%20%20%20%20%20%23%20Plot%20-ve%20region%0A%20%20%20%20%20%20%20%20mask_neg%20%3D%20x%20%3C%3D%200%0A%20%20%20%20%20%20%20%20plt.plot(x%5Bmask_neg%5D%2C%20y%5Bmask_neg%5D%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3D'Zero%20region%20(ReLU%20%3D%200)'%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3D'red'%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20linewidth%3D2)%0A%0A%20%20%20%20%20%20%20%20%23%20Plot%20%2Bve%20region%0A%20%20%20%20%20%20%20%20mask_pos%20%3D%20x%20%3E%200%0A%20%20%20%20%20%20%20%20plt.plot(x%5Bmask_pos%5D%2C%20y%5Bmask_pos%5D%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3D'Linear%20region%20(ReLU%20%3D%20x)'%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3D'blue'%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20linewidth%3D2)%0A%0A%20%20%20%20%20%20%20%20%23%20Plot%20test%20point%20if%20within%20range%20(expand%20slider%20if%20it%20doesn't%20appear)%0A%20%20%20%20%20%20%20%20if%20x_range.value%5B0%5D%20%3C%3D%20test_input.value%20%3C%3D%20x_range.value%5B1%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20test_output%20%3D%20max(0%2C%20test_input.value)%0A%20%20%20%20%20%20%20%20%20%20%20%20plt.scatter(%5Btest_input.value%5D%2C%20%5Btest_output%5D%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3D'green'%2C%20s%3D100%2C%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Df'Test%20point%3A%20ReLU(%7Btest_input.value%3A.2f%7D)%20%3D%20%7Btest_output%3A.2f%7D')%0A%0A%20%20%20%20%20%20%20%20plt.grid(True%2C%20alpha%3D0.3)%0A%20%20%20%20%20%20%20%20plt.title('ReLU%20Function')%0A%20%20%20%20%20%20%20%20plt.xlabel('Input%20(z)')%0A%20%20%20%20%20%20%20%20plt.ylabel('Output%20(ReLU(z))')%0A%20%20%20%20%20%20%20%20plt.legend(bbox_to_anchor%3D(1.05%2C%201)%2C%20loc%3D'upper%20left')%0A%0A%20%20%20%20%20%20%20%20%23%20Add%20zero%20lines%0A%20%20%20%20%20%20%20%20plt.axhline(y%3D0%2C%20color%3D'k'%2C%20linestyle%3D'--'%2C%20alpha%3D0.3)%0A%20%20%20%20%20%20%20%20plt.axvline(x%3D0%2C%20color%3D'k'%2C%20linestyle%3D'--'%2C%20alpha%3D0.3)%0A%0A%20%20%20%20%20%20%20%20plot_display%20%3D%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.as_html(plt.gca())%2C%0A%20%20%20%20%20%20%20%20%5D)%0A%0A%20%20%20%20%20%20%20%20return%20plot_display%0A%20%20%20%20return%20(plot_relu%2C)%0A%0A%0A%40app.cell%0Adef%20_(controls)%3A%0A%20%20%20%20controls%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(input_controls)%3A%0A%20%20%20%20input_controls%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(plot_relu)%3A%0A%20%20%20%20plot_relu()%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20conclusion%20%3D%20mo.vstack(%5B%0A%20%20%20%20%20%20%20%20mo.callout(%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20**Congratulations!**%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20You've%20explored%20the%20ReLU%20function%20interactively.%20You've%20learned%3A%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20How%20ReLU%20maps%20negative%20inputs%20to%20zero%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20How%20to%20visualize%20the%20function%20across%20different%20input%20ranges%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20The%20relationship%20between%20input%20values%20and%20their%20corresponding%20outputs%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20How%20to%20test%20specific%20input%20values%20and%20observe%20their%20ReLU%20transformations%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20kind%3D%22success%22%0A%20%20%20%20%20%20%20%20)%2C%0A%20%20%20%20%20%20%20%20mo.accordion(%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22Next%20Steps%22%3A%20mo.md(%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%201.%20**Implementation%3A**%20Try%20implementing%20ReLU%20from%20scratch%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%202.%20**Compare%3A**%20Explore%20how%20it%20differs%20from%20other%20activation%20functions%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%203.%20**Experiment%3A**%20Test%20ReLU%20in%20a%20simple%20neural%20network%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%204.%20**Advanced%3A**%20Learn%20about%20variants%20like%20Leaky%20ReLU%20and%20ELU%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%F0%9F%8E%AF%20Common%20Applications%22%3A%20mo.md(%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Deep%20neural%20networks%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Convolutional%20neural%20networks%20(CNNs)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Hidden%20layers%20in%20deep%20learning%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Feature%20extraction%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20Modern%20computer%20vision%20models%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22)%2C%0A%20%20%20%20%20%20%20%20%7D)%0A%20%20%20%20%5D)%0A%20%20%20%20return%20(conclusion%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(f%22%22%22%0A%20%20%20%20This%20interactive%20learning%20experience%20was%20designed%20to%20help%20you%20understand%20the%20ReLU%20activation%20function.%20Hope%20this%20helps%20in%20your%20deep%20learning%20journey!%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(conclusion)%3A%0A%20%20%20%20conclusion%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20return%20np%2C%20plt%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
