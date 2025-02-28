@@ -14,11 +14,11 @@ The process of Instance Normalization consists of the following steps:
 
 ### Structure of Instance Normalization for BCHW Input
 
-For an input tensor with the shape **BCHW** (where:
+For an input tensor with the shape **BCHW** , where:
 - **B**: batch size,
 - **C**: number of channels,
 - **H**: height,
-- **W**: width),
+- **W**: width,
 Instance Normalization operates on the spatial dimensions (height and width) of each instance (image) separately.
 
 #### 1. Mean and Variance Calculation for Each Instance

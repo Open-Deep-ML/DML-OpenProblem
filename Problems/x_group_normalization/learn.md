@@ -15,11 +15,11 @@ The process of Group Normalization consists of the following steps:
 
 ### Structure of Group Normalization for BCHW Input
 
-For an input tensor with the shape **BCHW** (where:
+For an input tensor with the shape **BCHW** , where:
 - **B**: batch size,
 - **C**: number of channels,
 - **H**: height,
-- **W**: width),
+- **W**: width,
 the Group Normalization process operates on specific dimensions based on the task's requirement.
 
 #### 1. Group Division
@@ -27,13 +27,13 @@ the Group Normalization process operates on specific dimensions based on the tas
 - The input feature dimension **C** (channels) is divided into several groups. The number of groups is determined by the **n_groups** parameter, and the size of each group is calculated as:
   
   $$
-  \text{group\_size} = \frac{C}{n_{\text{groups}}}
+  \text{groupSize} = \frac{C}{n_{\text{groups}}}
   $$
 
   Where:
   - **C** is the number of channels.
   - **n_groups** is the number of groups into which the channels are divided.
-  - **group_size** is the number of channels in each group.
+  - **groupSize** is the number of channels in each group.
 
   The input tensor is then reshaped to group the channels into the specified groups.
 
@@ -42,18 +42,18 @@ the Group Normalization process operates on specific dimensions based on the tas
 - For each group, the **mean** $\mu_g$ and **variance** $\sigma_g^2$ are computed over the spatial dimensions and across the batch. This normalization helps to stabilize the activations within each group.
   
   $$ 
-  \mu_g = \frac{1}{B \cdot H \cdot W \cdot \text{group\_size}} \sum_{i=1}^{B} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{g=1}^{\text{group\_size}} x_{i,g,h,w}
+  \mu_g = \frac{1}{B \cdot H \cdot W \cdot \text{groupSize}} \sum_{i=1}^{B} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{g=1}^{\text{groupSize}} x_{i,g,h,w}
   $$
 
   $$
-  \sigma_g^2 = \frac{1}{B \cdot H \cdot W \cdot \text{group\_size}} \sum_{i=1}^{B} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{g=1}^{\text{group\_size}} (x_{i,g,h,w} - \mu_g)^2
+  \sigma_g^2 = \frac{1}{B \cdot H \cdot W \cdot \text{groupSize}} \sum_{i=1}^{B} \sum_{h=1}^{H} \sum_{w=1}^{W} \sum_{g=1}^{\text{groupSize}} (x_{i,g,h,w} - \mu_g)^2
   $$
 
   Where:
   - $x_{i,g,h,w}$ is the activation at batch index $i$, group index $g$, height $h$, and width $w$.
   - $B$ is the batch size.
   - $H$ and $W$ are the spatial dimensions (height and width).
-  - $\text{group_size}$ is the number of channels in each group.
+  - $\text{groupSize}$ is the number of channels in each group.
 
 #### 3. Normalization
 

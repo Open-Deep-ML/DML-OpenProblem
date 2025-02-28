@@ -15,11 +15,11 @@ The process of Batch Normalization consists of the following steps:
 
 ### Structure of Batch Normalization for BCHW Input
 
-For an input tensor with the shape **BCHW** (where:
+For an input tensor with the shape **BCHW**, where:
 - **B**: batch size,
 - **C**: number of channels,
 - **H**: height,
-- **W**: width),
+- **W**: width,
 the Batch Normalization process operates on specific dimensions based on the task's requirement.
 
 #### 1. Mean and Variance Calculation
@@ -46,7 +46,7 @@ The mean and variance are computed **over all spatial positions (H, W)** and **a
 
 #### 2. Normalization
 
-Once the mean $\mu_c$ and variance $\sigma_c^2$ have been computed for each channel, the next step is to **normalize** the input. The normalization is done by subtracting the mean and dividing by the standard deviation (square root of the variance, plus a small constant $\epsilon$ for numerical stability):
+Once the mean $\mu_c$ and variance $\sigma_c^2$ have been computed for each channel, the next step is to **normalize** the input. The normalization is done by subtracting the mean and dividing by the standard deviation (plus a small constant $\epsilon$ for numerical stability):
 
 $$
 \hat{x}_{i,c,h,w} = \frac{x_{i,c,h,w} - \mu_c}{\sqrt{\sigma_c^2 + \epsilon}}
