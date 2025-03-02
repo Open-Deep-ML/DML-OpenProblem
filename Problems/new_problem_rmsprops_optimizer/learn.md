@@ -1,26 +1,23 @@
-
 # Learn Section
 
-## Learn: RMSprop Optimizer  
+## RMSprop Optimizer
 
-RMSprop (Root Mean Square Propagation) is an optimization algorithm that adjusts the learning rate dynamically using the moving average of squared gradients.  
+RMSprop (Root Mean Square Propagation) is an optimization algorithm that adjusts the learning rate dynamically using the moving average of squared gradients.
 
-### Update Rules  
+### Update Rules
 
 1. Compute the moving average of squared gradients:  
-   $$ v_t = \beta v_{t-1} + (1 - \beta) \cdot g_t^2 $$  
+   $$ v*t = \beta v*{t-1} + (1 - \beta) \cdot g_t^2 $$
 
 2. Update the parameter using the adjusted learning rate:  
-   $$ \theta_t = \theta_{t-1} - \frac{\alpha}{\sqrt{v_t} + \epsilon} \cdot g_t $$  
+   $$ \theta*t = \theta*{t-1} - \frac{\alpha}{\sqrt{v_t} + \epsilon} \cdot g_t $$
 
-### Hyperparameters  
+### Hyperparameters
 
-- **α (learning rate)**: Step size for parameter updates.  
-- **β (decay rate)**: Controls how much past gradients influence the moving average.  
-- **ϵ (small constant)**: Prevents division by zero for numerical stability.  
+- **α (learning rate)**: Step size for parameter updates.
+- **β (decay rate)**: Controls how much past gradients influence the moving average.
+- **ϵ (small constant)**: Prevents division by zero for numerical stability.
 
-### Intuition  
+### Intuition
 
-RMSprop prevents oscillations in gradient updates by scaling gradients based on past values, making it useful for optimizing deep neural networks.  
-
-    
+RMSprop prevents oscillations in gradient updates by scaling gradients based on past values, making it useful for optimizing deep neural networks.
