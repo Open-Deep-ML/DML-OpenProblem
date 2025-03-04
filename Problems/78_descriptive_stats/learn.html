@@ -1,0 +1,80 @@
+<h2>Understanding Descriptive Statistics</h2>
+<p>Descriptive statistics provide a summary of data through various measures and help understand the basic structure and distribution of data.</p>
+
+<h3>Key Metrics</h3>
+<p>Descriptive statistics cover several key metrics, including mean, median, mode, variance, standard deviation, percentiles, quartiles, and interquartile range.</p>
+
+<ul>
+    <li><strong>Mean:</strong> The average of all values in the dataset, calculated by summing all the values and dividing by the count of values.</li>
+    <li><strong>Median:</strong> The middle value when the data is sorted. If there is an even number of values, the median is the average of the two middle values.
+</li>
+    <li><strong>Mode:</strong> The value that occurs most frequently in the dataset.</li>
+    <li><strong>Variance:</strong> A measure of how much the values in the dataset deviate from the mean, calculated as the average of the squared differences from the mean.
+</li>
+    <li><strong>Standard Deviation:</strong> The square root of the variance. It measures the spread of the data and is in the same unit as the data.</li>
+    <li><strong>Percentiles and Quartiles:</strong> Percentiles divide the data into 100 equal parts, while quartiles divide the data into four equal parts. The 25th, 50th (median), and 75th percentiles are the common quartiles.</li>
+    <li><strong>Interquartile Range:</strong> The difference between the 75th and 25th percentiles. It measures the spread of the middle 50% of the data.</li>
+</ul>
+
+<h3>Implementation Steps</h3>
+<ol>
+    <li>Calculate the <strong>Mean</strong> by summing all values and dividing by the count.</li>
+    <li>Find the <strong>Median</strong> by sorting data and taking the middle value.</li>
+    <li>Identify the <strong>Mode</strong>, the most frequently occurring value.</li>
+    <li>Compute <strong>Variance</strong> by finding the average of squared differences from the mean.</li>
+    <li>Calculate <strong>Standard Deviation</strong>, the square root of the variance.</li>
+    <li>Determine <strong>Percentiles</strong> and <strong>Quartiles</strong> as values below which a specified proportion of data falls.</li>
+    <li>Compute the <strong>Interquartile Range</strong> as the difference between the 75th and 25th percentiles.</li>
+</ol>
+
+<h3>Example Calculation</h3>
+<p>Given data:</p>
+<p>Data set: [12, 15, 12, 18, 19, 17, 15, 14, 16, 18]</p>
+
+<ul>
+    <li><strong>Mean:</strong>
+    \[
+    \text{Mean} = \frac{156}{10} = 15.6
+    \]</li>
+
+    <li><strong>Median:</strong>
+    \[
+    \text{Median} = 15.5
+    \]</li>
+
+    <li><strong>Mode:</strong>
+    \[
+    \text{Mode} = 12, 15, 18
+    \]</li>
+
+    <li><strong>Variance:</strong>
+    \[
+    \text{Variance} = \frac{\sum (x_i - 15.6)^2}{9} = 6.93
+    \]</li>
+
+    <li><strong>Standard Deviation:</strong>
+    \[
+    \text{Standard Deviation} = \sqrt{6.93} \approx 2.63
+    \]</li>
+
+    <li><strong>Percentiles:</strong>
+    \[
+    25\% \text{ Percentile} = 13.5, \quad 50\% \text{ Percentile (Median)} = 15.5, \quad 75\% \text{ Percentile} = 17.5
+    \]</li>
+
+    <li><strong>Interquartile Range:</strong>
+    \[
+    \text{IQR} = 17.5 - 13.5 = 4
+    \]</li>
+</ul>
+
+<h3>Applications</h3>
+<p>Descriptive statistics are widely used in:</p>
+<ul>
+    <li>Data Analysis</li>
+    <li>Exploratory Data Analysis (EDA)</li>
+    <li>Understanding Data Distributions</li>
+    <li>Feature Engineering</li>
+    <li>Identifying Outliers</li>
+</ul>
+<p>These metrics are foundational in data science, helping to interpret data and prepare it for further analysis in machine learning.</p>

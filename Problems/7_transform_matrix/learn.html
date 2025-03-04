@@ -1,11 +1,11 @@
 <h2>Matrix Transformation using \(T^{-1}AS\)</h2>
 
-Transforming a matrix \(A\) using the operation \(T^{-1}AS\) involves several steps. This operation changes the basis of matrix \(A\) using two invertible matrices \(T\) and \(S\).
+Transforming a matrix \(A\) using the operation \(T^{-1}AS\) involves several steps. This operation changes the basis of matrix \(A\) using two matrices \(T\) and \(S\), with \(T\) being invertible.
 
 Given matrices \(A\), \(T\), and \(S\):
 
-<p><strong>1.</strong> Check if \(T\) and \(S\) are invertible by ensuring their determinants are non-zero; else return -1.</p>
-<p><strong>2.</strong> Compute the inverses of \(T\) and \(S\), denoted as \(T^{-1}\) and \(S^{-1}\).</p>
+<p><strong>1.</strong> Check if \(T\) is invertible by ensuring it's determinant is non-zero; else return -1.</p>
+<p><strong>2.</strong> Compute the inverse of \(T\), denoted as \(T^{-1}\).</p>
 <p><strong>3.</strong> Perform the matrix multiplication to obtain the transformed matrix:</p>
 \[
 A' = T^{-1}AS
@@ -32,11 +32,10 @@ S = \begin{pmatrix}
 \end{pmatrix}
 \]
 
-First, check that \(T\) and \(S\) are invertible:
+First, check if \(T\) is invertible:
 <p>• \(\det(T) = 4 \neq 0 \)</p>
-<p>• \(\det(S) = 1 \neq 0 \)</p>
 
-Compute the inverses:
+Compute the inverse:
 \[
 T^{-1} = \begin{pmatrix} 
 \frac{1}{2} & 0 \\ 
