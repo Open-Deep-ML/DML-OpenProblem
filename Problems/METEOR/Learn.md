@@ -22,7 +22,7 @@ the limitations in earlier metrics like BLEU.
 4. **Fragmentation Penalty**
    ```
    Chunks = Count of contiguous matched word sequences
-   Penalty = min(γ, 0.5 * (Chunks / Matches)^β)
+   Penalty = γ * (Chunks / Matches)^β
    ```
    - β controls penalty weight (typically 3)
    - γ limits maximum penalty (typically 0.5)
@@ -32,3 +32,5 @@ the limitations in earlier metrics like BLEU.
    METEOR = F_mean * (1 - Penalty)
    ```
    - Ranges from 0 (no match) to 1 (perfect match)
+
+**__Note__** : The [paper](https://aclanthology.org/W05-0909/) that introduced the metric doesn't have the parameters (α,β, and γ) as tunable parameters, but implementation in other libraries like NLTK offers this flexibility.
