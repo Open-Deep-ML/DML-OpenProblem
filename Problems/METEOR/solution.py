@@ -25,10 +25,19 @@ def meteor_score(reference, candidate, alpha=0.9, beta=3, gamma=0.5):
     
     fmean = (precision * recall) / (alpha * precision + (1 - alpha) * recall)
     
+    # Corrected chunk calculation
+    chunks = 0
+    i = 0
+    while i < len(ref_tokens):
+        if i < len(cand_tokens) and ref_tokens[i] == cand_tokens[i]:
+            chunks += 1
+            while i < len(ref_tokens) and i < len(cand_tokens) and ref_tokens[i] == cand_tokens[i]:
+                i += 1
+        else:
+            i += 1
+    
     # Fragmentation penalty
-    chunks = max(1, sum(1 for i in range(1, len(ref_tokens)) 
-                        if ref_tokens[i] == cand_tokens[i-1]))
-    penalty = min(gamma, 0.5 * (chunks / matches) ** beta)
+    penalty = gamma * ((chunks / matches) ** beta) if matches > 0 else 0
     
     # Final score
     return round(fmean * (1 - penalty), 3)
@@ -64,6 +73,12 @@ def test_meteor_score():
         assert False, "Test Case Failed"
     except ValueError:
         pass
+    
+    # Test Case 6: Partial match with penalty
+    ref_test6 = "The cat sits on the mat"
+    cand_test6 = "The cat on the mat sits"
+    expected6 = 0.933
+    assert meteor_score(ref_test6, cand_test6) == expected6, "Test Case Failed"
     
 if __name__ == "__main__":
     test_meteor_score()
