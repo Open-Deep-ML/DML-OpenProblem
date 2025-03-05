@@ -8,39 +8,41 @@ def meteor_score(reference, candidate, alpha=0.9, beta=3, gamma=0.5):
     # Tokenize and count
     ref_tokens = reference.lower().split()
     cand_tokens = candidate.lower().split()
-    
-    ref_counts = Counter(ref_tokens)
+
+    # Counter for unigram for reference and candidate 
+    ref_counts = Counter(ref_tokens) 
     cand_counts = Counter(cand_tokens)
     
     # Calculate matches
-    matches = sum((ref_counts & cand_counts).values())
+    num_matches = sum((ref_counts & cand_counts).values()) # Number of matching words in candidate and reference 
     ref_len = len(ref_tokens)
-    cand_len = len(cand_tokens)
+    cand_len = len(cand_tokens)  
+
+    # Unigram Precision and Recall 
+    precision = num_matches / cand_len if cand_len > 0 else 0 # Avoiding Division by zero
+    recall = num_matches / ref_len if ref_len > 0 else 0 # Avoiding Division by zero 
     
-    precision = matches / cand_len if cand_len > 0 else 0
-    recall = matches / ref_len if ref_len > 0 else 0
-    
-    if matches == 0:
+    if num_matches == 0:
         return 0.0
     
     fmean = (precision * recall) / (alpha * precision + (1 - alpha) * recall)
     
-    # Corrected chunk calculation
-    chunks = 0
+    num_chunks = 0
     i = 0
     while i < len(ref_tokens):
         if i < len(cand_tokens) and ref_tokens[i] == cand_tokens[i]:
-            chunks += 1
+            chunks += 1 # Increase the count of chunk when first matching unigram is detected 
             while i < len(ref_tokens) and i < len(cand_tokens) and ref_tokens[i] == cand_tokens[i]:
+                # Continue iterating until unigram/word stops matching 
                 i += 1
         else:
             i += 1
     
     # Fragmentation penalty
-    penalty = gamma * ((chunks / matches) ** beta) if matches > 0 else 0
+    penalty = gamma * ((num_chunks / num_matches) ** beta) if num_matches > 0 else 0
     
     # Final score
-    return round(fmean * (1 - penalty), 3)
+    return round(fmean * (1 - penalty), 3) # Rounding to 3 Decimal places 
 
 def test_meteor_score():
     # Test Case 1: Identical translations
