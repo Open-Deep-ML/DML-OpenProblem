@@ -8,7 +8,7 @@ def calculate_contrast(img):
         img (numpy.ndarray): 2D array representing a grayscale image with pixel values between 0 and 255.
 
     Returns:
-        float: Contrast value rounded to 3 decimal places.
+        int: Contrast value (pixel values between 0 and 255 - uint8).
     """
     
     # Find the maximum and minimum pixel values
@@ -18,7 +18,7 @@ def calculate_contrast(img):
     # Calculate contrast
     contrast = max_pixel - min_pixel
     
-    return round(float(contrast), 3)
+    return int(contrast)
 
 def test_calculate_contrast():
     # Test case 1: Simple gradient
