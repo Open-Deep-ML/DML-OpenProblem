@@ -20,7 +20,7 @@
 
 <h3>3. Find the residuals (Difference between the actual y values and the predicted ones) </h3>
 <h3>4. Update the weights and bias using the formula </p>
-<p> First, find the gradient with respect to weights $w$ using the formula \[ \frac{\partial J}{\partial w_j} = \frac{1}{n} \sum_{i=1}^nX_{ij}(y_i - \hat{y}_i) + \alpha \cdot sign(w_j) \] </h3>
+<p> First, find the gradient with respect to weights $w$ using the formula \[ \frac{\partial J}{\partial w_j} = \frac{1}{n} \sum_{i=1}^nX_{ij}(\hat{y}_i - y_i) + \alpha \cdot sign(w_j) \] </h3>
 <p> Then, we need to find the gradient with respect to the bias $b$. Since the bias term $b$ does not have a regularization component (since Lasso regularization is applied only to the weights $w_j$), the gradient with respect to $b$ is just the partial derivative of the Mean Squared Error (MSE) loss function with respect to $b$ \[ \frac{\partial J(w,b)}{\partial b} =  \frac{1}{n} \sum_{i = 1}^{n}(\hat{y}_i-y_i)\]</p>
 <p> Next, we update the weights and bias using the formula \[ w_j = w_j - \eta \cdot \frac{\partial J}{\partial w_j} \] \[ b = b - \eta \cdot \frac{\partial J}{\partial b} \] Where eta is the learning rate defined in the beginning of the function</p>
 <h3> 5. Repeat steps 2-4 until the weights converge. This is determined by evaulating the L1 Norm of the weight gradients </h3>
