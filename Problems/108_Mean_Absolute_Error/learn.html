@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mean Absolute Error (MAE) Calculation</title>
+    <script type="text/javascript" async
+        src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <h2>Mean Absolute Error (MAE) Calculation</h2>
+    <p>The Mean Absolute Error (MAE) is a metric used to measure the average absolute difference between predicted and actual values in a dataset.</p>
+
+    <h3>Mathematical Formulation</h3>
+    <p>MAE is defined as:</p>
+
+    <p>
+    \[
+    MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
+    \]
+    </p>
+
+    <ul>
+        <li><strong>\( n \):</strong> Total number of data points</li>
+        <li><strong>\( y_i \):</strong> Actual value at index \( i \)</li>
+        <li><strong>\( \hat{y}_i \):</strong> Predicted value at index \( i \)</li>
+        <li><strong>\( |y_i - \hat{y}_i| \):</strong> Absolute difference between actual and predicted values</li>
+    </ul>
+
+    <h3>Implementation Steps</h3>
+    <ol>
+        <li>Compute the absolute difference \( |y_i - \hat{y}_i| \) for each data point.</li>
+        <li>Sum all absolute differences.</li>
+        <li>Divide the sum by the total number of data points \( n \).</li>
+    </ol>
+
+    <h3>Example Calculation</h3>
+    <p>Given the actual values and predicted values:</p>
+
+    <ul>
+        <li>Actual values: \( y = [3, -0.5, 2, 7] \)</li>
+        <li>Predicted values: \( \hat{y} = [2.5, 0.0, 2, 8] \)</li>
+    </ul>
+
+    <p>Step-by-step calculation:</p>
+    <ul>
+        <li>Compute absolute differences:
+        \[
+        |3 - 2.5| = 0.5, \quad |-0.5 - 0.0| = 0.5, \quad |2 - 2| = 0, \quad |7 - 8| = 1
+        \]
+        </li>
+        <li>Sum of absolute differences:
+        \[
+        0.5 + 0.5 + 0 + 1 = 2
+        \]
+        </li>
+        <li>Compute MAE:
+        \[
+        MAE = \frac{2}{4} = 0.5
+        \]
+        </li>
+    </ul>
+
+    <p>The Mean Absolute Error (MAE) for this example is <strong>0.5</strong>.</p>
+
+</body>
+</html>
