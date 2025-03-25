@@ -2,6 +2,10 @@ import itertools
 from collections import defaultdict
 
 def apriori(transactions, min_support=0.5, max_length=None):
+    """
+    Min Support : Minimum frequency threshold for an itemset to be considered frequent
+    Max Length : Limits the maximum size of the frequent itemsets
+    """
     if not transactions:
         raise ValueError("Transaction list cannot be empty")
     if not 0 < min_support <= 1:
@@ -10,7 +14,6 @@ def apriori(transactions, min_support=0.5, max_length=None):
     num_transactions = len(transactions)
     min_support_count = min_support * num_transactions
     
-    # Find frequent 1-itemsets
     item_counts = defaultdict(int)
     for transaction in transactions:
         for item in transaction:
@@ -22,14 +25,13 @@ def apriori(transactions, min_support=0.5, max_length=None):
     k = 1  # Current itemset size
     all_frequent_itemsets = dict(frequent_itemsets)
     
-    # Generate frequent itemsets of size k+1 until no more can be found
     while frequent_itemsets and (max_length is None or k < max_length):
         k += 1
         candidates = generate_candidates(frequent_itemsets.keys(), k)
         
         candidate_counts = defaultdict(int)
         for transaction in transactions:
-            transaction_set = set(transaction)
+            transaction_set = frozenset(transaction)
             for candidate in candidates:
                 if candidate.issubset(transaction_set):
                     candidate_counts[candidate] += 1
@@ -43,25 +45,22 @@ def apriori(transactions, min_support=0.5, max_length=None):
 
 def generate_candidates(prev_frequent_itemsets, k):
     candidates = set()
-    prev_frequent_list = list(prev_frequent_itemsets)
+    prev_frequent_list = sorted(list(prev_frequent_itemsets), key=lambda x: sorted(x))
     
     for i in range(len(prev_frequent_list)):
         for j in range(i + 1, len(prev_frequent_list)):
             itemset1 = prev_frequent_list[i]
             itemset2 = prev_frequent_list[j]
-
-            # Merge only if they have k-1 common items
-            union_set = itemset1 | itemset2
-            if len(union_set) == k:
-                # Only add if all subsets of size k-1 are frequent
-                if all(frozenset(subset) in prev_frequent_itemsets 
-                       for subset in get_subsets(union_set, k-1)):
-                    candidates.add(union_set)
+            
+            if k > 2:
+                if sorted(itemset1)[:-1] != sorted(itemset2)[:-1]:
+                    continue
+            
+            new_candidate = itemset1 | itemset2
+            if len(new_candidate) == k:
+                candidates.add(new_candidate)
     
     return candidates
-
-def get_subsets(itemset, size):
-    return [frozenset(subset) for subset in itertools.combinations(itemset, size)]
 
 def test_apriori():
     transactions1 = [{'bread', 'milk'}, 
