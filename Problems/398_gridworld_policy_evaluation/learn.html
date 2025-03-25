@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Gridworld Policy Evaluation</title>
+</head>
+<body>
+  <h2>Gridworld Policy Evaluation</h2>
+  <p>
+    In reinforcement learning, <strong>policy evaluation</strong> is the process of computing the state-value function for a given policy. In a gridworld environment, this involves iteratively updating the value of each state based on the expected return from following the policy.
+  </p>
+  
+  <h3>Key Concepts</h3>
+  <ul>
+    <li><strong>State-Value Function (V):</strong> The expected return when starting from a state and following a policy.</li>
+    <li><strong>Policy:</strong> A mapping from states to probabilities for each available action.</li>
+    <li><strong>Bellman Expectation Equation:</strong>
+      <p>
+        For each state \( s \):<br>
+        \[
+        V(s) = \sum_{a} \pi(a|s) \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma V(s')]
+        \]
+      </p>
+    </li>
+  </ul>
+
+  <h3>Algorithm Overview</h3>
+  <ol>
+    <li><strong>Initialization:</strong> Start with an initial guess (e.g., zeros) for the state-value function \( V(s) \).</li>
+    <li><strong>Iterative Update:</strong> Update the state value for each non-terminal state using the Bellman equation until the maximum change is less than a set threshold.</li>
+    <li><strong>Terminal States:</strong> For this task, terminal states (the four corners) remain unchanged.</li>
+  </ol>
+
+  <p>
+    This method provides a foundation for assessing the quality of states under a given policy, which is crucial for many reinforcement learning techniques.
+  </p>
+</body>
+</html>
