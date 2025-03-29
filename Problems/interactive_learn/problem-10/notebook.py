@@ -1,6 +1,17 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "marimo",
+#     "numpy==2.2.4",
+#     "pandas==2.2.3",
+#     "plotly==6.0.1",
+#     "wigglystuff==0.1.12",
+# ]
+# ///
+
 import marimo
 
-__generated_with = "0.10.19"
+__generated_with = "0.11.31"
 app = marimo.App(width="medium")
 
 
@@ -53,14 +64,12 @@ def _(mo):
     \]
 
     where $X_i, Y_i$ are observations and $n$ is the number of samples.
-
     """)
-
     mo.accordion({"### Mathematical Formulation": definition})
     return (definition,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(insights):
     insights
     return
@@ -74,9 +83,9 @@ def _(mo):
     insights = mo.accordion({
         "🎯 Understanding Covariance": mo.md("""
         **Key Concepts:**
-        
+
         1. **Variance**: Measures spread of a single variable
-        
+
         2. **Covariance**: Measures relationship between two variables
 
         3. **Matrix Properties**: Symmetric, diagonal contains variances
@@ -105,7 +114,7 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(input_controls):
     input_controls.center()
     return
@@ -127,19 +136,13 @@ def _(Matrix, mo):
     return data_matrix, input_controls
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(calculate_button):
     calculate_button.center()
     return
 
 
-@app.cell
-def _(mo):
-    calculate_button = mo.ui.run_button(label="Calculate Covariance Matrix")
-    return (calculate_button,)
-
-
-@app.cell
+@app.cell(hide_code=True)
 def _(calculate_button, data_matrix, mo, np, pd, px):
     results = None
     if calculate_button.value:
@@ -148,18 +151,18 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
             data = np.array(data_matrix.matrix, dtype=float)
             if data.shape[0] != 2:
                 print("Data must have 2 rows")
-                
+
             # 2. key components calc
             means = np.mean(data, axis=1)
             centered_data = data - means[:, np.newaxis]
             cov_matrix = np.cov(data)
-            
+
             # 3. visualization with covariance matrix
             df = pd.DataFrame({
                 'x': data[0],
                 'y': data[1]
             })
-            
+
             scatter_fig = px.scatter(
                 df,
                 x='x',
@@ -188,17 +191,17 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
             # 4. results with relevant explanations
             results = mo.vstack([
                 mo.md("## Understanding Your Data's Covariance"),
-                
+
                 # First row: Plot and Matrix
                 mo.hstack([
                     # scatter plot
                     mo.vstack([scatter_fig]),
-                    
+
                     # covariance matrix
                     mo.vstack([
                         mo.md(r"""
                         **Covariance Matrix:**
-                        
+
                         $$
                         C = \begin{pmatrix} 
                         %.2f & %.2f \\
@@ -211,47 +214,47 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
                         ))
                     ])
                 ]),
-                
+
                 # interpretation and insights side by side
                 mo.hstack([
                     # Left: Pattern Interpretation
                     mo.callout(
                         mo.md("""
                         **Pattern Interpretation:**
-                        
-                        
+
+
                         - Upward trend → Positive covariance
-                        
+
                         - Downward trend → Negative covariance
-                        
+
                         - No trend → Zero/Low covariance
-                        
+
                         **Matrix Values:**
-                        
+
                         - Diagonal: Variances show spread
-                        
+
                         - Off-diagonal: Show relationship strength
                         """),
                         kind="info"
                     ),
-                    
+
                     # Right: Key Insights
                     mo.callout(
                         mo.md(f"""
                         **Key Insights:**
-                        
-                        
+
+
                         1. Relationship: {"Positive" if cov_matrix[0,1] > 0 else "Negative" if cov_matrix[0,1] < 0 else "No"} covariance
-                        
+
                         2. Strength: {"Strong" if abs(cov_matrix[0,1]) > 1 else "Moderate" if abs(cov_matrix[0,1]) > 0.5 else "Weak"}
-                        
+
                         3. Variances: ({cov_matrix[0,0]:.2f}, {cov_matrix[1,1]:.2f})
-                        
+
                         **Centered Data:**
                         ```python
-                        
+
                         Var1: {np.round(centered_data[0], 2)}
-                        
+
                         Var2: {np.round(centered_data[1], 2)}
                         ```
                         """),
@@ -259,7 +262,7 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
                     )
                 ])
             ], justify='center')
-            
+
         except Exception as e:
             results = mo.md(f"⚠️ Error: {str(e)}").callout(kind="danger")
     results
@@ -276,7 +279,7 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
     )
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(exercises):
     exercises
     return
@@ -319,7 +322,7 @@ def _(mo):
     return (exercises,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(conclusion):
     conclusion
     return
@@ -328,9 +331,7 @@ def _(conclusion):
 @app.cell(hide_code=True)
 def _(mo):
     # Conclusion
-
     conclusion = mo.vstack([
-
         mo.callout(
             mo.md("""
             **Congratulations!** 
@@ -338,11 +339,8 @@ def _(mo):
             You've mastered the key concepts of covariance matrices:
 
             - How to calculate covariance between variables
-
             - How to interpret the covariance matrix
-
             - How to visualize relationships in data
-
             - The importance of centered data
 
             """),
@@ -354,11 +352,8 @@ def _(mo):
             "🚀 Next Steps": mo.md("""
 
             1. Explore correlation matrices (normalized covariance)
-
             2. Apply to real-world datasets
-
             3. Use in dimensionality reduction (PCA)
-
             4. Implement in machine learning projects
 
             """)
@@ -373,13 +368,19 @@ def _():
     return (mo,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _():
-    import numpy as np
-    import plotly.express as px
-    from wigglystuff import Matrix
+    import numpy as np
+    import plotly.express as px
+    from wigglystuff import Matrix
     import pandas as pd
     return Matrix, np, pd, px
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    calculate_button = mo.ui.run_button(label="Calculate Covariance Matrix")
+    return (calculate_button,)
 
 
 if __name__ == "__main__":
