@@ -46,8 +46,8 @@ def test_transform_matrix() -> None:
     
     # Test case 4
     A = [[2, 3], [1, 4]]
-    T = [[3, 0], [0, 3]]
-    S = [[1, 1], [1, 1]]
+    T = [[1, 1], [1, 1]]
+    S = [[3, 0], [0, 3]]
     assert transform_matrix(A, T, S) == -1
     # try:
     #     transform_matrix(A, T, S)
