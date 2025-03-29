@@ -12,7 +12,7 @@ def transform_matrix(
     S = np.array(S, dtype=float)
     
     # Check if the matrices T and S are invertible
-    if np.linalg.det(T) == 0 or np.linalg.det(S) == 0:
+    if np.linalg.det(T) == 0:
         # raise ValueError("The matrices T and/or S are not invertible.")
         return -1
     
