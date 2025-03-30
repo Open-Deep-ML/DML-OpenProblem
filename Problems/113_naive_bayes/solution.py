@@ -132,7 +132,75 @@ def test_bernoulli_naive_bayes():
     assert set(y_pred).issubset({0, 1}), "Predictions should be binary (0 or 1)"
     print("Bernoulli Naive Bayes test passed successfully.")
 
+def test_gaussian_nb():
+    np.random.seed(42)  # For reproducibility
+
+    X = np.array([
+        [5.1, 3.5],   # Class 0
+        [4.9, 3.0],   # Class 0
+        [7.0, 3.2],   # Class 1
+        [6.4, 3.2],   # Class 1
+        [5.9, 3.0]    # Class 1
+    ])
+    y = np.array([0, 0, 1, 1, 1])
+
+    model = NaiveBayes()
+    model.forward(X, y)
+
+    X_test = np.array([[6.0, 3.1]])  # Should be class 1
+    pred = model.predict(X_test)
+
+    assert pred[0] == 1, f"Expected 1 but got {pred[0]}"
+    print("Gaussian NB passed!")
+
+def test_binary_nb():
+    np.random.seed(42)
+
+    # Binary features (0 or 1)
+    X = np.array([
+        [1, 0, 1],   # Spam
+        [1, 1, 0],   # Spam
+        [0, 0, 1],   # Ham
+        [0, 1, 0],   # Ham
+        [1, 1, 1]    # Spam
+    ])
+    y = np.array([1, 1, 0, 0, 1])
+    model = NaiveBayes(model_type="bernoulli")
+    model.forward(X, y)
+
+    X_test = np.array([[1, 0, 1]])  # Should be spam (1)
+    pred = model.predict(X_test)
+
+    assert pred[0] == 1, f"Expected 1 but got {pred[0]}"
+    print("Binary NB passed!")
+
+def test_multinomial_nb():
+    np.random.seed(42)
+
+    # Multinomial features (word counts)
+    X = np.array([
+        [2, 1, 0],   # Spam
+        [1, 2, 1],   # Spam
+        [0, 1, 2],   # Ham
+        [3, 0, 0],   # Spam
+        [0, 0, 1]    # Ham
+    ])
+    y = np.array([1, 1, 0, 1, 0])
+
+    model = NaiveBayes(model_type="multinomial")
+    model.forward(X, y)
+
+    X_test = np.array([[1, 1, 0]])  # Should be Spam (1)
+    pred = model.predict(X_test)
+
+    assert pred[0] == 1, f"Expected 1 but got {pred[0]}"
+    print("Multinomial NB passed!")
+
+
 if __name__ == "__main__":
     test_bernoulli_naive_bayes()
     test_gaussian_naive_bayes()
     test_multinomial_naive_bayes()
+    test_gaussian_nb()
+    test_binary_nb()
+    test_multinomial_nb()
