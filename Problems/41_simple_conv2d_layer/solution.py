@@ -83,17 +83,17 @@ def test_simple_conv2d():
         [1, 2, 3],
         [1, 2, 3],
     ])
-    kenel = np.array([
+    kernel = np.array([
         [1, 2, 3],
         [1, 2, 3],
         [1, 2, 3],
     ])
     padding, stride = 1, 1
     expected = np.array([
-        [26., 40., 10.],
-        [34., 54., 18.],
-        [26., 36.,  2.],
-    ])
+    [16., 28., 16.],
+    [24., 42., 24.],
+    [16., 28., 16.]
+])
     assert np.array_equal(expected, simple_conv2d(input_matrix, kernel, padding, stride))
 
 
