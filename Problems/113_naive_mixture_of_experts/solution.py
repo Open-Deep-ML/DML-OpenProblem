@@ -16,6 +16,7 @@ def get_top_k(arr: np.ndarray, k: int):
     idx: [[2, 3], [2, 3]] <- last two indices in each row
     vals: [[2, 3], [6, 7]] <- last two values in each row
 
+    **This function should be provided to the user**
     """
     idx = np.argpartition(arr, -k)[..., -k:]
     vals = np.take_along_axis(arr, idx, axis=-1)
