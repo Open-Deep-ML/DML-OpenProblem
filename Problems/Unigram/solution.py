@@ -9,7 +9,6 @@ def unigram_calculation(s,word):
     total_word_count=len(tokens)
     word_count=tokens.count(word)
     unigram_p=word_count/total_word_count
-    print(round(unigram_p,4))
     return round(unigram_p,4)
 
 def test():
