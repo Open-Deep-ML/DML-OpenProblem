@@ -15,6 +15,7 @@ Where:
 - $V$ = Vocabulary (all word tokens in the corpus).
 
 - $\sum_{w' \in V} \text{Count}(w')$ = Total number of word tokens.
+- Round upto the 4th decimal point.
 
 
 ---
