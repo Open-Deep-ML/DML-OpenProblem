@@ -21,6 +21,23 @@ git clone https://github.com/yourusername/DML-OpenProblem.git
 cd DML-OpenProblem
 pip install -r requirements.txt
 ```
+
+### Setting up Pre-commit Hooks
+
+We use pre-commit hooks to maintain code quality. The hooks automatically format Python files in the `Problems` directory, ensuring consistent whitespace (converting tabs to spaces) and line endings.
+
+1. Install pre-commit:
+```sh
+pip install pre-commit
+```
+
+2. Install the git hooks:
+```sh
+pre-commit install
+```
+
+Now, whenever you make a commit, the pre-commit hooks will automatically run and fix any whitespace issues in Python files. If any files are modified by the hooks, you'll need to stage those changes and commit again.
+
 ## Usage
 You can use the repository to create, edit, and solve problems related to linear algebra, machine learning, and deep learning. The problems are structured in directories, each containing relevant files such as learn.html for the learning section and solution.py for the solution code.
 
