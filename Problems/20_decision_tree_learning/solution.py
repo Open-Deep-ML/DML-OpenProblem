@@ -27,18 +27,18 @@ def learn_decision_tree(examples, attributes, target_attr):
         return examples[0][target_attr]
     if not attributes:
         return majority_class(examples, target_attr)
-    
+
     gains = {attr: calculate_information_gain(examples, attr, target_attr) for attr in attributes}
     best_attr = max(gains, key=gains.get)
     tree = {best_attr: {}}
-    
+
     for value in set(example[best_attr] for example in examples):
         subset = [example for example in examples if example[best_attr] == value]
         new_attributes = attributes.copy()
         new_attributes.remove(best_attr)
         subtree = learn_decision_tree(subset, new_attributes, target_attr)
         tree[best_attr][value] = subtree
-    
+
     return tree
 
 def test_learn_decision_tree():

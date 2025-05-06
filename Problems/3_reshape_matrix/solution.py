@@ -38,7 +38,7 @@ def test_reshape_matrix() -> None:
 
     # Test case 6
     a = [[1, 2, 3],[4, 5, 6]]
-    new_shape = (2, 3)  
+    new_shape = (2, 3)
     assert reshape_matrix(a, new_shape) == [[1, 2, 3], [4, 5, 6]]
 
     # Test case 7

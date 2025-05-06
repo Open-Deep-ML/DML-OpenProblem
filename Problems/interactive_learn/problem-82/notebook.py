@@ -324,8 +324,8 @@ def _(display):
 @app.cell
 def _(mo):
     conclusion = mo.md(f"""
-        **Congratulations!** 
-        You've explored the Grayscale Image Contrast Calculator interactively. 
+        **Congratulations!**
+        You've explored the Grayscale Image Contrast Calculator interactively.
 
         Now that you understand how image contrast works, head over to the Problem Description tab to solve the challenge!
 

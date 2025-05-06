@@ -5,16 +5,16 @@ def rmse(y_true,y_pred):
         raise ValueError("Arrays must have the same shape")
     if y_true.size == 0:
         raise ValueError("Arrays cannot be empty")
-    
+
     return round(np.sqrt(np.mean((y_true - y_pred) ** 2)),3)
 def test_rmse():
-# Test Case 1: Normal Case  
+# Test Case 1: Normal Case
     y_true1 = np.array([3, -0.5, 2, 7])
     y_pred1 = np.array([2.5, 0.0, 2, 8])
     expected1 = 0.612
     assert abs(rmse(y_true1, y_pred1)) == expected1, "Test Case Failed"
 
-# Test Case 2: 2D Array 
+# Test Case 2: 2D Array
     y_true2 = np.array([[0.5, 1], [-1, 1], [7, -6]])
     y_pred2 = np.array([[0, 2], [-1, 2], [8, -5]])
     expected2 = 0.842

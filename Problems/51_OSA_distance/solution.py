@@ -1,14 +1,14 @@
 def OSA(source: str, target: str) -> int:
     source_len, target_len = len(source), len(target)
-    
+
     osa_matrix = [[0]*(target_len + 1) for _ in range(source_len + 1)]
-    
+
     for j in range(1, target_len + 1):
         osa_matrix[0][j] = j
-    
+
     for i in range(1, source_len + 1):
         osa_matrix[i][0] = i
-    
+
     for i in range(1, source_len + 1):
         for j in range(1, target_len + 1):
             osa_matrix[i][j] = min(

@@ -30,7 +30,7 @@ def test_phi_transform() -> None:
         [1.0, 2.0, 4.0, 8.0, 16.0]
     ], 'Test Case 5 Failed.'
 
-    
+
 
 if __name__ == "__main__":
     test_phi_transform()

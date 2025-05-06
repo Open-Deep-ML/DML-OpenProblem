@@ -21,7 +21,7 @@ def reshape_matrix(a: list[list[int | float]],new_shape: tuple[int, int]) -> lis
             index += 1
         reshaped_matrix.append(new_row)
     return reshaped_matrix
-    
+
 
 def test_reshape_matrix() -> None:
     # Test cases for reshape_matrix function
@@ -53,7 +53,7 @@ def test_reshape_matrix() -> None:
 
     # Test case 6
     a = [[1, 2, 3],[4, 5, 6]]
-    new_shape = (2, 3)  
+    new_shape = (2, 3)
     assert reshape_matrix(a, new_shape) == [[1, 2, 3], [4, 5, 6]]
 
     # Test case 7

@@ -31,7 +31,7 @@ def _(mo):
     For an input $z$, the ELU function with parameter $\alpha$ is defined as:
 
     \[
-    \text{ELU}(z) = \begin{cases} 
+    \text{ELU}(z) = \begin{cases}
     z & \text{if } z > 0 \\
     \alpha(e^z - 1) & \text{if } z \leq 0
     \end{cases}
@@ -124,7 +124,7 @@ def _(alpha, mo):
             With alpha parameter $\\alpha = {alpha.value:.3f}$, the current ELU function is:
 
             \\[
-            f(z) = \\begin{{cases}} 
+            f(z) = \\begin{{cases}}
             z & \\text{{if }} z > 0 \\\\
             {alpha.value:.3f}(e^z - 1) & \\text{{if }} z \\leq 0
             \\end{{cases}}
@@ -159,24 +159,24 @@ def _(alpha, mo, np, plt, test_input, x_range):
 
         # Plot -ve region
         mask_neg = x <= 0
-        plt.plot(x[mask_neg], y[mask_neg], 
-                label=f'Negative region (exponential decay)', 
-                color='red', 
+        plt.plot(x[mask_neg], y[mask_neg],
+                label=f'Negative region (exponential decay)',
+                color='red',
                 linewidth=2)
 
         # Plot +ve region
         mask_pos = x > 0
-        plt.plot(x[mask_pos], y[mask_pos], 
-                label='Positive region (linear)', 
-                color='blue', 
+        plt.plot(x[mask_pos], y[mask_pos],
+                label='Positive region (linear)',
+                color='blue',
                 linewidth=2)
 
         # Plot test point if within range (expand x slider range to show test point)
 
         if x_range.value[0] <= test_input.value <= x_range.value[1]:
             test_output = test_input.value if test_input.value > 0 else alpha.value * (np.exp(test_input.value) - 1)
-            plt.scatter([test_input.value], [test_output], 
-                       color='green', s=100, 
+            plt.scatter([test_input.value], [test_output],
+                       color='green', s=100,
                        label=f'Test point: ELU({test_input.value:.2f}) = {test_output:.2f}')
 
         plt.grid(True, alpha=0.3)
@@ -220,7 +220,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the ELU function interactively. You've learned:
 
                 - How ELU smoothly handles negative inputs

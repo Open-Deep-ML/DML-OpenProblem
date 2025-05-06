@@ -9,13 +9,13 @@ def polynomial_features(X, degree):
         combs = [combinations_with_replacement(range(n_features), i) for i in range(0, degree + 1)]
         flat_combs = [item for sublist in combs for item in sublist]
         return flat_combs
-    
+
     combinations = index_combinations()
     n_output_features = len(combinations)
     X_new = np.empty((n_samples, n_output_features))
-    
+
     # Compute polynomial features
-    for i, index_combs in enumerate(combinations):  
+    for i, index_combs in enumerate(combinations):
         X_new[:, i] = np.prod(X[:, index_combs], axis=1)
 
     return X_new
@@ -30,7 +30,7 @@ def test_polynomial_features():
         [ 1.,  5.,  6., 25., 30., 36.]
     ])
     assert np.allclose(polynomial_features(X, degree), expected_output), "Test case 1 failed"
-    
+
     # Test case 2
     X = np.array([[1, 2], [3, 4], [5, 6]])
     degree = 3
@@ -40,7 +40,7 @@ def test_polynomial_features():
         [  1.,   5.,   6.,  25.,  30.,  36., 125., 150., 180., 216.]
     ])
     assert np.allclose(polynomial_features(X, degree), expected_output), "Test case 2 failed"
-    
+
     # Test case 3
     X = np.array([[1, 2, 3], [3, 4, 5], [5, 6, 9]])
     degree = 3

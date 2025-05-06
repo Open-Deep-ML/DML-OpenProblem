@@ -19,7 +19,7 @@ def _(mo):
         r"""
         # Understanding the Softsign Activation Function
 
-        The [Softsign activation function](https://www.gabormelli.com/RKB/Softsign_Activation_Function) is a smooth, bounded function that can be used in neural networks. 
+        The [Softsign activation function](https://www.gabormelli.com/RKB/Softsign_Activation_Function) is a smooth, bounded function that can be used in neural networks.
         Let's explore its properties interactively!
         """
     ).center()
@@ -61,13 +61,13 @@ def _(mo):
     _callout = mo.callout(
         mo.md("""
             The Softsign function:
-            
+
             - Approaches ±1 asymptotically
-            
+
             - Has a smoother curve compared to tanh
-            
+
             - Maintains non-zero gradients even for larger inputs
-            
+
             - Shows slower saturation than tanh
         """),
         kind="info"
@@ -160,8 +160,8 @@ def _(mo, np, plt, test_input, x_range):
         # Plot test point if within range (adjust sliders accordingly)
         if x_range.value[0] <= test_input.value <= x_range.value[1]:
             test_output = test_input.value / (1 + abs(test_input.value))
-            plt.scatter([test_input.value], [test_output], 
-                       color='green', s=100, 
+            plt.scatter([test_input.value], [test_output],
+                       color='green', s=100,
                        label=f'Test point: f({test_input.value:.2f}) = {test_output:.2f}')
 
         plt.grid(True, alpha=0.3)
@@ -207,7 +207,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the Softsign activation function interactively. You've learned:
 
                 - How Softsign bounds outputs between -1 and 1

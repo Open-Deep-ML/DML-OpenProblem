@@ -4,14 +4,14 @@ def linear_regression_normal_equation(X: list[list[float]], y: list[float]) -> l
     # Convert the inputs to numpy arrays
     X = np.array(X)
     y = np.array(y).reshape(-1, 1)
-    
+
     # Compute the normal equation
     X_transpose = X.T
     theta = np.linalg.inv(X_transpose.dot(X)).dot(X_transpose).dot(y)
-    
+
     # Round the result to four decimal places
     theta = np.round(theta, 4).flatten().tolist()
-    
+
     return theta
 
 def test_linear_regression_normal_equation() -> None:
