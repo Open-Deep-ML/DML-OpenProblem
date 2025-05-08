@@ -19,25 +19,25 @@ def test_calculate_dot_product():
     vec2 = np.array([4, 5, 6])
     expected_output1 = 32
     assert calculate_dot_product(vec1, vec2) == expected_output1, "Test case 1 failed"
-    
+
     # Test case 2: Include negative numbers
     vec1 = np.array([-1, 2, 3])
     vec2 = np.array([4, -5, 6])
     expected_output2 = 4
     assert calculate_dot_product(vec1, vec2) == expected_output2, "Test case 2 failed"
-    
+
     # Test case 3: Orthogonal vectors
     vec1 = np.array([1, 0])
     vec2 = np.array([0, 1])
     expected_output3 = 0
     assert calculate_dot_product(vec1, vec2) == expected_output3, "Test case 3 failed"
-    
+
     # Test case 4: All zeros
     vec1 = np.array([0, 0, 0])
     vec2 = np.array([0, 0, 0])
     expected_output4 = 0
     assert calculate_dot_product(vec1, vec2) == expected_output4, "Test case 4 failed"
-    
+
     # Test case 5: Scalars (single-element vectors)
     vec1 = np.array([7])
     vec2 = np.array([3])

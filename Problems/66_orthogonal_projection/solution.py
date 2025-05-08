@@ -2,7 +2,7 @@ def dot(v1:list[float], v2:list[float]) -> float:
 
     if len(v1) != len(v2):
         raise Exception("Vectors are not of the same dimensions.")
-    
+
     return sum([ax1*ax2 for ax1,ax2 in zip(v1,v2)])
 
 def scalar_mult(scalar:float, v:list[float]) -> list[float]:
@@ -11,7 +11,7 @@ def scalar_mult(scalar:float, v:list[float]) -> list[float]:
     return [scalar*ax for ax in v]
 
 def orthogonal_projection(v:list[float], L: list[float]) -> list[list[float]]:
-    
+
     # calculate the orthogonal projection of v onto L
     # calculate the unit vector of L
     L_mag = sum([ax**2 for ax in L])**0.5

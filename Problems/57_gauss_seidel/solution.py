@@ -1,29 +1,29 @@
 import numpy as np
 
 def gauss_seidel_it(A:np.array, b:np.array, x: np.array) -> np.array:
-    
+
     rows, cols = A.shape
-    
+
     for i in range(rows):
         x_new = b[i]
         for j in range(cols):
             if i != j:
                 x_new -= A[i,j] * x[j]
         x[i] = x_new/A[i,i]
-    
+
     return x
 
 def gauss_seidel(A:np.array, b:np.array, n: int, x_ini: np.array=None) -> np.array:
-    
+
     x = x_ini or np.zeros_like(b)
-    
+
     for _ in range(n):
         x = gauss_seidel_it(A,b,x)
-        
+
     return x
 
 def test_gauss_seidel():
-    
+
     # Test case 1: basic test
     A_1 = np.array([[4, 1, 2],[3, 5, 1],[1, 1, 3]], dtype=float)
     b_1 = np.array([4,7,3], dtype=float)

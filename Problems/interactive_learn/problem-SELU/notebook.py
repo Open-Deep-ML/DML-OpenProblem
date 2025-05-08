@@ -31,7 +31,7 @@ def _(mo):
     For an input $z$, the SELU function with parameter $\alpha$ is defined as:
 
     \[
-    \text{SELU}(z) = \lambda \begin{cases} 
+    \text{SELU}(z) = \lambda \begin{cases}
     z & \text{if } z > 0 \\
     \alpha(e^z - 1) & \text{if } z \leq 0
     \end{cases}
@@ -125,7 +125,7 @@ def _(alpha, mo):
             With parameter $\\alpha = {alpha.value:.3f}$ and fixed $\\lambda = 1.0507$, the current SELU function is:
 
             $$
-            f(z) = 1.0507 \\times \\begin{{cases}} 
+            f(z) = 1.0507 \\times \\begin{{cases}}
             z & \\text{{if }} z > 0 \\\\
             {alpha.value:.3f}(e^z - 1) & \\text{{if }} z \\leq 0
             \\end{{cases}}
@@ -161,16 +161,16 @@ def _(alpha, mo, np, plt, test_input, x_range):
 
         # Plot -ve region
         mask_neg = x <= 0
-        plt.plot(x[mask_neg], y[mask_neg], 
-                label=f'Negative region (α={alpha.value:.3f})', 
-                color='darkred', 
+        plt.plot(x[mask_neg], y[mask_neg],
+                label=f'Negative region (α={alpha.value:.3f})',
+                color='darkred',
                 linewidth=2)
 
         # Plot +ve region
         mask_pos = x > 0
-        plt.plot(x[mask_pos], y[mask_pos], 
-                label='Positive region (λx)', 
-                color='darkgreen', 
+        plt.plot(x[mask_pos], y[mask_pos],
+                label='Positive region (λx)',
+                color='darkgreen',
                 linewidth=2)
 
         # Plot test point if within range (extend range to show point if needed)
@@ -179,8 +179,8 @@ def _(alpha, mo, np, plt, test_input, x_range):
                 test_output = scale * test_input.value
             else:
                 test_output = scale * alpha.value * (np.exp(test_input.value) - 1)
-            plt.scatter([test_input.value], [test_output], 
-                       color='orange', s=100, 
+            plt.scatter([test_input.value], [test_output],
+                       color='orange', s=100,
                        label=f'Test point: f({test_input.value:.2f}) = {test_output:.2f}')
 
         plt.grid(True, alpha=0.3)
@@ -224,7 +224,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the SELU activation function interactively. You've learned:
 
                 - How SELU achieves self-normalization

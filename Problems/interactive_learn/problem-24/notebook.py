@@ -356,7 +356,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the single neuron model with sigmoid activation. You've learned:
 
                 - How weights and bias affect the decision boundary

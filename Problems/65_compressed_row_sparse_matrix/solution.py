@@ -13,10 +13,10 @@ def compressed_row_sparse_matrix(dense_matrix: list[list[float]]) -> tuple[list[
                 continue
             vals.append(val)
             col_idx.append(j)
-        row_ptr.append(len(vals))   
+        row_ptr.append(len(vals))
 
     return vals, col_idx, row_ptr
-    
+
 
 def test_compressed_row():
 
@@ -28,7 +28,7 @@ def test_compressed_row():
     ]
 
     vals, col_idx, row_ptr = compressed_row_sparse_matrix(dense_matrix)
-    
+
     assert vals == [], "Test case 1 failed: vals should be an empty list"
     assert col_idx == [], "Test case 1 failed: col_idx should be an empty list"
     assert row_ptr == [0, 0, 0, 0], "Test case 1 failed: row_ptr should be [0, 0, 0, 0]"
@@ -41,7 +41,7 @@ def test_compressed_row():
     ]
 
     vals, col_idx, row_ptr = compressed_row_sparse_matrix(dense_matrix)
-    
+
     assert vals == [1, 2, 3, 4], "Test case 2 failed: vals should be [1, 2, 3, 4]"
     assert col_idx == [0, 1, 1, 2], "Test case 2 failed: col_idx should be [0, 1, 1, 2]"
     assert row_ptr == [0, 0, 2, 4], "Test case 2 failed: row_ptr should be [0, 0, 2, 4]"

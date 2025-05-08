@@ -5,7 +5,7 @@ def matrix_dot_vector(
     #Check that dimensions match
     if len(a[0]) != len(b):
 	return -1
-        
+
 	c = []
     #Iterate using a list comprehension
 	for s_a in a:

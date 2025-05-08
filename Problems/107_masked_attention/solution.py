@@ -4,11 +4,11 @@ from typing import Tuple
 def compute_qkv(X: np.ndarray, W_q: np.ndarray, W_k: np.ndarray, W_v: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
     Compute the Query (Q), Key (K), and Value (V) matrices.
-    
+
     Args:
     X: numpy array of shape (seq_len, d_model), input sequence
     W_q, W_k, W_v: numpy arrays of shape (d_model, d_model), weight matrices for Q, K, and V
-    
+
     Returns:
     Q, K, V: numpy arrays of shape (seq_len, d_model)
     """
@@ -20,22 +20,22 @@ def compute_qkv(X: np.ndarray, W_q: np.ndarray, W_k: np.ndarray, W_v: np.ndarray
 def masked_attention(Q: np.ndarray, K: np.ndarray, V: np.ndarray, mask: np.ndarray) -> np.ndarray:
     """
     Compute self-attention for a single head with a mask applied.
-    
+
     Args:
     Q: numpy array of shape (seq_len, d_k), Query matrix
     K: numpy array of shape (seq_len, d_k), Key matrix
     V: numpy array of shape (seq_len, d_k), Value matrix
     mask: numpy array of shape (seq_len, seq_len), Mask matrix
-    
+
     Returns:
     attention_output: numpy array of shape (seq_len, d_k), output of the masked-attention mechanism
     """
     d_k = Q.shape[1]  # Get the dimension of the keys
     scores = np.matmul(Q, K.T) / np.sqrt(d_k)  # Compute scaled dot-product attention scores
-    
+
     # Apply the mask by adding a large negative value to the masked positions
     scores = scores + mask  # This will set the masked positions to a large negative value (-inf)
-    
+
     # For numerical stability, compute softmax
     attention_weights = np.exp(scores - np.max(scores, axis=1, keepdims=True))  # Subtract max for numerical stability
     attention_weights = attention_weights / np.sum(attention_weights, axis=1, keepdims=True)  # Normalize
