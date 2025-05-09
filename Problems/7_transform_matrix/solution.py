@@ -12,7 +12,7 @@ def transform_matrix(
     S = np.array(S, dtype=float)
     
     # Check if the matrices T and S are invertible
-    if np.linalg.det(T) == 0 or np.linalg.det(S) == 0:
+    if np.linalg.det(T) == 0:
         # raise ValueError("The matrices T and/or S are not invertible.")
         return -1
     
@@ -46,8 +46,8 @@ def test_transform_matrix() -> None:
     
     # Test case 4
     A = [[2, 3], [1, 4]]
-    T = [[3, 0], [0, 3]]
-    S = [[1, 1], [1, 1]]
+    T = [[1, 1], [1, 1]]
+    S = [[3, 0], [0, 3]]
     assert transform_matrix(A, T, S) == -1
 
     # Test case 5
