@@ -11,7 +11,11 @@ def calculate_dot_product(vec1, vec2):
     Returns:
         float: Dot product of the two vectors.
     """
-    return np.dot(vec1, vec2)
+    ans = 0
+	for i in range(vec1.shape[0]):
+        ans += vec1[i] * vec2[i]
+    return ans
+        
 
 def test_calculate_dot_product():
     # Test case 1: Positive numbers
