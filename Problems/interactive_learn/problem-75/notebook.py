@@ -245,23 +245,23 @@ def _(
         # matrix interpretation
         matrix_interpretation = mo.md(f"""
         ### Matrix Interpretation
-        
+
         - True Positives (TP): {tp} (Actual: Positive, Predicted: Positive)
-        
+
         - False Negatives (FN): {fn} (Actual: Positive, Predicted: Negative)
-        
+
         - False Positives (FP): {fp} (Actual: Negative, Predicted: Positive)
-        
+
         - True Negatives (TN): {tn} (Actual: Negative, Predicted: Negative)
 
         **Metrics:**
-        
+
         - Accuracy: {accuracy:.2f}
-        
+
         - Precision: {precision:.2f}
-        
+
         - Recall: {recall:.2f}
-        
+
         - F1 Score: {f1:.2f}
         """)
 
@@ -278,13 +278,13 @@ def _(
             mo.callout(
                 mo.md("""
                 🎉 Congratulations! You've successfully:
-                
+
                 - Understood how confusion matrices work in binary classification
-                
+
                 - Learned to interpret TP, FN, FP, and TN
-                
+
                 - Explored key metrics like accuracy, precision, recall, and F1 score
-                
+
                 - Gained hands-on experience with interactive confusion matrix analysis
                 """),
                 kind="success"

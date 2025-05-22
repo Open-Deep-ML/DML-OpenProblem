@@ -11,7 +11,7 @@ def test_precision():
     y_pred = np.array([1, 0, 1, 0, 0, 1])
     expected_output = 1.0
     assert precision(y_true, y_pred) == expected_output, "Test case 1 failed"
-    
+
     # Test case 2
     y_true = np.array([1, 0, 1, 1, 0, 0])
     y_pred = np.array([1, 0, 0, 0, 0, 1])

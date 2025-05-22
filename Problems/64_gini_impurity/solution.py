@@ -14,7 +14,7 @@ def gini_impurity(y: list[int]) -> float:
 
 
 def test_gini_impurity() -> None:
-    
+
     classes_1 = [0,0,0,0,1,1,1,1]
     assert gini_impurity(classes_1) == 0.5
 

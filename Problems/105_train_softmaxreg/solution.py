@@ -1,9 +1,9 @@
 import numpy as np
 
 
-def train_softmaxreg(X: np.ndarray, y: np.ndarray, 
+def train_softmaxreg(X: np.ndarray, y: np.ndarray,
                  learning_rate: float, iterations: int) -> tuple[list[float], ...]:
-    """        
+    """
     Gradient-descent training algorithm for softmax regression, that collects mean-reduced
     CE losses, accuracies.
     Returns
@@ -23,7 +23,7 @@ def train_softmaxreg(X: np.ndarray, y: np.ndarray,
     def ce_loss(y_pred, y_true):
         true_labels_idx = np.argmax(y_true, axis=1)
         return -np.sum(np.log(y_pred)[list(range(len(y_pred))),true_labels_idx])
- 
+
     y = y.astype(int)
     C = y.max()+1 # we assume that classes start from 0
     y = np.eye(C)[y]
@@ -55,11 +55,11 @@ def test_train_softmaxreg():
     y = np.array([2, 3, 0, 0, 1, 3, 0, 1, 2, 1])
     learning_rate = 3e-2
     iterations = 10
-    expected_b = [[-0.0841, -0.5693, -0.3651, -0.2423, -0.5344, 0.0339], 
-            [0.2566, 0.0535, -0.2104, -0.4004, 0.2709, -0.1461], 
-            [-0.1318, 0.2109, 0.3998, 0.523, -0.1001, 0.0545], 
+    expected_b = [[-0.0841, -0.5693, -0.3651, -0.2423, -0.5344, 0.0339],
+            [0.2566, 0.0535, -0.2104, -0.4004, 0.2709, -0.1461],
+            [-0.1318, 0.2109, 0.3998, 0.523, -0.1001, 0.0545],
             [-0.0407, 0.3049, 0.1757, 0.1197, 0.3637, 0.0576]]
-    expected_losses = [13.8629, 10.7201, 9.3163, 8.4942, 7.9132, 
+    expected_losses = [13.8629, 10.7201, 9.3163, 8.4942, 7.9132,
             7.4598, 7.0854, 6.7653, 6.4851, 6.2358]
     b, ce = train_softmaxreg(X, y, learning_rate, iterations)
     assert b == expected_b and ce == expected_losses, 'Test case 1 failed'
@@ -78,7 +78,7 @@ def test_train_softmaxreg():
     y = np.array([1., 0., 0., 1., 0., 1., 0., 1., 0., 1.])
     learning_rate = 1e-2
     iterations = 7
-    expected_b = [[-0.0052, 0.0148, 0.0562, -0.113, -0.2488], 
+    expected_b = [[-0.0052, 0.0148, 0.0562, -0.113, -0.2488],
                 [0.0052, -0.0148, -0.0562, 0.113, 0.2488]]
     expected_losses = [6.9315, 6.4544, 6.0487, 5.7025, 5.4055, 5.1493, 4.9269]
     b, ce = train_softmaxreg(X, y, learning_rate, iterations)

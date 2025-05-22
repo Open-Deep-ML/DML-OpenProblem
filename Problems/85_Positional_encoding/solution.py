@@ -1,7 +1,7 @@
 import numpy as np
 
 def pos_encoding(position:int, dmodel:int):
-    
+
     if position == 0 or dmodel == 0: return -1
 
     pos = np.array(np.arange(position), np.float16)
@@ -49,7 +49,7 @@ def test_pos_encoding() -> None:
     9.995e-01,  1.000e+00,  1.000e+00,  1.000e+00],
   [-7.568e-01,  9.536e-01,  3.894e-01,  1.261e-01,  3.998e-02,  1.265e-02,
     4.002e-03,  1.265e-03, -6.538e-01,  3.010e-01,  9.209e-01,  9.922e-01,
-    9.990e-01,  1.000e+00,  1.000e+00,  1.000e+00]]], 
+    9.990e-01,  1.000e+00,  1.000e+00,  1.000e+00]]],
         dtype=np.float16)
     result2 = pos_encoding(5, 16)
     assert np.allclose(result2, ans2, atol=1e-3), f"Test case 2 failed: {result2} != {ans2}"

@@ -22,7 +22,7 @@ def performance_metrics(actual: list[int],predicted: list[int]) -> tuple:
     #Get specificiy
     specificity = TN/(TN+FP)
     #Return
-    return confusion_matrix, round(accuracy,3),round(f1,3), round(specificity,3), round(negativePredictive,3), 
+    return confusion_matrix, round(accuracy,3),round(f1,3), round(specificity,3), round(negativePredictive,3),
 
 def test_confusion_matrix() -> None:
     # Test case 1
