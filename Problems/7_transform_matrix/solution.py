@@ -49,6 +49,12 @@ def test_transform_matrix() -> None:
     T = [[3, 0], [0, 3]]
     S = [[1, 1], [1, 1]]
     assert transform_matrix(A, T, S) == -1
+
+    # Test case 5
+    A = [[1, 2, 3],[0, 1, 4],[5, 6, 0]]
+    T = [[2, 0, 0],[0, 2, 0],[0, 0, 2]]
+    S = [[0, 1, 0],[0, 0, 1],[1, 0, 0]]
+    assert transform_matrix(A, T, S) == [[1.5, 0.5, 1.0], [2.0, 0.0, 0.5], [0.0, 2.5, 3.0]]
     # try:
     #     transform_matrix(A, T, S)
     #     assert False, "ValueError not raised"
