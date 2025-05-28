@@ -32,23 +32,8 @@ P(C | X) \propto P(X | C) \times P(C)
 
 ---
 
-## **3. Types of Naive Bayes**
 
-### 1 **Gaussian Naive Bayes**
-- Assumes the **features follow a normal distribution**.
-- For each feature \( x_i \), the likelihood is given by:
-
-\[
-P(x_i | C) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x_i - \mu)^2}{2\sigma^2}}
-\]
-
-Where:
-- \( \mu \) → Mean of the feature for class \( C \)
-- \( \sigma^2 \) → Variance of the feature for class \( C \)
-
----
-
-### 2 **Multinomial Naive Bayes**
+### 3 **Multinomial Naive Bayes**
 - Used for **text classification** and **discrete count data** (e.g., word occurrences).
 - The likelihood is given by:
 
@@ -62,15 +47,6 @@ Simplified in log form:
 \text{log-likelihood} = \sum_{i=1}^{n} x_i \cdot \log(P(x_i | C))
 \]
 
----
-
-### 3 **Bernoulli Naive Bayes**
-- Used for **binary data** (features take only 0 or 1 values).
-- The likelihood is given by:
-
-\[
-P(X | C) = \prod_{i=1}^{n} P(x_i | C)^{x_i} \cdot (1 - P(x_i | C))^{1 - x_i}
-\]
 
 ---
 
