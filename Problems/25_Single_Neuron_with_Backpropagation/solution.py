@@ -13,7 +13,7 @@ def train_neuron(features, labels, initial_weights, initial_bias, learning_rate,
     for _ in range(epochs):
         z = np.dot(features, weights) + bias
         predictions = sigmoid(z)
-        
+
         mse = np.mean((predictions - labels) ** 2)
         mse_values.append(round(mse, 4))
 
@@ -21,7 +21,7 @@ def train_neuron(features, labels, initial_weights, initial_bias, learning_rate,
         errors = predictions - labels
         weight_gradients = (2/len(labels)) * np.dot(features.T, errors * predictions * (1 - predictions))
         bias_gradient = (2/len(labels)) * np.mean(errors * predictions * (1 - predictions))
-        
+
         # Update weights and bias
         weights -= learning_rate * weight_gradients
         bias -= learning_rate * bias_gradient
@@ -42,7 +42,7 @@ def test_train_neuron():
     epochs = 2
     expected_output = ([0.1035, -0.1426], -0.0056, [0.3033, 0.2947])
     assert train_neuron(features, labels, initial_weights, initial_bias, learning_rate, epochs) == expected_output, "Test case 1 failed"
-    
+
     # Test case 2
     features = np.array([[1, 2], [2, 3], [3, 1]])
     labels = np.array([1, 0, 1])

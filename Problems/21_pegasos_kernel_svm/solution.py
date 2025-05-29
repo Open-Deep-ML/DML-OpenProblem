@@ -18,7 +18,7 @@ def pegasos_kernel_svm(data, labels, kernel='linear', lambda_val=0.01, iteration
                 kernel_func = linear_kernel
             elif kernel == 'rbf':
                 kernel_func = lambda x, y: rbf_kernel(x, y, sigma)
-    
+
             decision = sum(alphas[j] * labels[j] * kernel_func(data[j], data[i]) for j in range(n_samples)) + b
             if labels[i] * decision < 1:
                 alphas[i] += eta * (labels[i] - lambda_val * alphas[i])
@@ -33,7 +33,7 @@ def test_pegasos_kernel_svm():
     labels = np.array([1, 1, -1, -1])
     expected_output = ([100.0, 0.0, -100.0, -100.0], -937.4755)
     assert pegasos_kernel_svm(data, labels, kernel='linear', lambda_val=0.01, iterations=100) == expected_output, "Test case 1 failed"
-    
+
     # Test case 2: RBF kernel
     expected_output = ([100.0, 99.0, -100.0, -100.0], -115.0)
     assert pegasos_kernel_svm(data, labels, kernel='rbf', lambda_val=0.01, iterations=100, sigma=0.5) == expected_output, "Test case 2 failed"

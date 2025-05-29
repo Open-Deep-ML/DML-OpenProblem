@@ -3,7 +3,7 @@ def min_max(x:list[int])->list[float]:
     #trying to modify the input list in-place instead creating a new list
 
     largest=max(x) #finding the largest value in the input array
-    smallest=min(x) #finding the minimum value in the input array 
+    smallest=min(x) #finding the minimum value in the input array
 
     if largest==smallest: # if input has identical elements
         return[0.0]*len(x)

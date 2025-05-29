@@ -31,7 +31,7 @@ def _(mo):
     For an input $z$, the Leaky ReLU function with parameter $\alpha$ is defined as:
 
     \[
-    \text{LeakyReLU}(z) = \begin{cases} 
+    \text{LeakyReLU}(z) = \begin{cases}
     z & \text{if } z > 0 \\
     \alpha z & \text{if } z \leq 0
     \end{cases}
@@ -124,7 +124,7 @@ def _(alpha, mo):
             With alpha parameter $\\alpha = {alpha.value:.3f}$, the current Leaky ReLU function is:
 
             \\[
-            f(z) = \\begin{{cases}} 
+            f(z) = \\begin{{cases}}
             z & \\text{{if }} z > 0 \\\\
             {alpha.value:.3f}z & \\text{{if }} z \\leq 0
             \\end{{cases}}
@@ -159,23 +159,23 @@ def _(alpha, mo, np, plt, test_input, x_range):
 
         # Plot negative region
         mask_neg = x <= 0
-        plt.plot(x[mask_neg], y[mask_neg], 
-                label=f'Negative region (slope = {alpha.value:.3f})', 
-                color='red', 
+        plt.plot(x[mask_neg], y[mask_neg],
+                label=f'Negative region (slope = {alpha.value:.3f})',
+                color='red',
                 linewidth=2)
 
         # Plot positive region
         mask_pos = x > 0
-        plt.plot(x[mask_pos], y[mask_pos], 
-                label='Positive region (slope = 1.0)', 
-                color='blue', 
+        plt.plot(x[mask_pos], y[mask_pos],
+                label='Positive region (slope = 1.0)',
+                color='blue',
                 linewidth=2)
 
         # Plot test point if within range
         if x_range.value[0] <= test_input.value <= x_range.value[1]:
             test_output = test_input.value if test_input.value > 0 else alpha.value * test_input.value
-            plt.scatter([test_input.value], [test_output], 
-                       color='green', s=100, 
+            plt.scatter([test_input.value], [test_output],
+                       color='green', s=100,
                        label=f'Test point: f({test_input.value:.2f}) = {test_output:.2f}')
 
         plt.grid(True, alpha=0.3)
@@ -219,7 +219,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the Leaky ReLU function interactively. You've learned:
 
                 - How Leaky ReLU modifies ReLU to handle negative inputs

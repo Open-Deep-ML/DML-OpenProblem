@@ -31,7 +31,7 @@ def _(mo):
     For an input $x$, the Hard Sigmoid function is defined as:
 
     \[
-    \text{HardSigmoid}(x) = \begin{cases} 
+    \text{HardSigmoid}(x) = \begin{cases}
     0 & \text{if } x \leq -2.5 \\
     0.2x + 0.5 & \text{if } -2.5 < x < 2.5 \\
     1 & \text{if } x \geq 2.5
@@ -109,7 +109,7 @@ def _(mo):
             The Hard Sigmoid function is defined piece-wise:
 
             \[
-            f(x) = \begin{cases} 
+            f(x) = \begin{cases}
             0 & \text{if } x \leq -2.5 \\
             0.2x + 0.5 & \text{if } -2.5 < x < 2.5 \\
             1 & \text{if } x \geq 2.5
@@ -148,24 +148,24 @@ def _(mo, np, plt, test_input, x_range):
         mask_middle = (x > -2.5) & (x < 2.5)
         mask_right = x >= 2.5
 
-        plt.plot(x[mask_left], y[mask_left], 
-                label='Lower saturation (y = 0)', 
-                color='red', 
+        plt.plot(x[mask_left], y[mask_left],
+                label='Lower saturation (y = 0)',
+                color='red',
                 linewidth=2)
-        plt.plot(x[mask_middle], y[mask_middle], 
-                label='Linear region (y = 0.2x + 0.5)', 
-                color='blue', 
+        plt.plot(x[mask_middle], y[mask_middle],
+                label='Linear region (y = 0.2x + 0.5)',
+                color='blue',
                 linewidth=2)
-        plt.plot(x[mask_right], y[mask_right], 
-                label='Upper saturation (y = 1)', 
-                color='green', 
+        plt.plot(x[mask_right], y[mask_right],
+                label='Upper saturation (y = 1)',
+                color='green',
                 linewidth=2)
 
         # Plot test point if within range (extend slider range accordingly)
         if x_range.value[0] <= test_input.value <= x_range.value[1]:
             test_output = np.clip(0.2 * test_input.value + 0.5, 0, 1)
-            plt.scatter([test_input.value], [test_output], 
-                       color='purple', s=100, 
+            plt.scatter([test_input.value], [test_output],
+                       color='purple', s=100,
                        label=f'Test point: f({test_input.value:.2f}) = {test_output:.2f}')
 
         plt.grid(True, alpha=0.3)
@@ -209,7 +209,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the Hard Sigmoid function interactively. You've learned:
 
                 - How Hard Sigmoid approximates the standard sigmoid function

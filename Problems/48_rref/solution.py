@@ -4,12 +4,12 @@ def rref(matrix):
     # Convert to float for division operations
     A = matrix.astype(np.float32)
     n, m = A.shape
-    
+
     for i in range(n):
         if A[i, i] == 0:
             nonzero_rel_id = np.nonzero(A[i:, i])[0]
             if len(nonzero_rel_id) == 0: continue
-            
+
             A[i] = A[i] + A[nonzero_rel_id[0] + i]
 
         A[i] = A[i] / A[i, i]
@@ -32,7 +32,7 @@ def test_rref():
         [-0., -0.,  1., -2.]
     ])
     assert np.allclose(rref(matrix), expected_output), "Test case 1 failed"
-    
+
     # Test case 2
     matrix = np.array([
         [2, 4, -2],
@@ -45,7 +45,7 @@ def test_rref():
         [ 0.,  0.,  1.]
     ])
     assert np.allclose(rref(matrix), expected_output), "Test case 2 failed"
-    
+
     # Test case 3
     matrix = np.array([
         [0, 2, -1, -4],
@@ -58,7 +58,7 @@ def test_rref():
         [-0., -0.,  1., -11.]
     ])
     assert np.allclose(rref(matrix), expected_output), "Test case 3 failed"
-    
+
    # Test case 4
     matrix = np.array([
         [1, 2, -1],

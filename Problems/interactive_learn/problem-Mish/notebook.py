@@ -156,17 +156,17 @@ def _(mo, np, plt, smoothing, test_input, x_range):
         plt.figure(figsize=(12, 7))
 
         # Main function
-        plt.plot(x, y, 
-                label=f'Mish (β={smoothing.value:.2f})', 
-                color='purple', 
+        plt.plot(x, y,
+                label=f'Mish (β={smoothing.value:.2f})',
+                color='purple',
                 linewidth=2)
 
         # Plot test point if within range (vary slider accordingly)
         if x_range.value[0] <= test_input.value <= x_range.value[1]:
             test_softplus = np.log1p(np.exp(test_input.value))
             test_output = test_input.value * np.tanh(smoothing.value * test_softplus)
-            plt.scatter([test_input.value], [test_output], 
-                       color='orange', s=100, 
+            plt.scatter([test_input.value], [test_output],
+                       color='orange', s=100,
                        label=f'Test point: f({test_input.value:.2f}) = {test_output:.2f}')
 
         plt.grid(True, alpha=0.3)
@@ -210,7 +210,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the Mish activation function interactively. You've learned:
 
                 - How Mish combines softplus and tanh
