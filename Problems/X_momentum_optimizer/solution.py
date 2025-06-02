@@ -15,6 +15,9 @@ def momentum_optimizer(parameter, grad, velocity, learning_rate=0.01, momentum=0
     Returns:
         tuple: (updated_parameter, updated_velocity)
     """
+    assert learning_rate > 0, "Learning rate must be positive"
+    assert 0 <= momentum < 1, "Momentum must be between 0 and 1"
+
     # Update velocity
     velocity = momentum * velocity + learning_rate * grad
     
