@@ -15,6 +15,10 @@ def adagrad_optimizer(parameter, grad, G, learning_rate=0.01, epsilon=1e-8):
     Returns:
         tuple: (updated_parameter, updated_G)
     """
+    assert learning_rate > 0, "Learning rate must be positive"
+    assert epsilon > 0, "Epsilon must be positive"
+    assert all(G >= 0) if isinstance(G, np.ndarray) else G >= 0, "G must be non-negative"
+
     # Update accumulated squared gradients
     G = G + grad**2
 
