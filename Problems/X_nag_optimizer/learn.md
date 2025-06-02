@@ -26,6 +26,12 @@ Where:
 
 The key difference from classical momentum is that the gradient is evaluated at $\theta_{lookahead, t-1}$ instead of $\theta_{t-1}$
 
+Read more at:
+
+1. Nesterov, Y. (1983). A method for solving the convex programming problem with convergence rate O(1/k²). Doklady Akademii Nauk SSSR, 269(3), 543-547.
+2. Ruder, S. (2017). An overview of gradient descent optimization algorithms. [arXiv:1609.04747](https://arxiv.org/pdf/1609.04747)
+
+
 ## Problem Statement
 Implement the Nesterov Accelerated Gradient optimizer update step function. Your function should take the current parameter value, gradient function, and velocity as inputs, and return the updated parameter value and new velocity.
 
