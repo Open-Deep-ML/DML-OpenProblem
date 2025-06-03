@@ -3,24 +3,24 @@ import numpy as np
 def linear_regression_gradient_descent(X: np.ndarray, y: np.ndarray, alpha: float, iterations: int) -> np.ndarray:
     # Number of training examples and features
     m, n = X.shape
-    
+
     # Initialize the coefficients (weights) to zeros
     theta = np.zeros((n, 1))
-    
+
     # Perform gradient descent for a given number of iterations
     for _ in range(iterations):
         # Compute the predictions
         predictions = X @ theta
-        
+
         # Calculate the error (difference between predictions and actual values)
         errors = predictions - y.reshape(-1, 1)
-        
+
         # Calculate the updates for the coefficients
         updates = X.T @ errors / m
-        
+
         # Update the coefficients
         theta -= alpha * updates
-    
+
     # Round the coefficients to four decimal places and return as a 1D array
     return np.round(theta.flatten(), 4)
 

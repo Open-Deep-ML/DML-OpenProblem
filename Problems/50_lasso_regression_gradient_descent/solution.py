@@ -36,7 +36,7 @@ def test_l1_regularization_gradient_descent():
     y = np.array([1, 2, 3, 4, 5])
     alpha = 0.1
     expected_weights = np.array([0.27, 0.68])
-    expected_bias = 0.4 
+    expected_bias = 0.4
     weights, bias = l1_regularization_gradient_descent(X, y, alpha=alpha, learning_rate=0.01, max_iter=1000)
     assert np.allclose(weights, expected_weights, atol=0.01), "Test case 2 failed"
     assert np.isclose(bias, expected_bias, atol=0.01), "Test case 2 failed"

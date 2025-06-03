@@ -166,9 +166,9 @@ def _(mo, np, plt, steepness, test_input, x_range):
         plt.figure(figsize=(12, 7))
 
         # Plot main sigmoid curve
-        plt.plot(x, y, 
-                label=f'Sigmoid (β = {steepness.value:.2f})', 
-                color='blue', 
+        plt.plot(x, y,
+                label=f'Sigmoid (β = {steepness.value:.2f})',
+                color='blue',
                 linewidth=2)
 
         # Plot horizontal asymptotes
@@ -181,8 +181,8 @@ def _(mo, np, plt, steepness, test_input, x_range):
         # Plot test point if within range
         if x_range.value[0] <= test_input.value <= x_range.value[1]:
             test_output = 1 / (1 + np.exp(-steepness.value * test_input.value))
-            plt.scatter([test_input.value], [test_output], 
-                       color='green', s=100, 
+            plt.scatter([test_input.value], [test_output],
+                       color='green', s=100,
                        label=f'Test point: σ({test_input.value:.2f}) = {test_output:.4f}')
 
         plt.grid(True, alpha=0.3)
@@ -228,7 +228,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the Sigmoid function interactively. You've learned:
 
                 - How Sigmoid squashes any input to a value between 0 and 1

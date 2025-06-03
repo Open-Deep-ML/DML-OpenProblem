@@ -4,7 +4,7 @@ def get_random_subsets(X, y, n_subsets, replacements=True, seed=42):
     np.random.seed(seed)
 
     n, m = X.shape
-    
+
     subset_size = n if replacements else n // 2
     idx = np.array([np.random.choice(n, subset_size, replace=replacements) for _ in range(n_subsets)])
     # convert all ndarrays to lists
@@ -18,7 +18,7 @@ def test_get_random_subsets():
     expected_output = [([[3, 4], [9, 10]], [2, 5]), ([[7, 8], [3, 4]], [4, 2]), ([[3, 4], [1, 2]], [2, 1])]
     assert get_random_subsets(X, y, 3, False, seed=42) == expected_output, "Test case 1 failed"
 
-    
+
     # Test case 2
     X = np.array([[1, 1], [2, 2], [3, 3], [4, 4]])
     y = np.array([10, 20, 30, 40])

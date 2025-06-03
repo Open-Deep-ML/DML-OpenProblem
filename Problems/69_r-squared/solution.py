@@ -3,23 +3,23 @@ import numpy as np
 def r_squared(y_true, y_pred):
     """
     Calculate the R-squared (R²) coefficient of determination.
-    
+
     Args:
         y_true (numpy.ndarray): Array of true values
         y_pred (numpy.ndarray): Array of predicted values
-    
+
     Returns:
         float: R-squared value rounded to 3 decimal places
     """
     if np.array_equal(y_true, y_pred):
         return 1.0
-    
+
     # Calculate mean of true values
     y_mean = np.mean(y_true)
-    
+
     # Calculate Sum of Squared Residuals (SSR)
     ssr = np.sum((y_true - y_pred) ** 2)
-    
+
     # Calculate Total Sum of Squares (SST)
     sst = np.sum((y_true - y_mean) ** 2)
 
@@ -57,7 +57,7 @@ def test_r_squared():
     y_pred = np.array([3, 3, 3, 3, 3])
     expected_output = 0.000
     assert r_squared(y_true, y_pred) == expected_output, "Test case 4 failed"
-    
+
     # Test case 5
     y_true = np.array([3, 3, 3, 3, 3])
     y_pred = np.array([1, 2, 3, 4, 5])
@@ -70,12 +70,12 @@ def test_r_squared():
     expected_output = -3.000
     assert r_squared(y_true, y_pred) == expected_output, "Test case 6 failed"
 
-    # Test case 7: All zeros 
+    # Test case 7: All zeros
     y_true = np.array([0, 0, 0, 0, 0])
     y_pred = np.array([0, 0, 0, 0, 0])
     expected_output = 1.000
     assert r_squared(y_true, y_pred) == expected_output, "Test case 7 failed"
-    
+
     # Test case 8 : output = -inf
     y_true = np.array([-2, -2, -2])
     y_pred = np.array([-2, -2, -2 + 1e-8])

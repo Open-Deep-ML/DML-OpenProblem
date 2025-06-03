@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as np
 
 
 def svd_2x2_singular_values(A: np.ndarray) -> tuple:
@@ -16,7 +16,7 @@ def svd_2x2_singular_values(A: np.ndarray) -> tuple:
            theta = np.pi/4
        else:
            theta = 0.5 * np.arctan2(2 * a_2[0,1], a_2[0,0] - a_2[1,1])
-       
+
        # Create rotation matrix
        r = np.array(
            [
@@ -24,7 +24,7 @@ def svd_2x2_singular_values(A: np.ndarray) -> tuple:
                [np.sin(theta), np.cos(theta)]
                ]
            )
-       
+
        # apply rotation
        d = np.transpose(r) @ a_2 @ r
 
@@ -37,7 +37,7 @@ def svd_2x2_singular_values(A: np.ndarray) -> tuple:
    # sigma is the diagonal elements squared
    s = np.sqrt([d[0,0], d[1,1]])
    s_inv = np.array([[1/s[0], 0], [0, 1/s[1]]])
-   
+
    u = a @ v @ s_inv
-   
+
    return (u, s, v.T)

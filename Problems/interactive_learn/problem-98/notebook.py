@@ -31,7 +31,7 @@ def _(mo):
     For an input $z$, the PReLU function with learnable parameter $\alpha$ is defined as:
 
     \[
-    \text{PReLU}(z) = \begin{cases} 
+    \text{PReLU}(z) = \begin{cases}
     z & \text{if } z > 0 \\
     \alpha z & \text{if } z \leq 0
     \end{cases}
@@ -124,7 +124,7 @@ def _(alpha, mo):
             With learnable parameter $\\alpha = {alpha.value:.3f}$, the current PReLU function is:
 
             \\[
-            f(z) = \\begin{{cases}} 
+            f(z) = \\begin{{cases}}
             z & \\text{{if }} z > 0 \\\\
             {alpha.value:.3f}z & \\text{{if }} z \\leq 0
             \\end{{cases}}
@@ -159,23 +159,23 @@ def _(alpha, mo, np, plt, test_input, x_range):
 
         # Plot -ve region
         mask_neg = x <= 0
-        plt.plot(x[mask_neg], y[mask_neg], 
-                label=f'Negative region (learned slope = {alpha.value:.3f})', 
-                color='purple', 
+        plt.plot(x[mask_neg], y[mask_neg],
+                label=f'Negative region (learned slope = {alpha.value:.3f})',
+                color='purple',
                 linewidth=2)
 
         # Plot +ve region
         mask_pos = x > 0
-        plt.plot(x[mask_pos], y[mask_pos], 
-                label='Positive region (slope = 1.0)', 
-                color='green', 
+        plt.plot(x[mask_pos], y[mask_pos],
+                label='Positive region (slope = 1.0)',
+                color='green',
                 linewidth=2)
 
         # Plot test point if within range (modify x range slider accordingly)
         if x_range.value[0] <= test_input.value <= x_range.value[1]:
             test_output = test_input.value if test_input.value > 0 else alpha.value * test_input.value
-            plt.scatter([test_input.value], [test_output], 
-                       color='orange', s=100, 
+            plt.scatter([test_input.value], [test_output],
+                       color='orange', s=100,
                        label=f'Test point: f({test_input.value:.2f}) = {test_output:.2f}')
 
         plt.grid(True, alpha=0.3)
@@ -219,7 +219,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the PReLU activation function interactively. You've learned:
 
                 - How PReLU differs from Leaky ReLU through learnable parameters

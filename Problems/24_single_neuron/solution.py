@@ -6,10 +6,10 @@ def single_neuron_model(features, labels, weights, bias):
         z = sum(weight * feature for weight, feature in zip(weights, feature_vector)) + bias
         prob = 1 / (1 + math.exp(-z))
         probabilities.append(round(prob, 4))
-    
+
     mse = sum((prob - label) ** 2 for prob, label in zip(probabilities, labels)) / len(labels)
     mse = round(mse, 4)
-    
+
     return probabilities, mse
 
 def test_single_neuron_model():
@@ -20,7 +20,7 @@ def test_single_neuron_model():
     bias = -0.1
     expected_output = ([0.4626, 0.4134, 0.6682], 0.3349)
     assert single_neuron_model(features, labels, weights, bias) == expected_output, "Test case 1 failed"
-    
+
     # Test case 2
     features = [[1, 2], [2, 3], [3, 1]]
     labels = [1, 0, 1]

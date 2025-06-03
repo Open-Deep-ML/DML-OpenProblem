@@ -64,11 +64,11 @@ def _(mo):
     _callout = mo.callout(
         mo.md("""
             Adjust to see how temperature affects the 'sharpness' of the distribution.
-            
+
             **Observe how:**
-        
+
             - Higher temperature makes all probabilities more similar
-        
+
             - Lower temperature amplifies differences between inputs
         """),
         kind="info"
@@ -128,7 +128,7 @@ def _(mo, temperature, vector_size):
             f"""
             ### Temperature-Scaled Softmax
 
-            With temperature parameter $\\tau = {temperature.value:.1f}$ and vector size $n = {vector_size.value}$, 
+            With temperature parameter $\\tau = {temperature.value:.1f}$ and vector size $n = {vector_size.value}$,
             the temperature-scaled Softmax is:
 
             \\[
@@ -205,8 +205,8 @@ def _(array_nums, mo, np, plt, temperature, vector_size, x_range):
 
         plt.figure(figsize=(12, 7))
         for i in range(vector_size.value):
-            plt.plot(x, softmax_values[i], 
-                     label=f'Class {i+1}', 
+            plt.plot(x, softmax_values[i],
+                     label=f'Class {i+1}',
                      linewidth=2)
 
         # Plot current input values
@@ -214,7 +214,7 @@ def _(array_nums, mo, np, plt, temperature, vector_size, x_range):
         if len(input_array) >= vector_size.value:
             exp_inputs = np.exp(input_array[:vector_size.value] / temperature.value)
             softmax_inputs = exp_inputs / np.sum(exp_inputs)
-            plt.scatter(input_array[:vector_size.value], 
+            plt.scatter(input_array[:vector_size.value],
                         softmax_inputs,
                         c='red',
                         s=100,
@@ -258,7 +258,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the Softmax function interactively. You've learned:
 
                 - How Softmax converts numbers to probabilities

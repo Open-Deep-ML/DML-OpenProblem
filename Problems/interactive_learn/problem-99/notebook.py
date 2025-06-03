@@ -133,24 +133,24 @@ def _(mo, np, plt, test_input, x_range):
         plt.figure(figsize=(12, 7))
 
         # Plot Softplus
-        plt.plot(x, y_softplus, 
-                label='Softplus', 
-                color='blue', 
+        plt.plot(x, y_softplus,
+                label='Softplus',
+                color='blue',
                 linewidth=2)
 
         # Plot ReLU for comparison (to see the smooth approximation)
-        plt.plot(x, y_relu, 
-                label='ReLU (for comparison)', 
-                color='red', 
-                linestyle='--', 
+        plt.plot(x, y_relu,
+                label='ReLU (for comparison)',
+                color='red',
+                linestyle='--',
                 alpha=0.5,
                 linewidth=2)
 
         # Plot test point if within range (adjust slider value accordingly)
         if x_range.value[0] <= test_input.value <= x_range.value[1]:
             test_output = np.log1p(np.exp(test_input.value))
-            plt.scatter([test_input.value], [test_output], 
-                       color='green', s=100, 
+            plt.scatter([test_input.value], [test_output],
+                       color='green', s=100,
                        label=f'Test point: f({test_input.value:.2f}) = {test_output:.2f}')
 
         plt.grid(True, alpha=0.3)
@@ -194,7 +194,7 @@ def _(mo):
     conclusion = mo.vstack([
         mo.callout(
             mo.md("""
-                **Congratulations!** 
+                **Congratulations!**
                 You've explored the Softplus activation function interactively. You've learned:
 
                 - How Softplus smoothly approximates ReLU

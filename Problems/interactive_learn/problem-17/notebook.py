@@ -444,7 +444,7 @@ def _(mo):
         """
         **Congratulations!**
 
-        You've successfully explored the k-Means clustering algorithm through this what we hope was an interactive experience. 
+        You've successfully explored the k-Means clustering algorithm through this what we hope was an interactive experience.
 
         **Next Steps:**
 

@@ -23,7 +23,7 @@ def calculate_matrix_mean(
             for r in range(rows):
                 mean += matrix[r][c]
             mean /= rows
-            means.append(mean) 
+            means.append(mean)
     #Return
     return means
 
