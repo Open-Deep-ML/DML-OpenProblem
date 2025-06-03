@@ -1,0 +1,5 @@
+.git
+.github
+example_problem
+Problems
+__pycache__
