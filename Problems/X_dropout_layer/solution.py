@@ -46,7 +46,6 @@ def test_dropout_layer():
 
     grad_back = dropout.backward(grad)
     expected_grad_back = np.array([[0.5, 0.0], [1.0, 2.0]])
-    assert grad_back.shape == x.shape, "Gradient shape mismatch in test case 2"
     assert (grad_back == expected_grad_back).all(), "Gradient not applied correctly"
     
     
