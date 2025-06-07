@@ -237,7 +237,7 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    mo.md(f"""
+    mo.md("""
     This interactive learning experience was designed to help you understand the Softsign activation function. Hope this helps in your deep learning journey!
     """)
     return

@@ -17,7 +17,8 @@ def pegasos_kernel_svm(data, labels, kernel='linear', lambda_val=0.01, iteration
             if kernel == 'linear':
                 kernel_func = linear_kernel
             elif kernel == 'rbf':
-                kernel_func = lambda x, y: rbf_kernel(x, y, sigma)
+                def kernel_func(x, y):
+                    return rbf_kernel(x, y, sigma)
     
             decision = sum(alphas[j] * labels[j] * kernel_func(data[j], data[i]) for j in range(n_samples)) + b
             if labels[i] * decision < 1:

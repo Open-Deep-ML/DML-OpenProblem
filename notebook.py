@@ -161,7 +161,7 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
                 else:
                     coeffs = (0, 0)  # Default no slope
                     x_range = np.array([min(data[0]), max(data[0])]) if len(data[0]) > 0 else np.array([0, 1])
-            except Exception as trend_error:
+            except Exception:
                 coeffs = (0, 0)  # Default fallback
                 x_range = np.array([0, 1])
                 

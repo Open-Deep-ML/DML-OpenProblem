@@ -160,7 +160,7 @@ def _(alpha, mo, np, plt, test_input, x_range):
         # Plot -ve region
         mask_neg = x <= 0
         plt.plot(x[mask_neg], y[mask_neg], 
-                label=f'Negative region (exponential decay)', 
+                label='Negative region (exponential decay)', 
                 color='red', 
                 linewidth=2)
 
@@ -251,7 +251,7 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    mo.md(f"""
+    mo.md("""
     This interactive learning experience was designed to help you understand the ELU activation function. Hope this helps in your deep learning journey!
     """)
     return

@@ -239,11 +239,11 @@ def _(
         results = predictions
 
     results_display = mo.vstack([
-        mo.md(f"### Results"),
+        mo.md("### Results"),
         mo.md(f"**Predictions:** {results}"),
         mo.md(f"**Mean Squared Error:** {mse}"),
         mo.accordion({
-            "🔍 Understanding the Results": mo.md(f"""
+            "🔍 Understanding the Results": mo.md("""
             - Predictions close to 0 indicate class 0
             - Predictions close to 1 indicate class 1
             - Lower MSE means better model performance

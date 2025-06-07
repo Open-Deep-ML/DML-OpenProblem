@@ -49,7 +49,6 @@ def test_r_squared():
     y_true = np.array([1, 2, 3, 4, 5])
     y_pred = np.array([2, 1, 4, 3, 5])
     expected_output = 0.600
-    output = r_squared(y_true, y_pred)
     assert r_squared(y_true, y_pred) == expected_output, "Test case 3 failed"
 
     # Test case 4: Worst possible prediction (predicting mean)

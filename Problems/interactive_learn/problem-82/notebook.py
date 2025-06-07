@@ -323,7 +323,7 @@ def _(display):
 
 @app.cell
 def _(mo):
-    conclusion = mo.md(f"""
+    conclusion = mo.md("""
         **Congratulations!** 
         You've explored the Grayscale Image Contrast Calculator interactively. 
 

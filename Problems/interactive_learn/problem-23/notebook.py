@@ -290,7 +290,7 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    mo.md(f"""
+    mo.md("""
     This interactive learning experience was designed to help you understand the Softmax activation function. Hope this resource proves valuable in your exploration of this important topic.
     """)
     return
