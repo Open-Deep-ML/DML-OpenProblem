@@ -167,8 +167,6 @@ def _(np):
         Returns:
             float: Ridge loss value
         """
-        n_samples = X.shape[0]
-
         # Check dimension compatibility
         if X.shape[1] != len(w):
             raise ValueError(f"Coefficient count ({len(w)}) must match feature count ({X.shape[1]})")
