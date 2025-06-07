@@ -9,8 +9,6 @@ def solve_jacobi(A: np.ndarray, b: np.ndarray, n: int) -> list:
         x = 1/A_diag_vec*(b-(A@x-A_diag_vec*x))
     return x
 
-import numpy as np
-
 def test_solve_jacobi() -> None:
     def lists_are_close(list1, list2, tol=1e-4):
         """Helper function to check if two lists are element-wise close."""

@@ -19,7 +19,7 @@ app = marimo.App(css_file="/Users/adityakhalkar/Library/Application Support/mthe
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(
-        f"""# Understanding K-means Clustering
+        """# Understanding K-means Clustering
 
         ## Overview
         K-means clustering is an [unsupervised learning algorithm](https://en.wikipedia.org/wiki/Unsupervised_learning) that partitions data into k distinct clusters. Each cluster is characterized by its centroid - the mean position of all points in that cluster.
@@ -66,7 +66,7 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(f"""
+    mo.md("""
     ## Implementation Details
 
     This implementation uses:

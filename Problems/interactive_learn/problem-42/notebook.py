@@ -104,16 +104,16 @@ def _(mo):
 def _(mo):
     formula_display = mo.vstack([
         mo.md(
-            f"""
+            """
             ### Current ReLU Configuration
 
             The ReLU function is defined as:
 
             \[
-            f(z) = \max(0, z) = \\begin{{cases}} 
-            z & \\text{{if }} z > 0 \\\\
-            0 & \\text{{if }} z \\leq 0
-            \\end{{cases}}
+            f(z) = \max(0, z) = \\begin{cases} 
+            z & \\text{if } z > 0 \\\\
+            0 & \\text{if } z \\leq 0
+            \\end{cases}
             \]
 
             - For positive inputs: output = input
@@ -236,7 +236,7 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    mo.md(f"""
+    mo.md("""
     This interactive learning experience was designed to help you understand the ReLU activation function. Hope this helps in your deep learning journey!
     """)
     return

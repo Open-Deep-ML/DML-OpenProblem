@@ -2,7 +2,8 @@ import numpy as np
 
 def pos_encoding(position:int, dmodel:int):
     
-    if position == 0 or dmodel == 0: return -1
+    if position == 0 or dmodel == 0:
+        return -1
 
     pos = np.array(np.arange(position), np.float16)
     ind = np.array(np.arange(dmodel), np.float16)

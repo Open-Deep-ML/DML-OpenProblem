@@ -12,7 +12,6 @@ def pca(data, k):
     
     # Sort the eigenvectors by decreasing eigenvalues
     idx = np.argsort(eigenvalues)[::-1]
-    eigenvalues_sorted = eigenvalues[idx]
     eigenvectors_sorted = eigenvectors[:, idx]
     
     # Select the top k eigenvectors (principal components)

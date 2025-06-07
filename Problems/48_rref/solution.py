@@ -8,7 +8,8 @@ def rref(matrix):
     for i in range(n):
         if A[i, i] == 0:
             nonzero_rel_id = np.nonzero(A[i:, i])[0]
-            if len(nonzero_rel_id) == 0: continue
+            if len(nonzero_rel_id) == 0:
+                continue
             
             A[i] = A[i] + A[nonzero_rel_id[0] + i]
 

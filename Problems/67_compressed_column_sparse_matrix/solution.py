@@ -1,5 +1,3 @@
-import numpy as np
-from scipy.sparse import csc_matrix
 
 def compressed_col_sparse_matrix(dense_matrix: list[list[float]]) -> tuple[list[float], list[int], list[int]]:
 
@@ -65,5 +63,5 @@ def test_compressed_col():
     assert col_ptr == [0, 1, 3, 4, 5, 6], "Test case failed: col_ptr should be [0, 1, 3, 4, 5, 6]"
 
 if __name__ == "__main__":
-    test_compressed_row()
+    test_compressed_col()
     print("All Compressed Column Tests passed.")

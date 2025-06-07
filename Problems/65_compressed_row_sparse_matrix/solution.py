@@ -1,5 +1,3 @@
-import numpy as np
-from scipy.sparse import csr_matrix
 
 def compressed_row_sparse_matrix(dense_matrix: list[list[float]]) -> tuple[list[float], list[int], list[int]]:
 
