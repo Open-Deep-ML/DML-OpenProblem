@@ -1,0 +1,5 @@
+{
+  "input": "X.shape = (2, 2, 2, 2), gamma = [1, 1], beta = [0, 0], num_groups = 2",
+  "output": "Normalized tensor where each group is independently normalized and scaled by gamma and shifted by beta.",
+  "reasoning": "First split the channels into groups, compute mean and variance per group, normalize within the group, then scale and shift with gamma and beta."
+}

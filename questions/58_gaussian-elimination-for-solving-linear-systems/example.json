@@ -1,0 +1,5 @@
+{
+  "input": "A = np.array([[2,8,4], [2,5,1], [4,10,-1]], dtype=float)\nb = np.array([2,5,1], dtype=float)\n\nprint(gaussian_elimination(A, b))",
+  "output": "[11.0, -4.0, 3.0]",
+  "reasoning": "The Gaussian Elimination method transforms the system of equations into an upper triangular matrix and then uses backward substitution to solve for the variables."
+}

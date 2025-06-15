@@ -1,0 +1,5 @@
+{
+  "input": "k = 3, lam = 5",
+  "output": "0.14037",
+  "reasoning": "The function calculates the probability for a given number of events occurring in a fixed interval, based on the mean rate of occurrences."
+}

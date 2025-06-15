@@ -1,0 +1,5 @@
+{
+  "input": "y_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([1, 0, 1, 0, 0, 1])\nprint(jaccard_index(y_true, y_pred))",
+  "output": "0.75",
+  "reasoning": "The Jaccard Index is calculated as 3 / 4 = 0.75, indicating a 75% overlap between the true and predicted labels."
+}

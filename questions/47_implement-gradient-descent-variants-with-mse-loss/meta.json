@@ -1,0 +1,17 @@
+{
+  "id": "47",
+  "title": "Implement Gradient Descent Variants with MSE Loss",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

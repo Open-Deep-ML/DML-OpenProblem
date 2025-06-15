@@ -1,0 +1,5 @@
+{
+  "input": "softplus(2)",
+  "output": "2.1269",
+  "reasoning": "For x = 2, the Softplus activation is calculated as $\\log(1 + e^x)$."
+}

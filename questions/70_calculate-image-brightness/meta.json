@@ -1,0 +1,17 @@
+{
+  "id": "70",
+  "title": "Calculate Image Brightness",
+  "difficulty": "easy",
+  "category": "Computer Vision",
+  "video": "",
+  "likes": 0,
+  "dislikes": 0,
+  "contributor": [
+    {
+      "profile_link": "https://github.com/NiharP31",
+      "name": "NiharP31"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

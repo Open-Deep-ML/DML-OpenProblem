@@ -1,0 +1,5 @@
+{
+  "input": "prelu(-2.0, alpha=0.25)",
+  "output": "-0.5",
+  "reasoning": "For x = -2.0 and alpha = 0.25, the PReLU activation is calculated as $PReLU(x) = \\alpha x = 0.25 \\times -2.0 = -0.5$."
+}

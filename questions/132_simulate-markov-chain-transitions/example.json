@@ -1,0 +1,5 @@
+{
+  "input": "transition_matrix = np.array([[0.8, 0.2], [0.3, 0.7]]); print(simulate_markov_chain(transition_matrix, 0, 3))",
+  "output": "[0 0 1 1]",
+  "reasoning": "The solution simulates a Markov chain by starting with the initial state (0) and iteratively selecting the next state based on the probabilities in the transition matrix. For the given input, this process generates the sequence [0, 0, 1, 1] over three steps, where the first state is the initial one, and subsequent states are chosen such that from state 0, it stays at 0, then transitions to 1, and remains at 1."
+}

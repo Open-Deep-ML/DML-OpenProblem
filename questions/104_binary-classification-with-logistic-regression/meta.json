@@ -1,0 +1,17 @@
+{
+  "id": "104",
+  "title": "Binary Classification with Logistic Regression",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/emharsha1812",
+      "name": "emharsha1812"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

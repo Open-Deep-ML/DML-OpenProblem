@@ -1,0 +1,5 @@
+{
+  "input": "masked_attention(Q, K, V, mask)",
+  "output": "[[547. 490. 399. 495. 485. 439. 645. 393.]\n [547. 490. 399. 495. 485. 439. 645. 393.]\n [471. 472. 429. 538. 377. 450. 531. 362.]\n [471. 472. 429. 538. 377. 450. 531. 362.]\n [471. 472. 429. 538. 377. 450. 531. 362.]\n [471. 472. 429. 538. 377. 450. 531. 362.]]",
+  "reasoning": "The function computes self-attention by applying a mask to restrict information flow, ensuring causal dependencies are maintained."
+}

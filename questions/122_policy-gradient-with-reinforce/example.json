@@ -1,0 +1,5 @@
+{
+  "input": "theta = np.zeros((2,2)); episodes = [[(0,1,0), (1,0,1)], [(0,0,0)]]",
+  "output": "[[-0.25, 0.25], [0.25, -0.25]]",
+  "reasoning": "Episode 1 contributes a positive gradient from reward 1 at t=1; episode 2 adds zero. Result is averaged across episodes."
+}

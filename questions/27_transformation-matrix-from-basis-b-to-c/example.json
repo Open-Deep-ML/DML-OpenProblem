@@ -1,0 +1,5 @@
+{
+  "input": "B = [[1, 0, 0], \n             [0, 1, 0], \n             [0, 0, 1]]\n        C = [[1, 2.3, 3], \n             [4.4, 25, 6], \n             [7.4, 8, 9]]",
+  "output": "[[-0.6772, -0.0126, 0.2342],\n                [-0.0184, 0.0505, -0.0275],\n                [0.5732, -0.0345, -0.0569]]",
+  "reasoning": "The transformation matrix P from basis B to C can be found using matrix operations involving the inverse of matrix C."
+}

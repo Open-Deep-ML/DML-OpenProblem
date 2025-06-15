@@ -1,0 +1,1 @@
+Implement the Swish activation function, a self-gated activation function that has shown superior performance in deep neural networks compared to ReLU. Your task is to compute the Swish value for a given input.

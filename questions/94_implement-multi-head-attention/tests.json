@@ -1,0 +1,14 @@
+[
+  {
+    "test": "m, n = 4, 4\nn_heads = 2\nnp.random.seed(42)\nX = np.arange(m*n).reshape(m,n)\nX = np.random.permutation(X.flatten()).reshape(m, n)\nW_q = np.random.randint(0,4,size=(n,n))\nW_k = np.random.randint(0,5,size=(n,n))\nW_v = np.random.randint(0,6,size=(n,n))\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\nprint(multi_head_attention(Q, K, V, n_heads))",
+    "expected_output": "np.array([[103, 109, 46, 99],\n                                [103, 109, 46, 99],\n                                [103, 109, 46, 99],\n                                [103, 109, 46, 99]])"
+  },
+  {
+    "test": "m, n = 6, 8\nn_heads = 4\nnp.random.seed(42)\nX = np.arange(m*n).reshape(m,n)\nX = np.random.permutation(X.flatten()).reshape(m, n)\nW_q = np.random.randint(0,4,size=(n,n))\nW_k = np.random.randint(0,5,size=(n,n))\nW_v = np.random.randint(0,6,size=(n,n))\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\nprint(multi_head_attention(Q, K, V, n_heads))",
+    "expected_output": "[[500, 463, 399, 495, 377, 450, 531, 362],\n                                [500, 463, 399, 495, 377, 450, 531, 362],\n                                [500, 463, 399, 495, 377, 450, 531, 362],\n                                [500, 463, 399, 495, 377, 450, 531, 362],\n                                [500, 463, 399, 495, 377, 450, 531, 362],\n                                [500, 463, 399, 495, 377, 450, 531, 362]]"
+  },
+  {
+    "test": "m, n = 6, 8\nn_heads = 2\nnp.random.seed(42)\nX = np.arange(m*n).reshape(m,n)\nX = np.random.permutation(X.flatten()).reshape(m, n)\nW_q = np.random.randint(0,4,size=(n,n))\nW_k = np.random.randint(0,5,size=(n,n))\nW_v = np.random.randint(0,6,size=(n,n))\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\n\n# test multi-head attention\nactual_output = multi_head_attention(Q, K, V, n_heads)\nprint(actual_output)",
+    "expected_output": "[[547, 490, 399, 495, 377, 450, 531, 362],\n                                [547, 490, 399, 495, 377, 450, 531, 362],\n                                [547, 490, 399, 495, 377, 450, 531, 362],\n                                [547, 490, 399, 495, 377, 450, 531, 362],\n                                [547, 490, 399, 495, 377, 450, 531, 362],\n                                [547, 490, 399, 495, 377, 450, 531, 362]]"
+  }
+]

@@ -1,0 +1,1 @@
+Implement a function that performs Min-Max Normalization on a list of integers, scaling all values to the range [0, 1]. Min-Max normalization helps ensure that all features contribute equally to a model by scaling them to a common range.

@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(round(selu(1.0), 4))",
+    "expected_output": "1.0507"
+  },
+  {
+    "test": "print(round(selu(0.0), 4))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(round(selu(-1.0), 4))",
+    "expected_output": "-1.1113"
+  },
+  {
+    "test": "print(round(selu(5.0), 4))",
+    "expected_output": "5.2535"
+  },
+  {
+    "test": "print(round(selu(-5.0), 4))",
+    "expected_output": "-1.7463"
+  }
+]

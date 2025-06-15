@@ -1,0 +1,17 @@
+{
+  "id": "120",
+  "title": "Bhattacharyya Distance Between Two Distributions",
+  "difficulty": "easy",
+  "category": "Statistics",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Arudhra1999",
+      "name": "Arudhra1999"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

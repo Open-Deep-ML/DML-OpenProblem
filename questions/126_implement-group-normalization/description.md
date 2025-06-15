@@ -1,0 +1,1 @@
+Write a Python function to perform Group Normalization on a 4D input tensor with shape (B, C, H, W). The function should normalize over smaller groups of channels, then apply a learned scale (gamma) and shift (beta).

@@ -1,0 +1,1 @@
+Implement a gradient descent-based training algorithm for logistic regression. Your task is to compute model parameters using Binary Cross Entropy loss and return the optimized coefficients along with collected loss values over iterations(round to the 4th decimal).

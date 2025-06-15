@@ -1,0 +1,17 @@
+{
+  "id": "63",
+  "title": "Implement the Conjugate Gradient Method for Solving Linear Systems",
+  "difficulty": "hard",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/paddywardle",
+      "name": "paddywardle"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

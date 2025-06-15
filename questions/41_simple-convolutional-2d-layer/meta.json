@@ -1,0 +1,17 @@
+{
+  "id": "41",
+  "title": "Simple Convolutional 2D Layer",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/drogovozDP",
+      "name": "Drogovoz Dima"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

@@ -1,0 +1,6 @@
+[
+  {
+    "test": "\ndense_layer = Dense(n_units=3, input_shape=(2,))\n\nclass MockOptimizer:\n    def update(self, weights, grad):\n        return weights - 0.01 * grad\n\noptimizer = MockOptimizer()\ndense_layer.initialize(optimizer)\n\nX = np.array([[1, 2]])\noutput = dense_layer.forward_pass(X)\n\naccum_grad = np.array([[0.1, 0.2, 0.3]])\nback_output = dense_layer.backward_pass(accum_grad)\nprint(back_output)",
+    "expected_output": "[[ 0.20816524, -0.22928937]]"
+  }
+]

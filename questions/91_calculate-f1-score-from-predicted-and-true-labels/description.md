@@ -1,0 +1,1 @@
+Implement a function to calculate the F1 score given predicted and true labels. The F1 score is a widely used metric in machine learning, combining precision and recall into a single measure. round your solution to the 3rd decimal place

@@ -1,0 +1,5 @@
+{
+  "input": "train_logreg(np.array([[1.0, 0.5], [-0.5, -1.5], [2.0, 1.5], [-2.0, -1.0]]), np.array([1, 0, 1, 0]), 0.01, 20)",
+  "output": "([0.0037, 0.0246, 0.0202], [2.7726, 2.7373, 2.7024, 2.6678, 2.6335, 2.5995, 2.5659, 2.5327, 2.4997, 2.4671, 2.4348, 2.4029, 2.3712, 2.3399, 2.3089, 2.2783, 2.2480, 2.2180, 2.1882, 2.1588])",
+  "reasoning": "The function iteratively updates the logistic regression parameters using gradient descent and collects loss values over iterations."
+}

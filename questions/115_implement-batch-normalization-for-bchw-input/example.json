@@ -1,0 +1,5 @@
+{
+  "input": "B, C, H, W = 2, 2, 2, 2; np.random.seed(42); X = np.random.randn(B, C, H, W); gamma = np.ones(C).reshape(1, C, 1, 1); beta = np.zeros(C).reshape(1, C, 1, 1)",
+  "output": "[[[[ 0.42859934, -0.51776438], [ 0.65360963,  1.95820707]], [[ 0.02353721,  0.02355215], [ 1.67355207,  0.93490043]]], [[[-1.01139563,  0.49692747], [-1.00236882, -1.00581468]], [[ 0.45676349, -1.50433085], [-1.33293647, -0.27503802]]]]",
+  "reasoning": "The input X is a 2x2x2x2 array. For each channel, compute the mean and variance across the batch (B), height (H), and width (W) dimensions. Normalize X using (X - mean) / sqrt(variance + epsilon), then scale by gamma and shift by beta. The output matches the expected normalized values."
+}

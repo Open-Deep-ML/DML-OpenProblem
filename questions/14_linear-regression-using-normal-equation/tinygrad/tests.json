@@ -1,0 +1,10 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = linear_regression_normal_equation_tg(\n    [[1.0,0.0],[0.0,1.0]],\n    [5.0,3.0]\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[5.0, 3.0]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = linear_regression_normal_equation_tg(\n    [[1.0,1.0],[1.0,2.0],[1.0,3.0]],\n    [1.0,2.0,3.0]\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[0.0, 1.0]"
+  }
+]

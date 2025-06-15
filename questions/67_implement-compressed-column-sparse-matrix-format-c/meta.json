@@ -1,0 +1,17 @@
+{
+  "id": "67",
+  "title": "Implement Compressed Column Sparse Matrix Format (CSC)",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/paddywardle",
+      "name": "paddywardle"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

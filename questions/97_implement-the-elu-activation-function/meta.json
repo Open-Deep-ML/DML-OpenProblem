@@ -1,0 +1,18 @@
+{
+  "id": "97",
+  "title": "Implement the ELU Activation Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Haleshot",
+      "name": "Haleshot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "marimo_link": "https://open-deep-ml.github.io/deepml-notebooks/97/"
+}

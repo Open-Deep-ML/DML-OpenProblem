@@ -1,0 +1,17 @@
+{
+  "id": "115",
+  "title": "Implement Batch Normalization for BCHW Input",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/nzomi",
+      "name": "nzomi"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

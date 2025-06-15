@@ -1,0 +1,17 @@
+{
+  "id": "126",
+  "title": "Implement Group Normalization",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/nzomi",
+      "name": "nzomi"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

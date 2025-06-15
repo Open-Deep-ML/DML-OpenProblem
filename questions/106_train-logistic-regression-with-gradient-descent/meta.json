@@ -1,0 +1,17 @@
+{
+  "id": "106",
+  "title": "Train Logistic Regression with Gradient Descent",
+  "difficulty": "hard",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/turkunov",
+      "name": "turkunov"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

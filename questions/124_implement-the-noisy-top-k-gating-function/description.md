@@ -1,0 +1,1 @@
+Implement the Noisy Top-K gating mechanism used in Mixture-of-Experts (MoE) models. Given an input matrix, weight matrices, pre-sampled noise, and a sparsity constraint k, compute the final gating probabilities matrix.

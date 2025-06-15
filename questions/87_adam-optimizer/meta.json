@@ -1,0 +1,17 @@
+{
+  "id": "87",
+  "title": "Adam Optimizer",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/kapardhi03",
+      "name": "Kapardhi"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

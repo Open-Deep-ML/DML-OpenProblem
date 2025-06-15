@@ -1,0 +1,18 @@
+{
+  "id": "6",
+  "title": "Calculate Eigenvalues of a Matrix",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/AMCFzIaHc4Y",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": ""
+}

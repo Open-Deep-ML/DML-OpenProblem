@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(softmax([1, 2, 3]))",
+    "expected_output": "[0.09, 0.2447, 0.6652]"
+  },
+  {
+    "test": "print(softmax([1, 1, 1]))",
+    "expected_output": "[0.3333, 0.3333, 0.3333]"
+  },
+  {
+    "test": "print(softmax([-1, 0, 5]))",
+    "expected_output": "[0.0025, 0.0067, 0.9909]"
+  }
+]

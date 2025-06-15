@@ -1,0 +1,5 @@
+{
+  "input": "X = np.array([[0, 0], [1, 1], [2, 2]]); y = np.array([0, 1, 2])",
+  "output": "(array([0.37, 0.37]), 0.25)",
+  "reasoning": "The model learns a nearly perfect linear relationship with regularization controlling weight magnitude. The weights converge around 0.37 with a bias around 0.25."
+}

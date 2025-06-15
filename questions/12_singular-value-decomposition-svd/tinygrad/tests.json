@@ -1,0 +1,10 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nU, S, Vt = svd_2x2_singular_values_tg([[1.0, 0.0], [0.0, 1.0]])\nprint(U.numpy().tolist(), S.numpy().tolist(), Vt.numpy().tolist())",
+    "expected_output": "[[1.0, 0.0], [0.0, 1.0]] [1.0, 1.0] [[1.0, 0.0], [0.0, 1.0]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nU, S, Vt = svd_2x2_singular_values_tg([[2.0, 0.0], [0.0, 1.0]])\nprint(U.numpy().tolist(), S.numpy().tolist(), Vt.numpy().tolist())",
+    "expected_output": "[[1.0, 0.0], [0.0, 1.0]] [2.0, 1.0] [[1.0, 0.0], [0.0, 1.0]]"
+  }
+]

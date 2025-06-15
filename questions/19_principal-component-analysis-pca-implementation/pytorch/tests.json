@@ -1,0 +1,10 @@
+[
+  {
+    "test": "res = pca([[1.0,0.0],[0.0,1.0]], 2)\n# convert to Python list and round each value\nlst = res.tolist()\nrounded = [[round(val,4) for val in row] for row in lst]\nprint(rounded)",
+    "expected_output": "[[0.7071, 0.7071], [-0.7071, 0.7071]]"
+  },
+  {
+    "test": "res = pca([[1.0,1.0],[2.0,2.0],[3.0,3.0]], 1)\n# convert to Python list and round each value\nlst = res.tolist()\nrounded = [[round(val,4) for val in row] for row in lst]\nprint(rounded)",
+    "expected_output": "[[0.7071], [0.7071]]"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import torch\nres = calculate_eigenvalues(torch.tensor([[2.0,0.0],[0.0,3.0]]))\nprint(res.detach().numpy().tolist())",
+    "expected_output": "[2.0, 3.0]"
+  },
+  {
+    "test": "import torch\nres = calculate_eigenvalues(torch.tensor([[0.0,1.0],[1.0,0.0]]))\nprint(res.detach().numpy().tolist())",
+    "expected_output": "[-1.0, 1.0]"
+  },
+  {
+    "test": "import torch\nres = calculate_eigenvalues(torch.tensor([[4.0,2.0],[1.0,3.0]]))\nprint(res.detach().numpy().tolist())",
+    "expected_output": "[2.0, 5.0]"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "id": "82",
+  "title": "Grayscale Image Contrast Calculator",
+  "difficulty": "easy",
+  "category": "Computer Vision",
+  "video": "https://youtu.be/-IW2yzulQqI?si=gbdhQ5pRkwuDzaDB",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/rittik9",
+      "name": "rittik9"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-82"
+}

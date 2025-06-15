@@ -1,0 +1,1 @@
+Implement a function to perform Layer Normalization on an input tensor. Given a 3D array representing batch_size, sequence length, and feature dimensions, normalize the data across the feature dimension for each sequence, then apply scaling and shifting parameters.
