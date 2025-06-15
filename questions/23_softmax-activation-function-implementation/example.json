@@ -1,0 +1,5 @@
+{
+  "input": "scores = [1, 2, 3]",
+  "output": "[0.0900, 0.2447, 0.6652]",
+  "reasoning": "The softmax function converts a list of values into a probability distribution. The probabilities are proportional to the exponential of each element divided by the sum of the exponentials of all elements in the list."
+}

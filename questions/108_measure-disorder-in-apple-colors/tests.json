@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(disorder([0,0,0,0])<disorder([1,0,0,0]))",
+    "expected_output": "True"
+  },
+  {
+    "test": "print(disorder([0,0,0,0,0,1,2,3])<disorder([0,0,1,1,2,2,3,3]))",
+    "expected_output": "True"
+  },
+  {
+    "test": "print(disorder([1,1,0,0])<disorder([0,1,2,3]))",
+    "expected_output": "True"
+  }
+]

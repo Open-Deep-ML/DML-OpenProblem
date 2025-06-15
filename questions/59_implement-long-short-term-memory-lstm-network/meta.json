@@ -1,0 +1,17 @@
+{
+  "id": "59",
+  "title": "Implement Long Short-Term Memory (LSTM) Network",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Hui-cd",
+      "name": "Hui"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

@@ -1,0 +1,5 @@
+{
+  "input": "matrix = [[2, 1], [1, 2]]",
+  "output": "[3.0, 1.0]",
+  "reasoning": "The eigenvalues of the matrix are calculated using the characteristic equation of the matrix, which for a 2x2 matrix is $\\lambda^2 - \ttrace(A)\\lambda + \tdet(A) = 0$, where $\\lambda$ are the eigenvalues."
+}

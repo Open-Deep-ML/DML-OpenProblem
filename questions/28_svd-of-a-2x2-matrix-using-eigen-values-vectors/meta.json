@@ -1,0 +1,21 @@
+{
+  "id": "28",
+  "title": "SVD of a 2x2 Matrix using eigen values & vectors",
+  "difficulty": "hard",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/brentspell",
+      "name": "brentspell"
+    },
+    {
+      "profile_link": "https://github.com/EpsIotaPi",
+      "name": "EpsIotaPi"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

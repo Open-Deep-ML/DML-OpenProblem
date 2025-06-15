@@ -1,0 +1,14 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nprint(determinant_4x4_tg(Tensor(np.eye(4))).numpy().item())",
+    "expected_output": "1.0"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nprint(determinant_4x4_tg([[2.0,0,0,0],[0,3.0,0,0],[0,0,4.0,0],[0,0,0,5.0]]).numpy().item())",
+    "expected_output": "120.0"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nm = [[1.0,2.0,3.0,4.0],[1.0,2.0,3.0,4.0],[5.0,6.0,7.0,8.0],[9.0,10.0,11.0,12.0]]\nprint(determinant_4x4_tg(Tensor(m)).numpy().item())",
+    "expected_output": "0.0"
+  }
+]

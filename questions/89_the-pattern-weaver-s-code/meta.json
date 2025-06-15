@@ -1,0 +1,17 @@
+{
+  "id": "89",
+  "title": "The Pattern Weaver's Code",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://discord.gg/27N5vXdPW4",
+      "name": "GroundZero AI"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

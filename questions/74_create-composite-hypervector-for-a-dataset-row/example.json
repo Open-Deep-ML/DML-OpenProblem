@@ -1,0 +1,5 @@
+{
+  "input": "row = {\"FeatureA\": \"value1\", \"FeatureB\": \"value2\"}\ndim = 5\nrandom_seeds = {\"FeatureA\": 42, \"FeatureB\": 7}\nprint(create_row_hv(row, dim, random_seeds))",
+  "output": "[ 1, -1,  1,  1,  1]",
+  "reasoning": "The composite hypervector is created by binding hypervectors for each feature and bundling them together."
+}

@@ -1,0 +1,5 @@
+{
+  "input": "A = np.array([1, 2, 3])\nprint(log_softmax(A))",
+  "output": "array([-2.4076, -1.4076, -0.4076])",
+  "reasoning": "The log-softmax function is applied to the input array [1, 2, 3]. The output array contains the log-softmax values for each element."
+}

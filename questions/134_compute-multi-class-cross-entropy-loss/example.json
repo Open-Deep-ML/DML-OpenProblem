@@ -1,0 +1,5 @@
+{
+  "input": "predicted_probs = [[0.7, 0.2, 0.1], [0.3, 0.6, 0.1]]\ntrue_labels = [[1, 0, 0], [0, 1, 0]]",
+  "output": "0.4338",
+  "reasoning": "The predicted probabilities for the correct classes are 0.7 and 0.6. The cross-entropy is computed as -mean(log(0.7), log(0.6)), resulting in approximately 0.4463."
+}

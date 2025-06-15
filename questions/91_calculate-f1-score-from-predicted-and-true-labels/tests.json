@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(calculate_f1_score([1, 0, 1, 1, 0], [1, 0, 0, 1, 1]))",
+    "expected_output": "0.667"
+  },
+  {
+    "test": "print(calculate_f1_score([1, 1, 0, 0], [1, 0, 0, 1]))",
+    "expected_output": "0.5"
+  },
+  {
+    "test": "print(calculate_f1_score([0, 0, 0, 0], [1, 1, 1, 1]))",
+    "expected_output": "0.0"
+  }
+]

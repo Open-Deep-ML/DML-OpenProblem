@@ -1,0 +1,17 @@
+{
+  "id": "60",
+  "title": "Implement TF-IDF (Term Frequency-Inverse Document Frequency)",
+  "difficulty": "medium",
+  "category": "NLP",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Hui-cd",
+      "name": "Hui"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

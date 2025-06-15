@@ -1,0 +1,5 @@
+{
+  "input": "z = 0",
+  "output": "0.5",
+  "reasoning": "The sigmoid function is defined as σ(z) = 1 / (1 + exp(-z)). For z = 0, exp(-0) = 1, hence the output is 1 / (1 + 1) = 0.5."
+}

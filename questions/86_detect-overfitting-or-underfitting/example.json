@@ -1,0 +1,5 @@
+{
+  "input": "training_accuracy = 0.95, test_accuracy = 0.65",
+  "output": "'1'",
+  "reasoning": "The training accuracy is much higher than the test accuracy (difference = 0.30 > 0.2). This indicates that the model is overfitting to the training data and generalizes poorly to unseen data."
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(relu(0))",
+    "expected_output": "0"
+  },
+  {
+    "test": "print(relu(1))",
+    "expected_output": "1"
+  },
+  {
+    "test": "print(relu(-1))",
+    "expected_output": "0"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nprint(gen_text(\"hello\", n_tokens_to_generate=5))",
+    "expected_output": "hello hello hello <UNK> <UNK>"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nprint(gen_text(\"hello world\", n_tokens_to_generate=10))",
+    "expected_output": "world world world world world world world world world world"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nprint(gen_text(\"world\", n_tokens_to_generate=3))",
+    "expected_output": "world world world"
+  }
+]

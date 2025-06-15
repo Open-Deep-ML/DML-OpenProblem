@@ -1,0 +1,10 @@
+[
+  {
+    "test": "print(sigmoid(0))",
+    "expected_output": "0.5"
+  },
+  {
+    "test": "print(sigmoid(1))",
+    "expected_output": "0.7311"
+  }
+]

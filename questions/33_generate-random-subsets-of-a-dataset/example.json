@@ -1,0 +1,5 @@
+{
+  "input": "X = np.array([[1, 2],\n                  [3, 4],\n                  [5, 6],\n                  [7, 8],\n                  [9, 10]])\n    y = np.array([1, 2, 3, 4, 5])\n    n_subsets = 3\n    replacements = False\n    get_random_subsets(X, y, n_subsets, replacements)",
+  "output": "[array([[7, 8],\n            [1, 2]]), \n     array([4, 1])]\n     \n    [array([[9, 10],\n            [5, 6]]), \n     array([5, 3])]\n     \n    [array([[3, 4],\n            [5, 6]]), \n     array([2, 3])]",
+  "reasoning": "The function generates three random subsets of the dataset without replacements.\n    Each subset includes 50% of the samples (since replacements=False). The samples\n    are randomly selected without duplication."
+}

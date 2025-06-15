@@ -1,0 +1,22 @@
+{
+  "id": "75",
+  "title": "Generate a Confusion Matrix for Binary Classification",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "https://youtu.be/0n7dGmp0xUE",
+  "likes": 0,
+  "dislikes": 0,
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Selbl",
+      "name": "Selbl"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-75"
+}

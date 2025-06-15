@@ -1,0 +1,5 @@
+{
+  "input": "input_sequence = np.array([[1.0], [2.0], [3.0]])\ninitial_hidden_state = np.zeros((1, 1))\ninitial_cell_state = np.zeros((1, 1))\n\nlstm = LSTM(input_size=1, hidden_size=1)\noutputs, final_h, final_c = lstm.forward(input_sequence, initial_hidden_state, initial_cell_state)\n\nprint(final_h)",
+  "output": "[[0.73698596]] (approximate)",
+  "reasoning": "The LSTM processes the input sequence [1.0, 2.0, 3.0] and produces the final hidden state [0.73698596]."
+}

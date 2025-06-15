@@ -1,0 +1,5 @@
+{
+  "input": "matrix = [[1, 2], [3, 4]], scalar = 2",
+  "output": "[[2, 4], [6, 8]]",
+  "reasoning": "Each element of the matrix is multiplied by the scalar."
+}

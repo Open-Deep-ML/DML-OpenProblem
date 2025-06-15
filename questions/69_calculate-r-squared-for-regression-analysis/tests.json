@@ -1,0 +1,22 @@
+[
+  {
+    "test": "\nimport numpy as np\ny_true = np.array([1, 2, 3, 4, 5])\ny_pred = np.array([1, 2, 3, 4, 5])\nprint(r_squared(y_true, y_pred))\n",
+    "expected_output": "1.0"
+  },
+  {
+    "test": "\nimport numpy as np\ny_true = np.array([1, 2, 3, 4, 5])\ny_pred = np.array([1.1, 2.1, 2.9, 4.2, 4.8])\nprint(r_squared(y_true, y_pred))\n",
+    "expected_output": "0.989"
+  },
+  {
+    "test": "\nimport numpy as np\ny_true = np.array([1, 2, 3, 4, 5])\ny_pred = np.array([2, 1, 4, 3, 5])\nprint(r_squared(y_true, y_pred))\n",
+    "expected_output": "0.6"
+  },
+  {
+    "test": "\nimport numpy as np\ny_true = np.array([1, 2, 3, 4, 5])\ny_pred = np.array([3, 3, 3, 3, 3])\nprint(r_squared(y_true, y_pred))\n",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "\nimport numpy as np\ny_true = np.array([1, 2, 3, 4, 5])\ny_pred = np.array([5, 4, 3, 2, 1])\nprint(r_squared(y_true, y_pred))\n",
+    "expected_output": "-3.0"
+  }
+]
