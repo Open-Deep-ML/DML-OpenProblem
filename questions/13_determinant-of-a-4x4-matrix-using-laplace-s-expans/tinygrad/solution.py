@@ -1,6 +1,7 @@
 import numpy as np
 from tinygrad.tensor import Tensor
 
+
 def determinant_4x4_tg(matrix) -> Tensor:
     """
     Compute the determinant of a 4×4 matrix using tinygrad.

@@ -1,14 +1,14 @@
-
 import numpy as np
+
 
 def r_squared(y_true, y_pred):
     """
     Calculate the R-squared (R²) coefficient of determination.
-    
+
     Args:
         y_true (numpy.ndarray): Array of true values
         y_pred (numpy.ndarray): Array of predicted values
-    
+
     Returns:
         float: R-squared value rounded to 3 decimal places
     """

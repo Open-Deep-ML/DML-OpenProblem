@@ -1,6 +1,9 @@
 import torch
 
-def k_fold_cross_validation(X, y, k=5, shuffle=True) -> list[tuple[list[int], list[int]]]:
+
+def k_fold_cross_validation(
+    X, y, k=5, shuffle=True
+) -> list[tuple[list[int], list[int]]]:
     """
     Return train/test index splits for k-fold cross-validation using PyTorch.
     X: Tensor or convertible of shape (n_samples, ...)
@@ -20,7 +23,7 @@ def k_fold_cross_validation(X, y, k=5, shuffle=True) -> list[tuple[list[int], li
     folds = []
     start = 0
     for fs in fold_sizes:
-        folds.append(indices[start:start+fs].tolist())
+        folds.append(indices[start : start + fs].tolist())
         start += fs
     result = []
     for i in range(k):

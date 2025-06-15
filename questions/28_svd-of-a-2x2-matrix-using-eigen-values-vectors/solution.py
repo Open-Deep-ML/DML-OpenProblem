@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def svd_2x2(A: np.ndarray) -> tuple:
     y1, x1 = (A[1, 0] + A[0, 1]), (A[0, 0] - A[1, 1])
     y2, x2 = (A[1, 0] - A[0, 1]), (A[0, 0] + A[1, 1])
@@ -23,4 +24,3 @@ def svd_2x2(A: np.ndarray) -> tuple:
     V = np.diag(1.0 / s) @ U.T @ A
 
     return U, s, V
-    

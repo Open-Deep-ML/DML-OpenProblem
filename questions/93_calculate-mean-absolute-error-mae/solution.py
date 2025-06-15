@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def mae(y_true, y_pred):
     """
     Calculate Mean Absolute Error between two arrays.

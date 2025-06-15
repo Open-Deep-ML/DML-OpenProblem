@@ -1,10 +1,12 @@
 import numpy as np
 
+
 def softmax(scores):
     exp_scores = np.exp(scores)
     sum_exp_scores = np.sum(exp_scores)
     probabilities = np.round(exp_scores / sum_exp_scores, 4)
     return probabilities.tolist()
+
 
 def test_softmax():
     # Test case 1
@@ -21,6 +23,7 @@ def test_softmax():
     scores = [-1, 0, 5]
     expected_output = [0.0025, 0.0067, 0.9909]
     assert softmax(scores) == expected_output, "Test case 3 failed"
+
 
 if __name__ == "__main__":
     test_softmax()

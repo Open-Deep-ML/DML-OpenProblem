@@ -1,7 +1,9 @@
-def matrixmul(a: list[list[int | float]], b: list[list[int | float]]) -> list[list[int | float]]:
+def matrixmul(
+    a: list[list[int | float]], b: list[list[int | float]]
+) -> list[list[int | float]]:
     if len(a[0]) != len(b):
         return -1
-    
+
     vals = []
     for i in range(len(a)):
         hold = []
@@ -9,11 +11,12 @@ def matrixmul(a: list[list[int | float]], b: list[list[int | float]]) -> list[li
             val = 0
             for k in range(len(b)):
                 val += a[i][k] * b[k][j]
-                           
+
             hold.append(val)
         vals.append(hold)
 
     return vals
+
 
 def test_matrixmul() -> None:
     # Test cases for matrixmul function
@@ -32,6 +35,7 @@ def test_matrixmul() -> None:
     a = [[0, 0], [2, 4], [1, 2]]
     b = [[0, 0, 1], [2, 4, 1], [1, 2, 3]]
     assert matrixmul(a, b) == -1
+
 
 if __name__ == "__main__":
     test_matrixmul()

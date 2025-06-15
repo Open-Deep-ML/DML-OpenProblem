@@ -1,5 +1,6 @@
 from tinygrad.tensor import Tensor
 
+
 def linear_regression_normal_equation_tg(X, y) -> Tensor:
     """
     Solve linear regression via the normal equation using tinygrad.

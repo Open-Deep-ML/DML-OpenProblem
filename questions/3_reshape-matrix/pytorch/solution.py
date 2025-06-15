@@ -1,5 +1,6 @@
 import torch
 
+
 def reshape_matrix(a, new_shape) -> torch.Tensor:
     """
     Reshape a 2D matrix `a` to shape `new_shape` using PyTorch.

@@ -3,5 +3,5 @@ def inverse_2x2(matrix: list[list[float]]) -> list[list[float]]:
     determinant = a * d - b * c
     if determinant == 0:
         return None
-    inverse = [[d/determinant, -b/determinant], [-c/determinant, a/determinant]]
+    inverse = [[d / determinant, -b / determinant], [-c / determinant, a / determinant]]
     return inverse

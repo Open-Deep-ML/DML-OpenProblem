@@ -1,12 +1,15 @@
 import torch
 
+
 def calculate_eigenvalues(matrix: torch.Tensor) -> torch.Tensor:
     """
     Compute eigenvalues of a 2×2 matrix using PyTorch.
     Input: 2×2 tensor; Output: 1-D tensor with the two eigenvalues in ascending order.
     """
-    a = matrix[0,0]; b = matrix[0,1]
-    c = matrix[1,0]; d = matrix[1,1]
+    a = matrix[0, 0]
+    b = matrix[0, 1]
+    c = matrix[1, 0]
+    d = matrix[1, 1]
     trace = a + d
     det = a * d - b * c
     disc = trace * trace - 4 * det
