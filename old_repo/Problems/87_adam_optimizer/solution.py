@@ -1,6 +1,9 @@
 import numpy as np
 
-def adam_optimizer(parameter, grad, m, v, t, learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8):
+
+def adam_optimizer(
+    parameter, grad, m, v, t, learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8
+):
     """
     Update parameters using the Adam optimizer.
     Adjusts the learning rate based on the moving averages of the gradient and squared gradient.
@@ -37,6 +40,7 @@ def adam_optimizer(parameter, grad, m, v, t, learning_rate=0.001, beta1=0.9, bet
 
     return parameter, m, v
 
+
 def test_adam_optimizer():
     """Test cases for the Adam optimizer implementation."""
     # Test case 1: Scalar inputs
@@ -62,11 +66,14 @@ def test_adam_optimizer():
     expected_m = np.array([0.01, 0.02])
     expected_v = np.array([0.0001, 0.0004])
 
-    assert np.allclose(new_param, expected_param), f"Unexpected parameter values: {new_param}"
+    assert np.allclose(new_param, expected_param), (
+        f"Unexpected parameter values: {new_param}"
+    )
     assert np.allclose(new_m, expected_m), f"Unexpected m values: {new_m}"
     assert np.allclose(new_v, expected_v), f"Unexpected v values: {new_v}"
 
     print("All tests passed!")
+
 
 if __name__ == "__main__":
     test_adam_optimizer()

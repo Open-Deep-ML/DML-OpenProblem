@@ -1,5 +1,6 @@
 from tinygrad.tensor import Tensor
 
+
 def matrixmul_tg(a, b) -> Tensor:
     """
     Multiply two matrices using tinygrad.

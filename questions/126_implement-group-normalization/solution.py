@@ -1,17 +1,23 @@
-def group_normalization(X: np.ndarray, gamma: np.ndarray, beta: np.ndarray, num_groups: int, epsilon: float = 1e-5) -> np.ndarray:
-    '''
+def group_normalization(
+    X: np.ndarray,
+    gamma: np.ndarray,
+    beta: np.ndarray,
+    num_groups: int,
+    epsilon: float = 1e-5,
+) -> np.ndarray:
+    """
     Perform Group Normalization.
-    
+
     Args:
     X: numpy array of shape (B, C, H, W), input data
     gamma: numpy array of shape (C,), scale parameter
     beta: numpy array of shape (C,), shift parameter
     num_groups: number of groups for normalization
     epsilon: small constant to avoid division by zero
-    
+
     Returns:
     norm_X: numpy array of shape (B, C, H, W), normalized output
-    '''
+    """
     batch_size, num_channels, height, width = X.shape
     group_size = num_channels // num_groups
 

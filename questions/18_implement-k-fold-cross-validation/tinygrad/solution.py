@@ -1,6 +1,9 @@
 import numpy as np
 
-def k_fold_cross_validation_tg(X, y, k=5, shuffle=True) -> list[tuple[list[int], list[int]]]:
+
+def k_fold_cross_validation_tg(
+    X, y, k=5, shuffle=True
+) -> list[tuple[list[int], list[int]]]:
     """
     Return train/test index splits for k-fold cross-validation using NumPy backend.
     X: list or NumPy array or Tensor of shape (n_samples, ...)
@@ -20,7 +23,7 @@ def k_fold_cross_validation_tg(X, y, k=5, shuffle=True) -> list[tuple[list[int],
     folds = []
     start = 0
     for fs in fold_sizes:
-        folds.append(indices[start:start+fs].tolist())
+        folds.append(indices[start : start + fs].tolist())
         start += fs
     result = []
     for i in range(k):

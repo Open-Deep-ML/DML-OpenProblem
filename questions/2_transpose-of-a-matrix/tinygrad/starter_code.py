@@ -1,5 +1,6 @@
 from tinygrad.tensor import Tensor
 
+
 def transpose_matrix_tg(a) -> Tensor:
     """
     Transpose a 2D matrix `a` using tinygrad.
@@ -7,6 +8,6 @@ def transpose_matrix_tg(a) -> Tensor:
     Returns a transposed Tensor.
     """
     # Convert to Tensor
-    a_t = Tensor(a)
+    Tensor(a)
     # Your implementation here
     pass

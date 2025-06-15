@@ -1,6 +1,9 @@
 import torch
 
-def k_means_clustering(points, k, initial_centroids, max_iterations) -> list[tuple[float, ...]]:
+
+def k_means_clustering(
+    points, k, initial_centroids, max_iterations
+) -> list[tuple[float, ...]]:
     """
     Perform k-means clustering on `points` into `k` clusters.
     points: tensor of shape (n_points, n_features)
@@ -13,7 +16,7 @@ def k_means_clustering(points, k, initial_centroids, max_iterations) -> list[tup
     for _ in range(max_iterations):
         # compute distances (k, n_points)
         diffs = points_t.unsqueeze(0) - centroids.unsqueeze(1)
-        distances = torch.sqrt((diffs ** 2).sum(dim=2))
+        distances = torch.sqrt((diffs**2).sum(dim=2))
         # assign each point to nearest centroid
         assignments = distances.argmin(dim=0)
         new_centroids = []

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class SimpleRNN:
     def __init__(self, input_size, hidden_size, output_size):
         self.hidden_size = hidden_size
@@ -14,14 +15,16 @@ class SimpleRNN:
         outputs = []
         self.last_inputs = []
         self.last_hiddens = [h]
-        
+
         for t in range(len(x)):
             self.last_inputs.append(x[t].reshape(-1, 1))
-            h = np.tanh(np.dot(self.W_xh, self.last_inputs[t]) + np.dot(self.W_hh, h) + self.b_h)
+            h = np.tanh(
+                np.dot(self.W_xh, self.last_inputs[t]) + np.dot(self.W_hh, h) + self.b_h
+            )
             y = np.dot(self.W_hy, h) + self.b_y
             outputs.append(y)
             self.last_hiddens.append(h)
-        
+
         self.last_outputs = outputs
         return np.array(outputs)
 
@@ -36,11 +39,11 @@ class SimpleRNN:
 
         for t in reversed(range(len(x))):
             dy = self.last_outputs[t] - y[t].reshape(-1, 1)  # (Predicted - Actual)
-            dW_hy += np.dot(dy, self.last_hiddens[t+1].T)
+            dW_hy += np.dot(dy, self.last_hiddens[t + 1].T)
             db_y += dy
 
             dh = np.dot(self.W_hy.T, dy) + dh_next
-            dh_raw = (1 - self.last_hiddens[t+1] ** 2) * dh  # Derivative of tanh
+            dh_raw = (1 - self.last_hiddens[t + 1] ** 2) * dh  # Derivative of tanh
 
             dW_xh += np.dot(dh_raw, self.last_inputs[t].T)
             dW_hh += np.dot(dh_raw, self.last_hiddens[t].T)

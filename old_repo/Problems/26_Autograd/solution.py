@@ -1,5 +1,5 @@
 class Value:
-    def __init__(self, data, _children=(), _op=''):
+    def __init__(self, data, _children=(), _op=""):
         self.data = data
         self.grad = 0
         self._backward = lambda: None
@@ -8,29 +8,32 @@ class Value:
 
     def __add__(self, other):
         other = other if isinstance(other, Value) else Value(other)
-        out = Value(self.data + other.data, (self, other), '+')
+        out = Value(self.data + other.data, (self, other), "+")
 
         def _backward():
             self.grad += out.grad
             other.grad += out.grad
+
         out._backward = _backward
         return out
 
     def __mul__(self, other):
         other = other if isinstance(other, Value) else Value(other)
-        out = Value(self.data * other.data, (self, other), '*')
+        out = Value(self.data * other.data, (self, other), "*")
 
         def _backward():
             self.grad += other.data * out.grad
             other.grad += self.data * out.grad
+
         out._backward = _backward
         return out
 
     def relu(self):
-        out = Value(0 if self.data < 0 else self.data, (self,), 'ReLU')
+        out = Value(0 if self.data < 0 else self.data, (self,), "ReLU")
 
         def _backward():
             self.grad += (out.data > 0) * out.grad
+
         out._backward = _backward
         return out
 
@@ -78,9 +81,16 @@ def test_value_operations():
 
     # Actual results
     results = [a, b, c, d, e, f, g]
-    for i, (result, (expected_data, expected_grad)) in enumerate(zip(results, expected)):
-        assert result.data == expected_data, f"Test failed at step {i}: data mismatch ({result.data} != {expected_data})"
-        assert result.grad == expected_grad, f"Test failed at step {i}: grad mismatch ({result.grad} != {expected_grad})"
+    for i, (result, (expected_data, expected_grad)) in enumerate(
+        zip(results, expected)
+    ):
+        assert result.data == expected_data, (
+            f"Test failed at step {i}: data mismatch ({result.data} != {expected_data})"
+        )
+        assert result.grad == expected_grad, (
+            f"Test failed at step {i}: grad mismatch ({result.grad} != {expected_grad})"
+        )
+
 
 if __name__ == "__main__":
     test_value_operations()

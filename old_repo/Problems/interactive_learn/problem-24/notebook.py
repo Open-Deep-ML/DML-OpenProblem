@@ -65,8 +65,9 @@ def _(insights):
 @app.cell(hide_code=True)
 def _(mo):
     # insights accordion
-    insights = mo.accordion({
-        "🧠 Understanding the Components": mo.md("""
+    insights = mo.accordion(
+        {
+            "🧠 Understanding the Components": mo.md("""
         **Key Concepts:**
 
         1. **Input Features**: Multiple numerical values representing different aspects of the data
@@ -74,16 +75,16 @@ def _(mo):
         3. **Bias**: Offset term that helps the model fit the data better
         4. **Sigmoid Function**: Squashes input to probability between 0 and 1
         """),
-
-        "📊 Model Behavior": mo.md("""
+            "📊 Model Behavior": mo.md("""
         The neuron's behavior is influenced by:
 
         1. **Feature Values**: Input data characteristics
         2. **Weight Magnitudes**: Control feature influence
         3. **Bias Term**: Shifts the decision boundary
         4. **Sigmoid Activation**: Creates non-linear output
-        """)
-    })
+        """),
+        }
+    )
     return (insights,)
 
 
@@ -96,38 +97,39 @@ def _(feature_inputs):
 @app.cell(hide_code=True)
 def _(mo):
     # input controls: features
-    features_1 = mo.ui.array([
-        mo.ui.number(value=0.5, label="Feature 1", step=0.1),
-        mo.ui.number(value=1.0, label="Feature 2", step=0.1)
-    ])
+    features_1 = mo.ui.array(
+        [
+            mo.ui.number(value=0.5, label="Feature 1", step=0.1),
+            mo.ui.number(value=1.0, label="Feature 2", step=0.1),
+        ]
+    )
 
-    features_2 = mo.ui.array([
-        mo.ui.number(value=-1.5, label="Feature 1", step=0.1),
-        mo.ui.number(value=-2.0, label="Feature 2", step=0.1)
-    ])
+    features_2 = mo.ui.array(
+        [
+            mo.ui.number(value=-1.5, label="Feature 1", step=0.1),
+            mo.ui.number(value=-2.0, label="Feature 2", step=0.1),
+        ]
+    )
 
-    features_3 = mo.ui.array([
-        mo.ui.number(value=2.0, label="Feature 1", step=0.1),
-        mo.ui.number(value=1.5, label="Feature 2", step=0.1)
-    ])
+    features_3 = mo.ui.array(
+        [
+            mo.ui.number(value=2.0, label="Feature 1", step=0.1),
+            mo.ui.number(value=1.5, label="Feature 2", step=0.1),
+        ]
+    )
 
-    feature_inputs = mo.vstack([
-        mo.md("### Input Features"),
-        mo.hstack([
-            mo.vstack([
-                mo.md("**Example 1**"),
-                features_1
-            ]),
-            mo.vstack([
-                mo.md("**Example 2**"),
-                features_2
-            ]),
-            mo.vstack([
-                mo.md("**Example 3**"),
-                features_3
-            ])
-        ])
-    ])
+    feature_inputs = mo.vstack(
+        [
+            mo.md("### Input Features"),
+            mo.hstack(
+                [
+                    mo.vstack([mo.md("**Example 1**"), features_1]),
+                    mo.vstack([mo.md("**Example 2**"), features_2]),
+                    mo.vstack([mo.md("**Example 3**"), features_3]),
+                ]
+            ),
+        ]
+    )
     return feature_inputs, features_1, features_2, features_3
 
 
@@ -140,29 +142,18 @@ def _(weight_controls):
 @app.cell(hide_code=True)
 def _(mo):
     # Weight and bias (wandb) controls
-    w1 = mo.ui.number(
-        value=0.7,
-        label="Weight 1",
-        step=0.1
-    )
+    w1 = mo.ui.number(value=0.7, label="Weight 1", step=0.1)
 
-    w2 = mo.ui.number(
-        value=-0.4,
-        label="Weight 2",
-        step=0.1
-    )
+    w2 = mo.ui.number(value=-0.4, label="Weight 2", step=0.1)
 
-    bias = mo.ui.number(
-        value=-0.1,
-        label="Bias",
-        step=0.1
-    )
+    bias = mo.ui.number(value=-0.1, label="Bias", step=0.1)
 
-    weight_controls = mo.vstack([
-        mo.md("### Model Parameters"),
-        mo.hstack([w1, w2, bias]),
-        mo.callout(
-            mo.md("""
+    weight_controls = mo.vstack(
+        [
+            mo.md("### Model Parameters"),
+            mo.hstack([w1, w2, bias]),
+            mo.callout(
+                mo.md("""
             Adjust weights and bias to see how they affect the neuron's output:
 
             - Positive weights increase output for positive features
@@ -171,9 +162,10 @@ def _(mo):
 
             - Bias shifts the decision boundary
             """),
-            kind="info"
-        )
-    ])
+                kind="info",
+            ),
+        ]
+    )
     return bias, w1, w2, weight_controls
 
 
@@ -208,7 +200,7 @@ def _(
     w2,
 ):
     def sigmoid(z):
-            return 1 / (1 + np.exp(-z))
+        return 1 / (1 + np.exp(-z))
 
     def compute_neuron_output(features, weights, bias):
         z = np.dot(features, weights) + bias
@@ -226,7 +218,7 @@ def _(
         feature_vectors = [
             [f.value for f in features_1.elements],
             [f.value for f in features_2.elements],
-            [f.value for f in features_3.elements]
+            [f.value for f in features_3.elements],
         ]
 
         predictions = []
@@ -238,18 +230,22 @@ def _(
         mse = round(np.mean((np.array(predictions) - true_labels) ** 2), 4)
         results = predictions
 
-    results_display = mo.vstack([
-        mo.md(f"### Results"),
-        mo.md(f"**Predictions:** {results}"),
-        mo.md(f"**Mean Squared Error:** {mse}"),
-        mo.accordion({
-            "🔍 Understanding the Results": mo.md(f"""
+    results_display = mo.vstack(
+        [
+            mo.md("### Results"),
+            mo.md(f"**Predictions:** {results}"),
+            mo.md(f"**Mean Squared Error:** {mse}"),
+            mo.accordion(
+                {
+                    "🔍 Understanding the Results": mo.md("""
             - Predictions close to 0 indicate class 0
             - Predictions close to 1 indicate class 1
             - Lower MSE means better model performance
             """)
-        })
-    ])
+                }
+            ),
+        ]
+    )
     return (
         compute_neuron_output,
         feature_vectors,
@@ -289,49 +285,43 @@ def _(bias, features_1, features_2, features_3, np, pd, px, w1, w2):
         # Z values calculated using the neuron model
         Z = 1 / (1 + np.exp(-(w1.value * X + w2.value * Y + bias.value)))
 
-        df = pd.DataFrame({
-            'x': X.flatten(),
-            'y': Y.flatten(),
-            'z': Z.flatten()
-        })
+        df = pd.DataFrame({"x": X.flatten(), "y": Y.flatten(), "z": Z.flatten()})
 
         # Plot decision boundary using density contour
         fig = px.density_contour(
-            df, x='x', y='y', z='z',
-            title='Decision Boundary Visualization',
-            labels={'x': 'Feature 1', 'y': 'Feature 2', 'z': 'Probability'}
+            df,
+            x="x",
+            y="y",
+            z="z",
+            title="Decision Boundary Visualization",
+            labels={"x": "Feature 1", "y": "Feature 2", "z": "Probability"},
         )
 
         # Add scatter points for input examples
-        feature_points = pd.DataFrame({
-            'Feature 1': [
-                features_1.elements[0].value,
-                features_2.elements[0].value,
-                features_3.elements[0].value
-            ],
-            'Feature 2': [
-                features_1.elements[1].value,
-                features_2.elements[1].value,
-                features_3.elements[1].value
-            ],
-            'Label': ['Example 1', 'Example 2', 'Example 3']
-        })
-
-        scatter = px.scatter(
-            feature_points,
-            x='Feature 1',
-            y='Feature 2',
-            text='Label'
+        feature_points = pd.DataFrame(
+            {
+                "Feature 1": [
+                    features_1.elements[0].value,
+                    features_2.elements[0].value,
+                    features_3.elements[0].value,
+                ],
+                "Feature 2": [
+                    features_1.elements[1].value,
+                    features_2.elements[1].value,
+                    features_3.elements[1].value,
+                ],
+                "Label": ["Example 1", "Example 2", "Example 3"],
+            }
         )
+
+        scatter = px.scatter(feature_points, x="Feature 1", y="Feature 2", text="Label")
 
         for trace in scatter.data:
             fig.add_trace(trace)
 
-        fig.update_layout(
-            width=800,
-            height=600
-        )
+        fig.update_layout(width=800, height=600)
         return fig
+
     return (plot_decision_boundary,)
 
 
@@ -353,9 +343,10 @@ def _(conclusion):
 @app.cell(hide_code=True)
 def _(mo):
     # Conclusion and next steps
-    conclusion = mo.vstack([
-        mo.callout(
-            mo.md("""
+    conclusion = mo.vstack(
+        [
+            mo.callout(
+                mo.md("""
                 **Congratulations!** 
                 You've explored the single neuron model with sigmoid activation. You've learned:
 
@@ -363,29 +354,33 @@ def _(mo):
                 - How sigmoid activation converts linear combinations to probabilities
                 - How to evaluate performance using MSE
             """),
-            kind="success"
-        ),
-        mo.accordion({
-            "🎯 Applications": mo.md("""
+                kind="success",
+            ),
+            mo.accordion(
+                {
+                    "🎯 Applications": mo.md("""
                 - Binary classification tasks
                 - Feature importance analysis
                 - Basic pattern recognition
                 - Building blocks for larger neural networks
             """),
-            "🚀 Next Steps": mo.md("""
+                    "🚀 Next Steps": mo.md("""
                 1. Implement the neuron in a real project
                 2. Explore other activation functions
                 3. Add more features to handle complex patterns
                 4. Learn about gradient descent for training
-            """)
-        })
-    ])
+            """),
+                }
+            ),
+        ]
+    )
     return (conclusion,)
 
 
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -394,6 +389,7 @@ def _():
     import numpy as np
     import pandas as pd
     import plotly.express as px
+
     return np, pd, px
 
 

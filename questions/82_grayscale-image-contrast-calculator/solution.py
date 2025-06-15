@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def calculate_contrast(img):
     """
     Calculate the contrast of a grayscale image.

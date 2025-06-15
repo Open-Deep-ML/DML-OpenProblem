@@ -1,5 +1,5 @@
-
 import numpy as np
+
 
 def cosine_similarity(v1, v2):
     if v1.shape != v2.shape:

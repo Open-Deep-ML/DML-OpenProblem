@@ -1,8 +1,10 @@
 import numpy as np
 
+
 def softmax(values):
     exps = np.exp(values - np.max(values))
     return exps / np.sum(exps)
+
 
 def pattern_weaver(n, crystal_values, dimension):
     dimension_sqrt = np.sqrt(dimension)

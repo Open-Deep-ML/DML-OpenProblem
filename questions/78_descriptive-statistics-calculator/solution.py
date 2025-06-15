@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def descriptive_statistics(data):
     """
     Calculate various descriptive statistics metrics for a given dataset.
@@ -37,12 +38,12 @@ def descriptive_statistics(data):
         "mean": mean,
         "median": median,
         "mode": mode,
-        "variance": np.round(variance,4),
-        "standard_deviation": np.round(std_dev,4),
+        "variance": np.round(variance, 4),
+        "standard_deviation": np.round(std_dev, 4),
         "25th_percentile": percentiles[0],
         "50th_percentile": percentiles[1],
         "75th_percentile": percentiles[2],
-        "interquartile_range": iqr
+        "interquartile_range": iqr,
     }
 
     return stats_dict
