@@ -107,3 +107,6 @@ See `LICENSE` file for full terms.
 ## 🙋 Need Help?
 
 Open an issue or visit our Discord: https://discord.gg/JwMePfMZAV
+
+### Note: 
+for current PRs I will still work on making the other parts of the problem like i did before but it would be faster if you added the needed info
