@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\nX = np.array([[0, 0], [1, 1], [2, 2]])\ny = np.array([0, 1, 2])\n\nalpha = 0.1\nweights, bias = l1_regularization_gradient_descent(X, y, alpha=alpha, learning_rate=0.01, max_iter=1000)",
+  "output": "(weights,bias)\n(array([float, float]), float)",
+  "reasoning": "The Lasso Regression algorithm is used to optimize the weights and bias for the given data. The weights are adjusted to minimize the loss function with the L1 penalty."
+}

@@ -1,0 +1,5 @@
+{
+  "input": "disorder([1,1,0,0])",
+  "output": "0.5 #or any value from -inf till +inf",
+  "reasoning": "In the basket [1,1,0,0], there are two distinct colors each appearing with equal frequency (0.5)."
+}

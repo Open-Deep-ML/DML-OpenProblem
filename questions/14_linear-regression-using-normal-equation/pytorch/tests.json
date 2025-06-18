@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import torch\nX = torch.eye(2)\ny = torch.tensor([5.0, 3.0])\nres = linear_regression_normal_equation(X, y)\nprint(res.detach().numpy().tolist())",
+    "expected_output": "[5.0, 3.0]"
+  },
+  {
+    "test": "import torch\nX = torch.tensor([[1.0,1.0],[1.0,2.0],[1.0,3.0]])\ny = torch.tensor([1.0,2.0,3.0])\nres = linear_regression_normal_equation(X, y)\nprint(res.detach().numpy().tolist())",
+    "expected_output": "[0.0, 1.0]"
+  }
+]

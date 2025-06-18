@@ -1,0 +1,63 @@
+
+## Matrix Image, Spans, and How to Calculate It
+
+In linear algebra, the column space, also called the **image** or **span**, of a matrix is the set of all possible linear combinations of its columns. The column space gives important information about the matrix, such as the dimensions and dependencies between columns. It is useful for solving linear systems and understanding the structure of the data in the matrix. The image of a function can also be thought of as all the values the function takes in its codomain. The image of a matrix is the span of its columns - all linear combinations of its columns.
+
+Consider the following matrix $ A $:
+
+$$
+A = \begin{bmatrix} 
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{bmatrix}
+$$
+
+The column space of $ A $ is the set of all linear combinations of its columns. In other words, any vector in the column space of $ A $ can be written as:
+
+$$
+\text{span}(A) = c_1 \begin{bmatrix} 
+1 \\
+4 \\
+7
+\end{bmatrix} + c_2 \begin{bmatrix} 
+2 \\
+5 \\
+8
+\end{bmatrix} + c_3 \begin{bmatrix} 
+3 \\
+6 \\
+9
+\end{bmatrix}
+$$
+
+Where $ c_1 $, $ c_2 $, and $ c_3 $ are scalars representing the linear combination of the columns of matrix $ A $.
+
+### The Image of a Matrix
+
+The image of a matrix is spanned by its pivot columns. To find the image of a matrix, you can use the following steps:
+
+1) **Convert to Row Echelon Form (RREF)**
+
+The first step is to convert the matrix to its RREF using **Gauss-Jordan Elimination**. This finds the independent equations within the matrix. In RREF form:
+- Each non-zero row begins with a leading 1, called a pivot
+- Rows of all zeros are at the bottom of the matrix
+- Each leading 1 is to the right of the leading 1 in the row above
+
+2) **Identify Pivot Columns**
+
+Once the matrix is in RREF, the pivot columns are the columns that contain the leading 1s in each non-zero row. These columns represent the independent directions that span the column space of the matrix.
+
+3) **Extract Pivot Columns from the Original Matrix**
+
+Finally, to find the column space of the original matrix, you take the columns from the original matrix corresponding to the pivot columns in RREF.
+
+### Applications of Matrix Image
+
+The matrix image has important applications in:
+
+- **Solving systems of linear equations**
+- **Determining the rank of a matrix**
+- **Understanding linear transformations**
+
+It is also used in areas such as **data compression**, **computer graphics**, and **signal processing** to analyze and manipulate data effectively.

@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(softsign(0))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(softsign(1))",
+    "expected_output": "0.5"
+  },
+  {
+    "test": "print(softsign(-1))",
+    "expected_output": "-0.5"
+  },
+  {
+    "test": "print(softsign(100))",
+    "expected_output": "0.9901"
+  },
+  {
+    "test": "print(softsign(-100))",
+    "expected_output": "-0.9901"
+  }
+]

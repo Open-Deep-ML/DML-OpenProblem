@@ -1,0 +1,5 @@
+{
+  "input": "a = [[2, 1], [1, 2]]",
+  "output": "(array([[-0.70710678, -0.70710678],\n                        [-0.70710678,  0.70710678]]),\n        array([3., 1.]),\n        array([[-0.70710678, -0.70710678],\n               [-0.70710678,  0.70710678]]))",
+  "reasoning": "U is the first matrix sigma is the second vector and V is the third matrix"
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import torch\nres = linear_regression_gradient_descent(\n    torch.eye(2),\n    torch.tensor([5.0, 3.0]),\n    0.1,\n    10\n)\nprint(res.detach().numpy().tolist())",
+    "expected_output": "[3.2565999031066895, 1.9539999961853027]"
+  },
+  {
+    "test": "import torch\nX = torch.tensor([[1.0,1.0],[1.0,2.0],[1.0,3.0]])\ny = torch.tensor([1.0,2.0,3.0])\nres = linear_regression_gradient_descent(X, y, 0.01, 1000)\nprint(res.detach().numpy().tolist())",
+    "expected_output": "[0.03319999948143959, 0.9854000210762024]"
+  }
+]

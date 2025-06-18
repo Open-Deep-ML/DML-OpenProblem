@@ -1,0 +1,17 @@
+{
+  "id": "132",
+  "title": "Simulate Markov Chain Transitions",
+  "difficulty": "medium",
+  "category": "Probability",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "moe"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

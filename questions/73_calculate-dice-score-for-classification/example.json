@@ -1,0 +1,5 @@
+{
+  "input": "y_true = np.array([1, 1, 0, 1, 0, 1])\ny_pred = np.array([1, 1, 0, 0, 0, 1])\nprint(dice_score(y_true, y_pred))",
+  "output": "0.857",
+  "reasoning": "The Dice Score is calculated as (2 * 3) / (2 * 3 + 0 + 1) = 0.857, indicating an 85.7% overlap between the true and predicted labels."
+}

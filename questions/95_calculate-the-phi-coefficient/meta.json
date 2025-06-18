@@ -1,0 +1,21 @@
+{
+  "id": "95",
+  "title": "Calculate the Phi Coefficient",
+  "difficulty": "easy",
+  "category": "Statistics",
+  "video": "https://youtu.be/z0A4peJnJOs",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Noth2006",
+      "name": "Noth2006"
+    },
+    {
+      "profile_link": "https://github.com/Selbl",
+      "name": "Selbl"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

@@ -1,0 +1,17 @@
+{
+  "id": "46",
+  "title": "Implement Precision Metric",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "https://youtu.be/u99yBNF4vE0",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

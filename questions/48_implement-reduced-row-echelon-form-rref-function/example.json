@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\nmatrix = np.array([\n    [1, 2, -1, -4],\n    [2, 3, -1, -11],\n    [-2, 0, -3, 22]\n])\n\nrref_matrix = rref(matrix)\nprint(rref_matrix)",
+  "output": "# array([\n#    [ 1.  0.  0. -8.],\n#    [ 0.  1.  0.  1.],\n#    [-0. -0.  1. -2.]\n# ])",
+  "reasoning": "The given matrix is converted to its Reduced Row Echelon Form (RREF) where each leading entry is 1, and all other entries in the leading columns are zero."
+}

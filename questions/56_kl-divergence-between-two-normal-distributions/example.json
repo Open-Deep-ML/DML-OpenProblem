@@ -1,0 +1,5 @@
+{
+  "input": "mu_p = 0.0\nsigma_p = 1.0\nmu_q = 1.0\nsigma_q = 1.0\n\nprint(kl_divergence_normal(mu_p, sigma_p, mu_q, sigma_q))",
+  "output": "0.5",
+  "reasoning": "The KL divergence between the normal distributions \\( P \\) and \\( Q \\) with parameters \\( \\mu_P = 0.0 \\), \\( \\sigma_P = 1.0 \\) and \\( \\mu_Q = 1.0 \\), \\( \\sigma_Q = 1.0 \\) is 0.5."
+}

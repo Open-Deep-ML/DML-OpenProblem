@@ -1,0 +1,1 @@
+Implement the Softplus activation function, a smooth approximation of the ReLU function. Your task is to compute the Softplus value for a given input, handling edge cases to prevent numerical overflow or underflow.

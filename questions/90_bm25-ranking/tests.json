@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(calculate_bm25_scores([['the', 'cat', 'sat'], ['the', 'dog', 'ran'], ['the', 'bird', 'flew']], ['the', 'cat']))",
+    "expected_output": "[0.693, 0., 0. ]"
+  },
+  {
+    "test": "print(calculate_bm25_scores([['the'] * 10, ['the']], ['the']))",
+    "expected_output": "[0,0]"
+  },
+  {
+    "test": "print(calculate_bm25_scores([['term'] * 10, ['the'] * 2], ['term'], k1=1.0))",
+    "expected_output": "[.705, 0]"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "id": "128",
+  "title": "Dynamic Tanh: Normalization-Free Transformer Activation",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/turkunov",
+      "name": "Turkunov"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

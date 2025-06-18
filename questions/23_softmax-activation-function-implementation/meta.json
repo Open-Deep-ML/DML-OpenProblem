@@ -1,0 +1,13 @@
+{
+  "id": "23",
+  "title": "Softmax Activation Function Implementation ",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/WIUTXGFAuXY",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": null,
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": "https://adityakhalkar.github.io/Deep-ML-x-Marimo/23"
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "test": "np.random.seed(42)\nX = np.arange(48).reshape(6,8)\nX = np.random.permutation(X.flatten()).reshape(6, 8)\nmask = np.triu(np.ones((6, 6))*(-np.inf), k=1)\nW_q = np.random.randint(0,4,size=(8,8))\nW_k = np.random.randint(0,5,size=(8,8))\nW_v = np.random.randint(0,6,size=(8,8))\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\nprint(masked_attention(Q, K, V, mask))",
+    "expected_output": "[[547. 490. 399. 495. 485. 439. 645. 393.]\n [547. 490. 399. 495. 485. 439. 645. 393.]\n [471. 472. 429. 538. 377. 450. 531. 362.]\n [471. 472. 429. 538. 377. 450. 531. 362.]\n [471. 472. 429. 538. 377. 450. 531. 362.]\n [471. 472. 429. 538. 377. 450. 531. 362.]]"
+  },
+  {
+    "test": "np.random.seed(42)\nX = np.arange(16).reshape(4,4)\nX = np.random.permutation(X.flatten()).reshape(4, 4)\nmask = np.triu(np.ones((4, 4))*(-np.inf), k=1)\nW_q = np.random.randint(0,4,size=(4,4))\nW_k = np.random.randint(0,5,size=(4,4))\nW_v = np.random.randint(0,6,size=(4,4))\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\nprint(masked_attention(Q, K, V, mask))",
+    "expected_output": "[[ 52.  63.  48.  71.]\n [103. 109.  46.  99.]\n [103. 109.  46.  99.]\n [103. 109.  46.  99.]]"
+  }
+]

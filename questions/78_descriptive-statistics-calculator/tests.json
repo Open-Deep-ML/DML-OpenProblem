@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(descriptive_statistics([10, 20, 30, 40, 50]))",
+    "expected_output": "{'mean': 30.0, 'median': 30.0, 'mode': 10, 'variance': 200.0, 'standard_deviation': 14.1421, '25th_percentile': 20.0, '50th_percentile': 30.0, '75th_percentile': 40.0, 'interquartile_range': 20.0}"
+  },
+  {
+    "test": "print(descriptive_statistics([1, 2, 2, 3, 4, 4, 4, 5]))",
+    "expected_output": "{'mean': 3.125, 'median': 3.5, 'mode': 4, 'variance': 1.6094, 'standard_deviation': 1.2686, '25th_percentile': 2.0, '50th_percentile': 3.5, '75th_percentile': 4.0, 'interquartile_range': 2.0}"
+  },
+  {
+    "test": "print(descriptive_statistics([100]))",
+    "expected_output": "{'mean': 100.0, 'median': 100.0, 'mode': 100, 'variance': 0.0, 'standard_deviation': 0.0, '25th_percentile': 100.0, '50th_percentile': 100.0, '75th_percentile': 100.0, 'interquartile_range': 0.0}"
+  }
+]

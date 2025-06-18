@@ -1,0 +1,5 @@
+{
+  "input": "selu(-1.0)",
+  "output": "-1.1113",
+  "reasoning": "For x = -1.0, the SELU activation is calculated using the formula $SELU(x) = \\lambda \\alpha (e^x - 1)$. Substituting the values of $\\lambda$ and $\\alpha$, we get $SELU(-1.0) = 1.0507 \\times 1.6733 \\times (e^{-1.0} - 1) = -1.1113$."
+}

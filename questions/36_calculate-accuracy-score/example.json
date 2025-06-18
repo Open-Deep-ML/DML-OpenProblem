@@ -1,0 +1,5 @@
+{
+  "input": "y_true = np.array([1, 0, 1, 1, 0, 1])\n    y_pred = np.array([1, 0, 0, 1, 0, 1])\n    output = accuracy_score(y_true, y_pred)\n    print(output)",
+  "output": "# 0.8333333333333334",
+  "reasoning": "The function compares the true labels with the predicted labels and calculates the ratio of correct predictions to the total number of predictions. In this example, there are 5 correct predictions out of 6, resulting in an accuracy score of 0.8333333333333334."
+}

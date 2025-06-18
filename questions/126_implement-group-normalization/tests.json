@@ -1,0 +1,10 @@
+[
+  {
+    "test": "np.random.seed(42)\nB, C, H, W = 2, 2, 2, 2\nX = np.random.randn(B, C, H, W)\ngamma = np.ones(C).reshape(1, C, 1, 1)\nbeta = np.zeros(C).reshape(1, C, 1, 1)\nnum_groups = 2\noutput = group_normalization(X, gamma, beta, num_groups)\nprint(np.round(output, 4))",
+    "expected_output": "[[[[-0.2287, -1.2998], [ 0.026, 1.5025]], [[-0.926, -0.9259], [1.46, 0.3919]]], [[[-0.5848, 1.732 ], [-0.5709, -0.5762]], [[1.4005, -1.0503], [-0.8361, 0.486 ]]]]"
+  },
+  {
+    "test": "np.random.seed(42)\nB, C, H, W = 2, 2, 2, 1\nX = np.random.randn(B, C, H, W)\ngamma = np.ones(C).reshape(1, C, 1, 1)\nbeta = np.zeros(C).reshape(1, C, 1, 1)\nnum_groups = 2\noutput = group_normalization(X, gamma, beta, num_groups)\nprint(np.round(output, 4))",
+    "expected_output": "[[[[1. ], [-1. ]], [[-1. ], [1. ]]], [[[-0.0026],[0.0026]], [[1. ], [-1.]]]]"
+  }
+]

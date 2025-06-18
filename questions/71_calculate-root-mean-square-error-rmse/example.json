@@ -1,0 +1,5 @@
+{
+  "input": "y_true = np.array([3, -0.5, 2, 7])\ny_pred = np.array([2.5, 0.0, 2, 8])\nprint(rmse(y_true, y_pred))",
+  "output": "0.612",
+  "reasoning": "The RMSE is calculated as sqrt((0.5^2 + 0.5^2 + 0^2 + 1^2) / 4) = 0.612"
+}

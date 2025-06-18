@@ -1,0 +1,5 @@
+{
+  "input": "X = np.array([[2, 3],\n              [3, 4],\n              [5, 6]])\ndegree = 2\noutput = polynomial_features(X, degree)\nprint(output)",
+  "output": "[[ 1.  2.  3.  4.  6.  9.]\n [ 1.  3.  4.  9. 12. 16.]\n [ 1.  5.  6. 25. 30. 36.]]",
+  "reasoning": "For **degree = 2**, the raw polynomial terms for the first sample are [1, 2, 3, 4, 6, 9].  Sorting them from smallest to largest yields [1, 2, 3, 4, 6, 9]. The same procedure is applied to every sample."
+}

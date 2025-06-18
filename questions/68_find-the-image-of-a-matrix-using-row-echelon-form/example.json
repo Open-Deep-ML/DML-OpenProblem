@@ -1,0 +1,5 @@
+{
+  "input": "matrix = np.array([\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9]\n])\nprint(matrix_image(matrix))",
+  "output": "# [[1, 2],\n#  [4, 5],\n#  [7, 8]]",
+  "reasoning": "The column space of the matrix is spanned by the independent columns [1, 2], [4, 5], and [7, 8]. These columns form the basis vectors that represent the image of the matrix."
+}

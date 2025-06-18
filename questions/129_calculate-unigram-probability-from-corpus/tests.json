@@ -1,0 +1,18 @@
+[
+  {
+    "test": "corpus = \"\"\"<s> I am Jack </s> <s> Jack I am </s> <s> Jack I like </s> <s> Jack I do like </s> <s> do I like Jack </s>\"\"\"\nprint(round(unigram_probability(corpus, \"Jack\"),4))",
+    "expected_output": "0.1852"
+  },
+  {
+    "test": "corpus = \"\"\"<s> I am Jack </s> <s> Jack I am </s> <s> Jack I like </s> <s> Jack I do like </s> <s> do I like Jack </s>\"\"\"\nprint(round(unigram_probability(corpus, \"like\"),4))",
+    "expected_output": "0.1111"
+  },
+  {
+    "test": "corpus = \"\"\"<s> hello world </s> <s> hello </s>\"\"\"\nprint(round(unigram_probability(corpus, \"hello\"),4))",
+    "expected_output": "0.2857"
+  },
+  {
+    "test": "corpus = \"\"\"<s> the quick brown fox </s> <s> jumps over the lazy dog </s>\"\"\"\nprint(round(unigram_probability(corpus, \"the\"),4))",
+    "expected_output": "0.1538"
+  }
+]

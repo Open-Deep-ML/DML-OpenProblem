@@ -1,0 +1,5 @@
+{
+  "input": "[10, 20, 30, 40, 50]",
+  "output": "{'mean': 30.0, 'median': 30.0, 'mode': 10, 'variance': 200.0, 'standard_deviation': 14.142135623730951, '25th_percentile': 20.0, '50th_percentile': 30.0, '75th_percentile': 40.0, 'interquartile_range': 20.0}",
+  "reasoning": "The dataset is processed to calculate all descriptive statistics. The mean is the average value, the median is the central value, the mode is the most frequent value, and variance and standard deviation measure the spread of data. Percentiles and IQR describe data distribution."
+}
