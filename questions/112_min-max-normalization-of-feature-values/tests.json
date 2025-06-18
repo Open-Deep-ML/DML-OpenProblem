@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(min_max([1, 2, 3, 4, 5]))",
+    "expected_output": "[0.0, 0.25, 0.5, 0.75, 1.0]"
+  },
+  {
+    "test": "print([round(x, 4) for x in min_max([30, 45, 56, 70, 88])])",
+    "expected_output": "[0.0, 0.2586, 0.4483, 0.6897, 1.0]"
+  },
+  {
+    "test": "print([round(x, 4) for x in min_max([5, 5, 5, 5])])",
+    "expected_output": "[0.0, 0.0, 0.0, 0.0]"
+  }
+]

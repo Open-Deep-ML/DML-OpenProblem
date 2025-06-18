@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([1, 0, 1, 0, 0, 1])\n\nresult = precision(y_true, y_pred)\nprint(result)",
+  "output": "1.0",
+  "reasoning": "- True Positives (TP) = 3\n- False Positives (FP) = 0\n- Precision = TP / (TP + FP) = 3 / (3 + 0) = 1.0"
+}

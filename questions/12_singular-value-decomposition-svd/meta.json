@@ -1,0 +1,17 @@
+{
+  "id": "12",
+  "title": "Singular Value Decomposition (SVD)",
+  "difficulty": "hard",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium"
+}

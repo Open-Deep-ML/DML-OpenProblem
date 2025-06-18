@@ -1,0 +1,5 @@
+{
+  "input": "dense_matrix = [\n    [1, 0, 0, 0],\n    [0, 2, 0, 0],\n    [3, 0, 4, 0],\n    [1, 0, 0, 5]\n]\n\nvals, col_idx, row_ptr = compressed_row_sparse_matrix(dense_matrix)\nprint(\"Values array:\", vals)\nprint(\"Column indices array:\", col_idx)\nprint(\"Row pointer array:\", row_ptr)",
+  "output": "Values array: [1, 2, 3, 4, 1, 5]\nColumn indices array: [0, 1, 0, 2, 0, 3]\nRow pointer array: [0, 1, 2, 4, 6]",
+  "reasoning": "The dense matrix is converted to CSR format with the values array containing non-zero elements, column indices array storing the corresponding column index, and row pointer array indicating the start of each row in the values array."
+}

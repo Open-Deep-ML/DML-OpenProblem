@@ -1,0 +1,5 @@
+{
+  "input": "matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], mode = 'column'",
+  "output": "[4.0, 5.0, 6.0]",
+  "reasoning": "Calculating the mean of each column results in [(1+4+7)/3, (2+5+8)/3, (3+6+9)/3]."
+}

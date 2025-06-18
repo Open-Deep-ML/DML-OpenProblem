@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nPx = np.random.randn(4, 10)\nQx = np.random.randn(4, 10)\nmu1, cov1, mu2, cov2 = np.mean(Px, axis=1), np.cov(Px), np.mean(Qx, axis=1), np.cov(Qx)\nprint(round(multivariate_kl_divergence(mu1, cov1, mu2, cov2),4))",
+    "expected_output": "2.193"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nPx = np.random.randn(3, 8)\nQx = np.random.randn(3, 8)\nmu1, cov1, mu2, cov2 = np.mean(Px, axis=1), np.cov(Px), np.mean(Qx, axis=1), np.cov(Qx)\nprint(round(multivariate_kl_divergence(mu1, cov1, mu2, cov2),4))",
+    "expected_output": "1.7741"
+  }
+]

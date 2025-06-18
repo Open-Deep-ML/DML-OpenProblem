@@ -1,0 +1,5 @@
+{
+  "input": "X = np.random.randn(1, 2, 2, 1); kernels = [np.random.randn(3, 3, 2 + i*1, 1) * 0.01 for i in range(2)]; print(dense_net_block(X, 2, 1, kernels))",
+  "reasoning": "Each dense block layer concatenates its output to the existing feature maps, expanding the number of output channels by 1 per layer (the growth rate). After 2 layers, the original 2 channels become 4.",
+  "output": "[[[[ 4.96714153e-01, -1.38264301e-01, -2.30186127e-03, -6.70426255e-05]]]]"
+}

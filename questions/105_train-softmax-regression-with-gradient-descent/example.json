@@ -1,0 +1,5 @@
+{
+  "input": "train_softmaxreg(np.array([[0.5, -1.2], [-0.3, 1.1], [0.8, -0.6]]), np.array([0, 1, 2]), 0.01, 10)",
+  "reasoning": "The function iteratively updates the Softmax regression parameters using gradient descent and collects loss values over iterations.",
+  "output": "([[-0.0011, 0.0145, -0.0921], [0.002, -0.0598, 0.1263], [-0.0009, 0.0453, -0.0342]], [3.2958, 3.2611, 3.2272, 3.1941, 3.1618, 3.1302, 3.0993, 3.0692, 3.0398, 3.011])"
+}

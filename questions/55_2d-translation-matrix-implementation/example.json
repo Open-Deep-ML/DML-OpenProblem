@@ -1,0 +1,5 @@
+{
+  "input": "points = [[0, 0], [1, 0], [0.5, 1]]\ntx, ty = 2, 3\n\nprint(translate_object(points, tx, ty))",
+  "output": "[[2.0, 3.0], [3.0, 3.0], [2.5, 4.0]]",
+  "reasoning": "The translation matrix moves the points by 2 units in the x-direction and 3 units in the y-direction. The resulting points are [[2.0, 3.0], [3.0, 3.0], [2.5, 4.0]]."
+}

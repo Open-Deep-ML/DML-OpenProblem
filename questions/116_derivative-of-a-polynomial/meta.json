@@ -1,0 +1,17 @@
+{
+  "id": "116",
+  "title": "Derivative of a Polynomial",
+  "difficulty": "easy",
+  "category": "calculus",
+  "video": "https://youtu.be/xoRFwJdDT0A",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Selbl",
+      "name": "Selbl"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

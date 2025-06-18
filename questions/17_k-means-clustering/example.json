@@ -1,0 +1,5 @@
+{
+  "input": "points = [(1, 2), (1, 4), (1, 0), (10, 2), (10, 4), (10, 0)], k = 2, initial_centroids = [(1, 1), (10, 1)], max_iterations = 10",
+  "output": "[(1, 2), (10, 2)]",
+  "reasoning": "Given the initial centroids and a maximum of 10 iterations,\n        the points are clustered around these points, and the centroids are\n        updated to the mean of the assigned points, resulting in the final\n        centroids which approximate the means of the two clusters.\n        The exact number of iterations needed may vary,\n        but the process will stop after 10 iterations at most."
+}

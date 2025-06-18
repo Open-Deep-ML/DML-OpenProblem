@@ -1,0 +1,17 @@
+{
+  "id": "35",
+  "title": "Convert Vector to Diagonal Matrix",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/iT5dQ9hl-KQ",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/adarsh3690704",
+      "name": "Adarsh R"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

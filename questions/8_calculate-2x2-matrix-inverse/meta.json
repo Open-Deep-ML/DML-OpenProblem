@@ -1,0 +1,21 @@
+{
+  "id": "8",
+  "title": "Calculate 2x2 Matrix Inverse",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/-fhFySMHPZk",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy"
+}

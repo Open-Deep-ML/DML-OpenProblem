@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(normal_pdf(0, 0, 1))",
+    "expected_output": "0.39894"
+  },
+  {
+    "test": "print(normal_pdf(16, 15, 2.04))",
+    "expected_output": "0.17342"
+  },
+  {
+    "test": "print(normal_pdf(1, 0, 0.5))",
+    "expected_output": "0.10798"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\nX = np.array([[1, 1], [2, 1], [3, 1], [4, 1]])\nw = np.array([0.2, 2])\ny_true = np.array([2, 3, 4, 5])\nalpha = 0.1\n\nloss = ridge_loss(X, w, y_true, alpha)\nprint(loss)",
+  "output": "2.204",
+  "reasoning": "The Ridge loss is calculated using the Mean Squared Error (MSE) and a regularization term. The output represents the combined loss value."
+}

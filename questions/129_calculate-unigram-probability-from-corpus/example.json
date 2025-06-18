@@ -1,0 +1,5 @@
+{
+  "input": "corpus = \"<s> Jack I like </s> <s> Jack I do like </s>\", word = \"Jack\"",
+  "output": "0.1818",
+  "reasoning": "The corpus has 11 total tokens. 'Jack' appears twice. So, probability = 2 / 11"
+}

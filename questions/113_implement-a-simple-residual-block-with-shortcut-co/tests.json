@@ -1,0 +1,14 @@
+[
+  {
+    "test": "x = np.array([1.0, 2.0])\nw1 = np.array([[1.0, 0.0], [0.0, 1.0]])\nw2 = np.array([[0.5, 0.0], [0.0, 0.5]])\nprint(residual_block(x, w1, w2))",
+    "expected_output": "[1.5,3.]"
+  },
+  {
+    "test": "x = np.array([-1.0, 2.0])\nw1 = np.array([[1.0, 0.0], [0.0, 1.0]])\nw2 = np.array([[0.5, 0.0], [0.0, 0.5]])\nprint(residual_block(x, w1, w2))",
+    "expected_output": "[0.,3.]"
+  },
+  {
+    "test": "x = np.array([0.0, 0.0])\nw1 = np.array([[1.0, 0.0], [0.0, 1.0]])\nw2 = np.array([[0.5, 0.0], [0.0, 0.5]])\nprint(residual_block(x, w1, w2))",
+    "expected_output": "[0.,0.]"
+  }
+]

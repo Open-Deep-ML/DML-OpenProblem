@@ -1,0 +1,5 @@
+{
+  "input": "a = [1, 3], b = [4, 5]",
+  "output": "[5, 8]",
+  "reasoning": "Element-wise sum: [1+4, 3+5] = [5, 8]."
+}

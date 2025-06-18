@@ -1,0 +1,5 @@
+{
+  "input": "prompt=\"hello\", n_tokens_to_generate=5",
+  "output": "world <UNK> <UNK> <UNK> <UNK>",
+  "reasoning": "The function encodes the input \"hello\" into tokens using the dummy encoder, then runs a simplified GPT-2 forward pass to generate 5 tokens. Finally, it decodes the generated tokens back into text."
+}

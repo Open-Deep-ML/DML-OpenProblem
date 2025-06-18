@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(leaky_relu(5))",
+    "expected_output": "5"
+  },
+  {
+    "test": "print(leaky_relu(1))",
+    "expected_output": "1"
+  },
+  {
+    "test": "print(leaky_relu(-1))",
+    "expected_output": "-0.01"
+  }
+]

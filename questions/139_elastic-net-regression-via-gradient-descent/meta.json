@@ -1,0 +1,17 @@
+{
+  "id": "139",
+  "title": "Elastic Net Regression via Gradient Descent",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/komaksym",
+      "name": "komaksym"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

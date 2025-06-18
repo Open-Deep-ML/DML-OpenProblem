@@ -1,0 +1,5 @@
+{
+  "input": "source = \"butterfly\"\ntarget = \"dragonfly\"\n\ndistance = OSA(source, target)\nprint(distance)",
+  "output": "6",
+  "reasoning": "The OSA distance between the strings \"butterfly\" and \"dragonfly\" is 6. The minimum number of edits required to transform the source string into the target string is 6."
+}

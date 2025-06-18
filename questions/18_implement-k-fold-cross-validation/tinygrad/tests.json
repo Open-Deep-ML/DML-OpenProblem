@@ -1,0 +1,10 @@
+[
+  {
+    "test": "res = k_fold_cross_validation_tg(list(range(6)), list(range(6)), k=3, shuffle=False)\nprint(res)",
+    "expected_output": "[([2, 3, 4, 5], [0, 1]), ([0, 1, 4, 5], [2, 3]), ([0, 1, 2, 3], [4, 5])]"
+  },
+  {
+    "test": "res = k_fold_cross_validation_tg(list(range(8)), list(range(8)), k=4, shuffle=False)\nprint(res)",
+    "expected_output": "[([2, 3, 4, 5, 6, 7], [0, 1]), ([0, 1, 4, 5, 6, 7], [2, 3]), ([0, 1, 2, 3, 6, 7], [4, 5]), ([0, 1, 2, 3, 4, 5], [6, 7])]"
+  }
+]

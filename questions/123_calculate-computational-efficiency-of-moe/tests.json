@@ -1,0 +1,10 @@
+[
+  {
+    "test": "print(round(compute_efficiency(1000, 2, 512, 512),1))",
+    "expected_output": "99.8"
+  },
+  {
+    "test": "print(round(compute_efficiency(10, 2, 256, 256),1))",
+    "expected_output": "80.0"
+  }
+]

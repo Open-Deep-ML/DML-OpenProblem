@@ -1,0 +1,18 @@
+{
+  "id": "17",
+  "title": "K-Means Clustering",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "https://youtu.be/KzJORp8bgqs?si=BBrGGuCAWt_AA8QV",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Haleshot",
+      "name": "Srihari Thyagarajan"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium",
+  "marimo_link": "https://adityakhalkar.github.io/Deep-ML-x-Marimo/17"
+}

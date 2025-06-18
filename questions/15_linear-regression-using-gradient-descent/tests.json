@@ -1,0 +1,6 @@
+[
+  {
+    "test": "print(linear_regression_gradient_descent(np.array([[1, 1], [1, 2], [1, 3]]), np.array([1, 2, 3]), 0.01, 1000))",
+    "expected_output": "[0.1107, 0.9513]"
+  }
+]

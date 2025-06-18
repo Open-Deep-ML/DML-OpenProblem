@@ -1,0 +1,5 @@
+{
+  "input": "number of crystals: 5\nvalues: 4 2 7 1 9\n dimension: 1",
+  "output": "[8.9993, 8.9638, 9.0, 8.7259, 9.0]",
+  "reasoning": "The self-attention mechanism calculates relationships (attention scores) for each crystal using the given formula. These scores are converted to probabilities using the softmax function, and the final weighted pattern for each crystal is derived by summing the weighted values."
+}

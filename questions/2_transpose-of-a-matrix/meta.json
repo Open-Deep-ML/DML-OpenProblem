@@ -1,0 +1,17 @@
+{
+  "id": "2",
+  "title": "Transpose of a Matrix",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/fj0ZJ2gTSmI?si=vG8VSqASjyG0eNLY",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy"
+}

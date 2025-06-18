@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(compute_pmi(10, 50, 50, 200))",
+    "expected_output": "-0.322"
+  },
+  {
+    "test": "print(compute_pmi(100, 500, 500, 1000))",
+    "expected_output": "-1.322"
+  },
+  {
+    "test": "print(float(compute_pmi(100, 400, 600, 1200)))",
+    "expected_output": "-1."
+  }
+]

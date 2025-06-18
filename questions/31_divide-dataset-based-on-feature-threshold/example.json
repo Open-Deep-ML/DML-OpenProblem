@@ -1,0 +1,5 @@
+{
+  "input": "X = np.array([[1, 2], \n                  [3, 4], \n                  [5, 6], \n                  [7, 8], \n                  [9, 10]])\n    feature_i = 0\n    threshold = 5",
+  "output": "[array([[ 5,  6],\n                    [ 7,  8],\n                    [ 9, 10]]), \n             array([[1, 2],\n                    [3, 4]])]",
+  "reasoning": "The dataset X is divided based on whether the value in the 0th feature (first column) is greater than or equal to 5. Samples with the first column value >= 5 are in the first subset, and the rest are in the second subset."
+}

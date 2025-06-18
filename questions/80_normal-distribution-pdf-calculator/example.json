@@ -1,0 +1,5 @@
+{
+  "input": "x = 16, mean = 15, std_dev = 2.04",
+  "output": "0.17342",
+  "reasoning": "The function computes the PDF using x = 16, mean = 15, and std_dev = 2.04."
+}

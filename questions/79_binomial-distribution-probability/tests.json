@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(binomial_probability(6, 2, 0.5))",
+    "expected_output": "0.23438"
+  },
+  {
+    "test": "print(binomial_probability(6, 4, 0.7))",
+    "expected_output": "0.32414"
+  },
+  {
+    "test": "print(binomial_probability(3, 3, 0.9))",
+    "expected_output": "0.729"
+  },
+  {
+    "test": "print(binomial_probability(5, 0, 0.3))",
+    "expected_output": "0.16807"
+  },
+  {
+    "test": "print(binomial_probability(7, 2, 0.1))",
+    "expected_output": "0.124"
+  }
+]

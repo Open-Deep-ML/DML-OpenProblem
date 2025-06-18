@@ -1,0 +1,5 @@
+{
+  "input": "x = np.array([0, 1, 2, 1, 0])\n    output = to_categorical(x)\n    print(output)",
+  "output": "# [[1. 0. 0.]\n    #  [0. 1. 0.]\n    #  [0. 0. 1.]\n    #  [0. 1. 0.]\n    #  [1. 0. 0.]]",
+  "reasoning": "Each element in the input array is transformed into a one-hot encoded vector,\n    where the index corresponding to the value in the input array is set to 1, \n    and all other indices are set to 0."
+}
