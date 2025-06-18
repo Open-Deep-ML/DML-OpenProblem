@@ -1,0 +1,5 @@
+{
+  "input": "p = [0.1, 0.2, 0.3, 0.4], q = [0.4, 0.3, 0.2, 0.1]",
+  "output": "0.1166",
+  "reasoning": "The Bhattacharyya coefficient is calculated as the sum of element-wise square roots of the product of p and q, giving BC = 0.8898. The distance is then -log(0.8898) = 0.1166."
+}

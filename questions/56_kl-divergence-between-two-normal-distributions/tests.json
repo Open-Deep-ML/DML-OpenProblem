@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import numpy as np\n\nmu_p = 0.0\nsigma_p = 1.0\nmu_q = 0.0\nsigma_q = 1.0\nprint(kl_divergence_normal(mu_p, sigma_p, mu_q, sigma_q))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "import numpy as np\n\nmu_p = 0.0\nsigma_p = 1.0\nmu_q = 1.0\nsigma_q = 1.0\nprint(kl_divergence_normal(mu_p, sigma_p, mu_q, sigma_q))",
+    "expected_output": "0.5"
+  },
+  {
+    "test": "import numpy as np\n\nmu_p = 0.0\nsigma_p = 1.0\nmu_q = 0.0\nsigma_q = 2.0\nprint(kl_divergence_normal(mu_p, sigma_p, mu_q, sigma_q))",
+    "expected_output": "0.3181471805599453"
+  },
+  {
+    "test": "import numpy as np\n\nmu_p = 1.0\nsigma_p = 1.0\nmu_q = 0.0\nsigma_q = 2.0\nprint(kl_divergence_normal(mu_p, sigma_p, mu_q, sigma_q))",
+    "expected_output": "0.4431471805599453"
+  }
+]

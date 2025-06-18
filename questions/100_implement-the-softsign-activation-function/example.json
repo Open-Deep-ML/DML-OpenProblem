@@ -1,0 +1,5 @@
+{
+  "input": "softsign(1)",
+  "output": "0.5",
+  "reasoning": "For x = 1, the Softsign activation is calculated as $\\frac{x}{1 + |x|}$."
+}

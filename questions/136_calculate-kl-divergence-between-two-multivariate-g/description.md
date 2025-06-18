@@ -1,0 +1,1 @@
+KL divergence measures the dissimilarity between two probability distributions. In this problem, you'll implement a function to compute the KL divergence between two multivariate Gaussian distributions given their means and covariance matrices. Use the provided mathematical formulas and numerical considerations to ensure accuracy.

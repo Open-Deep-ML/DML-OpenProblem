@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\nx = np.array([[[0.94378259]],[[0.97754654]],[[0.36168351]],[[0.51821078]],[[0.76961589]]])\ngamma = np.ones((1,))\nbeta = np.zeros((1,))\nprint(np.round(dynamic_tanh(x, 0.5, gamma, beta),4))",
+    "expected_output": "[[[0.4397]], [[0.4532]], [[0.1789]], [[0.2535]], [[0.3669]]]"
+  },
+  {
+    "test": "import numpy as np\nx = np.array([[[0.20793482, 0.16989285, 0.03898972], [0.17912554, 0.10962205, 0.3870742], [0.00107181, 0.35807922, 0.15861333]]])\ngamma = np.ones((3,))\nbeta = np.zeros((3,))\nprint(np.round(dynamic_tanh(x, 0.5, gamma, beta),4))",
+    "expected_output": "[[[[0.1036, 0.0847, 0.0195], [0.0893, 0.0548, 0.1912], [0.0005, 0.1772, 0.0791]]]]"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "v = [3, 4]\nL = [1, 0]\nprint(orthogonal_projection(v, L))",
+    "expected_output": "[3.0, 0.0]"
+  },
+  {
+    "test": "v = [1, 2, 3]\nL = [0, 0, 1]\nprint(orthogonal_projection(v, L))",
+    "expected_output": "[0.0, 0.0, 3.0]"
+  },
+  {
+    "test": "v = [5, 6, 7]\nL = [2, 0, 0]\nprint(orthogonal_projection(v, L))",
+    "expected_output": "[5.0, 0.0, 0.0]"
+  }
+]

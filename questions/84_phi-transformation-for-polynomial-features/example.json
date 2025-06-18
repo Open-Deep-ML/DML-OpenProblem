@@ -1,0 +1,5 @@
+{
+  "input": "data = [1.0, 2.0], degree = 2",
+  "output": "[[1.0, 1.0, 1.0], [1.0, 2.0, 4.0]]",
+  "reasoning": "The Phi Transformation generates polynomial features for each data point up to the specified degree. For data = [1.0, 2.0] and degree = 2, the transformation creates a nested list where each row contains powers of the data point from 0 to 2."
+}

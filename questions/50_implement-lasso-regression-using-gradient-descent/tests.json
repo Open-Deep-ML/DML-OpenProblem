@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\n\nX = np.array([[0, 0], [1, 1], [2, 2]])\ny = np.array([0, 1, 2])\n\nalpha = 0.1\noutput = l1_regularization_gradient_descent(X, y, alpha=alpha, learning_rate=0.01, max_iter=1000)\nprint(output)",
+    "expected_output": "(array([0.42371644, 0.42371644]), 0.15385068459377865)"
+  },
+  {
+    "test": "import numpy as np\n\nX = np.array([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])\ny = np.array([1, 2, 3, 4, 5])\n\nalpha = 0.1\noutput = l1_regularization_gradient_descent(X, y, alpha=alpha, learning_rate=0.01, max_iter=1000)\nprint(output)",
+    "expected_output": "(array([0.27280148, 0.68108784]), 0.4082863608718005)"
+  }
+]

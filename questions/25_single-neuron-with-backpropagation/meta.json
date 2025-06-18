@@ -1,0 +1,17 @@
+{
+  "id": "25",
+  "title": "Single Neuron with Backpropagation",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/LPfsTFcFqU4",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/evintunador",
+      "name": "evintunador"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium"
+}

@@ -1,0 +1,1 @@
+Develop a function to compute the METEOR score for evaluating machine translation quality. Given a reference translation and a candidate translation, calculate the score based on unigram matches, precision, recall, F-mean, and a penalty for word order fragmentation.

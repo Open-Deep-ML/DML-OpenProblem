@@ -1,0 +1,5 @@
+{
+  "input": "img = [\n    [100, 200],\n    [50, 150]\n]\nprint(calculate_brightness(img))",
+  "output": "125.0",
+  "reasoning": "The average brightness is calculated as (100 + 200 + 50 + 150) / 4 = 125.0"
+}

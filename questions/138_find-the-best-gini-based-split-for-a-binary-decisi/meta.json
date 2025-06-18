@@ -1,0 +1,17 @@
+{
+  "id": "138",
+  "title": "Find the Best Gini-Based Split for a Binary Decision Tree",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/hardik1408",
+      "name": "Hardik Jindal"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

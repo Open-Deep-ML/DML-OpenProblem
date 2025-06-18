@@ -1,0 +1,21 @@
+{
+  "id": "32",
+  "title": "Generate Sorted Polynomial Features",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/eriklindernoren/ML-From-Scratch",
+      "name": "Erik Linder-Norén"
+    },
+    {
+      "profile_link": "https://github.com/peppermin-t",
+      "name": "Yinjia Chen"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

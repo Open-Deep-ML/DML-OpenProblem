@@ -1,0 +1,10 @@
+[
+  {
+    "test": "X = np.array([[0, 0], [1, 1], [2, 2]])\ny = np.array([0, 1, 2])\nw, b = elastic_net_gradient_descent(X, y, alpha1=0.1, alpha2=0.1, learning_rate=0.01, max_iter=1000)\nprint(np.round(w,2), round(b,2))",
+    "expected_output": "[0.37, 0.37],0.25"
+  },
+  {
+    "test": "X = np.array([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])\ny = np.array([1, 2, 3, 4, 5])\nw, b = elastic_net_gradient_descent(X, y, alpha1=0.1, alpha2=0.1, learning_rate=0.01, max_iter=2000)\nprint(np.round(w,2),round(b,2))",
+    "expected_output": "[0.43, 0.48], 0.69"
+  }
+]

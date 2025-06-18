@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(predict_logistic(np.array([[1, 1], [2, 2], [-1, -1], [-2, -2]]), np.array([1, 1]), 0))",
+    "expected_output": "[1 1 0 0]"
+  },
+  {
+    "test": "print(predict_logistic(np.array([[0, 0], [0.1, 0.1], [-0.1, -0.1]]), np.array([1, 1]), 0))",
+    "expected_output": "[1 1 0]"
+  },
+  {
+    "test": "print(predict_logistic(np.array([[1, 2, 3], [-1, -2, -3], [0.5, 1, 1.5]]), np.array([0.1, 0.2, 0.3]), -1))",
+    "expected_output": "[1 0 0]"
+  },
+  {
+    "test": "print(predict_logistic(np.array([[1], [2], [-1], [-2]]), np.array([2]), 0))",
+    "expected_output": "[1 1 0 0]"
+  },
+  {
+    "test": "print(predict_logistic(np.array([[1000, 2000], [-1000, -2000]]), np.array([0.1, 0.1]), 0))",
+    "expected_output": "[1 0]"
+  }
+]

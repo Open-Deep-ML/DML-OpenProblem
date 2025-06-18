@@ -1,0 +1,18 @@
+[
+  {
+    "test": "print(round(meteor_score('The dog barks at the moon', 'The dog barks at the moon'),3))",
+    "expected_output": "0.998"
+  },
+  {
+    "test": "print(round(meteor_score('Rain falls gently from the sky', 'Gentle rain drops from the sky'),3))",
+    "expected_output": "0.625"
+  },
+  {
+    "test": "print(round(meteor_score('The sun shines brightly', 'Clouds cover the sky'),3))",
+    "expected_output": "0.125"
+  },
+  {
+    "test": "print(round(meteor_score('Birds sing in the trees', 'Birds in the trees sing'),3))",
+    "expected_output": "0.892"
+  }
+]

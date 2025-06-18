@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(abs(find_treasure(-1) - 2.25) < 1e-2)",
+    "expected_output": "True"
+  },
+  {
+    "test": "print(abs(find_treasure(1.0) - 2.25) < 1e-2)",
+    "expected_output": "True"
+  },
+  {
+    "test": "print(abs(find_treasure(3.0) - 2.25) < 1e-2)",
+    "expected_output": "True"
+  }
+]

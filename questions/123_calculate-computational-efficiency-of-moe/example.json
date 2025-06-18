@@ -1,0 +1,5 @@
+{
+  "input": "compute_efficiency(1000, 2, 512, 512)",
+  "output": "99.8",
+  "reasoning": "Dense layer FLOPs: 1000 * 512 * 512 = 262,144,000. MoE FLOPs: 2 * 512 * 512 = 524,288. Savings:  ((262,144,000 - 524,288) / 262,144,000) x 100 ≈ 99.8%."
+}

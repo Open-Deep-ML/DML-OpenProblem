@@ -1,0 +1,17 @@
+{
+  "id": "107",
+  "title": "Implement Masked Self-Attention",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/R_OISH-JWPA?si=DP5hKJHoe2uKdjON",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/nzomi",
+      "name": "nzomi"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

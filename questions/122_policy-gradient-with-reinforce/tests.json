@@ -1,0 +1,10 @@
+[
+  {
+    "test": "theta = np.zeros((2,2)); episodes = [[(0,1,0), (1,0,1)], [(0,0,0)]]; print(np.round(compute_policy_gradient(theta, episodes), 4))",
+    "expected_output": "[[-0.25  0.25]\n [ 0.25 -0.25]]"
+  },
+  {
+    "test": "theta = np.zeros((2,2)); episodes = [[(0,0,0)], [(0,1,0), (1,1,0)]]; print(np.round(compute_policy_gradient(theta, episodes), 4))",
+    "expected_output": "[[0. 0.]\n [0. 0.]]"
+  }
+]

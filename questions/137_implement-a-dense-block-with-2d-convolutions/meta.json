@@ -1,0 +1,17 @@
+{
+  "id": "137",
+  "title": "Implement a Dense Block with 2D Convolutions",
+  "difficulty": "hard",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

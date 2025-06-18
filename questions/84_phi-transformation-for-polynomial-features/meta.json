@@ -1,0 +1,17 @@
+{
+  "id": "84",
+  "title": "Phi Transformation for Polynomial Features",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/changyy06",
+      "name": "changyy06"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

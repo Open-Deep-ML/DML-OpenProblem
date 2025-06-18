@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nX = np.random.randn(1, 1, 1, 2)\nkernels = [np.random.randn(3, 3, 2 + i*1, 1) * 0.01 for i in range(2)]\nprint(dense_net_block(X, 2, 1, kernels))",
+    "expected_output": "[[[[ 4.96714153e-01, -1.38264301e-01, -2.30186127e-03, -6.70426255e-05]]]]"
+  },
+  {
+    "test": "import numpy as np\n\nnp.random.seed(42)\nX = np.random.randn(1, 2, 3, 2)\nkernels = [np.random.randn(3, 3, 2 + i*1, 1) * 0.01 for i in range(2)]\nprint(dense_net_block(X, 2, 1, kernels))",
+    "expected_output": "[[[[ 0.49671415, -0.1382643 , -0.0308579 , -0.01845547], [ 0.64768854, 1.52302986, -0.0041634 , -0.0161227 ], [-0.23415337, -0.23413696, -0.02678915, 0.00295656]], [[ 1.57921282, 0.76743473, 0.00334109, -0.04043312], [-0.46947439, 0.54256004, -0.04493715, 0.00983633], [-0.46341769, -0.46572975, -0.03523526, 0.02832019]]]]"
+  }
+]

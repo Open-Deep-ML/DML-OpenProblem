@@ -1,0 +1,14 @@
+[
+  {
+    "test": "\n# Test Case 1: Normal Case  \ny_true1 = np.array([3, -0.5, 2, 7])\ny_pred1 = np.array([2.5, 0.0, 2, 8])\nprint(rmse(y_true1, y_pred1))\n",
+    "expected_output": "0.612"
+  },
+  {
+    "test": "\n# Test Case 2: 2D Array \ny_true2 = np.array([[0.5, 1], [-1, 1], [7, -6]])\ny_pred2 = np.array([[0, 2], [-1, 2], [8, -5]])\nprint(rmse(y_true2, y_pred2))\n",
+    "expected_output": "0.842"
+  },
+  {
+    "test": "\n# Test Case 3: Perfect predictions\ny_true3 = np.array([[1, 2], [3, 4]])\ny_pred3 = np.array([[1, 2], [3, 4]])\nprint(rmse(y_true3, y_pred3))\n",
+    "expected_output": "0.0"
+  }
+]

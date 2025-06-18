@@ -1,0 +1,17 @@
+{
+  "id": "133",
+  "title": "Implement Q-Learning Algorithm for MDPs",
+  "difficulty": "medium",
+  "category": "Reinforcement Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "moe"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

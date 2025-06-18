@@ -1,0 +1,17 @@
+{
+  "id": "51",
+  "title": "Optimal String Alignment Distance",
+  "difficulty": "medium",
+  "category": "NLP",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/12345pnp",
+      "name": "Biplab P."
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

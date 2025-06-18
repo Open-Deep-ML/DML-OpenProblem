@@ -1,0 +1,17 @@
+{
+  "id": "19",
+  "title": "Principal Component Analysis (PCA) Implementation",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/jon-rosen",
+      "name": "jon-rosen"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "80",
+  "title": "Normal Distribution PDF Calculator",
+  "difficulty": "medium",
+  "category": "Probability",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/BhardwajArjit",
+      "name": "Arjit Bhardwaj"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

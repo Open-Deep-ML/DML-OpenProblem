@@ -1,0 +1,5 @@
+{
+  "input": "input_sequence = [[1.0], [2.0], [3.0]]\n    initial_hidden_state = [0.0]\n    Wx = [[0.5]]  # Input to hidden weights\n    Wh = [[0.8]]  # Hidden to hidden weights\n    b = [0.0]     # Bias",
+  "output": "final_hidden_state = [0.9993]",
+  "reasoning": "The RNN processes each input in the sequence, updating the hidden state at each step using the tanh activation function."
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = solve_jacobi_tg(\n    [[4.0,1.0],[2.0,3.0]],\n    [1.0,2.0],\n    10\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[0.1, 0.6]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = solve_jacobi_tg(\n    [[3.0,0.0],[0.0,3.0]],\n    [3.0,6.0],\n    5\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[1.0, 2.0]"
+  }
+]

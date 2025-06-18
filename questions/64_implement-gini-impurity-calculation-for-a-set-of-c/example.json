@@ -1,0 +1,5 @@
+{
+  "input": "y = [0, 1, 1, 1, 0]\nprint(gini_impurity(y))",
+  "output": "0.48",
+  "reasoning": "The Gini Impurity is calculated as 1 - (p_0^2 + p_1^2), where p_0 and p_1 are the probabilities of each class. In this case, p_0 = 2/5 and p_1 = 3/5, resulting in a Gini Impurity of 0.48."
+}

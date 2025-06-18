@@ -1,0 +1,15 @@
+{
+  "id": "26",
+  "title": "Implementing Basic Autograd Operations",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": [
+    "https://youtu.be/VMj-3S1tku0?si=gjlnFP4o3JRN9dTg",
+    "https://youtu.be/heSdPbAfFH4"
+  ],
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": null,
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium"
+}

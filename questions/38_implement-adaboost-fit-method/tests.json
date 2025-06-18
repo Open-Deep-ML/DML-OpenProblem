@@ -1,0 +1,10 @@
+[
+  {
+    "test": "X = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])\ny = np.array([1, 1, -1, -1])\nn_clf = 3\nclfs = adaboost_fit(X, y, n_clf)\nprint(clfs)",
+    "expected_output": "[{'polarity': -1, 'threshold': 3, 'feature_index': 0, 'alpha': 11.512925464970229}, {'polarity': -1, 'threshold': 3, 'feature_index': 0, 'alpha': 11.512925464970229}, {'polarity': -1, 'threshold': 3, 'feature_index': 0, 'alpha': 11.512925464970229}]"
+  },
+  {
+    "test": "X = np.array([[8, 7], [3, 4], [5, 9], [4, 0], [1, 0], [0, 7], [3, 8], [4, 2], [6, 8], [0, 2]])\ny = np.array([1, -1, 1, -1, 1, -1, -1, -1, 1, 1])\nn_clf = 2\nclfs = adaboost_fit(X, y, n_clf)\nprint(clfs)",
+    "expected_output": "[{'polarity': 1, 'threshold': 5, 'feature_index': 0, 'alpha': 0.6931471803099453}, {'polarity': -1, 'threshold': 3, 'feature_index': 0, 'alpha': 0.5493061439673882}]"
+  }
+]

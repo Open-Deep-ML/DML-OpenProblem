@@ -1,0 +1,5 @@
+{
+  "input": "x = np.array([[[0.14115588, 0.00372817, 0.24126647, 0.22183601]]])\ngamma = np.ones((4,))\nbeta = np.zeros((4,))\nalpha = 0.5\nprint(dynamic_tanh(x, alpha, gamma, beta))",
+  "output": "[[[0.0705, 0.0019, 0.1201, 0.1105]]]",
+  "reasoning": "Each element in the input is scaled by alpha, passed through tanh, and then scaled by gamma and shifted by beta. This mimics the squashing behavior of layer normalization without explicitly using statistics."
+}

@@ -1,0 +1,1 @@
+Implement the prediction function for binary classification using Logistic Regression. Your task is to compute class probabilities using the sigmoid function and return binary predictions based on a threshold of 0.5.

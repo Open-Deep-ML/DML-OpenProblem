@@ -1,0 +1,1 @@
+Implement a gradient descent-based training algorithm for Softmax regression. Your task is to compute model parameters using Cross Entropy loss and return the optimized coefficients along with collected loss values over iterations. Make sure to round your solution to 4 decimal places

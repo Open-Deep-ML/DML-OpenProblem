@@ -1,0 +1,5 @@
+{
+  "input": "x = np.array([1.0, 2.0]), w1 = np.array([[1.0, 0.0], [0.0, 1.0]]), w2 = np.array([[0.5, 0.0], [0.0, 0.5]])",
+  "output": "[1.5, 3.0]",
+  "reasoning": "The input x is [1.0, 2.0]. First, compute w1 @ x = [1.0, 2.0], apply ReLU to get [1.0, 2.0]. Then, compute w2 @ [1.0, 2.0] = [0.5, 1.0]. Add the shortcut x to get [0.5 + 1.0, 1.0 + 2.0] = [1.5, 3.0]. Final ReLU gives [1.5, 3.0]."
+}

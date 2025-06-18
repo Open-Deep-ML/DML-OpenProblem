@@ -1,0 +1,5 @@
+{
+  "input": "dense_matrix = [\n    [0, 0, 3, 0],\n    [1, 0, 0, 4],\n    [0, 2, 0, 0]\n]\n\nvals, row_idx, col_ptr = compressed_col_sparse_matrix(dense_matrix)",
+  "output": "[1, 2, 3, 4] [1, 2, 0, 1] [0, 1, 2, 3, 4]",
+  "reasoning": "The dense matrix is converted to CSC format with the values array containing non-zero elements, row indices array storing the corresponding row index, and column pointer array indicating the start of each column in the values array."
+}

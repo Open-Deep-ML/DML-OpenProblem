@@ -1,0 +1,17 @@
+{
+  "id": "54",
+  "title": "Implementing a Simple RNN",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": null,
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

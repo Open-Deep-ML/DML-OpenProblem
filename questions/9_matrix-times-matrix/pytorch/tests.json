@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import torch\nres = matrixmul(\n    torch.tensor([[1,2],[3,4]]),\n    torch.tensor([[1,0],[0,1]])\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[[1, 2], [3, 4]]"
+  },
+  {
+    "test": "import torch\nres = matrixmul(\n    torch.tensor([[1,2,3],[2,4,5],[6,8,9]]),\n    torch.tensor([[1,2],[3,4],[5,6]])\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[[22, 28], [39, 50], [75, 98]]"
+  },
+  {
+    "test": "import torch\nres = matrixmul(\n    torch.tensor([[1,2,3],[2,4,5]]),\n    torch.tensor([[1,2],[3,4]])\n)\nprint(res.numpy().tolist())",
+    "expected_output": "-1"
+  }
+]

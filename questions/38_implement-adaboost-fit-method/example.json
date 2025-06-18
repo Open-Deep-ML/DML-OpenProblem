@@ -1,0 +1,5 @@
+{
+  "input": "X = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])\n    y = np.array([1, 1, -1, -1])\n    n_clf = 3\n\n    clfs = adaboost_fit(X, y, n_clf)\n    print(clfs)",
+  "output": "(example format, actual values may vary):\n    # [{'polarity': 1, 'threshold': 2, 'feature_index': 0, 'alpha': 0.5},\n    #  {'polarity': -1, 'threshold': 3, 'feature_index': 1, 'alpha': 0.3},\n    #  {'polarity': 1, 'threshold': 4, 'feature_index': 0, 'alpha': 0.2}]",
+  "reasoning": "The function fits an AdaBoost classifier on the dataset X with the given labels y and number of classifiers n_clf. It returns a list of classifiers with their parameters, including the polarity, threshold, feature index, and alpha values"
+}

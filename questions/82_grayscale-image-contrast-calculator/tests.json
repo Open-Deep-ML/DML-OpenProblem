@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(calculate_contrast(np.array([[0, 50], [200, 255]])))",
+    "expected_output": "255"
+  },
+  {
+    "test": "print(calculate_contrast(np.array([[128, 128], [128, 128]])))",
+    "expected_output": "0"
+  },
+  {
+    "test": "print(calculate_contrast(np.zeros((10, 10), dtype=np.uint8)))",
+    "expected_output": "0"
+  },
+  {
+    "test": "print(calculate_contrast(np.ones((10, 10), dtype=np.uint8) * 255))",
+    "expected_output": "0"
+  },
+  {
+    "test": "print(calculate_contrast(np.array([[10, 20, 30], [40, 50, 60]])))",
+    "expected_output": "50"
+  }
+]

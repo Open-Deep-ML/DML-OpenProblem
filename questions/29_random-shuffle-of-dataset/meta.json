@@ -1,0 +1,17 @@
+{
+  "id": "29",
+  "title": "Random Shuffle of Dataset",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/eriklindernoren/ML-From-Scratch",
+      "name": "Erik Linder-Norén"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

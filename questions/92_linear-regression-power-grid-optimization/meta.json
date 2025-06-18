@@ -1,0 +1,17 @@
+{
+  "id": "92",
+  "title": "Linear Regression - Power Grid Optimization",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://groundzeroai.netlify.app/",
+      "name": "GroundZero AI"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

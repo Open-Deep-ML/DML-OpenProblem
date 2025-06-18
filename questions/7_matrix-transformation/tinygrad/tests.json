@@ -1,0 +1,14 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = transform_matrix_tg(\n    [[1,2],[3,4]],\n    [[1,0],[0,1]],\n    [[1,0],[0,1]]\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[[1.0, 2.0], [3.0, 4.0]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = transform_matrix_tg(\n    [[1,2],[3,4]],\n    [[2,0],[0,3]],\n    [[1,0],[0,1]]\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[[0.5, 1.0], [1.0, 1.333]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = transform_matrix_tg(\n    [[1,2],[3,4]],\n    [[1,0],[0,1]],\n    [[1,0],[0,0]]\n)\nprint(res.numpy().tolist())",
+    "expected_output": "-1.0"
+  }
+]

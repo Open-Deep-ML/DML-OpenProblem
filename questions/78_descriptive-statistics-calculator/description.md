@@ -1,0 +1,1 @@
+Write a Python function to calculate various descriptive statistics metrics for a given dataset. The function should take a list or NumPy array of numerical values and return a dictionary containing mean, median, mode, variance, standard deviation, percentiles (25th, 50th, 75th), and interquartile range (IQR).

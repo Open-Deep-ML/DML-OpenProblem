@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\n\nA = np.array([[2,8,4], [2,5,1], [4,10,-1]], dtype=float)\nb = np.array([2,5,1], dtype=float)\nprint(gaussian_elimination(A, b))",
+    "expected_output": "[11.0, -4.0, 3.0]"
+  },
+  {
+    "test": "import numpy as np\n\nA = np.array([\n    [0, 2, 1, 0, 0, 0, 0],\n    [2, 6, 2, 1, 0, 0, 0],\n    [1, 2, 7, 2, 1, 0, 0],\n    [0, 1, 2, 8, 2, 1, 0],\n    [0, 0, 1, 2, 9, 2, 1],\n    [0, 0, 0, 1, 2, 10, 2],\n    [0, 0, 0, 0, 1, 2, 11]\n], dtype=float)\nb = np.array([1, 2, 3, 4, 5, 6, 7], dtype=float)\nprint(gaussian_elimination(A, b))",
+    "expected_output": "[-0.4894027,   0.36169985,  0.2766003,   0.25540569,  0.31898951,  0.40387497, 0.53393278]"
+  },
+  {
+    "test": "import numpy as np\n\nA = np.array([[2, 1, -1], [-3, -1, 2], [-2, 1, 2]], dtype=float)\nb = np.array([8, -11, -3], dtype=float)\nprint(gaussian_elimination(A, b))",
+    "expected_output": "[2.0, 3.0, -1.0]"
+  }
+]

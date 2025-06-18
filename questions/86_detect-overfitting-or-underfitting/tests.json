@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(model_fit_quality(0.95, 0.65))",
+    "expected_output": "1"
+  },
+  {
+    "test": "print(model_fit_quality(0.6, 0.5))",
+    "expected_output": "-1"
+  },
+  {
+    "test": "print(model_fit_quality(0.85, 0.8))",
+    "expected_output": "0"
+  },
+  {
+    "test": "print(model_fit_quality(0.5, 0.6))",
+    "expected_output": "-1"
+  },
+  {
+    "test": "print(model_fit_quality(0.75, 0.74))",
+    "expected_output": "0"
+  }
+]

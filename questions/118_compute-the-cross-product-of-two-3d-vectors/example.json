@@ -1,0 +1,5 @@
+{
+  "input": "cross_product([1, 0, 0], [0, 1, 0])",
+  "output": "[0, 0, 1]",
+  "reasoning": "The cross product of two orthogonal unit vectors [1, 0, 0] and [0, 1, 0] is [0, 0, 1], pointing in the positive z-direction as per the right-hand rule."
+}

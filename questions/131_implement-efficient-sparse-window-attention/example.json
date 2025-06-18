@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\nQ = np.array([[1.0], [1.0], [1.0]])\nK = np.array([[1.0], [1.0], [1.0]])\nV = np.array([[1.0], [2.0], [3.0]])\nprint(sparse_window_attention(Q, K, V, 1))",
+  "output": "[[1.5] [2. ] [2.5]]",
+  "reasoning": "The sparse_window_attention function processes each query in the input Q by computing attention scores only with keys in K within a window of size 1 (i.e., the current position and one adjacent position on each side), then applies softmax to these scores to derive weights for the corresponding values in V. For the given input arrays, this results in the output where the first element is the weighted average of V[0] and V[1] (yielding 1.5), the second is the average of all elements in V (yielding 2.0), and the third is the average of V[1] and V[2] (yielding 2.5)."
+}

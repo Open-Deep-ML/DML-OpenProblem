@@ -1,0 +1,17 @@
+{
+  "id": "39",
+  "title": "Implementation of Log Softmax Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": null,
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/MKFMIKU",
+      "name": "Kangfu MEI"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

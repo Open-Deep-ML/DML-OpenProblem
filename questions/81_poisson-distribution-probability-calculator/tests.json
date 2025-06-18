@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(poisson_probability(3, 5))",
+    "expected_output": "0.14037"
+  },
+  {
+    "test": "print(poisson_probability(0, 5))",
+    "expected_output": "0.00674"
+  },
+  {
+    "test": "print(poisson_probability(2, 10))",
+    "expected_output": "0.00227"
+  },
+  {
+    "test": "print(poisson_probability(1, 1))",
+    "expected_output": "0.36788"
+  },
+  {
+    "test": "print(poisson_probability(20, 20))",
+    "expected_output": "0.08884"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\n\ncorpus = [\n    [\"the\", \"cat\", \"sat\", \"on\", \"the\", \"mat\"],\n    [\"the\", \"dog\", \"chased\", \"the\", \"cat\"],\n    [\"the\", \"bird\", \"flew\", \"over\", \"the\", \"mat\"]\n]\nquery = [\"cat\"]\n\nprint(compute_tf_idf(corpus, query))",
+    "expected_output": "[[0.21461], [0.25754], [0.0]]"
+  },
+  {
+    "test": "import numpy as np\n\ncorpus = [\n    [\"the\", \"cat\", \"sat\", \"on\", \"the\", \"mat\"],\n    [\"the\", \"dog\", \"chased\", \"the\", \"cat\"],\n    [\"the\", \"bird\", \"flew\", \"over\", \"the\", \"mat\"]\n]\nquery = [\"cat\", \"mat\"]\n\nprint(compute_tf_idf(corpus, query))",
+    "expected_output": "[[0.21461, 0.21461], [0.25754, 0.0], [0.0, 0.21461]]"
+  },
+  {
+    "test": "import numpy as np\n\ncorpus = [\n    [\"this\", \"is\", \"a\", \"sample\"],\n    [\"this\", \"is\", \"another\", \"example\"],\n    [\"yet\", \"another\", \"sample\", \"document\"],\n    [\"one\", \"more\", \"document\", \"for\", \"testing\"]\n]\nquery = [\"sample\", \"document\", \"test\"]\n\nprint(compute_tf_idf(corpus, query))",
+    "expected_output": "[[0.37771, 0.0, 0.0], [0.0, 0.0, 0.0], [0.37771, 0.37771, 0.0], [0.0, 0.30217, 0.0]]"
+  }
+]
