@@ -1,0 +1,6 @@
+[
+  {
+    "test": "print(1+1)",
+    "expected_output": "2"
+  }
+]
