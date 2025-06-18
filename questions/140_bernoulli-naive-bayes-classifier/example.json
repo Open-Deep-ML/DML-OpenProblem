@@ -1,5 +1,5 @@
 {
-  "input": "…",
+  "input": "X = np.array([[1, 0, 1], [1, 1, 0], [0, 0, 1], [0, 1, 0], [1, 1, 1]]); y = np.array([1, 1, 0, 0, 1])\nmodel = NaiveBayes(smoothing=1.0)\nmodel.forward(X, y)\nprint(model.predict(np.array([[1, 0, 1]])))",
   "output": "[1]",
-  "reasoning": "…"
+  "reasoning": "The model learns class priors and feature probabilities with Laplace smoothing. For [1, 0, 1], the posterior for class 1 is higher, so the model predicts 1."
 }

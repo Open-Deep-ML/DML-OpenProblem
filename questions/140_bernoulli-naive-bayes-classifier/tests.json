@@ -1,6 +1,22 @@
 [
   {
-    "test": "print(1+1)",
-    "expected_output": "2"
+    "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.array([[1, 0, 1], [1, 1, 0], [0, 0, 1], [0, 1, 0], [1, 1, 1]])\ny = np.array([1, 1, 0, 0, 1])\nmodel.forward(X, y)\nprint(model.predict(np.array([[1, 0, 1]])))",
+    "expected_output": "[1]"
+  },
+  {
+    "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.array([[0], [1], [0], [1]])\ny = np.array([0, 1, 0, 1])\nmodel.forward(X, y)\nprint(model.predict(np.array([[0], [1]])))",
+    "expected_output": "[0 1]"
+  },
+  {
+    "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.array([[0, 0], [1, 0], [0, 1]])\ny = np.array([0, 1, 0])\nmodel.forward(X, y)\nprint(model.predict(np.array([[1, 1]])))",
+    "expected_output": "[0]"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nmodel = NaiveBayes(smoothing=1.0)\nX = np.random.randint(0, 2, (100, 5))\ny = np.random.choice([0, 1], size=100)\nmodel.forward(X, y)\nX_test = np.random.randint(0, 2, (10, 5))\npred = model.predict(X_test)\nprint(pred.shape)",
+    "expected_output": "(10,)"
+  },
+  {
+    "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.random.randint(0, 2, (10, 3))\ny = np.zeros(10)\nmodel.forward(X, y)\nX_test = np.random.randint(0, 2, (3, 3))\nprint(model.predict(X_test))",
+    "expected_output": "[0, 0, 0]"
   }
 ]

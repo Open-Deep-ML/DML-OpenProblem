@@ -28,39 +28,102 @@ from typing import Any, Dict
 
 # ── 1️⃣  EDIT YOUR QUESTION HERE ────────────────────────────────────────────
 QUESTION_DICT: Dict[str, Any] = {
-    "id": "140",
-    "title": "Bernoulli Naive Bayes Classifier",
-    "difficulty": "medium",
-    "category": "Machine Learning",
-    "description": "Write a Python class …",
-    "learn_section": "# Learn section …",
-    "starter_code": "import numpy as np\n\nclass NaiveBayes():\n    pass",
-    "solution": "import numpy as np\n\nclass NaiveBayes():\n    pass",
-    "example": {
-        "input": "…",
-        "output": "[1]",
-        "reasoning": "…"
-    },
+    'id':'140',
+    "description": "Write a Python class to implement the Bernoulli Naive Bayes classifier for binary (0/1) feature data. Your class should have two methods: `forward(self, X, y)` to train on the input data (X: 2D NumPy array of binary features, y: 1D NumPy array of class labels) and `predict(self, X)` to output predicted labels for a 2D test matrix X. Use Laplace smoothing (parameter: smoothing=1.0). Return predictions as a NumPy array. Only use NumPy. Predictions must be binary (0 or 1) and you must handle cases where the training data contains only one class. All log/likelihood calculations should use log probabilities for numerical stability.",
     "test_cases": [
-        {"test": "print(1+1)", "expected_output": "2"}
+        {
+            "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.array([[1, 0, 1], [1, 1, 0], [0, 0, 1], [0, 1, 0], [1, 1, 1]])\ny = np.array([1, 1, 0, 0, 1])\nmodel.forward(X, y)\nprint(model.predict(np.array([[1, 0, 1]])))",
+            "expected_output": "[1]"
+        },
+        {
+            "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.array([[0], [1], [0], [1]])\ny = np.array([0, 1, 0, 1])\nmodel.forward(X, y)\nprint(model.predict(np.array([[0], [1]])))",
+            "expected_output": "[0 1]"
+        },
+        {
+            "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.array([[0, 0], [1, 0], [0, 1]])\ny = np.array([0, 1, 0])\nmodel.forward(X, y)\nprint(model.predict(np.array([[1, 1]])))",
+            "expected_output": "[0]"
+        },
+        {
+            "test": "import numpy as np\nnp.random.seed(42)\nmodel = NaiveBayes(smoothing=1.0)\nX = np.random.randint(0, 2, (100, 5))\ny = np.random.choice([0, 1], size=100)\nmodel.forward(X, y)\nX_test = np.random.randint(0, 2, (10, 5))\npred = model.predict(X_test)\nprint(pred.shape)",
+            "expected_output": "(10,)"
+        },
+        {
+            "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.random.randint(0, 2, (10, 3))\ny = np.zeros(10)\nmodel.forward(X, y)\nX_test = np.random.randint(0, 2, (3, 3))\nprint(model.predict(X_test))",
+            "expected_output": "[0, 0, 0]"
+        }
     ],
-    "video": "",
+    "solution": "import numpy as np\n\nclass NaiveBayes():\n    def __init__(self, smoothing=1.0):\n        self.smoothing = smoothing\n        self.classes = None\n        self.priors = None\n        self.likelihoods = None\n\n    def forward(self, X, y):\n        self.classes, class_counts = np.unique(y, return_counts=True)\n        self.priors = {cls: np.log(class_counts[i] / len(y)) for i, cls in enumerate(self.classes)}\n        self.likelihoods = {}\n        for cls in self.classes:\n            X_cls = X[y == cls]\n            prob = (np.sum(X_cls, axis=0) + self.smoothing) / (X_cls.shape[0] + 2 * self.smoothing)\n            self.likelihoods[cls] = (np.log(prob), np.log(1 - prob))\n\n    def _compute_posterior(self, sample):\n        posteriors = {}\n        for cls in self.classes:\n            posterior = self.priors[cls]\n            prob_1, prob_0 = self.likelihoods[cls]\n            likelihood = np.sum(sample * prob_1 + (1 - sample) * prob_0)\n            posterior += likelihood\n            posteriors[cls] = posterior\n        return max(posteriors, key=posteriors.get)\n\n    def predict(self, X):\n        return np.array([self._compute_posterior(sample) for sample in X])",
+    "example": {
+        "input": "X = np.array([[1, 0, 1], [1, 1, 0], [0, 0, 1], [0, 1, 0], [1, 1, 1]]); y = np.array([1, 1, 0, 0, 1])\nmodel = NaiveBayes(smoothing=1.0)\nmodel.forward(X, y)\nprint(model.predict(np.array([[1, 0, 1]])))",
+        "output": "[1]",
+        "reasoning": "The model learns class priors and feature probabilities with Laplace smoothing. For [1, 0, 1], the posterior for class 1 is higher, so the model predicts 1."
+    },
+    "category": "Machine Learning",
+    "starter_code": "import numpy as np\n\nclass NaiveBayes():\n    def __init__(self, smoothing=1.0):\n        # Initialize smoothing\n        pass\n\n    def forward(self, X, y):\n        # Fit model to binary features X and labels y\n        pass\n\n    def predict(self, X):\n        # Predict class labels for test set X\n        pass",
+    "title": "Bernoulli Naive Bayes Classifier",
+    "learn_section":r"""# **Naive Bayes Classifier**
+
+## **1. Definition**
+
+Naive Bayes is a **probabilistic machine learning algorithm** used for **classification tasks**. It is based on **Bayes' Theorem**, which describes the probability of an event based on prior knowledge of related events.
+
+The algorithm assumes that:
+- **Features are conditionally independent** given the class label (the "naive" assumption).
+- It calculates the posterior probability for each class and assigns the class with the **highest posterior** to the sample.
+
+---
+
+## **2. Bayes' Theorem**
+
+Bayes' Theorem is given by:
+
+$$
+P(C | X) = \frac{P(X | C) \times P(C)}{P(X)}
+$$
+
+Where:
+- $P(C | X)$ **Posterior** probability: the probability of class $C $ given the feature vector $X$
+- $P(X | C)$ → **Likelihood**: the probability of the data $X$ given the class
+- $P(C)$ → **Prior** probability: the initial probability of class $C$ before observing any data
+- $ P(X)$ → **Evidence**: the total probability of the data across all classes (acts as a normalizing constant)
+
+Since $P(X)$ is the same for all classes during comparison, it can be ignored, simplifying the formula to:
+
+$$
+P(C | X) \propto P(X | C) \times P(C)
+$$
+---
+
+### 3 **Bernoulli Naive Bayes**
+- Used for **binary data** (features take only 0 or 1 values).
+- The likelihood is given by:
+
+$$
+P(X | C) = \prod_{i=1}^{n} P(x_i | C)^{x_i} \cdot (1 - P(x_i | C))^{1 - x_i}
+$$
+
+---
+
+## **4. Applications of Naive Bayes**
+
+- **Text Classification:** Spam detection, sentiment analysis, and news categorization.
+- **Document Categorization:** Sorting documents by topic.
+- **Fraud Detection:** Identifying fraudulent transactions or behaviors.
+- **Recommender Systems:** Classifying users into preference groups.
+
+--- """,
+    "contributor": [
+        {
+            "profile_link": "https://github.com/moe18",
+            "name": "Moe Chabot"
+        }
+    ],
     "likes": "0",
     "dislikes": "0",
-    "contributor": [
-        {"name": "Moe Chabot", "profile_link": "https://github.com/moe18"}
-    ]
-    # Optional extras:
-    # "marimo_link": "https://…",
-    # "tinygrad_difficulty": "medium",
-    # "tinygrad_starter_code": "BASE64…",
-    # "tinygrad_solution":     "BASE64…",
-    # "tinygrad_test_cases":   [],
-    # "pytorch_difficulty": "medium",
-    # "pytorch_starter_code": "BASE64…",
-    # "pytorch_solution":     "BASE64…",
-    # "pytorch_test_cases":   []
+    "difficulty": "medium",
+    "video":''
 }
+
 # ────────────────────────────────────────────────────────────────────────────
 
 
