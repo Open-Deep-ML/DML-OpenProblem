@@ -1,0 +1,21 @@
+{
+  "id": "11",
+  "title": "Solve Linear Equations using Jacobi Method",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/Y7WSn7K092g",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://github.com/Haleshot",
+      "name": "Haleshot"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium"
+}

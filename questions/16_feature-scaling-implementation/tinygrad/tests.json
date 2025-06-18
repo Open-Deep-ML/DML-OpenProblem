@@ -1,0 +1,10 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nstd, norm = feature_scaling_tg([[1.0,2.0],[3.0,4.0],[5.0,6.0]])\nprint(std.numpy().tolist(), norm.numpy().tolist())",
+    "expected_output": "[[-1.2247, -1.2247], [0.0, 0.0], [1.2247, 1.2247]] [[0.0, 0.0], [0.5, 0.5], [1.0, 1.0]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nstd, norm = feature_scaling_tg(Tensor([[10.0,0.0],[20.0,5.0]]))\nprint(std.numpy().tolist(), norm.numpy().tolist())",
+    "expected_output": "[[-1.0, -1.0], [1.0, 1.0]] [[0.0, 0.0], [1.0, 1.0]]"
+  }
+]

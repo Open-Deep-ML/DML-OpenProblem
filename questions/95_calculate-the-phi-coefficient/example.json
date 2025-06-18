@@ -1,0 +1,5 @@
+{
+  "input": "phi_corr([1, 1, 0, 0], [0, 0, 1, 1])",
+  "output": "-1.0",
+  "reasoning": "The Phi coefficient measures the correlation between two binary variables. In this example, the variables have a perfect negative correlation, resulting in a Phi coefficient of -1.0."
+}

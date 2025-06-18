@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import numpy as np\n\nmatrix = np.array([\n    [1, 2, -1, -4],\n    [2, 3, -1, -11],\n    [-2, 0, -3, 22]\n])\n\noutput = rref(matrix)\nprint(output)",
+    "expected_output": "[[ 1.,  0.,  0., -8.], [ 0.,  1.,  0.,  1.], [-0., -0.,  1., -2.]]"
+  },
+  {
+    "test": "import numpy as np\n\nmatrix = np.array([\n    [2, 4, -2],\n    [4, 9, -3],\n    [-2, -3, 7]\n])\n\noutput = rref(matrix)\nprint(output)",
+    "expected_output": "[[ 1.,  0.,  0.], [ 0.,  1.,  0.], [ 0.,  0.,  1.]]"
+  },
+  {
+    "test": "import numpy as np\n\nmatrix = np.array([\n    [0, 2, -1, -4],\n    [2, 0, -1, -11],\n    [-2, 0, 0, 22]\n])\n\noutput = rref(matrix)\nprint(output)",
+    "expected_output": "[[ 1.,  0.,  0., -11.],[-0.,  1.,  0., -7.5],[-0., -0.,  1., -11.]]"
+  },
+  {
+    "test": "import numpy as np\n\nmatrix = np.array([\n        [1, 2, -1],\n        [2, 4, -1],\n        [-2, -4, -3]])\n\noutput = rref(matrix)\nprint(output)",
+    "expected_output": "[[ 1.,  2.,  0.],[ 0.,  0.,  1.],[0., 0.,  0.]]"
+  }
+]

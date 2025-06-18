@@ -1,0 +1,17 @@
+{
+  "id": "5",
+  "title": "Scalar Multiplication of a Matrix",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/iE2NvpvZRBk",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy"
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import torch\nres = transform_matrix(\n    torch.tensor([[1,2],[3,4]], dtype=torch.float),\n    torch.eye(2),\n    torch.eye(2)\n)\nprint(res.detach().numpy().tolist())",
+    "expected_output": "[[1.0, 2.0], [3.0, 4.0]]"
+  },
+  {
+    "test": "import torch\nres = transform_matrix(\n    torch.tensor([[1,2],[3,4]], dtype=torch.float),\n    torch.tensor([[2,0],[0,3]], dtype=torch.float),\n    torch.eye(2)\n)\nprint(res.detach().numpy().tolist())",
+    "expected_output": "[[0.5, 1.0], [1.0, 1.333]]"
+  },
+  {
+    "test": "import torch\nres = transform_matrix(\n    torch.tensor([[1,2],[3,4]], dtype=torch.float),\n    torch.eye(2),\n    torch.tensor([[1,0],[0,0]], dtype=torch.float)\n)\nprint(res.detach().numpy().tolist())",
+    "expected_output": "-1.0"
+  }
+]

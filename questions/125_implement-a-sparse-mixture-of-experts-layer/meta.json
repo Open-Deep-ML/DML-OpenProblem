@@ -1,0 +1,17 @@
+{
+  "id": "125",
+  "title": "Implement a Sparse Mixture of Experts Layer",
+  "difficulty": "hard",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/lefarov",
+      "name": "lefarov"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

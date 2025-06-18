@@ -1,0 +1,21 @@
+{
+  "id": "50",
+  "title": "Implement Lasso Regression using Gradient Descent",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/afrenkai",
+      "name": "Artem Frenk"
+    },
+    {
+      "profile_link": "https://github.com/JerryWu-code",
+      "name": "JerryWu-code"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

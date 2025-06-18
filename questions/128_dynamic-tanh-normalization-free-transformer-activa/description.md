@@ -1,0 +1,1 @@
+Implement the Dynamic Tanh (DyT) function, a normalization-free transformation inspired by the Tanh function. DyT replaces layer normalization in Transformer architectures while preserving squashing behavior and enabling stable training.

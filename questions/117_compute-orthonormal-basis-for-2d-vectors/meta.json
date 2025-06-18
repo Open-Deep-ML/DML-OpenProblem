@@ -1,0 +1,17 @@
+{
+  "id": "117",
+  "title": "Compute Orthonormal Basis for 2D Vectors",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

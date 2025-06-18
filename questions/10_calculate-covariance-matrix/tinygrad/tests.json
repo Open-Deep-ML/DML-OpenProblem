@@ -1,0 +1,10 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = calculate_covariance_matrix_tg([[1.0,2.0,3.0],[4.0,5.0,6.0]])\nprint(res.numpy().tolist())",
+    "expected_output": "[[1.0, 1.0], [1.0, 1.0]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = calculate_covariance_matrix_tg([[1.0,2.0,3.0],[3.0,3.0,3.0]])\nprint(res.numpy().tolist())",
+    "expected_output": "[[1.0, 0.0], [0.0, 0.0]]"
+  }
+]

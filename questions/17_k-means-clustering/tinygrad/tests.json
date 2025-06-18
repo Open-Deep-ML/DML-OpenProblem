@@ -1,0 +1,10 @@
+[
+  {
+    "test": "res = k_means_clustering_tg(\n    [[0.0,0.0],[0.1,0.1],[10.0,10.0],[10.1,10.1]],\n    2,\n    [[0.0,0.0],[10.0,10.0]],\n    10\n)\nprint(res)",
+    "expected_output": "[(0.05, 0.05), (10.05, 10.05)]"
+  },
+  {
+    "test": "res = k_means_clustering_tg(\n    [[1.0,2.0],[3.0,4.0]],\n    1,\n    [[1.0,2.0]],\n    10\n)\nprint(res)",
+    "expected_output": "[(2.0, 3.0)]"
+  }
+]

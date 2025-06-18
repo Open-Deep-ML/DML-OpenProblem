@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\nX = np.array([[1, 0], [0, 1]])\nW_q = np.array([[1, 0], [0, 1]])\nW_k = np.array([[1, 0], [0, 1]])\nW_v = np.array([[1, 2], [3, 4]])\n\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\noutput = self_attention(Q, K, V)\n\nprint(output)",
+  "output": "# [[1.660477 2.660477]\n#  [2.339523 3.339523]]",
+  "reasoning": "The self-attention mechanism calculates the attention scores for each input, determining how much focus to put on other inputs when generating a contextualized representation. The output is the weighted sum of the values based on the attention scores."
+}

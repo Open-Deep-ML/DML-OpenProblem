@@ -1,0 +1,5 @@
+{
+  "input": "swish(1)",
+  "output": "0.7311",
+  "reasoning": "For x = 1, the Swish activation is calculated as $Swish(x) = x \\times \\sigma(x)$, where $\\sigma(x) = \\frac{1}{1 + e^{-x}}$. Substituting the value, $Swish(1) = 1 \\times \\frac{1}{1 + e^{-1}} = 0.7311$."
+}

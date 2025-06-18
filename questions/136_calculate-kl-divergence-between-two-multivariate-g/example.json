@@ -1,0 +1,5 @@
+{
+  "input": "mu_p, Cov_p, mu_q, Cov_q for two random multivariate Gaussians",
+  "output": "A float representing the KL divergence",
+  "reasoning": "The KL divergence is calculated using the formula: 0.5 * (log det term, minus dimension p, Mahalanobis distance between means, and trace term). It measures how dissimilar the second Gaussian is from the first."
+}

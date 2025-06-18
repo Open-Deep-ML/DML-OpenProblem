@@ -1,0 +1,12 @@
+{
+  "id": "27",
+  "title": "Transformation Matrix from Basis B to C",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/P2LTAUO1TdA?si=O8XAmMrfpZizOr81",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": null,
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

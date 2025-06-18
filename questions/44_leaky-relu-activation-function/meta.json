@@ -1,0 +1,22 @@
+{
+  "id": "44",
+  "title": "Leaky ReLU Activation Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/V817IRW07vs",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/atharva-gite",
+      "name": "atharva-gite"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-4"
+}

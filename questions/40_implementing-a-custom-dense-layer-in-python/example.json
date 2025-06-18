@@ -1,0 +1,5 @@
+{
+  "input": "# Initialize a Dense layer with 3 neurons and input shape (2,)\ndense_layer = Dense(n_units=3, input_shape=(2,))\n\n# Define a mock optimizer with a simple update rule\nclass MockOptimizer:\n    def update(self, weights, grad):\n        return weights - 0.01 * grad\n\noptimizer = MockOptimizer()\n\n# Initialize the Dense layer with the mock optimizer\ndense_layer.initialize(optimizer)\n\n# Perform a forward pass with sample input data\nX = np.array([[1, 2]])\noutput = dense_layer.forward_pass(X)\nprint(\"Forward pass output:\", output)\n\n# Perform a backward pass with sample gradient\naccum_grad = np.array([[0.1, 0.2, 0.3]])\nback_output = dense_layer.backward_pass(accum_grad)\nprint(\"Backward pass output:\", back_output)",
+  "output": "Forward pass output: [[-0.00655782  0.01429615  0.00905812]]\nBackward pass output: [[ 0.00129588  0.00953634]]",
+  "reasoning": "The code initializes a Dense layer with 3 neurons and input shape (2,). It then performs a forward pass with sample input data and a backward pass with sample gradients. The output demonstrates the forward and backward pass results."
+}

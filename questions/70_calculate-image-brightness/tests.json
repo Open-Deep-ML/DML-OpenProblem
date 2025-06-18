@@ -1,0 +1,22 @@
+[
+  {
+    "test": "\n# Test empty image\nprint(calculate_brightness([]))\n",
+    "expected_output": "-1"
+  },
+  {
+    "test": "\n# Test invalid dimensions\nprint(calculate_brightness([[100, 200], [150]]))\n",
+    "expected_output": "-1"
+  },
+  {
+    "test": "\n# Test invalid pixel values\nprint(calculate_brightness([[100, 300]]))\n",
+    "expected_output": "-1"
+  },
+  {
+    "test": "\n# Test valid cases\nprint(calculate_brightness([[128]]))\n",
+    "expected_output": "128.0"
+  },
+  {
+    "test": "\n# Another valid case\nprint(calculate_brightness([[100, 200], [50, 150]]))\n",
+    "expected_output": "125.0"
+  }
+]

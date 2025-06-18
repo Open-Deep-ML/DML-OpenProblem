@@ -1,0 +1,18 @@
+[
+  {
+    "test": "print(mae(np.array([3, -0.5, 2, 7]), np.array([2.5, 0.0, 2, 8])))",
+    "expected_output": "0.500"
+  },
+  {
+    "test": "print(mae(np.array([[0.5, 1], [-1, 1], [7, -6]]), np.array([[0, 2], [-1, 2], [8, -5]])))",
+    "expected_output": "0.750"
+  },
+  {
+    "test": "print(mae(np.array([-1, -2, -3]), np.array([-1.5, -2.2, -2.8])))",
+    "expected_output": "0.300"
+  },
+  {
+    "test": "print(mae(np.array([1, -1, 0]), np.array([-1, 1, 0])))",
+    "expected_output": "1.333"
+  }
+]

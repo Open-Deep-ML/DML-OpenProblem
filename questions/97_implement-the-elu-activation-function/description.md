@@ -1,0 +1,1 @@
+Implement the ELU (Exponential Linear Unit) activation function, which helps mitigate the limitations of ReLU by providing negative outputs for negative inputs. The function should compute the ELU activation value for a given input.

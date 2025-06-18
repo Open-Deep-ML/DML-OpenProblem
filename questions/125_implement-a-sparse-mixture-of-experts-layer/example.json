@@ -1,0 +1,5 @@
+{
+  "input": "x = np.arange(12).reshape(2, 3, 2)\nWe = np.ones((4, 2, 2))\nWg = np.ones((2, 4))\ntop_k = 1",
+  "output": "[[[1, 1], [5, 5], [9, 9]], [[13, 13], [17, 17], [21, 21]]]",
+  "reasoning": "Each token is routed to its top expert and processed using a weight matrix of ones. The result matches the input tokens due to identity transformation and weight 1."
+}

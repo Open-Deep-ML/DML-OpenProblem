@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import torch\nres = reshape_matrix(\n    torch.tensor([[1,2,3],[4,5,6]], dtype=torch.float),\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]]"
+  },
+  {
+    "test": "import torch\nres = reshape_matrix(\n    torch.tensor([[1,2],[3,4]], dtype=torch.float),\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[]"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np; np.random.seed(42); P = np.array([[[0, 1], [1, 0]], [[1, 0], [1, 0]]]); R = np.array([[1, 0], [0, 0]]); terminal_states = [1]; print(q_learning(2, 2, P, R, terminal_states, 0.1, 0.9, 0.1, 10))",
+  "output": "[[0.65132156, 0.052902  ],[0., 0.]]",
+  "reasoning": "The Q-Learning algorithm initializes a Q-table with zeros and iteratively updates it over 10 episodes by starting from random non-terminal states, selecting actions via an epsilon-greedy policy, sampling next states and rewards from the provided transition probabilities (P) and rewards (R), and applying the update rule: Q(s, a) += alpha * (reward + gamma * max(Q(next_state)) - Q(s, a)). This process results in the output Q-table [[0.65132156, 0.052902], [0., 0.]], where the values represent learned estimates of state-action values, with the second state's Q-values remaining zero because it is a terminal state and no further actions are taken from there."
+}

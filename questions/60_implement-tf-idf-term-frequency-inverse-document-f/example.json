@@ -1,0 +1,5 @@
+{
+  "input": "corpus = [\n    [\"the\", \"cat\", \"sat\", \"on\", \"the\", \"mat\"],\n    [\"the\", \"dog\", \"chased\", \"the\", \"cat\"],\n    [\"the\", \"bird\", \"flew\", \"over\", \"the\", \"mat\"]\n]\nquery = [\"cat\"]\n\nprint(compute_tf_idf(corpus, query))",
+  "output": "[[0.21461], [0.25754], [0.0]]",
+  "reasoning": "The TF-IDF scores for the word \"cat\" in each document are computed and rounded to five decimal places."
+}

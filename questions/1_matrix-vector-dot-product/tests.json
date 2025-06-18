@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(matrix_dot_vector([[1, 2, 3], [2, 4, 5], [6, 8, 9]], [1, 2, 3]))",
+    "expected_output": "[14, 25, 49]"
+  },
+  {
+    "test": "print(matrix_dot_vector([[1, 2], [2, 4], [6, 8], [12, 4]], [1, 2, 3]))",
+    "expected_output": "-1"
+  },
+  {
+    "test": "print(matrix_dot_vector([[1.5, 2.5], [3.0, 4.0]], [2, 1]))",
+    "expected_output": "[5.5, 10.0]"
+  }
+]

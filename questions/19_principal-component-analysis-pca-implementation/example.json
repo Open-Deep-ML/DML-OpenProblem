@@ -1,0 +1,5 @@
+{
+  "input": "data = np.array([[1, 2], [3, 4], [5, 6]]), k = 1",
+  "output": "[[0.7071], [0.7071]]",
+  "reasoning": "After standardizing the data and computing the covariance matrix, the eigenvalues and eigenvectors are calculated. The largest eigenvalue's corresponding eigenvector is returned as the principal component, rounded to four decimal places."
+}

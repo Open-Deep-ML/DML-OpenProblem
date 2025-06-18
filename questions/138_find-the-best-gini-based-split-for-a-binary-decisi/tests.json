@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\nX1 = np.array([[2.5], [3.5], [1.0], [4.0]])\ny1 = np.array([0, 1, 0, 1])\nf1, t1 = find_best_split(X1, y1)\nprint(f1, round(t1, 4))",
+    "expected_output": "0, 2.5"
+  },
+  {
+    "test": "import numpy as np\nX2 = np.array([[1], [2], [3]])\ny2 = np.array([1, 1, 1])\nf2, t2 = find_best_split(X2, y2)\nprint(f2, t2)",
+    "expected_output": "0, 1"
+  },
+  {
+    "test": "import numpy as np\nX5 = np.array([[0, 1], [0, 2], [0, 3], [0, 4]])\ny5 = np.array([0, 0, 1, 1])\nf5, t5 = find_best_split(X5, y5)\nprint(f5, t5)",
+    "expected_output": "1, 2"
+  }
+]

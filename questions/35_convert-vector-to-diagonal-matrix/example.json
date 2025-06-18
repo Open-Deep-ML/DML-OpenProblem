@@ -1,0 +1,5 @@
+{
+  "input": "x = np.array([1, 2, 3])\n    output = make_diagonal(x)\n    print(output)",
+  "output": "[[1. 0. 0.]\n    [0. 2. 0.]\n    [0. 0. 3.]]",
+  "reasoning": "The input vector [1, 2, 3] is converted into a diagonal matrix where the elements of the vector form the diagonal of the matrix."
+}

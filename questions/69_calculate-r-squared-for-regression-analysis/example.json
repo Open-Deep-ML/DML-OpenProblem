@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\ny_true = np.array([1, 2, 3, 4, 5])\ny_pred = np.array([1.1, 2.1, 2.9, 4.2, 4.8])\nprint(r_squared(y_true, y_pred))",
+  "output": "0.989",
+  "reasoning": "The R-squared value is calculated to be 0.989, indicating that the regression model explains 98.9% of the variance in the dependent variable."
+}

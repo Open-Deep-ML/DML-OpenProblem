@@ -1,0 +1,5 @@
+{
+  "input": "A = np.array([[4, 1], [1, 3]])\nb = np.array([1, 2])\nn = 5\n\nprint(conjugate_gradient(A, b, n))",
+  "output": "[0.09090909, 0.63636364]",
+  "reasoning": "The Conjugate Gradient method is applied to the linear system Ax = b with the given matrix A and vector b. The algorithm iteratively refines the solution to converge to the exact solution."
+}

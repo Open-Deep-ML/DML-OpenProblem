@@ -1,0 +1,10 @@
+[
+  {
+    "test": "U,s,V = svd_2x2(np.array([[-10, 8], [10, -1]]))\nresult = U @ np.diag(s) @ V\nprint(result)",
+    "expected_output": "[[-10, 8], [10, -1]]"
+  },
+  {
+    "test": "U,s,V = svd_2x2(np.array([[1, 2], [3, 4]]))\nresult = U @ np.diag(s) @ V\nprint(result)",
+    "expected_output": "[[1, 2], [3, 4]]"
+  }
+]

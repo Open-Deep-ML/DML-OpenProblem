@@ -1,0 +1,18 @@
+[
+  {
+    "test": "print(phi_corr([1, 1, 0, 0], [0, 0, 1, 1]))",
+    "expected_output": "-1.0"
+  },
+  {
+    "test": "print(phi_corr([1, 1, 0, 0], [1, 0, 1, 1]))",
+    "expected_output": "-0.5774"
+  },
+  {
+    "test": "print(phi_corr([0, 0, 1, 1], [0, 1, 0, 1]))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(phi_corr([1, 0, 1, 0,1,1,0], [1, 1, 0, 0,1,1,1]))",
+    "expected_output": "0.0913"
+  }
+]
