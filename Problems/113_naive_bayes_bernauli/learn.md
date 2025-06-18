@@ -14,31 +14,30 @@ The algorithm assumes that:
 
 Bayes' Theorem is given by:
 
-\[
+$$
 P(C | X) = \frac{P(X | C) \times P(C)}{P(X)}
-\]
+$$
 
 Where:
-- \( P(C | X) \) → **Posterior** probability: the probability of class \( C \) given the feature vector \( X \)
-- \( P(X | C) \) → **Likelihood**: the probability of the data \( X \) given the class
-- \( P(C) \) → **Prior** probability: the initial probability of class \( C \) before observing any data
-- \( P(X) \) → **Evidence**: the total probability of the data across all classes (acts as a normalizing constant)
+- $P(C | X)$ **Posterior** probability: the probability of class $C $ given the feature vector $X$
+- $P(X | C)$ → **Likelihood**: the probability of the data $X$ given the class
+- $P(C)$ → **Prior** probability: the initial probability of class $C$ before observing any data
+- $ P(X)$ → **Evidence**: the total probability of the data across all classes (acts as a normalizing constant)
 
-Since \( P(X) \) is the same for all classes during comparison, it can be ignored, simplifying the formula to:
+Since $P(X)$ is the same for all classes during comparison, it can be ignored, simplifying the formula to:
 
-\[
+$$
 P(C | X) \propto P(X | C) \times P(C)
-\]
-
+$$
 ---
 
 ### 3 **Bernoulli Naive Bayes**
 - Used for **binary data** (features take only 0 or 1 values).
 - The likelihood is given by:
 
-\[
+$$
 P(X | C) = \prod_{i=1}^{n} P(x_i | C)^{x_i} \cdot (1 - P(x_i | C))^{1 - x_i}
-\]
+$$
 
 ---
 
