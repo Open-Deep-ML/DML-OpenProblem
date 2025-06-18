@@ -1,0 +1,14 @@
+[
+  {
+    "test": "y = [0, 0, 0, 0, 1, 1, 1, 1]\nprint(gini_impurity(y))",
+    "expected_output": "0.5"
+  },
+  {
+    "test": "y = [0, 0, 0, 0, 0, 1]\nprint(gini_impurity(y))",
+    "expected_output": "0.278"
+  },
+  {
+    "test": "y = [0, 1, 2, 2, 2, 1, 2]\nprint(gini_impurity(y))",
+    "expected_output": "0.571"
+  }
+]

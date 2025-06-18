@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(early_stopping([0.9, 0.8, 0.75, 0.77, 0.76, 0.77, 0.78], 2, 0.01))",
+    "expected_output": "(4, 2)"
+  },
+  {
+    "test": "print(early_stopping([0.9, 0.8, 0.7, 0.6, 0.5], 2, 0.01))",
+    "expected_output": "(4, 4)"
+  },
+  {
+    "test": "print(early_stopping([0.9, 0.8, 0.79, 0.78, 0.77], 2, 0.1))",
+    "expected_output": "(4, 2)"
+  },
+  {
+    "test": "print(early_stopping([0.5, 0.4], 3, 0.01))",
+    "expected_output": "(1, 1)"
+  },
+  {
+    "test": "print(early_stopping([0.5, 0.4, 0.4, 0.4, 0.4], 2, 0.01))",
+    "expected_output": "(3, 1)"
+  }
+]

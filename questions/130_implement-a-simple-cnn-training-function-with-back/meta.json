@@ -1,0 +1,17 @@
+{
+  "id": "130",
+  "title": "Implement a Simple CNN Training Function with Backpropagation",
+  "difficulty": "hard",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "moe"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

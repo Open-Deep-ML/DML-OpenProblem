@@ -1,0 +1,17 @@
+{
+  "id": "111",
+  "title": "Compute Pointwise Mutual Information",
+  "difficulty": "medium",
+  "category": "NLP",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/saitiger",
+      "name": "saitiger"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

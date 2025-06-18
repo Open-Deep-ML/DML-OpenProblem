@@ -1,0 +1,5 @@
+{
+  "input": "elu(-1)",
+  "output": "-0.6321",
+  "reasoning": "For x = -1 and alpha = 1.0, the ELU activation is computed as $\\alpha(e^x - 1)$."
+}

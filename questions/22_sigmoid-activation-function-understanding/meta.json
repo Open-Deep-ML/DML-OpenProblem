@@ -1,0 +1,22 @@
+{
+  "id": "22",
+  "title": "Sigmoid Activation Function Understanding",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/DL_PVRD-NOg",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://github.com/Selbl",
+      "name": "Selbl"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": "https://open-deep-ml.github.io/deepml-notebooks/22/"
+}

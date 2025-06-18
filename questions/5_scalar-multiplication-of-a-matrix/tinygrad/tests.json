@@ -1,0 +1,10 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = scalar_multiply_tg(\n    [[1, 2], [3, 4]],\n    3\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[[3, 6], [9, 12]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = scalar_multiply_tg(\n    [[1.5, 2.5], [3.0, 4.0]],\n    2.0\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[[3.0, 5.0], [6.0, 8.0]]"
+  }
+]

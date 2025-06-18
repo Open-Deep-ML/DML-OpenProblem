@@ -1,0 +1,6 @@
+[
+  {
+    "test": "print(learn_decision_tree_tg([\n    {'Outlook': 'Sunny',   'Wind': 'Weak',   'PlayTennis': 'No'},\n    {'Outlook': 'Overcast','Wind': 'Strong', 'PlayTennis': 'Yes'},\n    {'Outlook': 'Rain',    'Wind': 'Weak',   'PlayTennis': 'Yes'},\n    {'Outlook': 'Sunny',   'Wind': 'Strong', 'PlayTennis': 'No'},\n    {'Outlook': 'Sunny',   'Wind': 'Weak',   'PlayTennis': 'Yes'},\n    {'Outlook': 'Overcast','Wind': 'Weak',   'PlayTennis': 'Yes'},\n    {'Outlook': 'Rain',    'Wind': 'Strong', 'PlayTennis': 'No'},\n    {'Outlook': 'Rain',    'Wind': 'Weak',   'PlayTennis': 'Yes'}\n], ['Outlook', 'Wind'], 'PlayTennis'))",
+    "expected_output": "{'Outlook': {'Sunny': {'Wind': {'Weak': 'No', 'Strong': 'No'}}, 'Rain': {'Wind': {'Weak': 'Yes', 'Strong': 'No'}}, 'Overcast': 'Yes'}}"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "input": "compute_pmi(50, 200, 300, 1000)",
+  "output": "-0.263",
+  "reasoning": "The PMI calculation compares the actual joint probability (50/1000 = 0.05) to the product of the individual probabilities (200/1000 * 300/1000 = 0.06). Thus, PMI = log₂(0.05 / (0.2 * 0.3)) ≈ -0.263, indicating the events co-occur slightly less than expected by chance."
+}

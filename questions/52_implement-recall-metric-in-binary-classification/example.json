@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([1, 0, 1, 0, 0, 1])\n\nprint(recall(y_true, y_pred))",
+  "output": "# 0.75",
+  "reasoning": "The recall value for the given true labels and predicted labels is 0.75. The model correctly identified 3 out of 4 positive instances in the dataset."
+}

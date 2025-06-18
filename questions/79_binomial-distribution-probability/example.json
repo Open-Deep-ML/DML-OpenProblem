@@ -1,0 +1,5 @@
+{
+  "input": "n = 6, k = 2, p = 0.5",
+  "output": "0.23438",
+  "reasoning": "The function calculates the Binomial probability, the intermediate steps include calculating the binomial coefficient, raising p and (1-p) to the appropriate powers, and multiplying the results."
+}

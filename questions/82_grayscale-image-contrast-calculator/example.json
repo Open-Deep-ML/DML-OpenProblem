@@ -1,0 +1,5 @@
+{
+  "input": "img = np.array([[0, 50], [200, 255]])",
+  "output": "255",
+  "reasoning": "The function calculates contrast by finding the difference between the maximum (255) and minimum (0) pixel values in the image, resulting in a contrast of 255."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "24",
+  "title": "Single Neuron",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/fK4QaDZ9UuU",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-24"
+}

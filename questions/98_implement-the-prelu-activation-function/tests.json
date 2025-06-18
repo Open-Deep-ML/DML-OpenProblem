@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(prelu(2.0))",
+    "expected_output": "2.0"
+  },
+  {
+    "test": "print(prelu(0.0))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(prelu(-2.0))",
+    "expected_output": "-0.5"
+  },
+  {
+    "test": "print(prelu(-2.0, alpha=0.1))",
+    "expected_output": "-0.2"
+  },
+  {
+    "test": "print(prelu(-2.0, alpha=1.0))",
+    "expected_output": "-2.0"
+  }
+]

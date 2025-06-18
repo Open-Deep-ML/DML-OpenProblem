@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\n\nX = np.array([[1, 0], [0, 1]])\nW_q = np.array([[1, 0], [0, 1]])\nW_k = np.array([[1, 0], [0, 1]])\nW_v = np.array([[1, 2], [3, 4]])\n\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\noutput = self_attention(Q, K, V)\nprint(output)",
+    "expected_output": "[[1.660477, 2.660477], [2.339523, 3.339523]]"
+  },
+  {
+    "test": "import numpy as np\n\nX = np.array([[1, 1], [1, 0]])\nW_q = np.array([[1, 0], [0, 1]])\nW_k = np.array([[1, 0], [0, 1]])\nW_v = np.array([[1, 2], [3, 4]])\n\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\noutput = self_attention(Q, K, V)\nprint(output)",
+    "expected_output": "[[3.00928465, 4.6790462], [2.5, 4.0]]"
+  },
+  {
+    "test": "import numpy as np\n\nX = np.array([[1, 0, 1], [0, 1, 1], [1, 1, 0]])\nW_q = np.array([[1, 1, 0], [0, 1, 1], [1, 0, 1]])\nW_k = np.array([[1, 1, 0], [0, 1, 1], [1, 0, 1]])\nW_v = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\n\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\noutput = self_attention(Q, K, V)\nprint(output)",
+    "expected_output": "[[8.0, 10.0, 12.0], [8.61987385, 10.61987385, 12.61987385], [7.38012615, 9.38012615, 11.38012615]]"
+  }
+]

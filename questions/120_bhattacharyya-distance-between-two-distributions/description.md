@@ -1,0 +1,1 @@
+Implement a function to calculate the Bhattacharyya distance between two probability distributions. The function should take two lists representing discrete probability distributions `p` and `q`, and return the Bhattacharyya distance rounded to 4 decimal places. If the inputs have different lengths or are empty, return 0.0.

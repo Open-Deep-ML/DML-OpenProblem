@@ -1,0 +1,5 @@
+{
+  "input": "A = [[-10, 8], \n         [10, -1]]",
+  "output": "(array([[  0.8, -0.6], [-0.6, -0.8]]), \n    array([15.65247584,  4.47213595]), \n    array([[ -0.89442719,  0.4472136], [ -0.4472136 , -0.89442719]]))",
+  "reasoning": "The SVD of the matrix A is calculated using the eigenvalues and eigenvectors of A^T A and A A^T. The singular values are the square roots of the eigenvalues, and the eigenvectors form the columns of matrices U and V."
+}

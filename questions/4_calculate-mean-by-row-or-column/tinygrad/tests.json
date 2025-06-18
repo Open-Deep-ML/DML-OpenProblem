@@ -1,0 +1,10 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nprint(calculate_matrix_mean_tg([[1.0,2.0,3.0],[4.0,5.0,6.0]], 'column').numpy().tolist())",
+    "expected_output": "[2.5, 3.5, 4.5]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nprint(calculate_matrix_mean_tg([[1.0,2.0,3.0],[4.0,5.0,6.0]], 'row').numpy().tolist())",
+    "expected_output": "[2.0, 5.0]"
+  }
+]

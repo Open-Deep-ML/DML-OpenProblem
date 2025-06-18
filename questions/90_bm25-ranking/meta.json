@@ -1,0 +1,17 @@
+{
+  "id": "90",
+  "title": "BM25 Ranking ",
+  "difficulty": "medium",
+  "category": "NLP",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/saitiger",
+      "name": "Sai Tiger Raina"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "dense_matrix = [\n    [1, 0, 0, 0],\n    [0, 2, 0, 0],\n    [3, 0, 4, 0],\n    [1, 0, 0, 5]\n]\nvals, col_idx, row_ptr = compressed_row_sparse_matrix(dense_matrix)\nprint(\"Values array:\", vals)\nprint(\"Column indices array:\", col_idx)\nprint(\"Row pointer array:\", row_ptr)",
+    "expected_output": "Values array: [1, 2, 3, 4, 1, 5]\nColumn indices array: [0, 1, 0, 2, 0, 3]\nRow pointer array: [0, 1, 2, 4, 6]"
+  },
+  {
+    "test": "dense_matrix = [\n    [0, 0, 0],\n    [1, 2, 0],\n    [0, 3, 4]\n]\nvals, col_idx, row_ptr = compressed_row_sparse_matrix(dense_matrix)\nprint(\"Values array:\", vals)\nprint(\"Column indices array:\", col_idx)\nprint(\"Row pointer array:\", row_ptr)",
+    "expected_output": "Values array: [1, 2, 3, 4]\nColumn indices array: [0, 1, 1, 2]\nRow pointer array: [0, 0, 2, 4]"
+  },
+  {
+    "test": "dense_matrix = [\n    [0, 0, 3, 0, 0],\n    [0, 4, 0, 0, 0],\n    [5, 0, 0, 6, 0],\n    [0, 0, 0, 0, 0],\n    [0, 7, 0, 0, 8]\n]\nvals, col_idx, row_ptr = compressed_row_sparse_matrix(dense_matrix)\nprint(\"Values array:\", vals)\nprint(\"Column indices array:\", col_idx)\nprint(\"Row pointer array:\", row_ptr)",
+    "expected_output": "Values array: [3, 4, 5, 6, 7, 8]\nColumn indices array: [2, 1, 0, 3, 1, 4]\nRow pointer array: [0, 1, 2, 4, 4, 6]"
+  }
+]

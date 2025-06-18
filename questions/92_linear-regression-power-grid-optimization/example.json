@@ -1,0 +1,5 @@
+{
+  "input": "Daily consumption data for 10 days: [150, 165, 185, 195, 210, 225, 240, 260, 275, 290]",
+  "output": "404",
+  "reasoning": "For each of the 10 days, we subtract the daily fluctuation given by 10xsin(2πxi/10). We then perform linear regression on the resulting values, predict day 15’s base usage, and add back the day 15 fluctuation. Finally, we apply a 5% margin. Running the provided solution code yields 404 for this dataset."
+}

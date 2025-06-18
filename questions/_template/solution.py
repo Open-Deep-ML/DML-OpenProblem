@@ -1,0 +1,3 @@
+def your_function(...):
+    # reference implementation
+    ...

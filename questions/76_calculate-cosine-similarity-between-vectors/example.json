@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\nv1 = np.array([1, 2, 3])\nv2 = np.array([2, 4, 6])\nprint(cosine_similarity(v1, v2))",
+  "output": "1.0",
+  "reasoning": "The cosine similarity between v1 and v2 is 1.0, indicating perfect similarity."
+}

@@ -1,0 +1,5 @@
+{
+  "input": "vec1 = np.array([1, 2, 3]), vec2 = np.array([4, 5, 6])",
+  "output": "32",
+  "reasoning": "The function calculates the dot product by multiplying corresponding elements of the two vectors and summing the results. For vec1 = [1, 2, 3] and vec2 = [4, 5, 6], the result is (1 * 4) + (2 * 5) + (3 * 6) = 32."
+}

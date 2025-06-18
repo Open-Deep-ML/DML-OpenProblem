@@ -1,0 +1,30 @@
+[
+  {
+    "test": "print(hard_sigmoid(.56))",
+    "expected_output": "0.612"
+  },
+  {
+    "test": "print(hard_sigmoid(3.0))",
+    "expected_output": "1.0"
+  },
+  {
+    "test": "print(hard_sigmoid(0.0))",
+    "expected_output": "0.5"
+  },
+  {
+    "test": "print(hard_sigmoid(1.0))",
+    "expected_output": "0.7"
+  },
+  {
+    "test": "print(hard_sigmoid(-1.0))",
+    "expected_output": "0.3"
+  },
+  {
+    "test": "print(hard_sigmoid(2.5))",
+    "expected_output": "1.0"
+  },
+  {
+    "test": "print(hard_sigmoid(-2.5))",
+    "expected_output": "0.0"
+  }
+]

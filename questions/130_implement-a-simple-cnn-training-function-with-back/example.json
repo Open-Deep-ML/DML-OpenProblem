@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np; np.random.seed(42); X = np.array([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]]); y = np.array([[1, 0]]); print(train_simple_cnn_with_backprop(X, y, 1, 0.01, 3, 1))",
+  "output": "(array([[[ 0.00501739],        [-0.00128214],        [ 0.00662764]],       [[ 0.01543131],        [-0.00209028],        [-0.00203986]],       [[ 0.01614389],        [ 0.00807636],        [-0.00424248]]]), array([5.02517066e-05]), array([[ 0.00635715, -0.00556573]]), array([ 0.00499531, -0.00499531]))",
+  "reasoning": "The solution processes the input X through a forward pass, where it applies a convolutional layer with ReLU activation, flattens the output, and passes it through a dense layer with softmax to compute predictions and loss based on the one-hot encoded label y. In the backward pass, it calculates gradients using backpropagation for the weights and biases, then updates them using stochastic gradient descent with the specified learning rate, and returns the updated weights after one epoch."
+}

@@ -1,0 +1,5 @@
+{
+  "input": "A = [[2, -1, 3], [4, 2, 1], [-6, 1, -2]], b = [5, 10, -3]",
+  "output": "[0.1667 3.3333 2.6667]",
+  "reasoning": "We compute the determinant of A and then replace each column with vector b to compute the determinants of modified matrices. These are then used in the formula $x_i = \\frac{\\det(A_i)}{\\det(A)}$ to get the solution."
+}

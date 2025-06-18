@@ -1,0 +1,5 @@
+{
+  "input": "predict_logistic(np.array([[1, 1], [2, 2], [-1, -1], [-2, -2]]), np.array([1, 1]), 0)",
+  "output": "[1 1 0 0]",
+  "reasoning": "Each sample's linear combination is computed using $z = Xw + b$. The sigmoid function is applied, and the output is thresholded at 0.5, resulting in binary predictions."
+}

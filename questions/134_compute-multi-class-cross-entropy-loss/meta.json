@@ -1,0 +1,17 @@
+{
+  "id": "134",
+  "title": "Compute Multi-class Cross-Entropy Loss",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/emharsha1812",
+      "name": "Harshwardhan Fartale"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

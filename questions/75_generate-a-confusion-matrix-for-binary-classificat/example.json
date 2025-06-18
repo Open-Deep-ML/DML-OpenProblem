@@ -1,0 +1,5 @@
+{
+  "input": "data = [[1, 1], [1, 0], [0, 1], [0, 0], [0, 1]]\nprint(confusion_matrix(data))",
+  "output": "[[1, 1], [2, 1]]",
+  "reasoning": "The confusion matrix shows the counts of true positives, false negatives, false positives, and true negatives."
+}

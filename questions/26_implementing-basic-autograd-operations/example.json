@@ -1,0 +1,5 @@
+{
+  "input": "a = Value(2)\n        b = Value(-3)\n        c = Value(10)\n        d = a + b * c\n        e = d.relu()\n        e.backward()\n        print(a, b, c, d, e)",
+  "reasoning": "The output reflects the forward computation and gradients after backpropagation. The ReLU on 'd' zeros out its output and gradient due to the negative data value.",
+  "output": "Value(data=2, grad=0) Value(data=-3, grad=0) Value(data=10, grad=0)"
+}

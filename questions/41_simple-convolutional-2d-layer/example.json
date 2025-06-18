@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\ninput_matrix = np.array([\n    [1, 2, 3, 4],\n    [5, 6, 7, 8],\n    [9, 10, 11, 12],\n    [13, 14, 15, 16]\n])\n\nkernel = np.array([\n    [1, 0],\n    [-1, 1]\n])\n\npadding = 1\nstride = 2\n\noutput = simple_conv2d(input_matrix, kernel, padding, stride)\nprint(output)",
+  "reasoning": "The function performs a 2D convolution operation on the input matrix using the specified kernel, padding, and stride. The output matrix contains the results of the convolution operation.",
+  "output": "[[ 1.  1. -4.],[ 9.  7. -4.],[ 0. 14. 16.]]"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "1",
+  "title": "Matrix-Vector Dot Product",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/DNoLs5tTGAw?si=vpkPobZMA8YY10WY",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy"
+}

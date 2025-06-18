@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\nx1 = np.array([1, 2, 3])\nx2 = np.array([4, 5, 6])\nresult = kernel_function(x1, x2)\nprint(result)",
+    "expected_output": "32"
+  },
+  {
+    "test": "import numpy as np\nx1 = np.array([0, 1, 2])\nx2 = np.array([3, 4, 5])\nresult = kernel_function(x1, x2)\nprint(result)",
+    "expected_output": "14"
+  }
+]

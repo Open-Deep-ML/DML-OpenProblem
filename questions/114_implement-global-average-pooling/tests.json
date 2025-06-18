@@ -1,0 +1,14 @@
+[
+  {
+    "test": "x = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])\nprint(global_avg_pool(x))",
+    "expected_output": "[5.5,6.5,7.5]"
+  },
+  {
+    "test": "x = np.array([[[100, 200]]])\nprint(global_avg_pool(x))",
+    "expected_output": "[100.,200.]"
+  },
+  {
+    "test": "x = np.ones((3, 3, 1))\nprint(global_avg_pool(x))",
+    "expected_output": "[1.]"
+  }
+]

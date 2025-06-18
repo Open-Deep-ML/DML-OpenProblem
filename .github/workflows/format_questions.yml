@@ -1,0 +1,31 @@
+name: Build & Validate Question Bundles
+
+on:
+  push:
+    branches: [main]
+    paths: ['questions/**', 'utils/**', 'schemas/**']
+  pull_request:
+    paths: ['questions/**', 'utils/**', 'schemas/**']
+
+jobs:
+  format-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install deps
+      run: pip install jsonschema
+
+    # ---------- build ----------
+    - name: Build bundles into /build
+      run: python utils/build_bundle.py
+
+    # ---------- validate ----------
+    - name: Validate bundles
+      run: python utils/validate_questions.py build/*.json

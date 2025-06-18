@@ -1,0 +1,18 @@
+[
+  {
+    "test": "\n# Test case 1: Perfect match\ny_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([1, 0, 1, 1, 0, 1])\nprint(jaccard_index(y_true, y_pred))\n",
+    "expected_output": "1.0"
+  },
+  {
+    "test": "\n# Test case 2: No overlap\ny_true = np.array([1, 0, 1, 1, 0, 0])\ny_pred = np.array([0, 1, 0, 0, 1, 1])\nprint(jaccard_index(y_true, y_pred))\n",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "\n# Test case 3: Partial overlap\ny_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([1, 0, 1, 0, 0, 0])\nprint(jaccard_index(y_true, y_pred))\n",
+    "expected_output": "0.5"
+  },
+  {
+    "test": "\ny_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([0, 1, 0, 1, 1, 0])\nprint(jaccard_index(y_true, y_pred))\n",
+    "expected_output": "0.167"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "input": "hard_sigmoid(0.0)",
+  "output": "0.5",
+  "reasoning": "The input 0.0 falls in the linear region of the Hard Sigmoid function. Using the formula $HardSigmoid(x) = 0.2x + 0.5$, the output is $0.2 \\times 0.0 + 0.5 = 0.5$."
+}

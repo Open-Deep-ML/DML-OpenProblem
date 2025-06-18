@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import torch\nstd, norm = feature_scaling([[1.0,2.0],[3.0,4.0],[5.0,6.0]])\nprint(std.numpy().tolist(), norm.numpy().tolist())",
+    "expected_output": "[[-1.2246999740600586, -1.2246999740600586], [0.0, 0.0], [1.2246999740600586, 1.2246999740600586]] [[0.0, 0.0], [0.5, 0.5], [1.0, 1.0]]"
+  },
+  {
+    "test": "import torch\nstd, norm = feature_scaling(torch.tensor([[10.0,0.0],[20.0,5.0]]))\nprint(std.numpy().tolist(), norm.numpy().tolist())",
+    "expected_output": "[[-1.0, -1.0], [1.0, 1.0]] [[0.0, 0.0], [1.0, 1.0]]"
+  }
+]

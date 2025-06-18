@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\n\nnp.random.seed(42) \n\ninput_sequence = np.array([[1.0], [2.0], [3.0], [4.0]])\nexpected_output = np.array([[2.0], [3.0], [4.0], [5.0]])\n\nrnn = SimpleRNN(input_size=1, hidden_size=5, output_size=1)\n\n# Train the RNN over multiple epochs\nfor epoch in range(100):\n    output = rnn.forward(input_sequence)\n    rnn.backward(input_sequence, expected_output, learning_rate=0.01)\n\nprint(output)",
+    "expected_output": "[[[2.24143915]],[[3.18450265]],[[4.04305928]],[[4.57419398]]]"
+  },
+  {
+    "test": "import numpy as np\n\nnp.random.seed(42) \n\ninput_sequence = np.array([[1.0,2.0], [7.0,2.0], [1.0,3.0], [12.0,4.0]])\nexpected_output = np.array([[2.0], [3.0], [4.0], [5.0]])\n\nrnn = SimpleRNN(input_size=2, hidden_size=3, output_size=1)\n\n# Train the RNN over multiple epochs\nfor epoch in range(100):\n    output = rnn.forward(input_sequence)\n    rnn.backward(input_sequence, expected_output, learning_rate=0.01)\n\nprint(output)",
+    "expected_output": "[[[2.42201379]],[[3.44167595]],[[3.6129965 ]],[[4.50660152]]]"
+  },
+  {
+    "test": "import numpy as np\n\nnp.random.seed(42) \n\ninput_sequence = np.array([[1.0,2.0], [7.0,2.0], [1.0,3.0], [12.0,4.0]])\nexpected_output = np.array([[2.0,1.0], [3.0,7.0], [4.0,8.0], [5.0,10.0]])\n\nrnn = SimpleRNN(input_size=2, hidden_size=10, output_size=2)\n\n# Train the RNN over multiple epochs\nfor epoch in range(50):\n    output = rnn.forward(input_sequence)\n    rnn.backward(input_sequence, expected_output, learning_rate=0.01)\n\nprint(output)",
+    "expected_output": "[[[3.28424506],[5.93532247]],[[3.60393582],[6.82013468]],[[3.52586543],[6.58278163]],[[3.61336207],[6.84916339]]]"
+  }
+]

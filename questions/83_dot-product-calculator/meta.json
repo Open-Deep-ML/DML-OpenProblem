@@ -1,0 +1,17 @@
+{
+  "id": "83",
+  "title": "Dot Product Calculator",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/rittik9",
+      "name": "rittik9"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

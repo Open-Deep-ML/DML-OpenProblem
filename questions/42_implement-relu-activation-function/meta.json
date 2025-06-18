@@ -1,0 +1,21 @@
+{
+  "id": "42",
+  "title": "Implement ReLU Activation Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/1hq_bTksuOQ",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/doshi-kevin",
+      "name": "Kevin Doshi"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

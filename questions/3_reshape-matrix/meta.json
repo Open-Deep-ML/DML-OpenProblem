@@ -1,0 +1,22 @@
+{
+  "id": "3",
+  "title": "Reshape Matrix",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/19FD49nPH6w?si=VrJh7RV27naO2V3o",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/mmujtabah",
+      "name": "mmujtabah"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": ""
+}

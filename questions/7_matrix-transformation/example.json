@@ -1,0 +1,5 @@
+{
+  "input": "A = [[1, 2], [3, 4]], T = [[2, 0], [0, 2]], S = [[1, 1], [0, 1]]",
+  "output": "[[0.5,1.5],[1.5,3.5]]",
+  "reasoning": "The matrices T and S are used to transform matrix A by computing $T^{-1}AS$."
+}

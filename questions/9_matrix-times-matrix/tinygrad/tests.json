@@ -1,0 +1,14 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = matrixmul_tg(\n    [[1,2],[3,4]],\n    [[1,0],[0,1]]\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[[1.0, 2.0], [3.0, 4.0]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = matrixmul_tg(\n    [[1,2,3],[2,4,5],[6,8,9]],\n    [[1,2],[3,4],[5,6]]\n)\nprint(res.numpy().tolist())",
+    "expected_output": "[[22.0, 28.0], [39.0, 50.0], [75.0, 98.0]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = matrixmul_tg(\n    [[1,2,3],[2,4,5]],\n    [[1,2],[3,4]]\n)\nprint(res.numpy().tolist())",
+    "expected_output": "-1.0"
+  }
+]

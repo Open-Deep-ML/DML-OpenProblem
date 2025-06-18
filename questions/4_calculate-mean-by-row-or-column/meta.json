@@ -1,0 +1,22 @@
+{
+  "id": "4",
+  "title": "Calculate Mean by Row or Column",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/l7kQALZvS_c",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": "https://adityakhalkar.github.io/Deep-ML-x-Marimo/4"
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\nQ = np.array([[1.0], [1.0], [1.0]])\nK = np.array([[1.0], [1.0], [1.0]])\nV = np.array([[1.0], [2.0], [3.0]])\nprint(sparse_window_attention(Q, K, V, 1))",
+    "expected_output": "[[1.5], [2.], [2.5]]"
+  },
+  {
+    "test": "import numpy as np\nQ = np.array([[4.0]])\nK = np.array([[4.0]])\nV = np.array([[5.0]])\nprint(sparse_window_attention(Q, K, V, 0))",
+    "expected_output": "[[5.]]"
+  },
+  {
+    "test": "import numpy as np\nQ = np.array([[0.0], [1.0], [0.0],[2.0], [0.0], [7.0]])\nK = np.array([[1.0], [2.0], [3.0], [0.0], [6.0], [0.0]])\nV = np.array([[10.0], [20.0], [30.0],[12.0], [23.0], [70.0]])\nprint(sparse_window_attention(Q, K, V, 2))",
+    "expected_output": "[[20. ], [25.31123059], [19. ], [23.01651938], [33.75 ], [23. ]]"
+  }
+]

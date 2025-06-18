@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(vector_sum([1, 2, 3], [4, 5, 6]))",
+    "expected_output": "[5, 7, 9]"
+  },
+  {
+    "test": "print(vector_sum([1, 2], [1, 2, 3]))",
+    "expected_output": "-1"
+  },
+  {
+    "test": "print(vector_sum([1.5, 2.5, 3.0], [2, 1, 4]))",
+    "expected_output": "[3.5, 3.5, 7.0]"
+  }
+]

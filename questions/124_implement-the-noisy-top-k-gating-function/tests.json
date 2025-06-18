@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\nnp.random.seed(0)\nX = np.array([[1.0, 2.0]])\nW_g = np.array([[1.0, 0.0], [0.0, 1.0]])\nW_noise = np.zeros((2,2))\nN = np.zeros((1,2))\nprint(noisy_topk_gating(X, W_g, W_noise, N, k=1))",
+    "expected_output": "[[0. 1.]]"
+  },
+  {
+    "test": "import numpy as np\nX = np.array([[1.0, 2.0]])\nW_g = np.array([[1.0, 0.0], [0.0, 1.0]])\nW_noise = np.array([[0.5, 0.5], [0.5, 0.5]])\nN = np.array([[1.0, -1.0]])\nprint(np.round(noisy_topk_gating(X, W_g, W_noise, N, k=2), 4))",
+    "expected_output": "[[0.917, 0.083]]"
+  }
+]

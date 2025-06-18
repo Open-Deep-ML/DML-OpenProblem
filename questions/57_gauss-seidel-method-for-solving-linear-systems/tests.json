@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\n\nA = np.array([[4, 1, 2], [3, 5, 1], [1, 1, 3]], dtype=float)\nb = np.array([4, 7, 3], dtype=float)\nn = 5\nprint(gauss_seidel(A, b, n))",
+    "expected_output": "[0.5008, 0.99968, 0.49984]"
+  },
+  {
+    "test": "import numpy as np\n\nA = np.array([[4, -1, 0, 1], [-1, 4, -1, 0], [0, -1, 4, -1], [1, 0, -1, 4]], dtype=float)\nb = np.array([15, 10, 10, 15], dtype=float)\nn = 1\nprint(gauss_seidel(A, b, n))",
+    "expected_output": "[3.75, 3.4375, 3.359375, 3.65234375]"
+  },
+  {
+    "test": "import numpy as np\n\nA = np.array([[10, -1, 2], [-1, 11, -1], [2, -1, 10]], dtype=float)\nb = np.array([6, 25, -11], dtype=float)\nn = 100\nprint(gauss_seidel(A, b, n))",
+    "expected_output": "[1.04326923, 2.26923077, -1.08173077]"
+  }
+]

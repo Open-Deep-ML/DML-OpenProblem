@@ -1,0 +1,5 @@
+{
+  "input": "parameter = 1.0, grad = 0.1, m = 0.0, v = 0.0, t = 1",
+  "output": "(0.999, 0.01, 0.0001)",
+  "reasoning": "The Adam optimizer computes updated values for the parameter, first moment (m), and second moment (v) using bias-corrected estimates of gradients. With input values parameter=1.0, grad=0.1, m=0.0, v=0.0, and t=1, the updated parameter becomes 0.999."
+}

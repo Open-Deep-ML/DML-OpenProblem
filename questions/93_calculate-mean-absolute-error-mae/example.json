@@ -1,0 +1,5 @@
+{
+  "input": "y_true = np.array([3, -0.5, 2, 7]), y_pred = np.array([2.5, 0.0, 2, 8])",
+  "output": "0.500",
+  "reasoning": "The MAE is calculated by taking the mean of the absolute differences between the predicted and true values. Using the formula, the result is 0.500."
+}

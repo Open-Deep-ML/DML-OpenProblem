@@ -1,0 +1,21 @@
+{
+  "id": "48",
+  "title": "Implement Reduced Row Echelon Form (RREF) Function",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/mpimdNG9XsA?si=kWFw8hhbGTy2ujX3",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://github.com/peppermin-t",
+      "name": "Yinjia Chen"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}
