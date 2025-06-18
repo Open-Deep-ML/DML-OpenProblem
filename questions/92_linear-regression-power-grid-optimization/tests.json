@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(power_grid_forecast([150, 165, 185, 195, 210, 225, 240, 260, 275, 290]))",
+    "expected_output": "404"
+  },
+  {
+    "test": "print(power_grid_forecast([160, 170, 190, 200, 215, 230, 245, 265, 280, 295]))",
+    "expected_output": "407"
+  },
+  {
+    "test": "print(power_grid_forecast([140, 158, 180, 193, 205, 220, 237, 255, 270, 288]))",
+    "expected_output": "404"
+  }
+]

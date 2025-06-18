@@ -1,0 +1,5 @@
+{
+  "input": "y_true = [1, 0, 1, 1, 0], y_pred = [1, 0, 0, 1, 1]",
+  "output": "0.667",
+  "reasoning": "The true positives, false positives, and false negatives are calculated from the given labels. Precision and recall are derived, and the F1 score is computed as their harmonic mean."
+}

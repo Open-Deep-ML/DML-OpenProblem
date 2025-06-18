@@ -1,0 +1,14 @@
+[
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = inverse_2x2_tg([[1.0, 0.0], [0.0, 1.0]])\nprint(res.numpy().tolist())",
+    "expected_output": "[[1.0, 0.0], [0.0, 1.0]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = inverse_2x2_tg([[1.0, 2.0], [3.0, 4.0]])\nprint(res.numpy().tolist())",
+    "expected_output": "[[-2.0, 1.0], [1.5, -0.5]]"
+  },
+  {
+    "test": "from tinygrad.tensor import Tensor\nres = inverse_2x2_tg([[1.0, 2.0], [2.0, 4.0]])\nprint(res)",
+    "expected_output": "None"
+  }
+]

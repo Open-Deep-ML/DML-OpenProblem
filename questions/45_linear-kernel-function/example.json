@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\nx1 = np.array([1, 2, 3])\nx2 = np.array([4, 5, 6])\n\nresult = kernel_function(x1, x2)\nprint(result)",
+  "output": "32",
+  "reasoning": "The linear kernel between x1 and x2 is computed as:1\\*4 + 2\\*5 + 3\\*6 = 32"
+}

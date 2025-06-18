@@ -1,0 +1,5 @@
+{
+  "input": "[[1, 2, 3], [4, 5, 6]]",
+  "output": "[[1.0, 1.0], [1.0, 1.0]]",
+  "reasoning": "The covariance between the two features is calculated based on their deviations from the mean. For the given vectors, both covariances are 1.0, resulting in a symmetric covariance matrix."
+}

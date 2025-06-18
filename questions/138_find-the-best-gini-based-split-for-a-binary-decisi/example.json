@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\nX = np.array([[2.5],[3.5],[1.0],[4.0]])\ny = np.array([0,1,0,1])\nprint(find_best_split(X, y))",
+  "output": "(0, 2.5)",
+  "reasoning": "Splitting on feature 0 at threshold 2.5 yields two perfectly pure leaves, producing the minimum possible weighted Gini impurity."
+}

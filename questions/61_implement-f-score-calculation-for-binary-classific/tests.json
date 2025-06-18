@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([1, 0, 1, 0, 0, 1])\nbeta = 1\nprint(f_score(y_true, y_pred, beta))",
+    "expected_output": "0.857"
+  },
+  {
+    "test": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 0])\ny_pred = np.array([1, 0, 0, 0, 0, 1])\nbeta = 1\nprint(f_score(y_true, y_pred, beta))",
+    "expected_output": "0.4"
+  },
+  {
+    "test": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 0])\ny_pred = np.array([1, 0, 1, 1, 0, 0])\nbeta = 2\nprint(f_score(y_true, y_pred, beta))",
+    "expected_output": "1.0"
+  },
+  {
+    "test": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([0, 0, 0, 1, 0, 1])\nbeta = 2\nprint(f_score(y_true, y_pred, beta))",
+    "expected_output": "0.556"
+  }
+]

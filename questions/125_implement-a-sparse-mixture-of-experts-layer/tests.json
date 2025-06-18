@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nd_model = 2\nn_experts = 4\nl_seq = 3\nn_batch = 2\ntop_k = 2\nx = np.random.rand(n_batch, l_seq, d_model)\nWe = np.random.rand(n_experts, d_model, d_model)\nWg = np.random.rand(d_model, n_experts)\noutput = moe(x, We, Wg, n_experts, top_k)\nprint(np.round(output, 4))",
+    "expected_output": "[[[0.5148 0.4329]\n  [0.5554 0.5447]\n  [0.1285 0.102 ]]\n\n [[0.339  0.3046]\n  [0.5391 0.417 ]\n  [0.3597 0.3262]]]"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nd_model = 2\nn_experts = 4\nl_seq = 3\nn_batch = 2\ntop_k = 2\nx = np.random.rand(n_batch, l_seq, d_model)\nWe = np.zeros((n_experts, d_model, d_model))\nWg = np.random.rand(d_model, n_experts)\noutput = moe(x, We, Wg, n_experts, top_k)\nprint(output)",
+    "expected_output": "[[[0. 0.]\n  [0. 0.]\n  [0. 0.]]\n\n [[0. 0.]\n  [0. 0.]\n  [0. 0.]]]"
+  }
+]

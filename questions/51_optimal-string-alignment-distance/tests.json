@@ -1,0 +1,18 @@
+[
+  {
+    "test": "source = \"butterfly\"\ntarget = \"dragonfly\"\noutput = OSA(source, target)\nprint(output)",
+    "expected_output": "6"
+  },
+  {
+    "test": "source = \"caper\"\ntarget = \"acer\"\noutput = OSA(source, target)\nprint(output)",
+    "expected_output": "2"
+  },
+  {
+    "test": "source = \"telescope\"\ntarget = \"microscope\"\noutput = OSA(source, target)\nprint(output)",
+    "expected_output": "5"
+  },
+  {
+    "test": "source = \"london\"\ntarget = \"paris\"\noutput = OSA(source, target)\nprint(output)",
+    "expected_output": "6"
+  }
+]

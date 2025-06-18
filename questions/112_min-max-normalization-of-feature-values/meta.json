@@ -1,0 +1,17 @@
+{
+  "id": "112",
+  "title": "Min-Max Normalization of Feature Values",
+  "difficulty": "easy",
+  "category": "Data Preprocessing",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Noth2006",
+      "name": "Noth2006"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

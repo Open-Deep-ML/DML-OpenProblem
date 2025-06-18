@@ -1,0 +1,17 @@
+{
+  "id": "36",
+  "title": "Calculate Accuracy Score",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/eriklindernoren/ML-From-Scratch",
+      "name": "Erik Linder-Norén"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

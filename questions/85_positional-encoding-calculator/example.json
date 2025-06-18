@@ -1,0 +1,5 @@
+{
+  "input": "position = 2, d_model = 8",
+  "reasoning": "The function computes the positional encoding by calculating sine values for even indices and cosine values for odd indices, ensuring that the encoding provides the required positional information.",
+  "output": "[[[ 0.,0.,0.,0.,1.,1.,1.,1.,]\n  [ 0.8413,0.0998,0.01,0.001,0.5405,0.995,1.,1.]]]"
+}

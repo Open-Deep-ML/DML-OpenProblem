@@ -1,0 +1,5 @@
+{
+  "input": "A = np.array([[4, 1, 2], [3, 5, 1], [1, 1, 3]], dtype=float)\nb = np.array([4, 7, 3], dtype=float)\n\nn = 100\nprint(gauss_seidel(A, b, n))",
+  "output": "# [0.2, 1.4, 0.8]  (Approximate, values may vary depending on iterations)",
+  "reasoning": "The Gauss-Seidel method iteratively updates the solution vector \\(x\\) until convergence. The output is an approximate solution to the linear system."
+}

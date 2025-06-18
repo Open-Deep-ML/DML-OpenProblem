@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\n\ntriangle = [[0, 0], [1, 0], [0.5, 1]]\ntx, ty = 2, 3\nprint(translate_object(triangle, tx, ty))",
+    "expected_output": "[[2.0, 3.0], [3.0, 3.0], [2.5, 4.0]]"
+  },
+  {
+    "test": "import numpy as np\n\nsquare = [[0, 0], [1, 0], [1, 1], [0, 1]]\ntx, ty = -1, 2\nprint(translate_object(square, tx, ty))",
+    "expected_output": "[[-1.0, 2.0], [0.0, 2.0], [0.0, 3.0], [-1.0, 3.0]]"
+  }
+]

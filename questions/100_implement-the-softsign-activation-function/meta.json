@@ -1,0 +1,18 @@
+{
+  "id": "100",
+  "title": "Implement the Softsign Activation Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Haleshot",
+      "name": "Haleshot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-softsign"
+}

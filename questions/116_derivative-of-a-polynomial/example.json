@@ -1,0 +1,5 @@
+{
+  "input": "poly_term_derivative(2.0, 3.0, 2.0)",
+  "output": "12.0",
+  "reasoning": "For the term 2 * x^2, the derivative is 2 * 2 * x^(2-1) = 4 * x. At x = 3, this evaluates to 4 * 3 = 12.0."
+}

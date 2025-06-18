@@ -1,0 +1,5 @@
+{
+  "input": "Q = np.array([[1, 0], [0, 1]]), K = np.array([[1, 0], [0, 1]]), V = np.array([[1, 0], [0, 1]]), n_heads = 2",
+  "output": "[[1., 0.], [0., 1.]]",
+  "reasoning": "Multi-head attention is computed for 2 heads using the input Q, K, and V matrices. The resulting outputs for each head are concatenated to form the final attention output."
+}

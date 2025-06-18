@@ -1,0 +1,5 @@
+{
+  "input": "X = [[1.0, 2.0]]\nW_g = [[1.0, 0.0], [0.0, 1.0]]\nW_noise = [[0.5, 0.5], [0.5, 0.5]]\nN = [[1.0, -1.0]]\nk = 2",
+  "output": "[[0.917, 0.0825]]",
+  "reasoning": "This example demonstrates that the gating function produces a sparse softmax output, favoring the higher gate after noise perturbation."
+}

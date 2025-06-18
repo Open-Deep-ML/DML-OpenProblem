@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\npred = np.array([[1, 0, 0], [0, 1, 0]])\ntrue = np.array([[1, 0, 0], [0, 1, 0]])\nprint(round(compute_cross_entropy_loss(pred, true), 4))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "import numpy as np\npred = np.array([[0.1, 0.8, 0.1], [0.8, 0.1, 0.1]])\ntrue = np.array([[0, 0, 1], [0, 1, 0]])\nprint(round(compute_cross_entropy_loss(pred, true), 4))",
+    "expected_output": "2.3026"
+  },
+  {
+    "test": "import numpy as np\npred = np.array([[0.7, 0.2, 0.1], [0.3, 0.6, 0.1]])\ntrue = np.array([[1, 0, 0], [0, 1, 0]])\nprint(round(compute_cross_entropy_loss(pred, true), 4))",
+    "expected_output": "0.4338"
+  }
+]

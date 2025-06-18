@@ -1,0 +1,1 @@
+Implement a function to solve a system of linear equations $Ax = b$ using Cramer's Rule. The function should take a square coefficient matrix $A$ and a constant vector $b$, and return the solution vector $x$. If the system has no unique solution (i.e., the determinant of $A$ is zero), return -1.

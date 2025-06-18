@@ -1,0 +1,5 @@
+{
+  "input": "corpus = [['the', 'cat', 'sat'], ['the', 'dog', 'ran'], ['the', 'bird', 'flew']], query = ['the', 'cat']",
+  "output": "[0.693, 0., 0. ]",
+  "reasoning": "BM25 calculates scores for each document in the corpus by evaluating how well the query terms match each document while considering term frequency saturation and document length normalization."
+}

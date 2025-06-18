@@ -1,0 +1,10 @@
+[
+  {
+    "test": "print(pegasos_kernel_svm(np.array([[1, 2], [2, 3], [3, 1], [4, 1]]), np.array([1, 1, -1, -1]), kernel='linear', lambda_val=0.01, iterations=100))",
+    "expected_output": "([100.0, 0.0, -100.0, -100.0], -937.4755)"
+  },
+  {
+    "test": "print(pegasos_kernel_svm(np.array([[1, 2], [2, 3], [3, 1], [4, 1]]), np.array([1, 1, -1, -1]), kernel='rbf', lambda_val=0.01, iterations=100, sigma=0.5))",
+    "expected_output": "([100.0, 99.0, -100.0, -100.0], -115.0)"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "input": "data = np.array([[1, 2], [3, 4], [5, 6]])",
+  "output": "([[-1.2247, -1.2247], [0.0, 0.0], [1.2247, 1.2247]], [[0.0, 0.0], [0.5, 0.5], [1.0, 1.0]])",
+  "reasoning": "Standardization rescales the feature to have a mean of 0 and a standard deviation of 1.\n        Min-max normalization rescales the feature to a range of [0, 1], where the minimum feature value\n        maps to 0 and the maximum to 1."
+}

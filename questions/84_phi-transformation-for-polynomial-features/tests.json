@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(phi_transform([], 2))",
+    "expected_output": "[]"
+  },
+  {
+    "test": "print(phi_transform([1.0, 2.0], -1))",
+    "expected_output": "[]"
+  },
+  {
+    "test": "print(phi_transform([1.0, 2.0], 2))",
+    "expected_output": "[[1.0, 1.0, 1.0], [1.0, 2.0, 4.0]]"
+  },
+  {
+    "test": "print(phi_transform([1.0, 3.0], 3))",
+    "expected_output": "[[1.0, 1.0, 1.0, 1.0], [1.0, 3.0, 9.0, 27.0]]"
+  },
+  {
+    "test": "print(phi_transform([2.0], 4))",
+    "expected_output": "[[1.0, 2.0, 4.0, 8.0, 16.0]]"
+  }
+]

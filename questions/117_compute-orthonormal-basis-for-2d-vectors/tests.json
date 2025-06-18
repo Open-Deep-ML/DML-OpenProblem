@@ -1,0 +1,18 @@
+[
+  {
+    "test": "basis = orthonormal_basis([[1, 0], [1, 1]]); print([b.round(4) for b in basis])",
+    "expected_output": "[array([1., 0.]), array([0., 1.])]"
+  },
+  {
+    "test": "basis = orthonormal_basis([[2, 0], [4, 0]], tol=1e-10); print([b.round(4) for b in basis])",
+    "expected_output": "[array([1., 0.])]"
+  },
+  {
+    "test": "basis = orthonormal_basis([[1, 1], [1, -1]], tol=1e-5); print([b.round(4) for b in basis])",
+    "expected_output": "[array([0.7071, 0.7071]), array([0.7071, -0.7071])]"
+  },
+  {
+    "test": "basis = orthonormal_basis([[0, 0]], tol=1e-10); print([b.round(4) for b in basis])",
+    "expected_output": "[]"
+  }
+]

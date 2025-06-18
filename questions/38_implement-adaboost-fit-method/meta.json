@@ -1,0 +1,21 @@
+{
+  "id": "38",
+  "title": "Implement AdaBoost Fit Method",
+  "difficulty": "hard",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/eriklindernoren/ML-From-Scratch",
+      "name": "Erik Linder-Norén"
+    },
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}

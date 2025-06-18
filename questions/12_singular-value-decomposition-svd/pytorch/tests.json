@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import torch\nU, S, Vt = svd_2x2_singular_values(torch.tensor([[1.0, 0.0], [0.0, 1.0]]))\nprint(U.numpy().tolist(), S.numpy().tolist(), Vt.numpy().tolist())",
+    "expected_output": "[[0.7071067690849304, -0.7071067690849304], [0.7071067690849304, 0.7071067690849304]] [1.0, 1.0] [[0.7071067690849304, 0.7071067690849304], [-0.7071067690849304, 0.7071067690849304]]"
+  },
+  {
+    "test": "import torch\nU, S, Vt = svd_2x2_singular_values(torch.tensor([[2.0, 0.0], [0.0, 1.0]]))\nprint(U.numpy().tolist(), S.numpy().tolist(), Vt.numpy().tolist())",
+    "expected_output": "[[1.0, 0.0], [0.0, 1.0]] [2.0, 1.0] [[1.0, 0.0], [0.0, 1.0]]"
+  }
+]

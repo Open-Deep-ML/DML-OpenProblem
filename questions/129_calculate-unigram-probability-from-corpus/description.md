@@ -1,0 +1,1 @@
+Implement a function that calculates the unigram probability of a given word in a corpus of sentences. Include start `<s>` and end `</s>` tokens in the calculation. The probability should be rounded to 4 decimal places.

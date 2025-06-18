@@ -1,0 +1,5 @@
+{
+  "input": "A = [[5, -2, 3], [-3, 9, 1], [2, -1, -7]], b = [-1, 2, 3], n=2",
+  "output": "[0.146, 0.2032, -0.5175]",
+  "reasoning": "The Jacobi method iteratively solves each equation for x[i] using the formula x[i] = (1/a_ii) * (b[i] - sum(a_ij * x[j] for j != i)), where a_ii is the diagonal element of A and a_ij are the off-diagonal elements."
+}

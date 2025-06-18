@@ -1,0 +1,14 @@
+[
+  {
+    "test": "dense_matrix = [\n    [0, 0, 0],\n    [0, 0, 0],\n    [0, 0, 0]\n]\nvals, row_idx, col_ptr = compressed_col_sparse_matrix(dense_matrix)\nprint(vals)",
+    "expected_output": "[]"
+  },
+  {
+    "test": "dense_matrix = [\n    [0, 0, 0],\n    [1, 2, 0],\n    [0, 3, 4]\n]\nvals, row_idx, col_ptr = compressed_col_sparse_matrix(dense_matrix)\nprint(vals)",
+    "expected_output": "[1, 2, 3, 4]"
+  },
+  {
+    "test": "dense_matrix = [\n    [0, 0, 3, 0, 0],\n    [0, 4, 0, 0, 0],\n    [5, 0, 0, 6, 0],\n    [0, 0, 0, 0, 0],\n    [0, 7, 0, 0, 8]\n]\nvals, row_idx, col_ptr = compressed_col_sparse_matrix(dense_matrix)\nprint(vals)",
+    "expected_output": "[5, 4, 7, 3, 6, 8]"
+  }
+]

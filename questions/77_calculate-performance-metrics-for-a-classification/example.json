@@ -1,0 +1,5 @@
+{
+  "input": "actual = [1, 0, 1, 0, 1]\npredicted = [1, 0, 0, 1, 1]\nprint(performance_metrics(actual, predicted))",
+  "output": "([[2, 1], [1, 1]], 0.6, 0.667, 0.5, 0.5)",
+  "reasoning": "The function calculates the confusion matrix, accuracy, F1 score, specificity, and negative predictive value based on the input labels. The resulting values are rounded to three decimal places as required."
+}

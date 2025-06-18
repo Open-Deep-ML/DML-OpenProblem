@@ -1,0 +1,5 @@
+{
+  "input": "v = [3, 4]\nL = [1, 0]\nprint(orthogonal_projection(v, L))",
+  "output": "[3.0, 0.0]",
+  "reasoning": "The orthogonal projection of vector [3, 4] onto the line defined by [1, 0] results in the projection vector [3, 0], which lies on the line [1, 0]."
+}

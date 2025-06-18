@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(round(swish(0),4))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(round(swish(1),4))",
+    "expected_output": "0.7311"
+  },
+  {
+    "test": "print(round(swish(-1),4))",
+    "expected_output": "-0.2689"
+  },
+  {
+    "test": "print(round(swish(10),4))",
+    "expected_output": "9.9995"
+  },
+  {
+    "test": "print(round(swish(-10),4))",
+    "expected_output": "-0.0005"
+  }
+]

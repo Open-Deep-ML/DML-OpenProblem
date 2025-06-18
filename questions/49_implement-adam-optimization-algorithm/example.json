@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\ndef objective_function(x):\n    return x[0]**2 + x[1]**2\n\ndef gradient(x):\n    return np.array([2*x[0], 2*x[1]])\n\nx0 = np.array([1.0, 1.0])\nx_opt = adam_optimizer(objective_function, gradient, x0)\n\nprint(\"Optimized parameters:\", x_opt)",
+  "output": "# Optimized parameters: [0.99000325 0.99000325]",
+  "reasoning": "The Adam optimizer updates the parameters to minimize the objective function. In this case, the objective function is the sum of squares of the parameters, and the optimizer finds the optimal values for the parameters."
+}

@@ -1,0 +1,17 @@
+{
+  "id": "9",
+  "title": "Matrix times Matrix ",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/N2j0fA2E9k4",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy"
+}

@@ -1,0 +1,5 @@
+{
+  "input": "orthonormal_basis([[1, 0], [1, 1]])",
+  "output": "[array([1., 0.]), array([0., 1.])]",
+  "reasoning": "Start with [1, 0], normalize to [1, 0]. For [1, 1], subtract its projection onto [1, 0] (which is [1, 0]), leaving [0, 1]. Check if norm > 1e-10 (it is 1), then normalize to [0, 1]. The result is an orthonormal basis."
+}
