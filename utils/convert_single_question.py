@@ -28,101 +28,40 @@ from typing import Any, Dict
 
 # ── 1️⃣  EDIT YOUR QUESTION HERE ────────────────────────────────────────────
 QUESTION_DICT: Dict[str, Any] = {
-    'id':'140',
-    "description": "Write a Python class to implement the Bernoulli Naive Bayes classifier for binary (0/1) feature data. Your class should have two methods: `forward(self, X, y)` to train on the input data (X: 2D NumPy array of binary features, y: 1D NumPy array of class labels) and `predict(self, X)` to output predicted labels for a 2D test matrix X. Use Laplace smoothing (parameter: smoothing=1.0). Return predictions as a NumPy array. Only use NumPy. Predictions must be binary (0 or 1) and you must handle cases where the training data contains only one class. All log/likelihood calculations should use log probabilities for numerical stability.",
+    "id": "141",
+    "description": "Write a Python function `convert_range` that shifts and scales the values of a NumPy array from their original range $[a, b]$ (where $a=\\min(x)$ and $b=\\max(x)$) to a new target range $[c, d]$. Your function should work for both 1D and 2D arrays, returning an array of the same shape, and only use NumPy. Return floating-point results, and ensure you use the correct formula to map the input interval to the output interval.",
     "test_cases": [
         {
-            "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.array([[1, 0, 1], [1, 1, 0], [0, 0, 1], [0, 1, 0], [1, 1, 1]])\ny = np.array([1, 1, 0, 0, 1])\nmodel.forward(X, y)\nprint(model.predict(np.array([[1, 0, 1]])))",
-            "expected_output": "[1]"
+            "test": "import numpy as np\nseq = np.array([388, 242, 124, 384, 313, 277, 339, 302, 268, 392])\nc, d = 0, 1\nout = convert_range(seq, c, d)\nprint(np.round(out, 6))",
+            "expected_output": "[0.985075, 0.440299, 0.,       0.970149, 0.705224, 0.570896, 0.802239, 0.664179, 0.537313, 1.      ]"
         },
         {
-            "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.array([[0], [1], [0], [1]])\ny = np.array([0, 1, 0, 1])\nmodel.forward(X, y)\nprint(model.predict(np.array([[0], [1]])))",
-            "expected_output": "[0 1]"
-        },
-        {
-            "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.array([[0, 0], [1, 0], [0, 1]])\ny = np.array([0, 1, 0])\nmodel.forward(X, y)\nprint(model.predict(np.array([[1, 1]])))",
-            "expected_output": "[0]"
-        },
-        {
-            "test": "import numpy as np\nnp.random.seed(42)\nmodel = NaiveBayes(smoothing=1.0)\nX = np.random.randint(0, 2, (100, 5))\ny = np.random.choice([0, 1], size=100)\nmodel.forward(X, y)\nX_test = np.random.randint(0, 2, (10, 5))\npred = model.predict(X_test)\nprint(pred.shape)",
-            "expected_output": "(10,)"
-        },
-        {
-            "test": "import numpy as np\nmodel = NaiveBayes(smoothing=1.0)\nX = np.random.randint(0, 2, (10, 3))\ny = np.zeros(10)\nmodel.forward(X, y)\nX_test = np.random.randint(0, 2, (3, 3))\nprint(model.predict(X_test))",
-            "expected_output": "[0, 0, 0]"
+            "test": "import numpy as np\nseq = np.array([[2028, 4522], [1412, 2502], [3414, 3694], [1747, 1233], [1862, 4868]])\nc, d = 4, 8\nout = convert_range(seq, c, d)\nprint(np.round(out, 6))",
+            "expected_output": "[[4.874828 7.619257]\n [4.196974 5.396424]\n [6.4      6.708116]\n [4.565612 4.      ]\n [4.69216  8.      ]]"
         }
     ],
-    "solution": "import numpy as np\n\nclass NaiveBayes():\n    def __init__(self, smoothing=1.0):\n        self.smoothing = smoothing\n        self.classes = None\n        self.priors = None\n        self.likelihoods = None\n\n    def forward(self, X, y):\n        self.classes, class_counts = np.unique(y, return_counts=True)\n        self.priors = {cls: np.log(class_counts[i] / len(y)) for i, cls in enumerate(self.classes)}\n        self.likelihoods = {}\n        for cls in self.classes:\n            X_cls = X[y == cls]\n            prob = (np.sum(X_cls, axis=0) + self.smoothing) / (X_cls.shape[0] + 2 * self.smoothing)\n            self.likelihoods[cls] = (np.log(prob), np.log(1 - prob))\n\n    def _compute_posterior(self, sample):\n        posteriors = {}\n        for cls in self.classes:\n            posterior = self.priors[cls]\n            prob_1, prob_0 = self.likelihoods[cls]\n            likelihood = np.sum(sample * prob_1 + (1 - sample) * prob_0)\n            posterior += likelihood\n            posteriors[cls] = posterior\n        return max(posteriors, key=posteriors.get)\n\n    def predict(self, X):\n        return np.array([self._compute_posterior(sample) for sample in X])",
+    "solution": "import numpy as np\n\ndef convert_range(values: np.ndarray, c: float, d: float) -> np.ndarray:\n    \"\"\"\n    Shift and scale values from their original range [min, max] to a target [c, d] range.\n\n    Parameters\n    ----------\n    values : np.ndarray\n        Input array (1D or 2D) to be rescaled.\n    c : float\n        New range lower bound.\n    d : float\n        New range upper bound.\n\n    Returns\n    -------\n    np.ndarray\n        Scaled array with the same shape as the input.\n    \"\"\"\n    a, b = values.min(), values.max()\n    return c + (d - c) / (b - a) * (values - a)",
     "example": {
-        "input": "X = np.array([[1, 0, 1], [1, 1, 0], [0, 0, 1], [0, 1, 0], [1, 1, 1]]); y = np.array([1, 1, 0, 0, 1])\nmodel = NaiveBayes(smoothing=1.0)\nmodel.forward(X, y)\nprint(model.predict(np.array([[1, 0, 1]])))",
-        "output": "[1]",
-        "reasoning": "The model learns class priors and feature probabilities with Laplace smoothing. For [1, 0, 1], the posterior for class 1 is higher, so the model predicts 1."
+        "input": "import numpy as np\nx = np.array([0, 5, 10])\nc, d = 2, 4\nprint(convert_range(x, c, d))",
+        "output": "[2. 3. 4.]",
+        "reasoning": "The minimum value (a) is 0 and the maximum value (b) is 10. The formula maps 0 to 2, 5 to 3, and 10 to 4 using: f(x) = c + (d-c)/(b-a)*(x-a)."
     },
     "category": "Machine Learning",
-    "starter_code": "import numpy as np\n\nclass NaiveBayes():\n    def __init__(self, smoothing=1.0):\n        # Initialize smoothing\n        pass\n\n    def forward(self, X, y):\n        # Fit model to binary features X and labels y\n        pass\n\n    def predict(self, X):\n        # Predict class labels for test set X\n        pass",
-    "title": "Bernoulli Naive Bayes Classifier",
-    "learn_section":r"""# **Naive Bayes Classifier**
-
-## **1. Definition**
-
-Naive Bayes is a **probabilistic machine learning algorithm** used for **classification tasks**. It is based on **Bayes' Theorem**, which describes the probability of an event based on prior knowledge of related events.
-
-The algorithm assumes that:
-- **Features are conditionally independent** given the class label (the "naive" assumption).
-- It calculates the posterior probability for each class and assigns the class with the **highest posterior** to the sample.
-
----
-
-## **2. Bayes' Theorem**
-
-Bayes' Theorem is given by:
-
-$$
-P(C | X) = \frac{P(X | C) \times P(C)}{P(X)}
-$$
-
-Where:
-- $P(C | X)$ **Posterior** probability: the probability of class $C $ given the feature vector $X$
-- $P(X | C)$ → **Likelihood**: the probability of the data $X$ given the class
-- $P(C)$ → **Prior** probability: the initial probability of class $C$ before observing any data
-- $ P(X)$ → **Evidence**: the total probability of the data across all classes (acts as a normalizing constant)
-
-Since $P(X)$ is the same for all classes during comparison, it can be ignored, simplifying the formula to:
-
-$$
-P(C | X) \propto P(X | C) \times P(C)
-$$
----
-
-### 3 **Bernoulli Naive Bayes**
-- Used for **binary data** (features take only 0 or 1 values).
-- The likelihood is given by:
-
-$$
-P(X | C) = \prod_{i=1}^{n} P(x_i | C)^{x_i} \cdot (1 - P(x_i | C))^{1 - x_i}
-$$
-
----
-
-## **4. Applications of Naive Bayes**
-
-- **Text Classification:** Spam detection, sentiment analysis, and news categorization.
-- **Document Categorization:** Sorting documents by topic.
-- **Fraud Detection:** Identifying fraudulent transactions or behaviors.
-- **Recommender Systems:** Classifying users into preference groups.
-
---- """,
+    "starter_code": "import numpy as np\n\ndef convert_range(values: np.ndarray, c: float, d: float) -> np.ndarray:\n    \"\"\"\n    Shift and scale values from their original range [min, max] to a target [c, d] range.\n    \"\"\"\n    # Your code here\n    pass",
+    "title": "Shift and Scale Array to Target Range",
+    "learn_section": "# **Shifting and Scaling a Range (Rescaling Data)**\n\n## **1. Motivation**\n\nRescaling (or shifting and scaling) is a common preprocessing step in data analysis and machine learning. It's often necessary to map data from an original range (e.g., test scores, pixel values, GPA) to a new range suitable for downstream tasks or compatibility between datasets. For example, you might want to shift a GPA from $[0, 10]$ to $[0, 4]$ for comparison or model input.\n\n---\n\n## **2. The General Mapping Formula**\n\nSuppose you have input values in the range $[a, b]$ and you want to map them to the interval $[c, d]$.\n\n- First, shift the lower bound to $0$ by applying $x \\mapsto x - a$, so $[a, b] \\rightarrow [0, b-a]$.\n- Next, scale to unit interval: $t \\mapsto \\frac{1}{b-a} \\cdot t$, yielding $[0, 1]$.\n- Now, scale to $[0, d-c]$ with $t \\mapsto (d-c)t$, and shift to $[c, d]$ with $t \\mapsto c + t$.\n- Combining all steps, the complete formula is:\n\n$$\n    f(x) = c + \\left(\\frac{d-c}{b-a}\\right)(x-a)\n$$\n\n- $x$ = the input value\n- $a = \\min(x)$ and $b = \\max(x)$\n- $c$, $d$ = target interval endpoints\n\n---\n\n## **3. Applications**\n- **Image Processing**: Rescale pixel intensities\n- **Feature Engineering**: Normalize features to a common range\n- **Score Conversion**: Convert test scores or grades between systems\n\n---\n\n## **4. Practical Considerations**\n- Be aware of the case when $a = b$ (constant input); this may require special handling (e.g., output all $c$).\n- For multidimensional arrays, use NumPy’s `.min()` and `.max()` to determine the full input range.\n\n---\n\nThis formula gives a **simple, mathematically justified way to shift and scale data to any target range**—a core tool for robust machine learning pipelines.\n",
     "contributor": [
         {
-            "profile_link": "https://github.com/moe18",
-            "name": "Moe Chabot"
+            "profile_link": "https://github.com/turkunov",
+            "name": "turkunov"
         }
     ],
     "likes": "0",
     "dislikes": "0",
-    "difficulty": "medium",
-    "video":''
+    "difficulty": "easy",
+    "video": ""
 }
+
 
 # ────────────────────────────────────────────────────────────────────────────
 
