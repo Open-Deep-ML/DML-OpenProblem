@@ -4,14 +4,14 @@ def matrix_dot_vector(
 ) -> list[int | float] | int:
     #Check that dimensions match
     if len(a[0]) != len(b):
-	return -1
-        
-	c = []
+        return -1
+    
+    c = []
     #Iterate using a list comprehension
-	for s_a in a:
-		temp = sum([s_a[i]*b[i] for i in range(len(b))])
-		c.append(temp)
-	return c
+    for s_a in a:
+        temp = sum([s_a[i]*b[i] for i in range(len(b))])
+        c.append(temp)
+    return c
 
 def test_matrix_dot_vector() -> None:
     # empty product

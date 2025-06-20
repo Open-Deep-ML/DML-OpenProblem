@@ -1,0 +1,31 @@
+name: Python Linting
+
+on: [push, pull_request]
+
+jobs:
+  ruff:
+    name: Run Ruff
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install Ruff
+      run: pip install ruff
+
+    - name: Run Ruff (Check)
+      run: ruff check . --exclude "**/problem.py,**/solution.py,**"
+      
+    - name: Run Ruff (Format Check)
+      run: ruff format --check . --exclude "**/problem.py,**/solution.py,**"
+    
+    - name: Run Ruff (Fix Check)
+      run: ruff check . --fix --exclude "**/problem.py,**/solution.py,**"
+    
+    - name: Run Ruff (Fix)
+      run: ruff format . --exclude "**/problem.py,**/solution.py,**"

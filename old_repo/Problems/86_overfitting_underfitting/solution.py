@@ -12,6 +12,7 @@ def model_fit_quality(training_accuracy: float, test_accuracy: float) -> int:
     else:
         return 0
 
+
 def test_model_fit_quality() -> None:
     # Test case 1: Overfitting
     result1 = model_fit_quality(0.9, 0.6)
@@ -32,6 +33,7 @@ def test_model_fit_quality() -> None:
     # Test case 5: Borderline overfitting
     result5 = model_fit_quality(0.9, 0.7)
     assert result5 == 0, f"Test case 5 failed: {result5} != 0"
+
 
 if __name__ == "__main__":
     test_model_fit_quality()

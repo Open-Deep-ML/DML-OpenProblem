@@ -12,6 +12,7 @@ def calculate_eigenvalues(
     lambda_2 = (trace - discriminant**0.5) / 2
     return [lambda_1, lambda_2]
 
+
 def test_calculate_eigenvalues() -> None:
     # Test cases for calculate_eigenvalues function
 
@@ -22,6 +23,7 @@ def test_calculate_eigenvalues() -> None:
     # Test case 2
     matrix = [[4, -2], [1, 1]]
     assert calculate_eigenvalues(matrix) == [3.0, 2.0]
+
 
 if __name__ == "__main__":
     test_calculate_eigenvalues()

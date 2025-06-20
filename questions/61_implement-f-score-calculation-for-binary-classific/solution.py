@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def f_score(y_true, y_pred, beta):
     tp = np.sum((y_true == 1) & (y_pred == 1))
     fn = np.sum((y_true == 1) & (y_pred == 0))
@@ -14,5 +15,5 @@ def f_score(y_true, y_pred, beta):
     if div == 0 or op == 0:
         return 0.0
 
-    score = (1 + (beta ** 2)) * op / div
+    score = (1 + (beta**2)) * op / div
     return round(score, 3)

@@ -79,9 +79,9 @@ def _(insights):
 def _(mo):
     # Key concepts accordion
 
-
-    insights = mo.accordion({
-        "🎯 Understanding Covariance": mo.md("""
+    insights = mo.accordion(
+        {
+            "🎯 Understanding Covariance": mo.md("""
         **Key Concepts:**
 
         1. **Variance**: Measures spread of a single variable
@@ -92,8 +92,7 @@ def _(mo):
 
         4. **Interpretation**: Direction and strength of relationships
         """),
-
-        "📊 Matrix Properties": mo.md("""
+            "📊 Matrix Properties": mo.md("""
         The covariance matrix has important properties:
 
         1. **Symmetry**: cov(X,Y) = cov(Y,X)
@@ -103,8 +102,9 @@ def _(mo):
         3. **Off-diagonal Elements**: Show relationships
 
         4. **Positive Semi-definite**: All eigenvalues ≥ 0
-        """)
-    })
+        """),
+        }
+    )
     return (insights,)
 
 
@@ -128,11 +128,13 @@ def _(Matrix, mo):
         matrix=[[1, 2, 3], [4, 5, 6]],  # default example data
         rows=2,
         cols=3,
-        step=0.1
+        step=0.1,
     )
-    input_controls = mo.hstack([
-        data_matrix,
-    ])
+    input_controls = mo.hstack(
+        [
+            data_matrix,
+        ]
+    )
     return data_matrix, input_controls
 
 
@@ -158,48 +160,43 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
             cov_matrix = np.cov(data)
 
             # 3. visualization with covariance matrix
-            df = pd.DataFrame({
-                'x': data[0],
-                'y': data[1]
-            })
+            df = pd.DataFrame({"x": data[0], "y": data[1]})
 
             scatter_fig = px.scatter(
                 df,
-                x='x',
-                y='y',
+                x="x",
+                y="y",
                 title="Variable Relationship Pattern",
-                labels={'x': 'Variable 1', 'y': 'Variable 2'}
-            ).update_layout(
-                width=400,
-                height=400,
-                showlegend=False
-            )
+                labels={"x": "Variable 1", "y": "Variable 2"},
+            ).update_layout(width=400, height=400, showlegend=False)
 
             # appropriate trendline
             coeffs = np.polyfit(data[0], data[1], 1)
             x_range = np.linspace(min(data[0]), max(data[0]), 100)
             scatter_fig.add_trace(
                 dict(
-                    type='scatter',
+                    type="scatter",
                     x=x_range,
                     y=coeffs[0] * x_range + coeffs[1],
-                    mode='lines',
-                    line=dict(color='red', dash='dash'),
-                    name='Trend'
+                    mode="lines",
+                    line=dict(color="red", dash="dash"),
+                    name="Trend",
                 )
             )
             # 4. results with relevant explanations
-            results = mo.vstack([
-                mo.md("## Understanding Your Data's Covariance"),
-
-                # First row: Plot and Matrix
-                mo.hstack([
-                    # scatter plot
-                    mo.vstack([scatter_fig]),
-
-                    # covariance matrix
-                    mo.vstack([
-                        mo.md(r"""
+            results = mo.vstack(
+                [
+                    mo.md("## Understanding Your Data's Covariance"),
+                    # First row: Plot and Matrix
+                    mo.hstack(
+                        [
+                            # scatter plot
+                            mo.vstack([scatter_fig]),
+                            # covariance matrix
+                            mo.vstack(
+                                [
+                                    mo.md(
+                                        r"""
                         **Covariance Matrix:**
 
                         $$
@@ -208,18 +205,24 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
                         %.2f & %.2f
                         \end{pmatrix}
                         $$
-                        """ % (
-                            cov_matrix[0,0], cov_matrix[0,1],
-                            cov_matrix[1,0], cov_matrix[1,1]
-                        ))
-                    ])
-                ]),
-
-                # interpretation and insights side by side
-                mo.hstack([
-                    # Left: Pattern Interpretation
-                    mo.callout(
-                        mo.md("""
+                        """
+                                        % (
+                                            cov_matrix[0, 0],
+                                            cov_matrix[0, 1],
+                                            cov_matrix[1, 0],
+                                            cov_matrix[1, 1],
+                                        )
+                                    )
+                                ]
+                            ),
+                        ]
+                    ),
+                    # interpretation and insights side by side
+                    mo.hstack(
+                        [
+                            # Left: Pattern Interpretation
+                            mo.callout(
+                                mo.md("""
                         **Pattern Interpretation:**
 
 
@@ -235,20 +238,19 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
 
                         - Off-diagonal: Show relationship strength
                         """),
-                        kind="info"
-                    ),
-
-                    # Right: Key Insights
-                    mo.callout(
-                        mo.md(f"""
+                                kind="info",
+                            ),
+                            # Right: Key Insights
+                            mo.callout(
+                                mo.md(f"""
                         **Key Insights:**
 
 
-                        1. Relationship: {"Positive" if cov_matrix[0,1] > 0 else "Negative" if cov_matrix[0,1] < 0 else "No"} covariance
+                        1. Relationship: {"Positive" if cov_matrix[0, 1] > 0 else "Negative" if cov_matrix[0, 1] < 0 else "No"} covariance
 
-                        2. Strength: {"Strong" if abs(cov_matrix[0,1]) > 1 else "Moderate" if abs(cov_matrix[0,1]) > 0.5 else "Weak"}
+                        2. Strength: {"Strong" if abs(cov_matrix[0, 1]) > 1 else "Moderate" if abs(cov_matrix[0, 1]) > 0.5 else "Weak"}
 
-                        3. Variances: ({cov_matrix[0,0]:.2f}, {cov_matrix[1,1]:.2f})
+                        3. Variances: ({cov_matrix[0, 0]:.2f}, {cov_matrix[1, 1]:.2f})
 
                         **Centered Data:**
                         ```python
@@ -258,10 +260,13 @@ def _(calculate_button, data_matrix, mo, np, pd, px):
                         Var2: {np.round(centered_data[1], 2)}
                         ```
                         """),
-                        kind="neutral"
-                    )
-                ])
-            ], justify='center')
+                                kind="neutral",
+                            ),
+                        ]
+                    ),
+                ],
+                justify="center",
+            )
 
         except Exception as e:
             results = mo.md(f"⚠️ Error: {str(e)}").callout(kind="danger")
@@ -289,9 +294,9 @@ def _(exercises):
 def _(mo):
     # Practice exercises
 
-    exercises = mo.accordion({
-
-        "🎯 Practice Exercises": mo.md("""
+    exercises = mo.accordion(
+        {
+            "🎯 Practice Exercises": mo.md("""
 
         Try these examples to understand covariance better:
 
@@ -304,9 +309,7 @@ def _(mo):
         What do you notice about the covariance matrices?
 
         """),
-
-
-        "💡 Tips for Interpretation": mo.md("""
+            "💡 Tips for Interpretation": mo.md("""
 
         - Large positive values: Strong positive relationship
 
@@ -316,9 +319,9 @@ def _(mo):
 
         - Diagonal values: Spread of individual variables
 
-        """)
-
-    })
+        """),
+        }
+    )
     return (exercises,)
 
 
@@ -331,9 +334,10 @@ def _(conclusion):
 @app.cell(hide_code=True)
 def _(mo):
     # Conclusion
-    conclusion = mo.vstack([
-        mo.callout(
-            mo.md("""
+    conclusion = mo.vstack(
+        [
+            mo.callout(
+                mo.md("""
             **Congratulations!** 
 
             You've mastered the key concepts of covariance matrices:
@@ -344,12 +348,11 @@ def _(mo):
             - The importance of centered data
 
             """),
-            kind="success"
-        ),
-
-        mo.accordion({
-
-            "🚀 Next Steps": mo.md("""
+                kind="success",
+            ),
+            mo.accordion(
+                {
+                    "🚀 Next Steps": mo.md("""
 
             1. Explore correlation matrices (normalized covariance)
             2. Apply to real-world datasets
@@ -357,14 +360,17 @@ def _(mo):
             4. Implement in machine learning projects
 
             """)
-        })
-    ])
+                }
+            ),
+        ]
+    )
     return (conclusion,)
 
 
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -374,6 +380,7 @@ def _():
     import plotly.express as px
     from wigglystuff import Matrix
     import pandas as pd
+
     return Matrix, np, pd, px
 
 

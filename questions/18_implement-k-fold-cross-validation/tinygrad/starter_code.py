@@ -1,4 +1,6 @@
-def k_fold_cross_validation_tg(X, y, k=5, shuffle=True) -> list[tuple[list[int], list[int]]]:
+def k_fold_cross_validation_tg(
+    X, y, k=5, shuffle=True
+) -> list[tuple[list[int], list[int]]]:
     """
     Return train/test index splits for k-fold cross-validation using pure Python or tinygrad.
     X: list or Tensor of shape (n_samples, ...)
