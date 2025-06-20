@@ -28,39 +28,74 @@ from typing import Any, Dict
 
 # ── 1️⃣  EDIT YOUR QUESTION HERE ────────────────────────────────────────────
 QUESTION_DICT: Dict[str, Any] = {
-    "id": "141",
-    "description": "Write a Python function `convert_range` that shifts and scales the values of a NumPy array from their original range $[a, b]$ (where $a=\\min(x)$ and $b=\\max(x)$) to a new target range $[c, d]$. Your function should work for both 1D and 2D arrays, returning an array of the same shape, and only use NumPy. Return floating-point results, and ensure you use the correct formula to map the input interval to the output interval.",
+    "id": "142",
+    "title": "Gridworld Policy Evaluation",
+    "description": "Implement policy evaluation for a 5x5 gridworld. Given a policy (mapping each state to action probabilities), compute the state-value function $V(s)$ for each cell using the Bellman expectation equation. The agent can move up, down, left, or right, receiving a constant reward of -1 for each move. Terminal states (the four corners) are fixed at 0. Iterate until the largest change in $V$ is less than a given threshold. Only use Python built-ins and no external RL libraries.",
     "test_cases": [
         {
-            "test": "import numpy as np\nseq = np.array([388, 242, 124, 384, 313, 277, 339, 302, 268, 392])\nc, d = 0, 1\nout = convert_range(seq, c, d)\nprint(np.round(out, 6))",
-            "expected_output": "[0.985075, 0.440299, 0.,       0.970149, 0.705224, 0.570896, 0.802239, 0.664179, 0.537313, 1.      ]"
+            "test": "grid_size = 5\ngamma = 0.9\nthreshold = 0.001\npolicy = {(i, j): {'up': 0.25, 'down': 0.25, 'left': 0.25, 'right': 0.25} for i in range(grid_size) for j in range(grid_size)}\nV = gridworld_policy_evaluation(policy, gamma, threshold)\nprint([round(V[2][2], 4), V[0][0], V[0][4], V[4][0], V[4][4]])",
+            "expected_output": "[-7.0902, 0.0, 0.0, 0.0, 0.0]"
         },
         {
-            "test": "import numpy as np\nseq = np.array([[2028, 4522], [1412, 2502], [3414, 3694], [1747, 1233], [1862, 4868]])\nc, d = 4, 8\nout = convert_range(seq, c, d)\nprint(np.round(out, 6))",
-            "expected_output": "[[4.874828 7.619257]\n [4.196974 5.396424]\n [6.4      6.708116]\n [4.565612 4.      ]\n [4.69216  8.      ]]"
+            "test": "grid_size = 5\ngamma = 0.9\nthreshold = 0.001\npolicy = {(i, j): {'up': 0.1, 'down': 0.4, 'left': 0.1, 'right': 0.4} for i in range(grid_size) for j in range(grid_size)}\nV = gridworld_policy_evaluation(policy, gamma, threshold)\nprint(round(V[1][3], 4) < 0)",
+            "expected_output": "True"
         }
     ],
-    "solution": "import numpy as np\n\ndef convert_range(values: np.ndarray, c: float, d: float) -> np.ndarray:\n    \"\"\"\n    Shift and scale values from their original range [min, max] to a target [c, d] range.\n\n    Parameters\n    ----------\n    values : np.ndarray\n        Input array (1D or 2D) to be rescaled.\n    c : float\n        New range lower bound.\n    d : float\n        New range upper bound.\n\n    Returns\n    -------\n    np.ndarray\n        Scaled array with the same shape as the input.\n    \"\"\"\n    a, b = values.min(), values.max()\n    return c + (d - c) / (b - a) * (values - a)",
+    "solution": "def gridworld_policy_evaluation(policy: dict, gamma: float, threshold: float) -> list[list[float]]:\n    grid_size = 5\n    V = [[0.0 for _ in range(grid_size)] for _ in range(grid_size)]\n    actions = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}\n    reward = -1\n    while True:\n        delta = 0.0\n        new_V = [row[:] for row in V]\n        for i in range(grid_size):\n            for j in range(grid_size):\n                if (i, j) in [(0, 0), (0, grid_size-1), (grid_size-1, 0), (grid_size-1, grid_size-1)]:\n                    continue\n                v = 0.0\n                for action, prob in policy[(i, j)].items():\n                    di, dj = actions[action]\n                    ni = i + di if 0 <= i + di < grid_size else i\n                    nj = j + dj if 0 <= j + dj < grid_size else j\n                    v += prob * (reward + gamma * V[ni][nj])\n                new_V[i][j] = v\n                delta = max(delta, abs(V[i][j] - new_V[i][j]))\n        V = new_V\n        if delta < threshold:\n            break\n    return V",
     "example": {
-        "input": "import numpy as np\nx = np.array([0, 5, 10])\nc, d = 2, 4\nprint(convert_range(x, c, d))",
-        "output": "[2. 3. 4.]",
-        "reasoning": "The minimum value (a) is 0 and the maximum value (b) is 10. The formula maps 0 to 2, 5 to 3, and 10 to 4 using: f(x) = c + (d-c)/(b-a)*(x-a)."
+        "input": "policy = {(i, j): {'up': 0.25, 'down': 0.25, 'left': 0.25, 'right': 0.25} for i in range(5) for j in range(5)}\ngamma = 0.9\nthreshold = 0.001\nV = gridworld_policy_evaluation(policy, gamma, threshold)\nprint(round(V[2][2], 4))",
+        "output": "-7.0902",
+        "reasoning": "The policy is uniform (equal chance of each move). The agent receives -1 per step. After iterative updates, the center state value converges to about -7.09, and corners remain at 0."
     },
-    "category": "Machine Learning",
-    "starter_code": "import numpy as np\n\ndef convert_range(values: np.ndarray, c: float, d: float) -> np.ndarray:\n    \"\"\"\n    Shift and scale values from their original range [min, max] to a target [c, d] range.\n    \"\"\"\n    # Your code here\n    pass",
-    "title": "Shift and Scale Array to Target Range",
-    "learn_section": "# **Shifting and Scaling a Range (Rescaling Data)**\n\n## **1. Motivation**\n\nRescaling (or shifting and scaling) is a common preprocessing step in data analysis and machine learning. It's often necessary to map data from an original range (e.g., test scores, pixel values, GPA) to a new range suitable for downstream tasks or compatibility between datasets. For example, you might want to shift a GPA from $[0, 10]$ to $[0, 4]$ for comparison or model input.\n\n---\n\n## **2. The General Mapping Formula**\n\nSuppose you have input values in the range $[a, b]$ and you want to map them to the interval $[c, d]$.\n\n- First, shift the lower bound to $0$ by applying $x \\mapsto x - a$, so $[a, b] \\rightarrow [0, b-a]$.\n- Next, scale to unit interval: $t \\mapsto \\frac{1}{b-a} \\cdot t$, yielding $[0, 1]$.\n- Now, scale to $[0, d-c]$ with $t \\mapsto (d-c)t$, and shift to $[c, d]$ with $t \\mapsto c + t$.\n- Combining all steps, the complete formula is:\n\n$$\n    f(x) = c + \\left(\\frac{d-c}{b-a}\\right)(x-a)\n$$\n\n- $x$ = the input value\n- $a = \\min(x)$ and $b = \\max(x)$\n- $c$, $d$ = target interval endpoints\n\n---\n\n## **3. Applications**\n- **Image Processing**: Rescale pixel intensities\n- **Feature Engineering**: Normalize features to a common range\n- **Score Conversion**: Convert test scores or grades between systems\n\n---\n\n## **4. Practical Considerations**\n- Be aware of the case when $a = b$ (constant input); this may require special handling (e.g., output all $c$).\n- For multidimensional arrays, use NumPy’s `.min()` and `.max()` to determine the full input range.\n\n---\n\nThis formula gives a **simple, mathematically justified way to shift and scale data to any target range**—a core tool for robust machine learning pipelines.\n",
+    "category": "Reinforcement Learning",
+    "starter_code": "def gridworld_policy_evaluation(policy: dict, gamma: float, threshold: float) -> list[list[float]]:\n    \"\"\"\n    Evaluate state-value function for a policy on a 5x5 gridworld.\n    \n    Args:\n        policy: dict mapping (row, col) to action probability dicts\n        gamma: discount factor\n        threshold: convergence threshold\n    Returns:\n        5x5 list of floats\n    \"\"\"\n    # Your code here\n    pass",
+    "learn_section": r"""# Gridworld Policy Evaluation
+
+In reinforcement learning, **policy evaluation** is the process of computing the state-value function for a given policy. For a gridworld environment, this involves iteratively updating the value of each state based on the expected return following the policy.
+
+## Key Concepts
+
+- **State-Value Function (V):**  
+  The expected return when starting from a state and following a given policy.
+
+- **Policy:**  
+  A mapping from states to probabilities of selecting each available action.
+
+- **Bellman Expectation Equation:**  
+  For each state $s$:
+  $$
+  V(s) = \sum_{a} \pi(a|s) \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma V(s')]
+  $$
+  where:
+  - $ \pi(a|s) $ is the probability of taking action $ a $ in state $ s $,
+  - $ P(s'|s,a) $ is the probability of transitioning to state $ s' $,
+  - $ R(s,a,s') $ is the reward for that transition,
+  - $ \gamma $ is the discount factor.
+
+## Algorithm Overview
+
+1. **Initialization:**  
+   Start with an initial guess (commonly zeros) for the state-value function $ V(s) $.
+
+2. **Iterative Update:**  
+   For each non-terminal state, update the state value using the Bellman expectation equation. Continue updating until the maximum change in value (delta) is less than a given threshold.
+
+3. **Terminal States:**  
+   For this example, the four corners of the grid are considered terminal, so their values remain unchanged.
+
+This evaluation method is essential for understanding how "good" each state is under a specific policy, and it forms the basis for more advanced reinforcement learning algorithms.""",
     "contributor": [
         {
-            "profile_link": "https://github.com/turkunov",
-            "name": "turkunov"
+            "profile_link": "https://github.com/arpitsinghgautam",
+            "name": "Arpit Singh Gautam"
         }
     ],
     "likes": "0",
     "dislikes": "0",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "video": ""
 }
+
 
 
 # ────────────────────────────────────────────────────────────────────────────
