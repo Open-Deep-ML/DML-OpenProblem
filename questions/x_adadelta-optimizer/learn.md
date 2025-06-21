@@ -56,8 +56,8 @@ Return tuple: (updated_parameter, updated_v, updated_u)
 # Example usage:
 parameter = 1.0
 grad = 0.1
-v = 0.0
-u = 0.0
+v = 1.0
+u = 1.0
 
 new_param, new_v, new_u = adadelta_optimizer(parameter, grad, v, u)
 ```
