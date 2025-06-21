@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\nseq = np.array([388, 242, 124, 384, 313, 277, 339, 302, 268, 392])\nc, d = 0, 1\nout = convert_range(seq, c, d)\nprint(np.round(out, 6))",
+    "expected_output": "[0.985075, 0.440299, 0.,       0.970149, 0.705224, 0.570896, 0.802239, 0.664179, 0.537313, 1.      ]"
+  },
+  {
+    "test": "import numpy as np\nseq = np.array([[2028, 4522], [1412, 2502], [3414, 3694], [1747, 1233], [1862, 4868]])\nc, d = 4, 8\nout = convert_range(seq, c, d)\nprint(np.round(out, 6))",
+    "expected_output": "[[4.874828 7.619257]\n [4.196974 5.396424]\n [6.4      6.708116]\n [4.565612 4.      ]\n [4.69216  8.      ]]"
+  }
+]
