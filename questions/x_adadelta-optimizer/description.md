@@ -1,0 +1,1 @@
+Implement the Adadelta optimizer update step function. Your function should take the current parameter value, gradient, and moving averages as inputs, and return the updated parameter value and new moving averages. The function should handle both scalar and array inputs, and include proper input validation.

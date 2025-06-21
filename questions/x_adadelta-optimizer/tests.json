@@ -1,0 +1,22 @@
+[
+    {
+        "test": "print(adadelta_optimizer(1., 0.5, 1., 1., 0.95, 1e-6))",
+        "expected_output": "(0.49035, 0.9625, 0.96299)"
+    },
+    {
+        "test": "print(adadelta_optimizer(np.array([1., 2.]), np.array([0.1, 0.2]), np.array([1., 1.]), np.array([1., 1.]), 0.95, 1e-6))",
+        "expected_output": "(array([0.89743, 1.79502]), array([0.9505, 0.952]), array([0.95053, 0.9521]))"
+    },
+    {
+        "test": "print(adadelta_optimizer(np.array([1., 2.]), np.array([0., 0.2]), np.array([0., 1.]), np.array([0., 1.]), 0.95, 1e-6))",
+        "expected_output": "(array([1., 1.79502]), array([0., 0.952]), array([0., 0.9521]))"
+    },
+    {
+        "test": "print(adadelta_optimizer(np.array([1., 1.]), np.array([1., 1.]), np.array([10000., 1.]), np.array([1., 1.]), 0.95, 1e-6))",
+        "expected_output": "(array([0.98974, 0.]), array([9500.05, 1.]), array([0.95001, 1.]))"
+    },
+    {
+        "test": "print(adadelta_optimizer(1., 0.5, 1., 1., 0., 1e-6))",
+        "expected_output": "(0.999, 0.25, 0.0)"
+    }
+]
