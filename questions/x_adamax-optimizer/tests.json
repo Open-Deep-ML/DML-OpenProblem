@@ -1,0 +1,18 @@
+[
+  {
+    "test": "print(adamax_optimizer(1., 0.1, 1., 1., 1, 0.002, 0.9, 0.999, 1e-8))",
+    "expected_output": "(0.98178, 0.91, 0.999)"
+  },
+  {
+    "test": "print(adamax_optimizer(np.array([1., 2.]), np.array([0.1, 0.2]), np.array([1., 1.]), np.array([1., 1.]), 1, 0.002, 0.9, 0.999, 1e-8))",
+    "expected_output": "(array([0.98178, 1.98158]), array([0.91, 0.92]), array([0.999, 0.999]))"
+  },
+  {
+    "test": "print(adamax_optimizer(np.array([1., 2.]), np.array([0.0, 0.0]), np.array([0.1, 0.1]), np.array([0., 0.]), 1, 0.002, 0.9, 0.999, 1e-8))",
+    "expected_output": "(array([-179999., -179998.]), array([0.09, 0.09]), array([0., 0.]))"
+  },
+  {
+    "test": "print(adamax_optimizer(1., 0.1, 1., 1., 1, 0.002, 0., 0., 1e-8))",
+    "expected_output": "(0.998, 0.1, 0.1)"
+  }
+]
