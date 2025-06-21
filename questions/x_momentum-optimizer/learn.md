@@ -45,7 +45,7 @@ Return tuple: (updated_parameter, updated_velocity)
 # Example usage:
 parameter = 1.0
 grad = 0.1
-velocity = 0.0
+velocity = 0.1
 
 new_param, new_velocity = momentum_optimizer(parameter, grad, velocity)
 ```
