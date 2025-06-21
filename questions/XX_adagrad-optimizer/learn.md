@@ -46,7 +46,7 @@ Return tuple: (updated_parameter, updated_G)
 # Example usage:
 parameter = 1.0
 grad = 0.1
-G = 0.0
+G = 1.0
 
 new_param, new_G = adagrad_optimizer(parameter, grad, G)
 ```
