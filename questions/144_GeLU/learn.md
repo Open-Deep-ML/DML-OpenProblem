@@ -1,6 +1,6 @@
 ## Understanding the GELU Activation Function
 
-The **GELU** (Gaussian Error Linear Unit) is an activation function that combines properties of **ReLU** and **sigmoid** but adds a probabilistic interpretation, making it smooth and differentiable.
+The **GELU** (Gaussian Error Linear Unit) is an activation function that combines properties of **ReLU** and **tanh (or) sigmoid** but adds a probabilistic interpretation, making it smooth and differentiable.
 
 ### Mathematical Definition
 
@@ -21,6 +21,8 @@ A widely used **approximation** is:
 $$
 \text{GELU}(x) \approx 0.5x \left(1 + \tanh\left(\sqrt{\frac{2}{\pi}}(x + 0.044715x^3)\right)\right)
 $$
+
+> In some cases, a **sigmoid-based formula** may be used in place of **tanh** to approximate the erf function. If you wish to dive deep, you may read it [here](https://datascience.stackexchange.com/questions/49522/what-is-gelu-activation).
 
 ### Characteristics
 
