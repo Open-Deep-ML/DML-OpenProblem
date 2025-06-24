@@ -5,7 +5,7 @@
   },
   {
     "test": "print(adagrad_optimizer(np.array([1., 2.]), np.array([0.1, 0.2]), np.array([1., 1.]), 0.01, 1e-8))",
-    "expected_output": "(array([0.999, 1.99804]), array([1.01, 1.04])"
+    "expected_output": "(array([0.999, 1.99804]), array([1.01, 1.04]))"
   },
   {
     "test": "print(adagrad_optimizer(np.array([1., 2.]), np.array([0., 0.2]), np.array([0., 1.]), 0.01, 1e-8))",
