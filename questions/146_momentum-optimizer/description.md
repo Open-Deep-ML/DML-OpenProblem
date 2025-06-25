@@ -1,0 +1,1 @@
+Implement the momentum optimizer update step function. Your function should take the current parameter value, gradient, and velocity as inputs, and return the updated parameter value and new velocity. The function should also handle scalar and array inputs.
