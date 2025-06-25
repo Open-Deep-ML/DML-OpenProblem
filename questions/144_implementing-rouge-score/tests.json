@@ -1,0 +1,11 @@
+
+[
+  {
+    "test": "print(rouge_1_score('the cat sat on the mat', 'the cat is on the mat'))",
+    "expected_output": "{'precision': 0.8333333333333334, 'recall': 0.8333333333333334, 'f1': 0.8333333333333334}"
+  },
+  {
+    "test": "print(rouge_1_score('hello there', 'hello there'))",
+    "expected_output": "{'precision': 1.0, 'recall': 1.0, 'f1': 1.0}"
+  }
+]
