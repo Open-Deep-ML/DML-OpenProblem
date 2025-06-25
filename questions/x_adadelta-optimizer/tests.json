@@ -17,6 +17,6 @@
     },
     {
         "test": "print(adadelta_optimizer(1., 0.5, 1., 1., 0., 1e-6))",
-        "expected_output": "(0.999, 0.25, 0.0)"
+        "expected_output": "(0., 0.25, 1.0)"
     }
 ]
