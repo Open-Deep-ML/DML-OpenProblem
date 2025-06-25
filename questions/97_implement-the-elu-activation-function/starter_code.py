@@ -11,4 +11,3 @@ def elu(x: float, alpha: float = 1.0) -> float:
 	"""
 	# Your code here
 	pass
-	return round(val,4)
