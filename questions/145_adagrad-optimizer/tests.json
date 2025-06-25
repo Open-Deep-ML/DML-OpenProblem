@@ -1,0 +1,18 @@
+[
+  {
+    "test": "print(adagrad_optimizer(1., 0.5, 1., 0.01, 1e-8))",
+    "expected_output": "(0.99553, 1.25)"
+  },
+  {
+    "test": "print(adagrad_optimizer(np.array([1., 2.]), np.array([0.1, 0.2]), np.array([1., 1.]), 0.01, 1e-8))",
+    "expected_output": "(array([0.999, 1.99804]), array([1.01, 1.04]))"
+  },
+  {
+    "test": "print(adagrad_optimizer(np.array([1., 2.]), np.array([0., 0.2]), np.array([0., 1.]), 0.01, 1e-8))",
+    "expected_output": "(array([1., 1.99804]), array([0., 1.04]))"
+  },
+  {
+    "test": "print(adagrad_optimizer(np.array([1., 1.]), np.array([1., 1.]), np.array([10000., 1.]), 0.01, 1e-8))",
+    "expected_output": "(array([0.9999, 0.99293]), array([10001., 2.]))"
+  }
+]
