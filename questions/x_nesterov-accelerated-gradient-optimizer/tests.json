@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import numpy as np\ndef gradient_function(x):\n    if isinstance(x, np.ndarray):\n        n = len(x)\n        return x - np.arange(n)\n    else:\n        return x - 0\nprint(nag_optimizer(1., gradient_function, 0.5, 0.01, 0.9))",
+    "expected_output": "(0.5445, 0.4555)"
+  },
+  {
+    "test": "import numpy as np\ndef gradient_function(x):\n    if isinstance(x, np.ndarray):\n        n = len(x)\n        return x - np.arange(n)\n    else:\n        return x - 0\nprint(nag_optimizer(np.array([1.0, 2.0]), gradient_function, np.array([0.5, 1.0]), 0.01, 0.9))",
+    "expected_output": "(array([0.5445, 1.099]), array([0.4555, 0.901]))"
+  },
+  {
+    "test": "import numpy as np\ndef gradient_function(x):\n    if isinstance(x, np.ndarray):\n        n = len(x)\n        return x - np.arange(n)\n    else:\n        return x - 0\nprint(nag_optimizer(np.array([1.0, 2.0]), gradient_function, np.array([0.5, 1.0]), 0.01, 0.0))",
+    "expected_output": "(array([0.99, 1.99]), array([0.01, 0.01]))"
+  },
+  {
+    "test": "import numpy as np\ndef gradient_function(x):\n    if isinstance(x, np.ndarray):\n        n = len(x)\n        return x - np.arange(n)\n    else:\n        return x - 0\nprint(nag_optimizer(0.9, gradient_function, 1, 0.01, 0.9))",
+    "expected_output": "(0.0, 0.9)"
+  }
+]

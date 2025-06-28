@@ -54,7 +54,7 @@ def grad_func(parameter):
     pass
 
 parameter = 1.0
-velocity = 0.0
+velocity = 0.1
 
 new_param, new_velocity = nag_optimizer(parameter, grad_func, velocity)
 ```
