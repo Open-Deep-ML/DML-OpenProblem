@@ -56,8 +56,9 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    insights = mo.accordion({
-        "🔍 Key Components": mo.md("""
+    insights = mo.accordion(
+        {
+            "🔍 Key Components": mo.md("""
         **1. Mean Squared Error (MSE)**
         - Measures prediction accuracy
         - Penalizes larger errors more heavily
@@ -68,53 +69,38 @@ def _(mo):
         - Prevents coefficient values from becoming too large
         - Helps prevent overfitting
         """),
-
-        "⚙️ Role of Alpha (λ)": mo.md("""
+            "⚙️ Role of Alpha (λ)": mo.md("""
         The regularization parameter α controls:
 
         1. α = 0: Equivalent to standard linear regression
         2. Small α: Slight regularization effect
         3. Large α: Strong regularization, coefficients approach zero
         """),
-
-        "🧮 Coefficient Shrinkage": mo.md("""
+            "🧮 Coefficient Shrinkage": mo.md("""
         Ridge regression shrinks coefficients by adding a penalty proportional to their squared magnitude:
 
         - Larger coefficients incur higher penalties
         - The penalty applies to all coefficients equally
         - Unlike Lasso, Ridge typically keeps all features but with reduced magnitudes
         - Mathematically, Ridge finds the minimum of: ||y - Xβ||² + λ||β||²
-        """)
-    })
+        """),
+        }
+    )
     return (insights,)
 
 
 @app.cell(hide_code=True)
 def _(mo):
     # controls for sample data
-    sample_size = mo.ui.slider(
-        start=4,
-        stop=20,
-        value=10,
-        step=1,
-        label="Sample Size"
-    )
+    sample_size = mo.ui.slider(start=4, stop=20, value=10, step=1, label="Sample Size")
 
     alpha = mo.ui.number(
-        value=0.1,
-        start=0,
-        stop=10,
-        step=0.1,
-        label="Regularization Parameter (α)"
+        value=0.1, start=0, stop=10, step=0.1, label="Regularization Parameter (α)"
     )
 
-    controls = mo.hstack([
-        mo.vstack([
-            mo.md("### Data Parameters"),
-            sample_size,
-            alpha
-        ])
-    ])
+    controls = mo.hstack(
+        [mo.vstack([mo.md("### Data Parameters"), sample_size, alpha])]
+    )
     return alpha, controls, sample_size
 
 
@@ -132,18 +118,23 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    coefficient_inputs = mo.ui.array([
-        mo.ui.number(value=0.2, label="Coefficient 1", step=0.1),
-        mo.ui.number(value=2.0, label="Coefficient 2", step=0.1)
-    ], label="Model Coefficients")
+    coefficient_inputs = mo.ui.array(
+        [
+            mo.ui.number(value=0.2, label="Coefficient 1", step=0.1),
+            mo.ui.number(value=2.0, label="Coefficient 2", step=0.1),
+        ],
+        label="Model Coefficients",
+    )
 
-    coefficient_section = mo.hstack([
-        coefficient_inputs,
-        mo.callout(
-            mo.md("Adjust coefficients to see how they affect the loss value."),
-            kind="warn"
-        )
-    ])
+    coefficient_section = mo.hstack(
+        [
+            coefficient_inputs,
+            mo.callout(
+                mo.md("Adjust coefficients to see how they affect the loss value."),
+                kind="warn",
+            ),
+        ]
+    )
     return coefficient_inputs, coefficient_section
 
 
@@ -167,16 +158,19 @@ def _(np):
         Returns:
             float: Ridge loss value
         """
-        n_samples = X.shape[0]
+        X.shape[0]
 
         # Check dimension compatibility
         if X.shape[1] != len(w):
-            raise ValueError(f"Coefficient count ({len(w)}) must match feature count ({X.shape[1]})")
+            raise ValueError(
+                f"Coefficient count ({len(w)}) must match feature count ({X.shape[1]})"
+            )
 
         y_pred = X @ w
         mse = np.mean((y_true - y_pred) ** 2)
-        regularization = alpha * np.sum(w ** 2)
+        regularization = alpha * np.sum(w**2)
         return mse + regularization
+
     return (ridge_loss,)
 
 
@@ -189,10 +183,9 @@ def _(mo):
 @app.cell
 def _(alpha, coefficient_inputs, mo, np, ridge_loss, sample_size):
     # Generate sample data
-    X = np.column_stack([
-        np.arange(1, sample_size.value + 1),
-        np.ones(sample_size.value)
-    ])
+    X = np.column_stack(
+        [np.arange(1, sample_size.value + 1), np.ones(sample_size.value)]
+    )
     y_true = np.arange(2, sample_size.value + 2)
     w = np.array(coefficient_inputs.value)
 
@@ -202,26 +195,26 @@ def _(alpha, coefficient_inputs, mo, np, ridge_loss, sample_size):
 
         # Calculate components for display
         mse_component = np.mean((y_true - X @ w) ** 2)
-        reg_component = alpha.value * np.sum(w ** 2)
+        reg_component = alpha.value * np.sum(w**2)
 
         # Display results
-        result_display = mo.vstack([
-            mo.md("### Current Loss Value"),
-            mo.callout(
-                mo.md(f"Ridge Loss: **{current_loss:.4f}**\n\n"
-                    f"- MSE Component: {mse_component:.4f}\n"
-                    f"- Regularization Component: {reg_component:.4f}"),
-                kind="info"
-            )
-        ])
+        result_display = mo.vstack(
+            [
+                mo.md("### Current Loss Value"),
+                mo.callout(
+                    mo.md(
+                        f"Ridge Loss: **{current_loss:.4f}**\n\n"
+                        f"- MSE Component: {mse_component:.4f}\n"
+                        f"- Regularization Component: {reg_component:.4f}"
+                    ),
+                    kind="info",
+                ),
+            ]
+        )
     except Exception as e:
-        result_display = mo.vstack([
-            mo.md("### Error"),
-            mo.callout(
-                mo.md(f"Error: {str(e)}"),
-                kind="danger"
-            )
-        ])
+        result_display = mo.vstack(
+            [mo.md("### Error"), mo.callout(mo.md(f"Error: {str(e)}"), kind="danger")]
+        )
         current_loss = None
     return (
         X,
@@ -246,28 +239,39 @@ def _(pd, px):
         y_pred = X @ w
 
         # Use pandas DataFrame for better compatibility with plotly
-        df = pd.DataFrame({
-            'x': X[:, 0],
-            'True Values': y_true,
-            'Predictions': y_pred
-        })
+        df = pd.DataFrame({"x": X[:, 0], "True Values": y_true, "Predictions": y_pred})
 
         # Prepare data for plotting
-        plot_df = pd.melt(df, id_vars=['x'], value_vars=['True Values', 'Predictions'],
-                         var_name='Type', value_name='Value')
+        plot_df = pd.melt(
+            df,
+            id_vars=["x"],
+            value_vars=["True Values", "Predictions"],
+            var_name="Type",
+            value_name="Value",
+        )
 
-        fig = px.scatter(plot_df, x='x', y='Value', color='Type',
-                        title='True Values vs Predictions',
-                        labels={'Value': 'Value', 'x': 'Sample Index'})
+        fig = px.scatter(
+            plot_df,
+            x="x",
+            y="Value",
+            color="Type",
+            title="True Values vs Predictions",
+            labels={"Value": "Value", "x": "Sample Index"},
+        )
 
         # Add lines connecting points
-        for series_name in ['True Values', 'Predictions']:
-            series_data = df[['x', series_name]].sort_values('x')
-            fig.add_scatter(x=series_data['x'], y=series_data[series_name], 
-                           mode='lines', name=f'{series_name} (line)',
-                           line=dict(dash='dash'))
+        for series_name in ["True Values", "Predictions"]:
+            series_data = df[["x", series_name]].sort_values("x")
+            fig.add_scatter(
+                x=series_data["x"],
+                y=series_data[series_name],
+                mode="lines",
+                name=f"{series_name} (line)",
+                line=dict(dash="dash"),
+            )
 
         return fig
+
     return (plot_predictions,)
 
 
@@ -284,16 +288,19 @@ def _(X, mo, plot_predictions, visualize_button, w, y_true):
         try:
             plot_results = plot_predictions(X, w, y_true)
         except Exception as e:
-            plot_results = mo.md(f"Error generating plot: {str(e)}").callout(kind="danger")
+            plot_results = mo.md(f"Error generating plot: {str(e)}").callout(
+                kind="danger"
+            )
     plot_results
     return (plot_results,)
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    conclusion = mo.vstack([
-        mo.callout(
-            mo.md("""
+    conclusion = mo.vstack(
+        [
+            mo.callout(
+                mo.md("""
                 **Congratulations!** 
                 You've explored the Ridge Regression loss function interactively. Key takeaways:
 
@@ -302,23 +309,26 @@ def _(mo):
                 - How coefficients affect predictions and loss
                 - How Ridge regression shrinks coefficients toward zero
             """),
-            kind="success"
-        ),
-        mo.accordion({
-            "🎯 Applications": mo.md("""
+                kind="success",
+            ),
+            mo.accordion(
+                {
+                    "🎯 Applications": mo.md("""
                 - High-dimensional data analysis
                 - Feature selection
                 - Preventing overfitting in linear models
                 - Multicollinearity handling
             """),
-            "🚀 Next Steps": mo.md("""
+                    "🚀 Next Steps": mo.md("""
                 1. Implement gradient descent optimization
                 2. Compare with Lasso regression
                 3. Explore cross-validation for α selection
                 4. Apply to real-world datasets
-            """)
-        })
-    ])
+            """),
+                }
+            ),
+        ]
+    )
     return (conclusion,)
 
 
@@ -331,6 +341,7 @@ def _(conclusion):
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -339,6 +350,7 @@ def _():
     import numpy as np
     import plotly.express as px
     import pandas as pd
+
     return np, pd, px
 
 

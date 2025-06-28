@@ -10,7 +10,9 @@
 import marimo
 
 __generated_with = "0.10.12"
-app = marimo.App(css_file="/Users/adityakhalkar/Library/Application Support/mtheme/themes/deepml.css")
+app = marimo.App(
+    css_file="/Users/adityakhalkar/Library/Application Support/mtheme/themes/deepml.css"
+)
 
 
 @app.cell(hide_code=True)
@@ -40,18 +42,14 @@ def _(mo):
 
     This piece-wise linear function approximates the smooth sigmoid curve with straight lines.
     """)
-    mo.accordion({"### Mathematical Definition" : value})
+    mo.accordion({"### Mathematical Definition": value})
     return (value,)
 
 
 @app.cell
 def _(mo):
     x_range = mo.ui.range_slider(
-        start=-5,
-        stop=5,
-        step=0.5,
-        value=[-3, 3],
-        label="X-axis Range"
+        start=-5, stop=5, step=0.5, value=[-3, 3], label="X-axis Range"
     )
 
     _callout = mo.callout(
@@ -62,48 +60,50 @@ def _(mo):
             - Between -2.5 and 2.5: Linear interpolation (0.2x + 0.5)
             - Above 2.5: Output is 1
         """),
-        kind="info"
+        kind="info",
     )
 
-    controls = mo.vstack([
-        mo.md("### Adjust Parameters"),
-        mo.hstack([
-            mo.vstack([
-                x_range,
-                mo.accordion({
-                    "About Function Regions": _callout
-                })
-            ])
-        ])
-    ])
+    controls = mo.vstack(
+        [
+            mo.md("### Adjust Parameters"),
+            mo.hstack(
+                [
+                    mo.vstack(
+                        [x_range, mo.accordion({"About Function Regions": _callout})]
+                    )
+                ]
+            ),
+        ]
+    )
     return controls, x_range
 
 
 @app.cell
 def _(mo):
     test_input = mo.ui.number(
-        value=0.0,
-        start=-5,
-        stop=5,
-        step=0.1,
-        label="Test Input Value"
+        value=0.0, start=-5, stop=5, step=0.1, label="Test Input Value"
     )
 
-    input_controls = mo.vstack([
-        mo.md("### Test Specific Values"),
-        test_input,
-        mo.accordion({
-            "About Testing": "Enter specific values to see their Hard Sigmoid outputs."
-        })
-    ])
+    input_controls = mo.vstack(
+        [
+            mo.md("### Test Specific Values"),
+            test_input,
+            mo.accordion(
+                {
+                    "About Testing": "Enter specific values to see their Hard Sigmoid outputs."
+                }
+            ),
+        ]
+    )
     return input_controls, test_input
 
 
 @app.cell
 def _(mo):
-    formula_display = mo.vstack([
-        mo.md(
-            r"""
+    formula_display = mo.vstack(
+        [
+            mo.md(
+                r"""
             ### Current Hard Sigmoid Configuration
 
             The Hard Sigmoid function is defined piece-wise:
@@ -120,8 +120,9 @@ def _(mo):
             - For -2.5 < x < 2.5: output = 0.2x + 0.5
             - For x ≥ 2.5: output = 1
             """
-        ),
-    ])
+            ),
+        ]
+    )
     return (formula_display,)
 
 
@@ -136,7 +137,9 @@ def _(mo, np, plt, test_input, x_range):
     @mo.cache(pin_modules=True)
     def plot_hard_sigmoid():
         if x_range.value[0] >= x_range.value[1]:
-            raise ValueError("Invalid x_range: start value must be less than stop value.")
+            raise ValueError(
+                "Invalid x_range: start value must be less than stop value."
+            )
 
         x = np.linspace(x_range.value[0], x_range.value[1], 1000)
         y = np.clip(0.2 * x + 0.5, 0, 1)
@@ -148,41 +151,57 @@ def _(mo, np, plt, test_input, x_range):
         mask_middle = (x > -2.5) & (x < 2.5)
         mask_right = x >= 2.5
 
-        plt.plot(x[mask_left], y[mask_left], 
-                label='Lower saturation (y = 0)', 
-                color='red', 
-                linewidth=2)
-        plt.plot(x[mask_middle], y[mask_middle], 
-                label='Linear region (y = 0.2x + 0.5)', 
-                color='blue', 
-                linewidth=2)
-        plt.plot(x[mask_right], y[mask_right], 
-                label='Upper saturation (y = 1)', 
-                color='green', 
-                linewidth=2)
+        plt.plot(
+            x[mask_left],
+            y[mask_left],
+            label="Lower saturation (y = 0)",
+            color="red",
+            linewidth=2,
+        )
+        plt.plot(
+            x[mask_middle],
+            y[mask_middle],
+            label="Linear region (y = 0.2x + 0.5)",
+            color="blue",
+            linewidth=2,
+        )
+        plt.plot(
+            x[mask_right],
+            y[mask_right],
+            label="Upper saturation (y = 1)",
+            color="green",
+            linewidth=2,
+        )
 
         # Plot test point if within range (extend slider range accordingly)
         if x_range.value[0] <= test_input.value <= x_range.value[1]:
             test_output = np.clip(0.2 * test_input.value + 0.5, 0, 1)
-            plt.scatter([test_input.value], [test_output], 
-                       color='purple', s=100, 
-                       label=f'Test point: f({test_input.value:.2f}) = {test_output:.2f}')
+            plt.scatter(
+                [test_input.value],
+                [test_output],
+                color="purple",
+                s=100,
+                label=f"Test point: f({test_input.value:.2f}) = {test_output:.2f}",
+            )
 
         plt.grid(True, alpha=0.3)
-        plt.title('Hard Sigmoid Function')
-        plt.xlabel('Input (x)')
-        plt.ylabel('Output (HardSigmoid(x))')
-        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.title("Hard Sigmoid Function")
+        plt.xlabel("Input (x)")
+        plt.ylabel("Output (HardSigmoid(x))")
+        plt.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
 
         # Add zero lines
-        plt.axhline(y=0, color='k', linestyle='--', alpha=0.3)
-        plt.axvline(x=0, color='k', linestyle='--', alpha=0.3)
+        plt.axhline(y=0, color="k", linestyle="--", alpha=0.3)
+        plt.axvline(x=0, color="k", linestyle="--", alpha=0.3)
 
-        plot_display = mo.vstack([
-            mo.as_html(plt.gca()),
-        ])
+        plot_display = mo.vstack(
+            [
+                mo.as_html(plt.gca()),
+            ]
+        )
 
         return plot_display
+
     return (plot_hard_sigmoid,)
 
 
@@ -206,9 +225,10 @@ def _(plot_hard_sigmoid):
 
 @app.cell
 def _(mo):
-    conclusion = mo.vstack([
-        mo.callout(
-            mo.md("""
+    conclusion = mo.vstack(
+        [
+            mo.callout(
+                mo.md("""
                 **Congratulations!** 
                 You've explored the Hard Sigmoid function interactively. You've learned:
 
@@ -216,30 +236,33 @@ def _(mo):
                 - The three distinct regions of the function
                 - The simplicity of the function -> only requires basic arithmetic operations -> making it computationally cheaper
             """),
-            kind="success"
-        ),
-        mo.accordion({
-            "Next Steps": mo.md("""
+                kind="success",
+            ),
+            mo.accordion(
+                {
+                    "Next Steps": mo.md("""
                 1. **Implementation:** Try implementing Hard Sigmoid from scratch
                 2. **Compare:** Explore how it differs from regular sigmoid
                 3. **Experiment:** Test performance benefits in a neural network
                 4. **Advanced:** Learn about other sigmoid approximations
             """),
-            "🎯 Common Applications": mo.md("""
+                    "🎯 Common Applications": mo.md("""
                 - Neural networks requiring fast computation
                 - Embedded systems with limited resources
                 - Mobile applications
                 - Real-time inference systems
                 - Hardware implementations of neural networks
             """),
-        })
-    ])
+                }
+            ),
+        ]
+    )
     return (conclusion,)
 
 
 @app.cell
 def _(mo):
-    mo.md(f"""
+    mo.md("""
     This interactive learning experience was designed to help you understand the Hard Sigmoid activation function. Hope this helps in your deep learning journey!
     """)
     return
@@ -254,6 +277,7 @@ def _(conclusion):
 @app.cell(hide_code=True)
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -261,6 +285,7 @@ def _():
 def _():
     import numpy as np
     import matplotlib.pyplot as plt
+
     return np, plt
 
 

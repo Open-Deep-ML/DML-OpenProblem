@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def gauss_seidel_it(A, b, x):
     rows, cols = A.shape
     for i in range(rows):
@@ -9,6 +10,7 @@ def gauss_seidel_it(A, b, x):
                 x_new -= A[i, j] * x[j]
         x[i] = x_new / A[i, i]
     return x
+
 
 def gauss_seidel(A, b, n, x_ini=None):
     x = x_ini or np.zeros_like(b)

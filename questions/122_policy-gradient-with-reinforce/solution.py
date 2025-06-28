@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def compute_policy_gradient(theta, episodes):
     def softmax(x):
         x = x - np.max(x)

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def residual_block(x: np.ndarray, w1: np.ndarray, w2: np.ndarray) -> np.ndarray:
     # First weight layer
     y = np.dot(w1, x)

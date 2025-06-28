@@ -1,13 +1,14 @@
 import numpy as np
 
+
 def mae(y_true, y_pred):
     """
     Calculate Mean Absolute Error between two arrays.
-    
+
     Parameters:
     y_true (numpy.ndarray): Array of true values
     y_pred (numpy.ndarray): Array of predicted values
-    
+
     Returns:
     float: Mean Absolute Error rounded to 3 decimal places
     """
@@ -15,8 +16,9 @@ def mae(y_true, y_pred):
         raise ValueError("Arrays must have the same shape")
     if y_true.size == 0:
         raise ValueError("Arrays cannot be empty")
-    
+
     return round(np.mean(np.abs(y_true - y_pred)), 3)
+
 
 def test_mae():
     # Test Case 1: Normal Case
@@ -65,6 +67,7 @@ def test_mae():
     y_pred7 = np.array([-1, 1, 0])
     expected7 = 1.333
     assert mae(y_true7, y_pred7) == expected7, "Test Case 7 Failed"
+
 
 if __name__ == "__main__":
     test_mae()

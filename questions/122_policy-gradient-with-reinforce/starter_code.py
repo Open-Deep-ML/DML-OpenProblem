@@ -1,6 +1,9 @@
 import numpy as np
 
-def compute_policy_gradient(theta: np.ndarray, episodes: list[list[tuple[int, int, float]]]) -> np.ndarray:
+
+def compute_policy_gradient(
+    theta: np.ndarray, episodes: list[list[tuple[int, int, float]]]
+) -> np.ndarray:
     """
     Estimate the policy gradient using REINFORCE.
 

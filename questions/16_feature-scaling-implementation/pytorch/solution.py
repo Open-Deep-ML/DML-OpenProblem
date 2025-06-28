@@ -1,5 +1,6 @@
 import torch
 
+
 def feature_scaling(data) -> tuple[torch.Tensor, torch.Tensor]:
     """
     Standardize and Min-Max normalize input data using PyTorch.

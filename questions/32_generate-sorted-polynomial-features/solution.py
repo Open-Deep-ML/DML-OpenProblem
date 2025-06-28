@@ -1,12 +1,16 @@
 import numpy as np
 from itertools import combinations_with_replacement
 
+
 def polynomial_features(X, degree):
     n_samples, n_features = X.shape
 
     # All index combinations for powers 0 … degree (constant term included)
-    combs = [c for d in range(degree + 1)
-             for c in combinations_with_replacement(range(n_features), d)]
+    combs = [
+        c
+        for d in range(degree + 1)
+        for c in combinations_with_replacement(range(n_features), d)
+    ]
 
     # Compute raw polynomial terms
     X_poly = np.empty((n_samples, len(combs)))

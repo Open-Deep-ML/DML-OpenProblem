@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def elastic_net_gradient_descent(
     X: np.ndarray,
     y: np.ndarray,
@@ -16,7 +17,11 @@ def elastic_net_gradient_descent(
     for _ in range(max_iter):
         y_pred = np.dot(X, weights) + bias
         error = y_pred - y
-        grad_w = (1 / n_samples) * np.dot(X.T, error) + alpha1 * np.sign(weights) + 2 * alpha2 * weights
+        grad_w = (
+            (1 / n_samples) * np.dot(X.T, error)
+            + alpha1 * np.sign(weights)
+            + 2 * alpha2 * weights
+        )
         grad_b = (1 / n_samples) * np.sum(error)
         weights -= learning_rate * grad_w
         bias -= learning_rate * grad_b

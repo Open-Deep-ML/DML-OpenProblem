@@ -1,10 +1,13 @@
 from tinygrad.tensor import Tensor
 
+
 class Value:
     """Same idea, but using tinygrad’s automatic differentiation."""
 
     def __init__(self, data, _tensor=None):
-        self._t = _tensor if _tensor is not None else Tensor(float(data), requires_grad=True)
+        self._t = (
+            _tensor if _tensor is not None else Tensor(float(data), requires_grad=True)
+        )
 
     @property
     def data(self):
@@ -18,6 +21,7 @@ class Value:
     def __repr__(self):
         def fmt(x):
             return int(x) if float(x).is_integer() else round(x, 4)
+
         return f"Value(data={fmt(self.data)}, grad={fmt(self.grad)})"
 
     def _wrap(self, other):

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def compute_tf_idf(corpus, query):
     """
     Compute TF-IDF scores for a query against a corpus of documents using only NumPy.

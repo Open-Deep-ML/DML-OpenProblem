@@ -1,5 +1,6 @@
 import torch
 
+
 def matrix_dot_vector(a, b) -> torch.Tensor:
     """
     Compute the product of matrix `a` and vector `b` using PyTorch.

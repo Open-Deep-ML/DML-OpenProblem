@@ -10,4 +10,4 @@ def softplus(x: float) -> float:
 	"""
 	# Your code here
 	pass
-	 return round(val,4)
+	return round(val,4)

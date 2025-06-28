@@ -1,5 +1,6 @@
 from tinygrad.tensor import Tensor
 
+
 def matrix_dot_vector_tg(a, b) -> Tensor:
     """
     Compute the product of matrix `a` and vector `b` using tinygrad.
@@ -10,7 +11,7 @@ def matrix_dot_vector_tg(a, b) -> Tensor:
     if len(a[0]) != len(b):
         return Tensor(-1)
     # Convert to Tensor
-    a_t = Tensor(a)
-    b_t = Tensor(b)
+    Tensor(a)
+    Tensor(b)
     # Your implementation here
     pass
