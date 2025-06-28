@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nx = np.array([[1.0, 2.0], [3.0, 4.0]])\ngrad = np.array([[0.5, 0.2], [1.0, 2.0]])\n\ndropout = DropoutLayer(0.2)\n\nprint(dropout.forward(x, training=True), dropout.forward(x, training=False), dropout.backward(grad))",
+    "expected_output": "(array([[1.25, 0.], [3.75, 5.]]), array([[1.0, 2.0], [3.0, 4.0]]), array([[0.625, 0.], [1.25, 2.5]]))"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nx = np.ones((1000, 1000))\ndropout = DropoutLayer(0.2)\n\n_ = dropout.forward(x, training=True)\nmask1 = dropout.mask.copy()\n_ = dropout.forward(x, training=True)\nmask2 = dropout.mask.copy()\nprint(np.array_equal(mask1, mask2))",
+    "expected_output": "False"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nx = np.ones((1000, 1000))\ndropout = DropoutLayer(0.3)\n\noutput_train = dropout.forward(x, training=True)\nmean_output = np.mean(output_train)\nprint(abs(mean_output - 1.0) < 0.1)",
+    "expected_output": "True"
+  },
+  {
+    "test": "import numpy as np\nimport pytest\np = 1.5\nwith pytest.raises(ValueError):\n    dropout = DropoutLayer(p)\np = -0.5\nwith pytest.raises(ValueError):\n    dropout = DropoutLayer(p)\nprint('All tests passed')",
+    "expected_output": "All tests passed"
+  }
+]

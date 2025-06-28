@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import torch\ntorch.manual_seed(42)\nx = torch.tensor([[1.0, 2.0], [3.0, 4.0]])\ngrad = torch.tensor([[0.5, 0.2], [1.0, 2.0]])\n\ndropout = DropoutLayer(0.2)\n\nprint(dropout.forward(x, training=True), dropout.forward(x, training=False), dropout.backward(grad))",
+    "expected_output": "(tensor([[0., 0.], [3.75, 0.]]), tensor([[1.0, 2.0], [3.0, 4.0]]), tensor([[0., 0.], [1.25, 0.]]))"
+  },
+  {
+    "test": "import torch\ntorch.manual_seed(42)\nx = torch.ones((1000, 1000))\ndropout = DropoutLayer(0.2)\n\n_ = dropout.forward(x, training=True)\nmask1 = dropout.mask.clone()\n_ = dropout.forward(x, training=True)\nmask2 = dropout.mask.clone()\nprint(mask1.equal(mask2))",
+    "expected_output": "False"
+  },
+  {
+    "test": "import torch\ntorch.manual_seed(42)\nx = torch.ones((1000, 1000))\ndropout = DropoutLayer(0.3)\noutput_train = dropout.forward(x, training=True)\nmean_output = torch.mean(output_train)\nprint(abs(mean_output - 1.0).item() < 0.1)",
+    "expected_output": "True"
+  },
+  {
+    "test": "import pytest\np = 1.5\nwith pytest.raises(ValueError):\n    dropout = DropoutLayer(p)\np = -0.5\nwith pytest.raises(ValueError):\n    dropout = DropoutLayer(p)\nprint('All tests passed')",
+    "expected_output": "All tests passed"
+  }
+]

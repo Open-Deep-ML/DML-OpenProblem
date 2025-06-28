@@ -19,6 +19,10 @@ During inference:
 
 $y = x$
 
+During backpropagation:
+
+$grad = \dfrac{grad \odot m}{1-p}$
+
 Where:
 - $x$ is the input vector
 - $m$ is a binary mask vector sampled from Bernoulli(p)
@@ -28,6 +32,8 @@ Where:
 The mask $m$ is randomly generated for each forward pass during training and is stored in memory to be used in the corresponding backward pass. This ensures that the same neurons are dropped during both forward and backward propagation for a given input.
 
 The scaling factor $\frac{1}{1-p}$ during training ensures that the expected value of the output matches the input, making the network's behavior consistent between training and inference.
+
+During backpropagation, the gradients must also be scaled by the same factor $\frac{1}{1-p}$ to maintain the correct gradient flow.
 
 Dropout acts as a form of regularization by:
 1. Preventing co-adaptation of neurons, forcing them to learn more robust features that are useful in combination with many different random subsets of other neurons
@@ -82,14 +88,12 @@ grad_back = dropout.backward(grad)
 
 ## Tips
 - Use numpy's random binomial generator for creating the mask
-- Remember to scale up the output during training by 1/(1-p)
+- Remember to scale up the output and gradients during training by 1/(1-p)
 - Test with different dropout rates (typically between 0.2 and 0.5)
 - Verify that the expected value of the output matches the input
 
 ## Common Pitfalls
-- Forgetting to scale the output during training
 - Using the same mask for all examples in a batch
 - Setting dropout rate too high (can lead to underfitting)
-- Not handling the scaling factor correctly
 
 ---
