@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\nB, C, H, W = 2, 2, 2, 2\nnp.random.seed(42)\nX = np.random.randn(B, C, H, W)\ngamma = np.ones(C)\nbeta = np.zeros(C)\nout = instance_normalization(X, gamma, beta)\nprint(np.round(out, 8))",
+  "output": "[[[[-0.08841405 -0.50250083]\n   [ 0.01004046  0.58087442]]\n\n  [[-0.43833369 -0.43832346]\n   [ 0.69114093  0.18551622]]]\n\n [[[-0.17259136  0.51115219]\n   [-0.16849938 -0.17006144]]\n\n  [[ 0.73955155 -0.55463639]\n   [-0.44152783  0.25661268]]]]",
+  "reasoning": "The function normalizes each instance and channel across (H, W), then applies the gamma and beta scaling/shifting parameters. This matches standard InstanceNorm behavior."
+}
