@@ -28,10 +28,3 @@ class ExponentialLRScheduler:
         
         # Round the learning rate to 4 decimal places
         return round(current_lr, 4)
-
-
-
-
-
-scheduler = ExponentialLRScheduler(initial_lr=0.005, gamma=0.99)
-print(f"{scheduler.get_lr(epoch=0):.4f}\\n{scheduler.get_lr(epoch=10):.4f}\\n{scheduler.get_lr(epoch=20):.4f}")
