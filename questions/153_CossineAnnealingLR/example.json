@@ -1,0 +1,5 @@
+{
+  "input": "import math\nscheduler = CosineAnnealingLRScheduler(initial_lr=0.1, T_max=10, min_lr=0.001)\nprint(f\"{scheduler.get_lr(epoch=0):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=2):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=5):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=7):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=10):.4f}\")",
+  "output": "0.1000\n0.0905\n0.0505\n0.0214\n0.0010",
+  "reasoning": "The learning rate starts at initial_lr (0.1), follows a cosine curve, reaches min_lr (0.001) at T_max (epoch 10), and then cycles back up. Each value is rounded to 4 decimal places."
+}
