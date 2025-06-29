@@ -1,0 +1,15 @@
+{
+  "id": "153",
+  "title": "CosineAnnealingLR Learning Rate Scheduler",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/komaksym",
+      "name": "komaksym"
+    }
+  ]
+}
