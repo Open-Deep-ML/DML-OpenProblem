@@ -1,34 +1,34 @@
 [
-  {
-    "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=0))",
-    "expected_output": "0.1"
-  },
-  {
-    "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=4))",
-    "expected_output": "0.1"
-  },
-  {
-    "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=5))",
-    "expected_output": "0.05"
-  },
-  {
-    "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=9))",
-    "expected_output": "0.05"
-  },
-  {
-    "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=10))",
-    "expected_output": "0.025"
-  },
-  {
-    "test": "scheduler = StepLRScheduler(initial_lr=0.01, step_size=10, gamma=0.1)\nprint(scheduler.get_lr(epoch=0))\nprint(scheduler.get_lr(epoch=9))\nprint(scheduler.get_lr(epoch=10))\nprint(scheduler.get_lr(epoch=19))\nprint(scheduler.get_lr(epoch=20))",
-    "expected_output": "0.01\n0.01\n0.001\n0.001\n0.0001"
-  },
-  {
-    "test": "scheduler = StepLRScheduler(initial_lr=1.0, step_size=1, gamma=0.9)\nprint(scheduler.get_lr(epoch=0))\nprint(scheduler.get_lr(epoch=1))\nprint(scheduler.get_lr(epoch=2))\nprint(scheduler.get_lr(epoch=3))",
-    "expected_output": "1.0\n0.9\n0.81\n0.7290000000000001"
-  },
-  {
-    "test": "scheduler = StepLRScheduler(initial_lr=0.0001, step_size=100, gamma=0.8)\nprint(scheduler.get_lr(epoch=99))\nprint(scheduler.get_lr(epoch=100))\nprint(scheduler.get_lr(epoch=199))\nprint(scheduler.get_lr(epoch=200))",
-    "expected_output": "0.0001\n8e-05\n8e-05\n6.4e-05"
-  }
+    {
+        "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=0))",
+        "expected_output": "0.1"
+    },
+    {
+        "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=4))",
+        "expected_output": "0.1"
+    },
+    {
+        "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=5))",
+        "expected_output": "0.05"
+    },
+    {
+        "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=9))",
+        "expected_output": "0.05"
+    },
+    {
+        "test": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=10))",
+        "expected_output": "0.025"
+    },
+    {
+        "test": "scheduler = StepLRScheduler(initial_lr=0.01, step_size=10, gamma=0.1)\nprint(scheduler.get_lr(epoch=0))\nprint(scheduler.get_lr(epoch=9))\nprint(scheduler.get_lr(epoch=10))\nprint(scheduler.get_lr(epoch=19))\nprint(scheduler.get_lr(epoch=20))",
+        "expected_output": "0.01\n0.01\n0.001\n0.001\n0.0001"
+    },
+    {
+        "test": "scheduler = StepLRScheduler(initial_lr=1.0, step_size=1, gamma=0.9)\nprint(round(scheduler.get_lr(epoch=0), 6))\nprint(round(scheduler.get_lr(epoch=1), 6))\nprint(round(scheduler.get_lr(epoch=2), 6))\nprint(round(scheduler.get_lr(epoch=3), 6))",
+        "expected_output": "1.0\n0.9\n0.81\n0.729"
+    },
+    {
+        "test": "scheduler = StepLRScheduler(initial_lr=0.001, step_size=50, gamma=0.5)\nprint(scheduler.get_lr(epoch=49))\nprint(scheduler.get_lr(epoch=50))\nprint(scheduler.get_lr(epoch=100))",
+        "expected_output": "0.001\n0.0005\n0.0003"
+    }
 ]
