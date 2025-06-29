@@ -33,7 +33,3 @@ class StepLRScheduler:
         current_lr = self.initial_lr * (self.gamma ** num_decays)
         
         return current_lr
-
-
-scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)
-print(scheduler.get_lr(epoch=9))
