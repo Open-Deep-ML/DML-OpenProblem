@@ -1,0 +1,36 @@
+{
+  "id": "124",
+  "title": "Implement the Noisy Top-K Gating Function",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement the Noisy Top-K gating mechanism used in Mixture-of-Experts (MoE) models. Given an input matrix, weight matrices, pre-sampled noise, and a sparsity constraint k, compute the final gating probabilities matrix.",
+  "learn_section": "## Noisy Top-K Gating\n\nNoisy Top-K Gating is a sparse selection mechanism used in Mixture-of-Experts (MoE) models. It routes input tokens to a subset of available experts, enhancing efficiency and model capacity.\n\n### Overview\n\nThe core idea is to add learned noise to the gating logits and then select only the top-k experts for each input. This encourages exploration and helps balance load across experts.\n\n### Step-by-Step Breakdown\n\n1. **Compute Raw Gate Scores**  \n   First, compute two linear projections of the input:\n   $$\n   H_{\\text{base}} = X W_g\n   $$\n   $$\n   H_{\\text{noise}} = X W_{\\text{noise}}\n   $$\n\n2. **Apply Noise with Softplus Scaling**  \n   Add pre-sampled Gaussian noise, scaled by a softplus transformation:\n   $$\n   H = H_{\\text{base}} + N \\odot \\text{Softplus}(H_{\\text{noise}})\n   $$\n\n3. **Top-K Masking**  \n   Keep only the top-k elements in each row (i.e., per input), setting the rest to $-\\infty$:\n   $$\n   H' = \\text{TopK}(H, k)\n   $$\n\n4. **Softmax Over Top-K**  \n   Normalize the top-k scores into a valid probability distribution:\n   $$\n   G = \\text{Softmax}(H')\n   $$\n\n### Worked Example\n\nLet:\n- $X = [[1.0, 2.0]]$\n- $W_g = [[1.0, 0.0], [0.0, 1.0]]$\n- $W_{\\text{noise}} = [[0.5, 0.5], [0.5, 0.5]]$\n- $N = [[1.0, -1.0]]$\n- $k = 2$\n\nStep-by-step:\n- $H_{\\text{base}} = [1.0, 2.0]$\n- $H_{\\text{noise}} = [1.5, 1.5]$\n- $\\text{Softplus}(H_{\\text{noise}}) \\approx [1.804, 1.804]$\n- $H = [1.0 + 1.804, 2.0 - 1.804] = [2.804, 0.196]$\n- Softmax over these gives: $[0.917, 0.0825]$\n\n### Benefits\n\n- **Computational Efficiency**: Activates only k experts per input.\n- **Load Balancing**: Injected noise encourages diversity in expert selection.\n- **Improved Generalization**: Acts as a regularizer via noise-based gating.\n\nThis technique is used in large sparse models like GShard and Switch Transformers.",
+  "starter_code": "import numpy as np\n\ndef noisy_topk_gating(\n    X: np.ndarray,\n    W_g: np.ndarray,\n    W_noise: np.ndarray,\n    N: np.ndarray,\n    k: int\n) -> np.ndarray:\n    \"\"\"\n    Args:\n        X: Input data, shape (batch_size, features)\n        W_g: Gating weight matrix, shape (features, num_experts)\n        W_noise: Noise weight matrix, shape (features, num_experts)\n        N: Noise samples, shape (batch_size, num_experts)\n        k: Number of experts to keep per example\n    Returns:\n        Gating probabilities, shape (batch_size, num_experts)\n    \"\"\"\n    # Your code here\n    pass",
+  "solution": "import numpy as np\n\ndef noisy_topk_gating(\n    X: np.ndarray,\n    W_g: np.ndarray,\n    W_noise: np.ndarray,\n    N: np.ndarray,\n    k: int\n) -> np.ndarray:\n    H_base = X @ W_g\n    H_noise = X @ W_noise\n    softplus = np.log1p(np.exp(H_noise))\n    H = H_base + N * softplus\n\n    def top_k_masked(row, k):\n        mask = np.full_like(row, -np.inf)\n        top_idx = np.argsort(row)[-k:]\n        mask[top_idx] = row[top_idx]\n        return mask\n\n    masked_H = np.vstack([top_k_masked(row, k) for row in H])\n    exps = np.exp(masked_H - np.max(masked_H, axis=1, keepdims=True))\n    return exps / np.sum(exps, axis=1, keepdims=True)",
+  "example": {
+    "input": "X = [[1.0, 2.0]]\nW_g = [[1.0, 0.0], [0.0, 1.0]]\nW_noise = [[0.5, 0.5], [0.5, 0.5]]\nN = [[1.0, -1.0]]\nk = 2",
+    "output": "[[0.917, 0.0825]]",
+    "reasoning": "This example demonstrates that the gating function produces a sparse softmax output, favoring the higher gate after noise perturbation."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nnp.random.seed(0)\nX = np.array([[1.0, 2.0]])\nW_g = np.array([[1.0, 0.0], [0.0, 1.0]])\nW_noise = np.zeros((2,2))\nN = np.zeros((1,2))\nprint(noisy_topk_gating(X, W_g, W_noise, N, k=1))",
+      "expected_output": "[[0. 1.]]"
+    },
+    {
+      "test": "import numpy as np\nX = np.array([[1.0, 2.0]])\nW_g = np.array([[1.0, 0.0], [0.0, 1.0]])\nW_noise = np.array([[0.5, 0.5], [0.5, 0.5]])\nN = np.array([[1.0, -1.0]])\nprint(np.round(noisy_topk_gating(X, W_g, W_noise, N, k=2), 4))",
+      "expected_output": "[[0.917, 0.083]]"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "55",
+  "title": "2D Translation Matrix Implementation",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Mohamad-Abdulkadir",
+      "name": "Mohamad Abdulkadir"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "## Task: Implement a 2D Translation Matrix\n\nYour task is to implement a function that applies a 2D translation matrix to a set of points. A translation matrix is used to move points in 2D space by a specified distance in the x and y directions.\n\nWrite a function `translate_object(points, tx, ty)` where `points` is a list of [x, y] coordinates and `tx` and `ty` are the translation distances in the x and y directions, respectively.\n\nThe function should return a new list of points after applying the translation matrix.\n\n    ",
+  "learn_section": "\n## 2D Translation Matrix Implementation\n\nThe translation matrix is a fundamental concept in linear algebra and computer graphics, used to move points or objects in a 2D space.\n\n### Concept Overview\n\nFor a 2D translation, we use a 3x3 matrix to move a point \\( (x, y) \\) by \\( x_t \\) units in the x-direction and \\( y_t \\) units in the y-direction.\n\nAny point \\( P \\) in 2D Cartesian space with coordinates \\( (x, y) \\) can be represented in homogeneous coordinates as \\( (x, y, 1) \\):\n\n$$\nP_{\\text{Cartesian}} = (x, y) \\rightarrow P_{\\text{Homogeneous}} = (x, y, 1)\n$$\n\nMore generally, any scalar multiple of \\( (x, y, 1) \\) represents the same point in 2D space. Thus, \\( (kx, ky, k) \\) for any non-zero \\( k \\) also represents the same point \\( (x, y) \\).\n\nThe addition of this third coordinate allows us to represent translation as a linear transformation.\n\n### Translation Matrix\n\nThe translation matrix \\( T \\) is defined as:\n\n$$\nT = \\begin{bmatrix}\n1 & 0 & x_t \\\\\n0 & 1 & y_t \\\\\n0 & 0 & 1\n\\end{bmatrix}\n$$\n\n### Applying the Translation\n\nTo translate a point \\( (x, y) \\), we first convert it to homogeneous coordinates: \\( (x, y, 1) \\). The transformation is then performed using matrix multiplication:\n\n$$\n\\begin{bmatrix}\n1 & 0 & x_t \\\\\n0 & 1 & y_t \\\\\n0 & 0 & 1\n\\end{bmatrix}\n\\begin{bmatrix}\nx \\\\\ny \\\\\n1\n\\end{bmatrix}\n=\n\\begin{bmatrix}\nx + x_t \\\\\ny + y_t \\\\\n1\n\\end{bmatrix}\n$$\n\n### Explanation of Parameters\n\n1. **Original Point**: \\( (x, y) \\)  \n2. **Translation in x-direction**: \\( x_t \\)  \n3. **Translation in y-direction**: \\( y_t \\)  \n4. **Translated Point**: \\( (x + x_t, y + y_t) \\)\n\nThis process effectively shifts the original point \\( (x, y) \\) by \\( x_t \\) and \\( y_t \\), resulting in the new coordinates \\( (x + x_t, y + y_t) \\).",
+  "starter_code": "import numpy as np\ndef translate_object(points, tx, ty):\n\treturn translated_points",
+  "solution": "import numpy as np\n\ndef translate_object(points, tx, ty):\n    translation_matrix = np.array([\n        [1, 0, tx],\n        [0, 1, ty],\n        [0, 0, 1]\n    ])\n    \n    homogeneous_points = np.hstack([np.array(points), np.ones((len(points), 1))])\n    \n    translated_points = np.dot(homogeneous_points, translation_matrix.T)\n    \n    return translated_points[:, :2].tolist()",
+  "example": {
+    "input": "points = [[0, 0], [1, 0], [0.5, 1]]\ntx, ty = 2, 3\n\nprint(translate_object(points, tx, ty))",
+    "output": "[[2.0, 3.0], [3.0, 3.0], [2.5, 4.0]]",
+    "reasoning": "The translation matrix moves the points by 2 units in the x-direction and 3 units in the y-direction. The resulting points are [[2.0, 3.0], [3.0, 3.0], [2.5, 4.0]]."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\n\ntriangle = [[0, 0], [1, 0], [0.5, 1]]\ntx, ty = 2, 3\nprint(translate_object(triangle, tx, ty))",
+      "expected_output": "[[2.0, 3.0], [3.0, 3.0], [2.5, 4.0]]"
+    },
+    {
+      "test": "import numpy as np\n\nsquare = [[0, 0], [1, 0], [1, 1], [0, 1]]\ntx, ty = -1, 2\nprint(translate_object(square, tx, ty))",
+      "expected_output": "[[-1.0, 2.0], [0.0, 2.0], [0.0, 3.0], [-1.0, 3.0]]"
+    }
+  ]
+}

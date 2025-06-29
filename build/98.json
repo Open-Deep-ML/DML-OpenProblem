@@ -1,0 +1,49 @@
+{
+  "id": "98",
+  "title": "Implement the PReLU Activation Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Haleshot",
+      "name": "Haleshot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-98",
+  "description": "Implement the PReLU (Parametric ReLU) activation function, a variant of the ReLU activation function that introduces a learnable parameter for negative inputs. Your task is to compute the PReLU activation value for a given input.",
+  "learn_section": "### Understanding the PReLU (Parametric ReLU) Activation Function\n\nThe PReLU (Parametric Rectified Linear Unit) is an advanced variant of the ReLU activation function that introduces a learnable parameter for negative inputs. This makes it more flexible than standard ReLU and helps prevent the \"dying ReLU\" problem.\n\n#### Mathematical Definition\n\nThe PReLU function is defined as:\n\n$$\nPReLU(x) = \\begin{cases}\nx & \\text{if } x > 0 \\\\\n\\alpha x & \\text{otherwise}\n\\end{cases}\n$$\n\nWhere:\n- $x$ is the input value\n- $\\alpha$ is a learnable parameter (typically initialized to a small value like 0.25)\n\n#### Key Characteristics\n\n1. **Adaptive Slope**: Unlike ReLU which has a zero slope for negative inputs, PReLU learns the optimal negative slope parameter ($\\alpha$) during training.\n\n2. **Output Range**: \n   - For $x > 0$: Output equals input ($y = x$)\n   - For $x \\leq 0$: Output is scaled by $\\alpha$ ($y = \\alpha x$)\n\n3. **Advantages**:\n   - Helps prevent the \"dying ReLU\" problem\n   - More flexible than standard ReLU\n   - Can improve model performance through learned parameter\n   - Maintains the computational efficiency of ReLU\n\n4. **Special Cases**:\n   - When $\\alpha = 0$, PReLU becomes ReLU\n   - When $\\alpha = 1$, PReLU becomes a linear function\n   - When $\\alpha$ is small (e.g., 0.01), PReLU behaves similarly to Leaky ReLU\n\nPReLU is particularly useful in deep neural networks where the optimal negative slope might vary across different layers or channels.",
+  "starter_code": "def prelu(x: float, alpha: float = 0.25) -> float:\n\t\"\"\"\n\tImplements the PReLU (Parametric ReLU) activation function.\n\n\tArgs:\n\t\tx: Input value\n\t\talpha: Slope parameter for negative values (default: 0.25)\n\n\tReturns:\n\t\tfloat: PReLU activation value\n\t\"\"\"\n\t# Your code here\n\tpass",
+  "solution": "def prelu(x: float, alpha: float = 0.25) -> float:\n    \"\"\"\n    Implements the PReLU (Parametric ReLU) activation function.\n\n    Args:\n        x: Input value\n        alpha: Slope parameter for negative values (default: 0.25)\n\n    Returns:\n        float: PReLU activation value\n    \"\"\"\n    return x if x > 0 else alpha * x",
+  "example": {
+    "input": "prelu(-2.0, alpha=0.25)",
+    "output": "-0.5",
+    "reasoning": "For x = -2.0 and alpha = 0.25, the PReLU activation is calculated as $PReLU(x) = \\alpha x = 0.25 \\times -2.0 = -0.5$."
+  },
+  "test_cases": [
+    {
+      "test": "print(prelu(2.0))",
+      "expected_output": "2.0"
+    },
+    {
+      "test": "print(prelu(0.0))",
+      "expected_output": "0.0"
+    },
+    {
+      "test": "print(prelu(-2.0))",
+      "expected_output": "-0.5"
+    },
+    {
+      "test": "print(prelu(-2.0, alpha=0.1))",
+      "expected_output": "-0.2"
+    },
+    {
+      "test": "print(prelu(-2.0, alpha=1.0))",
+      "expected_output": "-2.0"
+    }
+  ]
+}

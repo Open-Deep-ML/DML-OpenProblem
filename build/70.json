@@ -1,0 +1,48 @@
+{
+  "id": "70",
+  "title": "Calculate Image Brightness",
+  "difficulty": "easy",
+  "category": "Computer Vision",
+  "video": "",
+  "likes": 0,
+  "dislikes": 0,
+  "contributor": [
+    {
+      "profile_link": "https://github.com/NiharP31",
+      "name": "NiharP31"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "\n## Task: Image Brightness Calculator\n\nIn this task, you will implement a function `calculate_brightness(img)` that calculates the average brightness of a grayscale image. The image is represented as a 2D matrix, where each element represents a pixel value between 0 (black) and 255 (white).\n\n### **Your Task**:\nImplement the function `calculate_brightness(img)` to:\n1. Return the average brightness of the image rounded to two decimal places.\n2. Handle edge cases:\n   - If the image matrix is empty.\n   - If the rows in the matrix have inconsistent lengths.\n   - If any pixel values are outside the valid range (0-255).\n\nFor any of these edge cases, the function should return `-1`.",
+  "learn_section": "\n# Image Brightness Calculator\n\nConsider a grayscale image represented as a 2D matrix where each element represents a pixel value between 0 (black) and 255 (white):\n\n$$\nImage = \\begin{pmatrix}\np_{11} & p_{12} \\\\\np_{21} & p_{22}\n\\end{pmatrix}\n$$\n\nThe average brightness is calculated as:\n\n$$\nBrightness = \\frac{\\sum_{i=1}^{m} \\sum_{j=1}^{n} p_{ij}}{m \\times n}\n$$\n\nWhere:\n\n1) $p_{ij}$ is the pixel value at position $(i,j)$  \n2) $m$ is the number of rows  \n3) $n$ is the number of columns  \n\n### Things to Note:\n\n1) All pixel values must be between 0 and 255  \n2) The image matrix must be well-formed (all rows same length)  \n3) Empty or invalid images return -1  ",
+  "starter_code": "\ndef calculate_brightness(img):\n\t# Write your code here\n\tpass",
+  "solution": "\ndef calculate_brightness(img):\n    # Check if image is empty or has no columns\n    if not img or not img[0]:\n        return -1\n\n    rows, cols = len(img), len(img[0])\n\n    # Check if all rows have same length and values are valid\n    for row in img:\n        if len(row) != cols:\n            return -1\n        for pixel in row:\n            if not 0 <= pixel <= 255:\n                return -1\n\n    # Calculate average brightness\n    total = sum(sum(row) for row in img)\n    return round(total / (rows * cols), 2)",
+  "example": {
+    "input": "img = [\n    [100, 200],\n    [50, 150]\n]\nprint(calculate_brightness(img))",
+    "output": "125.0",
+    "reasoning": "The average brightness is calculated as (100 + 200 + 50 + 150) / 4 = 125.0"
+  },
+  "test_cases": [
+    {
+      "test": "\n# Test empty image\nprint(calculate_brightness([]))\n",
+      "expected_output": "-1"
+    },
+    {
+      "test": "\n# Test invalid dimensions\nprint(calculate_brightness([[100, 200], [150]]))\n",
+      "expected_output": "-1"
+    },
+    {
+      "test": "\n# Test invalid pixel values\nprint(calculate_brightness([[100, 300]]))\n",
+      "expected_output": "-1"
+    },
+    {
+      "test": "\n# Test valid cases\nprint(calculate_brightness([[128]]))\n",
+      "expected_output": "128.0"
+    },
+    {
+      "test": "\n# Another valid case\nprint(calculate_brightness([[100, 200], [50, 150]]))\n",
+      "expected_output": "125.0"
+    }
+  ]
+}

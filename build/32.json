@@ -1,0 +1,44 @@
+{
+  "id": "32",
+  "title": "Generate Sorted Polynomial Features",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/eriklindernoren/ML-From-Scratch",
+      "name": "Erik Linder-Norén"
+    },
+    {
+      "profile_link": "https://github.com/peppermin-t",
+      "name": "Yinjia Chen"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Write a Python function that takes a 2-D NumPy array **X** and an integer **degree**, generates all polynomial feature combinations of the columns of **X** up to the given degree **inclusive**, **then sorts the resulting features for each sample from lowest to highest value**. The function should return a new 2-D NumPy array whose rows correspond to the input samples and whose columns are the **ascending-sorted** polynomial features.",
+  "learn_section": "## Understanding Polynomial Features\n\nGenerating polynomial features is a method used to create new features for a machine-learning model by raising existing features to a specified power. This technique helps capture non-linear relationships between features.\n\n### Example\nGiven a dataset with two features $x_1$ and $x_2$, generating polynomial features up to degree 2 will create new features such as:\n- $x_1^2$\n- $x_2^2$\n- $x_1 x_2$\n\n### Problem Overview\nIn this problem you will write a function to **generate** polynomial features **and then sort each sample's features in ascending order**. Specifically:\n- Given a 2-D NumPy array **X** and an integer **degree**, create a new 2-D array with all polynomial combinations of the features up to the specified degree.\n- Finally, sort each row from the lowest value to the highest value.\n\n### Importance\nPolynomial expansion allows otherwise linear models to handle non-linear data. Sorting the expanded features can be useful for certain downstream tasks (e.g., histogram-based models or feature selection heuristics) and reinforces array-manipulation skills in NumPy.",
+  "starter_code": "import numpy as np\nfrom itertools import combinations_with_replacement\n\ndef polynomial_features(X, degree):\n    # ✏️  Your code here\n    pass",
+  "solution": "import numpy as np\nfrom itertools import combinations_with_replacement\n\ndef polynomial_features(X, degree):\n    n_samples, n_features = X.shape\n\n    # All index combinations for powers 0 … degree (constant term included)\n    combs = [c for d in range(degree + 1)\n             for c in combinations_with_replacement(range(n_features), d)]\n\n    # Compute raw polynomial terms\n    X_poly = np.empty((n_samples, len(combs)))\n    for i, idx in enumerate(combs):\n        X_poly[:, i] = 1 if len(idx) == 0 else np.prod(X[:, idx], axis=1)\n\n    # Sort each row from lowest → highest\n    X_sorted = np.sort(X_poly, axis=1)\n    return X_sorted",
+  "example": {
+    "input": "X = np.array([[2, 3],\n              [3, 4],\n              [5, 6]])\ndegree = 2\noutput = polynomial_features(X, degree)\nprint(output)",
+    "output": "[[ 1.  2.  3.  4.  6.  9.]\n [ 1.  3.  4.  9. 12. 16.]\n [ 1.  5.  6. 25. 30. 36.]]",
+    "reasoning": "For **degree = 2**, the raw polynomial terms for the first sample are [1, 2, 3, 4, 6, 9].  Sorting them from smallest to largest yields [1, 2, 3, 4, 6, 9]. The same procedure is applied to every sample."
+  },
+  "test_cases": [
+    {
+      "test": "print(polynomial_features(np.array([[2, 3], [3, 4], [5, 6]]), 2))",
+      "expected_output": "[[ 1.  2.  3.  4.  6.  9.]\n [ 1.  3.  4.  9. 12. 16.]\n [ 1.  5.  6. 25. 30. 36.]]"
+    },
+    {
+      "test": "print(polynomial_features(np.array([[1, 2], [3, 4], [5, 6]]), 3))",
+      "expected_output": "[[1., 1., 1., 1., 2., 2., 2., 4., 4., 8.], [ 1., 3., 4., 9., 12., 16., 27., 36., 48., 64.], [ 1., 5., 6., 25., 30., 36., 125., 150., 180., 216.]]"
+    },
+    {
+      "test": "print(polynomial_features(np.array([[1, 2, 3], [3, 4, 5], [5, 6, 9]]), 3))",
+      "expected_output": "[[ 1., 1., 1., 1., 2., 2., 2., 3., 3., 3., 4., 4., 6., 6., 8., 9., 9., 12., 18., 27.], [ 1., 3., 4., 5., 9., 12., 15., 16., 20., 25., 27., 36., 45., 48., 60., 64., 75., 80., 100., 125.], [ 1., 5., 6., 9., 25., 30., 36., 45., 54., 81., 125., 150., 180., 216., 225., 270., 324., 405., 486., 729.]]"
+    }
+  ]
+}

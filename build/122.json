@@ -1,0 +1,36 @@
+{
+  "id": "122",
+  "title": "Policy Gradient with REINFORCE",
+  "difficulty": "hard",
+  "category": "Reinforcement Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement the policy gradient estimator using the REINFORCE algorithm. The policy is parameterized by a 2D NumPy array `theta` of shape `(num_states, num_actions)`. The policy for each state is computed via softmax over `theta[s, :]`. Given a list of episodes (each a list of (state, action, reward) tuples), compute the average gradient of the log-policy multiplied by the return at each time step.",
+  "learn_section": "## REINFORCE and Policy Gradient Estimation\n\nThe REINFORCE algorithm computes gradients of the expected return with respect to policy parameters using Monte Carlo samples of episodes.\n\n### Softmax Policy\nGiven $\\theta$ with shape (num_states, num_actions), we define the probability of action $a$ in state $s$ as:\n\n$$\n\\pi(a \\mid s; \\theta) = \\frac{\\exp(\\theta[s, a])}{\\sum_{a'} \\exp(\\theta[s, a'])}\n$$\n\n### REINFORCE Gradient\nFor an episode with transitions $(s_t, a_t, r_t)$ and returns $G_t = \\sum_{k=t}^T r_k$:\n\n$$\n\\nabla_\\theta J(\\theta) \\approx \\sum_t \\nabla_\\theta \\log \\pi(a_t \\mid s_t) \\cdot G_t\n$$\n\n### Log-Policy Gradient\nTo compute $\\nabla_\\theta \\log \\pi(a_t \\mid s_t)$:\n\n- For $\\theta[s_t, a_t]$: $1 - \\pi(a_t \\mid s_t)$\n- For $\\theta[s_t, a']$, where $a' \\neq a_t$: $-\\pi(a' \\mid s_t)$\n- All other entries: 0\n\n### Final Estimate\nFor multiple episodes:\n\n$$\n\\hat{\\nabla}_\\theta J(\\theta) = \\frac{1}{N} \\sum_{i=1}^N \\sum_{t=0}^{T_i} \\nabla_\\theta \\log \\pi(a_t^i \\mid s_t^i) \\cdot G_t^i\n$$\n\nThis algorithm works even without value function estimation, making it a foundational method in policy-based reinforcement learning.",
+  "starter_code": "import numpy as np\n\ndef compute_policy_gradient(theta: np.ndarray, episodes: list[list[tuple[int, int, float]]]) -> np.ndarray:\n    \"\"\"\n    Estimate the policy gradient using REINFORCE.\n\n    Args:\n        theta: (num_states x num_actions) policy parameters.\n        episodes: List of episodes, where each episode is a list of (state, action, reward).\n\n    Returns:\n        Average policy gradient (same shape as theta).\n    \"\"\"\n    # Your code here\n    pass",
+  "solution": "import numpy as np\n\ndef compute_policy_gradient(theta, episodes):\n    def softmax(x):\n        x = x - np.max(x)\n        exps = np.exp(x)\n        return exps / np.sum(exps)\n\n    grad = np.zeros_like(theta)\n    for episode in episodes:\n        rewards = [step[2] for step in episode]\n        returns = np.cumsum(rewards[::-1])[::-1]\n        for t, (s, a, _), G in zip(range(len(episode)), episode, returns):\n            probs = softmax(theta[s])\n            grad_log_pi = np.zeros_like(theta)\n            grad_log_pi[s, :] = -probs\n            grad_log_pi[s, a] += 1\n            grad += grad_log_pi * G\n    return grad / len(episodes)",
+  "example": {
+    "input": "theta = np.zeros((2,2)); episodes = [[(0,1,0), (1,0,1)], [(0,0,0)]]",
+    "output": "[[-0.25, 0.25], [0.25, -0.25]]",
+    "reasoning": "Episode 1 contributes a positive gradient from reward 1 at t=1; episode 2 adds zero. Result is averaged across episodes."
+  },
+  "test_cases": [
+    {
+      "test": "theta = np.zeros((2,2)); episodes = [[(0,1,0), (1,0,1)], [(0,0,0)]]; print(np.round(compute_policy_gradient(theta, episodes), 4))",
+      "expected_output": "[[-0.25  0.25]\n [ 0.25 -0.25]]"
+    },
+    {
+      "test": "theta = np.zeros((2,2)); episodes = [[(0,0,0)], [(0,1,0), (1,1,0)]]; print(np.round(compute_policy_gradient(theta, episodes), 4))",
+      "expected_output": "[[0. 0.]\n [0. 0.]]"
+    }
+  ]
+}

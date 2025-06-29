@@ -1,0 +1,36 @@
+{
+  "id": "125",
+  "title": "Implement a Sparse Mixture of Experts Layer",
+  "difficulty": "hard",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/lefarov",
+      "name": "lefarov"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement a Mixture-of-Experts (MoE) layer using softmax gating and top-k routing. Given an input tensor, a set of expert weight matrices, a gating weight matrix, and parameters specifying the number of experts and the value of k, compute the final MoE output by selecting the top-k experts per token, applying their transformations, and aggregating the results weighted by the normalized gating probabilities.",
+  "learn_section": "\n## Mixture of Experts Layer\n\nMixture-of-Experts layers route each token through a small subset of expert networks, reducing computation while retaining flexibility.\n\n### 1. Gating with Softmax  \n- **Logits**: For each token $t$, compute a vector of gating scores $g_t \\in \\mathbb{R}^E$, where $E$ is the number of experts.  \n- **Softmax**: Convert scores into a probability distribution  \n  $$\n  \\alpha_{t,j}\n    = \\frac{\\exp\\bigl(g_{t,j} - \\max_j g_{t,j}\\bigr)}\n           {\\sum_{j'=1}^{E}\\exp\\bigl(g_{t,j'} - \\max_j g_{t,j'}\\bigr)}.\n  $$\n\n### 2. Top-$k$ Selection  \n- **Sparsity**: Keep only the $k$ largest weights per token, zeroing out the rest.  \n- **Renormalize**: For token $t$, let $\\mathcal{K}_t$ be the indices of the top $k$ experts. Then  \n  $$\n  \\tilde\\alpha_{t,j} =\n    \\begin{cases}\n      \\displaystyle\\frac{\\alpha_{t,j}}{\\sum_{i \\in \\mathcal{K}_t}\\alpha_{t,i}}\n        & j \\in \\mathcal{K}_t,\\\\[8pt]\n      0\n        & \\text{otherwise.}\n    \\end{cases}\n  $$\n\n### 3. Expert Computation  \nEach expert $i$ applies its own linear transform to the token embedding $x_t$:  \n$$\nO_t^{(i)} = x_t\\,W_e^{(i)},\n$$  \nwhere $W_e^{(i)}$ is the expert's $d \\times d$ weight matrix.\n\n### 4. Weighted Aggregation  \nCombine the selected experts' outputs for each token:  \n$$\ny_t = \\sum_{i=1}^{E} \\tilde\\alpha_{t,i}\\,O_t^{(i)}.\n$$  \nThe result $y_t$ lives in the original embedding space $\\mathbb{R}^d$.\n\n---\n\n### Example Walk Through\n\nSuppose one sentence of length 2, embedding size 3, $E=4$ experts, and $k=2$.  \n- After flattening, you get 2 softmax distributions of length 4.  \n- You pick the top 2 experts for each token and renormalize their weights.  \n- Each selected expert produces a 3-dimensional output for its tokens.  \n- You weight and sum those outputs to yield the final 3-dimensional vector per token.\n\nThis sparse routing mechanism dramatically cuts computation only $k$ experts run per token instead of all $E$ while retaining the expressivity of a full ensemble.",
+  "starter_code": "import numpy as np\n\ndef moe(x: np.ndarray, We: np.ndarray, Wg: np.ndarray, n_experts: int, top_k: int) -> np.ndarray:\n    \"\"\"\n    Args:\n        x: Input tensor of shape (n_batch, l_seq, d_model)\n        We: Expert weights of shape (n_experts, d_model, d_model)\n        Wg: Gating weights of shape (d_model, n_experts)\n        n_experts: Number of experts\n        top_k: Number of experts to route each token to\n    Returns:\n        Output tensor of shape (n_batch, l_seq, d_model)\n    \"\"\"\n    pass",
+  "solution": "import numpy as np\n\ndef softmax(x: np.ndarray, axis: int = -1) -> np.ndarray:\n    exp_x = np.exp(x - np.max(x, axis=axis, keepdims=True))\n    return exp_x / np.sum(exp_x, axis=axis, keepdims=True)\n\ndef get_top_k(arr: np.ndarray, k: int):\n    idx = np.argpartition(arr, -k)[..., -k:]\n    vals = np.take_along_axis(arr, idx, axis=-1)\n    return idx, vals\n\ndef expert(x: np.ndarray, We_i: np.ndarray):\n    # x: [n_tokens, d_model]\n    # We_i: [d_model, d_model]\n    return x @ We_i\n\ndef gate(x: np.ndarray, Wg: np.ndarray):\n    # x: [n_batch * l_seq, d_model]\n    # Wg: [n_batch * l_seq, n_experts]\n    return x @ Wg\n\ndef moe(x: np.ndarray, We: np.ndarray, Wg: np.ndarray, n_experts: int, top_k: int):\n    # x: [n_batch, l_seq, d_model]\n    # We: [n_experts, d_model, d_model]\n    # Wg: [n_batch * l_seq, n_experts]\n\n    n_batch, l_seq, d_model = x.shape\n\n    # flatten batch and sequence dimensions for easier indexing\n    # x_flat: [n_batch * l_seq, d_model]\n    x_flat = x.reshape(-1, d_model)\n    n_tokens, _ = x_flat.shape\n\n    gating_logits = gate(x_flat, Wg)\n    gating_weights = softmax(gating_logits, axis=-1)\n\n    topk_idx, topk_weights = get_top_k(gating_weights, top_k)\n    topk_idx_flat = topk_idx.flatten()  # [n_tokens * top_k]\n    # mapping from top K expert indices to token indices: [n_tokens * top_k]\n    token_idx_flat = np.arange(n_tokens).repeat(top_k)\n\n    topk_weights_norm = topk_weights / topk_weights.sum(axis=1, keepdims=True)\n    topk_weights_norm_flat = topk_weights_norm.flatten()\n\n    # prepare result memory for aggregation: [n_tokens, d_model]\n    output_flat = np.zeros_like(x_flat)\n    for i in range(n_experts):\n        mask = topk_idx_flat == i\n        tokens_expert_i = token_idx_flat[mask]\n\n        if tokens_expert_i.size > 0:\n            x_expert_i = x_flat[tokens_expert_i]\n            output_expert_i = expert(x_expert_i, We[i, ...])\n            output_expert_i *= topk_weights_norm_flat[mask, None]\n\n            # scatter add to result memory\n            np.add.at(output_flat, tokens_expert_i, output_expert_i)\n\n    return output_flat.reshape(n_batch, l_seq, d_model)",
+  "example": {
+    "input": "x = np.arange(12).reshape(2, 3, 2)\nWe = np.ones((4, 2, 2))\nWg = np.ones((2, 4))\ntop_k = 1",
+    "output": "[[[1, 1], [5, 5], [9, 9]], [[13, 13], [17, 17], [21, 21]]]",
+    "reasoning": "Each token is routed to its top expert and processed using a weight matrix of ones. The result matches the input tokens due to identity transformation and weight 1."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nnp.random.seed(42)\nd_model = 2\nn_experts = 4\nl_seq = 3\nn_batch = 2\ntop_k = 2\nx = np.random.rand(n_batch, l_seq, d_model)\nWe = np.random.rand(n_experts, d_model, d_model)\nWg = np.random.rand(d_model, n_experts)\noutput = moe(x, We, Wg, n_experts, top_k)\nprint(np.round(output, 4))",
+      "expected_output": "[[[0.5148 0.4329]\n  [0.5554 0.5447]\n  [0.1285 0.102 ]]\n\n [[0.339  0.3046]\n  [0.5391 0.417 ]\n  [0.3597 0.3262]]]"
+    },
+    {
+      "test": "import numpy as np\nnp.random.seed(42)\nd_model = 2\nn_experts = 4\nl_seq = 3\nn_batch = 2\ntop_k = 2\nx = np.random.rand(n_batch, l_seq, d_model)\nWe = np.zeros((n_experts, d_model, d_model))\nWg = np.random.rand(d_model, n_experts)\noutput = moe(x, We, Wg, n_experts, top_k)\nprint(output)",
+      "expected_output": "[[[0. 0.]\n  [0. 0.]\n  [0. 0.]]\n\n [[0. 0.]\n  [0. 0.]\n  [0. 0.]]]"
+    }
+  ]
+}

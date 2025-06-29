@@ -1,0 +1,64 @@
+{
+  "id": "14",
+  "title": "Linear Regression Using Normal Equation",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "https://youtu.be/9hkQJxICZj8",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "Stoatscript"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium",
+  "description": "Write a Python function that performs linear regression using the normal equation. The function should take a matrix X (features) and a vector y (target) as input, and return the coefficients of the linear regression model. Round your answer to four decimal places, -0.0 is a valid result for rounding a very small number.",
+  "learn_section": "\n## Linear Regression Using the Normal Equation\n\nLinear regression aims to model the relationship between a scalar dependent variable \\( y \\) and one or more explanatory variables (or independent variables) \\( X \\). The normal equation provides an analytical solution to find the coefficients \\( \\theta \\) that minimize the cost function for linear regression.\n\nGiven a matrix \\( X \\) (with each row representing a training example and each column a feature) and a vector \\( y \\) (representing the target values), the normal equation is:\n$$\n\\theta = (X^TX)^{-1}X^Ty\n$$\n\n### Explanation of Terms\n1. \\( X^T \\) is the transpose of \\( X \\).\n2. \\( (X^TX)^{-1} \\) is the inverse of the matrix \\( X^TX \\).\n3. \\( y \\) is the vector of target values.\n\n### Key Points\n- **Feature Scaling**: This method does not require feature scaling.\n- **Learning Rate**: There is no need to choose a learning rate.\n- **Computational Cost**: Computing the inverse of \\( X^TX \\) can be computationally expensive if the number of features is very large.\n\n### Practical Implementation\nA practical implementation involves augmenting \\( X \\) with a column of ones to account for the intercept term and then applying the normal equation directly to compute \\( \\theta \\).",
+  "starter_code": "import numpy as np\ndef linear_regression_normal_equation(X: list[list[float]], y: list[float]) -> list[float]:\n\t# Your code here, make sure to round\n\treturn theta",
+  "solution": "\nimport numpy as np\ndef linear_regression_normal_equation(X: list[list[float]], y: list[float]) -> list[float]:\n    X = np.array(X)\n    y = np.array(y).reshape(-1, 1)\n    X_transpose = X.T\n    theta = np.linalg.inv(X_transpose.dot(X)).dot(X_transpose).dot(y)\n    theta = np.round(theta, 4).flatten().tolist()\n    return theta",
+  "example": {
+    "input": "X = [[1, 1], [1, 2], [1, 3]], y = [1, 2, 3]",
+    "output": "[0.0, 1.0]",
+    "reasoning": "The linear model is y = 0.0 + 1.0*x, perfectly fitting the input data."
+  },
+  "test_cases": [
+    {
+      "test": "print(linear_regression_normal_equation([[1, 1], [1, 2], [1, 3]], [1, 2, 3]))",
+      "expected_output": "[-0.0, 1.0]"
+    },
+    {
+      "test": "print(linear_regression_normal_equation([[1, 3, 4], [1, 2, 5], [1, 3, 2]], [1, 2, 1]))",
+      "expected_output": "[4.0, -1.0, -0.0]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef linear_regression_normal_equation_tg(X, y) -> Tensor:\n    \"\"\"\n    Solve linear regression via the normal equation using tinygrad.\n    X: list, NumPy array, or Tensor of shape (m,n); y: shape (m,) or (m,1).\n    Returns a 1-D Tensor of length n, rounded to 4 decimals.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "import numpy as np\nfrom tinygrad.tensor import Tensor\n\ndef linear_regression_normal_equation_tg(X, y) -> Tensor:\n    \"\"\"\n    Solve linear regression via the normal equation using tinygrad.\n    X: list, NumPy array, or Tensor of shape (m,n); y: shape (m,) or (m,1).\n    Returns a 1-D Tensor of length n, rounded to 4 decimals.\n    \"\"\"\n    X_np = np.array(X, dtype=float)\n    y_np = np.array(y, dtype=float).reshape(-1,1)\n    theta = np.linalg.inv(X_np.T.dot(X_np)).dot(X_np.T).dot(y_np)\n    theta = np.round(theta.flatten(), 4)\n    return Tensor(theta)",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = linear_regression_normal_equation_tg(\n    [[1.0,0.0],[0.0,1.0]],\n    [5.0,3.0]\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[5.0, 3.0]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = linear_regression_normal_equation_tg(\n    [[1.0,1.0],[1.0,2.0],[1.0,3.0]],\n    [1.0,2.0,3.0]\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[0.0, 1.0]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef linear_regression_normal_equation(X, y) -> torch.Tensor:\n    \"\"\"\n    Solve linear regression via the normal equation using PyTorch.\n    X: Tensor or convertible of shape (m,n); y: shape (m,) or (m,1).\n    Returns a 1-D tensor of length n, rounded to 4 decimals.\n    \"\"\"\n    X_t = torch.as_tensor(X, dtype=torch.float)\n    y_t = torch.as_tensor(y, dtype=torch.float).reshape(-1,1)\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef linear_regression_normal_equation(X, y) -> torch.Tensor:\n    \"\"\"\n    Solve linear regression via the normal equation using PyTorch.\n    X: Tensor or convertible of shape (m,n); y: shape (m,) or (m,1).\n    Returns a 1-D tensor of length n, rounded to 4 decimals.\n    \"\"\"\n    X_t = torch.as_tensor(X, dtype=torch.float)\n    y_t = torch.as_tensor(y, dtype=torch.float).reshape(-1,1)\n    # normal equation: theta = (XᵀX)⁻¹ Xᵀ y\n    XtX = X_t.transpose(0,1) @ X_t\n    theta = torch.linalg.inv(XtX) @ (X_t.transpose(0,1) @ y_t)\n    theta = theta.flatten()\n    return torch.round(theta * 10000) / 10000",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nX = torch.eye(2)\ny = torch.tensor([5.0, 3.0])\nres = linear_regression_normal_equation(X, y)\nprint(res.detach().numpy().tolist())",
+      "expected_output": "[5.0, 3.0]"
+    },
+    {
+      "test": "import torch\nX = torch.tensor([[1.0,1.0],[1.0,2.0],[1.0,3.0]])\ny = torch.tensor([1.0,2.0,3.0])\nres = linear_regression_normal_equation(X, y)\nprint(res.detach().numpy().tolist())",
+      "expected_output": "[0.0, 1.0]"
+    }
+  ]
+}

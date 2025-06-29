@@ -1,0 +1,40 @@
+{
+  "id": "80",
+  "title": "Normal Distribution PDF Calculator",
+  "difficulty": "medium",
+  "category": "Probability",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/BhardwajArjit",
+      "name": "Arjit Bhardwaj"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Write a Python function to calculate the probability density function (PDF) of the normal distribution for a given value, mean, and standard deviation. The function should use the mathematical formula of the normal distribution to return the PDF value rounded to 5 decimal places.",
+  "learn_section": "## Understanding Normal Distribution\n\nThe Normal Distribution, also known as the Gaussian Distribution, is a continuous probability distribution that is symmetrical and bell-shaped, representing the distribution of data around the mean.\n\n### Key Characteristics\n\n- **Symmetry**: The distribution is symmetric around the mean, which means the left and right halves of the graph are mirror images.\n- **Mean, Median, and Mode**: In a perfectly normal distribution, the mean, median, and mode are all equal.\n- **Shape**: The bell-shaped curve is defined by its mean ($\\mu$) and standard deviation ($\\sigma$).\n- **Empirical Rule**: Approximately:\n  - $68\\%$ of data falls within 1 standard deviation ($\\mu \\pm \\sigma$).\n  - $95\\%$ of data falls within 2 standard deviations ($\\mu \\pm 2\\sigma$).\n  - $99.7\\%$ of data falls within 3 standard deviations ($\\mu \\pm 3\\sigma$).\n\n### Mathematical Formula\n\nThe probability density function (PDF) of a normal distribution is given by:\n\n$$\nf(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\n$$\n\n- **$x$**: Random variable\n- **$\\mu$**: Mean of the distribution\n- **$\\sigma$**: Standard deviation of the distribution\n\n### Implementation Steps\n\n1. **Calculate the mean ($\\mu$) and standard deviation ($\\sigma$):**\n   - $\\mu = \\frac{\\sum x_i}{N}$\n   - $\\sigma = \\sqrt{\\frac{\\sum (x_i - \\mu)^2}{N}}$\n\n2. **Use the normal distribution formula to calculate the probability density for each value:**\n   - $\\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$\n\n3. **Visualize the curve**:\n   - Plot the calculated PDF values for a range of $x$ to visualize the bell-shaped curve.\n\n### Example Calculation\n\nGiven:\n\n- Data: [10, 12, 14, 16, 18, 20]\n\n1. **Mean ($\\mu$):**\n   $$\n   \\mu = \\frac{10 + 12 + 14 + 16 + 18 + 20}{6} = 15\n   $$\n\n2. **Standard Deviation ($\\sigma$):**\n   $$\n   \\sigma = \\sqrt{\\frac{(10-15)^2 + \\dots + (20-15)^2}{6}} = \\sqrt{\\frac{25}{6}} \\approx 2.04\n   $$\n\n3. **PDF for $x = 16$:**\n   $$\n   f(16) = \\frac{1}{\\sqrt{2\\pi(2.04)^2}} e^{-\\frac{(16-15)^2}{2(2.04)^2}} \\approx 0.176\n   $$\n\n### Applications\n\nThe Normal Distribution is widely used in:\n\n- Data Analysis\n- Statistical Inference\n- Machine Learning Algorithms\n- Quality Control\n- Risk Management\n\nThis distribution is crucial in fields like economics, biology, psychology, and engineering to model natural phenomena and make predictions.",
+  "starter_code": "import math\n\ndef normal_pdf(x, mean, std_dev):\n\t\"\"\"\n\tCalculate the probability density function (PDF) of the normal distribution.\n\t:param x: The value at which the PDF is evaluated.\n\t:param mean: The mean (μ) of the distribution.\n\t:param std_dev: The standard deviation (σ) of the distribution.\n\t\"\"\"\n\t# Your code here\n\tpass\n\treturn round(val,5)",
+  "solution": "import math\n\ndef normal_pdf(x, mean, std_dev):\n    \"\"\"\n    Calculate the probability density function (PDF) of the normal distribution.\n    :param x: The value at which the PDF is evaluated.\n    :param mean: The mean (μ) of the distribution.\n    :param std_dev: The standard deviation (σ) of the distribution.\n    :return: The PDF value for the given x.\n    \"\"\"\n    coefficient = 1 / (math.sqrt(2 * math.pi) * std_dev)\n    exponent = math.exp(-((x - mean) ** 2) / (2 * std_dev ** 2))\n    return round(coefficient * exponent, 5)",
+  "example": {
+    "input": "x = 16, mean = 15, std_dev = 2.04",
+    "output": "0.17342",
+    "reasoning": "The function computes the PDF using x = 16, mean = 15, and std_dev = 2.04."
+  },
+  "test_cases": [
+    {
+      "test": "print(normal_pdf(0, 0, 1))",
+      "expected_output": "0.39894"
+    },
+    {
+      "test": "print(normal_pdf(16, 15, 2.04))",
+      "expected_output": "0.17342"
+    },
+    {
+      "test": "print(normal_pdf(1, 0, 0.5))",
+      "expected_output": "0.10798"
+    }
+  ]
+}

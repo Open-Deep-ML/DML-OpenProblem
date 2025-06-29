@@ -1,0 +1,48 @@
+{
+  "id": "81",
+  "title": "Poisson Distribution Probability Calculator",
+  "difficulty": "easy",
+  "category": "Probability",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/BhardwajArjit",
+      "name": "Arjit Bhardwaj"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Write a Python function to calculate the probability of observing exactly k events in a fixed interval using the Poisson distribution formula. The function should take k (number of events) and lam (mean rate of occurrences) as inputs and return the probability rounded to 5 decimal places.",
+  "learn_section": "## Understanding Poisson Distribution\n\nThe Poisson distribution is a discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time or space, provided these events occur with a known constant mean rate and independently of the time since the last event.\n\n### Mathematical Definition\n\nThe probability of observing \\( k \\) events in a given interval is defined as:\n\n$$\nP(k; \\lambda) = \\frac{\\lambda^k e^{-\\lambda}}{k!}\n$$\n\n- **\\( k \\)**: Number of events (non-negative integer)\n- **\\( \\lambda \\)**: The mean number of events in the given interval (rate parameter)\n- **\\( e \\)**: Euler's number, approximately 2.718\n\n### Key Properties\n\n- **Mean**: \\( \\lambda \\)\n- **Variance**: \\( \\lambda \\)\n- The Poisson distribution is used for modeling rare or random events.\n\n### Example Calculation\n\nSuppose the mean number of calls received in an hour (\\( \\lambda \\)) is 5. Calculate the probability of receiving exactly 3 calls in an hour:\n\n1. **Substitute into the formula**:\n   $$\n   P(3; 5) = \\frac{5^3 e^{-5}}{3!}\n   $$\n\n2. **Calculate step-by-step**:\n   $$\n   P(3; 5) = \\frac{125 \\cdot e^{-5}}{6} \\approx 0.14037\n   $$\n\n### Applications\n\nThe Poisson distribution is widely used in:\n\n- Modeling the number of arrivals at a queue (e.g., calls at a call center)\n- Counting occurrences over time (e.g., number of emails received per hour)\n- Biology (e.g., distribution of mutations in a DNA strand)\n- Traffic flow analysis (e.g., number of cars passing through an intersection)\n\nThis distribution is essential for understanding and predicting rare events in real-world scenarios.",
+  "starter_code": "import math\n\ndef poisson_probability(k, lam):\n\t\"\"\"\n\tCalculate the probability of observing exactly k events in a fixed interval,\n\tgiven the mean rate of events lam, using the Poisson distribution formula.\n\t:param k: Number of events (non-negative integer)\n\t:param lam: The average rate (mean) of occurrences in a fixed interval\n\t\"\"\"\n\t# Your code here\n\tpass\n\treturn round(val,5)",
+  "solution": "import math\n\ndef poisson_probability(k, lam):\n    \"\"\"\n    Calculate the probability of observing exactly k events in a fixed interval,\n    given the mean rate of events lam, using the Poisson distribution formula.\n    :param k: Number of events (non-negative integer)\n    :param lam: The average rate (mean) of occurrences in a fixed interval\n    :return: Probability of k events occurring\n    \"\"\"\n    # Calculate the Poisson probability using the formula\n    probability = (lam ** k) * math.exp(-lam) / math.factorial(k)\n    # Return the probability, rounded to five decimal places\n    return round(probability, 5)",
+  "example": {
+    "input": "k = 3, lam = 5",
+    "output": "0.14037",
+    "reasoning": "The function calculates the probability for a given number of events occurring in a fixed interval, based on the mean rate of occurrences."
+  },
+  "test_cases": [
+    {
+      "test": "print(poisson_probability(3, 5))",
+      "expected_output": "0.14037"
+    },
+    {
+      "test": "print(poisson_probability(0, 5))",
+      "expected_output": "0.00674"
+    },
+    {
+      "test": "print(poisson_probability(2, 10))",
+      "expected_output": "0.00227"
+    },
+    {
+      "test": "print(poisson_probability(1, 1))",
+      "expected_output": "0.36788"
+    },
+    {
+      "test": "print(poisson_probability(20, 20))",
+      "expected_output": "0.08884"
+    }
+  ]
+}

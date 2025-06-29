@@ -1,0 +1,40 @@
+{
+  "id": "112",
+  "title": "Min-Max Normalization of Feature Values",
+  "difficulty": "easy",
+  "category": "Data Preprocessing",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Noth2006",
+      "name": "Noth2006"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement a function that performs Min-Max Normalization on a list of integers, scaling all values to the range [0, 1]. Min-Max normalization helps ensure that all features contribute equally to a model by scaling them to a common range.",
+  "learn_section": "## Understanding Min-Max Normalization\n\nMin-Max Normalization is a technique used to rescale numerical data to the range $[0, 1]$.\n\nThe formula used is:\n\n$$\nX' = \\frac{X - X_{\\min}}{X_{\\max} - X_{\\min}}\n$$\n\n### Why Normalize?\n\n- Ensures all features have equal importance regardless of their original scale.\n- Commonly used in preprocessing for machine learning algorithms such as k-nearest neighbors, neural networks, and gradient descent-based models.\n\n### Special Case\n\nIf all the elements in the input are identical, then $X_{\\max} = X_{\\min}$. In that case, return an array of zeros.\n\n### Example\n\nGiven the input list `[1, 2, 3, 4, 5]`:\n\n- Minimum: $1$\n- Maximum: $5$\n- The normalized values are:\n\n$$\n\\begin{aligned}\n&\\frac{1 - 1}{4} = 0.0 \\\\\n&\\frac{2 - 1}{4} = 0.25 \\\\\n&\\frac{3 - 1}{4} = 0.5 \\\\\n&\\frac{4 - 1}{4} = 0.75 \\\\\n&\\frac{5 - 1}{4} = 1.0\n\\end{aligned}\n$$\n\nThe result is `[0.0, 0.25, 0.5, 0.75, 1.0]`.\n\nRemember to round the result to **4 decimal places**.",
+  "starter_code": "def min_max(x: list[int]) -> list[float]:\n\t# Your code here\n\tpass",
+  "solution": "def min_max(x: list[int]) -> list[float]:\n    largest = max(x)\n    smallest = min(x)\n    if largest == smallest:\n        return [0.0] * len(x)\n    for i in range(len(x)):\n        x[i] = round((x[i] - smallest) / (largest - smallest), 4)\n    return x",
+  "example": {
+    "input": "min_max([1, 2, 3, 4, 5])",
+    "output": "[0.0, 0.25, 0.5, 0.75, 1.0]",
+    "reasoning": "The minimum value is 1 and the maximum is 5. Each value is scaled using the formula (x - min) / (max - min)."
+  },
+  "test_cases": [
+    {
+      "test": "print(min_max([1, 2, 3, 4, 5]))",
+      "expected_output": "[0.0, 0.25, 0.5, 0.75, 1.0]"
+    },
+    {
+      "test": "print([round(x, 4) for x in min_max([30, 45, 56, 70, 88])])",
+      "expected_output": "[0.0, 0.2586, 0.4483, 0.6897, 1.0]"
+    },
+    {
+      "test": "print([round(x, 4) for x in min_max([5, 5, 5, 5])])",
+      "expected_output": "[0.0, 0.0, 0.0, 0.0]"
+    }
+  ]
+}

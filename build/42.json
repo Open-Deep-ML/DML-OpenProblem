@@ -1,0 +1,44 @@
+{
+  "id": "42",
+  "title": "Implement ReLU Activation Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/1hq_bTksuOQ",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/doshi-kevin",
+      "name": "Kevin Doshi"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Write a Python function `relu` that implements the Rectified Linear Unit (ReLU) activation function. The function should take a single float as input and return the value after applying the ReLU function. The ReLU function returns the input if it's greater than 0, otherwise, it returns 0.",
+  "learn_section": "\n## Understanding the ReLU Activation Function\n\nThe ReLU (Rectified Linear Unit) activation function is widely used in neural networks, particularly in hidden layers of deep learning models. It maps any real-valued number to the non-negative range $[0, \\infty)$, which helps introduce non-linearity into the model while maintaining computational efficiency.\n\n### Mathematical Definition\nThe ReLU function is mathematically defined as:\n$$\nf(z) = \\max(0, z)\n$$\nwhere $z$ is the input to the function.\n\n### Characteristics\n- **Output Range**: The output is always in the range $[0, \\infty)$. Values below 0 are mapped to 0, while positive values are retained.\n- **Shape**: The function has an \"L\" shaped curve with a horizontal axis at $y = 0$ and a linear increase for positive $z$.\n- **Gradient**: The gradient is 1 for positive values of $z$ and 0 for non-positive values. This means the function is linear for positive inputs and flat (zero gradient) for negative inputs.\n\nThis function is particularly useful in deep learning models as it introduces non-linearity while being computationally efficient, helping to capture complex patterns in the data.",
+  "starter_code": "def relu(z: float) -> float:\n\t# Your code here\n\tpass",
+  "solution": "def relu(z: float) -> float:\n    return max(0, z)",
+  "example": {
+    "input": "print(relu(0)) \nprint(relu(1)) \nprint(relu(-1))",
+    "output": "0\n1\n0",
+    "reasoning": "The ReLU function is applied to the input values 0, 1, and -1. The output is 0 for negative values and the input value for non-negative values."
+  },
+  "test_cases": [
+    {
+      "test": "print(relu(0))",
+      "expected_output": "0"
+    },
+    {
+      "test": "print(relu(1))",
+      "expected_output": "1"
+    },
+    {
+      "test": "print(relu(-1))",
+      "expected_output": "0"
+    }
+  ]
+}

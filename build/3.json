@@ -1,0 +1,73 @@
+{
+  "id": "3",
+  "title": "Reshape Matrix",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/19FD49nPH6w?si=VrJh7RV27naO2V3o",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/mmujtabah",
+      "name": "mmujtabah"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": "",
+  "description": "Write a Python function that reshapes a given matrix into a specified shape. if it cant be reshaped return back an empty list `[ ]`",
+  "learn_section": "\n## Reshaping a Matrix\n\nMatrix reshaping involves changing the shape of a matrix without altering its data. This is essential in many machine learning tasks where the input data needs to be formatted in a specific way.\n\nFor example, consider a matrix $M$:\n\n**Original Matrix $M$:**\n$$\nM = \\begin{pmatrix} \n1 & 2 & 3 & 4 \\\\ \n5 & 6 & 7 & 8 \n\\end{pmatrix}\n$$\n\n**Reshaped Matrix $M'$ with shape (4, 2):**\n$$\nM' = \\begin{pmatrix} \n1 & 2 \\\\ \n3 & 4 \\\\ \n5 & 6 \\\\ \n7 & 8 \n\\end{pmatrix}\n$$\n\n### Important Note:\nEnsure the total number of elements remains constant during reshaping.",
+  "starter_code": "import numpy as np\n\ndef reshape_matrix(a: list[list[int|float]], new_shape: tuple[int, int]) -> list[list[int|float]]:\n\t#Write your code here and return a python list after reshaping by using numpy's tolist() method\n\treturn reshaped_matrix",
+  "solution": "import numpy as np\n\ndef reshape_matrix(a: list[list[int|float]], new_shape: tuple[int|float]) -> list[list[int|float]]:\n    # Not compatible case\n    if len(a)*len(a[0]) != new_shape[0]*new_shape[1]:\n        return []\n    return np.array(a).reshape(new_shape).tolist()",
+  "example": {
+    "input": "a = [[1,2,3,4],[5,6,7,8]], new_shape = (4, 2)",
+    "output": "[[1, 2], [3, 4], [5, 6], [7, 8]]",
+    "reasoning": "The given matrix is reshaped from 2x4 to 4x2."
+  },
+  "test_cases": [
+    {
+      "test": "print(reshape_matrix([[1,2,3,4],[5,6,7,8]], (4, 2)))",
+      "expected_output": "[[1, 2], [3, 4], [5, 6], [7, 8]]"
+    },
+    {
+      "test": "print(reshape_matrix([[1, 2, 3, 4], [5, 6, 7, 8]], (1, 4)))",
+      "expected_output": "[]"
+    },
+    {
+      "test": "print(reshape_matrix([[1,2,3],[4,5,6]], (3, 2)))",
+      "expected_output": "[[1, 2], [3, 4], [5, 6]]"
+    },
+    {
+      "test": "print(reshape_matrix([[1,2,3,4],[5,6,7,8]], (2, 4)))",
+      "expected_output": "[[1, 2, 3, 4], [5, 6, 7, 8]]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef reshape_matrix_tg(a, new_shape) -> Tensor:\n    \"\"\"\n    Reshape a 2D matrix `a` to shape `new_shape` using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a Tensor of shape `new_shape`, or an empty Tensor on mismatch.\n    \"\"\"\n    # Dimension check\n    if len(a) * len(a[0]) != new_shape[0] * new_shape[1]:\n        return Tensor([])\n    # Convert to Tensor and reshape\n    a_t = Tensor(a)\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef reshape_matrix_tg(a, new_shape) -> Tensor:\n    \"\"\"\n    Reshape a 2D matrix `a` to shape `new_shape` using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a Tensor of shape `new_shape`, or an empty Tensor on mismatch.\n    \"\"\"\n    # Dimension check\n    if len(a) * len(a[0]) != new_shape[0] * new_shape[1]:\n        return Tensor([])\n    a_t = Tensor(a)\n    return a_t.reshape(new_shape)",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    [[1,2,3],[4,5,6]],\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[[1, 2], [3, 4], [5, 6]]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    [[1,2],[3,4]],\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef reshape_matrix(a, new_shape) -> torch.Tensor:\n    \"\"\"\n    Reshape a 2D matrix `a` to shape `new_shape` using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a tensor of shape `new_shape`, or an empty tensor on mismatch.\n    \"\"\"\n    # Dimension check\n    if len(a) * len(a[0]) != new_shape[0] * new_shape[1]:\n        return torch.tensor([])\n    # Convert to tensor and reshape\n    a_t = torch.as_tensor(a, dtype=torch.float)\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef reshape_matrix(a, new_shape) -> torch.Tensor:\n    \"\"\"\n    Reshape a 2D matrix `a` to shape `new_shape` using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a tensor of shape `new_shape`, or an empty tensor on mismatch.\n    \"\"\"\n    # Dimension check\n    if len(a) * len(a[0]) != new_shape[0] * new_shape[1]:\n        return torch.tensor([])\n    a_t = torch.as_tensor(a, dtype=torch.float)\n    return a_t.reshape(new_shape)",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nres = reshape_matrix(\n    torch.tensor([[1,2,3],[4,5,6]], dtype=torch.float),\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]]"
+    },
+    {
+      "test": "import torch\nres = reshape_matrix(\n    torch.tensor([[1,2],[3,4]], dtype=torch.float),\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[]"
+    }
+  ]
+}

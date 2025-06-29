@@ -1,0 +1,40 @@
+{
+  "id": "90",
+  "title": "BM25 Ranking ",
+  "difficulty": "medium",
+  "category": "NLP",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/saitiger",
+      "name": "Sai Tiger Raina"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement the BM25 ranking function to calculate document scores for a query in an information retrieval context. BM25 is an advanced variation of TF-IDF that incorporates term frequency saturation, document length normalization, and a configurable penalty for document length effects.",
+  "learn_section": "## **BM25**\n\nBM25 (Best Match 25) is used in information retrieval for search relevance. Similar to TF-IDF, it reflects the importance of a word in a document within a collection or corpus. However, BM25 improves upon TF-IDF by addressing key limitations.\n\n### Limitations of TF-IDF Addressed by BM25\n\n1. **Saturation**: In TF-IDF, having a term multiple times in a document skews the term frequency, making the document overly relevant. BM25 mitigates this by using:  \n   $$ \\text{TF-adjusted} = \\frac{\\text{TF}}{\\text{TF} + k_1} $$  \n\n2. **Document Length Normalization**: BM25 accounts for document length by normalizing term frequencies using:  \n   $$ \\text{Normalized Length} = 1 - b + b \\times \\frac{\\text{Doc Len}}{\\text{Average Doc Len}} $$  \n\n3. **Amplifying Parameter**: The $b$ parameter controls the influence of document length normalization. Higher $b$ values amplify the effect.\n\n### Final BM25 Formula\n\nThe BM25 score for a term is given by:  \n$$ \\text{BM25} = \\text{IDF} \\times \\frac{\\text{TF} \\times (k_1 + 1)} {\\text{TF} + k_1 \\times (1 - b + b \\times \\frac{\\text{dl}}{\\text{adl}})} $$  \n\nWhere:  \n- $ \\text{TF} $: Term frequency in the document.  \n- $ \\text{IDF} $: Inverse document frequency, calculated as $ \\log(\\frac{N + 1}{\\text{df} + 1}) $.  \n- $ N $: Total number of documents.  \n- $ \\text{df} $: Number of documents containing the term.  \n- $ \\text{dl} $: Document length.  \n- $ \\text{adl} $: Average document length.  \n- $ k_1 $: Saturation parameter.  \n- $ b $: Normalization parameter.\n\n### Implementation Steps\n\n1. Compute document length ($ dl $) and average document length ($ adl $).  \n2. Calculate term frequencies ($ TF $) using the BM25 formula.  \n3. Compute inverse document frequencies ($ IDF $) for each term.  \n4. Calculate BM25 scores for each document.\n\n### Applications\n\nBM25 is widely used in:  \n- Search Engines  \n- Recommendation Systems  \n- Natural Language Processing (NLP)  \n\nUnderstanding BM25 enables the creation of robust systems for search and ranking tasks.",
+  "starter_code": "import numpy as np\nfrom collections import Counter\n\ndef calculate_bm25_scores(corpus, query, k1=1.5, b=0.75):\n\t# Your code here\n\tpass\n\treturn np.round(scores,3)",
+  "solution": "import numpy as np\nfrom collections import Counter\n\ndef calculate_bm25_scores(corpus, query, k1=1.5, b=0.75):\n    if not corpus or not query:\n        raise ValueError(\"Corpus and query cannot be empty\")\n\n    doc_lengths = [len(doc) for doc in corpus]\n    avg_doc_length = np.mean(doc_lengths)\n    doc_term_counts = [Counter(doc) for doc in corpus]\n    doc_freqs = Counter()\n    for doc in corpus:\n        doc_freqs.update(set(doc))\n\n    scores = np.zeros(len(corpus))\n    N = len(corpus)\n\n    for term in query:\n        df = doc_freqs.get(term, 0) + 1\n        idf = np.log((N + 1) / df)\n\n        for idx, term_counts in enumerate(doc_term_counts):\n            if term not in term_counts:\n                continue\n\n            tf = term_counts[term]\n            doc_len_norm = 1 - b + b * (doc_lengths[idx] / avg_doc_length)\n            term_score = (tf * (k1 + 1)) / (tf + k1 * doc_len_norm)\n            scores[idx] += idf * term_score\n\n    return np.round(scores, 3)",
+  "example": {
+    "input": "corpus = [['the', 'cat', 'sat'], ['the', 'dog', 'ran'], ['the', 'bird', 'flew']], query = ['the', 'cat']",
+    "output": "[0.693, 0., 0. ]",
+    "reasoning": "BM25 calculates scores for each document in the corpus by evaluating how well the query terms match each document while considering term frequency saturation and document length normalization."
+  },
+  "test_cases": [
+    {
+      "test": "print(calculate_bm25_scores([['the', 'cat', 'sat'], ['the', 'dog', 'ran'], ['the', 'bird', 'flew']], ['the', 'cat']))",
+      "expected_output": "[0.693, 0., 0. ]"
+    },
+    {
+      "test": "print(calculate_bm25_scores([['the'] * 10, ['the']], ['the']))",
+      "expected_output": "[0,0]"
+    },
+    {
+      "test": "print(calculate_bm25_scores([['term'] * 10, ['the'] * 2], ['term'], k1=1.0))",
+      "expected_output": "[.705, 0]"
+    }
+  ]
+}

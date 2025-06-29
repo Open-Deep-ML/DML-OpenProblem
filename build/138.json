@@ -1,0 +1,40 @@
+{
+  "id": "138",
+  "title": "Find the Best Gini-Based Split for a Binary Decision Tree",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/hardik1408",
+      "name": "Hardik Jindal"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement a function that scans every feature and threshold in a small data set, then returns the split that minimises the weighted Gini impurity. Your implementation should support binary class labels (0 or 1) and handle ties gracefully.  \n\nYou will write **one** function:\n\n```python\nfind_best_split(X: np.ndarray, y: np.ndarray) -> tuple[int, float]\n```\n\n* **`X`** is an $n\\times d$ NumPy array of numeric features.\n* **`y`** is a length-$n$ NumPy array of 0/1 labels.\n* The function returns `(best_feature_index, best_threshold)` for the split with the **lowest** weighted Gini impurity.\n* If several splits share the same impurity, return the first that you encounter while scanning features and thresholds.",
+  "learn_section": "# Learn: Gini Impurity and Best Split in Decision Trees\n\n## Overview\n\nA core concept in Decision Trees (and by extension, Random Forests) is how the model chooses where to split the data at each node. One popular criterion used for splitting is **Gini Impurity**.\n\nIn this task, you will implement:\n- Gini impurity computation\n- Finding the best feature and threshold to split on based on impurity reduction\n\nThis helps build the foundation for how trees grow in a Random Forest.\n\n---\n\n## Gini Impurity\n\nFor a set of samples with class labels \\( y \\), the Gini Impurity is defined as:\n\n$$\nG(y) = 1 - \\sum_{i=1}^{k} p_i^2\n$$\n\nWhere \\( p_i \\) is the proportion of samples belonging to class \\( i \\).\n\nA pure node (all one class) has \\( G = 0 \\), and higher values indicate more class diversity.\n\n---\n\n## Gini Gain for a Split\n\nGiven a feature and a threshold to split the dataset into left and right subsets:\n\n$$\nG_{\\text{split}} = \\frac{n_{\\text{left}}}{n} G(y_{\\text{left}}) + \\frac{n_{\\text{right}}}{n} G(y_{\\text{right}})\n$$\n\nWe choose the split that **minimizes** $( G_{\\text{split}} )$.\n\n---\n\n## Problem Statement\n\nYou are given a dataset $( X \\in \\mathbb{R}^{n \\times d} )$ and labels $( y \\in \\{0, 1\\}^n $). Implement the following functions:\n\n### Functions to Implement\n\n```python\ndef find_best_split(X: np.ndarray, y: np.ndarray) -> Tuple[int, float]:\n    ...\n```",
+  "starter_code": "import numpy as np\nfrom typing import Tuple\n\ndef find_best_split(X: np.ndarray, y: np.ndarray) -> Tuple[int, float]:\n    \"\"\"Return the (feature_index, threshold) that minimises weighted Gini impurity.\"\"\"\n    # ✏️ TODO: implement\n    pass",
+  "solution": "import numpy as np\nfrom typing import Tuple\n\ndef find_best_split(X: np.ndarray, y: np.ndarray) -> Tuple[int, float]:\n    def gini(y_subset: np.ndarray) -> float:\n        if y_subset.size == 0:\n            return 0.0\n        p = y_subset.mean()\n        return 1.0 - (p**2 + (1 - p)**2)\n\n    n_samples, n_features = X.shape\n    best_feature, best_threshold = -1, float('inf')\n    best_gini = float('inf')\n\n    for f in range(n_features):\n        for threshold in np.unique(X[:, f]):\n            left = y[X[:, f] <= threshold]\n            right = y[X[:, f] > threshold]\n            g_left, g_right = gini(left), gini(right)\n            weighted = (len(left) * g_left + len(right) * g_right) / n_samples\n            if weighted < best_gini:\n                best_gini, best_feature, best_threshold = weighted, f, threshold\n\n    return best_feature, best_threshold",
+  "example": {
+    "input": "import numpy as np\nX = np.array([[2.5],[3.5],[1.0],[4.0]])\ny = np.array([0,1,0,1])\nprint(find_best_split(X, y))",
+    "output": "(0, 2.5)",
+    "reasoning": "Splitting on feature 0 at threshold 2.5 yields two perfectly pure leaves, producing the minimum possible weighted Gini impurity."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nX1 = np.array([[2.5], [3.5], [1.0], [4.0]])\ny1 = np.array([0, 1, 0, 1])\nf1, t1 = find_best_split(X1, y1)\nprint(f1, round(t1, 4))",
+      "expected_output": "0, 2.5"
+    },
+    {
+      "test": "import numpy as np\nX2 = np.array([[1], [2], [3]])\ny2 = np.array([1, 1, 1])\nf2, t2 = find_best_split(X2, y2)\nprint(f2, t2)",
+      "expected_output": "0, 1"
+    },
+    {
+      "test": "import numpy as np\nX5 = np.array([[0, 1], [0, 2], [0, 3], [0, 4]])\ny5 = np.array([0, 0, 1, 1])\nf5, t5 = find_best_split(X5, y5)\nprint(f5, t5)",
+      "expected_output": "1, 2"
+    }
+  ]
+}

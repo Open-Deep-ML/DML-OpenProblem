@@ -1,0 +1,44 @@
+{
+  "id": "110",
+  "title": "Evaluate Translation Quality with METEOR Score",
+  "difficulty": "medium",
+  "category": "NLP",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/saitiger",
+      "name": "saitiger"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Develop a function to compute the METEOR score for evaluating machine translation quality. Given a reference translation and a candidate translation, calculate the score based on unigram matches, precision, recall, F-mean, and a penalty for word order fragmentation.",
+  "learn_section": "METEOR(Metric for Evaluation of Translation with Explicit ORdering) is a metric generally used for \nmachine translation and evaluating the text output of generative AI models. METEOR build was introduced to address \nthe limitations in earlier metrics like BLEU.\n\n## Key Characteristics\n- Considers semantic similarity beyond exact word matching\n- Accounts for word order and translation variations\n- Provides more human-aligned translation assessment\n\n# Implementation \n1. **Tokenization**\n\n2. **Frequency of matching words** : Matching needs to be exact\n\n3. **Calculate Precision, Recall and F-mean**\n```\n   F_mean = (Precision * Recall) / \n   (alpha * Precision + (1 - alpha) * Recall)\n```\n   - alpha typically set to 0.9\n   - Balances precision and recall\n\n4. **Fragmentation Penalty**\n   ```\n   Chunks = Count of contiguous matched word sequences\n   Penalty = gamma * (Chunks / Matches)^β\n   ```\n   - beta controls penalty weight (typically 3)\n   - gamma limits maximum penalty (typically 0.5)\n\n5. **Final METEOR Score**\n   ```\n   METEOR = F_mean * (1 - Penalty)\n   ```\n   - Ranges from 0 (no match) to 1 (perfect match)\n\n**__Note__** : The [paper](https://aclanthology.org/W05-0909/) that introduced the metric doesn't have the parameters (alpha,β, and gamma) as tunable parameters, but implementation in other libraries like NLTK offers this flexibility.\n\n# Example \n\n- Reference: \"The quick brown fox jumps over the lazy dog\"\n- Candidate: \"A quick brown fox jumps over a lazy dog\"\n\n### 1. Tokenization\n- Reference Tokens: ['the', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog']\n- Candidate Tokens: ['a', 'quick', 'brown', 'fox', 'jumps', 'over', 'a', 'lazy', 'dog']\n\n### 2. Unigram Matching\n- Matching tokens: ['quick', 'brown', 'fox', 'jumps', 'over', 'lazy', 'dog']\n- Matches: 7\n\n### 3. Unigram Precision and Recall Calculation\n- Precision = Matches / Candidate Length = 7 / 9 ~ 0.778\n\n- Recall = Matches / Reference Length = 7 / 9 ~ 0.778\n\n### 4. F-mean Calculation (alpha = 0.9)\n```\nF_mean = (Precision * Recall) / \n(alpha * Precision + (1 - alpha) * Recall)\n       = (0.778 * 0.778) / (0.9 * 0.778 + (1 - 0.9) * 0.778)\n       = 0.606 / (0.7 + 0.078)\n       = 0.606 / 0.778\n       ≈ 0.779\n```\n\n### 5. Chunk Calculation\n- Contiguous matched sequences:\n  1. ['quick', 'brown', 'fox']\n  2. ['jumps', 'over']\n  3. ['lazy', 'dog']\n- Number of Chunks: 3\n- Total Number of Unigram Matches: 7\n\n### 6. Penalty Calculation (betta = 3, gamma = 0.5)\n```\nPenalty = gamma * \n(Number of Chunks / Total Number of Unigram Matches)^betta\n        = 0.5 * (3 / 7)^3\n        = 0.5 * (0.429)^3\n        ≈ 0.039\n```\n\n### 7. Final METEOR Score\n```\nMETEOR = F_mean * (1 - Penalty)\n       = 0.779 * (1 - 0.039)\n       = 0.779 * 0.961\n       ≈ 0.749\n```",
+  "starter_code": "import numpy as np\nfrom collections import Counter\n\ndef meteor_score(reference, candidate, alpha=0.9, beta=3, gamma=0.5):\n\t# Your code here\n\tpass",
+  "solution": "\"import numpy as np\nfrom collections import Counter\n\ndef meteor_score(reference, candidate, alpha=0.9, beta=3, gamma=0.5):\n    if not reference or not candidate:\n        raise ValueError(\"Reference and candidate cannot be empty\")\n    \n    # Tokenize and count\n    ref_tokens = reference.lower().split()\n    cand_tokens = candidate.lower().split()\n\n    # Counter for unigram for reference and candidate \n    ref_counts = Counter(ref_tokens) \n    cand_counts = Counter(cand_tokens)\n    \n    # Calculate matches\n    num_matches = sum((ref_counts & cand_counts).values()) # Number of matching words in candidate and reference \n    ref_len = len(ref_tokens)\n    cand_len = len(cand_tokens)  \n\n    # Unigram Precision and Recall \n    precision = num_matches / cand_len if cand_len > 0 else 0 # Avoiding Division by zero\n    recall = num_matches / ref_len if ref_len > 0 else 0 # Avoiding Division by zero \n    \n    if num_matches == 0:\n        return 0.0\n    \n    fmean = (precision * recall) / (alpha * precision + (1 - alpha) * recall)\n\n    # Chunk calculation \n    matched_positions = []\n    ref_positions = {}  # Store positions of words in reference\n    used_positions = set()  # Track already used indices\n\n    # Populate reference positions for word alignment tracking\n    for i, word in enumerate(ref_tokens):\n        ref_positions.setdefault(word, []).append(i)\n\n    # Determine the sequence of matched positions in reference\n    for word in cand_tokens:\n        if word in ref_positions:\n            for pos in ref_positions[word]:\n                if pos not in used_positions:\n                    matched_positions.append(pos)\n                    used_positions.add(pos)\n                    break  # Ensure each match is used only once\n\n    # Count chunks by detecting breaks in position sequence\n    num_chunks = 1 if matched_positions else 0\n    for i in range(1, len(matched_positions)):\n        if matched_positions[i] != matched_positions[i - 1] + 1:\n            num_chunks += 1  # Break in sequence → new chunk\n\n    # Fragmentation penalty\n    penalty = gamma * ((num_chunks / num_matches) ** beta) if num_matches > 0 else 0\n    \n    # Final score\n    return round(fmean * (1 - penalty), 3) # Rounding to 3 Decimal places ",
+  "example": {
+    "input": "meteor_score('Rain falls gently from the sky', 'Gentle rain drops from the sky')",
+    "output": "0.625",
+    "reasoning": "The function identifies 4 unigram matches ('rain', 'gently'/'gentle', 'from', 'sky'), computes precision (4/6) and recall (4/5), calculates an F-mean, and then apply a small penalty for two chunks."
+  },
+  "test_cases": [
+    {
+      "test": "print(round(meteor_score('The dog barks at the moon', 'The dog barks at the moon'),3))",
+      "expected_output": "0.998"
+    },
+    {
+      "test": "print(round(meteor_score('Rain falls gently from the sky', 'Gentle rain drops from the sky'),3))",
+      "expected_output": "0.625"
+    },
+    {
+      "test": "print(round(meteor_score('The sun shines brightly', 'Clouds cover the sky'),3))",
+      "expected_output": "0.125"
+    },
+    {
+      "test": "print(round(meteor_score('Birds sing in the trees', 'Birds in the trees sing'),3))",
+      "expected_output": "0.892"
+    }
+  ]
+}

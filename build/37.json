@@ -1,0 +1,40 @@
+{
+  "id": "37",
+  "title": "Calculate Correlation Matrix",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/eriklindernoren/ML-From-Scratch",
+      "name": "Erik Linder-Norén"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Write a Python function to calculate the correlation matrix for a given dataset. The function should take in a 2D numpy array X and an optional 2D numpy array Y. If Y is not provided, the function should calculate the correlation matrix of X with itself. It should return the correlation matrix as a 2D numpy array.",
+  "learn_section": "\n## Understanding Correlation Matrix\n\nA correlation matrix is a table showing the correlation coefficients between variables. Each cell in the table shows the correlation between two variables, with values ranging from -1 to 1. These values indicate the strength and direction of the linear relationship between the variables.\n\n### Mathematical Definition\nThe correlation coefficient between two variables \\( X \\) and \\( Y \\) is given by:\n$$\n\\text{corr}(X, Y) = \\frac{\\text{cov}(X, Y)}{\\sigma_X \\sigma_Y}\n$$\n\n#### Where:\n- \\( \\text{cov}(X, Y) \\) is the covariance between \\( X \\) and \\( Y \\).\n- \\( \\sigma_X \\) and \\( \\sigma_Y \\) are the standard deviations of \\( X \\) and \\( Y \\), respectively.\n\n### Problem Overview\nIn this problem, you will write a function to calculate the correlation matrix for a given dataset. The function will take in a 2D numpy array \\( X \\) and an optional 2D numpy array \\( Y \\). If \\( Y \\) is not provided, the function will calculate the correlation matrix of \\( X \\) with itself.",
+  "starter_code": "import numpy as np\n\ndef calculate_correlation_matrix(X, Y=None):\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef calculate_correlation_matrix(X, Y=None):\n    # Helper function to calculate standard deviation\n    def calculate_std_dev(A):\n        return np.sqrt(np.mean((A - A.mean(0))**2, axis=0))\n    \n    if Y is None:\n        Y = X\n    n_samples = np.shape(X)[0]\n    # Calculate the covariance matrix\n    covariance = (1 / n_samples) * (X - X.mean(0)).T.dot(Y - Y.mean(0))\n    # Calculate the standard deviations\n    std_dev_X = np.expand_dims(calculate_std_dev(X), 1)\n    std_dev_y = np.expand_dims(calculate_std_dev(Y), 1)\n    # Calculate the correlation matrix\n    correlation_matrix = np.divide(covariance, std_dev_X.dot(std_dev_y.T))\n\n    return np.array(correlation_matrix, dtype=float)\n    ",
+  "example": {
+    "input": "X = np.array([[1, 2],\n                  [3, 4],\n                  [5, 6]])\n    output = calculate_correlation_matrix(X)\n    print(output)",
+    "output": "# [[1. 1.]\n    #  [1. 1.]]",
+    "reasoning": "The function calculates the correlation matrix for the dataset X. In this example, the correlation between the two features is 1, indicating a perfect linear relationship."
+  },
+  "test_cases": [
+    {
+      "test": "print(calculate_correlation_matrix(np.array([[1, 2], [3, 4], [5, 6]])))",
+      "expected_output": "[[1., 1.], [1., 1.]]"
+    },
+    {
+      "test": "print(calculate_correlation_matrix(np.array([[1, 2, 3], [7, 15, 6], [7, 8, 9]])))",
+      "expected_output": "[[1.,0.84298868, 0.8660254 ],[0.84298868, 1., 0.46108397],[0.8660254,  0.46108397, 1.]]"
+    },
+    {
+      "test": "print(calculate_correlation_matrix(np.array([[1, 0], [0, 1]]), np.array([[1, 2], [3, 4]])))",
+      "expected_output": "[[ -1.,  -1.], [ 1.,  1.]]"
+    }
+  ]
+}

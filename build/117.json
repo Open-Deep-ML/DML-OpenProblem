@@ -1,0 +1,44 @@
+{
+  "id": "117",
+  "title": "Compute Orthonormal Basis for 2D Vectors",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement a function that computes an orthonormal basis for the subspace spanned by a list of 2D vectors using the Gram-Schmidt process. The function should take a list of 2D vectors and a tolerance value (tol) to determine linear independence, returning a list of orthonormal vectors (unit length and orthogonal to each other) that span the same subspace. This is a fundamental concept in linear algebra with applications in machine learning, such as feature orthogonalization.",
+  "learn_section": "## Understanding the Gram-Schmidt Process\n\nThe Gram-Schmidt process transforms a set of vectors into an orthonormal basis vectors that are orthogonal (perpendicular) and have unit length for the subspace they span.\n\n### Mathematical Definition\n\nGiven vectors $v_1, v_2, \\ldots$, the process constructs an orthonormal set $u_1, u_2, \\ldots$ as follows:\n1. $u_1 = \\frac{v_1}{\\|v_1\\|}$ (normalize the first vector).\n2. For subsequent vectors $v_k$:\n   - Subtract projections: $$w_k = v_k - \\sum_{i=1}^{k-1} \\text{proj}_{u_i}(v_k),$$ where $\\text{proj}_{u_i}(v_k) = (v_k \\cdot u_i) u_i$.\n   - Normalize: $$u_k = \\frac{w_k}{\\|w_k\\|},$$ if $\\|w_k\\| > \\text{tol}$.\n\n### Why Orthonormal Bases?\n\n- Orthogonal vectors simplify computations (e.g., their dot product is zero).\n- Unit length ensures equal scaling, useful in $PCA$, $QR$ decomposition, and neural network optimization.\n\n### Special Case\n\nIf a vector's norm is less than or equal to $\\text{tol}$ (default $1e-10$), it's considered linearly dependent and excluded from the basis.\n\n### Example\n\nFor vectors `[[1, 0], [1, 1]]` with $\\text{tol} = 1e-10$:\n1. $v_1 = [1, 0]$, $\\|v_1\\| = 1$, so $u_1 = [1, 0]$.\n2. $v_2 = [1, 1]$, projection on $u_1$: $(v_2 \\cdot u_1) u_1 = 1 \\cdot [1, 0] = [1, 0]$.\n   - $w_2 = [1, 1] - [1, 0] = [0, 1]$.\n   - $\\|w_2\\| = 1 > 1e-10$, so $u_2 = [0, 1]$.\n\nResult: `[[1, 0], [0, 1]]`, rounded to 4 decimal places.",
+  "starter_code": "import numpy as np\n\ndef orthonormal_basis(vectors: list[list[float]], tol: float = 1e-10) -> list[np.ndarray]:\n    # Your code here\n    pass",
+  "solution": "import numpy as np\n\ndef orthonormal_basis(vectors: list[list[float]], tol: float = 1e-10) -> list[np.ndarray]:\n    basis = []\n    for v in vectors:\n        v = np.array(v, dtype=float)\n        for b in basis:\n            v = v - np.dot(v, b) * b\n        norm = np.sqrt(np.dot(v, v))\n        if norm > tol:\n            v = v / norm\n            basis.append(v)\n    return basis",
+  "example": {
+    "input": "orthonormal_basis([[1, 0], [1, 1]])",
+    "output": "[array([1., 0.]), array([0., 1.])]",
+    "reasoning": "Start with [1, 0], normalize to [1, 0]. For [1, 1], subtract its projection onto [1, 0] (which is [1, 0]), leaving [0, 1]. Check if norm > 1e-10 (it is 1), then normalize to [0, 1]. The result is an orthonormal basis."
+  },
+  "test_cases": [
+    {
+      "test": "basis = orthonormal_basis([[1, 0], [1, 1]]); print([b.round(4) for b in basis])",
+      "expected_output": "[array([1., 0.]), array([0., 1.])]"
+    },
+    {
+      "test": "basis = orthonormal_basis([[2, 0], [4, 0]], tol=1e-10); print([b.round(4) for b in basis])",
+      "expected_output": "[array([1., 0.])]"
+    },
+    {
+      "test": "basis = orthonormal_basis([[1, 1], [1, -1]], tol=1e-5); print([b.round(4) for b in basis])",
+      "expected_output": "[array([0.7071, 0.7071]), array([0.7071, -0.7071])]"
+    },
+    {
+      "test": "basis = orthonormal_basis([[0, 0]], tol=1e-10); print([b.round(4) for b in basis])",
+      "expected_output": "[]"
+    }
+  ]
+}

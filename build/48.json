@@ -1,0 +1,48 @@
+{
+  "id": "48",
+  "title": "Implement Reduced Row Echelon Form (RREF) Function",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/mpimdNG9XsA?si=kWFw8hhbGTy2ujX3",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://github.com/peppermin-t",
+      "name": "Yinjia Chen"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "In this problem, your task is to implement a function that converts a given matrix into its Reduced Row Echelon Form (RREF). The RREF of a matrix is a special form where each leading entry in a row is 1, and all other elements in the column containing the leading 1 are zeros, except for the leading 1 itself.\n\nHowever, there are some additional details to keep in mind:\n\n- Diagonal entries can be 0 if the matrix is reducible (i.e., the row corresponding to that position can be eliminated entirely).\n- Some rows may consist entirely of zeros.\n- If a column contains a pivot (a leading 1), all other entries in that column should be zero.\n\nYour task is to implement the RREF algorithm, which must handle these cases and convert any given matrix into its RREF.",
+  "learn_section": "## Understanding the RREF Algorithm\n\nThe Reduced Row Echelon Form (RREF) of a matrix is a specific form achieved through a sequence of elementary row operations. This algorithm will convert any matrix into its RREF, which is useful for solving linear equations and understanding the properties of the matrix.\n\nHere’s a step-by-step guide to implementing the RREF algorithm:\n\n1. **Start with the leftmost column**:  \n   Set the initial leading column to the first column of the matrix. Move this \"lead\" to the right as you progress through the algorithm.\n\n2. **Select the pivot row**:  \n   Identify the first non-zero entry in the current leading column. This entry is the pivot. If necessary, swap rows to bring the pivot into position to avoid having a zero in the pivot position.\n\n3. **Scale the pivot row**:  \n   Divide the entire pivot row by the pivot value to make the leading entry equal to 1.\n   $$\n   \\text{Row}_r = \\frac{\\text{Row}_r}{\\text{pivot}}\n   $$\n   For example, if the pivot is 3, divide the entire row by 3 to make the leading entry 1.\n\n4. **Eliminate above and below the pivot**:  \n   Subtract multiples of the pivot row from all the other rows to create zeros in the rest of the pivot column. This ensures the pivot is the only non-zero entry in its column.\n   $$\n   \\text{Row}_i = \\text{Row}_i - (\\text{Row}_r \\times \\text{lead coefficient})\n   $$\n   Repeat this step for each row $ i $ where $ i \\neq r $, ensuring all entries above and below the pivot are zero.\n\n5. **Move to the next column**:  \n   Move the lead one column to the right and repeat the process from step 2. Continue until there are no more columns to process or the remaining submatrix is all zeros.\n\nBy following these steps, the matrix will be converted into its Reduced Row Echelon Form, where each leading entry is 1, and all other entries in the leading columns are zero.",
+  "starter_code": "import numpy as np\n\ndef rref(matrix):\n\tYour code here\n\tpass",
+  "solution": "import numpy as np\n\ndef rref(matrix):\n    # Convert to float for division operations\n    A = matrix.astype(np.float32)\n    n, m = A.shape\n    row = 0  # Current row index for pivot placement\n    \n    # Iterate over columns, up to the number of columns m\n    for col in range(m):\n        if row >= n:  # No more rows to process\n            break\n        \n        # Find a row with a non-zero entry in the current column\n        nonzero_rel_id = np.nonzero(A[row:, col])[0]\n        if len(nonzero_rel_id) == 0:  # No pivot in this column\n            continue\n        \n        # Swap the current row with the row containing the non-zero entry\n        k = nonzero_rel_id[0] + row\n        A[[row, k]] = A[[k, row]]\n        \n        # Normalize the pivot row to make the pivot 1\n        A[row] = A[row] / A[row, col]\n        \n        # Eliminate all other entries in this column\n        for j in range(n):\n            if j != row:\n                A[j] -= A[j, col] * A[row]\n        \n        row += 1  # Move to the next row for the next pivot\n    \n    return A",
+  "example": {
+    "input": "import numpy as np\n\nmatrix = np.array([\n    [1, 2, -1, -4],\n    [2, 3, -1, -11],\n    [-2, 0, -3, 22]\n])\n\nrref_matrix = rref(matrix)\nprint(rref_matrix)",
+    "output": "# array([\n#    [ 1.  0.  0. -8.],\n#    [ 0.  1.  0.  1.],\n#    [-0. -0.  1. -2.]\n# ])",
+    "reasoning": "The given matrix is converted to its Reduced Row Echelon Form (RREF) where each leading entry is 1, and all other entries in the leading columns are zero."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\n\nmatrix = np.array([\n    [1, 2, -1, -4],\n    [2, 3, -1, -11],\n    [-2, 0, -3, 22]\n])\n\noutput = rref(matrix)\nprint(output)",
+      "expected_output": "[[ 1.,  0.,  0., -8.], [ 0.,  1.,  0.,  1.], [-0., -0.,  1., -2.]]"
+    },
+    {
+      "test": "import numpy as np\n\nmatrix = np.array([\n    [2, 4, -2],\n    [4, 9, -3],\n    [-2, -3, 7]\n])\n\noutput = rref(matrix)\nprint(output)",
+      "expected_output": "[[ 1.,  0.,  0.], [ 0.,  1.,  0.], [ 0.,  0.,  1.]]"
+    },
+    {
+      "test": "import numpy as np\n\nmatrix = np.array([\n    [0, 2, -1, -4],\n    [2, 0, -1, -11],\n    [-2, 0, 0, 22]\n])\n\noutput = rref(matrix)\nprint(output)",
+      "expected_output": "[[ 1.,  0.,  0., -11.],[-0.,  1.,  0., -7.5],[-0., -0.,  1., -11.]]"
+    },
+    {
+      "test": "import numpy as np\n\nmatrix = np.array([\n        [1, 2, -1],\n        [2, 4, -1],\n        [-2, -4, -3]])\n\noutput = rref(matrix)\nprint(output)",
+      "expected_output": "[[ 1.,  2.,  0.],[ 0.,  0.,  1.],[0., 0.,  0.]]"
+    }
+  ]
+}

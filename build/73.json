@@ -1,0 +1,48 @@
+{
+  "id": "73",
+  "title": "Calculate Dice Score for Classification",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": 0,
+  "dislikes": 0,
+  "contributor": [
+    {
+      "profile_link": "https://github.com/rittik9",
+      "name": "rittik9"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "\n## Task: Compute the Dice Score\n\nYour task is to implement a function `dice_score(y_true, y_pred)` that calculates the Dice Score, also known as the Sørensen-Dice coefficient or F1-score, for binary classification. The Dice Score is used to measure the similarity between two sets and is particularly useful in tasks like image segmentation and binary classification.\n\n### Your Task:\nImplement the function `dice_score(y_true, y_pred)` to:\n1. Calculate the Dice Score between the arrays `y_true` and `y_pred`.\n2. Return the Dice Score as a float value rounded to 3 decimal places.\n3. Handle edge cases appropriately, such as when there are no true or predicted positives.\n\nThe Dice Score is defined as:\n\n$$\n\\scriptsize\n\\text{Dice Score} =\n\\frac{2 \\times (\\text{Number of elements in the intersection of } y_{\\text{true}} \\text{ and } y_{\\text{pred}})}{\\text{Number of elements in } y_{\\text{true}} + \\text{Number of elements in } y_{\\text{pred}}}\n$$\n\nWhere:\n- $ y_{\\text{true}} $ and $ y_{\\text{pred}} $ are binary arrays of the same length, representing true and predicted labels.\n- The result ranges from 0 (no overlap) to 1 (perfect overlap).",
+  "learn_section": "\n # Understanding Dice Score in Classification\n\nThe Dice Score, also known as the Sørensen-Dice coefficient or F1-score, is a statistical measure used to gauge the similarity between two samples. It is particularly popular in image segmentation tasks and binary classification problems.\n\n## Mathematical Definition\n\nThe Dice coefficient is defined as twice the intersection divided by the sum of the cardinalities of both sets:\n\n$$\n\\text{Dice Score} = \\frac{2|X \\cap Y|}{|X| + |Y|} = \\frac{2TP}{2TP + FP + FN}\n$$\n\n### In terms of binary classification:\n1. **TP (True Positives):** Number of positions where both predicted and true labels are 1.  \n2. **FP (False Positives):** Number of positions where the prediction is 1 but the true label is 0.  \n3. **FN (False Negatives):** Number of positions where the prediction is 0 but the true label is 1.\n\n## Relationship with F1-Score\n\nThe Dice coefficient is identical to the F1-score, which is the harmonic mean of precision and recall:\n\n$$\n\\text{F1-score} = 2 \\cdot \\frac{\\text{precision} \\cdot \\text{recall}}{\\text{precision} + \\text{recall}} = \\text{Dice Score}\n$$\n\n## Key Properties\n1. **Range:** The Dice score always falls between 0 and 1 (inclusive).  \n2. **Perfect Score:** A value of 1 indicates perfect overlap.  \n3. **No Overlap:** A value of 0 indicates no overlap.  \n4. **Sensitivity:** More sensitive to overlap than the Jaccard Index.  \n5. **Symmetry:** The score is symmetric, meaning DSC(A,B) = DSC(B,A).\n\n## Example\n\nConsider two binary vectors:  \n- **True labels:** [1, 1, 0, 1, 0, 1]  \n- **Predicted labels:** [1, 1, 0, 0, 0, 1]  \n\nIn this case:  \n- **True Positives (TP):** 3  \n- **False Positives (FP):** 0  \n- **False Negatives (FN):** 1  \n\n$$\n\\text{Dice Score} = \\frac{2 \\times 3}{2 \\times 3 + 0 + 1} = 0.857\n$$\n\n## Advantages Over Jaccard Index\n\nThe Dice score offers several advantages:  \n1. **Higher Sensitivity to Overlap:** Due to the doubled intersection term.  \n2. **Weight on Agreement:** Gives more weight to instances where labels agree.  \n3. **Preferred in Medical Imaging:** Often used in medical image segmentation due to its sensitivity to overlap.  \n4. **Intuitive Interpretation:** As the harmonic mean of precision and recall.\n\n## Common Applications\n\nThe Dice score is widely used in:  \n1. **Medical image segmentation evaluation.**  \n2. **Binary classification tasks.**  \n3. **Object detection overlap assessment.**  \n4. **Text similarity measurement.**  \n5. **Semantic segmentation evaluation.**\n\nWhen implementing the Dice score, it is important to handle edge cases properly, such as when both sets are empty. In such cases, the score is typically defined as 0.0 (as per scikit-learn).",
+  "starter_code": "\nimport numpy as np\n\ndef dice_score(y_true, y_pred):\n\t# Write your code here\n\treturn round(res, 3)",
+  "solution": "\nimport numpy as np\n\ndef dice_score(y_true, y_pred):\n    intersection = np.logical_and(y_true, y_pred).sum()\n    true_sum = y_true.sum()\n    pred_sum = y_pred.sum()\n\n    # Handle edge cases\n    if true_sum == 0 or pred_sum == 0:\n        return 0.0\n\n    dice = (2.0 * intersection) / (true_sum + pred_sum)\n    return round(float(dice), 3)",
+  "example": {
+    "input": "y_true = np.array([1, 1, 0, 1, 0, 1])\ny_pred = np.array([1, 1, 0, 0, 0, 1])\nprint(dice_score(y_true, y_pred))",
+    "output": "0.857",
+    "reasoning": "The Dice Score is calculated as (2 * 3) / (2 * 3 + 0 + 1) = 0.857, indicating an 85.7% overlap between the true and predicted labels."
+  },
+  "test_cases": [
+    {
+      "test": "\ny_true = np.array([1, 1, 0, 0])\ny_pred = np.array([1, 1, 0, 0])\nprint(dice_score(y_true, y_pred))\n",
+      "expected_output": "1.0"
+    },
+    {
+      "test": "\ny_true = np.array([1, 1, 0, 0])\ny_pred = np.array([0, 0, 1, 1])\nprint(dice_score(y_true, y_pred))\n",
+      "expected_output": "0.0"
+    },
+    {
+      "test": "\ny_true = np.array([1, 1, 0, 0])\ny_pred = np.array([1, 0, 0, 0])\nprint(dice_score(y_true, y_pred))\n",
+      "expected_output": "0.667"
+    },
+    {
+      "test": "\ny_true = np.array([0, 0, 0, 0])\ny_pred = np.array([0, 0, 0, 0])\nprint(dice_score(y_true, y_pred))\n",
+      "expected_output": "0.0"
+    },
+    {
+      "test": "\ny_true = np.array([1, 1, 1, 1])\ny_pred = np.array([1, 1, 1, 1])\nprint(dice_score(y_true, y_pred))\n",
+      "expected_output": "1.0"
+    }
+  ]
+}

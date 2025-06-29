@@ -1,0 +1,36 @@
+{
+  "id": "136",
+  "title": "Calculate KL Divergence Between Two Multivariate Gaussian Distributions",
+  "difficulty": "medium",
+  "category": "Probability",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/turkunov",
+      "name": "turkunov"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "KL divergence measures the dissimilarity between two probability distributions. In this problem, you'll implement a function to compute the KL divergence between two multivariate Gaussian distributions given their means and covariance matrices. Use the provided mathematical formulas and numerical considerations to ensure accuracy.",
+  "learn_section": "## KL divergence and its properties\nKL divergence is used as a measure of dissimilarity between two distributions. It is defined by the following formula:\n$$\nD_{KL}(P || Q) = \\mathbb{E}_{x\\sim P(X)}log\\frac{P(X)}{Q(X)},\n$$\nwhere $P(X)$ observed distribution we compare everything else with and $Q(X)$ is usually the varying one; $P(X)$ and $Q(X)$ are PMF (but could also be denoted as PDFs $f(x)$ and $q(x)$ in continuos case). The function has following properties:\n* $D_{KL}\\geq0$\n* assymetry: $D_{KL}(P || Q) \\neq D_{KL}(Q || P)$\n\n## Finding $D_{KL}$ between two multivariate Gaussians\nConsider two multivariate Normal distributions:\n$$\np(x)\\sim \\mathbb{N}(\\mu_1,\\Sigma_1), \\\\\nq(x)\\sim \\mathbb{N}(\\mu_2,\\Sigma_2)\n$$\n\nPDF of a multivariate Normal distribution is defined as:\n$$\nf(x)=\\frac{1}{(2\\pi)^\\frac{p}{2}|\\Sigma|^\\frac{1}{2}}exp(-\\frac{1}{2}(x-\\mu)^T\\Sigma^{-1}(x-\\mu)),\n$$\n\nwhere $\\Sigma$ - covariance matrix, $|\\cdot|$ - determinant, $p$ - size of the random vector, i.e. number of different normally distributed features inside $P$ and $Q$ and $x$ usually denotes $x^T$, which is a random vector of size $p\\times1$.\n\nNow we can move onto calculating KL divergence for these two distributions, skipping the division part of two PDFs:\n$$\n\\frac{1}{2}[\\mathbb{E_p}log\\frac{|\\Sigma_q|}{|\\Sigma_p|} ^ \\textbf{[1]} - \\mathbb{E_p}(x-\\mu_p)^T\\Sigma_p^{-1}(x-\\mu_p) ^ \\textbf{[2]} + \\\\\n+ \\mathbb{E_p}(x-\\mu_q)^T\\Sigma_q^{-1}(x-\\mu_q) ^ \\textbf{[3]}]= \\\\\n= \\frac{1}{2}[log\\frac{|\\Sigma_q|}{|\\Sigma_p|}-p+(\\mu_p-\\mu_q)^T\\Sigma^{-1}_q(\\mu_p-\\mu_q) + \\\\\n+ tr(\\Sigma^{-1}_q\\Sigma_p)],\n$$\nwhere in order to achieve an equality we proceed to do $\\textbf{[1]}:$\n$$\nlog\\frac{|\\Sigma_q|}{|\\Sigma_p|}=const\\implies \\text{EV equals to the value itself;}\n$$\n\nthen $\\textbf{[2]}:$\n$$\n\\underset{N \\times p}{(x-\\mu_p)^T} * \\sum_{p \\times p} * \\underset{N \\times p}{(x-\\mu_p)^T} = \\underset{N\\times N}{A}\\text {, where } N=1 \\implies \\\\\n\\implies A=\\operatorname{tr}(A)\n$$\n\nRecall that:\n$$\n\\operatorname{tr}(A B C)=\\operatorname{tr}(B C A)=\\operatorname{tr}(C B A)\n$$\n\nThen:\n$$\n\\operatorname{tr}(A)=\\operatorname{tr}\\left(\\left(x-\\mu_p\\right)^{\\top}\\left(x-\\mu_p\\right) \\Sigma_p^{-1}\\right)\\\\ =\\operatorname{tr}\\left(\\Sigma_p \\Sigma_p^{-1}\\right)=\\operatorname{tr}(I)=p  \n$$\n\nand finally $\\textbf{[3]}$, where we should recall, that for multivariate Normal distributions this is true ($x\\sim\\mathbb{N}(\\mu_2, \\Sigma_2)$):\n$$\n\\mathbb{E}(x-\\mu_1)^TA(x-\\mu_1)= \\\\\n= (\\mu_2-\\mu_1)^TA(\\mu_2-\\mu_1)+tr(A\\Sigma_2)\n$$",
+  "starter_code": "import numpy as np\n\ndef multivariate_kl_divergence(mu_p: np.ndarray, Cov_p: np.ndarray, mu_q: np.ndarray, Cov_q: np.ndarray) -> float:\n    \"\"\"\n    Computes the KL divergence between two multivariate Gaussian distributions.\n    \n    Parameters:\n    mu_p: mean vector of the first distribution\n    Cov_p: covariance matrix of the first distribution\n    mu_q: mean vector of the second distribution\n    Cov_q: covariance matrix of the second distribution\n\n    Returns:\n    KL divergence as a float\n    \"\"\"\n    # Your code here\n    pass",
+  "solution": "import numpy as np\n\ndef multivariate_kl_divergence(mu_p:np.ndarray, Cov_p:np.ndarray, \n                               mu_q:np.ndarray, Cov_q:np.ndarray) -> float:\n\n    def trace(x: np.ndarray) -> float:\n        return np.diag(x).sum()\n\n    p = Cov_p.shape[0]\n    return float(1/2 * (\n        np.log(np.linalg.det(Cov_q)/np.linalg.det(Cov_p))         - p + (mu_p-mu_q).T @ np.linalg.inv(Cov_q) @ (mu_p-mu_q)         + trace(np.linalg.inv(Cov_q) @ Cov_p)\n    ))",
+  "example": {
+    "input": "mu_p, Cov_p, mu_q, Cov_q for two random multivariate Gaussians",
+    "output": "A float representing the KL divergence",
+    "reasoning": "The KL divergence is calculated using the formula: 0.5 * (log det term, minus dimension p, Mahalanobis distance between means, and trace term). It measures how dissimilar the second Gaussian is from the first."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nnp.random.seed(42)\nPx = np.random.randn(4, 10)\nQx = np.random.randn(4, 10)\nmu1, cov1, mu2, cov2 = np.mean(Px, axis=1), np.cov(Px), np.mean(Qx, axis=1), np.cov(Qx)\nprint(round(multivariate_kl_divergence(mu1, cov1, mu2, cov2),4))",
+      "expected_output": "2.193"
+    },
+    {
+      "test": "import numpy as np\nnp.random.seed(42)\nPx = np.random.randn(3, 8)\nQx = np.random.randn(3, 8)\nmu1, cov1, mu2, cov2 = np.mean(Px, axis=1), np.cov(Px), np.mean(Qx, axis=1), np.cov(Qx)\nprint(round(multivariate_kl_divergence(mu1, cov1, mu2, cov2),4))",
+      "expected_output": "1.7741"
+    }
+  ]
+}

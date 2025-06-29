@@ -1,0 +1,40 @@
+{
+  "id": "114",
+  "title": "Implement Global Average Pooling",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement a function that performs Global Average Pooling on a 3D NumPy array representing feature maps from a convolutional layer. The function should take an input of shape (height, width, channels) and return a 1D array of shape (channels,), where each element is the average of all values in the corresponding feature map.",
+  "learn_section": "## Understanding Global Average Pooling\n\nGlobal Average Pooling (GAP) is a pooling operation commonly used in convolutional neural networks (CNNs) to reduce the spatial dimensions of feature maps. Unlike traditional pooling methods like max pooling or average pooling with a fixed window size, GAP computes the average of each entire feature map, resulting in a single value per channel.\n\n### How It Works\n\nGiven a 3D input tensor of shape $(H, W, C)$, where:\n- $H$ is the height,\n- $W$ is the width,\n- $C$ is the number of channels (feature maps),\n\nGlobal Average Pooling produces a 1D output vector of shape $(C,)$, where each element is the average of all values in the corresponding feature map.\n\nMathematically, for each channel $c$:\n\n$$\n\\text{GAP}(x)_c = \\frac{1}{H \\times W} \\sum_{i=1}^{H} \\sum_{j=1}^{W} x_{i,j,c}\n$$\n\n### Benefits of Global Average Pooling\n\n- **Parameter Reduction**: By replacing fully connected layers with GAP, the number of parameters is significantly reduced, which helps in preventing overfitting.\n- **Spatial Invariance**: GAP captures the global information from each feature map, making the model more robust to spatial translations.\n- **Simplicity**: It is a straightforward operation that doesn't require tuning hyperparameters like pooling window size or stride.\n\n### Use in Modern Architectures\n\nGlobal Average Pooling is a key component in architectures like ResNet, where it is used before the final classification layer. It allows the network to handle inputs of varying sizes, as the output depends only on the number of channels, not the spatial dimensions.\n\n### Example\n\nConsider a 2x2x3 input tensor:\n\n$$\nx = \\begin{bmatrix}\n\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix},\n\\begin{bmatrix} 7 & 8 & 9 \\\\ 10 & 11 & 12 \\end{bmatrix}\n\\end{bmatrix}\n$$\n\nApplying GAP:\n\n- For channel 0: $\\frac{1+4+7+10}{4} = \\frac{22}{4} = 5.5$\n- For channel 1: $\\frac{2+5+8+11}{4} = \\frac{26}{4} = 6.5$\n- For channel 2: $\\frac{3+6+9+12}{4} = \\frac{30}{4} = 7.5$\n\nThus, the output is $[5.5, 6.5, 7.5]$.\n\nThis operation effectively summarizes each feature map into a single value, capturing the essence of the features learned by the network.",
+  "starter_code": "import numpy as np\n\ndef global_avg_pool(x: np.ndarray) -> np.ndarray:\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef global_avg_pool(x: np.ndarray) -> np.ndarray:\n    return np.mean(x, axis=(0, 1))",
+  "example": {
+    "input": "x = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])",
+    "output": "[5.5, 6.5, 7.5]",
+    "reasoning": "For each channel, compute the average of all elements. For channel 0: (1+4+7+10)/4 = 5.5, for channel 1: (2+5+8+11)/4 = 6.5, for channel 2: (3+6+9+12)/4 = 7.5."
+  },
+  "test_cases": [
+    {
+      "test": "x = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])\nprint(global_avg_pool(x))",
+      "expected_output": "[5.5,6.5,7.5]"
+    },
+    {
+      "test": "x = np.array([[[100, 200]]])\nprint(global_avg_pool(x))",
+      "expected_output": "[100.,200.]"
+    },
+    {
+      "test": "x = np.ones((3, 3, 1))\nprint(global_avg_pool(x))",
+      "expected_output": "[1.]"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "128",
+  "title": "Dynamic Tanh: Normalization-Free Transformer Activation",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/turkunov",
+      "name": "Turkunov"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement the Dynamic Tanh (DyT) function, a normalization-free transformation inspired by the Tanh function. DyT replaces layer normalization in Transformer architectures while preserving squashing behavior and enabling stable training.",
+  "learn_section": "A new study (https://arxiv.org/pdf/2503.10622) demonstrates that layer normalization, that is ubiquitous in transformers, produces Tanh-like S-shapes. By incorporating a new layer replacement for normalization called \"Dynamic Tanh\" (DyT for short), Transformers without normalization can match or exceed the performance of their normalized counterparts, mostly without hyperparameter tuning.\n\n### Normalization layer\nConsider an standard NLP task, where an input $x$ has a shape of $(B,T,C)$, where $B$ is the batch size, $T$ - number of tokens (sequence length) and $C$ - embedding dimensions. Then an output of a normalization layer is generally computed as $norm(x)=\\gamma(\\frac{x-\\mu}{\\sqrt{\\sigma^2+\\varepsilon}})+\\beta$, where $\\gamma$ and $\\beta$ are learnable parameters of shape $(C,)$. Distribution's statistics are calculated as follows: $\\mu_k=\\frac{1}{BT}\\sum_i^B\\sum_j^Tx_{ij}$; $\\sigma_k^2=\\frac{1}{B T} \\sum_{i, j}\\left(x_{i j k}-\\mu_k\\right)^2$\n\n### Hyperboloic tangent (Tanh)\nTanh function is defined as a ratio: $tanh(x)=\\frac{sinh(x)}{cosh(x)}=\\frac{exp(x)-exp(-x)}{exp(x)+exp(-x)}$. Essentially the function allows transformation of an arbitrary domain to $[-1,1]$. \n\n### Dynamic Tanh (DyT)\nTurns out that LN (layer normalization) produces different parts of a $tanh(kx)$, where $k$ controls the curvature of the tanh curve in the center. The smaller the $k$, the smoother is the change from $-1$ to $1$. Hence the study proposes a drop-in replacement for LN given an input tensor $x$:\n\n$$\nDyT(x)=\\gamma*tanh(\\alpha x)+\\beta,\n$$\n\nwhere:\n* $\\alpha$ - learnable parameter that allows scaling the input differently based on its range (tokens producing **smaller variance** produce **less smoother curves**). Authors suggest a **default value** of $0.5$.\n* $\\gamma, \\beta$ - learnable parameters, that scale our output based on the input. Authors suggest initializing these vectors with following **default values**:\n    * $\\gamma$ as all-one vector \n    * $\\beta$ as all-zero\n\nDespite not calculating statistics, DyT preserves the \"squashing\" effect of LN on extreme values in a non-linear fashion, while almost linearly transforming central parts of the input.",
+  "starter_code": "import numpy as np\n\ndef dynamic_tanh(x: np.ndarray, alpha: float, gamma: float, beta: float) -> list[float]:\n    # Your code here\n    pass",
+  "solution": "import numpy as np\n\ndef dynamic_tanh(x: np.ndarray, alpha: float, gamma: float, beta: float) -> list[float]:\n    def tanh(x: np.ndarray) -> np.ndarray:\n        return (np.exp(x) - np.exp(-x)) / (np.exp(x) + np.exp(-x))\n\n    x = tanh(alpha * x)\n    return (x * gamma + beta).round(4).tolist()",
+  "example": {
+    "input": "x = np.array([[[0.14115588, 0.00372817, 0.24126647, 0.22183601]]])\ngamma = np.ones((4,))\nbeta = np.zeros((4,))\nalpha = 0.5\nprint(dynamic_tanh(x, alpha, gamma, beta))",
+    "output": "[[[0.0705, 0.0019, 0.1201, 0.1105]]]",
+    "reasoning": "Each element in the input is scaled by alpha, passed through tanh, and then scaled by gamma and shifted by beta. This mimics the squashing behavior of layer normalization without explicitly using statistics."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nx = np.array([[[0.94378259]],[[0.97754654]],[[0.36168351]],[[0.51821078]],[[0.76961589]]])\ngamma = np.ones((1,))\nbeta = np.zeros((1,))\nprint(np.round(dynamic_tanh(x, 0.5, gamma, beta),4))",
+      "expected_output": "[[[0.4397]], [[0.4532]], [[0.1789]], [[0.2535]], [[0.3669]]]"
+    },
+    {
+      "test": "import numpy as np\nx = np.array([[[0.20793482, 0.16989285, 0.03898972], [0.17912554, 0.10962205, 0.3870742], [0.00107181, 0.35807922, 0.15861333]]])\ngamma = np.ones((3,))\nbeta = np.zeros((3,))\nprint(np.round(dynamic_tanh(x, 0.5, gamma, beta),4))",
+      "expected_output": "[[[[0.1036, 0.0847, 0.0195], [0.0893, 0.0548, 0.1912], [0.0005, 0.1772, 0.0791]]]]"
+    }
+  ]
+}

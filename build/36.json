@@ -1,0 +1,36 @@
+{
+  "id": "36",
+  "title": "Calculate Accuracy Score",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/eriklindernoren/ML-From-Scratch",
+      "name": "Erik Linder-Norén"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Write a Python function to calculate the accuracy score of a model's predictions. The function should take in two 1D numpy arrays: y_true, which contains the true labels, and y_pred, which contains the predicted labels. It should return the accuracy score as a float.",
+  "learn_section": "\n## Understanding Accuracy Score\n\nAccuracy is a metric used to evaluate the performance of a classification model. It is defined as the ratio of the number of correct predictions to the total number of predictions made. Mathematically, accuracy is given by:\n$$\n\\text{Accuracy} = \\frac{\\text{Number of Correct Predictions}}{\\text{Total Number of Predictions}}\n$$\n\n### Problem Overview\nIn this problem, you will write a function to calculate the accuracy score given the true labels and the predicted labels. The function will compare the two arrays and compute the accuracy as the proportion of matching elements.\n\n### Importance\nAccuracy is a straightforward and commonly used metric for classification tasks. It provides a quick way to understand how well a model is performing, but it may not always be the best metric, especially for imbalanced datasets.",
+  "starter_code": "import numpy as np\n\ndef accuracy_score(y_true, y_pred):\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef accuracy_score(y_true, y_pred):\n    accuracy = np.sum(y_true == y_pred, axis=0) / len(y_true)\n    return accuracy\n    ",
+  "example": {
+    "input": "y_true = np.array([1, 0, 1, 1, 0, 1])\n    y_pred = np.array([1, 0, 0, 1, 0, 1])\n    output = accuracy_score(y_true, y_pred)\n    print(output)",
+    "output": "# 0.8333333333333334",
+    "reasoning": "The function compares the true labels with the predicted labels and calculates the ratio of correct predictions to the total number of predictions. In this example, there are 5 correct predictions out of 6, resulting in an accuracy score of 0.8333333333333334."
+  },
+  "test_cases": [
+    {
+      "test": "print(accuracy_score(np.array([1, 0, 1, 1, 0, 1]), np.array([1, 0, 0, 1, 0, 1])))",
+      "expected_output": "0.8333333333333334"
+    },
+    {
+      "test": "print(accuracy_score(np.array([1, 1, 1, 1]), np.array([1, 0, 1, 0])))",
+      "expected_output": "0.5"
+    }
+  ]
+}

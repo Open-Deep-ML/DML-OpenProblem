@@ -1,0 +1,36 @@
+{
+  "id": "35",
+  "title": "Convert Vector to Diagonal Matrix",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/iT5dQ9hl-KQ",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/adarsh3690704",
+      "name": "Adarsh R"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Write a Python function to convert a 1D numpy array into a diagonal matrix. The function should take in a 1D numpy array x and return a 2D numpy array representing the diagonal matrix.",
+  "learn_section": "\n## Understanding Diagonal Matrices\n\nA diagonal matrix is a square matrix in which the entries outside the main diagonal are all zero. The main diagonal is the set of entries extending from the top left to the bottom right of the matrix.\n\n### Problem Overview\nIn this problem, you will write a function to convert a 1D numpy array (vector) into a diagonal matrix. The resulting matrix will have the elements of the input vector on its main diagonal, with zeros elsewhere.\n\n### Mathematical Representation\nGiven a vector $\\mathbf{x} = [x_1, x_2, \\ldots, x_n]$, the corresponding diagonal matrix $\\mathbf{D}$ is:\n$$\n\\mathbf{D} = \\begin{bmatrix}\nx_1 & 0 & 0 & \\cdots & 0 \\\\\n0 & x_2 & 0 & \\cdots & 0 \\\\\n0 & 0 & x_3 & \\cdots & 0 \\\\\n\\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\\n0 & 0 & 0 & \\cdots & x_n\n\\end{bmatrix}\n$$\n\n### Importance\nDiagonal matrices are important in various mathematical and scientific computations due to their simple structure and useful properties.",
+  "starter_code": "import numpy as np\n\ndef make_diagonal(x):\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef make_diagonal(x):\n    identity_matrix = np.identity(np.size(x))\n    return (identity_matrix*x)\n    ",
+  "example": {
+    "input": "x = np.array([1, 2, 3])\n    output = make_diagonal(x)\n    print(output)",
+    "output": "[[1. 0. 0.]\n    [0. 2. 0.]\n    [0. 0. 3.]]",
+    "reasoning": "The input vector [1, 2, 3] is converted into a diagonal matrix where the elements of the vector form the diagonal of the matrix."
+  },
+  "test_cases": [
+    {
+      "test": "print(make_diagonal(np.array([1, 2, 3])))",
+      "expected_output": "[[1., 0., 0.], [0., 2., 0.], [0., 0., 3.]]"
+    },
+    {
+      "test": "print(make_diagonal(np.array([4, 5, 6, 7])))",
+      "expected_output": "[[4., 0., 0., 0.], [0., 5., 0., 0.], [0., 0., 6., 0.], [0., 0., 0., 7.]]"
+    }
+  ]
+}

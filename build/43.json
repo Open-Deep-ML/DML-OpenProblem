@@ -1,0 +1,37 @@
+{
+  "id": "43",
+  "title": "Implement Ridge Regression Loss Function",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-43/index.html",
+  "description": "Write a Python function `ridge_loss` that implements the Ridge Regression loss function. The function should take a 2D numpy array `X` representing the feature matrix, a 1D numpy array `w` representing the coefficients, a 1D numpy array `y_true` representing the true labels, and a float `alpha` representing the regularization parameter. The function should return the Ridge loss, which combines the Mean Squared Error (MSE) and a regularization term.",
+  "learn_section": "\n## Ridge Regression Loss\n\nRidge Regression is a linear regression method with a regularization term to prevent overfitting by controlling the size of the coefficients.\n\n### Key Concepts:\n1. **Regularization**:  \n   Adds a penalty to the loss function to discourage large coefficients, helping to generalize the model.\n\n2. **Mean Squared Error (MSE)**:  \n   Measures the average squared difference between actual and predicted values.\n\n3. **Penalty Term**:  \n   The sum of the squared coefficients, scaled by the regularization parameter $ \\lambda $, which controls the strength of the regularization.\n\n### Ridge Loss Function\nThe Ridge Loss function combines MSE and the penalty term:\n$$\nL(\\beta) = \\frac{1}{n} \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2 + \\lambda \\sum_{j=1}^{p} \\beta_j^2\n$$\n\n### Implementation Steps:\n1. **Calculate MSE**:  \n   Compute the average squared difference between actual and predicted values.\n\n2. **Add Regularization Term**:  \n   Compute the sum of squared coefficients multiplied by $ \\lambda $.\n\n3. **Combine and Minimize**:  \n   Sum MSE and the regularization term to form the Ridge loss, then minimize this loss to find the optimal coefficients.",
+  "starter_code": "import numpy as np\n\ndef ridge_loss(X: np.ndarray, w: np.ndarray, y_true: np.ndarray, alpha: float) -> float:\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef ridge_loss(X: np.ndarray, w: np.ndarray, y_true: np.ndarray, alpha: float) -> float:\n    loss = np.mean((y_true - X @ w)**2) + alpha * np.sum(w**2)\n    return loss",
+  "example": {
+    "input": "import numpy as np\n\nX = np.array([[1, 1], [2, 1], [3, 1], [4, 1]])\nw = np.array([0.2, 2])\ny_true = np.array([2, 3, 4, 5])\nalpha = 0.1\n\nloss = ridge_loss(X, w, y_true, alpha)\nprint(loss)",
+    "output": "2.204",
+    "reasoning": "The Ridge loss is calculated using the Mean Squared Error (MSE) and a regularization term. The output represents the combined loss value."
+  },
+  "test_cases": [
+    {
+      "test": "X = np.array([[1,1],[2,1],[3,1],[4,1]])\nW = np.array([.2,2])\ny = np.array([2,3,4,5])\nalpha = 0.1\noutput = ridge_loss(X, W, y, alpha)\nprint(output)",
+      "expected_output": "2.204"
+    },
+    {
+      "test": "X = np.array([[1,1,4],[2,1,2],[3,1,.1],[4,1,1.2],[1,2,3]])\nW = np.array([.2,2,5])\ny = np.array([2,3,4,5,2])\nalpha = 0.1\noutput = ridge_loss(X, W, y, alpha)\nprint(output)",
+      "expected_output": "164.402"
+    }
+  ]
+}

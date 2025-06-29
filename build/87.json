@@ -1,0 +1,36 @@
+{
+  "id": "87",
+  "title": "Adam Optimizer",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/kapardhi03",
+      "name": "Kapardhi"
+    }
+  ],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null,
+  "description": "Implement the Adam optimizer update step function. Your function should take the current parameter value, gradient, and moving averages as inputs, and return the updated parameter value and new moving averages. The function should also handle scalar and array inputs and include bias correction for the moving averages.",
+  "learn_section": "# Implementing Adam Optimizer\n\n## Introduction\nAdam (Adaptive Moment Estimation) is a popular optimization algorithm used in training deep learning models. It combines the benefits of two other optimization algorithms: RMSprop and momentum optimization.\n\n## Learning Objectives\n- Understand how Adam optimizer works\n- Learn to implement adaptive learning rates\n- Understand bias correction in optimization algorithms\n- Gain practical experience with gradient-based optimization\n\n## Theory\nAdam maintains moving averages of both gradients (first moment) and squared gradients (second moment) to adapt the learning rate for each parameter. The key equations are:\n\n$m_t = \\beta_1 m_{t-1} + (1-\\beta_1)g_t$ (First moment)\n$v_t = \\beta_2 v_{t-1} + (1-\\beta_2)g_t^2$ (Second moment)\n\nBias correction:\n$\\hat{m}_t = \\frac{m_t}{1-\\beta_1^t}$\n$\\hat{v}_t = \\frac{v_t}{1-\\beta_2^t}$\n\nParameter update:\n$\\theta_t = \\theta_{t-1} - \\alpha \\frac{\\hat{m}_t}{\\sqrt{\\hat{v}_t} + \\epsilon}$\n\n## Problem Statement\nImplement the Adam optimizer update step function. Your function should take the current parameter value, gradient, and moving averages as inputs, and return the updated parameter value and new moving averages.\n\n### Input Format\nThe function should accept:\n- parameter: Current parameter value\n- grad: Current gradient\n- m: First moment estimate\n- v: Second moment estimate\n- t: Current timestep\n- learning_rate: Learning rate (default=0.001)\n- beta1: First moment decay rate (default=0.9)\n- beta2: Second moment decay rate (default=0.999)\n- epsilon: Small constant for numerical stability (default=1e-8)\n\n### Output Format\nReturn tuple: (updated_parameter, updated_m, updated_v)\n\n## Example\n# Example usage:\nparameter = 1.0\ngrad = 0.1\nm = 0.0\nv = 0.0\nt = 1\n\nnew_param, new_m, new_v = adam_optimizer(parameter, grad, m, v, t)\n## Tips\n- Initialize m and v as zeros\n- Keep track of timestep t for bias correction\n- Use numpy for numerical operations\n- Test with both scalar and array inputs",
+  "starter_code": "import numpy as np\n\ndef adam_optimizer(parameter, grad, m, v, t, learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8):\n\t\"\"\"\n\tUpdate parameters using the Adam optimizer.\n\tAdjusts the learning rate based on the moving averages of the gradient and squared gradient.\n\t:param parameter: Current parameter value\n\t:param grad: Current gradient\n\t:param m: First moment estimate\n\t:param v: Second moment estimate\n\t:param t: Current timestep\n\t:param learning_rate: Learning rate (default=0.001)\n\t:param beta1: First moment decay rate (default=0.9)\n\t:param beta2: Second moment decay rate (default=0.999)\n\t:param epsilon: Small constant for numerical stability (default=1e-8)\n\t:return: tuple: (updated_parameter, updated_m, updated_v)\n\t\"\"\"\n\t# Your code here\n\treturn np.round(parameter,5), np.round(m,5), np.round(v,5)",
+  "solution": "import numpy as np\n\ndef adam_optimizer(parameter, grad, m, v, t, learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8):\n    \"\"\"\n    Update parameters using the Adam optimizer.\n    Adjusts the learning rate based on the moving averages of the gradient and squared gradient.\n    :param parameter: Current parameter value\n    :param grad: Current gradient\n    :param m: First moment estimate\n    :param v: Second moment estimate\n    :param t: Current timestep\n    :param learning_rate: Learning rate (default=0.001)\n    :param beta1: First moment decay rate (default=0.9)\n    :param beta2: Second moment decay rate (default=0.999)\n    :param epsilon: Small constant for numerical stability (default=1e-8)\n    :return: tuple: (updated_parameter, updated_m, updated_v)\n    \"\"\"\n    # Update biased first moment estimate\n    m = beta1 * m + (1 - beta1) * grad\n\n    # Update biased second raw moment estimate\n    v = beta2 * v + (1 - beta2) * (grad**2)\n\n    # Compute bias-corrected first moment estimate\n    m_hat = m / (1 - beta1**t)\n\n    # Compute bias-corrected second raw moment estimate\n    v_hat = v / (1 - beta2**t)\n\n    # Update parameters\n    update = learning_rate * m_hat / (np.sqrt(v_hat) + epsilon)\n    parameter = parameter - update\n\n    return np.round(parameter,5), np.round(m,5), np.round(v,5)",
+  "example": {
+    "input": "parameter = 1.0, grad = 0.1, m = 0.0, v = 0.0, t = 1",
+    "output": "(0.999, 0.01, 0.0001)",
+    "reasoning": "The Adam optimizer computes updated values for the parameter, first moment (m), and second moment (v) using bias-corrected estimates of gradients. With input values parameter=1.0, grad=0.1, m=0.0, v=0.0, and t=1, the updated parameter becomes 0.999."
+  },
+  "test_cases": [
+    {
+      "test": "print(adam_optimizer(1.0, 0.1, 0.0, 0.0, 1))",
+      "expected_output": "(0.999, 0.01, 0.0001)"
+    },
+    {
+      "test": "print(adam_optimizer(np.array([1.0, 2.0]), np.array([0.1, 0.2]), np.zeros(2), np.zeros(2), 1))",
+      "expected_output": "(array([0.999, 1.999]), array([0.01, 0.02]), array([1.e-05, 4.e-05]))"
+    }
+  ]
+}
