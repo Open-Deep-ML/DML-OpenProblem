@@ -32,4 +32,4 @@ class StepLRScheduler:
         # to the initial learning rate.
         current_lr = self.initial_lr * (self.gamma ** num_decays)
         
-        return current_lr
+        return round(current_lr, 4)
