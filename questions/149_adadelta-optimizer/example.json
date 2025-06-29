@@ -1,0 +1,5 @@
+{
+  "input": "parameter = 1.0, grad = 0.1, u = 1.0, v = 1.0, rho = 0.95, epsilon = 1e-6",
+  "output": "(0.89743, 0.9505, 0.95053)",
+  "explanation": "The Adadelta optimizer computes updated values for the parameter, first moment (u), and second moment (v). With input values parameter=1.0, grad=0.1, u=1.0, v=1.0, and rho=0.95, the updated parameter becomes 0.89743."
+}
