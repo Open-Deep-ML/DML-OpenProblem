@@ -12,7 +12,7 @@
     "expected_output": "True"
   },
   {
-    "test": "import pytest\np = 1.5\nwith pytest.raises(ValueError):\n    dropout = DropoutLayer(p)\np = -0.5\nwith pytest.raises(ValueError):\n    dropout = DropoutLayer(p)\nprint('All tests passed')",
+    "test": "p = 1.5\ntry:\n    dropout = DropoutLayer(p)\n    raise AssertionError('Expected ValueError for p = 1.5')\nexcept ValueError:\n    pass\np = -0.5\ntry:\n    dropout = DropoutLayer(p)\n    raise AssertionError('Expected ValueError for p = -0.5')\nexcept ValueError:\n    pass\nprint('All tests passed')",
     "expected_output": "All tests passed"
   }
 ]
