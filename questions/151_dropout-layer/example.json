@@ -1,0 +1,5 @@
+{
+  "input": "x = np.array([1.0, 2.0, 3.0, 4.0]), grad = np.array([0.1, 0.2, 0.3, 0.4]), p = 0.5",
+  "output": "output = array([[2., 0. , 6. , 0. ]]), grad = array([[0.2, 0. , 0.6, 0. ]])",
+  "reasoning": "The Dropout layer randomly zeroes out elements of the input tensor with probability p during training. To maintain the expected value of the activations, the remaining elements are scaled by a factor of 1 / (1 - p). During inference, Dropout is disabled and the input is passed through unchanged. During backpropagation, the same dropout mask and scaling are applied to the gradients, ensuring the expected gradient magnitude is preserved."
+}
