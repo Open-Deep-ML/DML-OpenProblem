@@ -1,0 +1,5 @@
+{
+  "input": "scheduler = StepLRScheduler(initial_lr=0.1, step_size=5, gamma=0.5)\nprint(scheduler.get_lr(epoch=0))\nprint(scheduler.get_lr(epoch=4))\nprint(scheduler.get_lr(epoch=5))\nprint(scheduler.get_lr(epoch=9))\nprint(scheduler.get_lr(epoch=10))",
+  "output": "0.1\n0.1\n0.05\n0.05\n0.025",
+  "reasoning": "The initial learning rate is 0.1. It stays 0.1 for epochs 0-4. At epoch 5, it decays by 0.5 to 0.05. It stays 0.05 for epochs 5-9. At epoch 10, it decays again to 0.025."
+}
