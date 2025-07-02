@@ -1,5 +1,3 @@
-import numpy as np
-
 def compressed_row_sparse_matrix(dense_matrix):
     vals = []
     col_idx = []

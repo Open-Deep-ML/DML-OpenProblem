@@ -1,7 +1,7 @@
 import numpy as np
 
+
 def pos_encoding(position: int, d_model: int):
-    
     if position == 0 or d_model <= 0:
         return -1
 

@@ -1,4 +1,3 @@
-
 def calculate_brightness(img):
     # Check if image is empty or has no columns
     if not img or not img[0]:

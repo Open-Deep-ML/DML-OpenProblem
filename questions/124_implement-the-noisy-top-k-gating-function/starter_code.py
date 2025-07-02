@@ -1,11 +1,8 @@
 import numpy as np
 
+
 def noisy_topk_gating(
-    X: np.ndarray,
-    W_g: np.ndarray,
-    W_noise: np.ndarray,
-    N: np.ndarray,
-    k: int
+    X: np.ndarray, W_g: np.ndarray, W_noise: np.ndarray, N: np.ndarray, k: int
 ) -> np.ndarray:
     """
     Args:

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def sparse_window_attention(Q, K, V, window_size, scale_factor=None):
     """
     Computes sparse attention with a sliding window mask to efficiently handle longer context lengths.
@@ -24,7 +25,7 @@ def sparse_window_attention(Q, K, V, window_size, scale_factor=None):
     for i in range(seq_len):
         start = max(0, i - window_size)
         end = min(seq_len, i + window_size + 1)
-        local_Q = Q[i:i+1]
+        local_Q = Q[i : i + 1]
         local_K = K[start:end]
         local_V = V[start:end]
         scores = np.dot(local_Q, local_K.T) / scale_factor

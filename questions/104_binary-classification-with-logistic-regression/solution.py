@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def predict_logistic(X: np.ndarray, weights: np.ndarray, bias: float) -> np.ndarray:
     """
     Implements binary classification prediction using Logistic Regression.

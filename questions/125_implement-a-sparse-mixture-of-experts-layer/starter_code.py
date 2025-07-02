@@ -1,6 +1,9 @@
 import numpy as np
 
-def moe(x: np.ndarray, We: np.ndarray, Wg: np.ndarray, n_experts: int, top_k: int) -> np.ndarray:
+
+def moe(
+    x: np.ndarray, We: np.ndarray, Wg: np.ndarray, n_experts: int, top_k: int
+) -> np.ndarray:
     """
     Args:
         x: Input tensor of shape (n_batch, l_seq, d_model)

@@ -1,6 +1,3 @@
-import torch
-import math
-from collections import Counter
 from typing import List, Dict, Any, Union
 
 
@@ -15,9 +12,7 @@ def calculate_entropy(labels: List[Any]) -> float:
 
 
 def calculate_information_gain(
-    examples: List[Dict[str, Any]],
-    attr: str,
-    target_attr: str
+    examples: List[Dict[str, Any]], attr: str, target_attr: str
 ) -> float:
     """
     Compute information gain for splitting `examples` on `attr` w.r.t. `target_attr`.
@@ -27,10 +22,7 @@ def calculate_information_gain(
     pass
 
 
-def majority_class(
-    examples: List[Dict[str, Any]],
-    target_attr: str
-) -> Any:
+def majority_class(examples: List[Dict[str, Any]], target_attr: str) -> Any:
     """
     Return the most common value of `target_attr` in `examples`.
     """
@@ -39,9 +31,7 @@ def majority_class(
 
 
 def learn_decision_tree(
-    examples: List[Dict[str, Any]],
-    attributes: List[str],
-    target_attr: str
+    examples: List[Dict[str, Any]], attributes: List[str], target_attr: str
 ) -> Union[Dict[str, Any], Any]:
     """
     Learn a decision tree using the ID3 algorithm.

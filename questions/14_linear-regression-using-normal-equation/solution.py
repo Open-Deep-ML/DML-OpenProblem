@@ -1,6 +1,9 @@
-
 import numpy as np
-def linear_regression_normal_equation(X: list[list[float]], y: list[float]) -> list[float]:
+
+
+def linear_regression_normal_equation(
+    X: list[list[float]], y: list[float]
+) -> list[float]:
     X = np.array(X)
     y = np.array(y).reshape(-1, 1)
     X_transpose = X.T

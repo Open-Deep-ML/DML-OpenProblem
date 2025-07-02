@@ -2,11 +2,9 @@ import torch
 import torch.nn.functional as F
 from typing import List, Tuple
 
+
 def single_neuron_model(
-    features: List[List[float]],
-    labels: List[float],
-    weights: List[float],
-    bias: float
+    features: List[List[float]], labels: List[float], weights: List[float], bias: float
 ) -> Tuple[List[float], float]:
     X = torch.tensor(features, dtype=torch.float)
     y = torch.tensor(labels, dtype=torch.float)
@@ -17,6 +15,6 @@ def single_neuron_model(
     probs_t = torch.sigmoid(logits)
     probs = probs_t.tolist()
 
-    mse = F.mse_loss(probs_t, y, reduction='mean').item()
+    mse = F.mse_loss(probs_t, y, reduction="mean").item()
 
     return probs, mse

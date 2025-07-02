@@ -7,10 +7,14 @@ def calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]
 
     for i in range(n_features):
         for j in range(i, n_features):
-            covariance = sum((vectors[i][k] - means[i]) * (vectors[j][k] - means[j]) for k in range(n_observations)) / (n_observations - 1)
+            covariance = sum(
+                (vectors[i][k] - means[i]) * (vectors[j][k] - means[j])
+                for k in range(n_observations)
+            ) / (n_observations - 1)
             covariance_matrix[i][j] = covariance_matrix[j][i] = covariance
 
     return covariance_matrix
+
 
 def test_calculate_covariance_matrix() -> None:
     # Test cases for calculate_covariance_matrix function
@@ -21,7 +25,12 @@ def test_calculate_covariance_matrix() -> None:
 
     # Test case 2
     vectors = [[1, 5, 6], [2, 3, 4], [7, 8, 9]]
-    assert calculate_covariance_matrix(vectors) == [[7.0, 2.5, 2.5], [2.5, 1.0, 1.0], [2.5, 1.0, 1.0]]
+    assert calculate_covariance_matrix(vectors) == [
+        [7.0, 2.5, 2.5],
+        [2.5, 1.0, 1.0],
+        [2.5, 1.0, 1.0],
+    ]
+
 
 if __name__ == "__main__":
     test_calculate_covariance_matrix()
