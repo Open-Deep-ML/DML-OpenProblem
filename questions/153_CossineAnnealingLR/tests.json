@@ -5,7 +5,7 @@
   },
   {
     "test": "import math\nscheduler = CosineAnnealingLRScheduler(initial_lr=0.1, T_max=10, min_lr=0.001)\nprint(f\"{scheduler.get_lr(epoch=2):.4f}\")",
-    "expected_output": "0.0818"
+    "expected_output": "0.0905"
   },
   {
     "test": "import math\nscheduler = CosineAnnealingLRScheduler(initial_lr=0.1, T_max=10, min_lr=0.001)\nprint(f\"{scheduler.get_lr(epoch=5):.4f}\")",
@@ -13,7 +13,7 @@
   },
   {
     "test": "import math\nscheduler = CosineAnnealingLRScheduler(initial_lr=0.1, T_max=10, min_lr=0.001)\nprint(f\"{scheduler.get_lr(epoch=7):.4f}\")",
-    "expected_output": "0.0275"
+    "expected_output": "0.0214"
   },
   {
     "test": "import math\nscheduler = CosineAnnealingLRScheduler(initial_lr=0.1, T_max=10, min_lr=0.001)\nprint(f\"{scheduler.get_lr(epoch=10):.4f}\")",
