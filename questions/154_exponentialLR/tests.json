@@ -1,0 +1,30 @@
+[
+  {
+    "test": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=0):.4f}\")",
+    "expected_output": "0.1000"
+  },
+  {
+    "test": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=1):.4f}\")",
+    "expected_output": "0.0900"
+  },
+  {
+    "test": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=2):.4f}\")",
+    "expected_output": "0.0810"
+  },
+  {
+    "test": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=3):.4f}\")",
+    "expected_output": "0.0729"
+  },
+  {
+    "test": "scheduler = ExponentialLRScheduler(initial_lr=1.0, gamma=0.5)\nprint(f\"{scheduler.get_lr(epoch=0):.4f}\\n{scheduler.get_lr(epoch=1):.4f}\\n{scheduler.get_lr(epoch=2):.4f}\\n{scheduler.get_lr(epoch=3):.4f}\")",
+    "expected_output": "1.0000\n0.5000\n0.2500\n0.1250"
+  },
+  {
+    "test": "scheduler = ExponentialLRScheduler(initial_lr=0.005, gamma=0.99)\nprint(f\"{scheduler.get_lr(epoch=0):.4f}\\n{scheduler.get_lr(epoch=10):.4f}\\n{scheduler.get_lr(epoch=20):.4f}\")",
+    "expected_output": "0.0050\n0.0045\n0.0041"
+  },
+  {
+    "test": "scheduler = ExponentialLRScheduler(initial_lr=0.001, gamma=1.0)\nprint(f\"{scheduler.get_lr(epoch=5):.4f}\\n{scheduler.get_lr(epoch=10):.4f}\")",
+    "expected_output": "0.0010\n0.0010"
+  }
+]
