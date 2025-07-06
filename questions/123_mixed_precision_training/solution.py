@@ -1,5 +1,4 @@
 import numpy as np
-import json
 
 class MixedPrecision:
     def __init__(self, loss_scale=1024.0):
@@ -13,7 +12,7 @@ class MixedPrecision:
         
         # Simple forward pass: linear model + MSE loss
         predictions = np.dot(inputs_fp16, weights_fp16)
-        loss = np.mean((predictions - targets_fp16) ** 2)
+        loss = np.mean((targets_fp16 - predictions) ** 2)
         
         # Scale loss and convert back to float32 (Python float)
         scaled_loss = float(loss) * self.loss_scale
