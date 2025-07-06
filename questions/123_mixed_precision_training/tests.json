@@ -1,11 +1,11 @@
 [
   {
     "input": "import numpy as np\nmp = MixedPrecision(loss_scale=1024.0)\nweights = np.array([0.5, -0.3], dtype=np.float32)\ninputs = np.array([[1.0, 2.0], [3.0, 4.0]], dtype=np.float32)\ntargets = np.array([1.0, 0.0], dtype=np.float32)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.4f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")\ngrads = np.array([512.0, -256.0], dtype=np.float32)\nresult = mp.backward(grads)\nprint(f\"Gradients: {result}\")\nprint(f\"Grad dtype: {result.dtype}\")",
-    "output": "Loss: 1638.4000\nLoss dtype: float\nGradients: [0.5 -0.25]\nGrad dtype: float32"
+    "output": "Loss: 665.0000\nLoss dtype: float\nGradients: [0.5 -0.25]\nGrad dtype: float32"
   },
   {
     "input": "import numpy as np\nmp = MixedPrecision(loss_scale=512.0)\nweights = np.array([1.0, 0.5], dtype=np.float64)\ninputs = np.array([[2.0, 1.0]], dtype=np.float64)\ntargets = np.array([3.0], dtype=np.float64)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.1f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")\ngrads = np.array([1024.0, 512.0], dtype=np.float16)\nresult = mp.backward(grads)\nprint(f\"Gradients: [{result[0]:.0f} {result[1]:.0f}]\")\nprint(f\"Grad dtype: {result.dtype}\")",
-    "output": "Loss: 256.0\nLoss dtype: float\nGradients: [2 1]\nGrad dtype: float32"
+    "output": "Loss: 128.0\nLoss dtype: float\nGradients: [2 1]\nGrad dtype: float32"
   },
   {
     "input": "import numpy as np\nmp = MixedPrecision(loss_scale=100.0)\nweights = np.array([0.1, 0.2], dtype=np.float32)\ninputs = np.array([[1.0, 1.0]], dtype=np.float32)\ntargets = np.array([0.5], dtype=np.float32)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.1f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")\ngrads = np.array([200.0, 100.0], dtype=np.float64)\nresult = mp.backward(grads)\nprint(f\"Gradients: [{result[0]:.0f} {result[1]:.0f}]\")\nprint(f\"Grad dtype: {result.dtype}\")",
