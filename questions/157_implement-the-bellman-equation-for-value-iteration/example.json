@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\ntransitions = [\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, False)]},\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, True)]}\n]\nV = np.array([0.0, 0.0])\ngamma = 0.9\nnew_V = bellman_update(V, transitions, gamma)\nprint(np.round(new_V, 2))",
+  "output": "[1. 1.]",
+  "reasoning": "For state 0, the best action is to go to state 1 and get a reward of 1. For state 1, taking action 1 gives a reward of 1 and ends the episode, so its value is 1."
+}

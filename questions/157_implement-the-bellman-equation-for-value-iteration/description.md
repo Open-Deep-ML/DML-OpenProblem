@@ -1,0 +1,1 @@
+Write a function that performs one step of value iteration for a given Markov Decision Process (MDP) using the Bellman equation. The function should update the state-value function V(s) for each state based on possible actions, transition probabilities, rewards, and the discount factor gamma. Only use NumPy.
