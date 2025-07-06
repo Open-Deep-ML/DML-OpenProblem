@@ -1,5 +1,5 @@
 {
   "input": "import numpy as np\nmp = MixedPrecision(loss_scale=1024.0)\nweights = np.array([0.5, -0.3], dtype=np.float32)\ninputs = np.array([[1.0, 2.0], [3.0, 4.0]], dtype=np.float32)\ntargets = np.array([1.0, 0.0], dtype=np.float32)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.4f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")\ngrads = np.array([512.0, -256.0], dtype=np.float32)\nresult = mp.backward(grads)\nprint(f\"Gradients: {result}\")\nprint(f\"Grad dtype: {result.dtype}\")",
-  "output": "Loss: 1638.4000\nLoss dtype: float\nGradients: [0.5 -0.25]\nGrad dtype: float32",
+  "output": "Loss: 665.0000\nLoss dtype: float\nGradients: [0.5 -0.25]\nGrad dtype: float32",
   "reasoning": "Forward pass converts inputs to float16, computes loss, then scales and returns as Python float (float32). Backward converts gradients to float32 and unscales. Final gradients must be float32 type."
 }
