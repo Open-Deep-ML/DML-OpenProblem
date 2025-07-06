@@ -1,5 +1,5 @@
 {
-  "id": "142",
+  "id": "161",
   "title": "Mixed Precision Training",
   "difficulty": "medium",
   "category": "Machine Learning",
@@ -8,8 +8,8 @@
   "dislikes": "0",
   "contributor": [
     {
-      "profile_link": "https://github.com/contributor",
-      "name": "contributor"
+      "profile_link": "https://github.com/komaksym",
+      "name": "komaksym"
     }
   ]
 }
