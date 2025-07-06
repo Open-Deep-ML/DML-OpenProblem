@@ -28,39 +28,35 @@ from typing import Any, Dict
 
 # ── 1️⃣  EDIT YOUR QUESTION HERE ────────────────────────────────────────────
 QUESTION_DICT: Dict[str, Any] = {
-  "id": "157",
-  "title": "Implement the Bellman Equation for Value Iteration",
-  "description": "Write a function that performs one step of value iteration for a given Markov Decision Process (MDP) using the Bellman equation. The function should update the state-value function V(s) for each state based on possible actions, transition probabilities, rewards, and the discount factor gamma. Only use NumPy.",
+  "id":'158',
+  "title": "Incremental Mean for Online Reward Estimation",
+  "description": "Implement an efficient method to update the mean reward for a k-armed bandit action after receiving each new reward, **without storing the full history of rewards**. Given the previous mean estimate (Q_prev), the number of times the action has been selected (k), and a new reward (R), compute the updated mean using the incremental formula.\n\n**Note:** Using a regular mean that stores all past rewards will eventually run out of memory. Your solution should use only the previous mean, the count, and the new reward.",
+  "category": "Reinforcement Learning",
+  "difficulty": "easy",
+  "starter_code": "def incremental_mean(Q_prev, k, R):\n    \"\"\"\n    Q_prev: previous mean estimate (float)\n    k: number of times the action has been selected (int)\n    R: new observed reward (float)\n    Returns: new mean estimate (float)\n    \"\"\"\n    # Your code here\n    pass\n",
+  "solution": "def incremental_mean(Q_prev, k, R):\n    return Q_prev + (1 / k) * (R - Q_prev)",
   "test_cases": [
     {
-      "test": "import numpy as np\ntransitions = [\n  # For state 0\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, False)]},\n  # For state 1\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, True)]}\n]\nV = np.array([0.0, 0.0])\ngamma = 0.9\nnew_V = bellman_update(V, transitions, gamma)\nprint(np.round(new_V, 2))",
-      "expected_output": "[1., 1.]"
+      "test": "Q = 0.0\nk = 1\nR = 5.0\nprint(round(incremental_mean(Q, k, R), 4))",
+      "expected_output": "5.0"
     },
     {
-      "test": "import numpy as np\ntransitions = [\n  {0: [(0.8, 0, 5, False), (0.2, 1, 10, False)], 1: [(1.0, 1, 2, False)]},\n  {0: [(1.0, 0, 0, False)], 1: [(1.0, 1, 0, True)]}\n]\nV = np.array([0.0, 0.0])\ngamma = 0.5\nnew_V = bellman_update(V, transitions, gamma)\nprint(np.round(new_V, 2))",
-      "expected_output": "[6.,  0.]"
-    }
-  ],
-  "solution": "import numpy as np\n\ndef bellman_update(V, transitions, gamma):\n    n_states = len(V)\n    new_V = np.zeros_like(V)\n    for s in range(n_states):\n        action_values = []\n        for a in transitions[s]:\n            total = 0\n            for prob, next_s, reward, done in transitions[s][a]:\n                total += prob * (reward + gamma * (0 if done else V[next_s]))\n            action_values.append(total)\n        new_V[s] = max(action_values)\n    return new_V",
-  "example": {
-    "input": "import numpy as np\ntransitions = [\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, False)]},\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, True)]}\n]\nV = np.array([0.0, 0.0])\ngamma = 0.9\nnew_V = bellman_update(V, transitions, gamma)\nprint(np.round(new_V, 2))",
-    "output": "[1. 1.]",
-    "reasoning": "For state 0, the best action is to go to state 1 and get a reward of 1. For state 1, taking action 1 gives a reward of 1 and ends the episode, so its value is 1."
-  },
-  "category": "Reinforcement Learning",
-  "starter_code": "import numpy as np\n\ndef bellman_update(V, transitions, gamma):\n    \"\"\"\n    Perform one step of value iteration using the Bellman equation.\n    Args:\n      V: np.ndarray, state values, shape (n_states,)\n      transitions: list of dicts. transitions[s][a] is a list of (prob, next_state, reward, done)\n      gamma: float, discount factor\n    Returns:\n      np.ndarray, updated state values\n    \"\"\"\n    # TODO: Implement Bellman update\n    pass",
-  "learn_section": "# **The Bellman Equation**\n\nThe **Bellman equation** is a fundamental recursive equation in reinforcement learning that relates the value of a state to the values of possible next states. It provides the mathematical foundation for key RL algorithms such as value iteration and Q-learning.\n\n---\n\n## **Key Idea**\nFor each state $s$, the value $V(s)$ is the maximum expected return obtainable by choosing the best action $a$ and then following the optimal policy:\n\n$$\nV(s) = \\max_{a} \\sum_{s'} P(s'|s, a) \\left[ R(s, a, s') + \\gamma V(s') \\right]\n$$\n\nWhere:\n- $V(s)$: value of state $s$\n- $a$: possible actions\n- $P(s'|s, a)$: probability of moving to state $s'$ from $s$ via $a$\n- $R(s, a, s')$: reward for this transition\n- $\\gamma$: discount factor ($0 \\leq \\gamma \\leq 1$)\n- $V(s')$: value of next state\n\n---\n\n## **How to Use**\n1. **For each state:**\n   - For each possible action, sum over possible next states, weighting by transition probability.\n   - Add the immediate reward and the discounted value of the next state.\n   - Choose the action with the highest expected value (for control).\n2. **Repeat until values converge** (value iteration) or as part of other RL updates.\n\n---\n\n## **Applications**\n- **Value Iteration** and **Policy Iteration** in Markov Decision Processes (MDP)\n- **Q-learning** and other RL algorithms\n- Calculating the optimal value function and policy in gridworlds, games, and general MDPs\n\n---\n\n## **Why It Matters**\n- The Bellman equation formalizes the notion of **optimality** in sequential decision-making.\n- It is a backbone for teaching agents to solve environments with rewards, uncertainty, and long-term planning.",
-  "contributor": [
+      "test": "Q = 5.0\nk = 2\nR = 7.0\nprint(round(incremental_mean(Q, k, R), 4))",
+      "expected_output": "6.0"
+    },
     {
-      "profile_link": "https://github.com/moe18",
-      "name": "Moe Chabot"
+      "test": "Q = 6.0\nk = 3\nR = 4.0\nprint(round(incremental_mean(Q, k, R), 4))",
+      "expected_output": "5.3333"
     }
   ],
-  "likes": "0",
-  "dislikes": "0",
-  "difficulty": "medium",
-  "video": ""
+  "example": {
+    "input": "Q_prev = 2.0\nk = 2\nR = 6.0\nnew_Q = incremental_mean(Q_prev, k, R)\nprint(round(new_Q, 2))",
+    "output": "4.0",
+    "reasoning": "The updated mean is Q_prev + (1/k) * (R - Q_prev) = 2.0 + (1/2)*(6.0 - 2.0) = 2.0 + 2.0 = 4.0"
+  },
+  "learn_section": "### Incremental Mean Update Rule\n\nThe incremental mean formula lets you update your estimate of the mean after each new observation, **without keeping all previous rewards in memory**. For the k-th reward $R_k$ and previous estimate $Q_{k}$:\n\n$$\nQ_{k+1} = Q_k + \\frac{1}{k} (R_k - Q_k)\n$$\n\nThis saves memory compared to the regular mean, which requires storing all past rewards and recalculating each time. The incremental rule is crucial for online learning and large-scale problems where storing all data is impractical."
 }
+
 
 
 
