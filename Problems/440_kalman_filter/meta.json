@@ -1,7 +1,13 @@
 {
-  "id": 440,
-  "title": "Kalman Filter in 2D Motion Prediction",
-  "category": "algorithms",
-  "difficulty": "medium",
-  "tags": ["kalman-filter", "motion-tracking", "state-estimation"]
+    "id": 440,
+    "title": "Kalman Filter Prediction",
+    "category": "Time Series",
+    "difficulty": "medium",
+    "order": 440,
+    "tags": [
+        "filtering",
+        "tracking",
+        "kalman"
+    ],
+    "is_hidden": false
 }
