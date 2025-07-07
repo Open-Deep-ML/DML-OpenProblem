@@ -1,0 +1,7 @@
+{
+  "id": 440,
+  "title": "Kalman Filter in 2D Motion Prediction",
+  "category": "algorithms",
+  "difficulty": "medium",
+  "tags": ["kalman-filter", "motion-tracking", "state-estimation"]
+}
