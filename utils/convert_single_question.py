@@ -29,33 +29,7 @@ from typing import Any, Dict
 # ── 1️⃣  EDIT YOUR QUESTION HERE ────────────────────────────────────────────
 QUESTION_DICT: Dict[str, Any] = {
   "id":'158',
-  "title": "Epsilon-Greedy Action Selection for n-Armed Bandit",
-  "description": "Implement the epsilon-greedy method for action selection in an n-armed bandit problem. Given a set of estimated action values (Q-values), select an action using the epsilon-greedy policy: with probability epsilon, choose a random action; with probability 1 - epsilon, choose the action with the highest estimated value.",
-  "category": "Reinforcement Learning",
-  "difficulty": "easy",
-  "starter_code": "import numpy as np\n\ndef epsilon_greedy(Q, epsilon=0.1):\n    \"\"\"\n    Selects an action using epsilon-greedy policy.\n    Q: np.ndarray of shape (n,) -- estimated action values\n    epsilon: float in [0, 1]\n    Returns: int, selected action index\n    \"\"\"\n    # Your code here\n    pass",
-  "solution": "import numpy as np\n\ndef epsilon_greedy(Q, epsilon=0.1):\n    if np.random.rand() < epsilon:\n        return np.random.randint(len(Q))\n    else:\n        return int(np.argmax(Q))",
-  "test_cases": [
-    {
-      "test": "import numpy as np\nnp.random.seed(0)\nprint([epsilon_greedy(np.array([1, 2, 3]), epsilon=0.0) for _ in range(5)])",
-      "expected_output": "[2, 2, 2, 2, 2]"
-    },
-    {
-      "test": "import numpy as np\nnp.random.seed(1)\nprint([epsilon_greedy(np.array([5, 2, 1]), epsilon=1.0) for _ in range(5)])",
-      "expected_output": "[0, 1, 1, 0, 0]"
-    },
-    {
-      "test": "import numpy as np\nnp.random.seed(42)\nresults = [epsilon_greedy(np.array([1.5, 2.5, 0.5]), epsilon=0.5) for _ in range(10)]\nprint(results)",
-      "expected_output": "[1, 0, 1, 1, 1, 0, 1, 0, 0, 0]"
-    }
-  ],
-  "example": {
-    "input": "Q = np.array([0.5, 2.3, 1.7])\nepsilon = 0.0\naction = epsilon_greedy(Q, epsilon)\nprint(action)",
-    "output": "1",
-    "reasoning": "With epsilon=0.0 (always greedy), the highest Q-value is 2.3 at index 1, so the function always returns 1."
-  },
-  "learn_section": "### Epsilon-Greedy Policy\n\nThe epsilon-greedy method is a fundamental action selection strategy used in reinforcement learning, especially for solving the n-armed bandit problem. The key idea is to balance **exploration** (trying new actions) and **exploitation** (choosing the best-known action):\n\n- With probability $\\varepsilon$ (epsilon), the agent explores by selecting an action at random.\n- With probability $1-\\varepsilon$, it exploits by choosing the action with the highest estimated value (greedy choice).\n\nThe epsilon-greedy policy is simple to implement and provides a way to avoid getting stuck with suboptimal actions due to insufficient exploration."
-}
+
 
 
 
