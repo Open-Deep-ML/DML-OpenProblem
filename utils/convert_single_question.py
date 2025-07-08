@@ -28,39 +28,35 @@ from typing import Any, Dict
 
 # ── 1️⃣  EDIT YOUR QUESTION HERE ────────────────────────────────────────────
 QUESTION_DICT: Dict[str, Any] = {
-  "id": "157",
-  "title": "Implement the Bellman Equation for Value Iteration",
-  "description": "Write a function that performs one step of value iteration for a given Markov Decision Process (MDP) using the Bellman equation. The function should update the state-value function V(s) for each state based on possible actions, transition probabilities, rewards, and the discount factor gamma. Only use NumPy.",
+  "id":'158',
+  "title": "Epsilon-Greedy Action Selection for n-Armed Bandit",
+  "description": "Implement the epsilon-greedy method for action selection in an n-armed bandit problem. Given a set of estimated action values (Q-values), select an action using the epsilon-greedy policy: with probability epsilon, choose a random action; with probability 1 - epsilon, choose the action with the highest estimated value.",
+  "category": "Reinforcement Learning",
+  "difficulty": "easy",
+  "starter_code": "import numpy as np\n\ndef epsilon_greedy(Q, epsilon=0.1):\n    \"\"\"\n    Selects an action using epsilon-greedy policy.\n    Q: np.ndarray of shape (n,) -- estimated action values\n    epsilon: float in [0, 1]\n    Returns: int, selected action index\n    \"\"\"\n    # Your code here\n    pass",
+  "solution": "import numpy as np\n\ndef epsilon_greedy(Q, epsilon=0.1):\n    if np.random.rand() < epsilon:\n        return np.random.randint(len(Q))\n    else:\n        return int(np.argmax(Q))",
   "test_cases": [
     {
-      "test": "import numpy as np\ntransitions = [\n  # For state 0\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, False)]},\n  # For state 1\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, True)]}\n]\nV = np.array([0.0, 0.0])\ngamma = 0.9\nnew_V = bellman_update(V, transitions, gamma)\nprint(np.round(new_V, 2))",
-      "expected_output": "[1., 1.]"
+      "test": "import numpy as np\nnp.random.seed(0)\nprint([epsilon_greedy(np.array([1, 2, 3]), epsilon=0.0) for _ in range(5)])",
+      "expected_output": "[2, 2, 2, 2, 2]"
     },
     {
-      "test": "import numpy as np\ntransitions = [\n  {0: [(0.8, 0, 5, False), (0.2, 1, 10, False)], 1: [(1.0, 1, 2, False)]},\n  {0: [(1.0, 0, 0, False)], 1: [(1.0, 1, 0, True)]}\n]\nV = np.array([0.0, 0.0])\ngamma = 0.5\nnew_V = bellman_update(V, transitions, gamma)\nprint(np.round(new_V, 2))",
-      "expected_output": "[6.,  0.]"
-    }
-  ],
-  "solution": "import numpy as np\n\ndef bellman_update(V, transitions, gamma):\n    n_states = len(V)\n    new_V = np.zeros_like(V)\n    for s in range(n_states):\n        action_values = []\n        for a in transitions[s]:\n            total = 0\n            for prob, next_s, reward, done in transitions[s][a]:\n                total += prob * (reward + gamma * (0 if done else V[next_s]))\n            action_values.append(total)\n        new_V[s] = max(action_values)\n    return new_V",
-  "example": {
-    "input": "import numpy as np\ntransitions = [\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, False)]},\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, True)]}\n]\nV = np.array([0.0, 0.0])\ngamma = 0.9\nnew_V = bellman_update(V, transitions, gamma)\nprint(np.round(new_V, 2))",
-    "output": "[1. 1.]",
-    "reasoning": "For state 0, the best action is to go to state 1 and get a reward of 1. For state 1, taking action 1 gives a reward of 1 and ends the episode, so its value is 1."
-  },
-  "category": "Reinforcement Learning",
-  "starter_code": "import numpy as np\n\ndef bellman_update(V, transitions, gamma):\n    \"\"\"\n    Perform one step of value iteration using the Bellman equation.\n    Args:\n      V: np.ndarray, state values, shape (n_states,)\n      transitions: list of dicts. transitions[s][a] is a list of (prob, next_state, reward, done)\n      gamma: float, discount factor\n    Returns:\n      np.ndarray, updated state values\n    \"\"\"\n    # TODO: Implement Bellman update\n    pass",
-  "learn_section": "# **The Bellman Equation**\n\nThe **Bellman equation** is a fundamental recursive equation in reinforcement learning that relates the value of a state to the values of possible next states. It provides the mathematical foundation for key RL algorithms such as value iteration and Q-learning.\n\n---\n\n## **Key Idea**\nFor each state $s$, the value $V(s)$ is the maximum expected return obtainable by choosing the best action $a$ and then following the optimal policy:\n\n$$\nV(s) = \\max_{a} \\sum_{s'} P(s'|s, a) \\left[ R(s, a, s') + \\gamma V(s') \\right]\n$$\n\nWhere:\n- $V(s)$: value of state $s$\n- $a$: possible actions\n- $P(s'|s, a)$: probability of moving to state $s'$ from $s$ via $a$\n- $R(s, a, s')$: reward for this transition\n- $\\gamma$: discount factor ($0 \\leq \\gamma \\leq 1$)\n- $V(s')$: value of next state\n\n---\n\n## **How to Use**\n1. **For each state:**\n   - For each possible action, sum over possible next states, weighting by transition probability.\n   - Add the immediate reward and the discounted value of the next state.\n   - Choose the action with the highest expected value (for control).\n2. **Repeat until values converge** (value iteration) or as part of other RL updates.\n\n---\n\n## **Applications**\n- **Value Iteration** and **Policy Iteration** in Markov Decision Processes (MDP)\n- **Q-learning** and other RL algorithms\n- Calculating the optimal value function and policy in gridworlds, games, and general MDPs\n\n---\n\n## **Why It Matters**\n- The Bellman equation formalizes the notion of **optimality** in sequential decision-making.\n- It is a backbone for teaching agents to solve environments with rewards, uncertainty, and long-term planning.",
-  "contributor": [
+      "test": "import numpy as np\nnp.random.seed(1)\nprint([epsilon_greedy(np.array([5, 2, 1]), epsilon=1.0) for _ in range(5)])",
+      "expected_output": "[0, 1, 1, 0, 0]"
+    },
     {
-      "profile_link": "https://github.com/moe18",
-      "name": "Moe Chabot"
+      "test": "import numpy as np\nnp.random.seed(42)\nresults = [epsilon_greedy(np.array([1.5, 2.5, 0.5]), epsilon=0.5) for _ in range(10)]\nprint(results)",
+      "expected_output": "[1, 0, 1, 1, 1, 0, 1, 0, 0, 0]"
     }
   ],
-  "likes": "0",
-  "dislikes": "0",
-  "difficulty": "medium",
-  "video": ""
+  "example": {
+    "input": "Q = np.array([0.5, 2.3, 1.7])\nepsilon = 0.0\naction = epsilon_greedy(Q, epsilon)\nprint(action)",
+    "output": "1",
+    "reasoning": "With epsilon=0.0 (always greedy), the highest Q-value is 2.3 at index 1, so the function always returns 1."
+  },
+  "learn_section": "### Epsilon-Greedy Policy\n\nThe epsilon-greedy method is a fundamental action selection strategy used in reinforcement learning, especially for solving the n-armed bandit problem. The key idea is to balance **exploration** (trying new actions) and **exploitation** (choosing the best-known action):\n\n- With probability $\\varepsilon$ (epsilon), the agent explores by selecting an action at random.\n- With probability $1-\\varepsilon$, it exploits by choosing the action with the highest estimated value (greedy choice).\n\nThe epsilon-greedy policy is simple to implement and provides a way to avoid getting stuck with suboptimal actions due to insufficient exploration."
 }
+
 
 
 
