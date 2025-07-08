@@ -29,33 +29,7 @@ from typing import Any, Dict
 # ── 1️⃣  EDIT YOUR QUESTION HERE ────────────────────────────────────────────
 QUESTION_DICT: Dict[str, Any] = {
   "id":'158',
-  "title": "Incremental Mean for Online Reward Estimation",
-  "description": "Implement an efficient method to update the mean reward for a k-armed bandit action after receiving each new reward, **without storing the full history of rewards**. Given the previous mean estimate (Q_prev), the number of times the action has been selected (k), and a new reward (R), compute the updated mean using the incremental formula.\n\n**Note:** Using a regular mean that stores all past rewards will eventually run out of memory. Your solution should use only the previous mean, the count, and the new reward.",
-  "category": "Reinforcement Learning",
-  "difficulty": "easy",
-  "starter_code": "def incremental_mean(Q_prev, k, R):\n    \"\"\"\n    Q_prev: previous mean estimate (float)\n    k: number of times the action has been selected (int)\n    R: new observed reward (float)\n    Returns: new mean estimate (float)\n    \"\"\"\n    # Your code here\n    pass\n",
-  "solution": "def incremental_mean(Q_prev, k, R):\n    return Q_prev + (1 / k) * (R - Q_prev)",
-  "test_cases": [
-    {
-      "test": "Q = 0.0\nk = 1\nR = 5.0\nprint(round(incremental_mean(Q, k, R), 4))",
-      "expected_output": "5.0"
-    },
-    {
-      "test": "Q = 5.0\nk = 2\nR = 7.0\nprint(round(incremental_mean(Q, k, R), 4))",
-      "expected_output": "6.0"
-    },
-    {
-      "test": "Q = 6.0\nk = 3\nR = 4.0\nprint(round(incremental_mean(Q, k, R), 4))",
-      "expected_output": "5.3333"
-    }
-  ],
-  "example": {
-    "input": "Q_prev = 2.0\nk = 2\nR = 6.0\nnew_Q = incremental_mean(Q_prev, k, R)\nprint(round(new_Q, 2))",
-    "output": "4.0",
-    "reasoning": "The updated mean is Q_prev + (1/k) * (R - Q_prev) = 2.0 + (1/2)*(6.0 - 2.0) = 2.0 + 2.0 = 4.0"
-  },
-  "learn_section": "### Incremental Mean Update Rule\n\nThe incremental mean formula lets you update your estimate of the mean after each new observation, **without keeping all previous rewards in memory**. For the k-th reward $R_k$ and previous estimate $Q_{k}$:\n\n$$\nQ_{k+1} = Q_k + \\frac{1}{k} (R_k - Q_k)\n$$\n\nThis saves memory compared to the regular mean, which requires storing all past rewards and recalculating each time. The incremental rule is crucial for online learning and large-scale problems where storing all data is impractical."
-}
+
 
 
 

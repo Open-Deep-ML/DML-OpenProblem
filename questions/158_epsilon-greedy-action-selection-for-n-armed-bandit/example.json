@@ -1,0 +1,5 @@
+{
+  "input": "Q = np.array([0.5, 2.3, 1.7])\nepsilon = 0.0\naction = epsilon_greedy(Q, epsilon)\nprint(action)",
+  "output": "1",
+  "reasoning": "With epsilon=0.0 (always greedy), the highest Q-value is 2.3 at index 1, so the function always returns 1."
+}
