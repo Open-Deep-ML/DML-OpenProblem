@@ -1,0 +1,1 @@
+Implement the Upper Confidence Bound (UCB) action selection strategy for the multi-armed bandit problem. Write a function that, given the current number of times each action has been selected, the average rewards for each action, and the current timestep t, returns the action to select according to the UCB1 formula. Use only NumPy.

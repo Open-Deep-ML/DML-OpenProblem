@@ -1,0 +1,15 @@
+{
+  "id": "162",
+  "title": "Upper Confidence Bound (UCB) Action Selection",
+  "difficulty": "easy",
+  "category": "Reinforcement Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ]
+}
