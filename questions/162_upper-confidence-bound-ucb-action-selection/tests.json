@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import numpy as np\ncounts = np.array([1, 1, 1, 1])  # Each action tried once\nvalues = np.array([1.0, 2.0, 1.5, 0.5])\nt = 4\nc = 2.0\nprint(ucb_action(counts, values, t, c))",
+    "expected_output": "1"
+  },
+  {
+    "test": "import numpy as np\ncounts = np.array([10, 10, 1, 10])\nvalues = np.array([0.7, 0.6, 2.0, 0.8])\nt = 31\nc = 1.0\nprint(ucb_action(counts, values, t, c))",
+    "expected_output": "2"
+  },
+  {
+    "test": "import numpy as np\ncounts = np.array([20, 5, 5])\nvalues = np.array([1.0, 2.0, 1.5])\nt = 30\nc = 0.5\nprint(ucb_action(counts, values, t, c))",
+    "expected_output": "1"
+  },
+  {
+    "test": "import numpy as np\ncounts = np.array([3, 3, 3])\nvalues = np.array([0.0, 0.0, 0.0])\nt = 9\nc = 1.0\nprint(ucb_action(counts, values, t, c))",
+    "expected_output": "0"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\nnp.random.seed(0)\ngb = GradientBandit(num_actions=3, alpha=0.1)\na1 = gb.select_action()\ngb.update(a1, reward=1.0)\na2 = gb.select_action()\ngb.update(a2, reward=0.0)\nprint(a1, a2)",
+    "expected_output": "1 2"
+  },
+  {
+    "test": "import numpy as np\ngb = GradientBandit(num_actions=2, alpha=0.2)\nacts = [gb.select_action() for _ in range(10)]\nprint(len(acts), set(acts).issubset({0,1}))",
+    "expected_output": "10 True"
+  },
+  {
+    "test": "import numpy as np\ngb = GradientBandit(num_actions=4, alpha=0.1)\ngb.update(0, 0.0)\ngb.update(1, 1.0)\ngb.update(2, 0.5)\ngb.update(3, 0.0)\nprobs = gb.softmax()\nprint(np.round(probs, 2).tolist())",
+    "expected_output": "[0.25, 0.26, 0.25, 0.24]"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "input": "ph = 0.4\nV, policy = gambler_value_iteration(ph)\nprint(round(V[50], 4))\nprint(policy[50])",
+  "output": "0.0178\n1",
+  "reasoning": "From state 50, the optimal action is to bet 1, with a probability of reaching 100 of about 0.0178 when ph=0.4."
+}

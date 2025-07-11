@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\ngb = GradientBandit(num_actions=3, alpha=0.1)\na = gb.select_action()\ngb.update(a, reward=1.0)\nprobs = gb.softmax()\nprint(np.round(probs, 2).tolist())",
+  "output": "[0.32, 0.34, 0.34]",
+  "reasoning": "After a positive reward, the selected action's preference is increased, boosting its softmax probability."
+}

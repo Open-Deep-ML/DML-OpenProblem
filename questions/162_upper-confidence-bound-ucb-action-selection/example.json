@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\ncounts = np.array([1, 1, 1, 1])\nvalues = np.array([1.0, 2.0, 1.5, 0.5])\nt = 4\nc = 2.0\nprint(ucb_action(counts, values, t, c))",
+  "output": "1",
+  "reasoning": "At t=4, each action has been tried once, but action 1 has the highest average reward (2.0) and the same confidence bound as the others, so it is chosen."
+}
