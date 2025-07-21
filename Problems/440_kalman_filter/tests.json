@@ -1,0 +1,16 @@
+[
+  {
+    "test": {
+      "measurements": [[0, 0], [1, 1], [2, 2], [3, 3]],
+      "t_future": 2
+    },
+    "expected_output": [5.0, 5.0]
+  },
+  {
+    "test": {
+      "measurements": [[0.1, 0.2], [1.1, 1.0], [1.9, 2.2]],
+      "t_future": 1
+    },
+    "expected_output": [3.0, 3.0]
+  }
+]
