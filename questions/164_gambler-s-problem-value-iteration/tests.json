@@ -1,0 +1,10 @@
+[
+  {
+    "test": "ph = 0.4\nV, policy = gambler_value_iteration(ph)\nprint(round(V[50], 4))\nprint(policy[50])",
+    "expected_output": "0.4\n50"
+  },
+  {
+    "test": "ph = 0.25\nV, policy = gambler_value_iteration(ph)\nprint(round(V[80], 4))\nprint(policy[80])",
+    "expected_output": "0.4534\n5"
+  }
+]
