@@ -1,0 +1,14 @@
+[
+  {
+      "test": "print(k_nearest_neighbors([(1, 2), (3, 4), (1, 1), (5, 6), (2, 3)], (2, 2), 3))",
+      "expected_output": "[(1, 2), (2, 3), (1, 1)]"
+  },
+  {
+      "test": "print(k_nearest_neighbors([(0, 0), (1, 1), (2, 2), (3, 3)], (1.5, 1.5), 2))",
+      "expected_output": "[(1, 1), (2, 2)]"
+  },
+  {
+      "test": "print(k_nearest_neighbors([(1, 1), (2, 2), (3, 3)], (0, 0), 1))",
+      "expected_output": "[(1, 1)]"
+  }
+]
