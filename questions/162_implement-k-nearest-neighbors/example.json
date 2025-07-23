@@ -1,5 +1,5 @@
 {
   "input": "points = [(1, 2), (3, 4), (1, 1), (5, 6), (2, 3)], query_point = (2, 2), k = 3",
   "output": "[(1, 2), (2, 3), (1, 1)]",
-  "reasoning": "Calculate Euclidean distances from (2, 2): (1, 2) → √((1-2)² + (2-2)²) = 1.0, (3, 4) → √((3-2)² + (4-2)²) = √5 ≈ 2.24, (1, 1) → √((1-2)² + (1-2)²) = √2 ≈ 1.41, (5, 6) → √((5-2)² + (6-2)²) = 5.0, (2, 3) → √((2-2)² + (3-2)²) = 1.0. The 3 closest distances are 1.0, 1.0, and √2, corresponding to points (1, 2), (2, 3), and (1, 1)."
+  "reasoning": "The 3 closest points to (2, 2) are (1, 2), (2, 3), and (1, 1), so the output is [(1, 2), (2, 3), (1, 1)]."
 }
