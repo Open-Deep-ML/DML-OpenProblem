@@ -1,0 +1,18 @@
+[
+  {
+    "test": "print(chi_square_probability(2, 2))",
+    "expected_output": "0.184"
+  },
+  {
+    "test": "print(chi_square_probability(0, 4))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(chi_square_probability(5, 3))",
+    "expected_output": "0.073"
+  },
+  {
+    "test": "print(chi_square_probability(10, 6))",
+    "expected_output": "0.042"
+  }
+]

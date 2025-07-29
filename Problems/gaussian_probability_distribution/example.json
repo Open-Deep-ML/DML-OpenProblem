@@ -1,5 +1,0 @@
-{
-  "input": "x = 10, mu = 10, sigma = 2",
-  "output": "0.199",
-  "reasoning": "To calculate the probability of occurrence of x in a Gaussian distribution, we use the formula:\n\nP(x) = (1 / (sigma * sqrt(2 * pi))) * exp(-((x - mu) ** 2) / (2 * sigma ** 2))\n\nSubstituting the values:\n\nP(10) = (1 / (2 * sqrt(2 * pi))) * exp(-((10 - 10) ** 2) / (2 * 2 ** 2))\n\nCalculating this gives us approximately 0.199."
-}
