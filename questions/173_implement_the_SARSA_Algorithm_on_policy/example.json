@@ -1,0 +1,5 @@
+{
+    "input": "transitions = {\n    ('A', 'left'): (5.0, 'B'),\n    ('A', 'right'): (1.0, 'C'),\n    ('B', 'left'): (2.0, 'A'),\n    ('B', 'right'): (0.0, 'C'),\n    ('C', 'down'): (1.0, 'terminal')\n}\n\ninitial_states = ['A', 'B']\nalpha = 0.1\ngamma = 0.9\nmax_steps = 10\n\nQ = sarsa_update(transitions, initial_states, alpha, gamma, max_steps)\n\nfor k in sorted(transitions):\n    print(f\"Q{str(k):15} = {Q[k]:.4f}\")",
+    "output": "Q('A', 'left')   = 4.2181\nQ('A', 'right')  = 0.0000\nQ('B', 'left')   = 2.7901\nQ('B', 'right')  = 0.0000",
+    "reasoning": "The SARSA update rule is:\nQ(s,a) <- Q(s,a) + alpha * [reward + gamma * Q(s',a') - Q(s,a)]\n\nStarting from initial Q-values of 0, each episode updates Q-values based on the transitions.\n- Q('A', 'left') increases because it leads to B, and B can eventually return to A or C with additional rewards.\n- Q('A', 'right') and Q('B', 'right') remain 0.0 because the next state C leads directly to terminal with small reward.\n- Q('B', 'left') increases due to cyclic transitions giving non-zero rewards."
+}
