@@ -1,3 +1,3 @@
-## Gaussian Probability Distribution
+## Chi-Squared Probability Distribution
 
-Calculate the probability of occurrence of x in a Gaussian distribution with the given mean (mu) and standard deviation (sigma). 
+Calculate the probability of occurrence of x in a Chi-Squared distribution with the given sample value 'x' and degrees of freedom 'k'. 

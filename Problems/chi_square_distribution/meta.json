@@ -6,7 +6,10 @@
   "video": "",
   "likes": "0",
   "dislikes": "0",
-  "contributor": ["Soham Deshmukh"],
+  "contributor": [
+        {"profile_link": "https://github.com/SohamD34",
+        "name": "caesar"}
+    ],
   "tinygrad_difficulty": "",
   "pytorch_difficulty": ""
 }
