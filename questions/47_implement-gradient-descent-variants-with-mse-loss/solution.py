@@ -8,7 +8,7 @@ def gradient_descent(
     n_iterations: int,
     batch_size: int = 1,
     method: str = "batch",
-):
+) -> np.ndarray:
     m: int = X.shape[0]
     n: int = X.shape[1]
     w = np.zeros((n, 1))
