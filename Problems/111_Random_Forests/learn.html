@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Forest from Scratch</title>
+    <script type="text/javascript" async
+        src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Forest Algorithm</h1>
+        <p>Random Forest is an ensemble learning method that builds multiple decision trees and aggregates their predictions.</p>
+
+        <h2>Mathematical Formulation</h2>
+        <p>For classification, the final prediction is obtained using majority voting:</p>
+        <p class="formula">
+            \( \hat{y} = \text{mode} \{ T_1(x), T_2(x), ..., T_M(x) \} \)
+        </p>
+
+        <p>For regression, the final prediction is the average of all tree outputs:</p>
+        <p class="formula">
+            \( \hat{y} = \frac{1}{M} \sum_{i=1}^{M} T_i(x) \)
+        </p>
+
+        <h2>Implementation Steps</h2>
+        <ol>
+            <li>Create multiple bootstrap samples from the dataset.</li>
+            <li>Train a decision tree on each bootstrap sample.</li>
+            <li>For each split, choose a random subset of features.</li>
+            <li>Aggregate predictions:
+                <ul>
+                    <li><b>Classification:</b> Use majority voting.</li>
+                    <li><b>Regression:</b> Take the average prediction.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>Example Calculation</h2>
+        <p>Given a dataset with multiple features, we train multiple decision trees:</p>
+        <ul>
+            <li>Suppose we train <b>5 decision trees</b> on different bootstrapped samples.</li>
+            <li>Each tree makes a prediction.</li>
+            <li>For classification, we select the most common prediction.</li>
+            <li>For regression, we take the average of all predictions.</li>
+        </ul>
+
+        <h2>Final Prediction</h2>
+        <p>After training multiple trees and aggregating predictions:</p>
+        <ul>
+            <li>If performing classification, we use majority voting.</li>
+            <li>If performing regression, we average the tree predictions.</li>
+        </ul>
+    </div>
+</body>
+</html>
