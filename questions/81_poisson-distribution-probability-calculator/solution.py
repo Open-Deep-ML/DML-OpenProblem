@@ -1,5 +1,6 @@
 import math
 
+
 def poisson_probability(k, lam):
     """
     Calculate the probability of observing exactly k events in a fixed interval,
@@ -9,6 +10,6 @@ def poisson_probability(k, lam):
     :return: Probability of k events occurring
     """
     # Calculate the Poisson probability using the formula
-    probability = (lam ** k) * math.exp(-lam) / math.factorial(k)
+    probability = (lam**k) * math.exp(-lam) / math.factorial(k)
     # Return the probability, rounded to five decimal places
     return round(probability, 5)

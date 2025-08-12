@@ -1,5 +1,3 @@
-import numpy as np
-
 def OSA(source: str, target: str) -> int:
     source_len, target_len = len(source), len(target)
 
@@ -18,9 +16,17 @@ def OSA(source: str, target: str) -> int:
             osa_matrix[i][j] = min(
                 osa_matrix[i - 1][j] + 1,  # Deletion
                 osa_matrix[i][j - 1] + 1,  # Insertion
-                osa_matrix[i - 1][j - 1] + (1 if source[i - 1] != target[j - 1] else 0)  # Substitution
+                osa_matrix[i - 1][j - 1]
+                + (1 if source[i - 1] != target[j - 1] else 0),  # Substitution
             )
-            if i > 1 and j > 1 and source[i - 1] == target[j - 2] and source[i - 2] == target[j - 1]:
-                osa_matrix[i][j] = min(osa_matrix[i][j], osa_matrix[i - 2][j - 2] + 1)  # Transposition
+            if (
+                i > 1
+                and j > 1
+                and source[i - 1] == target[j - 2]
+                and source[i - 2] == target[j - 1]
+            ):
+                osa_matrix[i][j] = min(
+                    osa_matrix[i][j], osa_matrix[i - 2][j - 2] + 1
+                )  # Transposition
 
     return osa_matrix[-1][-1]

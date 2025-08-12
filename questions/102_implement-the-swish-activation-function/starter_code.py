@@ -1,12 +1,12 @@
 def swish(x: float) -> float:
-	"""
-	Implements the Swish activation function.
+    """
+    Implements the Swish activation function.
 
-	Args:
-		x: Input value
+    Args:
+            x: Input value
 
-	Returns:
-		The Swish activation value
-	"""
-	# Your code here
-	pass
+    Returns:
+            The Swish activation value
+    """
+    # Your code here
+    pass

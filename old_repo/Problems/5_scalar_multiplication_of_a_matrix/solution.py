@@ -5,6 +5,7 @@ def scalar_multiply(
     # Multiply each element by the scalar
     return [[element * scalar for element in row] for row in matrix]
 
+
 def test_scalar_multiply() -> None:
     # Test cases for scalar_multiply function
 
@@ -17,6 +18,7 @@ def test_scalar_multiply() -> None:
     matrix = [[0, -1], [1, 0]]
     scalar = -1
     assert scalar_multiply(matrix, scalar) == [[0, 1], [-1, 0]]
+
 
 if __name__ == "__main__":
     test_scalar_multiply()

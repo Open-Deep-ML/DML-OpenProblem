@@ -1,6 +1,7 @@
 import numpy as np
 from tinygrad.tensor import Tensor
 
+
 def feature_scaling_tg(data) -> tuple[Tensor, Tensor]:
     """
     Standardize and Min-Max normalize input data using tinygrad.

@@ -3,8 +3,9 @@ def inverse_2x2(matrix: list[list[float]]) -> list[list[float]]:
     determinant = a * d - b * c
     if determinant == 0:
         return None
-    inverse = [[d/determinant, -b/determinant], [-c/determinant, a/determinant]]
+    inverse = [[d / determinant, -b / determinant], [-c / determinant, a / determinant]]
     return inverse
+
 
 def test_inverse_2x2() -> None:
     # Test cases for inverse_2x2 function
@@ -16,6 +17,7 @@ def test_inverse_2x2() -> None:
     # Test case 2
     matrix = [[2, 1], [6, 2]]
     assert inverse_2x2(matrix) == [[-1.0, 0.5], [3.0, -1.0]]
+
 
 if __name__ == "__main__":
     test_inverse_2x2()

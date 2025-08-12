@@ -1,5 +1,6 @@
 from tinygrad.tensor import Tensor
 
+
 def svd_2x2_singular_values_tg(A) -> tuple[Tensor, Tensor, Tensor]:
     """
     Approximate the SVD of a 2×2 matrix A using one Jacobi rotation in tinygrad.

@@ -1,6 +1,7 @@
 import numpy as np
 from tinygrad.tensor import Tensor
 
+
 def solve_jacobi_tg(A, b, n) -> Tensor:
     """
     Solve Ax = b using the Jacobi iterative method for n iterations in tinygrad.
@@ -11,12 +12,12 @@ def solve_jacobi_tg(A, b, n) -> Tensor:
     b_t = Tensor(b).float()
     m = A_t.shape[0]
     # extract diagonal
-    d_list = [A_t[i,i] for i in range(m)]
+    d_list = [A_t[i, i] for i in range(m)]
     d = Tensor(d_list)
     # build remainder matrix
-    nda_list = [[A_t[i,j] if i != j else 0 for j in range(m)] for i in range(m)]
+    nda_list = [[A_t[i, j] if i != j else 0 for j in range(m)] for i in range(m)]
     nda = Tensor(nda_list).float()
-    x = Tensor([0.0]*m).float()
+    x = Tensor([0.0] * m).float()
     for _ in range(n):
         x = (b_t - nda.matmul(x)) / d
     res = x.numpy()

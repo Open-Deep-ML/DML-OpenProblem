@@ -1,5 +1,6 @@
 import torch
 
+
 def sigmoid(z: float) -> float:
     """
     Compute the sigmoid activation function.

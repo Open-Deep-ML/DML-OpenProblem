@@ -1,7 +1,9 @@
 import numpy as np
-from tinygrad.tensor import Tensor
 
-def k_means_clustering_tg(points, k, initial_centroids, max_iterations) -> list[tuple[float, ...]]:
+
+def k_means_clustering_tg(
+    points, k, initial_centroids, max_iterations
+) -> list[tuple[float, ...]]:
     """
     Perform k-means clustering on `points` into `k` clusters using tinygrad.
     points: list of lists or Tensor, shape (n_points, n_features)
@@ -16,10 +18,14 @@ def k_means_clustering_tg(points, k, initial_centroids, max_iterations) -> list[
         dists = np.array([np.linalg.norm(pts - c, axis=1) for c in centroids])
         # assign points
         assignments = dists.argmin(axis=0)
-        new_centroids = np.array([
-            pts[assignments == i].mean(axis=0) if np.any(assignments == i) else centroids[i]
-            for i in range(k)
-        ])
+        new_centroids = np.array(
+            [
+                pts[assignments == i].mean(axis=0)
+                if np.any(assignments == i)
+                else centroids[i]
+                for i in range(k)
+            ]
+        )
         new_centroids = np.round(new_centroids, 4)
         if np.array_equal(new_centroids, centroids):
             break

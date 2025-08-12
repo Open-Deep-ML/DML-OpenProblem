@@ -10,7 +10,9 @@
 import marimo
 
 __generated_with = "0.10.9"
-app = marimo.App(css_file="/Users/adityakhalkar/Library/Application Support/mtheme/themes/deepml.css")
+app = marimo.App(
+    css_file="/Users/adityakhalkar/Library/Application Support/mtheme/themes/deepml.css"
+)
 
 
 @app.cell(hide_code=True)
@@ -43,7 +45,7 @@ def _(column_content, mo, row_content):
 @app.cell(hide_code=True)
 def _(mo):
     row_content = mo.md(
-        r'''
+        r"""
         For a row \(i\), the sum is:
 
         \[
@@ -55,11 +57,11 @@ def _(mo):
         \[
         \overline{R}_i = \frac{R_i}{n}
         \]
-        '''
+        """
     )
 
     column_content = mo.md(
-        r'''
+        r"""
         For a column \(j\), the sum is:
 
         \[
@@ -71,7 +73,7 @@ def _(mo):
         \[
         \overline{C}_j = \frac{C_j}{m}
         \]
-        '''
+        """
     )
     return column_content, row_content
 
@@ -110,17 +112,13 @@ def calculations(matrix, np):
         if dimension == "row":
             sums = np.sum(arr, axis=1)
             means = np.mean(arr, axis=1)
-            labels = [f"Row {i+1}" for i in range(arr.shape[0])]
+            labels = [f"Row {i + 1}" for i in range(arr.shape[0])]
         else:
             sums = np.sum(arr, axis=0)
             means = np.mean(arr, axis=0)
-            labels = [f"Column {i+1}" for i in range(arr.shape[1])]
+            labels = [f"Column {i + 1}" for i in range(arr.shape[1])]
 
-        return {
-            "Dimension": labels,
-            "Sum": list(sums),
-            "Mean": list(means)
-        }
+        return {"Dimension": labels, "Sum": list(sums), "Mean": list(means)}
 
     # Calculate both row and column statistics
     row_stats = calculate_stats(matrix.matrix, "row")
@@ -132,7 +130,6 @@ def calculations(matrix, np):
 def step_by_step_display(col_stats, matrix, mo, np, row_stats):
     arr = np.array(matrix.matrix)
 
-
     def generate_row_steps():
         steps = ""
         for i in range(arr.shape[0]):
@@ -143,11 +140,10 @@ def step_by_step_display(col_stats, matrix, mo, np, row_stats):
 
             steps += rf"""
             \[
-            \text{{Row {i+1}}}: {sum_expr} = {sum_val:.1f} \text{{ (sum)}}, \frac{{{sum_val:.1f}}}{{{len(row)}}} = {mean_val:.1f} \text{{ (mean)}}
+            \text{{Row {i + 1}}}: {sum_expr} = {sum_val:.1f} \text{{ (sum)}}, \frac{{{sum_val:.1f}}}{{{len(row)}}} = {mean_val:.1f} \text{{ (mean)}}
             \]
             """
         return mo.md(steps)
-
 
     def generate_column_steps():
         steps = ""
@@ -159,11 +155,10 @@ def step_by_step_display(col_stats, matrix, mo, np, row_stats):
 
             steps += rf"""
             \[
-            \text{{Column {j+1}}}: {sum_expr} = {sum_val:.1f} \text{{ (sum)}}, \frac{{{sum_val:.1f}}}{{{len(col)}}} = {mean_val:.1f} \text{{ (mean)}}
+            \text{{Column {j + 1}}}: {sum_expr} = {sum_val:.1f} \text{{ (sum)}}, \frac{{{sum_val:.1f}}}{{{len(col)}}} = {mean_val:.1f} \text{{ (mean)}}
             \]
             """
         return mo.md(steps)
-
 
     # Create tabs for row and column calculations
     tabs_content = {
@@ -207,6 +202,7 @@ def _(mo):
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -214,6 +210,7 @@ def _():
 def _():
     import numpy as np
     from wigglystuff import Matrix
+
     return Matrix, np
 
 

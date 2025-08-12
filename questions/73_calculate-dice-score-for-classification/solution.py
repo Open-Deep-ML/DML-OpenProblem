@@ -1,5 +1,5 @@
-
 import numpy as np
+
 
 def dice_score(y_true, y_pred):
     intersection = np.logical_and(y_true, y_pred).sum()

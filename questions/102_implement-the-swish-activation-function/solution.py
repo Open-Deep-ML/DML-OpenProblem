@@ -1,5 +1,6 @@
 import math
 
+
 def swish(x: float) -> float:
     """
     Implements the Swish activation function.

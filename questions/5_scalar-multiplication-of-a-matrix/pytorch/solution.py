@@ -1,5 +1,6 @@
 import torch
 
+
 def scalar_multiply(matrix, scalar) -> torch.Tensor:
     """
     Multiply each element of a 2D matrix by a scalar using PyTorch.

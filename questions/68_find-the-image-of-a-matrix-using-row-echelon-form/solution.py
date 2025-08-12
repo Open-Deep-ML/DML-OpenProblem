@@ -1,5 +1,5 @@
-
 import numpy as np
+
 
 def rref(A):
     # Convert to float for division operations
@@ -20,6 +20,7 @@ def rref(A):
                 A[j] -= A[i] * A[j, i]
     return A
 
+
 def find_pivot_columns(A):
     n, m = A.shape
     pivot_columns = []
@@ -28,6 +29,7 @@ def find_pivot_columns(A):
         if len(nonzero) != 0:
             pivot_columns.append(nonzero[0])
     return pivot_columns
+
 
 def matrix_image(A):
     # Find the RREF of the matrix

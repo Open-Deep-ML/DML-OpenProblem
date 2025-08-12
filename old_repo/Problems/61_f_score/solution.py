@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def f_score(y_true, y_pred, beta):
     tp = np.sum((y_true == 1) & (y_pred == 1))
     fn = np.sum((y_true == 1) & (y_pred == 0))
@@ -14,8 +15,9 @@ def f_score(y_true, y_pred, beta):
     if div == 0 or op == 0:
         return 0
 
-    score = op/div * (1 + (beta ** 2))
+    score = op / div * (1 + (beta**2))
     return round(score, 3)
+
 
 def test_f_score():
     # Test case 1
@@ -73,6 +75,7 @@ def test_f_score():
     beta = 0
     expected_output = 0.667
     assert f_score(y_true, y_pred, beta) == expected_output, "Test case 8 failed"
+
 
 if __name__ == "__main__":
     test_f_score()

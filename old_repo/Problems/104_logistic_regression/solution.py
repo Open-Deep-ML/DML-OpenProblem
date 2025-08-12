@@ -1,11 +1,12 @@
 import numpy as np
 
-def predict_logistic(X: np.ndarray, weights: np.ndarray, bias: float) -> np.ndarray:
 
+def predict_logistic(X: np.ndarray, weights: np.ndarray, bias: float) -> np.ndarray:
     z = np.dot(X, weights) + bias
     z = np.clip(z, -500, 500)  # Prevent overflow in exp
     probabilities = 1 / (1 + np.exp(-z))
     return (probabilities >= 0.5).astype(int)
+
 
 def test_predict_logistic():
     # Test case 1: Simple linearly separable case
@@ -29,19 +30,20 @@ def test_predict_logistic():
     expected3 = np.array([1, 0, 0])
     assert np.array_equal(predict_logistic(X3, w3, b3), expected3), "Test case 3 failed"
 
-#     # Test case 4: Single feature
+    #     # Test case 4: Single feature
     X4 = np.array([[1], [2], [-1], [-2]]).reshape(-1, 1)
     w4 = np.array([2])
     b4 = 0
     expected4 = np.array([1, 1, 0, 0])
     assert np.array_equal(predict_logistic(X4, w4, b4), expected4), "Test case 4 failed"
 
-#     # Test case 5: Numerical stability test with large values
+    #     # Test case 5: Numerical stability test with large values
     X6 = np.array([[1000, 2000], [-1000, -2000]])
     w6 = np.array([0.1, 0.1])
     b6 = 0
     result6 = predict_logistic(X6, w6, b6)
     assert result6[0] == 1 and result6[1] == 0, "Test case 5 failed"
+
 
 if __name__ == "__main__":
     test_predict_logistic()

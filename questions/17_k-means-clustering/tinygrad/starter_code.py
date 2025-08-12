@@ -1,6 +1,6 @@
-from tinygrad.tensor import Tensor
-
-def k_means_clustering_tg(points, k, initial_centroids, max_iterations) -> list[tuple[float, ...]]:
+def k_means_clustering_tg(
+    points, k, initial_centroids, max_iterations
+) -> list[tuple[float, ...]]:
     """
     Perform k-means clustering on `points` into `k` clusters using tinygrad.
     points: list of lists or Tensor, shape (n_points, n_features)

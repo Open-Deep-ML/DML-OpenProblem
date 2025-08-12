@@ -1,5 +1,6 @@
 from tinygrad.tensor import Tensor
 
+
 def reshape_matrix_tg(a, new_shape) -> Tensor:
     """
     Reshape a 2D matrix `a` to shape `new_shape` using tinygrad.
@@ -10,6 +11,6 @@ def reshape_matrix_tg(a, new_shape) -> Tensor:
     if len(a) * len(a[0]) != new_shape[0] * new_shape[1]:
         return Tensor([])
     # Convert to Tensor and reshape
-    a_t = Tensor(a)
+    Tensor(a)
     # Your implementation here
     pass

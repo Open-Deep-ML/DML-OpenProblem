@@ -1,4 +1,3 @@
-
 import numpy as np
 import copy
 import math
@@ -38,13 +37,16 @@ class Dense(Layer):
 		self.W = None
 		self.w0 = None
 
-	def forward_pass():
+	def forward_pass(self):
+        # Your code here
+		pass
 
 
 	def backward_pass(self, accum_grad):
+        # Your code here
+		pass
 
 
-	def number_of_parameters():
-
-
-    
+	def number_of_parameters(self):
+        # Your code here
+		pass

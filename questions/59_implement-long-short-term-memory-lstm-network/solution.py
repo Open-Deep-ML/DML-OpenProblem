@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class LSTM:
     def __init__(self, input_size, hidden_size):
         self.input_size = input_size
