@@ -1,5 +1,5 @@
 {
   "input": "meteor_score('Rain falls gently from the sky', 'Gentle rain drops from the sky')",
   "output": "0.625",
-  "reasoning": "The function identifies 4 unigram matches ('rain', 'gently'/'gentle', 'from', 'sky'), computes precision (4/6) and recall (4/5), calculates an F-mean, and then apply a small penalty for two chunks."
+  "reasoning": "The function identifies 4 unigram matches ('rain', 'from', 'the', 'sky'), computes precision (4/6) and recall (4/6), calculates an F-mean, and then apply a small penalty for two chunks."
 }
