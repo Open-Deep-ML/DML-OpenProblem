@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\nnp.random.seed(0)\nprint([epsilon_greedy(np.array([1, 2, 3]), epsilon=0.0) for _ in range(5)])",
+    "expected_output": "[2, 2, 2, 2, 2]"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(1)\nprint([epsilon_greedy(np.array([5, 2, 1]), epsilon=1.0) for _ in range(5)])",
+    "expected_output": "[0, 1, 1, 0, 0]"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nresults = [epsilon_greedy(np.array([1.5, 2.5, 0.5]), epsilon=0.5) for _ in range(10)]\nprint(results)",
+    "expected_output": "[1, 0, 1, 1, 1, 0, 1, 0, 0, 0]"
+  }
+]
