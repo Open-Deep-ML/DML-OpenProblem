@@ -1,0 +1,60 @@
+{
+  "id": "25",
+  "title": "Single Neuron with Backpropagation",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/LPfsTFcFqU4",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/evintunador",
+      "name": "evintunador"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium",
+  "description": "Write a Python function that simulates a single neuron with sigmoid activation, and implements backpropagation to update the neuron's weights and bias. The function should take a list of feature vectors, associated true binary labels, initial weights, initial bias, a learning rate, and the number of epochs. The function should update the weights and bias using gradient descent based on the MSE loss, and return the updated weights, bias, and a list of MSE values for each epoch, each rounded to four decimal places.",
+  "learn_section": "\n## Neural Network Learning with Backpropagation\n\nThis task involves implementing backpropagation for a single neuron in a neural network. The neuron processes inputs and updates parameters to minimize the Mean Squared Error (MSE) between predicted outputs and true labels.\n\n### Mathematical Background\n\n**Forward Pass**  \nCompute the neuron output by calculating the dot product of the weights and input features, and adding the bias:\n$$\nz = w_1x_1 + w_2x_2 + \\dots + w_nx_n + b\n$$\n$$\n\\sigma(z) = \\frac{1}{1 + e^{-z}}\n$$\n\n**Loss Calculation (MSE)**  \nThe Mean Squared Error quantifies the error between the neuron's predictions and the actual labels:\n$$\nMSE = \\frac{1}{n} \\sum_{i=1}^{n} (\\sigma(z_i) - y_i)^2\n$$\n\n### Backward Pass (Gradient Calculation)\nCompute the gradient of the MSE with respect to each weight and the bias. This involves the partial derivatives of the loss function with respect to the output of the neuron, multiplied by the derivative of the sigmoid function:\n$$\n\\frac{\\partial MSE}{\\partial w_j} = \\frac{2}{n} \\sum_{i=1}^{n} (\\sigma(z_i) - y_i) \\sigma'(z_i) x_{ij}\n$$\n$$\n\\frac{\\partial MSE}{\\partial b} = \\frac{2}{n} \\sum_{i=1}^{n} (\\sigma(z_i) - y_i) \\sigma'(z_i)\n$$\n\n### Parameter Update\nUpdate each weight and the bias by subtracting a portion of the gradient, determined by the learning rate:\n$$\nw_j = w_j - \\alpha \\frac{\\partial MSE}{\\partial w_j}\n$$\n$$\nb = b - \\alpha \\frac{\\partial MSE}{\\partial b}\n$$\n\n### Practical Implementation\nThis process refines the neuron's ability to predict accurately by iteratively adjusting the weights and bias based on the error gradients, optimizing the neural network's performance over multiple iterations.",
+  "starter_code": "import numpy as np\ndef train_neuron(features: np.ndarray, labels: np.ndarray, initial_weights: np.ndarray, initial_bias: float, learning_rate: float, epochs: int) -> (np.ndarray, float, list[float]):\n\t# Your code here\n\treturn updated_weights, updated_bias, mse_values",
+  "solution": "\nimport numpy as np\n\ndef sigmoid(x):\n    return 1 / (1 + np.exp(-x))\n\ndef train_neuron(features, labels, initial_weights, initial_bias, learning_rate, epochs):\n    weights = np.array(initial_weights)\n    bias = initial_bias\n    features = np.array(features)\n    labels = np.array(labels)\n    mse_values = []\n\n    for _ in range(epochs):\n        z = np.dot(features, weights) + bias\n        predictions = sigmoid(z)\n        \n        mse = np.mean((predictions - labels) ** 2)\n        mse_values.append(round(mse, 4))\n\n        # Gradient calculation for weights and bias\n        errors = predictions - labels\n        weight_gradients = (2/len(labels)) * np.dot(features.T, errors * predictions * (1 - predictions))\n        bias_gradient = (2/len(labels)) * np.sum(errors * predictions * (1 - predictions))\n        \n        # Update weights and bias\n        weights -= learning_rate * weight_gradients\n        bias -= learning_rate * bias_gradient\n\n        # Round weights and bias for output\n        updated_weights = np.round(weights, 4)\n        updated_bias = round(bias, 4)\n\n    return updated_weights.tolist(), updated_bias, mse_values",
+  "example": {
+    "input": "features = [[1.0, 2.0], [2.0, 1.0], [-1.0, -2.0]], labels = [1, 0, 0], initial_weights = [0.1, -0.2], initial_bias = 0.0, learning_rate = 0.1, epochs = 2",
+    "reasoning": "The neuron receives feature vectors and computes predictions using the sigmoid activation. Based on the predictions and true labels, the gradients of MSE loss with respect to weights and bias are computed and used to update the model parameters across epochs.",
+    "output": "updated_weights = [0.1036, -0.1425], updated_bias = -0.0167, mse_values = [0.3033, 0.2942]"
+  },
+  "test_cases": [
+    {
+      "test": "print(train_neuron(np.array([[1.0, 2.0], [2.0, 1.0], [-1.0, -2.0]]), np.array([1, 0, 0]), np.array([0.1, -0.2]), 0.0, 0.1, 2))",
+      "expected_output": "([0.1036, -0.1425], -0.0167, [0.3033, 0.2942])"
+    },
+    {
+      "test": "print(train_neuron(np.array([[1, 2], [2, 3], [3, 1]]), np.array([1, 0, 1]), np.array([0.5, -0.2]), 0, 0.1, 3))",
+      "expected_output": "([0.4892, -0.2301], 0.0029, [0.21, 0.2087, 0.2076])"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\nfrom typing import List, Tuple\n\n\ndef train_neuron_tg(\n    features: List[List[float]],\n    labels:   List[float],\n    initial_weights: List[float],\n    initial_bias: float,\n    learning_rate: float,\n    epochs: int\n) -> Tuple[List[float], float, List[float]]:\n    \"\"\"\n    Tinygrad version — same contract as PyTorch implementation.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\nfrom typing import List, Tuple\n\n\ndef train_neuron_tg(\n    features: List[List[float]],\n    labels:   List[float],\n    initial_weights: List[float],\n    initial_bias: float,\n    learning_rate: float,\n    epochs: int\n) -> Tuple[List[float], float, List[float]]:\n    X = Tensor(features)\n    y = Tensor(labels).reshape(len(labels), 1)\n    w = Tensor(initial_weights).reshape(len(initial_weights), 1)\n    b = Tensor(initial_bias)\n\n    mse_values: List[float] = []\n    n = len(labels)\n\n    for _ in range(epochs):\n        z = X.matmul(w) + b         # (n,1)\n        preds = z.sigmoid()         # (n,1)\n        errors = preds - y          # (n,1)\n\n        mse = float(((errors**2).mean()).numpy())\n        mse_values.append(round(mse, 4))\n\n        sigma_prime = preds * (1 - preds)\n        delta = (2.0 / n) * errors * sigma_prime  # (n,1)\n\n        grad_w = X.T.matmul(delta)  # (f,1)\n        grad_b = delta.sum()\n\n        w -= Tensor(learning_rate) * grad_w\n        b -= Tensor(learning_rate) * grad_b\n\n    updated_weights = [round(val, 4) for val in w.numpy().flatten().tolist()]\n    updated_bias    = round(float(b.numpy()), 4)\n    return updated_weights, updated_bias, mse_values",
+  "tinygrad_test_cases": [
+    {
+      "test": "uw, ub, mses = train_neuron_tg(\n    [[1.0, 2.0], [2.0, 1.0], [-1.0, -2.0]],\n    [1, 0, 0],\n    [0.1, -0.2],\n    0.0,\n    0.1,\n    2\n)\nprint((uw, ub, mses))",
+      "expected_output": "([0.1036, -0.1425], -0.0167, [0.3033, 0.2942])"
+    },
+    {
+      "test": "uw, ub, mses = train_neuron_tg(\n    [[1, 2], [2, 3], [3, 1]],\n    [1, 0, 1],\n    [0.5, -0.2],\n    0.0,\n    0.1,\n    3\n)\nprint((uw, ub, mses))",
+      "expected_output": "([0.4892, -0.2301], 0.0029, [0.21, 0.2087, 0.2076])"
+    }
+  ],
+  "pytorch_starter_code": "import torch\nfrom typing import List, Tuple, Union\n\n\ndef train_neuron(\n    features: Union[List[List[float]], torch.Tensor],\n    labels:   Union[List[float],      torch.Tensor],\n    initial_weights: Union[List[float], torch.Tensor],\n    initial_bias: float,\n    learning_rate: float,\n    epochs: int\n) -> Tuple[List[float], float, List[float]]:\n    \"\"\"\n    Train a single neuron (sigmoid activation) with mean-squared-error loss.\n\n    Returns (updated_weights, updated_bias, mse_per_epoch)\n    — weights & bias are rounded to 4 decimals; each MSE value is rounded too.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\nfrom typing import List, Tuple, Union\n\n\ndef train_neuron(\n    features: Union[List[List[float]], torch.Tensor],\n    labels:   Union[List[float],      torch.Tensor],\n    initial_weights: Union[List[float], torch.Tensor],\n    initial_bias: float,\n    learning_rate: float,\n    epochs: int\n) -> Tuple[List[float], float, List[float]]:\n\n    # Ensure tensors\n    X = torch.as_tensor(features, dtype=torch.float)\n    y = torch.as_tensor(labels,   dtype=torch.float)\n    w = torch.as_tensor(initial_weights, dtype=torch.float)\n    b = torch.tensor(initial_bias, dtype=torch.float)\n\n    n = y.shape[0]\n    mse_values: List[float] = []\n\n    for _ in range(epochs):\n        # Forward\n        z      = X @ w + b        # (n,)\n        preds  = torch.sigmoid(z) # (n,)\n        errors = preds - y        # (n,)\n\n        # MSE\n        mse = torch.mean(errors**2).item()\n        mse_values.append(round(mse, 4))\n\n        # Manual gradients (chain-rule): dMSE/dz = 2/n * (preds-y) * σ'(z)\n        sigma_prime = preds * (1 - preds)\n        delta       = (2.0 / n) * errors * sigma_prime  # (n,)\n\n        grad_w = X.t() @ delta      # (f,)\n        grad_b = delta.sum()        # scalar\n\n        # Parameter update (gradient descent)\n        w -= learning_rate * grad_w\n        b -= learning_rate * grad_b\n\n    # Round final params for return\n    updated_weights = [round(val, 4) for val in w.tolist()]\n    updated_bias    = round(b.item(), 4)\n    return updated_weights, updated_bias, mse_values",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nuw, ub, mses = train_neuron(\n    torch.tensor([[1.0, 2.0], [2.0, 1.0], [-1.0, -2.0]]),\n    torch.tensor([1, 0, 0]),\n    torch.tensor([0.1, -0.2]),\n    0.0,\n    0.1,\n    2\n)\nprint((uw, ub, mses))",
+      "expected_output": "([0.1036, -0.1425], -0.0167, [0.3033, 0.2942])"
+    },
+    {
+      "test": "import torch\nuw, ub, mses = train_neuron(\n    torch.tensor([[1, 2], [2, 3], [3, 1]]),\n    torch.tensor([1, 0, 1]),\n    torch.tensor([0.5, -0.2]),\n    0.0,\n    0.1,\n    3\n)\nprint((uw, ub, mses))",
+      "expected_output": "([0.4892, -0.2301], 0.0029, [0.21, 0.2087, 0.2076])"
+    }
+  ]
+}

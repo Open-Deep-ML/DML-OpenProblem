@@ -1,0 +1,42 @@
+{
+  "id": "145",
+  "title": "Adagrad Optimizer",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/mavleo96",
+      "name": "Vijayabharathi Murugan"
+    }
+  ],
+  "description": "Implement the Adagrad optimizer update step function. Your function should take the current parameter value, gradient, and accumulated squared gradients as inputs, and return the updated parameter value and new accumulated squared gradients. The function should also handle scalar and array inputs, and include proper input validation.",
+  "learn_section": "# Implementing Adagrad Optimizer\n\n## Introduction\nAdagrad (Adaptive Gradient Algorithm) is an optimization algorithm that adapts the learning rate to each parameter, performing larger updates for infrequent parameters and smaller updates for frequent ones. This makes it particularly well-suited for dealing with sparse data.\n\n## Learning Objectives\n- Understand how Adagrad optimizer works\n- Learn to implement adaptive learning rates\n- Gain practical experience with gradient-based optimization\n\n## Theory\nAdagrad adapts the learning rate for each parameter based on the historical gradients. The key equations are:\n\n$G_t = G_{t-1} + g_t^2$ (Accumulated squared gradients)\n\n$\\theta_t = \\theta_{t-1} - \\dfrac{\\alpha}{\\sqrt{G_t} + \\epsilon} \\cdot g_t$ (Parameter update)\n\nWhere:\n- $G_t$ is the sum of squared gradients up to time step t\n- $\\alpha$ is the initial learning rate\n- $\\epsilon$ is a small constant for numerical stability\n- $g_t$ is the gradient at time step t\n\nRead more at:\n\n1. Duchi, J., Hazan, E., & Singer, Y. (2011). Adaptive subgradient methods for online learning and stochastic optimization. Journal of Machine Learning Research, 12, 2121–2159. [PDF](https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf)\n2. Ruder, S. (2017). An overview of gradient descent optimization algorithms. [arXiv:1609.04747](https://arxiv.org/pdf/1609.04747)\n\n\n## Problem Statement\nImplement the Adagrad optimizer update step function. Your function should take the current parameter value, gradient, and accumulated squared gradients as inputs, and return the updated parameter value and new accumulated squared gradients.\n\n### Input Format\nThe function should accept:\n- parameter: Current parameter value\n- grad: Current gradient\n- G: Accumulated squared gradients\n- learning_rate: Learning rate (default=0.01)\n- epsilon: Small constant for numerical stability (default=1e-8)\n\n### Output Format\nReturn tuple: (updated_parameter, updated_G)\n\n## Example\n```python\n# Example usage:\nparameter = 1.0\ngrad = 0.1\nG = 1.0\n\nnew_param, new_G = adagrad_optimizer(parameter, grad, G)\n```\n\n## Tips\n- Initialize G as zeros\n- Use numpy for numerical operations\n- Test with both scalar and array inputs\n\n---",
+  "starter_code": "import numpy as np\n\ndef adagrad_optimizer(parameter, grad, G, learning_rate=0.01, epsilon=1e-8):\n    \"\"\"\n    Update parameters using the Adagrad optimizer.\n    Adapts the learning rate for each parameter based on the historical gradients.\n\n    Args:\n        parameter: Current parameter value\n        grad: Current gradient\n        G: Accumulated squared gradients\n        learning_rate: Learning rate (default=0.01)\n        epsilon: Small constant for numerical stability (default=1e-8)\n\n    Returns:\n        tuple: (updated_parameter, updated_G)\n    \"\"\"\n    # Your code here\n    return np.round(parameter, 5), np.round(G, 5)",
+  "solution": "import numpy as np\n\ndef adagrad_optimizer(parameter, grad, G, learning_rate=0.01, epsilon=1e-8):\n    \"\"\"\n    Update parameters using the Adagrad optimizer.\n    Adapts the learning rate for each parameter based on the historical gradients.\n\n    Args:\n        parameter: Current parameter value\n        grad: Current gradient\n        G: Accumulated squared gradients\n        learning_rate: Learning rate (default=0.01)\n        epsilon: Small constant for numerical stability (default=1e-8)\n\n    Returns:\n        tuple: (updated_parameter, updated_G)\n    \"\"\"\n    assert learning_rate > 0, \"Learning rate must be positive\"\n    assert epsilon > 0, \"Epsilon must be positive\"\n    assert all(G >= 0) if isinstance(G, np.ndarray) else G >= 0, \"G must be non-negative\"\n\n    # Update accumulated squared gradients\n    G = G + grad**2\n\n    # Update parameters using adaptive learning rate\n    update = learning_rate * grad / (np.sqrt(G) + epsilon)\n    parameter = parameter - update\n\n    return np.round(parameter, 5), np.round(G, 5)",
+  "example": {
+    "input": "parameter = 1.0, grad = 0.1, G = 1.0",
+    "output": "(0.999, 1.01)",
+    "reasoning": "The Adagrad optimizer computes updated values for the parameter and the accumulated squared gradients. With input values parameter=1.0, grad=0.1, and G=1.0, the updated parameter becomes 0.999 and the updated G becomes 1.01."
+  },
+  "test_cases": [
+    {
+      "test": "print(adagrad_optimizer(1., 0.5, 1., 0.01, 1e-8))",
+      "expected_output": "(0.99553, 1.25)"
+    },
+    {
+      "test": "print(adagrad_optimizer(np.array([1., 2.]), np.array([0.1, 0.2]), np.array([1., 1.]), 0.01, 1e-8))",
+      "expected_output": "(array([0.999, 1.99804]), array([1.01, 1.04]))"
+    },
+    {
+      "test": "print(adagrad_optimizer(np.array([1., 2.]), np.array([0., 0.2]), np.array([0., 1.]), 0.01, 1e-8))",
+      "expected_output": "(array([1., 1.99804]), array([0., 1.04]))"
+    },
+    {
+      "test": "print(adagrad_optimizer(np.array([1., 1.]), np.array([1., 1.]), np.array([10000., 1.]), 0.01, 1e-8))",
+      "expected_output": "(array([0.9999, 0.99293]), array([10001., 2.]))"
+    }
+  ]
+}

@@ -6,7 +6,5 @@
   "video": "",
   "likes": "0",
   "dislikes": "0",
-  "contributor": "",
-  "tinygrad_difficulty": null,
-  "pytorch_difficulty": null
+  "contributor": []
 }

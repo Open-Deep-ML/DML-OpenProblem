@@ -11,7 +11,5 @@
       "profile_link": "https://groundzeroai.netlify.app/",
       "name": "GroundZero AI"
     }
-  ],
-  "tinygrad_difficulty": null,
-  "pytorch_difficulty": null
+  ]
 }

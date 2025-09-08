@@ -1,0 +1,42 @@
+{
+  "id": "116",
+  "title": "Derivative of a Polynomial",
+  "difficulty": "easy",
+  "category": "calculus",
+  "video": "https://youtu.be/xoRFwJdDT0A",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Selbl",
+      "name": "Selbl"
+    }
+  ],
+  "description": "Implement a function that computes the derivative of a polynomial term of the form `c * x^n` at a given point `x`, where `c` is a coefficient and `n` is the exponent. The function should return the value of the derivative, accounting for the coefficient in the power rule. This is useful for understanding how polynomials change at specific points in machine learning optimization problems.",
+  "learn_section": "## Derivative of a Polynomial\n\nA function's derivative is a way of quantifying the function's slope at a given point. It allows us to understand whether the function is increasing, decreasing or flat at specific input. \n\nTaking the derivative of a polynomial at a single point follows a straight-forward rule. This question will show the rule and the edge case you should be on the look-out for.\n\n### Mathematical Definition\n\nWhen calculating the slope of a function $f(x)$, we usually require two points $x_{1}$ and $x_{2}$ and use the following formula:\n\n$$\n\\frac{f(x_{2}) - f(x_{1})}{x_{2} - x_{1}}\n$$\n\nA derivative generalizes that notion by calculating the slope of a function at a specific point.\nA derivative of a function $f(x)$ is mathematically defined as:\n\n$$\n\\frac{d f(x)}{d x} = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}\n$$\n\nWhere:\n- $x$ is the input to the function\n- $h$ is the \"step\", which is equivalent to the difference $x_{2} - x_{1}$ in the two-point slope-formula\n\nTaking the limit as the step grows smaller and smaller, allow us to quantify the slope at a certain point, instead of having to consider two points as in other methods of finding the slope.\n\nWhen taking the derivative of a polynomial function $x^{n}$, where $n \\neq 0$, then the derivative is: $n x^{n-1}$. In the special case where $n = 0$ then the derivative is zero. This is because $x^{0} = 1$ if $x \\neq 0$.\n\nA positive derivative indicates that the function is increasing in that point, a negative derivative indicates that the function is decreasing at that point. A derivative equal to zero indicates that the function is flat, which could potentially indicate a function's minimum or maximum.",
+  "starter_code": "def poly_term_derivative(c: float, x: float, n: float) -> float:\n    # Your code here\n    pass",
+  "solution": "def poly_term_derivative(c: float, x: float, n: float) -> float:\n    if n == 0.0:\n        return 0.0\n    return round(c * n * (x ** (n - 1)), 4)",
+  "example": {
+    "input": "poly_term_derivative(2.0, 3.0, 2.0)",
+    "output": "12.0",
+    "reasoning": "For the term 2 * x^2, the derivative is 2 * 2 * x^(2-1) = 4 * x. At x = 3, this evaluates to 4 * 3 = 12.0."
+  },
+  "test_cases": [
+    {
+      "test": "print(poly_term_derivative(2.0, 3.0, 2.0))",
+      "expected_output": "12.0"
+    },
+    {
+      "test": "print(poly_term_derivative(1.5, 4.0, 0.0))",
+      "expected_output": "0.0"
+    },
+    {
+      "test": "print(poly_term_derivative(3.0, 2.0, 3.0))",
+      "expected_output": "36.0"
+    },
+    {
+      "test": "print(poly_term_derivative(0.5, 5.0, 1.0))",
+      "expected_output": "0.5"
+    }
+  ]
+}

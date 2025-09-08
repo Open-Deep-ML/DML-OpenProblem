@@ -1,0 +1,68 @@
+{
+  "id": "11",
+  "title": "Solve Linear Equations using Jacobi Method",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/Y7WSn7K092g",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://github.com/Haleshot",
+      "name": "Haleshot"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium",
+  "description": "Write a Python function that uses the Jacobi method to solve a system of linear equations given by Ax = b. The function should iterate n times, rounding each intermediate solution to four decimal places, and return the approximate solution x.",
+  "learn_section": "\n## Solving Linear Equations Using the Jacobi Method\n\nThe Jacobi method is an iterative algorithm used for solving a system of linear equations \\( Ax = b \\). This method is particularly useful for large systems where direct methods, such as Gaussian elimination, are computationally expensive.\n\n\n### Algorithm Overview\n\nFor a system of equations represented by \\( Ax = b \\), where \\( A \\) is a matrix and \\( x \\) and \\( b \\) are vectors, the Jacobi method involves the following steps:\n\n1. **Initialization**: Start with an initial guess for \\( x \\).\n\n2. **Iteration**: For each equation \\( i \\), update \\( x[i] \\) using:\n   $$\n   x[i] = \\frac{1}{a_{ii}} \\left(b[i] - \\sum_{j \\neq i} a_{ij} x[j]\\right)\n   $$\n   where \\( a_{ii} \\) are the diagonal elements of \\( A \\), and \\( a_{ij} \\) are the off-diagonal elements.\n\n3. **Convergence**: Repeat the iteration until the changes in \\( x \\) are below a certain tolerance or until a maximum number of iterations is reached.\n\nThis method assumes that all diagonal elements of \\( A \\) are non-zero and that the matrix is diagonally dominant or properly conditioned for convergence.\n\n### Practical Considerations\n\n- The method may not converge for all matrices.\n- Choosing a good initial guess can improve convergence.\n- Diagonal dominance of \\( A \\) ensures the convergence of the Jacobi method.",
+  "starter_code": "import numpy as np\ndef solve_jacobi(A: np.ndarray, b: np.ndarray, n: int) -> list:\n\treturn x",
+  "solution": "import numpy as np\n\ndef solve_jacobi(A: np.ndarray, b: np.ndarray, n: int) -> list:\n    d_a = np.diag(A)\n    nda = A - np.diag(d_a)\n    x = np.zeros(len(b))\n    x_hold = np.zeros(len(b))\n    for _ in range(n):\n        for i in range(len(A)):\n            x_hold[i] = (1/d_a[i]) * (b[i] - sum(nda[i]*x))\n        x = x_hold.copy()\n    return np.round(x,4).tolist()",
+  "example": {
+    "input": "A = [[5, -2, 3], [-3, 9, 1], [2, -1, -7]], b = [-1, 2, 3], n=2",
+    "output": "[0.146, 0.2032, -0.5175]",
+    "reasoning": "The Jacobi method iteratively solves each equation for x[i] using the formula x[i] = (1/a_ii) * (b[i] - sum(a_ij * x[j] for j != i)), where a_ii is the diagonal element of A and a_ij are the off-diagonal elements."
+  },
+  "test_cases": [
+    {
+      "test": "print(solve_jacobi(np.array([[5, -2, 3], [-3, 9, 1], [2, -1, -7]]), np.array([-1, 2, 3]),2))",
+      "expected_output": "[0.146, 0.2032, -0.5175]"
+    },
+    {
+      "test": "print(solve_jacobi(np.array([[4, 1, 2], [1, 5, 1], [2, 1, 3]]), np.array([4, 6, 7]),5))",
+      "expected_output": "[-0.0806, 0.9324, 2.4422]"
+    },
+    {
+      "test": "print(solve_jacobi(np.array([[4,2,-2],[1,-3,-1],[3,-1,4]]), np.array([0,7,5]),3))",
+      "expected_output": "[1.7083, -1.9583, -0.7812]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef solve_jacobi_tg(A, b, n) -> Tensor:\n    \"\"\"\n    Solve Ax = b using the Jacobi iterative method for n iterations in tinygrad.\n    A: list of lists or Tensor; b: list or Tensor; n: number of iterations.\n    Returns a 1-D Tensor of length m, rounded to 4 decimals.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "import numpy as np\nfrom tinygrad.tensor import Tensor\n\ndef solve_jacobi_tg(A, b, n) -> Tensor:\n    \"\"\"\n    Solve Ax = b using the Jacobi iterative method for n iterations in tinygrad.\n    A: list of lists or Tensor; b: list or Tensor; n: number of iterations.\n    Returns a 1-D Tensor of length m, rounded to 4 decimals.\n    \"\"\"\n    A_t = Tensor(A).float()\n    b_t = Tensor(b).float()\n    m = A_t.shape[0]\n    # extract diagonal\n    d_list = [A_t[i,i] for i in range(m)]\n    d = Tensor(d_list)\n    # build remainder matrix\n    nda_list = [[A_t[i,j] if i != j else 0 for j in range(m)] for i in range(m)]\n    nda = Tensor(nda_list).float()\n    x = Tensor([0.0]*m).float()\n    for _ in range(n):\n        x = (b_t - nda.matmul(x)) / d\n    res = x.numpy()\n    return Tensor(np.round(res, 4))",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = solve_jacobi_tg(\n    [[4.0,1.0],[2.0,3.0]],\n    [1.0,2.0],\n    10\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[0.1, 0.6]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = solve_jacobi_tg(\n    [[3.0,0.0],[0.0,3.0]],\n    [3.0,6.0],\n    5\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[1.0, 2.0]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef solve_jacobi(A, b, n) -> torch.Tensor:\n    \"\"\"\n    Solve Ax = b using the Jacobi iterative method for n iterations.\n    A: (m,m) tensor; b: (m,) tensor; n: number of iterations.\n    Returns a 1-D tensor of length m, rounded to 4 decimals.\n    \"\"\"\n    A_t = torch.as_tensor(A, dtype=torch.float)\n    b_t = torch.as_tensor(b, dtype=torch.float)\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef solve_jacobi(A, b, n) -> torch.Tensor:\n    \"\"\"\n    Solve Ax = b using the Jacobi iterative method for n iterations.\n    A: (m,m) tensor; b: (m,) tensor; n: number of iterations.\n    Returns a 1-D tensor of length m, rounded to 4 decimals.\n    \"\"\"\n    A_t = torch.as_tensor(A, dtype=torch.float)\n    b_t = torch.as_tensor(b, dtype=torch.float)\n    d = torch.diag(A_t)\n    nda = A_t - torch.diag(d)\n    x = torch.zeros_like(b_t)\n    for _ in range(n):\n        x = (b_t - nda.matmul(x)) / d\n    return torch.round(x * 10000) / 10000",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nres = solve_jacobi(\n    torch.tensor([[4.0,1.0],[2.0,3.0]]),\n    torch.tensor([1.0,2.0]),\n    10\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[0.1, 0.6]"
+    },
+    {
+      "test": "import torch\nres = solve_jacobi(\n    torch.tensor([[3.0,0.0],[0.0,3.0]]),\n    torch.tensor([3.0,6.0]),\n    5\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[1.0, 2.0]"
+    }
+  ]
+}

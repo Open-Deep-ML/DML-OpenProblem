@@ -1,0 +1,34 @@
+{
+  "id": "45",
+  "title": "Linear Kernel Function",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "description": "Write a Python function `kernel_function` that computes the linear kernel between two input vectors `x1` and `x2`. The linear kernel is defined as the dot product (inner product) of two vectors.",
+  "learn_section": "\n## Understanding the Linear Kernel\n\nA kernel function in machine learning is used to measure the similarity between two data points in a higher-dimensional space without having to compute the coordinates of the points in that space explicitly. The **linear kernel** is one of the simplest and most commonly used kernel functions. It computes the dot product (or inner product) of two vectors.\n\n### Mathematical Definition\nThe linear kernel between two vectors $ \\mathbf{x}_1 $ and $ \\mathbf{x}_2 $ is mathematically defined as:\n$$\nK(\\mathbf{x}_1, \\mathbf{x}_2) = \\mathbf{x}_1 \\cdot \\mathbf{x}_2 = \\sum_{i=1}^{n} x_{1,i} \\cdot x_{2,i}\n$$\nwhere $ n $ is the number of features, and $ x_{1,i} $ and $ x_{2,i} $ are the components of the vectors $ \\mathbf{x}_1 $ and $ \\mathbf{x}_2 $ respectively.\n\nThe linear kernel is widely used in support vector machines (SVMs) and other machine learning algorithms for linear classification and regression tasks. It is computationally efficient and works well when the data is linearly separable.\n\n### Characteristics\n- **Simplicity**: The linear kernel is straightforward to implement and compute.\n- **Efficiency**: It is computationally less expensive compared to other complex kernels like polynomial or RBF kernels.\n- **Interpretability**: The linear kernel is interpretable because it corresponds directly to the dot product, a well-understood operation in vector algebra.\n\nIn this problem, you will implement a function capable of computing the linear kernel between two vectors.",
+  "starter_code": "import numpy as np\n\ndef kernel_function(x1, x2):\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef kernel_function(x1, x2):\n    return np.inner(x1, x2)",
+  "example": {
+    "input": "import numpy as np\n\nx1 = np.array([1, 2, 3])\nx2 = np.array([4, 5, 6])\n\nresult = kernel_function(x1, x2)\nprint(result)",
+    "output": "32",
+    "reasoning": "The linear kernel between x1 and x2 is computed as:1\\*4 + 2\\*5 + 3\\*6 = 32"
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nx1 = np.array([1, 2, 3])\nx2 = np.array([4, 5, 6])\nresult = kernel_function(x1, x2)\nprint(result)",
+      "expected_output": "32"
+    },
+    {
+      "test": "import numpy as np\nx1 = np.array([0, 1, 2])\nx2 = np.array([3, 4, 5])\nresult = kernel_function(x1, x2)\nprint(result)",
+      "expected_output": "14"
+    }
+  ]
+}

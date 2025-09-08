@@ -1,0 +1,46 @@
+{
+  "id": "79",
+  "title": "Binomial Distribution Probability",
+  "difficulty": "medium",
+  "category": "Probability",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/BhardwajArjit",
+      "name": "Arjit Bhardwaj"
+    }
+  ],
+  "description": "Write a Python function to calculate the probability of achieving exactly k successes in n independent Bernoulli trials, each with probability p of success, using the Binomial distribution formula.",
+  "learn_section": "## Understanding the Binomial Distribution\n\nThe Binomial distribution is a discrete probability distribution that models the number of successes in a fixed number of independent Bernoulli trials, each with the same probability of success.\n\n### Mathematical Formulation\n\nThe probability of achieving exactly $k$ successes in $n$ trials is given by the formula:\n\n$$\nP(X = k) = \\binom{n}{k} \\cdot p^k \\cdot (1-p)^{n-k}\n$$\n\n- **$n$**: Total number of trials  \n- **$k$**: Number of successes  \n- **$p$**: Probability of success on each trial  \n- $\\binom{n}{k}$: The number of ways to choose $k$ successes from $n$ trials, calculated as:\n\n$$\n\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\n$$\n\n### Implementation Steps\n\n1. Calculate $\\binom{n}{k}$ using factorials.  \n2. Raise $p$ to the power of $k$ and $(1-p)$ to the power of $(n-k)$.  \n3. Multiply these results to get the probability.\n\n### Example Calculation\n\nGiven:\n\n- $n = 5$  \n- $k = 2$  \n- $p = 0.4$  \n\nStep-by-step:\n\n1. Calculate $\\binom{n}{k}$:\n\n$$\n\\binom{5}{2} = \\frac{5!}{2!(5-2)!} = \\frac{5 \\cdot 4}{2 \\cdot 1} = 10\n$$\n\n2. Calculate $p^k \\cdot (1-p)^{n-k}$:\n\n$$\n0.4^2 \\cdot (1-0.4)^3 = 0.16 \\cdot 0.216 = 0.03456\n$$\n\n3. Multiply results:\n\n$$\nP(X = 2) = 10 \\cdot 0.03456 = 0.3456\n$$\n\nThe probability of exactly 2 successes is $0.3456$.\n\n### Applications\n\nThe Binomial distribution is widely used in:\n\n- Quality control and defect analysis  \n- Survey analysis  \n- Medical trials  \n- Modeling success/failure experiments  \n\nIt provides insights into the likelihood of various outcomes in scenarios with two possible results (e.g., success or failure).",
+  "starter_code": "import math\n\ndef binomial_probability(n, k, p):\n\t\"\"\"\n    Calculate the probability of achieving exactly k successes in n independent Bernoulli trials,\n    each with probability p of success, using the Binomial distribution formula.\n    \"\"\"\n\t# Your code here\n\treturn round(probability, 5)",
+  "solution": "import math\n\ndef binomial_probability(n, k, p):\n    \"\"\"\n    Calculate the probability of achieving exactly k successes in n independent Bernoulli trials,\n    each with probability p of success, using the Binomial distribution formula.\n    :param n: Total number of trials\n    :param k: Number of successes\n    :param p: Probability of success on each trial\n    :return: Probability of k successes in n trials\n    \"\"\"\n    # Calculate binomial coefficient (n choose k)\n    binomial_coeff = math.comb(n, k)\n    # Calculate the probability using the binomial formula\n    probability = binomial_coeff * (p ** k) * ((1 - p) ** (n - k))\n    # Return the probability, rounded to five decimal places\n    return round(probability, 5)",
+  "example": {
+    "input": "n = 6, k = 2, p = 0.5",
+    "output": "0.23438",
+    "reasoning": "The function calculates the Binomial probability, the intermediate steps include calculating the binomial coefficient, raising p and (1-p) to the appropriate powers, and multiplying the results."
+  },
+  "test_cases": [
+    {
+      "test": "print(binomial_probability(6, 2, 0.5))",
+      "expected_output": "0.23438"
+    },
+    {
+      "test": "print(binomial_probability(6, 4, 0.7))",
+      "expected_output": "0.32414"
+    },
+    {
+      "test": "print(binomial_probability(3, 3, 0.9))",
+      "expected_output": "0.729"
+    },
+    {
+      "test": "print(binomial_probability(5, 0, 0.3))",
+      "expected_output": "0.16807"
+    },
+    {
+      "test": "print(binomial_probability(7, 2, 0.1))",
+      "expected_output": "0.124"
+    }
+  ]
+}

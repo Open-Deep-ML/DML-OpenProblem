@@ -1,0 +1,34 @@
+{
+  "id": "183",
+  "title": "Find PMF Normalization Constant",
+  "difficulty": "easy",
+  "category": "Probability & Statistics",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/jeetmukherjee",
+      "name": "jeetmukherjee"
+    }
+  ],
+  "description": "## Problem\n\nA discrete random variable `X` takes values 0 through 7 with probabilities:\n\n- P(X=0) = 0\n- P(X=1) = K\n- P(X=2) = 2K\n- P(X=3) = 2K\n- P(X=4) = 3K\n- P(X=5) = K^2\n- P(X=6) = 2K^2\n- P(X=7) = 7K^2 + K\n\nFind the value of the normalization constant `K` such that the above defines a valid PMF (i.e., probabilities are non‑negative and sum to 1).\n\nImplement a function `find_k()` that returns `K` as a Python float.",
+  "learn_section": "## Solution Explanation\n\nFor a valid PMF, probabilities must sum to 1.\n\nSum all terms:\n\n- Linear in K: K + 2K + 2K + 3K + K = 9K\n- Quadratic in K: K^2 + 2K^2 + 7K^2 = 10K^2\n\nTherefore: 10K^2 + 9K = 1  =>  10K^2 + 9K - 1 = 0\n\nSolve the quadratic: K = [-9 ± sqrt(81 + 40)] / 20 = [-9 ± 11] / 20\n\nFeasible solution (K ≥ 0): K = 2/20 = 0.1\n\nSo the normalization constant is K = 0.1.",
+  "starter_code": "def find_k():\n    \"\"\"\n    Return the normalization constant K for the given PMF as a float.\n    \"\"\"\n    # TODO: Solve for K from 10*K**2 + 9*K - 1 = 0 and return the non-negative root\n    pass",
+  "solution": "import math\n\ndef find_k():\n    \"\"\"\n    Solve 10*K^2 + 9*K - 1 = 0 and return the non-negative root.\n    \"\"\"\n    a = 10.0\n    b = 9.0\n    c = -1.0\n    discriminant = b * b - 4 * a * c\n    sqrt_disc = math.sqrt(discriminant)\n    k1 = (-b + sqrt_disc) / (2 * a)\n    k2 = (-b - sqrt_disc) / (2 * a)\n    return k1 if k1 >= 0 else k2",
+  "example": {
+    "input": "No input; call find_k()",
+    "output": "0.1",
+    "reasoning": "From the normalization condition, 10K^2 + 9K = 1 gives K = 0.1 (non-negative root)."
+  },
+  "test_cases": [
+    {
+      "test": "print(round(find_k(), 10))",
+      "expected_output": "0.1"
+    },
+    {
+      "test": "k = find_k(); s = 0 + k + 2*k + 2*k + 3*k + k**2 + 2*k**2 + (7*k**2 + k); print(round(s, 10))",
+      "expected_output": "1.0"
+    }
+  ]
+}
