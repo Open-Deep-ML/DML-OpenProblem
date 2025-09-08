@@ -1,0 +1,60 @@
+{
+  "id": "23",
+  "title": "Softmax Activation Function Implementation ",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/WIUTXGFAuXY",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": "https://adityakhalkar.github.io/Deep-ML-x-Marimo/23",
+  "description": "Write a Python function that computes the softmax activation for a given list of scores. The function should return the softmax values as a list, each rounded to four decimal places.",
+  "learn_section": "\n## Understanding the Softmax Activation Function\n\nThe softmax function is a generalization of the sigmoid function and is used in the output layer of a neural network model that handles multi-class classification tasks.\n\n### Mathematical Definition\nThe softmax function is mathematically represented as:\n$$\n\\text{softmax}(z_i) = \\frac{e^{z_i}}{\\sum_{j} e^{z_j}}\n$$\n\n### Characteristics\n- **Output Range**: Each output value is between 0 and 1, and the sum of all outputs is 1.\n- **Probability Distribution**: It transforms scores into probabilities, making them easier to interpret and useful for classification tasks.\n\nThe softmax function is essential for models where the output needs to represent a probability distribution across multiple classes.",
+  "starter_code": "import math\n\ndef softmax(scores: list[float]) -> list[float]:\n\t# Your code here\n\treturn probabilities",
+  "solution": "\nimport math\ndef softmax(scores: list[float]) -> list[float]:\n    exp_scores = [math.exp(score) for score in scores]\n    sum_exp_scores = sum(exp_scores)\n    probabilities = [round(score / sum_exp_scores, 4) for score in exp_scores]\n    return probabilities",
+  "example": {
+    "input": "scores = [1, 2, 3]",
+    "output": "[0.0900, 0.2447, 0.6652]",
+    "reasoning": "The softmax function converts a list of values into a probability distribution. The probabilities are proportional to the exponential of each element divided by the sum of the exponentials of all elements in the list."
+  },
+  "test_cases": [
+    {
+      "test": "print(softmax([1, 2, 3]))",
+      "expected_output": "[0.09, 0.2447, 0.6652]"
+    },
+    {
+      "test": "print(softmax([1, 1, 1]))",
+      "expected_output": "[0.3333, 0.3333, 0.3333]"
+    },
+    {
+      "test": "print(softmax([-1, 0, 5]))",
+      "expected_output": "[0.0025, 0.0067, 0.9909]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef softmax_tg(scores: list[float]) -> list[float]:\n    \"\"\"\n    Compute the softmax activation function using tinygrad.\n    Input:\n      - scores: list of floats (logits)\n    Returns:\n      - list of floats representing the softmax probabilities,\n        each rounded to 4 decimals.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef softmax_tg(scores: list[float]) -> list[float]:\n    \"\"\"\n    Compute the softmax activation function using tinygrad.\n    Input:\n      - scores: list of floats (logits)\n    Returns:\n      - list of floats representing the softmax probabilities,\n        each rounded to 4 decimals.\n    \"\"\"\n    t = Tensor(scores)\n    t_max = t.max()\n    exp_scores = (t - t_max).exp()\n    probs = exp_scores / exp_scores.sum()\n    probs_list = probs.numpy().tolist()\n    return [round(p, 4) for p in probs_list]",
+  "tinygrad_test_cases": [
+    {
+      "test": "print(softmax_tg([1, 2, 3]))",
+      "expected_output": "[0.09, 0.2447, 0.6652]"
+    },
+    {
+      "test": "print(softmax_tg([1, 1, 1]))",
+      "expected_output": "[0.3333, 0.3333, 0.3333]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\nimport torch.nn.functional as F\n\ndef softmax(scores: list[float]) -> list[float]:\n    \"\"\"\n    Compute the softmax activation function using PyTorch's built-in API.\n    Input:\n      - scores: list of floats (logits)\n    Returns:\n      - list of floats representing the softmax probabilities,\n        each rounded to 4 decimals.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\nimport torch.nn.functional as F\n\ndef softmax(scores: list[float]) -> list[float]:\n    \"\"\"\n    Compute the softmax activation function using PyTorch's built-in API.\n    Input:\n      - scores: list of floats (logits)\n    Returns:\n      - list of floats representing the softmax probabilities,\n        each rounded to 4 decimals.\n    \"\"\"\n    scores_t = torch.as_tensor(scores, dtype=torch.float)\n    probs = F.softmax(scores_t, dim=0)\n    probs = torch.round(probs * 10000) / 10000\n    return probs.tolist()",
+  "pytorch_test_cases": [
+    {
+      "test": "print(softmax([1, 2, 3]))",
+      "expected_output": "[0.09, 0.2447, 0.6652]"
+    },
+    {
+      "test": "print(softmax([1, 1, 1]))",
+      "expected_output": "[0.3333, 0.3333, 0.3333]"
+    }
+  ]
+}

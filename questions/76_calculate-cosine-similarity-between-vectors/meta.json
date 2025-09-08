@@ -4,14 +4,12 @@
   "difficulty": "easy",
   "category": "Linear Algebra",
   "video": "https://youtu.be/QMdvVDhc6f0?si=ST33rc73BjHY3pij",
-  "likes": 0,
-  "dislikes": 0,
+  "likes": "0",
+  "dislikes": "0",
   "contributor": [
     {
       "profile_link": "https://github.com/saitiger",
       "name": "saitiger"
     }
-  ],
-  "tinygrad_difficulty": null,
-  "pytorch_difficulty": null
+  ]
 }

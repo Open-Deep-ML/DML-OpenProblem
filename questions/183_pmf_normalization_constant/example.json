@@ -1,0 +1,5 @@
+{
+  "input": "No input; call find_k()",
+  "output": "0.1",
+  "reasoning": "From the normalization condition, 10K^2 + 9K = 1 gives K = 0.1 (non-negative root)."
+}

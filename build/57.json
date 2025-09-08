@@ -1,0 +1,38 @@
+{
+  "id": "57",
+  "title": "Gauss-Seidel Method for Solving Linear Systems",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/paddywardle",
+      "name": "paddywardle"
+    }
+  ],
+  "description": "## Task: Implement the Gauss-Seidel Method\n\nYour task is to implement the Gauss-Seidel method, an iterative technique for solving a system of linear equations \\(Ax = b\\).\n\nThe function should iteratively update the solution vector \\(x\\) by using the most recent values available during the iteration process.\n\nWrite a function `gauss_seidel(A, b, n, x_ini=None)` where:\n\n- `A` is a square matrix of coefficients,\n- `b` is the right-hand side vector,\n- `n` is the number of iterations,\n- `x_ini` is an optional initial guess for \\(x\\) (if not provided, assume a vector of zeros).\n\nThe function should return the approximated solution vector \\(x\\) after performing the specified number of iterations.\n\n    ",
+  "learn_section": "\n## Understanding the Gauss-Seidel Method\n\nThe Gauss-Seidel method is a technique for solving linear systems of equations $Ax = b$. Unlike fixed-point Jacobi, Gauss-Seidel uses previously computed results as soon as they are available. This increases convergence, resulting in fewer iterations, but it is not as easily parallelizable as fixed-point Jacobi.\n\n### Mathematical Formulation\n\n1. **Initialization**: Start with an initial guess for $x$.\n\n2. **Iteration**: For each equation $i$, update $x[i]$ using:\n\n$$\nx_{i}^{(k+1)} = \\frac{1}{a_{ii}} \\left( b[i] - \\sum_{j < i} a_{ij} x_{j}^{(k+1)} - \\sum_{j > i} a_{ij} x_{j}^{(k)} \\right)\n$$\n\nwhere $a_{ii}$ represents the diagonal elements of $A$, and $a_{ij}$ represents the off-diagonal elements.\n\n3. **Convergence**: Repeat the iteration until the changes in $x$ are below a set tolerance or until a maximum number of iterations is reached.\n\n### Matrix Form\n\nThe Gauss-Seidel method can also be expressed in matrix form using the diagonal matrix $D$, lower triangle $L$, and upper triangle $U$:\n\n$$\nx^{(k+1)} = D^{-1} \\left( b - Lx^{(k+1)} - Ux^{(k)} \\right)\n$$\n\n### Example Calculation\n\nLet’s solve the system of equations:\n\n$$\n3x_1 + x_2 = 5 \\quad x_1 + 2x_2 = 5\n$$\n\n1. Initialize $ x_1^{(0)} = 0 $ and $ x_2^{(0)} = 0 $.\n\n2. **First iteration**:\n\nFor $ x_1^{(1)} $:\n\n$$\nx_1^{(1)} = \\frac{1}{3} \\left( 5 - 1 \\cdot x_2^{(0)} \\right) = \\frac{5}{3} \\approx 1.6667\n$$\n\nFor $ x_2^{(1)} $:\n\n$$\nx_2^{(1)} = \\frac{1}{2} \\left( 5 - 1 \\cdot x_1^{(1)} \\right) = \\frac{1}{2} \\left( 5 - 1.6667 \\right) \\approx 1.6667\n$$\n\nAfter the first iteration, the values are $ x_1^{(1)} = 1.6667 $ and $ x_2^{(1)} = 1.6667 $.\n\nContinue iterating until the results converge to a desired tolerance.\n\n### Applications\n\nThe Gauss-Seidel method and other iterative solvers are commonly used in data science, computational fluid dynamics, and 3D graphics.",
+  "starter_code": "import numpy as np\n\ndef gauss_seidel(A, b, n, x_ini=None):\n\treturn np.zeros_like(b)",
+  "solution": "import numpy as np\n\ndef gauss_seidel_it(A, b, x):\n    rows, cols = A.shape\n    for i in range(rows):\n        x_new = b[i]\n        for j in range(cols):\n            if i != j:\n                x_new -= A[i, j] * x[j]\n        x[i] = x_new / A[i, i]\n    return x\n\ndef gauss_seidel(A, b, n, x_ini=None):\n    x = x_ini or np.zeros_like(b)\n    for _ in range(n):\n        x = gauss_seidel_it(A, b, x)\n    return x",
+  "example": {
+    "input": "A = np.array([[4, 1, 2], [3, 5, 1], [1, 1, 3]], dtype=float)\nb = np.array([4, 7, 3], dtype=float)\n\nn = 100\nprint(gauss_seidel(A, b, n))",
+    "output": "# [0.2, 1.4, 0.8]  (Approximate, values may vary depending on iterations)",
+    "reasoning": "The Gauss-Seidel method iteratively updates the solution vector \\(x\\) until convergence. The output is an approximate solution to the linear system."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\n\nA = np.array([[4, 1, 2], [3, 5, 1], [1, 1, 3]], dtype=float)\nb = np.array([4, 7, 3], dtype=float)\nn = 5\nprint(gauss_seidel(A, b, n))",
+      "expected_output": "[0.5008, 0.99968, 0.49984]"
+    },
+    {
+      "test": "import numpy as np\n\nA = np.array([[4, -1, 0, 1], [-1, 4, -1, 0], [0, -1, 4, -1], [1, 0, -1, 4]], dtype=float)\nb = np.array([15, 10, 10, 15], dtype=float)\nn = 1\nprint(gauss_seidel(A, b, n))",
+      "expected_output": "[3.75, 3.4375, 3.359375, 3.65234375]"
+    },
+    {
+      "test": "import numpy as np\n\nA = np.array([[10, -1, 2], [-1, 11, -1], [2, -1, 10]], dtype=float)\nb = np.array([6, 25, -11], dtype=float)\nn = 100\nprint(gauss_seidel(A, b, n))",
+      "expected_output": "[1.04326923, 2.26923077, -1.08173077]"
+    }
+  ]
+}

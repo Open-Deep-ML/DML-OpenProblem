@@ -1,0 +1,29 @@
+{
+  "id": "34",
+  "title": "One-Hot Encoding of Nominal Values",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [],
+  "description": "Write a Python function to perform one-hot encoding of nominal values. The function should take in a 1D numpy array x of integer values and an optional integer n_col representing the number of columns for the one-hot encoded array. If n_col is not provided, it should be automatically determined from the input array.",
+  "learn_section": "\n## Understanding One-Hot Encoding\n\nOne-hot encoding is a method used to represent categorical variables as binary vectors. This technique is useful in machine learning when dealing with categorical data that has no ordinal relationship.\n\n### Explanation\nIn one-hot encoding, each category is represented by a binary vector with a length equal to the number of categories. The vector has a value of 1 at the index corresponding to the category and 0 at all other indices.\n\n### Example\nFor instance, if you have three categories: 0, 1, and 2, the one-hot encoded vectors would be:\n- **0**: $[1, 0, 0]$\n- **1**: $[0, 1, 0]$\n- **2**: $[0, 0, 1]$\n\nThis method ensures that the model does not assume any ordinal relationship between categories, which is crucial for many machine learning algorithms.\n\n### Mathematical Representation\nThe one-hot encoding process can be mathematically represented as follows:\n\nGiven a category $x_i$ from a set of categories $\\{0, 1, \\ldots, n-1\\}$, the one-hot encoded vector $\\mathbf{v}$ is:\n$$\n\\mathbf{v}_i = \n\\begin{cases} \n1 & \\text{if } i = x_i \\\\\n0 & \\text{otherwise}\n\\end{cases}\n$$\n\nThis vector $\\mathbf{v}$ will have a length equal to the number of unique categories.",
+  "starter_code": "import numpy as np\n\ndef to_categorical(x, n_col=None):\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef to_categorical(x, n_col=None):\n    # One-hot encoding of nominal values\n    # If n_col is not provided, determine the number of columns from the input array\n    if not n_col:\n        n_col = np.amax(x) + 1\n    # Initialize a matrix of zeros with shape (number of samples, n_col)\n    one_hot = np.zeros((x.shape[0], n_col))\n    # Set the appropriate elements to 1\n    one_hot[np.arange(x.shape[0]), x] = 1\n    return one_hot\n    ",
+  "example": {
+    "input": "x = np.array([0, 1, 2, 1, 0])\n    output = to_categorical(x)\n    print(output)",
+    "output": "# [[1. 0. 0.]\n    #  [0. 1. 0.]\n    #  [0. 0. 1.]\n    #  [0. 1. 0.]\n    #  [1. 0. 0.]]",
+    "reasoning": "Each element in the input array is transformed into a one-hot encoded vector,\n    where the index corresponding to the value in the input array is set to 1, \n    and all other indices are set to 0."
+  },
+  "test_cases": [
+    {
+      "test": "print(to_categorical(np.array([0, 1, 2, 1, 0])))",
+      "expected_output": "[[1., 0., 0.], [0., 1., 0.], [0., 0., 1.], [0., 1., 0.], [1., 0., 0.]]"
+    },
+    {
+      "test": "print(to_categorical(np.array([3, 1, 2, 1, 3]), 4))",
+      "expected_output": "[[0., 0., 0., 1.], [0., 1., 0., 0.], [0., 0., 1., 0.], [0., 1., 0., 0.], [0., 0., 0., 1.]]"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "83",
+  "title": "Dot Product Calculator",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/rittik9",
+      "name": "rittik9"
+    }
+  ],
+  "description": "Write a Python function to calculate the dot product of two vectors. The function should take two 1D NumPy arrays as input and return the dot product as a single number.",
+  "learn_section": "## Calculating the Dot Product of Two Vectors\n\nThe dot product, also known as the scalar product, is a mathematical operation that takes two equal-length vectors and returns a single number. It is widely used in physics, geometry, and linear algebra.\n\n### 1. Formula for the Dot Product\n\nThe dot product of two vectors $\\mathbf{a}$ and $\\mathbf{b}$, each of length $n$, is calculated as follows:\n\n$$\n\\mathbf{a} \\cdot \\mathbf{b} = \\sum_{i=1}^{n} a_i b_i\n$$\n\nThis means multiplying corresponding elements of the two vectors and summing up the results.\n\n### 2. Geometric Interpretation\n\nIn geometric terms, the dot product can also be expressed as:\n\n$$\n\\mathbf{a} \\cdot \\mathbf{b} = |\\mathbf{a}| |\\mathbf{b}| \\cos \\theta\n$$\n\nWhere:\n\n- $|\\mathbf{a}|$ and $|\\mathbf{b}|$ are the magnitudes of the vectors.\n- $\\theta$ is the angle between the two vectors.\n\n### 3. Properties of the Dot Product\n\n1. **Commutative**:  \n   $$\n   \\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{b} \\cdot \\mathbf{a}\n   $$\n\n2. **Distributive**:  \n   $$\n   \\mathbf{a} \\cdot (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\cdot \\mathbf{b} + \\mathbf{a} \\cdot \\mathbf{c}\n   $$\n\n3. **Orthogonal Vectors**:  \n   If:  \n   $$\n   \\mathbf{a} \\cdot \\mathbf{b} = 0\n   $$  \n   Then $\\mathbf{a}$ and $\\mathbf{b}$ are perpendicular.\n\n### 4. Example Calculation\n\nGiven two vectors:\n\n- $\\mathbf{a} = [1, 2, 3]$\n- $\\mathbf{b} = [4, 5, 6]$\n\nThe dot product is calculated as:\n\n$$\n\\mathbf{a} \\cdot \\mathbf{b} = (1 \\cdot 4) + (2 \\cdot 5) + (3 \\cdot 6) = 4 + 10 + 18 = 32\n$$\n\n### Conclusion\n\nThe dot product is a fundamental operation in vector algebra, useful in determining angles between vectors, projections, and in many applications across physics and engineering.",
+  "starter_code": "import numpy as np\n\ndef calculate_dot_product(vec1, vec2) -> float:\n\t\"\"\"\n\tCalculate the dot product of two vectors.\n\tArgs:\n\t\tvec1 (numpy.ndarray): 1D array representing the first vector.\n\t\tvec2 (numpy.ndarray): 1D array representing the second vector.\n\t\"\"\"\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef calculate_dot_product(vec1, vec2):\n    \"\"\"\n    Calculate the dot product of two vectors.\n    Args:\n        vec1 (numpy.ndarray): 1D array representing the first vector.\n        vec2 (numpy.ndarray): 1D array representing the second vector.\n    Returns:\n        float: Dot product of the two vectors.\n    \"\"\"\n    return np.dot(vec1, vec2)",
+  "example": {
+    "input": "vec1 = np.array([1, 2, 3]), vec2 = np.array([4, 5, 6])",
+    "output": "32",
+    "reasoning": "The function calculates the dot product by multiplying corresponding elements of the two vectors and summing the results. For vec1 = [1, 2, 3] and vec2 = [4, 5, 6], the result is (1 * 4) + (2 * 5) + (3 * 6) = 32."
+  },
+  "test_cases": [
+    {
+      "test": "print(calculate_dot_product(np.array([1, 2, 3]), np.array([4, 5, 6])))",
+      "expected_output": "32"
+    },
+    {
+      "test": "print(calculate_dot_product(np.array([-1, 2, 3]), np.array([4, -5, 6])))",
+      "expected_output": "4"
+    },
+    {
+      "test": "print(calculate_dot_product(np.array([1, 0]), np.array([0, 1])))",
+      "expected_output": "0"
+    },
+    {
+      "test": "print(calculate_dot_product(np.array([0, 0, 0]), np.array([0, 0, 0])))",
+      "expected_output": "0"
+    },
+    {
+      "test": "print(calculate_dot_product(np.array([7]), np.array([3])))",
+      "expected_output": "21"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "120",
+  "title": "Bhattacharyya Distance Between Two Distributions",
+  "difficulty": "easy",
+  "category": "Statistics",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Arudhra1999",
+      "name": "Arudhra1999"
+    }
+  ],
+  "description": "Implement a function to calculate the Bhattacharyya distance between two probability distributions. The function should take two lists representing discrete probability distributions `p` and `q`, and return the Bhattacharyya distance rounded to 4 decimal places. If the inputs have different lengths or are empty, return 0.0.",
+  "learn_section": "## Understanding Bhattacharyya Distance\n\n**Bhattacharyya Distance (BD)** is a concept in statistics used to measure the **similarity** or **overlap** between two probability distributions **P(x)** and **Q(x)** on the same domain **x**.  \n\nThis differs from **KL Divergence**, which measures the **loss of information** when projecting one probability distribution onto another (reference distribution).  \n\n### **Bhattacharyya Distance Formula**\nThe Bhattacharyya distance is defined as:  \n\n$$\nBC (P, Q) = \\sum \\sqrt{P(X) \\cdot Q(X)}\n$$\n\n$$\nBD (P, Q) = -\\ln(BC (P, Q))\n$$\n\nwhere **BC (P, Q)** is the **Bhattacharyya coefficient**.  \n\n### **Key Properties**\n1. **BD is always non-negative**:  \n   $$ BD \\geq 0 $$\n2. **Symmetric in nature**:  \n   $$ BD (P, Q) = BD (Q, P) $$\n3. **Applications**:  \n   - Risk assessment  \n   - Stock predictions  \n   - Feature scaling  \n   - Classification problems  \n\n### **Example Calculation**\nConsider two probability distributions **P(x)** and **Q(x)**:  \n\n$$\nP(x) = [0.1, 0.2, 0.3, 0.4], \\quad Q(x) = [0.4, 0.3, 0.2, 0.1]\n$$\n\n1. **Bhattacharyya Coefficient**:  \n\n$$\nBC (P, Q) = \\sum \\sqrt{P(X) \\cdot Q(X)} = 0.8898\n$$\n\n2. **Bhattacharyya Distance**:  \n\n$$\nBD (P, Q) = -\\ln(BC (P, Q)) = -\\ln(0.8898) = 0.1166\n$$\n\nThis illustrates how BD quantifies the **overlap** between two probability distributions.  ",
+  "starter_code": "import numpy as np\n\ndef bhattacharyya_distance(p: list[float], q: list[float]) -> float:\n    # Your code here\n    pass",
+  "solution": "import numpy as np\n\ndef bhattacharyya_distance(p : list[float], q : list[float]) -> float:\n    if len(p) != len(q):\n        return 0.0\n\n    p, q = np.array(p), np.array(q)\n    BC = np.sum(np.sqrt(p * q))\n    DB = -np.log(BC)\n    return round(DB, 4)",
+  "example": {
+    "input": "p = [0.1, 0.2, 0.3, 0.4], q = [0.4, 0.3, 0.2, 0.1]",
+    "output": "0.1166",
+    "reasoning": "The Bhattacharyya coefficient is calculated as the sum of element-wise square roots of the product of p and q, giving BC = 0.8898. The distance is then -log(0.8898) = 0.1166."
+  },
+  "test_cases": [
+    {
+      "test": "print(round(bhattacharyya_distance([0.1, 0.2, 0.3, 0.4], [0.4, 0.3, 0.2, 0.1]),4))",
+      "expected_output": "0.1166"
+    },
+    {
+      "test": "print(round(bhattacharyya_distance([0.7, 0.2, 0.1], [0.4, 0.3, 0.3]),4))",
+      "expected_output": "0.0541"
+    },
+    {
+      "test": "print(round(bhattacharyya_distance([], [0.5, 0.4, 0.1]),4))",
+      "expected_output": "0.0"
+    },
+    {
+      "test": "print(round(bhattacharyya_distance([0.6, 0.4], [0.1, 0.7, 0.2]),4))",
+      "expected_output": "0.0"
+    },
+    {
+      "test": "print(round(bhattacharyya_distance([0.6, 0.2, 0.1, 0.1], [0.1, 0.2, 0.3, 0.4]),4))",
+      "expected_output": "0.2007"
+    }
+  ]
+}
