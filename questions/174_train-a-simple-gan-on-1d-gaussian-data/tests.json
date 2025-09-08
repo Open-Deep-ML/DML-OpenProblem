@@ -1,0 +1,14 @@
+[
+  {
+    "test": "gen_forward = train_gan(4.0, 1.25, epochs=1000, seed=42)\nz = np.random.normal(0, 1, (500, 1))\nx_gen, _, _ = gen_forward(z)\nprint((round(np.mean(x_gen), 4), round(np.std(x_gen), 4)))",
+    "expected_output": "(0.0004, 0.0002)"
+  },
+  {
+    "test": "gen_forward = train_gan(0.0, 1.0, epochs=500, seed=0)\nz = np.random.normal(0, 1, (300, 1))\nx_gen, _, _ = gen_forward(z)\nprint((round(np.mean(x_gen), 4), round(np.std(x_gen), 4)))",
+    "expected_output": "(-0.0002, 0.0002)"
+  },
+  {
+    "test": "gen_forward = train_gan(-2.0, 0.5, epochs=1500, seed=123)\nz = np.random.normal(0, 1, (400, 1))\nx_gen, _, _ = gen_forward(z)\nprint((round(np.mean(x_gen), 4), round(np.std(x_gen), 4)))",
+    "expected_output": "(-0.0044, 0.0002)"
+  }
+]

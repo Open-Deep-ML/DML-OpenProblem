@@ -1,0 +1,16 @@
+{
+  "id": "174",
+  "title": "Train a Simple GAN on 1D Gaussian Data",
+  "difficulty": "hard",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "moe"
+    }
+  ],
+  "pytorch_difficulty": "medium"
+}
