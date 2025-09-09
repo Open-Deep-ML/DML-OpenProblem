@@ -66,10 +66,9 @@ F_mean = (Precision * Recall) /
 
 ### 5. Chunk Calculation
 - Contiguous matched sequences:
-  1. ['quick', 'brown', 'fox']
-  2. ['jumps', 'over']
-  3. ['lazy', 'dog']
-- Number of Chunks: 3
+  1. ['quick', 'brown', 'fox', jumps', 'over']
+  2. ['lazy', 'dog']
+- Number of Chunks: 2
 - Total Number of Unigram Matches: 7
 
 ### 6. Penalty Calculation (betta = 3, gamma = 0.5)
