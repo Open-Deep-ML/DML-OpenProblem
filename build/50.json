@@ -1,0 +1,38 @@
+{
+  "id": "50",
+  "title": "Implement Lasso Regression using Gradient Descent",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/afrenkai",
+      "name": "Artem Frenk"
+    },
+    {
+      "profile_link": "https://github.com/JerryWu-code",
+      "name": "JerryWu-code"
+    }
+  ],
+  "description": "In this problem, you need to implement the Lasso Regression algorithm using Gradient Descent. Lasso Regression (L1 Regularization) adds a penalty equal to the absolute value of the coefficients to the loss function. Your task is to update the weights and bias iteratively using the gradient of the loss function and the L1 penalty.\n\nThe objective function of Lasso Regression is:\n$$\nJ(w, b) = \\frac{1}{2n} \\sum_{i=1}^{n} \\left( y_i - \\left( \\sum_{j=1}^{p} X_{ij} w_j + b \\right) \\right)^2 + \\alpha \\sum_{j=1}^{p} | w_j |\n$$\n\nWhere:\n- $ y_i $ is the actual value for the $ i $-th sample\n- $ \\hat{y}_i = \\sum_{j=1}^{p} X_{ij} w_j + b $ is the predicted value for the $ i $-th sample\n- $ w_j $ is the weight associated with the $ j $-th feature\n- $ \\alpha $ is the regularization parameter\n- $ b $ is the bias\n\nYour task is to use the L1 penalty to shrink some of the feature coefficients to zero during gradient descent, thereby helping with feature selection.",
+  "learn_section": "## Understanding Lasso Regression and L1 Regularization\n\nLasso Regression is a type of linear regression that applies L1 regularization to the model. It adds a penalty equal to the sum of the absolute values of the coefficients, encouraging some of them to be exactly zero. This makes Lasso Regression particularly useful for feature selection, as it can shrink the coefficients of less important features to zero, effectively removing them from the model.\n\n### Steps to Implement Lasso Regression using Gradient Descent\n\n1. **Initialize Weights and Bias**:  \n   Start with the weights and bias set to zero.\n\n2. **Make Predictions**:  \n   Use the formula:\n   $$\n   \\hat{y}_i = \\sum_{j=1}^{p} X_{ij} w_j + b\n   $$\n   where $ \\hat{y}_i $ is the predicted value for the $ i $-th sample.\n\n3. **Compute Residuals**:  \n   Find the difference between the predicted values $ \\hat{y}_i $ and the actual values $ y_i $. These residuals are the errors in the model.\n\n4. **Update the Weights and Bias**:  \n   Update the weights and bias using the gradient of the loss function with respect to the weights and bias:\n\n   1. For weights $ w_j $:\n      $$\n      \\frac{\\partial J}{\\partial w_j} = \\frac{1}{n} \\sum_{i=1}^{n} X_{ij}(\\hat{y}_i - y_i) + \\alpha \\cdot \\text{sign}(w_j)\n      $$\n\n   2. For bias $ b $ (without the regularization term):\n      $$\n      \\frac{\\partial J}{\\partial b} = \\frac{1}{n} \\sum_{i=1}^{n} (\\hat{y}_i - y_i)\n      $$\n\n   3. Update the weights and bias:\n      $$\n      w_j = w_j - \\eta \\cdot \\frac{\\partial J}{\\partial w_j}\n      $$\n      $$\n      b = b - \\eta \\cdot \\frac{\\partial J}{\\partial b}\n      $$\n\n5. **Check for Convergence**:  \n   The algorithm stops when the L1 norm of the gradient with respect to the weights becomes smaller than a predefined threshold $ \\text{tol} $:\n   $$\n   ||\\nabla w ||_1 = \\sum_{j=1}^{p} \\left| \\frac{\\partial J}{\\partial w_j} \\right|\n   $$\n\n6. **Return the Weights and Bias**:  \n   Once the algorithm converges, return the optimized weights and bias.",
+  "starter_code": "import numpy as np\n\ndef l1_regularization_gradient_descent(X: np.array, y: np.array, alpha: float = 0.1, learning_rate: float = 0.01, max_iter: int = 1000, tol: float = 1e-4) -> tuple:\n\tn_samples, n_features = X.shape\n\n\tweights = np.zeros(n_features)\n\tbias = 0\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef l1_regularization_gradient_descent(X: np.array, y: np.array, alpha: float = 0.1, learning_rate: float = 0.01, max_iter: int = 1000, tol: float = 1e-4) -> tuple:\n    n_samples, n_features = X.shape\n    # Zero out weights and bias\n    weights = np.zeros(n_features)\n    bias = 0\n    \n    for iteration in range(max_iter):\n        # Predict values\n        y_pred = np.dot(X, weights) + bias\n        # Calculate error\n        error = y_pred - y\n        # Gradient for weights with L1 penalty\n        grad_w = (1 / n_samples) * np.dot(X.T, error) + alpha * np.sign(weights)\n        # Gradient for bias (no penalty for bias)\n        grad_b = (1 / n_samples) * np.sum(error)\n        \n        # Update weights and bias\n        weights -= learning_rate * grad_w\n        bias -= learning_rate * grad_b\n        \n        # Check for convergence\n        if np.linalg.norm(grad_w, ord=1) < tol:\n            break\n    \n    return weights, bias",
+  "example": {
+    "input": "import numpy as np\n\nX = np.array([[0, 0], [1, 1], [2, 2]])\ny = np.array([0, 1, 2])\n\nalpha = 0.1\nweights, bias = l1_regularization_gradient_descent(X, y, alpha=alpha, learning_rate=0.01, max_iter=1000)",
+    "output": "(weights,bias)\n(array([float, float]), float)",
+    "reasoning": "The Lasso Regression algorithm is used to optimize the weights and bias for the given data. The weights are adjusted to minimize the loss function with the L1 penalty."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\n\nX = np.array([[0, 0], [1, 1], [2, 2]])\ny = np.array([0, 1, 2])\n\nalpha = 0.1\noutput = l1_regularization_gradient_descent(X, y, alpha=alpha, learning_rate=0.01, max_iter=1000)\nprint(output)",
+      "expected_output": "(array([0.42371644, 0.42371644]), 0.15385068459377865)"
+    },
+    {
+      "test": "import numpy as np\n\nX = np.array([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])\ny = np.array([1, 2, 3, 4, 5])\n\nalpha = 0.1\noutput = l1_regularization_gradient_descent(X, y, alpha=alpha, learning_rate=0.01, max_iter=1000)\nprint(output)",
+      "expected_output": "(array([0.27280148, 0.68108784]), 0.4082863608718005)"
+    }
+  ]
+}

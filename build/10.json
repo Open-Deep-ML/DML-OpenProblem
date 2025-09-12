@@ -1,0 +1,64 @@
+{
+  "id": "10",
+  "title": "Calculate Covariance Matrix",
+  "difficulty": "easy",
+  "category": "Statistics",
+  "video": "https://youtu.be/Mmuz3a4idg4",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://github.com/Selbl",
+      "name": "Selbl"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "easy",
+  "description": "Write a Python function to calculate the covariance matrix for a given set of vectors. The function should take a list of lists, where each inner list represents a feature with its observations, and return a covariance matrix as a list of lists. Additionally, provide test cases to verify the correctness of your implementation.",
+  "learn_section": "## Understanding Covariance Matrix\n\nThe covariance matrix is a fundamental concept in statistics and machine learning, used to understand the relationship between multiple variables (features) in a dataset. It quantifies the degree to which two variables change together.\n\n### Key Concepts\n\n- **Covariance**: Measures the directional relationship between two random variables. A positive covariance indicates that the variables increase together, while a negative covariance indicates that one variable increases as the other decreases.\n- **Covariance Matrix**: For a dataset with $n$ features, the covariance matrix is an $n \\times n$ matrix where each element $(i, j)$ represents the covariance between the $i^{th}$ and $j^{th}$ features.\n\n### Covariance Formula\n\nThe covariance between two variables $X$ and $Y$ is calculated as:\n\n$$\n\\text{cov}(X, Y) = \\frac{\\sum_{k=1}^{m} (X_k - \\bar{X})(Y_k - \\bar{Y})}{m - 1}\n$$\n\nWhere:\n\n- $X_k$ and $Y_k$ are the individual observations of variables $X$ and $Y$.\n- $\\bar{X}$ and $\\bar{Y}$ are the means of $X$ and $Y$.\n- $m$ is the number of observations.\n\n### Constructing the Covariance Matrix\n\nGiven a dataset with $n$ features, the covariance matrix is constructed as follows:\n\n1. **Calculate the Mean**: Compute the mean of each feature.\n2. **Compute Covariance**: For each pair of features, calculate the covariance using the formula above.\n3. **Populate the Matrix**: Place the computed covariance values in the corresponding positions in the matrix. The diagonal elements represent the variance of each feature.\n\n$$\n\\text{Covariance Matrix} =\n\\begin{bmatrix}\n\\text{cov}(X_1, X_1) & \\text{cov}(X_1, X_2) & \\cdots & \\text{cov}(X_1, X_n) \\\\\n\\text{cov}(X_2, X_1) & \\text{cov}(X_2, X_2) & \\cdots & \\text{cov}(X_2, X_n) \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\n\\text{cov}(X_n, X_1) & \\text{cov}(X_n, X_2) & \\cdots & \\text{cov}(X_n, X_n) \\\\\n\\end{bmatrix}\n$$\n\n### Example Calculation\n\nConsider the following dataset with two features:\n\n$$\n\\begin{align*}\n\\text{Feature 1} &: [1, 2, 3] \\\\\n\\text{Feature 2} &: [4, 5, 6]\n\\end{align*}\n$$\n\n1. **Calculate Means**:\n   $$\n   \\bar{X}_1 = \\frac{1 + 2 + 3}{3} = 2.0 \\\\\n   \\bar{X}_2 = \\frac{4 + 5 + 6}{3} = 5.0\n   $$\n\n2. **Compute Covariances**:\n   $$\n   \\text{cov}(X_1, X_1) = \\frac{(1-2)^2 + (2-2)^2 + (3-2)^2}{3-1} = 1.0 \\\\\n   \\text{cov}(X_1, X_2) = \\frac{(1-2)(4-5) + (2-2)(5-5) + (3-2)(6-5)}{3-1} = 1.0 \\\\\n   \\text{cov}(X_2, X_2) = \\frac{(4-5)^2 + (5-5)^2 + (6-5)^2}{3-1} = 1.0\n   $$\n\n3. **Covariance Matrix**:\n   $$\n   \\begin{bmatrix}\n   1.0 & 1.0 \\\\\n   1.0 & 1.0 \n   \\end{bmatrix}\n   $$\n\n### Applications\n\nCovariance matrices are widely used in various fields, including:\n\n- **Principal Component Analysis (PCA)**: Reducing the dimensionality of datasets while preserving variance.\n- **Portfolio Optimization**: Understanding the variance and covariance between different financial assets.\n- **Multivariate Statistics**: Analyzing the relationships between multiple variables simultaneously.\n\nUnderstanding the covariance matrix is crucial for interpreting the relationships in multivariate data and for performing advanced statistical analyses.",
+  "starter_code": "def calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]:\n\t# Your code here\n\treturn []",
+  "solution": "import numpy as np\n\ndef calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]:\n    n_features = len(vectors)\n    n_observations = len(vectors[0])\n    covariance_matrix = [[0 for _ in range(n_features)] for _ in range(n_features)]\n\n    means = [sum(feature) / n_observations for feature in vectors]\n\n    for i in range(n_features):\n        for j in range(i, n_features):\n            covariance = sum((vectors[i][k] - means[i]) * (vectors[j][k] - means[j]) for k in range(n_observations)) / (n_observations - 1)\n            covariance_matrix[i][j] = covariance_matrix[j][i] = covariance\n\n    return covariance_matrix",
+  "example": {
+    "input": "[[1, 2, 3], [4, 5, 6]]",
+    "output": "[[1.0, 1.0], [1.0, 1.0]]",
+    "reasoning": "The covariance between the two features is calculated based on their deviations from the mean. For the given vectors, both covariances are 1.0, resulting in a symmetric covariance matrix."
+  },
+  "test_cases": [
+    {
+      "test": "print(calculate_covariance_matrix([[1, 2, 3], [4, 5, 6]]))",
+      "expected_output": "[[1.0, 1.0], [1.0, 1.0]]"
+    },
+    {
+      "test": "print(calculate_covariance_matrix([[1, 5, 6], [2, 3, 4], [7, 8, 9]]))",
+      "expected_output": "[[7.0, 2.5, 2.5], [2.5, 1.0, 1.0], [2.5, 1.0, 1.0]]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef calculate_covariance_matrix_tg(vectors) -> Tensor:\n    \"\"\"\n    Calculate the covariance matrix for given feature vectors using tinygrad.\n    Input: 2D array-like of shape (n_features, n_observations).\n    Returns a Tensor of shape (n_features, n_features).\n    \"\"\"\n    v_t = Tensor(vectors).float()\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef calculate_covariance_matrix_tg(vectors) -> Tensor:\n    \"\"\"\n    Calculate the covariance matrix for given feature vectors using tinygrad.\n    Input: 2D array-like of shape (n_features, n_observations).\n    Returns a Tensor of shape (n_features, n_features).\n    \"\"\"\n    v_t = Tensor(vectors).float()\n    n_features, n_obs = v_t.shape\n    # compute feature means\n    means = v_t.sum(axis=1).reshape(n_features,1) / n_obs\n    centered = v_t - means\n    cov = centered.matmul(centered.transpose(0,1)) / (n_obs - 1)\n    return cov",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = calculate_covariance_matrix_tg([[1.0,2.0,3.0],[4.0,5.0,6.0]])\nprint(res.numpy().tolist())",
+      "expected_output": "[[1.0, 1.0], [1.0, 1.0]]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = calculate_covariance_matrix_tg([[1.0,2.0,3.0],[3.0,3.0,3.0]])\nprint(res.numpy().tolist())",
+      "expected_output": "[[1.0, 0.0], [0.0, 0.0]]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef calculate_covariance_matrix(vectors) -> torch.Tensor:\n    \"\"\"\n    Calculate the covariance matrix for given feature vectors using PyTorch.\n    Input: 2D array-like of shape (n_features, n_observations).\n    Returns a tensor of shape (n_features, n_features).\n    \"\"\"\n    v_t = torch.as_tensor(vectors, dtype=torch.float)\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef calculate_covariance_matrix(vectors) -> torch.Tensor:\n    \"\"\"\n    Calculate the covariance matrix for given feature vectors using PyTorch.\n    Input: 2D array-like of shape (n_features, n_observations).\n    Returns a tensor of shape (n_features, n_features).\n    \"\"\"\n    v_t = torch.as_tensor(vectors, dtype=torch.float)\n    # use built-in covariance\n    return torch.cov(v_t)",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nv = [[1.0,2.0,3.0],[4.0,5.0,6.0]]\ncov = calculate_covariance_matrix(v)\nprint(cov.detach().numpy().tolist())",
+      "expected_output": "[[1.0, 1.0], [1.0, 1.0]]"
+    },
+    {
+      "test": "import torch\nv = [[1.0,2.0,3.0],[3.0,3.0,3.0]]\ncov = calculate_covariance_matrix(v)\nprint(cov.detach().numpy().tolist())",
+      "expected_output": "[[1.0, 0.0], [0.0, 0.0]]"
+    }
+  ]
+}

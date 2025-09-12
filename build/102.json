@@ -1,0 +1,46 @@
+{
+  "id": "102",
+  "title": "Implement the Swish Activation Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Haleshot",
+      "name": "Haleshot"
+    }
+  ],
+  "description": "Implement the Swish activation function, a self-gated activation function that has shown superior performance in deep neural networks compared to ReLU. Your task is to compute the Swish value for a given input.",
+  "learn_section": "## Understanding the Swish Activation Function\n\nThe Swish activation function is a modern self-gated activation function introduced by researchers at Google Brain. It has been shown to perform better than ReLU in many deep networks, particularly in deeper architectures.\n\n### Mathematical Definition\n\nThe Swish function is defined as:\n\n$$Swish(x) = x \\times \\sigma(x)$$\n\nwhere $\\sigma(x)$ is the sigmoid function defined as:\n\n$$\\sigma(x) = \\frac{1}{1 + e^{-x}}$$\n\n### Characteristics\n\n- **Output Range**: Unlike ReLU which has a range of $[0, \\infty)$, Swish has a range of $(-\\infty, \\infty)$\n- **Smoothness**: Swish is smooth and non-monotonic, making it differentiable everywhere\n- **Shape**: The function has a slight dip below 0 for negative values, then curves up smoothly for positive values\n- **Properties**:\n  - For large positive x: Swish(x) ~ x (similar to linear function)\n  - For large negative x: Swish(x) ~ 0 (similar to ReLU)\n  - Has a minimal value around x ~ -1.28\n\n### Advantages\n\n- Smooth function with no hard zero threshold like ReLU\n- Self-gated nature allows for more complex relationships\n- Often provides better performance in deep neural networks\n- Reduces the vanishing gradient problem compared to sigmoid",
+  "starter_code": "def swish(x: float) -> float:\n\t\"\"\"\n\tImplements the Swish activation function.\n\n\tArgs:\n\t\tx: Input value\n\n\tReturns:\n\t\tThe Swish activation value\n\t\"\"\"\n\t# Your code here\n\tpass",
+  "solution": "import math\n\ndef swish(x: float) -> float:\n    \"\"\"\n    Implements the Swish activation function.\n\n    Args:\n        x: Input value\n\n    Returns:\n        The Swish activation value\n    \"\"\"\n    return x * (1 / (1 + math.exp(-x)))",
+  "example": {
+    "input": "swish(1)",
+    "output": "0.7311",
+    "reasoning": "For x = 1, the Swish activation is calculated as $Swish(x) = x \\times \\sigma(x)$, where $\\sigma(x) = \\frac{1}{1 + e^{-x}}$. Substituting the value, $Swish(1) = 1 \\times \\frac{1}{1 + e^{-1}} = 0.7311$."
+  },
+  "test_cases": [
+    {
+      "test": "print(round(swish(0),4))",
+      "expected_output": "0.0"
+    },
+    {
+      "test": "print(round(swish(1),4))",
+      "expected_output": "0.7311"
+    },
+    {
+      "test": "print(round(swish(-1),4))",
+      "expected_output": "-0.2689"
+    },
+    {
+      "test": "print(round(swish(10),4))",
+      "expected_output": "9.9995"
+    },
+    {
+      "test": "print(round(swish(-10),4))",
+      "expected_output": "-0.0005"
+    }
+  ]
+}

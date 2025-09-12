@@ -13,9 +13,7 @@
     },
     {
       "profile_link": "https://github.com/eriklindernoren/ML-From-Scratch",
-      "name": "Erik Linder-Norén"
+      "name": "Erik Linder-Nor\u00e9n"
     }
-  ],
-  "tinygrad_difficulty": null,
-  "pytorch_difficulty": null
+  ]
 }

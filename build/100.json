@@ -1,0 +1,47 @@
+{
+  "id": "100",
+  "title": "Implement the Softsign Activation Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Haleshot",
+      "name": "Haleshot"
+    }
+  ],
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-softsign",
+  "description": "Implement the Softsign activation function, a smooth activation function used in neural networks. Your task is to compute the Softsign value for a given input, ensuring the output is bounded between -1 and 1.",
+  "learn_section": "## Understanding the Softsign Activation Function\n\nThe Softsign activation function is a smooth, non-linear activation function used in neural networks. It’s similar to the hyperbolic tangent (tanh) function but with different properties, particularly in its tails which approach their limits more slowly.\n\n### Mathematical Definition\n\nThe Softsign function is mathematically defined as:\n\n$$\nSoftsign(x) = \\frac{x}{1 + |x|}\n$$\n\nWhere:\n- $x$ is the input to the function\n- $|x|$ represents the absolute value of $x$\n\n### Characteristics\n\n- **Output Range:** The output is bounded between -1 and 1, approaching these values asymptotically as $x$ approaches $\\pm \\infty$.\n- **Shape:** The function has an S-shaped curve, similar to tanh but with a smoother approach to its asymptotes.\n- **Gradient:** The gradient is smoother and more gradual compared to tanh, which can help prevent vanishing gradient problems in deep networks.\n- **Symmetry:** The function is symmetric around the origin $(0,0)$.\n\n### Key Properties\n\n- **Bounded Output:** Unlike ReLU, Softsign naturally bounds its output between -1 and 1.\n- **Smoothness:** The function is continuous and differentiable everywhere.\n- **No Saturation:** The gradients approach zero more slowly than in tanh or sigmoid functions.\n- **Zero-Centered:** The function crosses through the origin, making it naturally zero-centered.\n\nThis activation function can be particularly useful in scenarios where you need bounded outputs with more gradual saturation compared to tanh or sigmoid functions.",
+  "starter_code": "def softsign(x: float) -> float:\n\t\"\"\"\n\tImplements the Softsign activation function.\n\n\tArgs:\n\t\tx (float): Input value\n\n\tReturns:\n\t\tfloat: The Softsign of the input\t\"\"\"\n\t# Your code here\n\tpass\n\treturn round(val,4)",
+  "solution": "def softsign(x: float) -> float:\n    \"\"\"\n    Implements the Softsign activation function.\n\n    Args:\n        x (float): Input value\n\n    Returns:\n        float: The Softsign of the input, calculated as x/(1 + |x|)\n    \"\"\"\n    return round(x / (1 + abs(x)), 4)",
+  "example": {
+    "input": "softsign(1)",
+    "output": "0.5",
+    "reasoning": "For x = 1, the Softsign activation is calculated as $\\frac{x}{1 + |x|}$."
+  },
+  "test_cases": [
+    {
+      "test": "print(softsign(0))",
+      "expected_output": "0.0"
+    },
+    {
+      "test": "print(softsign(1))",
+      "expected_output": "0.5"
+    },
+    {
+      "test": "print(softsign(-1))",
+      "expected_output": "-0.5"
+    },
+    {
+      "test": "print(softsign(100))",
+      "expected_output": "0.9901"
+    },
+    {
+      "test": "print(softsign(-100))",
+      "expected_output": "-0.9901"
+    }
+  ]
+}
