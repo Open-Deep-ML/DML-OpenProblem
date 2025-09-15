@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class MixedPrecision:
     def __init__(self, loss_scale=1024.0):
         self.loss_scale = loss_scale
@@ -15,9 +14,8 @@ class MixedPrecision:
         predictions = np.dot(inputs_fp16, weights_fp16)
         loss = np.mean((targets_fp16 - predictions) ** 2)
 
-        # Scale loss and convert back to float32
-        scaled_loss = loss.astype(np.float32) * self.loss_scale
-
+        # Scale loss and convert back to float32 (Python float)
+        scaled_loss = float(loss) * self.loss_scale
         return scaled_loss
 
     def backward(self, gradients):
