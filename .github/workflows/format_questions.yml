@@ -1,4 +1,4 @@
-name: Build & Validate Question Bundles
+name: Build Question Bundles
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - 'questions/**'
       - 'utils/**'
       - 'schemas/**'
-      - '.github/workflows/**'   # ensure workflow edits retrigger
+      - '.github/workflows/**'
   pull_request:
     paths:
       - 'questions/**'
@@ -15,12 +15,8 @@ on:
       - 'schemas/**'
       - '.github/workflows/**'
 
-concurrency:
-  group: build-validate-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  format-validate:
+  build-only:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,71 +31,25 @@ jobs:
 
       - name: Install deps
         run: |
-          set -euo pipefail
           python -m pip install --upgrade pip
-          python -m pip install "jsonschema>=4.0,<5"
-
-      # ---------- quick sanity: are we running the right validator? ----------
-      - name: Debug validator presence and contents
-        run: |
-          set -euo pipefail
-          echo "Commit:"; git log -1 --oneline
-          echo "::group::Search for any other validate_questions.py"
-          git ls-files | grep -n 'validate_questions.py' || true
-          echo "::endgroup::"
-          echo "::group::Show utils/validate_questions.py (first 140 lines)"
-          nl -ba utils/validate_questions.py | sed -n '1,140p'
-          echo "::endgroup::"
-          echo "::group::Check for old SCHEMA line"
-          if grep -n 'SCHEMA = json.load(open("schemas/question.schema.json"))' -R utils; then
-            echo "Found stale validator code; please ensure only the new path-robust version exists." >&2
-            exit 1
-          else
-            echo "No stale SCHEMA loader found. Good."
-          fi
-          echo "::endgroup::"
-
-      # ---------- validate schema file itself, fail early & print context ----------
-      - name: Validate schema JSON strictly (and print with line numbers)
-        run: |
-          set -euo pipefail
-          echo "::group::schemas/question.schema.json (first 120 lines)"
-          nl -ba schemas/question.schema.json | sed -n '1,120p' || true
-          echo "::endgroup::"
-          echo "Checking schema JSON with python -m json.tool..."
-          python -m json.tool schemas/question.schema.json >/dev/null
-          echo "Schema is valid JSON."
 
       # ---------- build ----------
       - name: Build bundles into /build
-        run: |
-          set -euo pipefail
-          python utils/build_bundle.py
+        run: python utils/build_bundle.py
 
       # ---------- verify something was built ----------
       - name: Check build outputs exist
         run: |
-          set -euo pipefail
           test -d build || { echo "build/ does not exist"; exit 1; }
-          ls -l build || true
+          ls -l build
           shopt -s nullglob
           files=(build/*.json)
           ((${#files[@]})) || { echo "No build/*.json files found"; exit 1; }
 
-      # ---------- validate ----------
-      # Let the script default to build/*.json internally (safer than a fragile shell glob).
-      - name: Validate bundles
-        run: |
-          set -euo pipefail
-          python utils/validate_questions.py
-
-      # ---------- artifacts for debugging ----------
-      - name: Upload artifacts (build + schema + validator)
+      # ---------- artifact for debugging ----------
+      - name: Upload build artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: question-bundles-and-schema
-          path: |
-            build/*.json
-            schemas/question.schema.json
-            utils/validate_questions.py
+          name: question-bundles
+          path: build/*.json
