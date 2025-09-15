@@ -33,15 +33,15 @@
       "expected_output": "[[1, 4], [2, 5], [3, 6]]"
     }
   ],
-  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef transpose_matrix_tg(a) -> Tensor:\n    \"\"\"\n    Transpose a 2D matrix `a` using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a transposed Tensor.\n    \"\"\"\n    # Convert to Tensor\n    a_t = Tensor(a)\n    # Your implementation here\n    pass",
-  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef transpose_matrix_tg(a) -> Tensor:\n    \"\"\"\n    Transpose a 2D matrix `a` using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a transposed Tensor.\n    \"\"\"\n    a_t = Tensor(a)\n    return a_t.transpose(0,1)",
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef transpose_matrix_tg(a:Tensor) -> Tensor:\n    \"\"\"\n    Transpose a 2D matrix `a` using tinygrad.\n    Inputs are tinygrad Tensors.\n    Returns a transposed Tensor.\n    \"\"\"\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef transpose_matrix_tg(a) -> Tensor:\n    \"\"\"\n    Transpose a 2D matrix `a` using tinygrad.\n    Inputs are tinygrad Tensors.\n    Returns a transposed Tensor.\n    \"\"\"\n    return a.T",
   "tinygrad_test_cases": [
     {
-      "test": "from tinygrad.tensor import Tensor\nres = transpose_matrix_tg([[1,2,3],[4,5,6]])\nprint(res.numpy().tolist())",
+      "test": "from tinygrad.tensor import Tensor\nres = transpose_matrix_tg(Tensor([[1,2,3],[4,5,6]]))\nprint(res.numpy().tolist())",
       "expected_output": "[[1, 4], [2, 5], [3, 6]]"
     },
     {
-      "test": "from tinygrad.tensor import Tensor\nres = transpose_matrix_tg([[1,2],[3,4]])\nprint(res.numpy().tolist())",
+      "test": "from tinygrad.tensor import Tensor\nres = transpose_matrix_tg(Tensor([[1,2],[3,4]]))\nprint(res.numpy().tolist())",
       "expected_output": "[[1, 3], [2, 4]]"
     }
   ],
