@@ -16,9 +16,9 @@ If the true probabilities are unknown, you can estimate them with an **empirical
 
 ## Example
 Observed sequence: `1, 2, 2, 3, 3, 3` (6 outcomes total)
-- “1” appears once → estimated probability = 1/6  
-- “2” appears twice → estimated probability = 2/6 = 1/3  
-- “3” appears three times → estimated probability = 3/6 = 1/2  
+- "1" appears once → estimated probability = 1/6  
+- "2" appears twice → estimated probability = 2/6 = 1/3  
+- "3" appears three times → estimated probability = 3/6 = 1/2  
 
 
     
