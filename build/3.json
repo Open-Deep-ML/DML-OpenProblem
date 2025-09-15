@@ -46,15 +46,15 @@
       "expected_output": "[[1, 2, 3, 4], [5, 6, 7, 8]]"
     }
   ],
-  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef reshape_matrix_tg(a, new_shape) -> Tensor:\n    \"\"\"\n    Reshape a 2D matrix `a` to shape `new_shape` using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a Tensor of shape `new_shape`, or an empty Tensor on mismatch.\n    \"\"\"\n    # Dimension check\n    if len(a) * len(a[0]) != new_shape[0] * new_shape[1]:\n        return Tensor([])\n    # Convert to Tensor and reshape\n    a_t = Tensor(a)\n    # Your implementation here\n    pass",
-  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef reshape_matrix_tg(a, new_shape) -> Tensor:\n    \"\"\"\n    Reshape a 2D matrix `a` to shape `new_shape` using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a Tensor of shape `new_shape`, or an empty Tensor on mismatch.\n    \"\"\"\n    # Dimension check\n    if len(a) * len(a[0]) != new_shape[0] * new_shape[1]:\n        return Tensor([])\n    a_t = Tensor(a)\n    return a_t.reshape(new_shape)",
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef reshape_matrix_tg(a:Tensor, new_shape:tuple) -> Tensor:\n    \"\"\"\n    Reshape a 2D matrix `a` to shape `new_shape` using tinygrad.\n    Inputs are tinygrad Tensors.\n    Returns a Tensor of shape `new_shape`, or an empty Tensor on mismatch.\n    \"\"\"\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef reshape_matrix_tg(a, new_shape) -> Tensor:\n    \"\"\"\n    Reshape a 2D matrix `a` to shape `new_shape` using tinygrad.\n    Inputs are tinygrad Tensors.\n    Returns a Tensor of shape `new_shape`, or an empty Tensor on mismatch.\n    \"\"\"\n    # Dimension check\n    if len(a) * len(a[0]) != new_shape[0] * new_shape[1]:\n        return Tensor([])\n    return a.reshape(new_shape)",
   "tinygrad_test_cases": [
     {
-      "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    [[1,2,3],[4,5,6]],\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+      "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    Tensor([[1,2,3],[4,5,6]]),\n    (3, 2)\n)\nprint(res.numpy().tolist())",
       "expected_output": "[[1, 2], [3, 4], [5, 6]]"
     },
     {
-      "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    [[1,2],[3,4]],\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+      "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    Tensor([[1,2],[3,4]]),\n    (3, 2)\n)\nprint(res.numpy().tolist())",
       "expected_output": "[]"
     }
   ],
