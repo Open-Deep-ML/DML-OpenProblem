@@ -1,0 +1,42 @@
+{
+  "id": "64",
+  "title": "Implement Gini Impurity Calculation for a Set of Classes",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/paddywardle",
+      "name": "paddywardle"
+    },
+    {
+      "profile_link": "https://github.com/ianxek",
+      "name": "ianxek"
+    }
+  ],
+  "description": "## Task: Implement Gini Impurity Calculation\n\nYour task is to implement a function that calculates the Gini Impurity for a set of classes. Gini impurity is commonly used in decision tree algorithms to measure the impurity or disorder within a node.",
+  "learn_section": "\n## Understanding Gini Impurity\n\nGini impurity is a statistical measurement of the impurity or disorder in a list of elements. It is commonly used in decision tree algorithms to decide the optimal split at tree nodes. It is calculated as follows, where $ p_i $ is the probability of each class, $ \\frac{n_i}{n} $:\n\n$$\n\\text{Gini Impurity} = 1 - \\sum_{i=1}^{C} p_i^2\n$$\n\nA Gini impurity of 0 indicates a node where all elements belong to the same class, whereas a Gini impurity of 1-1/C indicates maximum impurity, where elements are evenly distributed among each class. This means that a lower impurity implies a less homogeneous distribution of elements, suggesting a good split, as decision trees aim to minimize it at each node.\n\n### Advantages and Limitations\n\n#### Advantages:\n- Computationally efficient\n- Works for binary and multi-class classification\n\n#### Limitations:\n- Biased toward larger classes\n- May cause overfitting in deep decision trees\n\n### Example Calculation\n\nSuppose we have the set: $[0, 1, 1, 1, 0]$. The probability of each class is calculated as follows:\n\n$$\np_{0} = \\frac{2}{5} \\quad p_{1} = \\frac{3}{5}\n$$\n\nThe Gini Impurity is then calculated as follows:\n\n$$\n\\text{Gini Impurity} = 1 - (p_0^2 + p_1^2) = 1 - \\left(\\left(\\frac{2}{5}\\right)^2 + \\left(\\frac{3}{5}\\right)^2\\right) = 0.48\n$$",
+  "starter_code": "\nimport numpy as np\n\ndef gini_impurity(y):\n\t\"\"\"\n\tCalculate Gini Impurity for a list of class labels.\n\n\t:param y: List of class labels\n\t:return: Gini Impurity rounded to three decimal places\n\t\"\"\"\n\tpass\n\treturn round(val,3)",
+  "solution": "import numpy as np\n\ndef gini_impurity(y: list[int]) -> float:\n\n    classes = set(y)\n    n = len(y)\n\n    gini_impurity = 0\n\n    for cls in classes:\n        gini_impurity += (y.count(cls)/n)**2\n\n    return round(1-gini_impurity,3)",
+  "example": {
+    "input": "y = [0, 1, 1, 1, 0]\nprint(gini_impurity(y))",
+    "output": "0.48",
+    "reasoning": "The Gini Impurity is calculated as 1 - (p_0^2 + p_1^2), where p_0 and p_1 are the probabilities of each class. In this case, p_0 = 2/5 and p_1 = 3/5, resulting in a Gini Impurity of 0.48."
+  },
+  "test_cases": [
+    {
+      "test": "y = [0, 0, 0, 0, 1, 1, 1, 1]\nprint(gini_impurity(y))",
+      "expected_output": "0.5"
+    },
+    {
+      "test": "y = [0, 0, 0, 0, 0, 1]\nprint(gini_impurity(y))",
+      "expected_output": "0.278"
+    },
+    {
+      "test": "y = [0, 1, 2, 2, 2, 1, 2]\nprint(gini_impurity(y))",
+      "expected_output": "0.571"
+    }
+  ]
+}

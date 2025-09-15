@@ -9,13 +9,11 @@
   "contributor": [
     {
       "profile_link": "https://github.com/eriklindernoren/ML-From-Scratch",
-      "name": "Erik Linder-Norén"
+      "name": "Erik Linder-Nor\u00e9n"
     },
     {
       "profile_link": "https://github.com/moe18",
       "name": "Moe Chabot"
     }
-  ],
-  "tinygrad_difficulty": null,
-  "pytorch_difficulty": null
+  ]
 }

@@ -3,10 +3,10 @@
   "title": "Decision Tree Learning",
   "difficulty": "hard",
   "category": "Machine Learning",
-  "video": null,
+  "video": "",
   "likes": "0",
   "dislikes": "0",
-  "contributor": null,
+  "contributor": [],
   "tinygrad_difficulty": "hard",
   "pytorch_difficulty": "hard"
 }

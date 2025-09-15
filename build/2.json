@@ -1,0 +1,60 @@
+{
+  "id": "2",
+  "title": "Transpose of a Matrix",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/fj0ZJ2gTSmI?si=vG8VSqASjyG0eNLY",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "description": "Write a Python function that computes the transpose of a given matrix.",
+  "learn_section": "\n## Transpose of a Matrix\n\nLet's consider a matrix $M$ and its transpose $M^T$:\n\n**Original Matrix $M$:**\n$$\nM = \\begin{pmatrix} \na & b & c \\\\ \nd & e & f \n\\end{pmatrix}\n$$\n\n**Transposed Matrix $M^T$:**\n$$\nM^T = \\begin{pmatrix} \na & d \\\\ \nb & e \\\\ \nc & f \n\\end{pmatrix}\n$$\n\n### Explanation:\nTransposing a matrix involves converting its rows into columns and vice versa. This operation is fundamental in linear algebra for various computations and transformations.",
+  "starter_code": "def transpose_matrix(a: list[list[int|float]]) -> list[list[int|float]]:\n\treturn b",
+  "solution": "def transpose_matrix(a: list[list[int|float]]) -> list[list[int|float]]:\n    return [list(i) for i in zip(*a)]",
+  "example": {
+    "input": "a = [[1,2,3],[4,5,6]]",
+    "output": "[[1,4],[2,5],[3,6]]",
+    "reasoning": "The transpose of a matrix is obtained by flipping rows and columns."
+  },
+  "test_cases": [
+    {
+      "test": "print(transpose_matrix([[1,2],[3,4],[5,6]]))",
+      "expected_output": "[[1, 3, 5], [2, 4, 6]]"
+    },
+    {
+      "test": "print(transpose_matrix([[1,2,3],[4,5,6]]))",
+      "expected_output": "[[1, 4], [2, 5], [3, 6]]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef transpose_matrix_tg(a) -> Tensor:\n    \"\"\"\n    Transpose a 2D matrix `a` using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a transposed Tensor.\n    \"\"\"\n    # Convert to Tensor\n    a_t = Tensor(a)\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef transpose_matrix_tg(a) -> Tensor:\n    \"\"\"\n    Transpose a 2D matrix `a` using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a transposed Tensor.\n    \"\"\"\n    a_t = Tensor(a)\n    return a_t.transpose(0,1)",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = transpose_matrix_tg([[1,2,3],[4,5,6]])\nprint(res.numpy().tolist())",
+      "expected_output": "[[1, 4], [2, 5], [3, 6]]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = transpose_matrix_tg([[1,2],[3,4]])\nprint(res.numpy().tolist())",
+      "expected_output": "[[1, 3], [2, 4]]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef transpose_matrix(a) -> torch.Tensor:\n    \"\"\"\n    Transpose a 2D matrix `a` using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a transposed tensor.\n    \"\"\"\n    a_t = torch.as_tensor(a)\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef transpose_matrix(a) -> torch.Tensor:\n    \"\"\"\n    Transpose a 2D matrix `a` using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a transposed tensor.\n    \"\"\"\n    a_t = torch.as_tensor(a)\n    return a_t.T",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nres = transpose_matrix(torch.tensor([[1,2,3],[4,5,6]]))\nprint(res.numpy().tolist())",
+      "expected_output": "[[1, 4], [2, 5], [3, 6]]"
+    },
+    {
+      "test": "import torch\nres = transpose_matrix(torch.tensor([[1,2],[3,4]]))\nprint(res.numpy().tolist())",
+      "expected_output": "[[1, 3], [2, 4]]"
+    }
+  ]
+}

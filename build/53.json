@@ -1,0 +1,38 @@
+{
+  "id": "53",
+  "title": "Implement Self-Attention Mechanism",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Jayanth-vardhan",
+      "name": "Jayanth-vardhan"
+    }
+  ],
+  "description": "## Task: Implement the Self-Attention Mechanism\n\nYour task is to implement the **self-attention** mechanism, which is a fundamental component of transformer models, widely used in natural language processing and computer vision tasks. The self-attention mechanism allows a model to dynamically focus on different parts of the input sequence when generating a contextualized representation.\n\nYour function should return the self-attention output as a numpy array.\n\n    ",
+  "learn_section": "## Self-Attention Mechanism\n\nThe **self-attention mechanism** is a fundamental concept in **transformer models** and is widely used in **natural language processing (NLP)** and **computer vision (CV)**. It allows models to dynamically weigh different parts of the input sequence, enabling them to capture **long-range dependencies** effectively.\n\n---\n\n### **Understanding Self-Attention**\n\nSelf-attention helps a model determine **which parts of an input sequence are relevant to each other**. Instead of treating every word or token equally, self-attention assigns different weights to different parts of the sequence, allowing the model to capture contextual relationships.\n\nFor example, in machine translation, self-attention allows the model to **focus on relevant words** from the input sentence when generating each word in the output.\n\n---\n\n### **Mathematical Formulation of Self-Attention**\n\nGiven an input sequence $X$, self-attention computes three key components:\n\n1. **Query ($Q$)**: Represents the current token we are processing.\n2. **Key ($K$)**: Represents each token in the sequence.\n3. **Value ($V$)**: Contains the actual token embeddings.\n\nThe Query, Key, and Value matrices are computed as:\n\n$$\nQ = X W_Q, \\quad K = X W_K, \\quad V = X W_V\n$$\n\nwhere $W_Q$, $W_K$, and $W_V$ are learned weight matrices.\n\nThe attention scores are computed using the **scaled dot-product attention**:\n\n$$\n\\text{Attention}(Q, K, V) = \\text{softmax} \\left( \\frac{Q K^T}{\\sqrt{d_k}} \\right) V\n$$\n\nwhere $d_k$ is the dimensionality of the key vectors.\n\n---\n\n### **Why Self-Attention is Powerful?**\n\n- **Captures long-range dependencies**: Unlike RNNs, which process input sequentially, self-attention can relate any word in the sequence to any other word, regardless of distance.\n- **Parallelization**: Since self-attention is computed **simultaneously** across the entire sequence, it is much faster than sequential models like LSTMs.\n- **Contextual Understanding**: Each token is **contextually enriched** by attending to relevant tokens in the sequence.\n\n---\n\n### **Example Calculation**\n\nConsider an input sequence of three tokens:\n\n$$\nX = \\begin{bmatrix} x_1 \\\\ x_2 \\\\ x_3 \\end{bmatrix}\n$$\n\nWe compute $Q$, $K$, and $V$ as:\n\n$$\nQ = X W_Q, \\quad K = X W_K, \\quad V = X W_V\n$$\n\nNext, we compute the attention scores:\n\n$$\nS = \\frac{Q K^T}{\\sqrt{d_k}}\n$$\n\nApplying the softmax function:\n\n$$\nA = \\text{softmax}(S)\n$$\n\nFinally, the weighted sum of values:\n\n$$\n\\text{Output} = A V\n$$\n\n---\n\n### **Applications of Self-Attention**\n\nSelf-attention is widely used in:\n- **Transformer models (e.g., BERT, GPT-3)** for language modeling.\n- **Speech processing models** for transcribing audio.\n- **Vision Transformers (ViTs)** for computer vision tasks.\n- **Recommender systems** for learning item-user relationships.\n\nMastering self-attention is essential for understanding modern deep learning architectures, especially in NLP and computer vision.",
+  "starter_code": "import numpy as np\n\ndef self_attention(Q, K, V):\n    \n\treturn attention_output",
+  "solution": "import numpy as np\n\ndef compute_qkv(X, W_q, W_k, W_v):\n    Q = np.dot(X, W_q)\n    K = np.dot(X, W_k)\n    V = np.dot(X, W_v)\n    return Q, K, V\n\ndef self_attention(Q, K, V):\n    d_k = Q.shape[1]\n    scores = np.matmul(Q, K.T) / np.sqrt(d_k)\n    attention_weights = np.exp(scores) / np.sum(np.exp(scores), axis=1, keepdims=True)\n    attention_output = np.matmul(attention_weights, V)\n    return attention_output",
+  "example": {
+    "input": "import numpy as np\n\nX = np.array([[1, 0], [0, 1]])\nW_q = np.array([[1, 0], [0, 1]])\nW_k = np.array([[1, 0], [0, 1]])\nW_v = np.array([[1, 2], [3, 4]])\n\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\noutput = self_attention(Q, K, V)\n\nprint(output)",
+    "output": "# [[1.660477 2.660477]\n#  [2.339523 3.339523]]",
+    "reasoning": "The self-attention mechanism calculates the attention scores for each input, determining how much focus to put on other inputs when generating a contextualized representation. The output is the weighted sum of the values based on the attention scores."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\n\nX = np.array([[1, 0], [0, 1]])\nW_q = np.array([[1, 0], [0, 1]])\nW_k = np.array([[1, 0], [0, 1]])\nW_v = np.array([[1, 2], [3, 4]])\n\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\noutput = self_attention(Q, K, V)\nprint(output)",
+      "expected_output": "[[1.660477, 2.660477], [2.339523, 3.339523]]"
+    },
+    {
+      "test": "import numpy as np\n\nX = np.array([[1, 1], [1, 0]])\nW_q = np.array([[1, 0], [0, 1]])\nW_k = np.array([[1, 0], [0, 1]])\nW_v = np.array([[1, 2], [3, 4]])\n\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\noutput = self_attention(Q, K, V)\nprint(output)",
+      "expected_output": "[[3.00928465, 4.6790462], [2.5, 4.0]]"
+    },
+    {
+      "test": "import numpy as np\n\nX = np.array([[1, 0, 1], [0, 1, 1], [1, 1, 0]])\nW_q = np.array([[1, 1, 0], [0, 1, 1], [1, 0, 1]])\nW_k = np.array([[1, 1, 0], [0, 1, 1], [1, 0, 1]])\nW_v = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\n\nQ, K, V = compute_qkv(X, W_q, W_k, W_v)\noutput = self_attention(Q, K, V)\nprint(output)",
+      "expected_output": "[[8.0, 10.0, 12.0], [8.61987385, 10.61987385, 12.61987385], [7.38012615, 9.38012615, 11.38012615]]"
+    }
+  ]
+}

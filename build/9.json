@@ -1,0 +1,72 @@
+{
+  "id": "9",
+  "title": "Matrix times Matrix ",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/N2j0fA2E9k4",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "description": "multiply two matrices together (return -1 if shapes of matrix dont aline), i.e. $C = A \\cdot B$",
+  "learn_section": "\n## Matrix Multiplication\n\nConsider two matrices \\( A \\) and \\( B \\) to demonstrate their multiplication, defined as follows:\n\n**Matrix \\( A \\):**\n$$\nA = \\begin{pmatrix} \na_{11} & a_{12} \\\\ \na_{21} & a_{22} \n\\end{pmatrix}\n$$\n\n**Matrix \\( B \\):**\n$$\nB = \\begin{pmatrix} \nb_{11} & b_{12} \\\\ \nb_{21} & b_{22} \n\\end{pmatrix}\n$$\n\nThe multiplication of matrix \\( A \\) by matrix \\( B \\) is calculated as:\n$$\nA \\times B = \\begin{pmatrix} \na_{11}b_{11} + a_{12}b_{21} & a_{11}b_{12} + a_{12}b_{22} \\\\ \na_{21}b_{11} + a_{22}b_{21} & a_{21}b_{12} + a_{22}b_{22} \n\\end{pmatrix}\n$$\n\nThis operation results in a new matrix where each element is the result of the dot product between the rows of matrix \\( A \\) and the columns of matrix \\( B \\).",
+  "starter_code": "def matrixmul(a:list[list[int|float]],\n              b:list[list[int|float]])-> list[list[int|float]]:\n\treturn c",
+  "solution": "\ndef matrixmul(a:list[list[int|float]],\n              b:list[list[int|float]])-> list[list[int|float]]:\n    if len(a[0]) != len(b):\n        return -1\n    \n    vals = []\n    for i in range(len(a)):\n        hold = []\n        for j in range(len(b[0])):\n            val = 0\n            for k in range(len(b)):\n                val += a[i][k] * b[k][j]\n                           \n            hold.append(val)\n        vals.append(hold)\n\n    return vals",
+  "example": {
+    "input": "A = [[1,2],[2,4]], B = [[2,1],[3,4]]",
+    "reasoning": "1\\*2 + 2\\*3 = 8;                   2\\*2 + 3\\*4 = 16;                   1\\*1 + 2\\*4 = 9;                   2\\*1 + 4\\*4 = 18                    Example 2:        input: A = [[1,2],                    [2,4]],                B = [[2,1],                    [3,4],                    [4,5]]        output: -1        reasoning: the length of the rows of A does not equal          the column length of B",
+    "output": "[[ 8,  9],[16, 18]]"
+  },
+  "test_cases": [
+    {
+      "test": "print(matrixmul([[1,2,3],[2,3,4],[5,6,7]],[[3,2,1],[4,3,2],[5,4,3]]))",
+      "expected_output": "[[26, 20, 14], [38, 29, 20], [74, 56, 38]]"
+    },
+    {
+      "test": "print(matrixmul([[0,0],[2,4],[1,2]],[[0,0],[2,4]]))",
+      "expected_output": "[[0, 0], [8, 16], [4, 8]]"
+    },
+    {
+      "test": "print(matrixmul([[0,0],[2,4],[1,2]],[[0,0,1],[2,4,1],[1,2,3]]))",
+      "expected_output": "-1"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef matrixmul_tg(a, b) -> Tensor:\n    \"\"\"\n    Multiply two matrices using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a 2D Tensor of shape (m, n) or a scalar Tensor -1.0 if dimensions mismatch.\n    \"\"\"\n    # dimension mismatch\n    if len(a[0]) != len(b):\n        return Tensor(-1.0)\n    # convert and multiply\n    a_t = Tensor(a)\n    b_t = Tensor(b)\n    return a_t.matmul(b_t)",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef matrixmul_tg(a, b) -> Tensor:\n    \"\"\"\n    Multiply two matrices using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a 2D Tensor of shape (m, n) or a scalar Tensor -1.0 if dimensions mismatch.\n    \"\"\"\n    if len(a[0]) != len(b):\n        return Tensor(-1.0)\n    a_t = Tensor(a)\n    b_t = Tensor(b)\n    return a_t.matmul(b_t)",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = matrixmul_tg(\n    [[1,2],[3,4]],\n    [[1,0],[0,1]]\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[[1.0, 2.0], [3.0, 4.0]]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = matrixmul_tg(\n    [[1,2,3],[2,4,5],[6,8,9]],\n    [[1,2],[3,4],[5,6]]\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[[22.0, 28.0], [39.0, 50.0], [75.0, 98.0]]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = matrixmul_tg(\n    [[1,2,3],[2,4,5]],\n    [[1,2],[3,4]]\n)\nprint(res.numpy().tolist())",
+      "expected_output": "-1.0"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef matrixmul(a, b) -> torch.Tensor:\n    \"\"\"\n    Multiply two matrices using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a 2D tensor of shape (m, n) or a scalar tensor -1 if dimensions mismatch.\n    \"\"\"\n    a_t = torch.as_tensor(a)\n    b_t = torch.as_tensor(b)\n    # dimension mismatch\n    if a_t.size(1) != b_t.size(0):\n        return torch.tensor(-1)\n    # matrix multiplication\n    return a_t.matmul(b_t)",
+  "pytorch_solution": "import torch\n\ndef matrixmul(a, b) -> torch.Tensor:\n    \"\"\"\n    Multiply two matrices using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a 2D tensor of shape (m, n) or a scalar tensor -1 if dimensions mismatch.\n    \"\"\"\n    a_t = torch.as_tensor(a)\n    b_t = torch.as_tensor(b)\n    if a_t.size(1) != b_t.size(0):\n        return torch.tensor(-1)\n    return a_t.matmul(b_t)",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nres = matrixmul(\n    torch.tensor([[1,2],[3,4]]),\n    torch.tensor([[1,0],[0,1]])\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[[1, 2], [3, 4]]"
+    },
+    {
+      "test": "import torch\nres = matrixmul(\n    torch.tensor([[1,2,3],[2,4,5],[6,8,9]]),\n    torch.tensor([[1,2],[3,4],[5,6]])\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[[22, 28], [39, 50], [75, 98]]"
+    },
+    {
+      "test": "import torch\nres = matrixmul(\n    torch.tensor([[1,2,3],[2,4,5]]),\n    torch.tensor([[1,2],[3,4]])\n)\nprint(res.numpy().tolist())",
+      "expected_output": "-1"
+    }
+  ]
+}
