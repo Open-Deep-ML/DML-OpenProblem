@@ -1,0 +1,5 @@
+{
+  "input": "X = [[1,1], [2,2], [3,3]]; y = [1, 1, -1]; learning_rate = 0.1; max_epochs = 10",
+  "output": "weights = [-0.2, -0.2, 0.0]; predictions = [1, 1, -1]",
+  "reasoning": "Perceptron algorithm updates weights only when predictions are wrong. For linearly separable data, it converges to a decision boundary that correctly classifies all training points. The final weights include the bias term as the last element."
+}
