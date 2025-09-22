@@ -1,7 +1,0 @@
-{
-  "input": "X_train = [1, 2, 3]; y_train = [2, 2.5, 3.5]; X_test = [4]",
-  "output": "m = 0.75, b = 1.166667, y_pred = [4.166667]",
-  "reasoning": "Using OLS: m = Cov(X,Y)/Var(X) = 1.5/2 = 0.75 and b = y_bar - m*x_bar = (8/3) - 0.75*2 = 1.166667. Prediction for X_test=[4] is 0.75*4 + 1.166667 = 4.166667."
-}
-
-
