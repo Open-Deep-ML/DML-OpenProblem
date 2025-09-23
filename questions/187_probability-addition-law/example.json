@@ -1,0 +1,5 @@
+{
+  "input": "prob_union(0.6, 0.5, 0.3)",
+  "output": "0.8",
+  "reasoning": "By addition law: 0.6 + 0.5 − 0.3 = 0.8."
+}
