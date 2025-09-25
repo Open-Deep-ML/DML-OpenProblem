@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R-squared (R²) Calculation</title>
+    <script type="text/javascript" async
+        src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <h2>R-squared (\( R^2 \)) Calculation</h2>
+    <p>R-squared (\( R^2 \)) is a statistical measure that represents the proportion of the variance in the dependent variable that is explained by the independent variables in a regression model.</p>
+
+    <h3>Mathematical Formulation</h3>
+    <p>R-squared is defined as:</p>
+
+    <p>
+    \[
+    R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
+    \]
+    </p>
+
+    <ul>
+        <li><strong>\( n \):</strong> Total number of data points</li>
+        <li><strong>\( y_i \):</strong> Actual value at index \( i \)</li>
+        <li><strong>\( \hat{y}_i \):</strong> Predicted value at index \( i \)</li>
+        <li><strong>\( \bar{y} \):</strong> Mean of actual values</li>
+        <li><strong>\( \sum (y_i - \hat{y}_i)^2 \):</strong> Sum of squared errors (SSE)</li>
+        <li><strong>\( \sum (y_i - \bar{y})^2 \):</strong> Total sum of squares (TSS)</li>
+    </ul>
+
+    <h3>Implementation Steps</h3>
+    <ol>
+        <li>Compute the mean of actual values:
+        \[
+        \bar{y} = \frac{1}{n} \sum_{i=1}^{n} y_i
+        \]
+        </li>
+        <li>Calculate the Sum of Squared Errors (SSE):
+        \[
+        SSE = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+        \]
+        </li>
+        <li>Calculate the Total Sum of Squares (TSS):
+        \[
+        TSS = \sum_{i=1}^{n} (y_i - \bar{y})^2
+        \]
+        </li>
+        <li>Compute \( R^2 \) using:
+        \[
+        R^2 = 1 - \frac{SSE}{TSS}
+        \]
+        </li>
+    </ol>
+
+    <h3>Example Calculation</h3>
+    <p>Given the actual and predicted values:</p>
+
+    <ul>
+        <li>Actual values: \( y = [3, -0.5, 2, 7] \)</li>
+        <li>Predicted values: \( \hat{y} = [2.5, 0.0, 2, 8] \)</li>
+    </ul>
+
+    <p>Step-by-step calculation:</p>
+    <ul>
+        <li>Compute \( \bar{y} \):
+        \[
+        \bar{y} = \frac{3 + (-0.5) + 2 + 7}{4} = 2.875
+        \]
+        </li>
+        <li>Compute SSE:
+        \[
+        (3-2.5)^2 + (-0.5-0.0)^2 + (2-2)^2 + (7-8)^2 = 0.25 + 0.25 + 0 + 1 = 1.5
+        \]
+        </li>
+        <li>Compute TSS:
+        \[
+        (3-2.875)^2 + (-0.5-2.875)^2 + (2-2.875)^2 + (7-2.875)^2 = 0.0156 + 11.3906 + 0.7656 + 17.0156 = 29.1875
+        \]
+        </li>
+        <li>Compute \( R^2 \):
+        \[
+        R^2 = 1 - \frac{1.5}{29.1875} = 0.9486
+        \]
+        </li>
+    </ul>
+
+    <p>The R-squared value for this example is <strong>0.9486</strong>, indicating a strong fit of the model.</p>
+
+</body>
+</html>
