@@ -1,6 +1,3 @@
-
-# Learn Section
-
 # SARSA: On-Policy TD Control
 
 **Goal**: Estimate the action-value function $Q^\pi \approx q^*$ using the SARSA algorithm (on-policy Temporal-Difference control).

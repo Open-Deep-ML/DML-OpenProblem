@@ -9,6 +9,6 @@
   },
   {
     "test": "transitions = {\n    ('A', 'x'): (0.0, 'terminal'),\n    ('A', 'y'): (5.0, 'B'),\n    ('B', 'z'): (2.0, 'terminal')\n}\ninitial_states = ['A']\nalpha = 0.4\ngamma = 0.9\nmax_steps = 3\nQ = sarsa_update(transitions, initial_states, alpha, gamma, max_steps)\nfor k in sorted(Q):\n    print(f\"Q{str(k):15} = {Q[k]:.4f}\")",
-    "expected_output": "Q('A', 'x')      = 0.0000\nQ('A', 'y')      = 0.0000\nQ('B', 'z')      = 0.0000"
+    "expected_output": "Q('A', 'x')      = 0.0000\nQ('A', 'y')      = 0.0000"
   }
 ]

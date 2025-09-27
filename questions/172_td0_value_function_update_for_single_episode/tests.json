@@ -5,7 +5,7 @@
   },
   {
     "test": "episode = [\n    ('A', 'left', 5.0, 'B'),\n    ('B', 'right', 0.0, 'C'),\n    ('C', 'down', 1.0, 'terminal')\n]\nV = {'A': 0.0, 'B': 0.0, 'C': 0.0, 'terminal': 0.0}\npi = {'A': 'left', 'B': 'right', 'C': 'down'}\nalpha = 0.5\nV_updated = td0_policy_evaluation(episode, V, pi, alpha)\nprint({k: round(v, 2) for k, v in V_updated.items()})",
-    "expected_output": "{'A': 2.5, 'B': 0.5, 'C': 0.5, 'terminal': 0.0}"
+    "expected_output": "{'A': 2.5, 'B': 0.0, 'C': 0.5, 'terminal': 0.0}"
   }
 
 ]

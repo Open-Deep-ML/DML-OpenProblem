@@ -1,6 +1,3 @@
-
-# Learn Section
-
 # TD(0) Policy Evaluation Algorithm
 
 **Input**: the policy $\pi$ to be evaluated  
