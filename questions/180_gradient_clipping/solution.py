@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def clip_gradients(gradients, max_norm):
     """
     Clips the gradients so that their L2 norm does not exceed max_norm.

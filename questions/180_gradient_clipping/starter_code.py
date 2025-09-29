@@ -1,5 +1,6 @@
 import numpy as np
 
+
 # Implement your function below.
 def clip_gradients(gradients, max_norm):
     """
