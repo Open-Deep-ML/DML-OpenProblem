@@ -1,12 +1,10 @@
 {
-  "id": "XXX",
-  "title": "TITLE GOES HERE",
-  "difficulty": "medium",
+  "id": "180",
+  "title": "Gradient Clipping (L2 Norm)",
+  "difficulty": "easy",
   "category": "Machine Learning",
   "video": "",
   "likes": "0",
   "dislikes": "0",
-  "contributor": [],
-  "tinygrad_difficulty": "",
-  "pytorch_difficulty": ""
+  "contributor": ["https://github.com/komaksym"]
 }
