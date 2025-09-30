@@ -1,6 +1,22 @@
 [
   {
-    "test": "print(your_function(...))",
-    "expected_output": "..."
+    "test": "import numpy as np\ndef f1(x): return x + 1\ndef f2(x): return x * 2\ndef f3(x): return x - 3\nfuncs = [f1, f2, f3]\ninput_arr = np.array([1.0, 2.0])\nprint(checkpoint_forward(funcs, input_arr))",
+    "expected_output": "[1. 3.]"
+  },
+  {
+    "test": "import numpy as np\ndef f1(x): return x * 0\ndef f2(x): return x + 10\nfuncs = [f1, f2]\ninput_arr = np.array([5.0, 7.0])\nprint(checkpoint_forward(funcs, input_arr))",
+    "expected_output": "[10. 10.]"
+  },
+  {
+    "test": "import numpy as np\ndef f1(x): return x / 2\ndef f2(x): return x ** 2\nfuncs = [f1, f2]\ninput_arr = np.array([4.0, 8.0])\nprint(checkpoint_forward(funcs, input_arr))",
+    "expected_output": "[ 4. 16.]"
+  },
+  {
+    "test": "import numpy as np\ndef f1(x): return x - 1\nfuncs = [f1]\ninput_arr = np.array([10.0, 20.0])\nprint(checkpoint_forward(funcs, input_arr))",
+    "expected_output": "[ 9. 19.]"
+  },
+  {
+    "test": "import numpy as np\nfuncs = []\ninput_arr = np.array([1.0, 2.0])\nprint(checkpoint_forward(funcs, input_arr))",
+    "expected_output": "[1. 2.]"
   }
 ]
