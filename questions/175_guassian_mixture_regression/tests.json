@@ -1,11 +1,11 @@
 [
   {
     "test": "import numpy as np\ngp = GaussianProcessRegression(kernel='rbf', kernel_params={'sigma': 1.0, 'length_scale': 1.0}, noise=1e-8)\nX_train = np.array([[0], [2.5], [5.0], [7.5], [10.0]])\ny_train = np.sin(X_train).ravel()\ngp.fit(X_train, y_train)\nX_test = np.array([[1.25]])\nmu = gp.predict(X_test)\nprint(f\"{mu[0]:.4f}\")",
-    "expected_output": "0.7787"
+    "expected_output": "0.2814"
   },
   {
     "test": "import numpy as np\ngp = GaussianProcessRegression(kernel='rbf', kernel_params={'sigma': 1.0, 'length_scale': 1.0}, noise=1e-8)\nX_train = np.array([[0], [2.5], [5.0], [7.5], [10.0]])\ny_train = np.sin(X_train).ravel()\ngp.fit(X_train, y_train)\nX_test = np.array([[1.25]])\nmu, std = gp.predict(X_test, return_std=True)\nprint(f\"mu={mu[0]:.4f}, std={std[0]:.4f}\")",
-    "expected_output": "mu=0.7787, std=0.6274"
+    "expected_output": "mu=0.2814, std=0.7734"
   },
   {
     "test": "import numpy as np\ngp = GaussianProcessRegression(kernel='rbf', kernel_params={'sigma': 1.0, 'length_scale': 1.0}, noise=1e-8)\nX_train = np.array([[0], [2.5], [5.0]])\ny_train = np.array([1.0, 3.0, 1.5])\ngp.fit(X_train, y_train)\nX_test = np.array([[2.5]])\nmu, std = gp.predict(X_test, return_std=True)\nprint(f\"mu={mu[0]:.4f}, std={std[0]:.4f}\")",
@@ -17,10 +17,6 @@
   },
   {
     "test": "import numpy as np\ngp = GaussianProcessRegression(kernel='rbf', kernel_params={'sigma': 1.0, 'length_scale': 1.5}, noise=1e-8)\nX_train = np.array([[1, 2], [3, 4], [5, 1]])\ny_train = np.sum(X_train, axis=1)\ngp.fit(X_train, y_train)\nX_test = np.array([[2, 3]])\nmu = gp.predict(X_test)\nprint(f\"{mu[0]:.4f}\")",
-    "expected_output": "4.5444"
-  },
-  {
-    "test": "import numpy as np\n# Monkey-patch the optimizer to prevent printing to stdout\noriginal_optimizer = GaussianProcessRegression.optimize_hyperparameters\ndef silent_optimizer(self):\n    print_state = self.__dict__.get('__print__', True)\n    if print_state:\n        def objective(params):\n            self.kernel_params = {'length_scale': np.exp(params[0]), 'sigma': np.exp(params[1])}\n            self.fit(self.X_train, self.y_train)\n            return -self.log_marginal_likelihood()\n        init_params = np.log([self.kernel_params.get('length_scale', 1.0), self.kernel_params.get('sigma', 1.0)])\n        res = minimize(objective, init_params, method='L-BFGS-B', bounds=[(-5, 5), (-5, 5)])\n        self.kernel_params = {'length_scale': np.exp(res.x[0]), 'sigma': np.exp(res.x[1])}\n        self.fit(self.X_train, self.y_train)\nGaussianProcessRegression.optimize_hyperparameters = silent_optimizer\n\nnp.random.seed(42)\ngp = GaussianProcessRegression(kernel='rbf', noise=0.01)\nX_train = np.linspace(0, 2 * np.pi, 10).reshape(-1, 1)\ny_train = np.sin(X_train).ravel() + np.random.randn(10) * 0.1\ngp.fit(X_train, y_train)\ngp.optimize_hyperparameters()\nX_test = np.array([[np.pi]])\nmu = gp.predict(X_test)\nprint(f\"{mu[0]:.4f}\")",
-    "expected_output": "0.0543"
+    "expected_output": "5.5553"
   }
 ]

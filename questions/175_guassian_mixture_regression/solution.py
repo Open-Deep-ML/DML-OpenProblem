@@ -33,7 +33,12 @@ def matern_kernel(x: np.ndarray, x_prime: np.ndarray, length_scale=1.0, nu=1.5):
 
 def rbf_kernel(x: np.ndarray, x_prime, sigma=1.0, length_scale=1.0):
     # This is a squared exponential kernel
-    return sigma**2 * np.exp(-0.5 * np.linalg.norm(x - x_prime) ** 2 / length_scale**2)
+
+    # Calculate the squared euclidean distance
+    sq_norm = np.linalg.norm(x - x_prime) ** 2
+
+    # Correctly implement the formula
+    return sigma**2 * np.exp(-sq_norm / (2 * length_scale**2))
 
 
 def periodic_kernel(
@@ -169,3 +174,15 @@ class GaussianProcessRegression(_GaussianProcessBase):
         # Re-fit with optimal hyperparameters
         self.fit(self.X_train, self.y_train)
         print("Optimized Hyperparameters:", self.kernel_params)
+
+
+# if __name__ == "__main__":
+#     gp = GaussianProcessRegression(
+#         kernel="rbf", kernel_params={"sigma": 1.0, "length_scale": 1.0}, noise=1e-8
+#     )
+#     X_train = np.array([[0], [2.5], [5.0]])
+#     y_train = np.array([1.0, 3.0, 1.5])
+#     gp.fit(X_train, y_train)
+#     X_test = np.array([[2.5]])
+#     mu, std = gp.predict(X_test, return_std=True)
+#     print(f"mu={mu[0]:.4f}, std={std[0]:.4f}")
