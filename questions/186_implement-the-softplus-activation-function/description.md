@@ -1,0 +1,2 @@
+## Problem
+Implement the Softplus activation function, a smooth activation function used in neural networks. Your task is to compute the Softplus value for a given input with beta and threshold parameters, ensuring numerical stability by avoiding overflow when the input exceeds the threshold.
