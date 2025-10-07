@@ -12,8 +12,6 @@
       "name": "Jeet Mukherjee"
     }
   ],
-  "tinygrad_difficulty": "medium",
-  "pytorch_difficulty": "medium",
   "description": "## Problem\n\nImplement a simple ETL (Extract-Transform-Load) pipeline for model-ready data preparation.\n\nGiven a CSV-like string containing user events with columns: `user_id,event_type,value` (header included), write a function `run_etl(csv_text)` that:\n\n1. Extracts rows from the raw CSV text.\n2. Transforms data by:\n\t- Filtering only rows where `event_type == \"purchase\"`.\n\t- Converting `value` to float and dropping invalid rows.\n\t- Aggregating total purchase `value` per `user_id`.\n3. Loads the transformed results by returning a list of `(user_id, total_value)` tuples sorted by `user_id` ascending.\n\nAssume small inputs (no external libs), handle extra whitespace, and ignore blank lines.",
   "learn_section": "## Solution Explanation\n\nThis task mirrors a minimal MLOps ETL flow that prepares data for downstream modeling.\n\n### ETL breakdown\n- Extract: parse raw CSV text, ignore blanks, and split into header and rows.\n- Transform:\n\t- Filter only relevant records (event_type == \"purchase\").\n\t- Cast `value` to float; discard invalid rows to maintain data quality.\n\t- Aggregate total purchase value per user to create compact features.\n- Load: return a deterministic, sorted list of `(user_id, total_value)`.\n\n### Why this design?\n- Input sanitation prevents runtime errors and poor-quality features.\n- Aggregation compresses event-level logs into user-level features commonly used in models.\n- Sorting produces stable, testable outputs.\n\n### Complexity\n- For N rows, parsing and aggregation run in O(N); sorting unique users U costs O(U log U).\n\n### Extensions\n- Add schema validation and logging.\n- Write outputs to files or databases.\n- Schedule ETL runs and add monitoring for drift and freshness.",
   "starter_code": "# Implement your function below.\n\ndef run_etl(csv_text: str) -> list[tuple[str, float]]:\n\t\"\"\"Run a simple ETL pipeline over CSV text with header user_id,event_type,value.\n\n\tReturns a sorted list of (user_id, total_value) for event_type == \"purchase\".\n\t\"\"\"\n\t# TODO: implement extract, transform, and load steps\n\traise NotImplementedError",
@@ -24,38 +22,6 @@
     "reasoning": "Keep only purchases; convert values; drop invalid; aggregate per user; sort by user_id."
   },
   "test_cases": [
-    {
-      "test": "from solution import run_etl; print(run_etl('user_id,event_type,value\n u1, purchase, 10.0\n u2, view, 1.0\n u1, purchase, 5\n u3, purchase, not_a_number\n u2, purchase, 3.5 \n'))",
-      "expected_output": "[('u1', 15.0), ('u2', 3.5)]"
-    },
-    {
-      "test": "from solution import run_etl; print(run_etl('user_id,event_type,value\n'))",
-      "expected_output": "[]"
-    },
-    {
-      "test": "from solution import run_etl; print(run_etl('value,event_type,user_id\n 1.0, purchase, u1\n 2.0, purchase, u1\n'))",
-      "expected_output": "[('u1', 3.0)]"
-    }
-  ],
-  "tinygrad_starter_code": "from typing import List, Tuple\n\n\ndef run_etl(csv_text: str) -> List[Tuple[str, float]]:\n\t\"\"\"Run a simple ETL pipeline and return (user_id, total_value) sorted.\"\"\"\n\traise NotImplementedError",
-  "tinygrad_solution": "from typing import List, Tuple\n\n\ndef run_etl(csv_text: str) -> List[Tuple[str, float]]:\n\tlines = [line.strip() for line in csv_text.splitlines() if line.strip()]\n\tif not lines:\n\t\treturn []\n\theaders = [h.strip().lower() for h in lines[0].split(\",\")]\n\ttry:\n\t\tidx_user = headers.index(\"user_id\")\n\t\tidx_event = headers.index(\"event_type\")\n\t\tidx_value = headers.index(\"value\")\n\texcept ValueError:\n\t\treturn []\n\n\taggregates: dict[str, float] = {}\n\tfor row in lines[1:]:\n\t\tparts = [c.strip() for c in row.split(\",\")]\n\t\tif len(parts) <= max(idx_user, idx_event, idx_value):\n\t\t\tcontinue\n\t\tif parts[idx_event].lower() != \"purchase\":\n\t\t\tcontinue\n\t\ttry:\n\t\t\tvalue = float(parts[idx_value])\n\t\texcept ValueError:\n\t\t\tcontinue\n\t\tuser_id = parts[idx_user]\n\t\taggregates[user_id] = aggregates.get(user_id, 0.0) + value\n\n\treturn sorted(aggregates.items(), key=lambda kv: kv[0])",
-  "tinygrad_test_cases": [
-    {
-      "test": "from solution import run_etl; print(run_etl('user_id,event_type,value\n u1, purchase, 10.0\n u2, view, 1.0\n u1, purchase, 5\n u3, purchase, not_a_number\n u2, purchase, 3.5 \n'))",
-      "expected_output": "[('u1', 15.0), ('u2', 3.5)]"
-    },
-    {
-      "test": "from solution import run_etl; print(run_etl('user_id,event_type,value\n'))",
-      "expected_output": "[]"
-    },
-    {
-      "test": "from solution import run_etl; print(run_etl('value,event_type,user_id\n 1.0, purchase, u1\n 2.0, purchase, u1\n'))",
-      "expected_output": "[('u1', 3.0)]"
-    }
-  ],
-  "pytorch_starter_code": "from typing import List, Tuple\n\n\ndef run_etl(csv_text: str) -> List[Tuple[str, float]]:\n\t\"\"\"Run a simple ETL pipeline and return (user_id, total_value) sorted.\"\"\"\n\traise NotImplementedError",
-  "pytorch_solution": "from typing import List, Tuple\n\n\ndef run_etl(csv_text: str) -> List[Tuple[str, float]]:\n\tlines = [line.strip() for line in csv_text.splitlines() if line.strip()]\n\tif not lines:\n\t\treturn []\n\theaders = [h.strip().lower() for h in lines[0].split(\",\")]\n\ttry:\n\t\tidx_user = headers.index(\"user_id\")\n\t\tidx_event = headers.index(\"event_type\")\n\t\tidx_value = headers.index(\"value\")\n\texcept ValueError:\n\t\treturn []\n\n\taggregates: dict[str, float] = {}\n\tfor row in lines[1:]:\n\t\tparts = [c.strip() for c in row.split(\",\")]\n\t\tif len(parts) <= max(idx_user, idx_event, idx_value):\n\t\t\tcontinue\n\t\tif parts[idx_event].lower() != \"purchase\":\n\t\t\tcontinue\n\t\ttry:\n\t\t\tvalue = float(parts[idx_value])\n\t\texcept ValueError:\n\t\t\tcontinue\n\t\tuser_id = parts[idx_user]\n\t\taggregates[user_id] = aggregates.get(user_id, 0.0) + value\n\n\treturn sorted(aggregates.items(), key=lambda kv: kv[0])",
-  "pytorch_test_cases": [
     {
       "test": "from solution import run_etl; print(run_etl('user_id,event_type,value\n u1, purchase, 10.0\n u2, view, 1.0\n u1, purchase, 5\n u3, purchase, not_a_number\n u2, purchase, 3.5 \n'))",
       "expected_output": "[('u1', 15.0), ('u2', 3.5)]"

@@ -1,0 +1,38 @@
+{
+  "id": "185",
+  "title": "Basic Data Drift Check: Mean and Variance Thresholds",
+  "difficulty": "easy",
+  "category": "MLOps",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Jeet009",
+      "name": "Jeet Mukherjee"
+    }
+  ],
+  "description": "## Problem\n\nImplement a basic data drift check comparing two numeric datasets (reference vs. current).\n\nWrite a function `check_drift(ref, cur, mean_threshold, var_threshold)` that:\n\n- Accepts two lists of numbers `ref` and `cur`.\n- Computes the absolute difference in means and variances.\n- Returns a tuple `(mean_drift, var_drift)` where each element is a boolean indicating whether drift exceeds the corresponding threshold:\n\t- `mean_drift = abs(mean(ref) - mean(cur)) > mean_threshold`\n\t- `var_drift  = abs(var(ref)  - var(cur))  > var_threshold`\n\nAssume population variance (divide by N). Handle empty inputs by returning `(False, False)`.",
+  "learn_section": "## Solution Explanation\n\nWe compare two numeric samples (reference vs. current) using mean and variance with user-defined thresholds.\n\n### Definitions\n- Mean: \\( \\mu = \\frac{1}{N}\\sum_i x_i \\)\n- Population variance: \\( \\sigma^2 = \\frac{1}{N}\\sum_i (x_i - \\mu)^2 \\)\n\n### Drift rules\n- Mean drift if \\(|\\mu_{ref} - \\mu_{cur}| > \\tau_{mean}\\)\n- Variance drift if \\(|\\sigma^2_{ref} - \\sigma^2_{cur}| > \\tau_{var}\\)\n\n### Edge cases\n- If either sample is empty, return `(False, False)` to avoid false alarms.\n- Population vs. sample variance: we use population here to match many monitoring setups. Either is fine if used consistently.\n\n### Complexity\n- O(N + M) to compute stats; O(1) extra space.",
+  "starter_code": "from typing import List, Tuple\n\n\ndef check_drift(ref: List[float], cur: List[float], mean_threshold: float, var_threshold: float) -> Tuple[bool, bool]:\n\t\"\"\"Return (mean_drift, var_drift) comparing ref vs cur with given thresholds.\n\n\tUse population variance.\n\t\"\"\"\n\t# TODO: handle empty inputs; compute means and variances; compare with thresholds\n\traise NotImplementedError",
+  "solution": "from typing import List, Tuple\n\n\ndef _mean(xs: List[float]) -> float:\n\treturn sum(xs) / len(xs) if xs else 0.0\n\n\ndef _var(xs: List[float]) -> float:\n\tif not xs:\n\t\treturn 0.0\n\tm = _mean(xs)\n\treturn sum((x - m) * (x - m) for x in xs) / len(xs)\n\n\ndef check_drift(ref: List[float], cur: List[float], mean_threshold: float, var_threshold: float) -> Tuple[bool, bool]:\n\tif not ref or not cur:\n\t\treturn (False, False)\n\tmean_ref = _mean(ref)\n\tmean_cur = _mean(cur)\n\tvar_ref = _var(ref)\n\tvar_cur = _var(cur)\n\tmean_drift = abs(mean_ref - mean_cur) > mean_threshold\n\tvar_drift = abs(var_ref - var_cur) > var_threshold\n\treturn (mean_drift, var_drift)",
+  "example": {
+    "input": "check_drift([1, 2, 3], [1.1, 2.2, 3.3], 0.05, 0.1)",
+    "output": "(True, True)",
+    "reasoning": "Mean(ref)=2.0, Mean(cur)=2.2 → |Δ|=0.2>0.05. Var(ref)=2/3≈0.667; Var(cur)=1.21×0.667≈0.807 → |Δ|≈0.14>0.1."
+  },
+  "test_cases": [
+    {
+      "test": "from solution import check_drift; print(check_drift([1,2,3], [1.1,2.2,3.3], 0.05, 0.1))",
+      "expected_output": "(True, True)"
+    },
+    {
+      "test": "from solution import check_drift; print(check_drift([0,0,0], [0,0,0], 0.01, 0.01))",
+      "expected_output": "(False, False)"
+    },
+    {
+      "test": "from solution import check_drift; print(check_drift([], [1,2,3], 0.01, 0.01))",
+      "expected_output": "(False, False)"
+    }
+  ]
+}
