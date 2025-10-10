@@ -1,5 +1,0 @@
-[
-  { "test": "from solution import check_drift; print(check_drift([1,2,3], [1.1,2.2,3.3], 0.05, 0.1))", "expected_output": "(True, True)" },
-  { "test": "from solution import check_drift; print(check_drift([0,0,0], [0,0,0], 0.01, 0.01))", "expected_output": "(False, False)" },
-  { "test": "from solution import check_drift; print(check_drift([], [1,2,3], 0.01, 0.01))", "expected_output": "(False, False)" }
-]

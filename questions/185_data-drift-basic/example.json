@@ -1,5 +1,0 @@
-{
-  "input": "check_drift([1, 2, 3], [1.1, 2.2, 3.3], 0.05, 0.1)",
-  "output": "(True, True)",
-  "reasoning": "Mean(ref)=2.0, Mean(cur)=2.2 → |Δ|=0.2>0.05. Var(ref)=2/3≈0.667; Var(cur)=1.21×0.667≈0.807 → |Δ|≈0.14>0.1."
-}
