@@ -173,7 +173,6 @@ class GaussianProcessRegression(_GaussianProcessBase):
         }
         # Re-fit with optimal hyperparameters
         self.fit(self.X_train, self.y_train)
-        print("Optimized Hyperparameters:", self.kernel_params)
 
 
 if __name__ == "__main__":
@@ -185,4 +184,3 @@ if __name__ == "__main__":
     gp.fit(X_train, y_train)
     X_test = np.array([[3.0]])
     mu = gp.predict(X_test)
-    print(f"{mu[0]:.4f}")
