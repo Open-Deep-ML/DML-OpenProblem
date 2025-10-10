@@ -176,13 +176,13 @@ class GaussianProcessRegression(_GaussianProcessBase):
         print("Optimized Hyperparameters:", self.kernel_params)
 
 
-# if __name__ == "__main__":
-#     gp = GaussianProcessRegression(
-#         kernel="rbf", kernel_params={"sigma": 1.0, "length_scale": 1.0}, noise=1e-8
-#     )
-#     X_train = np.array([[0], [2.5], [5.0]])
-#     y_train = np.array([1.0, 3.0, 1.5])
-#     gp.fit(X_train, y_train)
-#     X_test = np.array([[2.5]])
-#     mu, std = gp.predict(X_test, return_std=True)
-#     print(f"mu={mu[0]:.4f}, std={std[0]:.4f}")
+if __name__ == "__main__":
+    gp = GaussianProcessRegression(
+        kernel="linear", kernel_params={"sigma_b": 0.0, "sigma_v": 1.0}, noise=1e-8
+    )
+    X_train = np.array([[1], [2], [4]])
+    y_train = np.array([3, 5, 9])
+    gp.fit(X_train, y_train)
+    X_test = np.array([[3.0]])
+    mu = gp.predict(X_test)
+    print(f"{mu[0]:.4f}")
