@@ -1,0 +1,72 @@
+{
+  "id": "187",
+  "title": "Probability Addition Law: Compute P(A ∪ B)",
+  "difficulty": "easy",
+  "category": "Probability & Statistics",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Jeet009",
+      "name": "Jeet Mukherjee"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "description": "## Problem\n\nTwo events `A` and `B` in a probability space have the following probabilities:\n\n- P(A) = 0.6\n- P(B) = 0.5\n- P(A ∩ B) = 0.3\n\nUsing the probability addition law, compute `P(A ∪ B)`.\n\nImplement a function `prob_union(p_a, p_b, p_intersection)` that returns `P(A ∪ B)` as a float.\n\nRecall: P(A ∪ B) = P(A) + P(B) − P(A ∩ B).\n\nNote: If `A` and `B` are mutually exclusive (disjoint), then `P(A ∩ B) = 0` and the rule simplifies to `P(A ∪ B) = P(A) + P(B)`.",
+  "learn_section": "## Solution Explanation\n\nThe probability addition law for any two events A and B states:\n\n$$\nP(A \\cup B) = P(A) + P(B) - P(A \\cap B)\n$$\n\n- The union counts outcomes in A or B (or both).\n- We subtract the intersection once to correct double-counting.\n\n### Mutually exclusive (disjoint) events\nIf A and B cannot occur together, then \\(P(A \\cap B) = 0\\) and the addition rule simplifies to:\n\\[\nP(A \\cup B) = P(A) + P(B)\n\\]\n\n### Plug in the given values\n\nGiven: \\(P(A)=0.6\\), \\(P(B)=0.5\\), \\(P(A \\cap B)=0.3\\)\n\n\\[\nP(A \\cup B) = 0.6 + 0.5 - 0.3 = 0.8\n\\]\n\n### Validity checks\n- Probabilities must lie in [0, 1]. The result 0.8 is valid.\n- Given inputs must satisfy: \\(0 \\le P(A \\cap B) \\le \\min\\{P(A), P(B)\\}\\) and \\(P(A \\cap B) \\ge P(A) + P(B) - 1\\). Here, 0.3 is within [0.1, 0.5], so inputs are consistent.\n\n### Implementation outline\n- Accept three floats: `p_a`, `p_b`, `p_intersection`.\n- Optionally assert basic bounds to help users catch mistakes.\n- Return `p_a + p_b - p_intersection`.",
+  "starter_code": "# Implement your function below.\n\ndef prob_union(p_a: float, p_b: float, p_intersection: float) -> float:\n\t\"\"\"Return P(A ∪ B) using the addition law.\n\n\tAuto-detects mutually exclusive events by treating very small P(A ∩ B) as 0.\n\n\tArguments:\n\t- p_a: P(A)\n\t- p_b: P(B)\n\t- p_intersection: P(A ∩ B)\n\n\tReturns:\n\t- float: P(A ∪ B)\n\t\"\"\"\n\t# TODO: if p_intersection is ~0, return p_a + p_b; else return p_a + p_b - p_intersection\n\traise NotImplementedError",
+  "solution": "def prob_union(p_a: float, p_b: float, p_intersection: float) -> float:\n\t\"\"\"Reference implementation for P(A ∪ B) with auto-detection of mutual exclusivity.\n\n\tIf p_intersection is numerically very small (≤ 1e-12), treat as 0 and\n\tuse the simplified rule P(A ∪ B) = P(A) + P(B).\n\t\"\"\"\n\tepsilon = 1e-12\n\tif p_intersection <= epsilon:\n\t\treturn p_a + p_b\n\treturn p_a + p_b - p_intersection",
+  "example": {
+    "input": "prob_union(0.6, 0.5, 0.3)",
+    "output": "0.8",
+    "reasoning": "By addition law: 0.6 + 0.5 − 0.3 = 0.8."
+  },
+  "test_cases": [
+    {
+      "test": "from solution import prob_union; print(prob_union(0.6, 0.5, 0.3))",
+      "expected_output": "0.8"
+    },
+    {
+      "test": "from solution import prob_union; print(prob_union(0.2, 0.4, 0.1))",
+      "expected_output": "0.5"
+    },
+    {
+      "test": "from solution import prob_union; print(prob_union(0.3, 0.2, 0.0))",
+      "expected_output": "0.5"
+    }
+  ],
+  "tinygrad_starter_code": "def prob_union(p_a: float, p_b: float, p_intersection: float) -> float:\n\t\"\"\"Return P(A ∪ B). Treat very small P(A ∩ B) as 0 (mutually exclusive).\"\"\"\n\traise NotImplementedError",
+  "tinygrad_solution": "def prob_union(p_a: float, p_b: float, p_intersection: float) -> float:\n\t\"\"\"Reference implementation for P(A ∪ B) with auto-detection (Tinygrad track).\"\"\"\n\tepsilon = 1e-12\n\tif p_intersection <= epsilon:\n\t\treturn p_a + p_b\n\treturn p_a + p_b - p_intersection",
+  "tinygrad_test_cases": [
+    {
+      "test": "from solution import prob_union; print(prob_union(0.6, 0.5, 0.3))",
+      "expected_output": "0.8"
+    },
+    {
+      "test": "from solution import prob_union; print(prob_union(0.2, 0.4, 0.1))",
+      "expected_output": "0.5"
+    },
+    {
+      "test": "from solution import prob_union; print(prob_union(0.3, 0.2, 0.0))",
+      "expected_output": "0.5"
+    }
+  ],
+  "pytorch_starter_code": "def prob_union(p_a: float, p_b: float, p_intersection: float) -> float:\n\t\"\"\"Return P(A ∪ B). Treat very small P(A ∩ B) as 0 (mutually exclusive).\"\"\"\n\traise NotImplementedError",
+  "pytorch_solution": "def prob_union(p_a: float, p_b: float, p_intersection: float) -> float:\n\t\"\"\"Reference implementation for P(A ∪ B) with auto-detection (PyTorch track).\"\"\"\n\tepsilon = 1e-12\n\tif p_intersection <= epsilon:\n\t\treturn p_a + p_b\n\treturn p_a + p_b - p_intersection",
+  "pytorch_test_cases": [
+    {
+      "test": "from solution import prob_union; print(prob_union(0.6, 0.5, 0.3))",
+      "expected_output": "0.8"
+    },
+    {
+      "test": "from solution import prob_union; print(prob_union(0.2, 0.4, 0.1))",
+      "expected_output": "0.5"
+    },
+    {
+      "test": "from solution import prob_union; print(prob_union(0.3, 0.2, 0.0))",
+      "expected_output": "0.5"
+    }
+  ]
+}
