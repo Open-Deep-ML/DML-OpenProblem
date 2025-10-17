@@ -1,0 +1,30 @@
+[
+  {
+    "test": "import numpy as np\ngradients = np.array([3.0, 4.0])\nmax_norm = 5.0\nprint(clip_gradients(gradients, max_norm))",
+    "expected_output": "[3. 4.]"
+  },
+  {
+    "test": "import numpy as np\ngradients = np.array([6.0, 8.0])\nmax_norm = 5.0\nprint(clip_gradients(gradients, max_norm))",
+    "expected_output": "[3. 4.]"
+  },
+  {
+    "test": "import numpy as np\ngradients = np.array([0.0, 0.0])\nmax_norm = 1.0\nprint(clip_gradients(gradients, max_norm))",
+    "expected_output": "[0. 0.]"
+  },
+  {
+    "test": "import numpy as np\ngradients = np.array([1.0, 2.0, 2.0])\nmax_norm = 3.0\nprint(clip_gradients(gradients, max_norm))",
+    "expected_output": "[1. 2. 2.]"
+  },
+  {
+    "test": "import numpy as np\ngradients = np.array([10.0, 0.0])\nmax_norm = 5.0\nprint(clip_gradients(gradients, max_norm))",
+    "expected_output": "[5. 0.]"
+  },
+  {
+    "test": "import numpy as np\ngradients = np.array([-3.0, -4.0])\nmax_norm = 5.0\nprint(clip_gradients(gradients, max_norm))",
+    "expected_output": "[-3. -4.]"
+  },
+  {
+    "test": "import numpy as np\ngradients = np.array([-6.0, -8.0])\nmax_norm = 5.0\nprint(clip_gradients(gradients, max_norm))",
+    "expected_output": "[-3. -4.]"
+  }
+]
