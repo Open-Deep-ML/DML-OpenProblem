@@ -6,5 +6,10 @@
   "video": "",
   "likes": "0",
   "dislikes": "0",
-  "contributor": ["https://github.com/komaksym"]
+  "contributor": [
+        {
+          "profile_link": "https://github.com/komaksym",
+          "name": "komaksym"
+        }
+      ]
 }
