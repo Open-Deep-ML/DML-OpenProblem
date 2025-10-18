@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(softplus(0))",
+    "expected_output": "0.6931"
+  },
+  {
+    "test": "print(softplus(1))",
+    "expected_output": "1.3133"
+  },
+  {
+    "test": "print(softplus(5))",
+    "expected_output": "5.0067"
+  },
+  {
+    "test": "print(softplus(9))",
+    "expected_output": "9.0001"
+  },
+  {
+    "test": "print(softplus(21))",
+    "expected_output": "21.0"
+  }
+]

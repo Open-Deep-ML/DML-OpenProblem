@@ -1,0 +1,5 @@
+{
+  "input": "softplus(x=0, beta=1, threshold=20)",
+  "output": "0.6931",
+  "reasoning": "For x=0, beta=1, threshold=20, beta * x = 0 < threshold => The SoftPlus activation is calculated as (1/beta) * log(1 + exp(beta * x)) = (1/1) * log(1 + exp(0)) = log(1 + 1) = log(2) ≈ 0.6931"
+}
