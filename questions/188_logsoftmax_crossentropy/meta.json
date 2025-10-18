@@ -1,0 +1,16 @@
+{
+  "id": "188",
+  "title": "Log-Softmax & Cross-Entropy",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+    "profile_link": "https://www.linkedin.com/in/preetham-a-k-18b97931b/",
+    "name": "Preetham AK"
+    }
+  ],
+  "pytorch_difficulty": "medium"
+}
