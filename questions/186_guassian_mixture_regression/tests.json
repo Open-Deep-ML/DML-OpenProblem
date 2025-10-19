@@ -1,0 +1,22 @@
+[
+  {
+    "test": "import numpy as np\ngp = GaussianProcessRegression(kernel='rbf', kernel_params={'sigma': 1.0, 'length_scale': 1.0}, noise=1e-8)\nX_train = np.array([[0], [2.5], [5.0], [7.5], [10.0]])\ny_train = np.sin(X_train).ravel()\ngp.fit(X_train, y_train)\nX_test = np.array([[1.25]])\nmu = gp.predict(X_test)\nprint(f\"{mu[0]:.4f}\")",
+    "expected_output": "0.2814"
+  },
+  {
+    "test": "import numpy as np\ngp = GaussianProcessRegression(kernel='rbf', kernel_params={'sigma': 1.0, 'length_scale': 1.0}, noise=1e-8)\nX_train = np.array([[0], [2.5], [5.0], [7.5], [10.0]])\ny_train = np.sin(X_train).ravel()\ngp.fit(X_train, y_train)\nX_test = np.array([[1.25]])\nmu, std = gp.predict(X_test, return_std=True)\nprint(f\"mu={mu[0]:.4f}, std={std[0]:.4f}\")",
+    "expected_output": "mu=0.2814, std=0.7734"
+  },
+  {
+    "test": "import numpy as np\ngp = GaussianProcessRegression(kernel='rbf', kernel_params={'sigma': 1.0, 'length_scale': 1.0}, noise=1e-8)\nX_train = np.array([[0], [2.5], [5.0]])\ny_train = np.array([1.0, 3.0, 1.5])\ngp.fit(X_train, y_train)\nX_test = np.array([[2.5]])\nmu, std = gp.predict(X_test, return_std=True)\nprint(f\"mu={mu[0]:.4f}, std={std[0]:.4f}\")",
+    "expected_output": "mu=3.0000, std=0.0001"
+  },
+  {
+    "test": "import numpy as np\ngp = GaussianProcessRegression(kernel='linear', kernel_params={'sigma_b': 0.1, 'sigma_v': 1.0}, noise=1e-8)\nX_train = np.array([[1], [2], [4]])\ny_train = np.array([3, 5, 9])\ngp.fit(X_train, y_train)\nX_test = np.array([[3.0]])\nmu = gp.predict(X_test)\nprint(f\"{mu[0]:.4f}\")",
+    "expected_output": "7.0000"
+  },
+  {
+    "test": "import numpy as np\ngp = GaussianProcessRegression(kernel='rbf', kernel_params={'sigma': 1.0, 'length_scale': 1.5}, noise=1e-8)\nX_train = np.array([[1, 2], [3, 4], [5, 1]])\ny_train = np.sum(X_train, axis=1)\ngp.fit(X_train, y_train)\nX_test = np.array([[2, 3]])\nmu = gp.predict(X_test)\nprint(f\"{mu[0]:.4f}\")",
+    "expected_output": "5.5553"
+  }
+]
