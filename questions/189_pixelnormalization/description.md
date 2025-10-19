@@ -1,0 +1,2 @@
+## Problem
+Write a Python function to perform Pixel Normalization on a 4D input tensor with shape (B, C, H, W). The function should normalize each pixel across all channels by dividing its values by the square root of the mean squared activation across channels.

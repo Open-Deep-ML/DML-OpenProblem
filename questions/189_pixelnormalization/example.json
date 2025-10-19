@@ -1,0 +1,5 @@
+{
+  "input": "X.shape = (2, 2, 2, 2)",
+  "output": "Normalized tensor of shape (2, 2, 2, 2) where each spatial location is normalized across channels",
+  "reasoning": "For each spatial location, compute the mean of squared activations across all channels, take the square root to obtain the RMS value, and divide each channel’s activation by this value."
+}
