@@ -1,0 +1,14 @@
+[
+  {
+    "test": "print(np.round(GeLU(np.array([0.1, 0.0, -0.1])), 4))",
+    "expected_output": "[ 0.054, 0., -0.046]"
+  },
+  {
+    "test": "print(np.round(GeLU(np.array([5.5, -4.2, 0.75])), 4))",
+    "expected_output": "[ 5.5, -0., 0.58]"
+  },
+  {
+    "test": "print(np.round(GeLU(np.array([1e-6, -1e-6])), 4))",
+    "expected_output": "[ 0., -0.]"
+  }
+]

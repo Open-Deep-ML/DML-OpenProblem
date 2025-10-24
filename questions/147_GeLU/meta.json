@@ -1,0 +1,15 @@
+{
+  "id": "147",
+  "title": "GeLU Activation Function ",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [{
+      "profile_link": "https://github.com/PT-10",
+      "name": "PT-10"
+    }],
+  "tinygrad_difficulty": null,
+  "pytorch_difficulty": null
+}
