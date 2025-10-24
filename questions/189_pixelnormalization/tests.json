@@ -1,0 +1,10 @@
+[
+  {
+    "test": "np.random.seed(42)\nB, C, H, W = 2, 2, 2, 2\nX = np.random.randn(B, C, H, W)\noutput = pixel_normalization(X)\nprint(np.round(output, 4))",
+    "expected_output": "[[[[1.2792, -0.7191], [0.5366, 1.2629]], [[-0.603, -1.2177], [1.3084, 0.6364]]], [[[-1.2571, 0.3858], [-0.3669, -0.9021]], [[0.6479, -1.3606], [-1.3658, -1.0891]]]]"
+  },
+  {
+    "test": "np.random.seed(42)\nB, C, H, W = 2, 2, 2, 1\nX = np.random.randn(B, C, H, W)\noutput = pixel_normalization(X)\nprint(np.round(output, 4))",
+    "expected_output": "[[[[0.8606], [-0.1279]], [[1.1222], [1.4084]]], [[[-0.2074],[-0.4127]], [[1.3989], [1.3527]]]]"
+  }
+]
