@@ -1,0 +1,6 @@
+{
+  "input": "episode = [\n    ('s1', 'a1', 1.0, 's2'),\n    ('s2', 'a2', 2.0, 's3'),\n    ('s3', 'a3', 3.0, 'terminal')\n]\nV = {'s1': 0.0, 's2': 0.0, 's3': 0.0, 'terminal': 0.0}\npi = {'s1': 'a1', 's2': 'a2', 's3': 'a3'}\nalpha = 0.5\nV_updated = td0_policy_evaluation(episode, V, pi, alpha)\nprint({k: round(v, 2) for k, v in V_updated.items()})",
+  "output": "{'s1': 0.5, 's2': 1.0, 's3': 1.5, 'terminal': 0.0}",
+  "reasoning": "Each update uses the current value of the next state:\n- V(s1) = 0.5 * (1 + 0) = 0.5\n- V(s2) = 0.5 * (2 + 0) = 1.0\n- V(s3) =  0.5 * (3 + 0) = 1.5"
+}
+
