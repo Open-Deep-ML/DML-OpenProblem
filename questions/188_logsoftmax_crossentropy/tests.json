@@ -1,0 +1,6 @@
+[
+  {
+    "test": "import torch\nfrom starter_code import log_softmax_stable, cross_entropy_loss\n\ny_true = torch.tensor([0,1])\ny_pred = torch.tensor([[2.0,1.0,0.1],[0.5,2.5,0.3]])\n\n# Test log-softmax\nexpected_log_softmax = torch.tensor([[-0.5514,-1.5514,-2.4514],[-2.2808,-0.2808,-2.4808]])\nassert torch.allclose(log_softmax_stable(y_pred), expected_log_softmax, atol=1e-3)\n\n# Test cross-entropy loss\nexpected_loss = 0.4161\nassert abs(cross_entropy_loss(y_true, y_pred).item() - expected_loss) < 1e-3",
+    "expected_output": "pass"
+  }
+]

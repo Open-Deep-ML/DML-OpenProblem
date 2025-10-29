@@ -1,0 +1,13 @@
+{
+  "input": {
+    "y_true": [0, 1],
+    "y_pred": [[2.0, 1.0, 0.1],
+               [0.5, 2.5, 0.3]]
+  },
+  "output": {
+    "log_softmax": [[-0.5514, -1.5514, -2.4514],
+                    [-2.2808, -0.2808, -2.4808]],
+    "cross_entropy_loss": 0.4161
+  },
+  "reasoning": "Compute log-softmax using the numerical stability trick (subtract max of each row before exponentiating), then compute the mean negative log probability of the correct classes to get the cross-entropy loss."
+}
