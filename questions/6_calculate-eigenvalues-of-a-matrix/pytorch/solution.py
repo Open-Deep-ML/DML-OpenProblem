@@ -14,4 +14,4 @@ def calculate_eigenvalues(matrix: torch.Tensor) -> torch.Tensor:
     lambda1 = (trace + sqrt_disc) / 2
     lambda2 = (trace - sqrt_disc) / 2
     eig = torch.stack([lambda1, lambda2])
-    return torch.sort(eig).values
+    return torch.sort(eig, descending=True).values
