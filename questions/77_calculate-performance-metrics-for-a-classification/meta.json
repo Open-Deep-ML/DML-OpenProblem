@@ -4,8 +4,8 @@
   "difficulty": "medium",
   "category": "Machine Learning",
   "video": "https://youtu.be/W9YoUBZApcA?si=I8FTWXfH3EugaZhc",
-  "likes": 0,
-  "dislikes": 0,
+  "likes": "0",
+  "dislikes": "0",
   "contributor": [
     {
       "profile_link": "https://github.com/Selbl",
@@ -15,7 +15,5 @@
       "profile_link": "https://www.youtube.com/@StoatScript/videos",
       "name": "StoatScript"
     }
-  ],
-  "tinygrad_difficulty": null,
-  "pytorch_difficulty": null
+  ]
 }

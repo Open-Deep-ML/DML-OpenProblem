@@ -1,0 +1,38 @@
+{
+  "id": "121",
+  "title": "Vector Element-wise Sum",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "description": "Write a Python function that computes the element-wise sum of two vectors. The function should return a new vector representing the resulting sum if the operation is valid, or -1 if the vectors have incompatible dimensions. Two vectors (lists) can be summed element-wise only if they are of the same length.",
+  "learn_section": "## Understanding Vector Element-wise Sum\n\nIn linear algebra, the **element-wise sum** (also known as vector addition) involves adding corresponding entries of two vectors.\n\n### Vector Notation\nGiven two vectors $a$ and $b$ of the same dimension $n$:\n\n$$\na = \\begin{pmatrix} a_1 \\\\ a_2 \\\\ \\vdots \\\\ a_n \\end{pmatrix}, \\quad b = \\begin{pmatrix} b_1 \\\\ b_2 \\\\ \\vdots \\\\ b_n \\end{pmatrix}\n$$\n\nThe element-wise sum is defined as:\n\n$$\na + b = \\begin{pmatrix} a_1 + b_1 \\\\ a_2 + b_2 \\\\ \\vdots \\\\ a_n + b_n \\end{pmatrix}\n$$\n\n### Key Requirement\nVectors $a$ and $b$ must be of the same length $n$ for the operation to be valid. If their lengths differ, element-wise addition is not defined.\n\n### Example\nLet:\n\n$$\na = [1, 2, 3], \\quad b = [4, 5, 6]\n$$\n\nThen:\n\n$$\na + b = [1+4, 2+5, 3+6] = [5, 7, 9]\n$$\n\nThis simple operation is foundational in many applications such as vector arithmetic, neural network computations, and linear transformations.",
+  "starter_code": "def vector_sum(a: list[int|float], b: list[int|float]) -> list[int|float]:\n\t# Return the element-wise sum of vectors 'a' and 'b'.\n\t# If vectors have different lengths, return -1.\n\tpass",
+  "solution": "def vector_sum(a: list[int|float], b: list[int|float]) -> list[int|float]:\n    if len(a) != len(b):\n        return -1\n    return [a[i] + b[i] for i in range(len(a))]",
+  "example": {
+    "input": "a = [1, 3], b = [4, 5]",
+    "output": "[5, 8]",
+    "reasoning": "Element-wise sum: [1+4, 3+5] = [5, 8]."
+  },
+  "test_cases": [
+    {
+      "test": "print(vector_sum([1, 2, 3], [4, 5, 6]))",
+      "expected_output": "[5, 7, 9]"
+    },
+    {
+      "test": "print(vector_sum([1, 2], [1, 2, 3]))",
+      "expected_output": "-1"
+    },
+    {
+      "test": "print(vector_sum([1.5, 2.5, 3.0], [2, 1, 4]))",
+      "expected_output": "[3.5, 3.5, 7.0]"
+    }
+  ]
+}

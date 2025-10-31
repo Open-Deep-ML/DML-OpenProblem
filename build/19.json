@@ -1,0 +1,60 @@
+{
+  "id": "19",
+  "title": "Principal Component Analysis (PCA) Implementation",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/jon-rosen",
+      "name": "jon-rosen"
+    }
+  ],
+  "tinygrad_difficulty": "medium",
+  "pytorch_difficulty": "medium",
+  "description": "Write a Python function that performs Principal Component Analysis (PCA) from scratch. The function should take a 2D NumPy array as input, where each row represents a data sample and each column represents a feature. The function should standardize the dataset, compute the covariance matrix, find the eigenvalues and eigenvectors, and return the principal components (the eigenvectors corresponding to the largest eigenvalues). The function should also take an integer k as input, representing the number of principal components to return.",
+  "learn_section": "\n## Understanding Eigenvalues in PCA\n\nPrincipal Component Analysis (PCA) utilizes the concept of eigenvalues and eigenvectors to identify the principal components of a dataset. Here's how eigenvalues fit into the PCA process:\n\n### Eigenvalues and Eigenvectors: The Foundation of PCA\nFor a given square matrix \\( A \\), representing the covariance matrix in PCA, eigenvalues \\( \\lambda \\) and their corresponding eigenvectors \\( v \\) satisfy:\n$$\nAv = \\lambda v\n$$\n\n### Calculating Eigenvalues\nThe eigenvalues of matrix \\( A \\) are found by solving the characteristic equation:\n$$\n\\det(A - \\lambda I) = 0\n$$\nwhere \\( I \\) is the identity matrix of the same dimension as \\( A \\). This equation highlights the relationship between a matrix, its eigenvalues, and eigenvectors.\n\n### Role in PCA\nIn PCA, the covariance matrix's eigenvalues represent the variance explained by its eigenvectors. Thus, selecting the eigenvectors associated with the largest eigenvalues is akin to choosing the principal components that retain the most data variance.\n\n### Eigenvalues and Dimensionality Reduction\nThe magnitude of an eigenvalue correlates with the importance of its corresponding eigenvector (principal component) in representing the dataset's variability. By selecting a subset of eigenvectors corresponding to the largest eigenvalues, PCA achieves dimensionality reduction while preserving as much of the dataset's variability as possible.\n\n### Practical Application\n1. **Standardize the Dataset**: Ensure that each feature has a mean of 0 and a standard deviation of 1.\n2. **Compute the Covariance Matrix**: Reflects how features vary together.\n3. **Find Eigenvalues and Eigenvectors**: Solve the characteristic equation for the covariance matrix.\n4. **Select Principal Components**: Choose eigenvectors (components) with the highest eigenvalues for dimensionality reduction.\n\nThrough this process, PCA transforms the original features into a new set of uncorrelated features (principal components), ordered by the amount of original variance they explain.",
+  "starter_code": "import numpy as np \ndef pca(data: np.ndarray, k: int) -> np.ndarray:\n\t# Your code here\n\treturn np.round(principal_components, 4)",
+  "solution": "\nimport numpy as np\n\ndef pca(data, k):\n    # Standardize the data\n    data_standardized = (data - np.mean(data, axis=0)) / np.std(data, axis=0)\n    \n    # Compute the covariance matrix\n    covariance_matrix = np.cov(data_standardized, rowvar=False)\n    \n    # Eigen decomposition\n    eigenvalues, eigenvectors = np.linalg.eig(covariance_matrix)\n    \n    # Sort the eigenvectors by decreasing eigenvalues\n    idx = np.argsort(eigenvalues)[::-1]\n    eigenvalues_sorted = eigenvalues[idx]\n    eigenvectors_sorted = eigenvectors[:,idx]\n    \n    # Select the top k eigenvectors (principal components)\n    principal_components = eigenvectors_sorted[:, :k]\n    \n    return np.round(principal_components, 4)",
+  "example": {
+    "input": "data = np.array([[1, 2], [3, 4], [5, 6]]), k = 1",
+    "output": "[[0.7071], [0.7071]]",
+    "reasoning": "After standardizing the data and computing the covariance matrix, the eigenvalues and eigenvectors are calculated. The largest eigenvalue's corresponding eigenvector is returned as the principal component, rounded to four decimal places."
+  },
+  "test_cases": [
+    {
+      "test": "print(pca(np.array([[4,2,1],[5,6,7],[9,12,1],[4,6,7]]),2))",
+      "expected_output": "[[0.6855, 0.0776], [0.6202, 0.4586], [-0.3814, 0.8853]]"
+    },
+    {
+      "test": "print(pca(np.array([[1, 2], [3, 4], [5, 6]]), k = 1))",
+      "expected_output": " [[0.7071], [0.7071]]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef pca_tg(data, k) -> Tensor:\n    \"\"\"\n    Perform PCA on `data`, returning the top `k` principal components as a tinygrad Tensor.\n    Input: list, NumPy array, or Tensor of shape (n_samples, n_features).\n    Returns: a Tensor of shape (n_features, k), with floats rounded to 4 decimals.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "import numpy as np\nfrom tinygrad.tensor import Tensor\n\ndef pca_tg(data, k) -> Tensor:\n    \"\"\"\n    Perform PCA on `data`, returning the top `k` principal components as a tinygrad Tensor.\n    Input: list, NumPy array, or Tensor of shape (n_samples, n_features).\n    Returns: a Tensor of shape (n_features, k), with floats rounded to 4 decimals.\n    \"\"\"\n    arr = np.array(data, dtype=float)\n    # Standardize\n    arr_std = (arr - arr.mean(axis=0)) / arr.std(axis=0)\n    # Covariance\n    cov = np.cov(arr_std, rowvar=False)\n    # Eigen decomposition\n    vals, vecs = np.linalg.eig(cov)\n    idx = np.argsort(vals)[::-1]\n    pcs = vecs[:, idx[:k]]\n    pcs = np.round(pcs, 4)\n    return Tensor(pcs)",
+  "tinygrad_test_cases": [
+    {
+      "test": "res = pca_tg([[1.0,0.0],[0.0,1.0]], 2)\n# convert to Python list and round each value\nlst = res.numpy().tolist()\nrounded = [[round(val,4) for val in row] for row in lst]\nprint(rounded)",
+      "expected_output": "[[1.0, 0.0], [0.0, 1.0]]"
+    },
+    {
+      "test": "res = pca_tg([[1.0,1.0],[2.0,2.0],[3.0,3.0]], 1)\n# convert to Python list and round each value\nlst = res.numpy().tolist()\nrounded = [[round(val,4) for val in row] for row in lst]\nprint(rounded)",
+      "expected_output": "[[0.7071], [0.7071]]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef pca(data, k) -> torch.Tensor:\n    \"\"\"\n    Perform PCA on `data`, returning the top `k` principal components as a tensor.\n    Input: Tensor or convertible of shape (n_samples, n_features).\n    Returns: a torch.Tensor of shape (n_features, k), with floats rounded to 4 decimals.\n    \"\"\"\n    data_t = torch.as_tensor(data, dtype=torch.float)\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef pca(data, k) -> torch.Tensor:\n    \"\"\"\n    Perform PCA on `data`, returning the top `k` principal components as a tensor.\n    Input: Tensor or convertible of shape (n_samples, n_features).\n    Returns: a torch.Tensor of shape (n_features, k), with floats rounded to 4 decimals.\n    \"\"\"\n    data_t = torch.as_tensor(data, dtype=torch.float)\n    # Standardize\n    mean = data_t.mean(dim=0, keepdim=True)\n    std  = data_t.std(dim=0, unbiased=False, keepdim=True)\n    data_std = (data_t - mean) / std\n    # Covariance\n    cov = torch.cov(data_std.T)\n    # Eigen decomposition\n    eigenvalues, eigenvectors = torch.linalg.eig(cov)\n    vals = eigenvalues.real\n    vecs = eigenvectors.real\n    # Sort by descending eigenvalue\n    idx = torch.argsort(vals, descending=True)\n    pcs = vecs[:, idx[:k]]\n    # Round to 4 decimals\n    pcs = torch.round(pcs * 10000) / 10000\n    return pcs",
+  "pytorch_test_cases": [
+    {
+      "test": "res = pca([[1.0,0.0],[0.0,1.0]], 2)\n# convert to Python list and round each value\nlst = res.tolist()\nrounded = [[round(val,4) for val in row] for row in lst]\nprint(rounded)",
+      "expected_output": "[[0.7071, 0.7071], [-0.7071, 0.7071]]"
+    },
+    {
+      "test": "res = pca([[1.0,1.0],[2.0,2.0],[3.0,3.0]], 1)\n# convert to Python list and round each value\nlst = res.tolist()\nrounded = [[round(val,4) for val in row] for row in lst]\nprint(rounded)",
+      "expected_output": "[[0.7071], [0.7071]]"
+    }
+  ]
+}

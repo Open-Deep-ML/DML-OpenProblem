@@ -1,10 +1,10 @@
 [
   {
-    "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    [[1,2,3],[4,5,6]],\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+    "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    Tensor([[1,2,3],[4,5,6]]),\n    (3, 2)\n)\nprint(res.numpy().tolist())",
     "expected_output": "[[1, 2], [3, 4], [5, 6]]"
   },
   {
-    "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    [[1,2],[3,4]],\n    (3, 2)\n)\nprint(res.numpy().tolist())",
+    "test": "from tinygrad.tensor import Tensor\nres = reshape_matrix_tg(\n    Tensor([[1,2],[3,4]]),\n    (3, 2)\n)\nprint(res.numpy().tolist())",
     "expected_output": "[]"
   }
 ]

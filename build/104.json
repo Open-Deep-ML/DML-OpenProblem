@@ -1,0 +1,46 @@
+{
+  "id": "104",
+  "title": "Binary Classification with Logistic Regression",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/emharsha1812",
+      "name": "emharsha1812"
+    }
+  ],
+  "description": "Implement the prediction function for binary classification using Logistic Regression. Your task is to compute class probabilities using the sigmoid function and return binary predictions based on a threshold of 0.5.",
+  "learn_section": "## Binary Classification with Logistic Regression\n\nLogistic Regression is a fundamental algorithm for binary classification. Given input features and learned model parameters (weights and bias), your task is to implement the prediction function that computes class probabilities.\n\n### Mathematical Background\n\nThe logistic regression model makes predictions using the sigmoid function:\n\n$$\\sigma(z) = \\frac{1}{1 + e^{-z}}$$\n\nwhere z is the linear combination of features and weights plus bias:\n\n$$z = \\mathbf{w}^T\\mathbf{x} + b = \\sum_{i=1}^{n} w_ix_i + b$$\n\n### Implementation Requirements\n\nYour task is to implement a function that:\n\n- Takes a batch of samples $\\mathbf{X}$ (shape: N x D), weights $\\mathbf{w}$ (shape: D), and bias b\n- Computes $z = \\mathbf{X}\\mathbf{w} + b$ for all samples\n- Applies the sigmoid function to get probabilities\n- Returns binary predictions i.e., 0 or 1 using a threshold of 0.5\n\n### Important Considerations\n\n- Handle numerical stability in sigmoid computation\n- Ensure efficient vectorized operations using numpy\n- Return binary predictions (0 or 1)\n\n### Hint\n\nTo prevent overflow in the exponential calculation of the sigmoid function, use `np.clip` to limit z values:\n\n```python\nz = np.clip(z, -500, 500)\n```\nThis ensures numerical stability when dealing with large input values.",
+  "starter_code": "import numpy as np\n\ndef predict_logistic(X: np.ndarray, weights: np.ndarray, bias: float) -> np.ndarray:\n\t\"\"\"\n\tImplements binary classification prediction using Logistic Regression.\n\n\tArgs:\n\t\tX: Input feature matrix (shape: N x D)\n\t\tweights: Model weights (shape: D)\n\t\tbias: Model bias\n\n\tReturns:\n\t\tBinary predictions (0 or 1)\n\t\"\"\"\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef predict_logistic(X: np.ndarray, weights: np.ndarray, bias: float) -> np.ndarray:\n    \"\"\"\n    Implements binary classification prediction using Logistic Regression.\n\n    Args:\n        X: Input feature matrix (shape: N × D)\n        weights: Model weights (shape: D)\n        bias: Model bias\n\n    Returns:\n        Binary predictions (0 or 1)\n    \"\"\"\n    z = np.dot(X, weights) + bias\n    z = np.clip(z, -500, 500)  # Prevent overflow in exp\n    probabilities = 1 / (1 + np.exp(-z))\n    return (probabilities >= 0.5).astype(int)",
+  "example": {
+    "input": "predict_logistic(np.array([[1, 1], [2, 2], [-1, -1], [-2, -2]]), np.array([1, 1]), 0)",
+    "output": "[1 1 0 0]",
+    "reasoning": "Each sample's linear combination is computed using $z = Xw + b$. The sigmoid function is applied, and the output is thresholded at 0.5, resulting in binary predictions."
+  },
+  "test_cases": [
+    {
+      "test": "print(predict_logistic(np.array([[1, 1], [2, 2], [-1, -1], [-2, -2]]), np.array([1, 1]), 0))",
+      "expected_output": "[1 1 0 0]"
+    },
+    {
+      "test": "print(predict_logistic(np.array([[0, 0], [0.1, 0.1], [-0.1, -0.1]]), np.array([1, 1]), 0))",
+      "expected_output": "[1 1 0]"
+    },
+    {
+      "test": "print(predict_logistic(np.array([[1, 2, 3], [-1, -2, -3], [0.5, 1, 1.5]]), np.array([0.1, 0.2, 0.3]), -1))",
+      "expected_output": "[1 0 0]"
+    },
+    {
+      "test": "print(predict_logistic(np.array([[1], [2], [-1], [-2]]), np.array([2]), 0))",
+      "expected_output": "[1 1 0 0]"
+    },
+    {
+      "test": "print(predict_logistic(np.array([[1000, 2000], [-1000, -2000]]), np.array([0.1, 0.1]), 0))",
+      "expected_output": "[1 0]"
+    }
+  ]
+}

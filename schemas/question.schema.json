@@ -1,50 +1,57 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Deep-ML Question",
-    "type": "object",
-  
-    "required": [
-      "id", "title", "description", "difficulty", "category",
-      "starter_code", "solution", "example", "test_cases",
-      "learn_section", "video", "likes", "dislikes", "contributor"
-    ],
-  
-    "properties": {
-      /* ── core ───────────────────────────────────────────── */
-      "id":          { "type": "string", "pattern": "^[0-9]+$" },
-      "title":       { "type": "string" },
-      "description": { "type": "string" },
-      "difficulty":  { "type": "string", "enum": ["easy","medium","hard"] },
-      "category":    { "type": "string" },
-  
-      "starter_code":{ "type": "string" },
-      "solution":    { "type": "string" },
-  
-      "example":     { "type": "object" },
-      "test_cases":  { "type": "array" },
-  
-      "learn_section": { "type": "string" },
-      "video":         { "type": "string" },
-      "likes":         { "type": "string" },
-      "dislikes":      { "type": "string" },
-      "contributor":   { "type": "array" },
-  
-      /* ── optional links ─────────────────────────────────── */
-      "marimo_link":   { "type": "string" },
-  
-      /* ── optional TinyGrad ─────────────────────────────── */
-      "tinygrad_difficulty":   { "type": "string", "enum": ["easy","medium","hard"] },
-      "tinygrad_starter_code": { "type": "string" },
-      "tinygrad_solution":     { "type": "string" },
-      "tinygrad_test_cases":   { "type": "array" },
-  
-      /* ── optional PyTorch ──────────────────────────────── */
-      "pytorch_difficulty":   { "type": "string", "enum": ["easy","medium","hard"] },
-      "pytorch_starter_code": { "type": "string" },
-      "pytorch_solution":     { "type": "string" },
-      "pytorch_test_cases":   { "type": "array" }
-    },
-  
-    "additionalProperties": false
-  }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Deep-ML Question",
+  "type": "object",
+
+  "required": [
+    "id",
+    "title",
+    "description",
+    "difficulty",
+    "category",
+    "starter_code",
+    "solution",
+    "example",
+    "test_cases",
+    "learn_section",
+    "video",
+    "likes",
+    "dislikes",
+    "contributor"
+  ],
+
+  "properties": {
+    "id": { "type": "string", "pattern": "^[0-9]+$" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "difficulty": { "type": "string", "enum": ["easy", "medium", "hard"] },
+    "category": { "type": "string" },
+
+    "starter_code": { "type": "string" },
+    "solution": { "type": "string" },
+
+    "example": { "type": "object" },
+    "test_cases": { "type": "array" },
+
+    "learn_section": { "type": "string" },
+    "video": { "type": "string" },
+    "likes": { "type": "string" },
+    "dislikes": { "type": "string" },
+    "contributor": { "type": "array" },
+
+    "marimo_link": { "type": "string" },
+
+    "tinygrad_difficulty": { "type": "string", "enum": ["easy", "medium", "hard"] },
+    "tinygrad_starter_code": { "type": "string" },
+    "tinygrad_solution": { "type": "string" },
+    "tinygrad_test_cases": { "type": "array" },
+
+    "pytorch_difficulty": { "type": "string", "enum": ["easy", "medium", "hard"] },
+    "pytorch_starter_code": { "type": "string" },
+    "pytorch_solution": { "type": "string" },
+    "pytorch_test_cases": { "type": "array" }
+  },
+
+  "additionalProperties": false
+}
   
