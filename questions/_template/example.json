@@ -1,5 +1,14 @@
 {
-  "input": "...",
-  "output": "...",
-  "reasoning": "Explain why the output follows from the input."
+  "input": {
+    "bbox_A": [100, 100, 200, 200],
+    "bbox_B": [150, 150, 250, 250]
+  },
+  "output": {
+    "iou_score": 0.146
+  },
+  "reasoning": "The output shows the Intersection over Union (IoU) score between bbox_A and bbox_B. Here's how it's calculated: bbox_A is [100,100,200,200] representing [x1,y1,x2,y2] bbox_B is [150,150,250,250] representing [x1,y1,x2,y2]
+                The intersection area is 50x50=2500 (overlapping region).The union area is the sum of both areas minus the intersection:   
+                - Area_A = 100x100 = 10000  - Area_B = 100x100 = 10000
+                - Union = 10000 + 10000 - 2500 = 17500  IoU = intersection/union = 2500/17500 ≈ 0.14286
+              "
 }
