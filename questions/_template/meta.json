@@ -1,12 +1,17 @@
 {
   "id": "XXX",
-  "title": "TITLE GOES HERE",
+  "title": "IOU-score calculation",
   "difficulty": "medium",
-  "category": "Machine Learning",
+  "category": "Computer Vision",
   "video": "",
   "likes": "0",
   "dislikes": "0",
-  "contributor": [],
+  "contributor": [
+    {
+      "profile_link": "https://github.com/dsaha21",
+      "name": "Dripto Saha"
+    }
+  ],
   "tinygrad_difficulty": "",
   "pytorch_difficulty": ""
 }
