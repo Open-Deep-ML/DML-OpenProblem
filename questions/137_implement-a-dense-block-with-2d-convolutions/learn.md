@@ -4,7 +4,7 @@ Dense blocks are a key innovation in the DenseNet architecture. Each layer recei
 
 ### Dense Block Concept
 For a dense block:
-- **Each layer**: Applies ReLU, then 2D convolution, and then concatenates the output to previous features.
+- **Each layer**: Applies ReLU, then 2D convolution, and then concatenates the output to the previous features.
 - Mathematically:
 $$
 x_l = H_l([x_0, x_1, \ldots, x_{l-1}])
@@ -28,10 +28,10 @@ $$
 - After $L$ layers, total channels = input channels + $L \times \text{growth rate}$.
 
 ### Putting It All Together
-1️⃣ Start with an input tensor.  
-2️⃣ Repeat for $\text{num layers}$:
+1. Start with an input tensor.  
+2. Repeat for $\text{num layers}$:
 - Apply ReLU activation.
 - Apply 2D convolution (with padding).
 - Concatenate the output along the channel dimension.
 
-By understanding these core principles, you’re ready to build the dense block function!
+By understanding these core principles, you're ready to build the dense block function!
