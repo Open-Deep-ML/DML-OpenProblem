@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\ninput_matrix = np.array([\n    [2,4,6,7],\n    [9,2,6,5],\n    [1,2,3,4],\n    [5,6,7,8]\n])\n\nkernel = np.array([\n    [1,0],\n    [-1,1]\n])\n\nstride = 1\n\noutput = im2col(input_matrix, kernel, stride)\nprint(output)",
+  "output": "[[2. 4. 9. 2.]\n [4. 6. 2. 6.]\n [6. 7. 6. 5.]\n [9. 2. 1. 2.]\n [2. 6. 2. 3.]\n [6. 5. 3. 4.]\n [1. 2. 5. 6.]\n [2. 3. 6. 7.]\n [3. 4. 7. 8.]]",
+  "reasoning": "The function extracts each patch from the input image based on the kernel size and stride, then flattens each patch into a 1D vector. Each row of the output corresponds to one local patch. For example, the kernel is 2x2, so the first window covers [2,4,9,2], then shifts across the image horizontally and vertically until all patches are collected."
+}
