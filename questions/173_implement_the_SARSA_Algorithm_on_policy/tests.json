@@ -1,0 +1,14 @@
+[
+  {
+    "test": "transitions = {\n    ('A', 'go'): (1.0, 'B'),\n    ('B', 'go'): (2.0, 'C'),\n    ('C', 'go'): (3.0, 'terminal')\n}\ninitial_states = ['A']\nalpha = 0.5\ngamma = 0.9\nmax_steps = 5\nQ = sarsa_update(transitions, initial_states, alpha, gamma, max_steps)\nfor k in sorted(Q):\n    print(f\"Q{str(k):15} = {Q[k]:.4f}\")",
+    "expected_output": "Q('A', 'go')     = 0.5000\nQ('B', 'go')     = 1.0000\nQ('C', 'go')     = 1.5000"
+  },
+  {
+    "test": "transitions = {\n    ('S1', 'left'): (2.0, 'S2'),\n    ('S1', 'right'): (1.0, 'S3'),\n    ('S2', 'left'): (0.5, 'terminal'),\n    ('S3', 'right'): (0.5, 'terminal')\n}\ninitial_states = ['S1', 'S2', 'S3']\nalpha = 0.1\ngamma = 0.8\nmax_steps = 10\nQ = sarsa_update(transitions, initial_states, alpha, gamma, max_steps)\nfor k in sorted(Q):\n    print(f\"Q{str(k):15} = {Q[k]:.4f}\")",
+    "expected_output": "Q('S1', 'left')  = 0.2000\nQ('S1', 'right') = 0.0000\nQ('S2', 'left')  = 0.0950\nQ('S3', 'right') = 0.0500"
+  },
+  {
+    "test": "transitions = {\n    ('A', 'x'): (0.0, 'terminal'),\n    ('A', 'y'): (5.0, 'B'),\n    ('B', 'z'): (2.0, 'terminal')\n}\ninitial_states = ['A']\nalpha = 0.4\ngamma = 0.9\nmax_steps = 3\nQ = sarsa_update(transitions, initial_states, alpha, gamma, max_steps)\nfor k in sorted(Q):\n    print(f\"Q{str(k):15} = {Q[k]:.4f}\")",
+    "expected_output": "Q('A', 'x')      = 0.0000\nQ('A', 'y')      = 0.0000"
+  }
+]
