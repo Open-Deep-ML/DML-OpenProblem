@@ -1,0 +1,6 @@
+{
+  "input": "sample_mean=103.0, sample_std=10.0, n=25, H0='mu = 100', H1='mu > 100'",
+  "output": "{'t': 1.5, 'df': 24, 'p_value': 0.0735, 'alternative': 'greater'}",
+  "reasoning": "SE = 10/sqrt(25)=2.0. t=(103-100)/2=1.5. With df=24 and a right-tailed test, p=1-CDF_t(1.5;24)=0.0735 (approx)."
+}
+

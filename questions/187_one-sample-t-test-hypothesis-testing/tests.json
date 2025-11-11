@@ -1,0 +1,27 @@
+[
+  {
+    "test": "one_sample_t_test(103.0, 10.0, 25, 'mu = 100', 'mu != 100')",
+    "expected_output": "{'t': 1.5, 'df': 24, 'p_value': 0.1469, 'alternative': 'two-sided'}"
+  },
+  {
+    "test": "one_sample_t_test(103.0, 10.0, 25, 'mu = 100', 'mu > 100')",
+    "expected_output": "{'t': 1.5, 'df': 24, 'p_value': 0.0735, 'alternative': 'greater'}"
+  },
+  {
+    "test": "one_sample_t_test(103.0, 10.0, 25, 'mu = 100', 'mu < 100')",
+    "expected_output": "{'t': 1.5, 'df': 24, 'p_value': 0.9265, 'alternative': 'less'}"
+  },
+  {
+    "test": "one_sample_t_test(97.0, 12.0, 36, 'mu = 100', 'mu != 100')",
+    "expected_output": "{'t': -1.5, 'df': 35, 'p_value': 0.1423, 'alternative': 'two-sided'}"
+  },
+  {
+    "test": "one_sample_t_test(97.0, 12.0, 36, 'mu = 100', 'mu < 100')",
+    "expected_output": "{'t': -1.5, 'df': 35, 'p_value': 0.0712, 'alternative': 'less'}"
+  },
+  {
+    "test": "one_sample_t_test(97.0, 12.0, 36, 'mu = 100', 'mu > 100')",
+    "expected_output": "{'t': -1.5, 'df': 35, 'p_value': 0.9288, 'alternative': 'greater'}"
+  }
+]
+
