@@ -1,8 +1,8 @@
 {
-  "id": "187",
-  "title": "Build a Simple ETL Pipeline (MLOps)",
-  "difficulty": "medium",
-  "category": "MLOps",
+  "id": "186",
+  "title": "One-Sample Z-Test for Mean (One and Two-Tailed)",
+  "difficulty": "easy",
+  "category": "Statistics",
   "video": "",
   "likes": "0",
   "dislikes": "0",
@@ -10,3 +10,4 @@
     { "profile_link": "https://github.com/Jeet009", "name": "Jeet Mukherjee" }
   ]
 }
+
