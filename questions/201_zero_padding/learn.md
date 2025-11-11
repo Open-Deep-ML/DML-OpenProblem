@@ -1,7 +1,4 @@
-
-# Learn Section
-
-## Understanding Pooling
+## Understanding Padding
 
 In computer vision and image processing, padding refers to the process of adding pixels (or matrix values) around the border of in input to preserve its dimension and prevent information loss during processing by, for example, and convolutional neural network (CNN). There are different strategies for padding, such as the position where padding is added (ie. left of image vs. around the image), the amount of padding added to each different axis, and even the specific value that is used as the padding value. In this simple example, the padding is done around the entire image, and each axis gets the same amount of padding.
 
