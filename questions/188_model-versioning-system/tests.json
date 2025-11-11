@@ -1,0 +1,42 @@
+[
+  {
+    "test": "registry = ModelRegistry()\nresult = registry.register_model('sentiment_classifier', 0.95, 'dev')\nprint(result['version'])",
+    "expected_output": "1.0"
+  },
+  {
+    "test": "registry = ModelRegistry()\n# Register first version\nregistry.register_model('nlp_model', 0.95, 'dev')\n# Register second version\nresult = registry.register_model('nlp_model', 0.97, 'dev')\nprint(result['version'])",
+    "expected_output": "1.1"
+  },
+  {
+    "test": "registry = ModelRegistry()\nregistry.register_model('image_classifier', 0.92, 'dev')\n# Promote to staging\nsuccess = registry.promote_model('image_classifier', '1.0', 'staging')\nprint(success)",
+    "expected_output": "True"
+  },
+  {
+    "test": "registry = ModelRegistry()\n# Register multiple versions\nregistry.register_model('recommendation_model', 0.90, 'dev')\nregistry.register_model('recommendation_model', 0.93, 'dev')\nregistry.register_model('recommendation_model', 0.89, 'dev')\n# Compare versions\nresult = registry.compare_models('recommendation_model', '1.0', '1.1')\nprint(result['accuracy_delta'])",
+    "expected_output": "0.03"
+  },
+  {
+    "test": "registry = ModelRegistry()\nregistry.register_model('fraud_detector', 0.95, 'dev')\nregistry.register_model('churn_predictor', 0.88, 'staging')\nmodels = registry.list_models()\nprint(len(models))",
+    "expected_output": "2"
+  },
+  {
+    "test": "registry = ModelRegistry()\nregistry.register_model('test_model', 0.85, 'dev')\n# Get latest version\nmodel = registry.get_model('test_model')\nprint(model['version'])",
+    "expected_output": "1.0"
+  },
+  {
+    "test": "registry = ModelRegistry()\nregistry.register_model('test_model', 0.85, 'dev')\n# Get specific version\nmodel = registry.get_model('test_model', '1.0')\nprint(model['accuracy'])",
+    "expected_output": "0.85"
+  },
+  {
+    "test": "registry = ModelRegistry()\nregistry.register_model('test_model', 0.85, 'dev')\n# Promote to production\nsuccess = registry.promote_model('test_model', '1.0', 'production')\nmodel = registry.get_model('test_model', '1.0')\nprint(model['stage'])",
+    "expected_output": "production"
+  },
+  {
+    "test": "registry = ModelRegistry()\nregistry.register_model('test_model', 0.85, 'dev')\n# Try to promote non-existent version\nsuccess = registry.promote_model('test_model', '2.0', 'staging')\nprint(success)",
+    "expected_output": "False"
+  },
+  {
+    "test": "registry = ModelRegistry()\nregistry.register_model('test_model', 0.85, 'dev')\n# Compare non-existent versions\nresult = registry.compare_models('test_model', '1.0', '2.0')\nprint(result)",
+    "expected_output": "None"
+  }
+]

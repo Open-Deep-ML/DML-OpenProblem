@@ -1,0 +1,5 @@
+{
+  "input": "registry = ModelRegistry()\nresult = registry.register_model('sentiment_classifier', 0.95, 'dev')\nprint(result['version'])",
+  "output": "1.0",
+  "reasoning": "First registration of a model creates version 1.0 automatically. The system assigns the initial version and stores the accuracy and stage information."
+}
