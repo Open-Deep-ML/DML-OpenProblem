@@ -1,6 +1,24 @@
 [
   {
-    "test": "print(your_function(...))",
-    "expected_output": "..."
+    "test": "print(iou_score([0, 0, 100, 100],[0, 0, 100, 100]))", 
+    "expected_output": "1.0"
+  },
+  {
+    "test": "print(iou_score([0, 0, 50, 50],[60, 60, 100, 100]))", 
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(iou_score([100, 100, 200, 200],[150, 150, 250, 250]))", 
+    "expected_output": "0.146"
+  },
+  {
+    "test": "print(iou_score([10, 20, 100, 100],[90, 90, 200, 201]))", 
+    "expected_output": "0.006"
+  },
+  {
+    "test": "print(iou_score([100, 100.2, 200.7, 201.5],[150.5, 150, 250.8, 250.9]))", 
+    "expected_output": "0.149"
   }
+  
+
 ]
