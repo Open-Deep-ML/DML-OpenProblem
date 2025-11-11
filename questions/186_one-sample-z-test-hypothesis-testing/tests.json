@@ -1,0 +1,27 @@
+[
+  {
+    "test": "one_sample_z_test(103.0, 100.0, 15.0, 36, alternative='two-sided')",
+    "expected_output": "{'z': 1.2, 'p_value': 0.2296}"
+  },
+  {
+    "test": "one_sample_z_test(103.0, 100.0, 15.0, 36, alternative='greater')",
+    "expected_output": "{'z': 1.2, 'p_value': 0.1151}"
+  },
+  {
+    "test": "one_sample_z_test(103.0, 100.0, 15.0, 36, alternative='less')",
+    "expected_output": "{'z': 1.2, 'p_value': 0.8849}"
+  },
+  {
+    "test": "one_sample_z_test(97.0, 100.0, 10.0, 25, alternative='two-sided')",
+    "expected_output": "{'z': -1.5, 'p_value': 0.1336}"
+  },
+  {
+    "test": "one_sample_z_test(97.0, 100.0, 10.0, 25, alternative='less')",
+    "expected_output": "{'z': -1.5, 'p_value': 0.0668}"
+  },
+  {
+    "test": "one_sample_z_test(97.0, 100.0, 10.0, 25, alternative='greater')",
+    "expected_output": "{'z': -1.5, 'p_value': 0.9332}"
+  }
+]
+

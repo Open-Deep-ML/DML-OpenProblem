@@ -1,0 +1,6 @@
+{
+  "input": "sample_mean=103.0, population_mean=100.0, population_std=15.0, n=36, alternative='greater'",
+  "output": "{'z': 1.2, 'p_value': 0.1151}",
+  "reasoning": "Standard error = 15/sqrt(36)=2.5. Z=(103-100)/2.5=1.2. For a 'greater' test, p=1-CDF(1.2)=0.1151."
+}
+
