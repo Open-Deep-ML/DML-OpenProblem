@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\ngradients = np.array([3.0, 4.0])\nmax_norm = 5.0\nclipped = clip_gradients(gradients, max_norm)\nprint(clipped)",
+  "output": "[3. 4.]",
+  "reasoning": "The L2 norm of [3.0, 4.0] is 5.0, which is equal to max_norm, so the gradients are returned unchanged."
+}
