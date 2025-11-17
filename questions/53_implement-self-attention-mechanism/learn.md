@@ -34,7 +34,7 @@ $$
 \text{Attention}(Q, K, V) = \text{softmax} \left( \frac{Q K^T}{\sqrt{d_k}} \right) V
 $$
 
-where $d_k$ is the dimensionality of the key vectors.
+where $d_k$ is the dimensionality of the key vectors (as in the amount of features used to describe each token).
 
 ---
 
