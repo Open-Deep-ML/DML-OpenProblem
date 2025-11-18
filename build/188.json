@@ -1,0 +1,78 @@
+{
+  "id": "188",
+  "title": "Log-Softmax & Cross-Entropy",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://www.linkedin.com/in/preetham-a-k-18b97931b/",
+      "name": "Preetham AK"
+    }
+  ],
+  "pytorch_difficulty": "medium",
+  "description": "# Log-Softmax and Cross-Entropy Loss Implementation\n\nImplement a numerically stable log-softmax function and use it to compute the cross-entropy loss from scratch in PyTorch.\n\nYou are **not allowed** to use `torch.nn.functional.log_softmax` or `torch.nn.functional.cross_entropy`. You may only use basic PyTorch tensor operations.\n\nYour function should support:\n- 1D or 2D input tensors\n- Batch computation\n- Numerical stability using the log-sum-exp trick",
+  "learn_section": "# Learning Goals\n\n1. Understand how **softmax** converts logits to probabilities.\n2. Learn why **log-softmax** is preferred for numerical stability.\n3. Implement **cross-entropy loss** manually.\n4. Apply batch computations in PyTorch.\n5. Understand the connection between logits, probabilities, and loss functions.",
+  "starter_code": "import torch\nfrom typing import List\n\ndef log_softmax_stable(x: torch.Tensor) -> torch.Tensor:\n    \"\"\"\n    Compute log-softmax of x in a numerically stable way.\n    Args:\n        x: torch.Tensor of shape (N,) or (N, C)\n    Returns:\n        log-softmax tensor of same shape\n    \"\"\"\n    # Your code here\n    pass\n\ndef cross_entropy_loss(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:\n    \"\"\"\n    Compute cross-entropy loss given true labels and predicted logits.\n    Args:\n        y_true: torch.Tensor of shape (N,)\n        y_pred: torch.Tensor of shape (N, C)\n    Returns:\n        scalar mean loss\n    \"\"\"\n    # Your code here\n    pass",
+  "solution": "import torch\n\ndef log_softmax_stable(x: torch.Tensor) -> torch.Tensor:\n    x_max = x.max(dim=-1, keepdim=True).values\n    log_probs = x - x_max - torch.log(torch.exp(x - x_max).sum(dim=-1, keepdim=True))\n    return log_probs\n\ndef cross_entropy_loss(y_true: torch.Tensor, y_pred: torch.Tensor) -> torch.Tensor:\n    log_probs = log_softmax_stable(y_pred)\n    loss = -log_probs[range(len(y_true)), y_true].mean()\n    return loss",
+  "example": {
+    "input": {
+      "y_true": [
+        0,
+        1
+      ],
+      "y_pred": [
+        [
+          2.0,
+          1.0,
+          0.1
+        ],
+        [
+          0.5,
+          2.5,
+          0.3
+        ]
+      ]
+    },
+    "output": {
+      "log_softmax": [
+        [
+          -0.5514,
+          -1.5514,
+          -2.4514
+        ],
+        [
+          -2.2808,
+          -0.2808,
+          -2.4808
+        ]
+      ],
+      "cross_entropy_loss": 0.4161
+    },
+    "reasoning": "Compute log-softmax using the numerical stability trick (subtract max of each row before exponentiating), then compute the mean negative log probability of the correct classes to get the cross-entropy loss."
+  },
+  "test_cases": [
+    {
+      "test": "import torch\nfrom starter_code import log_softmax_stable, cross_entropy_loss\n\ny_true = torch.tensor([0,1])\ny_pred = torch.tensor([[2.0,1.0,0.1],[0.5,2.5,0.3]])\n\n# Test log-softmax\nexpected_log_softmax = torch.tensor([[-0.5514,-1.5514,-2.4514],[-2.2808,-0.2808,-2.4808]])\nassert torch.allclose(log_softmax_stable(y_pred), expected_log_softmax, atol=1e-3)\n\n# Test cross-entropy loss\nexpected_loss = 0.4161\nassert abs(cross_entropy_loss(y_true, y_pred).item() - expected_loss) < 1e-3",
+      "expected_output": "pass"
+    }
+  ],
+  "tinygrad_starter_code": "def your_function(...):\n    pass",
+  "tinygrad_solution": "def your_function(...):\n    ...",
+  "tinygrad_test_cases": [
+    {
+      "test": "print(your_function(...))",
+      "expected_output": "..."
+    }
+  ],
+  "pytorch_starter_code": "def your_function(...):\n    pass",
+  "pytorch_solution": "def your_function(...):\n    ...",
+  "pytorch_test_cases": [
+    {
+      "test": "print(your_function(...))",
+      "expected_output": "..."
+    }
+  ]
+}
