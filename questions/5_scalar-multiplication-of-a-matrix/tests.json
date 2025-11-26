@@ -1,5 +1,9 @@
 [
   {
+    "test": "print(scalar_multiply([], 2))",
+    "expected_output": "[]"
+  },
+  {
     "test": "print(scalar_multiply([[1,2],[3,4]], 2))",
     "expected_output": "[[2, 4], [6, 8]]"
   },
