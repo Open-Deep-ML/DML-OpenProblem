@@ -1,0 +1,8 @@
+{
+  "input": {
+    "measurements": [[0, 0], [1, 1], [2, 2], [3, 3]],
+    "t_future": 2
+  },
+  "output": [5.0, 5.0],
+  "explanation": "The object moves diagonally with constant velocity (1,1), so after 2 more steps, it reaches (5,5)."
+}

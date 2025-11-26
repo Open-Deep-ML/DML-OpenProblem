@@ -1,0 +1,13 @@
+{
+    "id": 440,
+    "title": "Kalman Filter Prediction",
+    "category": "Time Series",
+    "difficulty": "medium",
+    "order": 440,
+    "tags": [
+        "filtering",
+        "tracking",
+        "kalman"
+    ],
+    "is_hidden": false
+}
