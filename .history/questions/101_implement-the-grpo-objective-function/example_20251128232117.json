@@ -1,5 +1,5 @@
 {
   "input": "grpo_objective([1.2, 0.8, 1.1], [1.0, 1.0, 1.0], [0.9, 1.1, 1.0], [1.0, 0.5, 1.5], epsilon=0.2, beta=0.01)",
-  "output": "1.032708",
+  "output": "1.032749",
   "reasoning": "The function calculates the GRPO objective by first clipping the likelihood ratios, computing the minimum terms, averaging them, and then subtracting the KL divergence penalty scaled by beta."
 }

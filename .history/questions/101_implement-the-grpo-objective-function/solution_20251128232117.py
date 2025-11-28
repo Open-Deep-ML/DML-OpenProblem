@@ -35,10 +35,9 @@ def grpo_objective(rhos, A, pi_theta_old, pi_theta_ref, epsilon=0.2, beta=0.01) 
     pi_theta /= np.sum(pi_theta)
     pi_theta_ref /= np.sum(pi_theta_ref)
     
-    # Compute KL divergence following GRPO paper (https://arxiv.org/pdf/2402.03300)
-    log_ratio = np.log(pi_theta_ref) - np.log(pi_theta)
-    kl_divergence = np.exp(log_ratio) - log_ratio - 1
-
+    # Compute KL divergence D_KL(pi_theta || pi_theta_ref)
+    kl_divergence = np.sum(pi_theta * np.log(pi_theta / pi_theta_ref + 1e-10))  # Added epsilon to avoid log(0)
+    
     # Compute the final objective
     objective = average_min - beta * kl_divergence
     
