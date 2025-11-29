@@ -18,18 +18,18 @@ $v_t = \rho v_{t-1} + (1-\rho)g_t^2$ (Exponential moving average of squared grad
 
 The above approximates a window size of $w \approx \dfrac{1}{1-\rho}$ 
 
-$\Delta\theta_t = -\dfrac{\sqrt{u_{t-1} + \epsilon}}{\sqrt{v_t + \epsilon}} \cdot g_t$ (Parameter update with unit correction)
+$\Delta\theta_t = -\dfrac{\sqrt{v_{t-1} + \epsilon}}{\sqrt{u_t + \epsilon}} \cdot g_t$ (Parameter update with unit correction)
 
 $u_t = \rho u_{t-1} + (1-\rho)\Delta\theta_t^2$ (Exponential moving average of squared parameter updates)
 
 Where:
-- $v_t$ is the exponential moving average of squared gradients (decay rate ρ)
-- $u_t$ is the exponential moving average of squared parameter updates (decay rate ρ)
+- $v_t$ is the exponential moving average of squared **parameter updates** (decay rate ρ)
+- $u_t$ is the exponential moving average of squared **gradients** (decay rate ρ)
 - $\rho$ is the decay rate (typically 0.9) that controls the effective window size w ≈ 1/(1-ρ)
 - $\epsilon$ is a small constant for numerical stability
 - $g_t$ is the gradient at time step t
 
-The ratio $\dfrac{\sqrt{u_{t-1} + \epsilon}}{\sqrt{v_t + \epsilon}}$ serves as an adaptive learning rate that automatically handles the units of the updates, making the algorithm more robust to different parameter scales. Unlike Adagrad, Adadelta does not require a manually set learning rate, making it especially useful when tuning hyperparameters is difficult. This automatic learning rate adaptation is achieved through the ratio of the root mean squared (RMS) of parameter updates to the RMS of gradients.
+The ratio $\dfrac{\sqrt{v_{t-1} + \epsilon}}{\sqrt{u_t + \epsilon}}$ serves as an adaptive learning rate that automatically handles the units of the updates, making the algorithm more robust to different parameter scales. Unlike Adagrad, Adadelta does not require a manually set learning rate, making it especially useful when tuning hyperparameters is difficult. This automatic learning rate adaptation is achieved through the ratio of the root mean squared (RMS) of parameter updates to the RMS of gradients.
 
 Read more at:
 
@@ -43,8 +43,8 @@ Implement the Adadelta optimizer update step function. Your function should take
 The function should accept:
 - parameter: Current parameter value
 - grad: Current gradient
-- v: Exponentially decaying average of squared gradients
-- u: Exponentially decaying average of squared parameter updates
+- u: Exponentially decaying average of squared gradients
+- v: Exponentially decaying average of squared parameter updates
 - rho: Decay rate (default=0.9)
 - epsilon: Small constant for numerical stability (default=1e-8)
 
