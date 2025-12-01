@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adjusted R-squared (R²) Calculation</title>
+    <script type="text/javascript" async
+        src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<body>
+    <div class="container">
+        <h1>Adjusted R-Squared (\( R^2_{\text{adj}} \))</h1>
+        <p>Adjusted R-squared (\( R^2_{\text{adj}} \)) is an improved version of R-squared that accounts for the number of predictors in a regression model. It prevents overfitting by adjusting for the number of independent variables.</p>
+
+        <h2>Mathematical Formulation</h2>
+        <p>The formula for Adjusted R-squared is:</p>
+        <p class="formula">
+            \( R^2_{\text{adj}} = 1 - \left( \frac{(1 - R^2) \times (n - 1)}{n - p - 1} \right) \)
+        </p>
+
+        <ul>
+            <li>\( R^2 \): The regular R-squared value.</li>
+            <li>\( n \): The number of observations (data points).</li>
+            <li>\( p \): The number of independent variables (predictors).</li>
+        </ul>
+
+        <h2>Implementation Steps</h2>
+        <ol>
+            <li>Calculate the regular R-squared value.</li>
+            <li>Determine the number of observations (\( n \)) and predictors (\( p \)).</li>
+            <li>Apply the formula to get \( R^2_{\text{adj}} \).</li>
+        </ol>
+
+        <h2>Example Calculation</h2>
+        <p>Given:</p>
+        <ul>
+            <li>\( R^2 = 0.85 \)</li>
+            <li>\( n = 10 \) (total observations)</li>
+            <li>\( p = 2 \) (number of predictors)</li>
+        </ul>
+
+        <p>Step-by-step:</p>
+        <p class="formula">
+            \( R^2_{\text{adj}} = 1 - \left( \frac{(1 - 0.85) \times (10 - 1)}{10 - 2 - 1} \right) \)
+        </p>
+
+        <p>Final value:</p>
+        <p class="formula">
+            \( R^2_{\text{adj}} = 0.80179 \)
+        </p>
+    </div>
+</body>
+</html>
