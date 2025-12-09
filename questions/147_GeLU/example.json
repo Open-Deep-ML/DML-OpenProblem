@@ -1,0 +1,5 @@
+{
+  "input": "np.array([-2.0, -1.0, 0.0, 1.0, 2.0])",
+  "output": "[-0.0454 -0.1588 0. 0.8412 1.9546]",
+  "reasoning": "Each value in the input array is passed through the GELU activation function using the approximation formula. For example, GELU(1.0) ≈ 0.841192, which rounds to 0.8412. Similarly, GELU(-2.0) ≈ -0.045402, which rounds to -0.0454. Since we're using numpy, it uses vectorized operations and applies the formula to each element in the array. Then, we rounded it to four decimal places to produce the output array."
+}
