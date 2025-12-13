@@ -1,0 +1,66 @@
+[
+  {
+    "test": "print(nt_xent_loss([[1, 0], [1, 0], [0, 1], [0, 1]], 1.0))",
+    "expected_output": "0.5514447139320511"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0], [1, 0]], 1.0))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0], [1, 0], [1, 0], [1, 0]], 1.0))",
+    "expected_output": "1.0986122886681098"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0], [1, 0], [-1, 0], [-1, 0]], 0.5))",
+    "expected_output": "0.035976299748193295"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]], 1.0))",
+    "expected_output": "1.0986122886681098"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0], [1, 0], [0, 1], [0, 1]], 100.0))",
+    "expected_output": "1.0919567454272663"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0], [1, 0], [0, 1], [0, 1]], 0.5))",
+    "expected_output": "0.23954476622188456"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0], [1, 0], [0, 1], [0, 1]], 2.0))",
+    "expected_output": "0.7943767694176431"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0, 0], [1, 0, 0], [0, 1, 0], [0, 1, 0], [0, 0, 1], [0, 0, 1]], 1.0))",
+    "expected_output": "0.904832441554448"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0], [0.8, 0.6], [0, 1], [-0.6, 0.8]], 1.0))",
+    "expected_output": "0.6735767888870939"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0], [-1, 0], [0, 1], [0, -1]], 1.0))",
+    "expected_output": "1.861994804058251"
+  },
+  {
+    "test": "print(nt_xent_loss([[1, 0], [0, 1], [0.99, 0.141], [0.141, 0.99]], 1.0))",
+    "expected_output": "1.4700659232878173"
+  },
+  {
+    "test": "print(nt_xent_loss([[1], [1]], 1.0))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(nt_xent_loss([[1.0, 0.0], [0.707, 0.707], [-1.0, 0.0], [-0.707, 0.707]], 1.0))",
+    "expected_output": "0.4528130954640332"
+  },
+  {
+    "test": "import numpy as np; np.random.seed(42); N = 1000; dim = 64; temperature = 0.1; embeddings = np.random.randn(2 * N, dim); z = embeddings / np.linalg.norm(embeddings, axis=1, keepdims=True); print(nt_xent_loss(z, temperature))",
+    "expected_output": "8.37825890387809"
+  },
+  {
+    "test": "import numpy as np; np.random.seed(42); N = 8; dim = 8192; temperature = 0.5; embeddings = np.random.randn(2 * N, dim); z = embeddings / np.linalg.norm(embeddings, axis=1, keepdims=True); print(nt_xent_loss(z, temperature))",
+    "expected_output": "2.7080214605287156"
+  }
+]

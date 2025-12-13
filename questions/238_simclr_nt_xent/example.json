@@ -1,0 +1,5 @@
+{
+    "input": "# N=2 (Total batch 4).\n# 0 and 1 are views of Cat. 2 and 3 are views of Dog.\n# 0 matches 1 (Positive). 0 mismatches 2 and 3 (Negatives).\n\nz = np.array([\n    [1.0, 0.0],  # 0: Cat View A\n    [1.0, 0.0],  # 1: Cat View B (Perfect match with 0)\n    [0.0, 1.0],  # 2: Dog View A (Orthogonal to 0)\n    [0.0, 1.0]   # 3: Dog View B (Orthogonal to 0)\n])\ntemperature = 0.5",
+    "output": "2.2395447662218846",
+    "reasoning": "Let's calculate loss for index 0 (Cat A):\n\n1. **Positive Pair**: Index 1. Sim = 1.0.\n\n2. **Negatives**: Index 2, Index 3. Sim = 0.0.\n\n3. **Terms**:\n\n   - Numerator (Positive): $\\exp(1.0 / 0.5) = \\exp(2) \\approx 7.389$\n\n   - Denominator (All $k \\neq 0$):\n\n     - Term 1 (Pos): $\\exp(1.0/0.5) \\approx 7.389$\n\n     - Term 2 (Neg): $\\exp(0.0/0.5) = 1$\n\n     - Term 3 (Neg): $\\exp(0.0/0.5) = 1$\n\n   - Denominator Sum: $7.389 + 1 + 1 = 9.389$\n\n4. **Loss for index 0**: $-\\log(7.389 / 9.389) \\approx 0.239$\n\n\n\nSince the setup is symmetric, all 4 indices have the same loss."
+}
