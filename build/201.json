@@ -1,0 +1,42 @@
+{
+  "id": "201",
+  "title": "Zero Padding",
+  "difficulty": "easy",
+  "category": "Computer Vision",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/vnethrapalli",
+      "name": "vnet"
+    }
+  ],
+  "description": "In image processing, padding is important because it helps preserve spatial dimensions during convolution operations, prevents information loss at image borders, and enables consistent output sizes across layers in deep learning models. Write a function `pad_matrix` that will return a zero-padded version of the input matrix. The original matrix will be called `a` and the amount of padding will be controlled by another integer parameter called `padding`. Note that the input matrix may not necessarily be square. ",
+  "learn_section": "## Understanding Padding\n\nIn computer vision and image processing, padding refers to the process of adding pixels (or matrix values) around the border of in input to preserve its dimension and prevent information loss during processing by, for example, and convolutional neural network (CNN). There are different strategies for padding, such as the position where padding is added (ie. left of image vs. around the image), the amount of padding added to each different axis, and even the specific value that is used as the padding value. In this simple example, the padding is done around the entire image, and each axis gets the same amount of padding.\n\nConsider the following input matrix:\n\n$$\n\\begin{bmatrix}\na_{11} & a_{12} \\\\\na_{21} & a_{22}\n\\end{bmatrix}\n$$\n\nIf we consider a padding of 1, the padded matrix would have an additional \"1 pixel\" of values (zeros in this case) around it. This would look like: \n\n$$\n\\begin{bmatrix}\n0 & 0 & 0 & 0 \\\\\n0 & a_{11} & a_{12} & 0 \\\\\n0 & a_{21} & a_{22} & 0 \\\\\n0 & 0 & 0 & 0\n\\end{bmatrix}\n$$\n\nWith a padding of 2, there would be \"2 pixels\" around the picture, and so on. If the input matrix happened to be a rectangle the same logic will apply. Though in practice there may be more ways to customize this process, this simple idea of padding can help maintain certain dimensions of data throughout image processing and help reduce information loss at the edges of an image. \n\n    ",
+  "starter_code": "def pad_matrix(a: list[list[int|float]], padding: int) -> list[list[int|float]]:\n\t# return a new matrix with padding of p zeros on both sides of each axis\n    pass",
+  "solution": "def pad_matrix(a: list[list[int|float]], padding: int) -> list[list[int|float]]:\n\t# return a new matrix with padding of p zeros on both sides of each axis\n\t\n\trows = len(a)\n\tcols = len(a[0])\n\t\n\tpadded_matrix = [[0]*(cols + 2*padding) for _ in range(rows + 2*padding)]\n\tfor i in range(rows):\n\t\tfor j in range(cols):\n\t\t\tpadded_matrix[i + padding][j + padding] = a[i][j]\n\t\t\t\n\treturn padded_matrix",
+  "example": {
+    "input": "a = [[1, 2], [3, 4]], padding = 1",
+    "output": "[[0, 0, 0, 0], [0, 1, 2, 0], [0, 3, 4, 0], [0, 0, 0, 0]]",
+    "reasoning": "Since the padding here is 1, a length one 'buffer' is included around the original input matrix. This is sometimes referred to as 'same' padding."
+  },
+  "test_cases": [
+    {
+      "test": "print(pad_matrix([[1, 2], [3, 4]], 1))",
+      "expected_output": "[[0, 0, 0, 0], [0, 1, 2, 0], [0, 3, 4, 0], [0, 0, 0, 0]]"
+    },
+    {
+      "test": "print(pad_matrix([[1]], 2))",
+      "expected_output": "[[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]"
+    },
+    {
+      "test": "print(pad_matrix([[1, 2]], 1))",
+      "expected_output": "[[0, 0, 0, 0], [0, 1, 2, 0], [0, 0, 0, 0]]"
+    },
+    {
+      "test": "print(pad_matrix([[1], [2]], 1))",
+      "expected_output": "[[0, 0, 0], [0, 1, 0], [0, 2, 0], [0, 0, 0]]"
+    }
+  ]
+}

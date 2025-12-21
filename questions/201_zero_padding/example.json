@@ -1,0 +1,5 @@
+{
+  "input": "a = [[1, 2], [3, 4]], padding = 1",
+  "output": "[[0, 0, 0, 0], [0, 1, 2, 0], [0, 3, 4, 0], [0, 0, 0, 0]]",
+  "reasoning": "Since the padding here is 1, a length one 'buffer' is included around the original input matrix. This is sometimes referred to as 'same' padding."
+}
