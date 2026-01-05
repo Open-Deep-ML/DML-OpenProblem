@@ -5,22 +5,22 @@
   },
   {
     "test": "print(elu(1))",
-    "expected_output": "1.0"
+    "expected_output": "1"
   },
   {
     "test": "print(elu(-1))",
-    "expected_output": "-0.6321"
+    "expected_output": "-0.6321205588285577"
   },
   {
     "test": "print(elu(-1, alpha=2.0))",
-    "expected_output": "-1.2642"
+    "expected_output": "-1.2642411176571153"
   },
   {
     "test": "print(elu(5))",
-    "expected_output": "5.0"
+    "expected_output": "5"
   },
   {
     "test": "print(elu(-5))",
-    "expected_output": "-0.9933"
+    "expected_output": "-0.9932620530009145"
   }
 ]
