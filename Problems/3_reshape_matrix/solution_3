@@ -1,0 +1,10 @@
+import numpy as np
+
+def reshape_matrix(a: list[list[int|float]], new_shape: tuple[int, int]) -> list[list[int|float]]:
+	#Write your code here and return a python list after reshaping by using numpy's tolist() method
+	if len(a)*len(a[0]) != new_shape[0] * new_shape[1]:
+		return []
+	init_array = np.array(a)
+	reshaped_array = np.reshape(init_array,new_shape)
+	reshaped_matrix = reshaped_array.tolist()
+	return reshaped_matrix
