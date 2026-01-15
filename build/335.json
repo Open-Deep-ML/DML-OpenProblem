@@ -1,0 +1,46 @@
+{
+  "id": "335",
+  "title": "Constraining Hyper-Connection Matrices using Sinkhorn–Knopp Algorithm",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/gokulmk-12",
+      "name": "gokulmk12"
+    }
+  ],
+  "description": "In deep neural networks with hyper-connections, residual mixing matrices must be carefully constrained to avoid signal explosion or vanishing. One effective way to enforce stability is to normalize a matrix into a doubly stochastic matrix, where each row and each column sums to one. Such matrices lie in the **Birkhoff polytope** and preserve signal magnitude across layers.\n\nYour task is to implement the **Sinkhorn–Knopp** algorithm, an iterative procedure that alternates between row-wise and column-wise normalization to transform a given matrix into a doubly stochastic matrix. The input is a NxN unconstrained matrix and an optional variable iterations. Return the doubly stochastic matrix, each element rounded off to **4-decimal** places. ",
+  "learn_section": "\n## Understanding the Sinkhorn–Knopp Algorithm for Manifold-Constrained Hyper-Connections\n\n### Introduction\n\nResidual connections stabilize deep neural networks by preserving identity mappings across layers. Hyper-connections extend this idea by allowing multiple residual streams to be mixed using a learnable matrix\n\n- Residual update:\n  $$\n  h_{l+1} = h_l + f(h_l)\n  $$\n- Hyper-connections update:\n  $$\n  h_{l+1} = H_{\\text{res}} . h_l + f(h_l)\n  $$\n\nWhile hyper-connections increase expressivity, an unconstrained mixing matrix $ H_{\\text{res}} $ can cause signal explosion or vanishing when applied repeatedly across many layers.\n\n### Manifold-Constrained Hyper-Connections (mHC)\n\nTo ensure stable signal propagation, manifold-constrained hyper-connections restrict the residual mixing matrix to lie in the Birkhoff polytope, the set of doubly stochastic matrices\n\n- Row sums equal to 1:\n  $$ \n  \\sum_j H_{ij} = 1 \n  $$\n- Column sums equal to 1\n  $$ \n  \\sum_i H_{ij} = 1 \n  $$\n- Non-negativity:\n  $$ \n  H_{ij} \\ge 0 \n  $$\n\nThese constraints ensure that residual streams are redistributed rather than amplified, preserving signal norms while enabling rich feature mixing.\n\n### Sinkhorn–Knopp Algorithm\n\nThe Sinkhorn–Knopp algorithm transforms a matrix into a doubly stochastic matrix by alternately normalizing its rows and columns. Since the input matrix may contain negative values, it is first mapped to a non-negative matrix using an element-wise exponential\n $$ \n H^{(0)} = \\exp(H_{\\text{res}}) \n $$\n\nThe algorithm then performs the following steps iteratively:\n\n1. **Row normalization**\n  $$ \n  H^{'}{ij} = \\dfrac{H^{(k)}{ij}}{\\sum_j H^{(k)}_{ij}} \n  $$\n2. **Column normalization**\n  $$ \n  H^{(k+1)}{ij} = \\dfrac{H^{'}{ij}}{\\sum_i H^{'}_{ij}} \n  $$\n\nAfter sufficient iterations, the matrix converges to a doubly stochastic matrix.\n\n### Why Doubly Stochastic?\n\n - Row sums = 1 → prevents signal amplification\n - Column sums = 1 → prevents information loss\n\nTogether, these properties restore the norm-preserving behavior of residual connections, while retaining the expressive power of hyper-connections.\n\n### Key Takeaways\n - Hyper-connections improve expressivity but can destabilize deep networks.\n - Manifold constraints enforce stable, balanced residual mixing.\n - The Sinkhorn–Knopp algorithm efficiently projects matrices onto the Birkhoff polytope. \n - Exponentiation allows handling unconstrained (including negative) matrices.\n    ",
+  "starter_code": "import numpy as np\n\ndef sinkhorn_knopp(H_res: np.ndarray, iterations: int = 20) -> np.ndarray:\n    \"\"\"\n    Apply the Sinkhorn–Knopp algorithm to the mixing matrix\n\n    Parameters: \n        H_res: A 2D (NxN) unconstrained residual mixing matrix.\n        iterations: Number of Sinkhorn normalization iterations to perform.\n\n    Returns\n        Doubly stochastic matrix in the Birkhoff Polytope\n    \"\"\"\n    # your code here\n    pass",
+  "solution": "import numpy as np\n\ndef sinkhorn_knopp(H_res: np.ndarray, iterations: int = 20) -> np.ndarray:\n    \"\"\"\n    Apply the Sinkhorn–Knopp algorithm to the mixing matrix\n\n    Parameters: \n        H_res: A non-negative 2D matrix unconstrained residual mixing matrix.\n        iterations: Number of Sinkhorn normalization iterations to perform.\n\n    Returns\n        Doubly stochastic matrix in the Birkhoff Polytope\n    \"\"\"\n    # Make all elements positive\n    H = np.exp(H_res)\n\n    # Sinkhorn-Knopp Iteration  \n    for _ in range(iterations):\n        # Normalize Columns\n        H = H / H.sum(axis=0, keepdims=True)\n        # Normalize rows\n        H = H / H.sum(axis=1, keepdims=True)\n    return H",
+  "example": {
+    "input": "H_res = np.array([[1.0, 2.0], [3.0, 4.0]])\n result = sinkhorn_knopp(H_res, iterations=20)\n print(np.round(result, 4))",
+    "output": "[[0.5 0.5]\n [0.5 0.5]]",
+    "reasoning": "The function should initially make sure the elements are positive. Then in a loop till iterations, normalize the elements along the row using the row sum and normalize the elements along the column using the column sum."
+  },
+  "test_cases": [
+    {
+      "test": "H_res = np.array([[1.0, 2.0], [3.0, 4.0]]); print(np.round(sinkhorn_knopp(H_res, iterations=20), 4))",
+      "expected_output": "[[0.5, 0.5], [0.5, 0.5]]"
+    },
+    {
+      "test": "H_res = np.eye(4); print(np.round(sinkhorn_knopp(H_res, iterations=20), 4))",
+      "expected_output": "[[0.4754, 0.1749, 0.1749, 0.1749], [0.1749, 0.4754, 0.1749, 0.1749], [0.1749, 0.1749, 0.4754, 0.1749], [0.1749, 0.1749, 0.1749, 0.4754]]"
+    },
+    {
+      "test": "H_res = np.zeros(shape=(6,6)); print(np.round(sinkhorn_knopp(H_res, iterations=50), 4))",
+      "expected_output": "[[0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.1667], [0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.1667], [0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.1667], [0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.1667], [0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.1667], [0.1667, 0.1667, 0.1667, 0.1667, 0.1667, 0.1667]]"
+    },
+    {
+      "test": "np.random.seed(42); H_res = np.random.randn(5, 5); print(np.round(sinkhorn_knopp(H_res, iterations=10), 4))",
+      "expected_output": "[[0.104, 0.0741, 0.1077, 0.5699, 0.1444], [0.0513, 0.4229, 0.1244, 0.0796, 0.3218], [0.1844, 0.2474, 0.3326, 0.085, 0.1507], [0.1511, 0.1294, 0.3233, 0.21, 0.1863], [0.5093, 0.1262, 0.1121, 0.0556, 0.1969]]"
+    },
+    {
+      "test": "H_res = np.array([[0.5]]); print(np.round(sinkhorn_knopp(H_res, iterations=15), 4))",
+      "expected_output": "[[1.]]"
+    }
+  ]
+}
