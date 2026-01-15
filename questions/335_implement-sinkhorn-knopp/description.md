@@ -1,0 +1,3 @@
+In deep neural networks with hyper-connections, residual mixing matrices must be carefully constrained to avoid signal explosion or vanishing. One effective way to enforce stability is to normalize a matrix into a doubly stochastic matrix, where each row and each column sums to one. Such matrices lie in the **Birkhoff polytope** and preserve signal magnitude across layers.
+
+Your task is to implement the **Sinkhorn–Knopp** algorithm, an iterative procedure that alternates between row-wise and column-wise normalization to transform a given matrix into a doubly stochastic matrix. The input is a NxN unconstrained matrix and an optional variable iterations. Return the doubly stochastic matrix, each element rounded off to **4-decimal** places. 

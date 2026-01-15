@@ -1,0 +1,5 @@
+{
+  "input": "H_res = np.array([[1.0, 2.0], [3.0, 4.0]])\n result = sinkhorn_knopp(H_res, iterations=20)\n print(np.round(result, 4))",
+  "output": "[[0.5 0.5]\n [0.5 0.5]]",
+  "reasoning": "The function should initially make sure the elements are positive. Then in a loop till iterations, normalize the elements along the row using the row sum and normalize the elements along the column using the column sum."
+}

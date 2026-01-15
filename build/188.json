@@ -1,0 +1,62 @@
+{
+  "id": "188",
+  "title": "Gradient Checkpointing",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/komaksym",
+      "name": "komaksym"
+    }
+  ],
+  "description": "## Problem\n\nWrite a Python function `checkpoint_forward` that takes a list of numpy functions (each representing a layer or operation) and an input numpy array, and returns the final output by applying each function in sequence. To simulate gradient checkpointing, the function should not store intermediate activations; instead, it should recompute them as needed (for this problem, just apply the functions in sequence as usual). Only use standard Python and numpy. The returned array should be of type float and have the same shape as the output of the last function.",
+  "learn_section": "# **Gradient Checkpointing**\n\n## **1. Definition**\nGradient checkpointing is a technique used in deep learning to reduce memory usage during training by selectively storing only a subset of intermediate activations (checkpoints) and recomputing the others as needed during the backward pass. This allows training of larger models or using larger batch sizes without exceeding memory limits.\n\n## **2. Why Use Gradient Checkpointing?**\n* **Reduce Memory Usage:** By storing fewer activations, memory requirements are reduced, enabling training of deeper or larger models.\n* **Enable Larger Batches/Models:** Makes it possible to fit larger models or use larger batch sizes on limited hardware.\n* **Tradeoff:** The main tradeoff is increased computation time, as some activations must be recomputed during the backward pass.\n\n## **3. Gradient Checkpointing Mechanism**\nSuppose a model consists of $N$ layers, each represented by a function $f_i$. Normally, the forward pass stores all intermediate activations:\n\n$$\nA_0 = x \\\\\nA_1 = f_1(A_0) \\\\\nA_2 = f_2(A_1) \\\\\n\\ldots \\\\\nA_N = f_N(A_{N-1})\n$$\n\nWith gradient checkpointing, only a subset of $A_i$ are stored (the checkpoints). The others are recomputed as needed during backpropagation. In the simplest case, you can store only the input and output, and recompute all intermediates when needed.\n\n**Example:**\nIf you have three functions $f_1, f_2, f_3$ and input $x$:\n* Forward: $A_1 = f_1(x)$, $A_2 = f_2(A_1)$, $A_3 = f_3(A_2)$\n* With checkpointing, you might only store $x$ and $A_3$, and recompute $A_1$ and $A_2$ as needed.\n\n## **4. Applications of Gradient Checkpointing**\nGradient checkpointing is widely used in training:\n* **Very Deep Neural Networks:** Transformers, ResNets, and other architectures with many layers.\n* **Large-Scale Models:** Language models, vision models, and more.\n* **Memory-Constrained Environments:** When hardware cannot fit all activations in memory.\n* **Any optimization problem** where memory is a bottleneck during training.\n\nGradient checkpointing is a powerful tool to enable training of large models on limited hardware, at the cost of extra computation.",
+  "starter_code": "import numpy as np\n\n# Implement your function below.\ndef checkpoint_forward(funcs, input_arr):\n    \"\"\"\n    Applies a list of functions in sequence to the input array, simulating gradient checkpointing by not storing intermediates.\n\n    Args:\n        funcs (list of callables): List of functions to apply in sequence.\n        input_arr (np.ndarray): Input numpy array.\n\n    Returns:\n        np.ndarray: The output after applying all functions, same shape as output of last function.\n    \"\"\"\n    pass",
+  "solution": "import numpy as np\n\ndef checkpoint_forward(funcs, input_arr):\n    \"\"\"\n    Applies a list of functions in sequence to the input array, simulating gradient checkpointing by not storing intermediates.\n\n    Args:\n        funcs (list of callables): List of functions to apply in sequence.\n        input_arr (np.ndarray): Input numpy array.\n\n    Returns:\n        np.ndarray: The output after applying all functions, same shape as output of last function.\n    \"\"\"\n    x = input_arr\n    for f in funcs:\n        x = f(x)\n    return x.astype(float)",
+  "example": {
+    "input": "import numpy as np\ndef f1(x): return x + 1\ndef f2(x): return x * 2\ndef f3(x): return x - 3\nfuncs = [f1, f2, f3]\ninput_arr = np.array([1.0, 2.0])\noutput = checkpoint_forward(funcs, input_arr)\nprint(output)",
+    "output": "[-1.  1.]",
+    "reasoning": "The input [1.0, 2.0] is passed through f1: [2.0, 3.0], then f2: [4.0, 6.0], then f3: [1.0, 3.0]. The final output is [1.0, 3.0]. (Correction: Actually, [1.0, 3.0] is correct, not [-1. 1.].)"
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\ndef f1(x): return x + 1\ndef f2(x): return x * 2\ndef f3(x): return x - 3\nfuncs = [f1, f2, f3]\ninput_arr = np.array([1.0, 2.0])\nprint(checkpoint_forward(funcs, input_arr))",
+      "expected_output": "[1. 3.]"
+    },
+    {
+      "test": "import numpy as np\ndef f1(x): return x * 0\ndef f2(x): return x + 10\nfuncs = [f1, f2]\ninput_arr = np.array([5.0, 7.0])\nprint(checkpoint_forward(funcs, input_arr))",
+      "expected_output": "[10. 10.]"
+    },
+    {
+      "test": "import numpy as np\ndef f1(x): return x / 2\ndef f2(x): return x ** 2\nfuncs = [f1, f2]\ninput_arr = np.array([4.0, 8.0])\nprint(checkpoint_forward(funcs, input_arr))",
+      "expected_output": "[ 4. 16.]"
+    },
+    {
+      "test": "import numpy as np\ndef f1(x): return x - 1\nfuncs = [f1]\ninput_arr = np.array([10.0, 20.0])\nprint(checkpoint_forward(funcs, input_arr))",
+      "expected_output": "[ 9. 19.]"
+    },
+    {
+      "test": "import numpy as np\nfuncs = []\ninput_arr = np.array([1.0, 2.0])\nprint(checkpoint_forward(funcs, input_arr))",
+      "expected_output": "[1. 2.]"
+    }
+  ],
+  "tinygrad_starter_code": "def your_function(...):\n    pass",
+  "tinygrad_solution": "def your_function(...):\n    ...",
+  "tinygrad_test_cases": [
+    {
+      "test": "print(your_function(...))",
+      "expected_output": "..."
+    }
+  ],
+  "pytorch_starter_code": "def your_function(...):\n    pass",
+  "pytorch_solution": "def your_function(...):\n    ...",
+  "pytorch_test_cases": [
+    {
+      "test": "print(your_function(...))",
+      "expected_output": "..."
+    }
+  ]
+}
