@@ -1,0 +1,8 @@
+{
+  "input": {
+    "img": [[0, 128], [192, 255]],
+    "gamma": 2.0
+  },
+  "output": [[0, 64], [144, 255]],
+  "reasoning": "Each pixel is transformed using the gamma correction formula."
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "test": "apply_gamma_correction([[0,128],[192,255]],2.0)",
+    "expected_output": "[[0,64],[144,255]]"
+  },
+  {
+    "test": "apply_gamma_correction([],2.0)",
+    "expected_output": "-1"
+  },
+  {
+    "test": "apply_gamma_correction([[300]],1.5)",
+    "expected_output": "-1"
+  }
+]
