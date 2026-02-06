@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import numpy as np\npolicy_chosen = np.array([-0.1])\npolicy_rejected = np.array([-10.0])\nreference_chosen = np.array([-5.0])\nreference_rejected = np.array([-5.0])\nresult = compute_dpo_loss(policy_chosen, policy_rejected, reference_chosen, reference_rejected, beta=0.1)\nprint(round(result, 4))",
+    "expected_output": "0.316"
+  },
+  {
+    "test": "import numpy as np\npolicy_chosen = np.array([-1.0, -0.5])\npolicy_rejected = np.array([-2.0, -1.5])\nreference_chosen = np.array([-1.0, -0.5])\nreference_rejected = np.array([-2.0, -1.5])\nresult = compute_dpo_loss(policy_chosen, policy_rejected, reference_chosen, reference_rejected, beta=0.1)\nprint(round(result, 4))",
+    "expected_output": "0.6931"
+  },
+  {
+    "test": "import numpy as np\npolicy_chosen = np.array([-1.0, -0.5])\npolicy_rejected = np.array([-2.0, -1.5])\nreference_chosen = np.array([-1.2, -0.6])\nreference_rejected = np.array([-1.8, -1.4])\nresult = compute_dpo_loss(policy_chosen, policy_rejected, reference_chosen, reference_rejected, beta=0.1)\nprint(round(result, 4))",
+    "expected_output": "0.6783"
+  },
+  {
+    "test": "import numpy as np\npolicy_chosen = np.array([-0.5, -1.0, -0.8])\npolicy_rejected = np.array([-3.0, -2.5, -3.2])\nreference_chosen = np.array([-1.0, -1.5, -1.2])\nreference_rejected = np.array([-2.0, -2.0, -2.5])\nresult = compute_dpo_loss(policy_chosen, policy_rejected, reference_chosen, reference_rejected, beta=0.2)\nprint(round(result, 4))",
+    "expected_output": "0.5806"
+  }
+]

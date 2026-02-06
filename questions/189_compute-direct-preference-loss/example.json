@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\n\npolicy_chosen_logps = np.array([-1.0, -0.5])\npolicy_rejected_logps = np.array([-2.0, -1.5])\nreference_chosen_logps = np.array([-1.2, -0.6])\nreference_rejected_logps = np.array([-1.8, -1.4])\nbeta = 0.1\n\nloss = compute_dpo_loss(policy_chosen_logps, policy_rejected_logps, reference_chosen_logps, reference_rejected_logps, beta)\nprint(round(loss, 4))",
+  "output": "0.6783",
+  "reasoning": "The DPO loss computes the preference loss by comparing policy and reference log-probability ratios. With beta=0.1, the logits are 0.1 * ([1.0, 1.0] - [0.6, 0.8]) = [0.04, 0.02]. The loss for each example is log(1 + exp(-logit)), giving approximately [0.67334, 0.68319], with a rounded average of 0.6783."
+}
