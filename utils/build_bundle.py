@@ -37,7 +37,7 @@ def bundle_one(folder: pathlib.Path):
                 meta[f"{lang}_test_cases"] = load_json(sub / "tests.json")
 
     out_path = OUTDIR / f"{meta['id']}.json"
-    out_path.write_text(json.dumps(meta, indent=2, ensure_ascii=False))
+    out_path.write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"✓ bundled {out_path.name}")
 
 def main():
