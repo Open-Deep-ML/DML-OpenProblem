@@ -1,0 +1,3 @@
+Implement a depthwise separable convolution operation, a key building block in efficient neural network architectures like MobileNet, Xception, and EfficientNet. This operation decomposes a standard convolution into two steps: a depthwise convolution that applies a single filter per input channel, followed by a pointwise (1×1) convolution that combines the outputs. This decomposition significantly reduces computational cost and number of parameters while maintaining similar performance.
+
+Given an input tensor, depthwise filters, and pointwise filters, compute the depthwise separable convolution output. Assume stride=1 and no padding for simplicity.
