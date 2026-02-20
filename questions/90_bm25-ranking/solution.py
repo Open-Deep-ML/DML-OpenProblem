@@ -1,6 +1,7 @@
 import numpy as np
 from collections import Counter
 
+
 def calculate_bm25_scores(corpus, query, k1=1.5, b=0.75):
     if not corpus or not query:
         raise ValueError("Corpus and query cannot be empty")

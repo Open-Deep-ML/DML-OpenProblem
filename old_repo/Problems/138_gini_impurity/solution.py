@@ -1,6 +1,7 @@
 import numpy as np
 from typing import Tuple
 
+
 def find_best_split(X: np.ndarray, y: np.ndarray) -> Tuple[int, float]:
     """
     Find the best feature and threshold to split the dataset based on Gini impurity.
@@ -14,12 +15,12 @@ def find_best_split(X: np.ndarray, y: np.ndarray) -> Tuple[int, float]:
         if len(y_subset) == 0:
             return 0.0
         p = np.mean(y_subset == 1)
-        return 1.0 - (p ** 2 + (1 - p) ** 2)
+        return 1.0 - (p**2 + (1 - p) ** 2)
 
     n_samples, n_features = X.shape
     best_feature = -1
-    best_threshold = float('inf')
-    best_gini = float('inf')
+    best_threshold = float("inf")
+    best_gini = float("inf")
 
     for feature_index in range(n_features):
         thresholds = np.unique(X[:, feature_index])
@@ -38,6 +39,7 @@ def find_best_split(X: np.ndarray, y: np.ndarray) -> Tuple[int, float]:
                 best_threshold = threshold
 
     return best_feature, best_threshold
+
 
 def test():
     # Test 1: Balanced binary split
@@ -83,6 +85,7 @@ def test():
     assert t6 in [1, 2]
 
     print("All test cases passed.")
+
 
 if __name__ == "__main__":
     test()

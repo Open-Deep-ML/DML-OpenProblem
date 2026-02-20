@@ -1,5 +1,6 @@
 import torch
 
+
 def transpose_matrix(a) -> torch.Tensor:
     """
     Transpose a 2D matrix `a` using PyTorch.

@@ -1,5 +1,3 @@
-import numpy as np
-
 def calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]:
     n_observations = len(vectors)
     n_features = len(vectors[0])

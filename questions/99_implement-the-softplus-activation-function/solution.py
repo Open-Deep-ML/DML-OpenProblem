@@ -1,5 +1,6 @@
 import math
 
+
 def softplus(x: float) -> float:
     """
     Compute the softplus activation function.
@@ -17,4 +18,4 @@ def softplus(x: float) -> float:
     if x < -100:
         return 0.0
 
-    return round (math.log(1.0 + math.exp(x)),4)
+    return round(math.log(1.0 + math.exp(x)), 4)

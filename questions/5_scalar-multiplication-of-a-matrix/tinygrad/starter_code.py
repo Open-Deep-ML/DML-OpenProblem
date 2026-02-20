@@ -1,5 +1,6 @@
 from tinygrad.tensor import Tensor
 
+
 def scalar_multiply_tg(matrix, scalar) -> Tensor:
     """
     Multiply each element of a 2D matrix by a scalar using tinygrad.
@@ -7,6 +8,6 @@ def scalar_multiply_tg(matrix, scalar) -> Tensor:
     Returns a 2D Tensor of the same shape.
     """
     # Convert input to Tensor
-    m_t = Tensor(matrix)
+    Tensor(matrix)
     # Your implementation here
     pass

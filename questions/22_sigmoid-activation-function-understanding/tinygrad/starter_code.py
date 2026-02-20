@@ -1,5 +1,3 @@
-from tinygrad.tensor import Tensor
-
 def sigmoid_tg(z: float) -> float:
     """
     Compute the sigmoid activation function using tinygrad.

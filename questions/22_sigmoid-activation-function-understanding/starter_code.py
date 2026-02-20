@@ -1,5 +1,3 @@
-import math
-
 def sigmoid(z: float) -> float:
-	#Your code here
-	return result
+    # Your code here
+    return result

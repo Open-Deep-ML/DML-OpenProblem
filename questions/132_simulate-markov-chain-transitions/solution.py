@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def simulate_markov_chain(transition_matrix, initial_state, num_steps):
     """
     Simulates a Markov Chain given a transition matrix, initial state, and number of steps.

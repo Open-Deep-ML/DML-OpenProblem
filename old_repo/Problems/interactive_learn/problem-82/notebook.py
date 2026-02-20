@@ -11,7 +11,9 @@
 import marimo
 
 __generated_with = "0.10.11"
-app = marimo.App(css_file="/Users/adityakhalkar/Library/Application Support/mtheme/themes/deepml.css")
+app = marimo.App(
+    css_file="/Users/adityakhalkar/Library/Application Support/mtheme/themes/deepml.css"
+)
 
 
 @app.cell(hide_code=True)
@@ -130,7 +132,6 @@ def _(Image, io, mo, np):
         img.thumbnail(max_size, Image.Resampling.LANCZOS)
         return img
 
-
     @mo.cache
     def process_image(image_data=None, use_sample=False):
         # TODO: Image path needs to be fixed for sample image; rerun when new version is rolled out
@@ -152,7 +153,6 @@ def _(Image, io, mo, np):
 
         return img_array, img_display
 
-
     def calculate_contrast(img_array, method):
         if img_array is None:
             return 0
@@ -165,6 +165,7 @@ def _(Image, io, mo, np):
         else:  # Michelson Contrast
             Imax, Imin = np.max(img_array), np.min(img_array)
             return (Imax - Imin) / (Imax + Imin + 1e-6)
+
     return calculate_contrast, compress_image, process_image
 
 
@@ -260,7 +261,6 @@ def _(calculate_contrast, img_array, io, mo, np, plt):
         ]
     )
 
-
     michelson_tab = mo.vstack(
         [
             mo.md(rf"""
@@ -323,7 +323,7 @@ def _(display):
 
 @app.cell
 def _(mo):
-    conclusion = mo.md(f"""
+    conclusion = mo.md("""
         **Congratulations!** 
         You've explored the Grayscale Image Contrast Calculator interactively. 
 
@@ -342,8 +342,9 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    mo.accordion({
-        "🌟 Applications and Relevance": mo.md(r"""
+    mo.accordion(
+        {
+            "🌟 Applications and Relevance": mo.md(r"""
     ### Relevance in Signal and Image Processing
 
     Contrast calculations play a vital role in enhancing image quality for better visualization and analysis. They are used in:
@@ -354,7 +355,8 @@ def _(mo):
 
     Contrast is a cornerstone of image and signal processing, enabling improved functionality across diverse fields from healthcare to autonomous systems.
             """),
-    })
+        }
+    )
     return
 
 
@@ -374,6 +376,7 @@ def _(callout, img_data, mo, source_selector):
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -383,6 +386,7 @@ def _():
     from PIL import Image
     import matplotlib.pyplot as plt
     import io
+
     return Image, io, np, plt
 
 

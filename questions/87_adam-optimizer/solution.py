@@ -1,6 +1,9 @@
 import numpy as np
 
-def adam_optimizer(parameter, grad, m, v, t, learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8):
+
+def adam_optimizer(
+    parameter, grad, m, v, t, learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8
+):
     """
     Update parameters using the Adam optimizer.
     Adjusts the learning rate based on the moving averages of the gradient and squared gradient.
@@ -31,4 +34,4 @@ def adam_optimizer(parameter, grad, m, v, t, learning_rate=0.001, beta1=0.9, bet
     update = learning_rate * m_hat / (np.sqrt(v_hat) + epsilon)
     parameter = parameter - update
 
-    return np.round(parameter,5), np.round(m,5), np.round(v,5)
+    return np.round(parameter, 5), np.round(m, 5), np.round(v, 5)

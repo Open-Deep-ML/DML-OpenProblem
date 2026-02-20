@@ -1,5 +1,6 @@
 import math
 
+
 def selu(x: float) -> float:
     """
     Implements the SELU (Scaled Exponential Linear Unit) activation function.

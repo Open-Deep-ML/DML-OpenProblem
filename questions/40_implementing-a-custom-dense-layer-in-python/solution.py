@@ -1,4 +1,3 @@
-
 class Dense(Layer):
     def __init__(self, n_units, input_shape=None):
         self.layer_input = None
@@ -10,9 +9,9 @@ class Dense(Layer):
 
     def initialize(self, optimizer):
         limit = 1 / math.sqrt(self.input_shape[0])
-        self.W  = np.random.uniform(-limit, limit, (self.input_shape[0], self.n_units))
+        self.W = np.random.uniform(-limit, limit, (self.input_shape[0], self.n_units))
         self.w0 = np.zeros((1, self.n_units))
-        self.W_opt  = copy.copy(optimizer)
+        self.W_opt = copy.copy(optimizer)
         self.w0_opt = copy.copy(optimizer)
 
     def parameters(self):
@@ -33,5 +32,4 @@ class Dense(Layer):
         return accum_grad
 
     def output_shape(self):
-        return (self.n_units, )
-    
+        return (self.n_units,)

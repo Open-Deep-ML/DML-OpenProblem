@@ -1,5 +1,6 @@
 import math
 
+
 def normal_pdf(x, mean, std_dev):
     """
     Calculate the probability density function (PDF) of the normal distribution.
@@ -9,5 +10,5 @@ def normal_pdf(x, mean, std_dev):
     :return: The PDF value for the given x.
     """
     coefficient = 1 / (math.sqrt(2 * math.pi) * std_dev)
-    exponent = math.exp(-((x - mean) ** 2) / (2 * std_dev ** 2))
+    exponent = math.exp(-((x - mean) ** 2) / (2 * std_dev**2))
     return round(coefficient * exponent, 5)

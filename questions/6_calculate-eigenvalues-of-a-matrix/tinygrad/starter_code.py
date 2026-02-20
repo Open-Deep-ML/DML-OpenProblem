@@ -1,5 +1,6 @@
 from tinygrad.tensor import Tensor
 
+
 def calculate_eigenvalues_tg(matrix) -> Tensor:
     """
     Compute eigenvalues of a 2×2 matrix using tinygrad.

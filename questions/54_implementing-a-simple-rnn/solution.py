@@ -1,5 +1,5 @@
-
 import numpy as np
+
 
 def rnn_forward(input_sequence, initial_hidden_state, Wx, Wh, b):
     h = np.array(initial_hidden_state)

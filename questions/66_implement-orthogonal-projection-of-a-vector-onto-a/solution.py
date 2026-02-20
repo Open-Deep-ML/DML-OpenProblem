@@ -1,8 +1,10 @@
 def dot(v1, v2):
     return sum([ax1 * ax2 for ax1, ax2 in zip(v1, v2)])
 
+
 def scalar_mult(scalar, v):
     return [scalar * ax for ax in v]
+
 
 def orthogonal_projection(v, L):
     L_mag_sq = dot(L, L)

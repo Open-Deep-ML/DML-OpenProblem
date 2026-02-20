@@ -1,5 +1,6 @@
 import torch
 
+
 def solve_jacobi(A, b, n) -> torch.Tensor:
     """
     Solve Ax = b using the Jacobi iterative method for n iterations.

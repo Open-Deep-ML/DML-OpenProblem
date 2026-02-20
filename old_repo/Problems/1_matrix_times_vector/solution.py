@@ -28,11 +28,12 @@ def test_matrix_dot_vector() -> None:
     a: list[list[int | float]] = [[1, 2], [2, 4]]
     b: list[int | float] = [1, 2]
     assert matrix_dot_vector(a, b) == [5, 10]
-    
-    # valid product with rectangular matrix (non-square) -- > if we changed  "for j in range(len(a[i]))" to "for j in range(len(a))" previous tests will pass 
+
+    # valid product with rectangular matrix (non-square) -- > if we changed  "for j in range(len(a[i]))" to "for j in range(len(a))" previous tests will pass
     a: list[list[int | float]] = [[1, 2, 3], [2, 4, 6]]
     b: list[int | float] = [1, 2, 3]
     assert matrix_dot_vector(a, b) == [14, 28]
+
 
 if __name__ == "__main__":
     test_matrix_dot_vector()

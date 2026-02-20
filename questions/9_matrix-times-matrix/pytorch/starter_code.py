@@ -1,5 +1,6 @@
 import torch
 
+
 def matrixmul(a, b) -> torch.Tensor:
     """
     Multiply two matrices using PyTorch.

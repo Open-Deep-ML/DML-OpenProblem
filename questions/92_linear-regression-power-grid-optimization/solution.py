@@ -2,6 +2,7 @@ import math
 
 PI = 3.14159
 
+
 def power_grid_forecast(consumption_data):
     # consumption_data: list of 10 daily consumption values
     # days: 1 through 10

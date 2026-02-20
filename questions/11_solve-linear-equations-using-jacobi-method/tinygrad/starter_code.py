@@ -1,5 +1,6 @@
 from tinygrad.tensor import Tensor
 
+
 def solve_jacobi_tg(A, b, n) -> Tensor:
     """
     Solve Ax = b using the Jacobi iterative method for n iterations in tinygrad.

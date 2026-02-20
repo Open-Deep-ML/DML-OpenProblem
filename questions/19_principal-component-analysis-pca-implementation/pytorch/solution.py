@@ -1,5 +1,6 @@
 import torch
 
+
 def pca(data, k) -> torch.Tensor:
     """
     Perform PCA on `data`, returning the top `k` principal components as a tensor.
@@ -9,7 +10,7 @@ def pca(data, k) -> torch.Tensor:
     data_t = torch.as_tensor(data, dtype=torch.float)
     # Standardize
     mean = data_t.mean(dim=0, keepdim=True)
-    std  = data_t.std(dim=0, unbiased=False, keepdim=True)
+    std = data_t.std(dim=0, unbiased=False, keepdim=True)
     data_std = (data_t - mean) / std
     # Covariance
     cov = torch.cov(data_std.T)

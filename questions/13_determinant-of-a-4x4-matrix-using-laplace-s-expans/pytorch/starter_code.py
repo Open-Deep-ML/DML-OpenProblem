@@ -1,5 +1,6 @@
 import torch
 
+
 def determinant_4x4(matrix) -> float:
     """
     Compute the determinant of a 4×4 matrix using PyTorch.
@@ -7,6 +8,6 @@ def determinant_4x4(matrix) -> float:
     Returns a Python float.
     """
     # Convert to tensor
-    m = torch.as_tensor(matrix, dtype=torch.float)
+    torch.as_tensor(matrix, dtype=torch.float)
     # Your implementation here
     pass

@@ -1,6 +1,7 @@
 import numpy as np
 from tinygrad.tensor import Tensor
 
+
 def pca_tg(data, k) -> Tensor:
     """
     Perform PCA on `data`, returning the top `k` principal components as a tinygrad Tensor.

@@ -1,7 +1,10 @@
 from typing import Tuple
 
-def early_stopping(val_losses: list[float], patience: int, min_delta: float) -> Tuple[int, int]:
-    best_loss = float('inf')
+
+def early_stopping(
+    val_losses: list[float], patience: int, min_delta: float
+) -> Tuple[int, int]:
+    best_loss = float("inf")
     best_epoch = 0
     epochs_without_improvement = 0
 

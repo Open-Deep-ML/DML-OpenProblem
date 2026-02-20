@@ -13,18 +13,20 @@
 import marimo
 
 __generated_with = "0.10.12"
-app = marimo.App(css_file="/Users/adityakhalkar/Library/Application Support/mtheme/themes/deepml.css")
+app = marimo.App(
+    css_file="/Users/adityakhalkar/Library/Application Support/mtheme/themes/deepml.css"
+)
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(
-        f"""# Understanding K-means Clustering
+        """# Understanding K-means Clustering
 
         ## Overview
         K-means clustering is an [unsupervised learning algorithm](https://en.wikipedia.org/wiki/Unsupervised_learning) that partitions data into k distinct clusters. Each cluster is characterized by its centroid - the mean position of all points in that cluster.
         """
-     )
+    )
     return
 
 
@@ -36,8 +38,9 @@ def _(intro):
 
 @app.cell(hide_code=True)
 def _(mo):
-    intro = mo.accordion({
-        "🔄 Algorithm Steps": mo.md("""
+    intro = mo.accordion(
+        {
+            "🔄 Algorithm Steps": mo.md("""
             1. **Initialization**: Randomly place k centroids in the feature space
             2. **Assignment**: Assign each point to the nearest centroid using Euclidean distance (or a suitable distance metric like Manhattan (City Block distance), Minkowski distance, etc.):
 
@@ -48,7 +51,7 @@ def _(mo):
             3. **Update**: Recompute centroids as the mean of assigned points
             4. **Repeat**: Steps 2-3 until convergence
             """),
-        "📐 Mathematical Formulation": mo.md("""
+            "📐 Mathematical Formulation": mo.md("""
             The objective function (inertia) that K-means minimizes:
 
             \\[
@@ -58,15 +61,16 @@ def _(mo):
             where:
             - $x_i$ is the i-th data point
             - $\\mu_j$ is the centroid of cluster $j$
-            """)
-    })
+            """),
+        }
+    )
 
     return (intro,)
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(f"""
+    mo.md("""
     ## Implementation Details
 
     This implementation uses:
@@ -86,7 +90,8 @@ def _(implementation):
 
 @app.cell(hide_code=True)
 def _(mo):
-    implementation = mo.accordion({
+    implementation = mo.accordion(
+        {
             "⚙️ Key Parameters": mo.md("""
             - **n_clusters**: Number of clusters (k)
             - **init**: Initialization method ('k-means++' or 'random')
@@ -94,16 +99,15 @@ def _(mo):
             - **tol**: Tolerance for declaring convergence (default=1e-4)
             - **n_init**: Number of initializations to try (default=10)
             """)
-        })
+        }
+    )
     return (implementation,)
 
 
 @app.cell
 def _(mo):
     method = mo.ui.dropdown(
-        options=["Random", "Manual"],
-        value="Random",
-        label="Generation Method"
+        options=["Random", "Manual"], value="Random", label="Generation Method"
     )
     return (method,)
 
@@ -161,7 +165,6 @@ def _(mo):
 def _(np, random, random_button):
     random_button
 
-
     def _generate_data():
         n_clusters = random.randint(2, 10)
         np.random.randn()
@@ -173,7 +176,6 @@ def _(np, random, random_button):
                 + np.random.uniform(-2, 2)
             )
         return np.vstack(points)
-
 
     generated_points = _generate_data()
     return (generated_points,)
@@ -479,6 +481,7 @@ def _(callout):
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -491,6 +494,7 @@ def _():
     from sklearn.cluster import KMeans
     import plotly.express as px
     from drawdata import ScatterWidget
+
     return KMeans, ScatterWidget, np, pd, px, random
 
 

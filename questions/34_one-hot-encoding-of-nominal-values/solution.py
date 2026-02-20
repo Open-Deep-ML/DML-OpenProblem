@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def to_categorical(x, n_col=None):
     # One-hot encoding of nominal values
     # If n_col is not provided, determine the number of columns from the input array
@@ -10,4 +11,3 @@ def to_categorical(x, n_col=None):
     # Set the appropriate elements to 1
     one_hot[np.arange(x.shape[0]), x] = 1
     return one_hot
-    

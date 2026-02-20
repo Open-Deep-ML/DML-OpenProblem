@@ -1,5 +1,3 @@
-from tinygrad.tensor import Tensor
-
 def softmax_tg(scores: list[float]) -> list[float]:
     """
     Compute the softmax activation function using tinygrad.

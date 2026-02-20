@@ -95,14 +95,18 @@ def _(data_controls):
 def _(mo):
     # Create number inputs for 12 individuals
     n_samples = 12
-    actual_inputs = mo.ui.array([
-        mo.ui.number(value=0, start=0, stop=1, label=f"Actual {i+1}")
-        for i in range(n_samples)
-    ])
-    predicted_inputs = mo.ui.array([
-        mo.ui.number(value=0, start=0, stop=1, label=f"Predicted {i+1}")
-        for i in range(n_samples)
-    ])
+    actual_inputs = mo.ui.array(
+        [
+            mo.ui.number(value=0, start=0, stop=1, label=f"Actual {i + 1}")
+            for i in range(n_samples)
+        ]
+    )
+    predicted_inputs = mo.ui.array(
+        [
+            mo.ui.number(value=0, start=0, stop=1, label=f"Predicted {i + 1}")
+            for i in range(n_samples)
+        ]
+    )
 
     # Create data table using markdown with LaTeX
     data_table = mo.md(r"""
@@ -120,20 +124,23 @@ def _(mo):
     """)
 
     # Stack inputs horizontally and data table below
-    data_controls = mo.vstack([
-        mo.hstack([
-            mo.vstack([
-                mo.md("**Actual Classifications:**"),
-                actual_inputs
-            ]),
-            mo.vstack([
-                mo.md("**Predicted Classifications:**"),
-                predicted_inputs
-            ])
-        ], justify="start", align="start"),
-        mo.md("### Data Table:"),
-        data_table
-    ], gap=2)  # Added gap for better spacing
+    data_controls = mo.vstack(
+        [
+            mo.hstack(
+                [
+                    mo.vstack([mo.md("**Actual Classifications:**"), actual_inputs]),
+                    mo.vstack(
+                        [mo.md("**Predicted Classifications:**"), predicted_inputs]
+                    ),
+                ],
+                justify="start",
+                align="start",
+            ),
+            mo.md("### Data Table:"),
+            data_table,
+        ],
+        gap=2,
+    )  # Added gap for better spacing
     return (
         actual_inputs,
         data_controls,
@@ -197,49 +204,58 @@ def _(
         accuracy = (tp + tn) / total if total > 0 else 0
         precision = tp / (tp + fp) if (tp + fp) > 0 else 0
         recall = tp / (tp + fn) if (tp + fn) > 0 else 0
-        f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+        f1 = (
+            2 * (precision * recall) / (precision + recall)
+            if (precision + recall) > 0
+            else 0
+        )
 
         # results table using markdown with LaTeX
-        results_table = mo.md(r"""
+        results_table = mo.md(
+            r"""
         $$
         \begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
         \hline
         \text{Individual} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
         \hline
-        \text{Actual} & """ + " & ".join(str(v) for v in actual_values) + r""" \\
+        \text{Actual} & """
+            + " & ".join(str(v) for v in actual_values)
+            + r""" \\
         \hline
-        \text{Predicted} & """ + " & ".join(str(v) for v in predicted_values) + r""" \\
+        \text{Predicted} & """
+            + " & ".join(str(v) for v in predicted_values)
+            + r""" \\
         \hline
-        \text{Result} & """ + " & ".join(results_array) + r""" \\
+        \text{Result} & """
+            + " & ".join(results_array)
+            + r""" \\
         \hline
         \end{array}
         $$
-        """)
+        """
+        )
 
         # Create confusion matrix visualization
         fig = px.imshow(
             conf_matrix,
             labels=dict(x="Predicted", y="Actual"),
-            x=['Positive', 'Negative'],
-            y=['Positive', 'Negative'],
+            x=["Positive", "Negative"],
+            y=["Positive", "Negative"],
             aspect="auto",
             title="Confusion Matrix Heatmap",
             color_continuous_scale="RdBu",
             width=500,
             height=500,
-            text_auto=True
+            text_auto=True,
         )
 
         fig.update_traces(
             texttemplate="%{z}",
             textfont={"size": 20},
             hoverongaps=False,
-            hovertemplate="<br>".join([
-                "Actual: %{y}",
-                "Predicted: %{x}",
-                "Count: %{z}",
-                "<extra></extra>"
-            ])
+            hovertemplate="<br>".join(
+                ["Actual: %{y}", "Predicted: %{x}", "Count: %{z}", "<extra></extra>"]
+            ),
         )
 
         # matrix interpretation
@@ -265,18 +281,16 @@ def _(
         - F1 Score: {f1:.2f}
         """)
 
-        results = mo.vstack([
-            mo.md("### Results"),
-            results_table,
-            # confusion matrix and interpretation side-by-side
-            mo.hstack([
-                fig,
-                matrix_interpretation
-            ], justify="start", align="start"),
-            explanation,
-            # final callout
-            mo.callout(
-                mo.md("""
+        results = mo.vstack(
+            [
+                mo.md("### Results"),
+                results_table,
+                # confusion matrix and interpretation side-by-side
+                mo.hstack([fig, matrix_interpretation], justify="start", align="start"),
+                explanation,
+                # final callout
+                mo.callout(
+                    mo.md("""
                 🎉 Congratulations! You've successfully:
                 
                 - Understood how confusion matrices work in binary classification
@@ -287,9 +301,10 @@ def _(
                 
                 - Gained hands-on experience with interactive confusion matrix analysis
                 """),
-                kind="success"
-                )
-        ])
+                    kind="success",
+                ),
+            ]
+        )
     results
     return (
         accuracy,
@@ -317,8 +332,9 @@ def _(
 
 @app.cell(hide_code=True)
 def _(mo):
-    explanation = mo.accordion({
-        "🎯 Understanding the Results": mo.md("""
+    explanation = mo.accordion(
+        {
+            "🎯 Understanding the Results": mo.md("""
         **Interpreting the Confusion Matrix:**
 
         1. **Top-left (TP)**: Correctly identified positive cases
@@ -326,27 +342,27 @@ def _(mo):
         3. **Bottom-left (FP)**: False alarms
         4. **Bottom-right (TN)**: Correctly identified negative cases
         """),
-
-        "📊 Derived Metrics": mo.md("""
+            "📊 Derived Metrics": mo.md("""
         - **Accuracy**: Overall correctness (TP + TN) / Total
         - **Precision**: Positive predictive value TP / (TP + FP)
         - **Recall**: True positive rate TP / (TP + FN)
         - **F1 Score**: Harmonic mean of precision and recall
         """),
-
-        "💡 Best Practices": mo.md("""
+            "💡 Best Practices": mo.md("""
         1. Consider class imbalance
         2. Look at all metrics, not just accuracy
         3. Choose metrics based on your problem context
         4. Use confusion matrix for model debugging
-        """)
-    })
+        """),
+        }
+    )
     return (explanation,)
 
 
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -354,6 +370,7 @@ def _():
 def _():
     import numpy as np
     import plotly.express as px
+
     return np, px
 
 

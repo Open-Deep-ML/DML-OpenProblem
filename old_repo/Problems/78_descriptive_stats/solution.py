@@ -44,7 +44,7 @@ def descriptive_statistics(data):
         "25th_percentile": percentiles[0],
         "50th_percentile": percentiles[1],
         "75th_percentile": percentiles[2],
-        "interquartile_range": iqr
+        "interquartile_range": iqr,
     }
 
     return stats_dict
@@ -62,11 +62,13 @@ def test_descriptive_statistics():
         "25th_percentile": 20.0,
         "50th_percentile": 30.0,
         "75th_percentile": 40.0,
-        "interquartile_range": 20.0
+        "interquartile_range": 20.0,
     }
     output_1 = descriptive_statistics(data_1)
-    assert all(np.isclose(output_1[key], value, atol=1e-5) for key, value in expected_output_1.items()), \
-        f"Test case 1 failed: expected {expected_output_1}, got {output_1}"
+    assert all(
+        np.isclose(output_1[key], value, atol=1e-5)
+        for key, value in expected_output_1.items()
+    ), f"Test case 1 failed: expected {expected_output_1}, got {output_1}"
 
     # Test case 2: Dataset with repeated elements
     data_2 = [1, 2, 2, 3, 4, 4, 4, 5]
@@ -79,11 +81,13 @@ def test_descriptive_statistics():
         "25th_percentile": 2.0,
         "50th_percentile": 3.5,
         "75th_percentile": 4.0,
-        "interquartile_range": 2.0
+        "interquartile_range": 2.0,
     }
     output_2 = descriptive_statistics(data_2)
-    assert all(np.isclose(output_2[key], value, atol=1e-5) for key, value in expected_output_2.items()), \
-        f"Test case 2 failed: expected {expected_output_2}, got {output_2}"
+    assert all(
+        np.isclose(output_2[key], value, atol=1e-5)
+        for key, value in expected_output_2.items()
+    ), f"Test case 2 failed: expected {expected_output_2}, got {output_2}"
 
     # Test case 3: Single-element dataset
     data_3 = [100]
@@ -96,11 +100,13 @@ def test_descriptive_statistics():
         "25th_percentile": 100.0,
         "50th_percentile": 100.0,
         "75th_percentile": 100.0,
-        "interquartile_range": 0.0
+        "interquartile_range": 0.0,
     }
     output_3 = descriptive_statistics(data_3)
-    assert all(np.isclose(output_3[key], value, atol=1e-5) for key, value in expected_output_3.items()), \
-        f"Test case 3 failed: expected {expected_output_3}, got {output_3}"
+    assert all(
+        np.isclose(output_3[key], value, atol=1e-5)
+        for key, value in expected_output_3.items()
+    ), f"Test case 3 failed: expected {expected_output_3}, got {output_3}"
 
     print("All descriptive statistics tests passed.")
 

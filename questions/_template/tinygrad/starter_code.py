@@ -1,2 +1,2 @@
-def your_function(...):
+def your_function():
     pass

@@ -1,10 +1,15 @@
 import torch
 
+
 class Value:
     """Scalar autograd value powered by PyTorch tensors."""
 
     def __init__(self, data, _tensor=None):
-        self._t = _tensor if _tensor is not None else torch.tensor(float(data), requires_grad=True)
+        self._t = (
+            _tensor
+            if _tensor is not None
+            else torch.tensor(float(data), requires_grad=True)
+        )
         self._t.retain_grad()
 
     # ----- helpers -----
@@ -20,6 +25,7 @@ class Value:
     def __repr__(self):
         def fmt(x):
             return int(x) if float(x).is_integer() else round(x, 4)
+
         return f"Value(data={fmt(self.data)}, grad={fmt(self.grad)})"
 
     def _wrap(self, other):

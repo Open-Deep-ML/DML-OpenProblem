@@ -4,13 +4,14 @@ import streamlit.components.v1 as components
 import os
 import re
 
+
 def render_learn_section(learn_section):
     # Replace LaTeX delimiters with the appropriate format for MathJax
-    learn_section = re.sub(r'\\\(', r'$', learn_section)
-    learn_section = re.sub(r'\\\)', r'$', learn_section)
-    learn_section = re.sub(r'\\\[', r'$$', learn_section)
-    learn_section = re.sub(r'\\\]', r'$$', learn_section)
-    
+    learn_section = re.sub(r"\\\(", r"$", learn_section)
+    learn_section = re.sub(r"\\\)", r"$", learn_section)
+    learn_section = re.sub(r"\\\[", r"$$", learn_section)
+    learn_section = re.sub(r"\\\]", r"$$", learn_section)
+
     st.subheader("Learn Section Preview")
     components.html(
         f"""
@@ -36,23 +37,27 @@ def render_learn_section(learn_section):
         height=1000,
     )
 
+
 # Define the directory containing the learn.html files
 LEARN_HTML_DIR = "Problems"
 
+
 def load_file(file_path):
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             return file.read()
     except Exception as e:
         st.error(f"Error loading file {file_path}: {e}")
         return ""
 
+
 def save_file(file_path, content):
     try:
-        with open(file_path, 'w', encoding='utf-8') as file:
+        with open(file_path, "w", encoding="utf-8") as file:
             file.write(content)
     except Exception as e:
         st.error(f"Error saving file {file_path}: {e}")
+
 
 # Streamlit app
 st.title("Learn Section Editor")
@@ -68,7 +73,9 @@ if not html_files:
     st.warning("No learn.html files found.")
 else:
     # File selector
-    selected_file = st.selectbox("Select an HTML file to edit", html_files, key="file_selector")
+    selected_file = st.selectbox(
+        "Select an HTML file to edit", html_files, key="file_selector"
+    )
 
     if selected_file:
         # Load the content of the selected file
@@ -79,7 +86,9 @@ else:
         editor_key = f"editor_{selected_file}"
 
         # Display the editor with the current file content
-        edited_content = st_ace(value=content, language='html', theme='monokai', key=editor_key)
+        edited_content = st_ace(
+            value=content, language="html", theme="monokai", key=editor_key
+        )
 
         if st.button("RENDER"):
             st.session_state["rendered_html"] = edited_content

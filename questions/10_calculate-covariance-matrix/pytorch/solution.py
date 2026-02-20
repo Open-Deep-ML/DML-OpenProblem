@@ -1,5 +1,6 @@
 import torch
 
+
 def calculate_covariance_matrix(vectors) -> torch.Tensor:
     """
     Calculate the covariance matrix for given feature vectors using PyTorch.

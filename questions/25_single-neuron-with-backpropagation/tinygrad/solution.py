@@ -4,11 +4,11 @@ from typing import List, Tuple
 
 def train_neuron_tg(
     features: List[List[float]],
-    labels:   List[float],
+    labels: List[float],
     initial_weights: List[float],
     initial_bias: float,
     learning_rate: float,
-    epochs: int
+    epochs: int,
 ) -> Tuple[List[float], float, List[float]]:
     X = Tensor(features)
     y = Tensor(labels).reshape(len(labels), 1)
@@ -19,9 +19,9 @@ def train_neuron_tg(
     n = len(labels)
 
     for _ in range(epochs):
-        z = X.matmul(w) + b         # (n,1)
-        preds = z.sigmoid()         # (n,1)
-        errors = preds - y          # (n,1)
+        z = X.matmul(w) + b  # (n,1)
+        preds = z.sigmoid()  # (n,1)
+        errors = preds - y  # (n,1)
 
         mse = float(((errors**2).mean()).numpy())
         mse_values.append(round(mse, 4))
@@ -36,5 +36,5 @@ def train_neuron_tg(
         b -= Tensor(learning_rate) * grad_b
 
     updated_weights = [round(val, 4) for val in w.numpy().flatten().tolist()]
-    updated_bias    = round(float(b.numpy()), 4)
+    updated_bias = round(float(b.numpy()), 4)
     return updated_weights, updated_bias, mse_values

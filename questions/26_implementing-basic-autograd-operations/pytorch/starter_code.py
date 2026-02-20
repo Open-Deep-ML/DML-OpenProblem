@@ -1,11 +1,16 @@
 import torch
 
+
 class Value:
     """A tiny scalar wrapper that delegates all gradient work to PyTorch autograd."""
 
     def __init__(self, data, _tensor=None):
         # leaf node: create fresh tensor with grad; internal node: reuse tensor
-        self._t = _tensor if _tensor is not None else torch.tensor(float(data), requires_grad=True)
+        self._t = (
+            _tensor
+            if _tensor is not None
+            else torch.tensor(float(data), requires_grad=True)
+        )
         # make sure every Tensor (leaf or not) keeps its grad for printing
         self._t.retain_grad()
 
@@ -22,6 +27,7 @@ class Value:
     def __repr__(self):
         def fmt(x):
             return int(x) if float(x).is_integer() else round(x, 4)
+
         return f"Value(data={fmt(self.data)}, grad={fmt(self.grad)})"
 
     # ensure rhs is Value

@@ -60,6 +60,7 @@ def validate_file(validator: Draft7Validator, fp: pathlib.Path) -> bool:
         print(f"✓ {fp.name}")
         return True
 
+
 def main():
     schema = load_schema()
     validator = Draft7Validator(schema)
@@ -85,6 +86,7 @@ def main():
         ok = validate_file(validator, fp) and ok
 
     sys.exit(0 if ok else 1)
+
 
 if __name__ == "__main__":
     main()
