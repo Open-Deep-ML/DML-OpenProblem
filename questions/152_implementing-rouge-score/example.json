@@ -1,0 +1,5 @@
+{
+  "input": "rouge_1_score('the cat sat on the mat', 'the cat is on the mat')",
+  "output": "{'precision': 0.8333333333333334, 'recall': 0.8333333333333334, 'f1': 0.8333333333333334}",
+  "reasoning": "The reference text 'the cat sat on the mat' has 6 tokens, and the candidate text 'the cat is on the mat' has 6 tokens. The overlapping words are: 'the' (appears 2 times in reference, 2 times in candidate, so min(2,2)=2 overlap), 'cat' (1,1 → 1 overlap), 'on' (1,1 → 1 overlap), and 'mat' (1,1 → 1 overlap). Total overlap = 2+1+1+1 = 5. Precision = 5/6 ≈ 0.833 (5 overlapping words out of 6 candidate words). Recall = 5/6 ≈ 0.833 (5 overlapping words out of 6 reference words). F1 = 2×(0.833×0.833)/(0.833+0.833) = 0.833 since precision equals recall."
+}

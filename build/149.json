@@ -1,0 +1,46 @@
+{
+  "id": "149",
+  "title": "Adadelta Optimizer",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/mavleo96",
+      "name": "Vijayabharathi Murugan"
+    }
+  ],
+  "description": "Implement the Adadelta optimizer update step function. Your function should take the current parameter value, gradient, and moving averages as inputs, and return the updated parameter value and new moving averages. The function should handle both scalar and array inputs, and include proper input validation.",
+  "learn_section": "# Implementing Adadelta Optimizer\n\n## Introduction\nAdadelta is an extension of Adagrad that addresses two key issues: the aggressive, monotonically decreasing learning rate and the need for manual learning rate tuning. While Adagrad accumulates all past squared gradients, Adadelta restricts the influence of past gradients to a window of size w. Instead of explicitly storing w past gradients, it efficiently approximates this window using an exponential moving average with decay rate ρ, making it more robust to parameter updates. Additionally, it automatically handles the units of the updates, eliminating the need for a manually set learning rate.\n\n## Learning Objectives\n- Understand how Adadelta optimizer works\n- Learn to implement adaptive learning rates with moving averages\n\n## Theory\nAdadelta uses two main ideas:\n1. Exponential moving average of squared gradients to approximate a window of size w\n2. Automatic unit correction through the ratio of parameter updates\n\nThe key equations are:\n\n$v_t = \\rho v_{t-1} + (1-\\rho)g_t^2$ (Exponential moving average of squared gradients)\n\nThe above approximates a window size of $w \\approx \\dfrac{1}{1-\\rho}$ \n\n$\\Delta\\theta_t = -\\dfrac{\\sqrt{u_{t-1} + \\epsilon}}{\\sqrt{v_t + \\epsilon}} \\cdot g_t$ (Parameter update with unit correction)\n\n$u_t = \\rho u_{t-1} + (1-\\rho)\\Delta\\theta_t^2$ (Exponential moving average of squared parameter updates)\n\nWhere:\n- $v_t$ is the exponential moving average of squared gradients (decay rate ρ)\n- $u_t$ is the exponential moving average of squared parameter updates (decay rate ρ)\n- $\\rho$ is the decay rate (typically 0.9) that controls the effective window size w ≈ 1/(1-ρ)\n- $\\epsilon$ is a small constant for numerical stability\n- $g_t$ is the gradient at time step t\n\nThe ratio $\\dfrac{\\sqrt{u_{t-1} + \\epsilon}}{\\sqrt{v_t + \\epsilon}}$ serves as an adaptive learning rate that automatically handles the units of the updates, making the algorithm more robust to different parameter scales. Unlike Adagrad, Adadelta does not require a manually set learning rate, making it especially useful when tuning hyperparameters is difficult. This automatic learning rate adaptation is achieved through the ratio of the root mean squared (RMS) of parameter updates to the RMS of gradients.\n\nRead more at:\n\n1. Zeiler, M. D. (2012). ADADELTA: An Adaptive Learning Rate Method. [arXiv:1212.5701](https://arxiv.org/abs/1212.5701)\n2. Ruder, S. (2017). An overview of gradient descent optimization algorithms. [arXiv:1609.04747](https://arxiv.org/pdf/1609.04747)\n\n## Problem Statement\nImplement the Adadelta optimizer update step function. Your function should take the current parameter value, gradient, and accumulated statistics as inputs, and return the updated parameter value and new accumulated statistics.\n\n### Input Format\nThe function should accept:\n- parameter: Current parameter value\n- grad: Current gradient\n- v: Exponentially decaying average of squared gradients\n- u: Exponentially decaying average of squared parameter updates\n- rho: Decay rate (default=0.9)\n- epsilon: Small constant for numerical stability (default=1e-8)\n\n### Output Format\nReturn tuple: (updated_parameter, updated_v, updated_u)\n\n## Example\n```python\n# Example usage:\nparameter = 1.0\ngrad = 0.1\nv = 1.0\nu = 1.0\n\nnew_param, new_v, new_u = adadelta_optimizer(parameter, grad, v, u)\n```\n\n## Tips\n- Initialize v and u as zeros\n- Use numpy for numerical operations\n- Test with both scalar and array inputs\n- The learning rate is automatically determined by the algorithm\n\n---",
+  "starter_code": "import numpy as np\n\ndef adadelta_optimizer(parameter, grad, u, v, rho=0.95, epsilon=1e-6):\n    \"\"\"\n    Update parameters using the AdaDelta optimizer.\n    AdaDelta is an extension of AdaGrad that seeks to reduce its aggressive,\n    monotonically decreasing learning rate.\n\n    Args:\n        parameter: Current parameter value\n        grad: Current gradient\n        u: Running average of squared gradients\n        v: Running average of squared parameter updates\n        rho: Decay rate for the moving average (default=0.95)\n        epsilon: Small constant for numerical stability (default=1e-6)\n\n    Returns:\n        tuple: (updated_parameter, updated_u, updated_v)\n    \"\"\"\n    # Your code here\n    return np.round(parameter, 5), np.round(u, 5), np.round(v, 5)",
+  "solution": "import numpy as np\n\ndef adadelta_optimizer(parameter, grad, u, v, rho=0.95, epsilon=1e-6):\n    \"\"\"\n    Update parameters using the AdaDelta optimizer.\n    AdaDelta is an extension of AdaGrad that seeks to reduce its aggressive,\n    monotonically decreasing learning rate.\n\n    Args:\n        parameter: Current parameter value\n        grad: Current gradient\n        u: Running average of squared gradients\n        v: Running average of squared parameter updates\n        rho: Decay rate for the moving average (default=0.95)\n        epsilon: Small constant for numerical stability (default=1e-6)\n\n    Returns:\n        tuple: (updated_parameter, updated_u, updated_v)\n    \"\"\"\n    assert 0 <= rho < 1, \"Rho must be between 0 and 1\"\n    assert epsilon > 0, \"Epsilon must be positive\"\n    assert all(u >= 0) if isinstance(u, np.ndarray) else u >= 0, \"u must be non-negative\"\n    assert all(v >= 0) if isinstance(v, np.ndarray) else v >= 0, \"v must be non-negative\"\n\n    # Update running average of squared gradients\n    u = rho * u + (1 - rho) * grad**2\n\n    # Compute RMS of gradient\n    RMS_g = np.sqrt(u + epsilon)\n\n    # Compute RMS of parameter updates\n    RMS_dx = np.sqrt(v + epsilon)\n\n    # Compute parameter update\n    dx = -RMS_dx / RMS_g * grad\n\n    # Update running average of squared parameter updates\n    v = rho * v + (1 - rho) * dx**2\n\n    # Update parameters\n    parameter = parameter + dx\n\n    return np.round(parameter, 5), np.round(u, 5), np.round(v, 5)",
+  "example": {
+    "input": "parameter = 1.0, grad = 0.1, u = 1.0, v = 1.0, rho = 0.95, epsilon = 1e-6",
+    "output": "(0.89743, 0.9505, 0.95053)",
+    "explanation": "The Adadelta optimizer computes updated values for the parameter, first moment (u), and second moment (v). With input values parameter=1.0, grad=0.1, u=1.0, v=1.0, and rho=0.95, the updated parameter becomes 0.89743."
+  },
+  "test_cases": [
+    {
+      "test": "print(adadelta_optimizer(1., 0.5, 1., 1., 0.95, 1e-6))",
+      "expected_output": "(0.49035, 0.9625, 0.96299)"
+    },
+    {
+      "test": "print(adadelta_optimizer(np.array([1., 2.]), np.array([0.1, 0.2]), np.array([1., 1.]), np.array([1., 1.]), 0.95, 1e-6))",
+      "expected_output": "(array([0.89743, 1.79502]), array([0.9505, 0.952]), array([0.95053, 0.9521]))"
+    },
+    {
+      "test": "print(adadelta_optimizer(np.array([1., 2.]), np.array([0., 0.2]), np.array([0., 1.]), np.array([0., 1.]), 0.95, 1e-6))",
+      "expected_output": "(array([1., 1.79502]), array([0., 0.952]), array([0., 0.9521]))"
+    },
+    {
+      "test": "print(adadelta_optimizer(np.array([1., 1.]), np.array([1., 1.]), np.array([10000., 1.]), np.array([1., 1.]), 0.95, 1e-6))",
+      "expected_output": "(array([0.98974, 0.]), array([9500.05, 1.]), array([0.95001, 1.]))"
+    },
+    {
+      "test": "print(adadelta_optimizer(1., 0.5, 1., 1., 0., 1e-6))",
+      "expected_output": "(0., 0.25, 1.0)"
+    }
+  ]
+}

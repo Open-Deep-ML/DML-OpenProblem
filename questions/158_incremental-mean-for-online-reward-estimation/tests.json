@@ -1,0 +1,14 @@
+[
+  {
+    "test": "Q = 0.0\nk = 1\nR = 5.0\nprint(round(incremental_mean(Q, k, R), 4))",
+    "expected_output": "5.0"
+  },
+  {
+    "test": "Q = 5.0\nk = 2\nR = 7.0\nprint(round(incremental_mean(Q, k, R), 4))",
+    "expected_output": "6.0"
+  },
+  {
+    "test": "Q = 6.0\nk = 3\nR = 4.0\nprint(round(incremental_mean(Q, k, R), 4))",
+    "expected_output": "5.3333"
+  }
+]

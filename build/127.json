@@ -1,0 +1,38 @@
+{
+  "id": "127",
+  "title": "Find Captain Redbeard's Hidden Treasure",
+  "difficulty": "medium",
+  "category": "Calculus",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "description": "Captain Redbeard, the most daring pirate of the seven seas, has uncovered a mysterious ancient map. Instead of islands, it shows a strange wavy curve, and the treasure lies at the lowest point of the land! (watch out for those tricky local mins)\n\nThe land's height at any point $x$ is given by:\n\nf(x) = x^4 - 3x^3 + 2\n\n\n**Your Mission:**\nImplement a Python function that finds the value of $x$ where $f(x)$ reaches its minimum, starting from any random initial position.",
+  "learn_section": "## How to Find the Minimum of a Function\n\nTo find the minimum of a function like\n\n$$\nf(x) = x^4 - 3x^3 + 2\n$$\n\nwe can use a technique called **gradient descent**.\n\n### Steps:\n\n1. **Find the Derivative**\n   - The derivative (slope) tells us which direction the function is increasing or decreasing.\n   - For this problem, the derivative is:\n     $$\n     f'(x) = 4x^3 - 9x^2\n     $$\n\n2. **Move Opposite the Slope**\n   - If the slope is positive, move left.\n   - If the slope is negative, move right.\n   - Update the position by:\n     $$\n     x_{new} = x_{old} - \\text{learning rate} \\times f'(x_{old})\n     $$\n\n3. **Repeat**\n   - Keep updating $x$ until the change is very small (below a tolerance).\n\n### Why Does This Work?\n- If you always move downhill along the slope, you eventually reach a bottom a local minimum.\n\n### Important Terms\n- **Learning Rate**: How big a step to take each update.\n- **Tolerance**: How close successive steps must be to stop.\n- **Local Minimum**: A point where the function value is lower than nearby points.\n\nIn this problem, Captain Redbeard finds the hidden treasure by moving downhill until he reaches the lowest point!",
+  "starter_code": "def find_treasure(start_x: float) -> float:\n    \"\"\"\n    Find the x-coordinate where f(x) = x^4 - 3x^3 + 2 is minimized.\n\n  Returns:\n        float: The x-coordinate of the minimum point.\n    \"\"\"\n    # Your code here\n    pass",
+  "solution": "def find_treasure(start_x: float) -> float:\n\tlearning_rate = 0.1, tolerance = 1e-6, max_iters = 10000)    def gradient(x):\n        return 4 * x**3 - 9 * x**2  # derivative of x^4 - 3x^3 + 2\n\n    x = start_x\n    for _ in range(max_iters):\n        grad = gradient(x)\n        new_x = x - learning_rate * grad\n        if abs(new_x - x) < tolerance:\n            break\n        x = new_x\n    return round(x, 4)",
+  "example": {
+    "input": "start_x = 0.0",
+    "output": "min float value",
+    "reasoning": "Cant really give you a example without giving the solution... so ya"
+  },
+  "test_cases": [
+    {
+      "test": "print(abs(find_treasure(-1) - 2.25) < 1e-2)",
+      "expected_output": "True"
+    },
+    {
+      "test": "print(abs(find_treasure(1.0) - 2.25) < 1e-2)",
+      "expected_output": "True"
+    },
+    {
+      "test": "print(abs(find_treasure(3.0) - 2.25) < 1e-2)",
+      "expected_output": "True"
+    }
+  ]
+}

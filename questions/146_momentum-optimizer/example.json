@@ -1,0 +1,5 @@
+{
+  "input": "parameter = 1.0, grad = 0.1, velocity = 0.1",
+  "output": "(0.909, 0.091)",
+  "reasoning": "The momentum optimizer computes updated values for the parameter and the velocity. With input values parameter=1.0, grad=0.1, and velocity=0.1, the updated parameter becomes 0.909 and the updated velocity becomes 0.091."
+}

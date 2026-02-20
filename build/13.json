@@ -1,0 +1,72 @@
+{
+  "id": "13",
+  "title": "Determinant of a 4x4 Matrix using Laplace's Expansion (hard)",
+  "difficulty": "hard",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "description": "Write a Python function that calculates the determinant of a 4x4 matrix using Laplace's Expansion method. The function should take a single argument, a 4x4 matrix represented as a list of lists, and return the determinant of the matrix. The elements of the matrix can be integers or floating-point numbers. Implement the function recursively to handle the computation of determinants for the 3x3 minor matrices.",
+  "learn_section": "\n## Determinant of a 4x4 Matrix using Laplace's Expansion\n\nLaplace's Expansion, also known as cofactor expansion, is a method to calculate the determinant of a square matrix of any size. For a 4x4 matrix \\( A \\), this method involves expanding \\( A \\) into minors and cofactors along a chosen row or column.\n\nConsider a 4x4 matrix \\( A \\):\n$$\nA = \\begin{pmatrix}\na_{11} & a_{12} & a_{13} & a_{14} \\\\\na_{21} & a_{22} & a_{23} & a_{24} \\\\\na_{31} & a_{32} & a_{33} & a_{34} \\\\\na_{41} & a_{42} & a_{43} & a_{44}\n\\end{pmatrix}\n$$\n\nThe determinant of \\( A \\), \\( \\det(A) \\), can be calculated by selecting any row or column (e.g., the first row) and using the formula that involves the elements of that row (or column), their corresponding cofactors, and the determinants of the 3x3 minor matrices obtained by removing the row and column of each element. This process is recursive, as calculating the determinants of the 3x3 matrices involves further expansions.\n\nThe expansion formula for the first row is:\n$$\n\\det(A) = a_{11}C_{11} - a_{12}C_{12} + a_{13}C_{13} - a_{14}C_{14}\n$$\n\n### Explanation of Terms\n- **Cofactor \\( C_{ij} \\)**: The cofactor of element \\( a_{ij} \\) is given by:\n  $$\n  C_{ij} = (-1)^{i+j} \\det(\\text{Minor of } a_{ij})\n  $$\n  where the minor of \\( a_{ij} \\) is the determinant of the 3x3 matrix obtained by removing the \\( i \\)th row and \\( j \\)th column from \\( A \\).\n\n### Notes\n- The choice of row or column for expansion can be based on convenience, often selecting one with the most zeros to simplify calculations.\n- The process is recursive, breaking down the determinant calculation into smaller 3x3 determinants until reaching 2x2 determinants, which are simpler to compute.\n\nThis method is fundamental in linear algebra and provides a systematic approach for determinant calculation, especially for matrices larger than 3x3.",
+  "starter_code": "def determinant_4x4(matrix: list[list[int|float]]) -> float:\n\t# Your recursive implementation here\n\tpass",
+  "solution": "def determinant_4x4(matrix: list[list[int|float]]) -> float:\n    # Base case: If the matrix is 1x1, return its single element\n    if len(matrix) == 1:\n        return matrix[0][0]\n    # Recursive case: Calculate determinant using Laplace's Expansion\n    det = 0\n    for c in range(len(matrix)):\n        minor = [row[:c] + row[c+1:] for row in matrix[1:]]  # Remove column c\n        cofactor = ((-1)**c) * determinant_4x4(minor)  # Compute cofactor\n        det += matrix[0][c] * cofactor  # Add to running total\n    return det",
+  "example": {
+    "input": "a = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]",
+    "output": "0",
+    "reasoning": "Using Laplace's Expansion, the determinant of a 4x4 matrix is calculated by expanding it into minors and cofactors along any row or column. Given the symmetrical and linear nature of this specific matrix, its determinant is 0. The calculation for a generic 4x4 matrix involves more complex steps, breaking it down into the determinants of 3x3 matrices."
+  },
+  "test_cases": [
+    {
+      "test": "print(determinant_4x4([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]))",
+      "expected_output": "0"
+    },
+    {
+      "test": "print(determinant_4x4([[4, 3, 2, 1], [3, 2, 1, 4], [2, 1, 4, 3], [1, 4, 3, 2]]))",
+      "expected_output": "-160"
+    },
+    {
+      "test": "print(determinant_4x4([[0, 1, 2, 3], [1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5, 6]]))",
+      "expected_output": "0"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef determinant_4x4_tg(matrix) -> Tensor:\n    \"\"\"\n    Compute the determinant of a 4×4 matrix using tinygrad.\n    Input can be a Python list, NumPy array, or tinygrad Tensor of shape (4,4).\n    Returns a 0-D Tensor containing the determinant.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "import numpy as np\nfrom tinygrad.tensor import Tensor\n\ndef determinant_4x4_tg(matrix) -> Tensor:\n    \"\"\"\n    Compute the determinant of a 4×4 matrix using tinygrad.\n    Input can be a Python list, NumPy array, or tinygrad Tensor of shape (4,4).\n    Returns a 0-D Tensor containing the determinant.\n    \"\"\"\n    # convert to NumPy array\n    if isinstance(matrix, Tensor):\n        arr = matrix.numpy()\n    else:\n        arr = np.array(matrix, dtype=float)\n    det = float(np.linalg.det(arr))\n    return Tensor(det)",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nprint(determinant_4x4_tg(Tensor(np.eye(4))).numpy().item())",
+      "expected_output": "1.0"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nprint(determinant_4x4_tg([[2.0,0,0,0],[0,3.0,0,0],[0,0,4.0,0],[0,0,0,5.0]]).numpy().item())",
+      "expected_output": "120.0"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nm = [[1.0,2.0,3.0,4.0],[1.0,2.0,3.0,4.0],[5.0,6.0,7.0,8.0],[9.0,10.0,11.0,12.0]]\nprint(determinant_4x4_tg(Tensor(m)).numpy().item())",
+      "expected_output": "0.0"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef determinant_4x4(matrix) -> float:\n    \"\"\"\n    Compute the determinant of a 4×4 matrix using PyTorch.\n    Input can be a Python list, NumPy array, or torch Tensor of shape (4,4).\n    Returns a Python float.\n    \"\"\"\n    # Convert to tensor\n    m = torch.as_tensor(matrix, dtype=torch.float)\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef determinant_4x4(matrix) -> float:\n    \"\"\"\n    Compute the determinant of a 4×4 matrix using PyTorch.\n    Input can be a Python list, NumPy array, or torch Tensor of shape (4,4).\n    Returns a Python float.\n    \"\"\"\n    m = torch.as_tensor(matrix, dtype=torch.float)\n    # use built-in determinant\n    return torch.linalg.det(m).item()",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nprint(determinant_4x4(torch.eye(4)))",
+      "expected_output": "1.0"
+    },
+    {
+      "test": "import torch\nprint(determinant_4x4(torch.diag(torch.tensor([2.0,3.0,4.0,5.0]))))",
+      "expected_output": "120.0"
+    },
+    {
+      "test": "import torch\nm = torch.tensor([[1.0,2.0,3.0,4.0],[1.0,2.0,3.0,4.0],[5.0,6.0,7.0,8.0],[9.0,10.0,11.0,12.0]])\nprint(determinant_4x4(m))",
+      "expected_output": "0.0"
+    }
+  ]
+}

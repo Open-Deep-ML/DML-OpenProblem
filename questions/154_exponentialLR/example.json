@@ -1,0 +1,5 @@
+{
+  "input": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=0):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=1):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=2):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=3):.4f}\")",
+  "output": "0.1000\n0.0900\n0.0810\n0.0729",
+  "reasoning": "The initial learning rate is 0.1. At epoch 1, it decays by 0.9 to 0.09. At epoch 2, it decays again to 0.081, and so on, decaying by gamma every single epoch. All results are rounded to 4 decimal places."
+}

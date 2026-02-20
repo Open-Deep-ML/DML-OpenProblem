@@ -1,0 +1,54 @@
+{
+  "id": "154",
+  "title": "ExponentialLR Learning Rate Scheduler",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/komaksym",
+      "name": "komaksym"
+    }
+  ],
+  "description": "## Problem\n\nWrite a Python class ExponentialLRScheduler to implement a learning rate scheduler based on the ExponentialLR strategy. Your class should have an __init__ method to initialize with an initial_lr (float) and gamma (float) parameter. It should also have a get_lr(self, epoch) method that returns the current learning rate for a given epoch (int). The learning rate should be decreased by gamma every epoch. The returned learning rate should be rounded to 4 decimal places. Only use standard Python.",
+  "learn_section": "# **Learning Rate Schedulers: ExponentialLR**\n\n## **1. Definition**\nA **learning rate scheduler** is a component used in machine learning, especially in neural network training, to adjust the learning rate during the training process. The **learning rate** is a hyperparameter that determines the step size at each iteration while moving towards a minimum of a loss function.\n\n**ExponentialLR (Exponential Learning Rate)** is a common type of learning rate scheduler that decays the learning rate by a fixed multiplicative factor γ (gamma) at *every* epoch. This results in an exponential decrease of the learning rate over time. It's often used when a rapid and continuous reduction of the learning rate is desired.\n\n## **2. Why Use Learning Rate Schedulers?**\n* **Faster Convergence:** A higher initial learning rate can help quickly move through the loss landscape.\n* **Improved Performance:** A smaller learning rate towards the end of training allows for finer adjustments and helps in converging to a better local minimum, avoiding oscillations around the minimum.\n* **Stability:** Reducing the learning rate prevents large updates that could lead to divergence or instability.\n\n## **3. ExponentialLR Mechanism**\nThe learning rate is reduced by a factor γ (gamma) every epoch.\n\nThe formula for the learning rate at a given epoch e is:\n\n$$LR_e = LR_{\\text{initial}} \\times \\gamma^e$$\n\nWhere:\n* $LR_e$: The learning rate at epoch e.\n* $LR_{\\text{initial}}$: The initial learning rate.\n* γ (gamma): The multiplicative factor by which the learning rate is reduced per epoch (usually between 0 and 1, e.g., 0.9, 0.99).\n* e: The current epoch number (0-indexed).\n\n**Example:**\nIf initial learning rate = 0.1, and γ = 0.9:\n* Epoch 0: $LR_0 = 0.1 \\times 0.9^0 = 0.1 \\times 1 = 0.1$\n* Epoch 1: $LR_1 = 0.1 \\times 0.9^1 = 0.1 \\times 0.9 = 0.09$\n* Epoch 2: $LR_2 = 0.1 \\times 0.9^2 = 0.1 \\times 0.81 = 0.081$\n* Epoch 3: $LR_3 = 0.1 \\times 0.9^3 = 0.1 \\times 0.729 = 0.0729$\n\n## **4. Applications of Learning Rate Schedulers**\nLearning rate schedulers, including ExponentialLR, are widely used in training various machine learning models, especially deep neural networks, across diverse applications such as:\n* **Image Classification:** Training Convolutional Neural Networks (CNNs) for tasks like object recognition.\n* **Natural Language Processing (NLP):** Training Recurrent Neural Networks (RNNs) and Transformers for tasks like machine translation, text generation, and sentiment analysis.\n* **Speech Recognition:** Training models for converting spoken language to text.\n* **Reinforcement Learning:** Optimizing policies in reinforcement learning agents.\n* **Any optimization problem** where gradient descent or its variants are used.",
+  "starter_code": "class ExponentialLRScheduler:\n    def __init__(self, initial_lr, gamma):\n        # Initialize initial_lr and gamma\n        pass\n\n    def get_lr(self, epoch):\n        # Calculate and return the learning rate for the given epoch\n        pass",
+  "solution": "class ExponentialLRScheduler:\n    def __init__(self, initial_lr, gamma):\n        \"\"\"\n        Initializes the ExponentialLR scheduler.\n\n        Args:\n            initial_lr (float): The initial learning rate.\n            gamma (float): The multiplicative factor of learning rate decay per epoch.\n                           (e.g., 0.9 for reducing LR by 10% each epoch).\n        \"\"\"\n        self.initial_lr = initial_lr\n        self.gamma = gamma\n\n    def get_lr(self, epoch):\n        \"\"\"\n        Calculates and returns the current learning rate for a given epoch,\n        rounded to 4 decimal places.\n\n        Args:\n            epoch (int): The current epoch number (0-indexed).\n\n        Returns:\n            float: The calculated learning rate for the current epoch, rounded to 4 decimal places.\n        \"\"\"\n        # Apply the decay factor 'gamma' raised to the power of the current 'epoch'\n        # to the initial learning rate.\n        current_lr = self.initial_lr * (self.gamma ** epoch)\n        \n        # Round the learning rate to 4 decimal places\n        return round(current_lr, 4)",
+  "example": {
+    "input": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=0):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=1):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=2):.4f}\")\nprint(f\"{scheduler.get_lr(epoch=3):.4f}\")",
+    "output": "0.1000\n0.0900\n0.0810\n0.0729",
+    "reasoning": "The initial learning rate is 0.1. At epoch 1, it decays by 0.9 to 0.09. At epoch 2, it decays again to 0.081, and so on, decaying by gamma every single epoch. All results are rounded to 4 decimal places."
+  },
+  "test_cases": [
+    {
+      "test": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=0):.4f}\")",
+      "expected_output": "0.1000"
+    },
+    {
+      "test": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=1):.4f}\")",
+      "expected_output": "0.0900"
+    },
+    {
+      "test": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=2):.4f}\")",
+      "expected_output": "0.0810"
+    },
+    {
+      "test": "scheduler = ExponentialLRScheduler(initial_lr=0.1, gamma=0.9)\nprint(f\"{scheduler.get_lr(epoch=3):.4f}\")",
+      "expected_output": "0.0729"
+    },
+    {
+      "test": "scheduler = ExponentialLRScheduler(initial_lr=1.0, gamma=0.5)\nprint(f\"{scheduler.get_lr(epoch=0):.4f}\\n{scheduler.get_lr(epoch=1):.4f}\\n{scheduler.get_lr(epoch=2):.4f}\\n{scheduler.get_lr(epoch=3):.4f}\")",
+      "expected_output": "1.0000\n0.5000\n0.2500\n0.1250"
+    },
+    {
+      "test": "scheduler = ExponentialLRScheduler(initial_lr=0.005, gamma=0.99)\nprint(f\"{scheduler.get_lr(epoch=0):.4f}\\n{scheduler.get_lr(epoch=10):.4f}\\n{scheduler.get_lr(epoch=20):.4f}\")",
+      "expected_output": "0.0050\n0.0045\n0.0041"
+    },
+    {
+      "test": "scheduler = ExponentialLRScheduler(initial_lr=0.001, gamma=1.0)\nprint(f\"{scheduler.get_lr(epoch=5):.4f}\\n{scheduler.get_lr(epoch=10):.4f}\")",
+      "expected_output": "0.0010\n0.0010"
+    }
+  ]
+}

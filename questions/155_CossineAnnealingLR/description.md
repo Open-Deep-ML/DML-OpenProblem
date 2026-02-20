@@ -1,0 +1,3 @@
+## Problem
+
+Write a Python class CosineAnnealingLRScheduler to implement a learning rate scheduler based on the Cosine Annealing LR strategy. Your class should have an __init__ method to initialize with an initial_lr (float), T_max (int, the maximum number of iterations/epochs), and min_lr (float, the minimum learning rate) parameters. It should also have a **get_lr(self, epoch)** method that returns the current learning rate for a given epoch (int). The learning rate should follow a cosine annealing schedule. The returned learning rate should be rounded to 4 decimal places. Only use standard Python and the math module for trigonometric functions.

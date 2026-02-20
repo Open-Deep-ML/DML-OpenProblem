@@ -1,0 +1,68 @@
+{
+  "id": "1",
+  "title": "Matrix-Vector Dot Product",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/DNoLs5tTGAw?si=vpkPobZMA8YY10WY",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "description": "Write a Python function that computes the dot product of a matrix and a vector. The function should return a list representing the resulting vector if the operation is valid, or -1 if the matrix and vector dimensions are incompatible. A matrix (a list of lists) can be dotted with a vector (a list) only if the number of columns in the matrix equals the length of the vector. For example, an n x m matrix requires a vector of length m.",
+  "learn_section": "\n## Matrix-Vector Dot Product\n\nConsider a matrix $A$ and a vector $v$:\n\n**Matrix $A$ (n x m):**\n$$\nA = \\begin{pmatrix}\na_{11} & a_{12} & \\cdots & a_{1m} \\\\\na_{21} & a_{22} & \\cdots & a_{2m} \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\na_{n1} & a_{n2} & \\cdots & a_{nm}\n\\end{pmatrix}\n$$\n\n**Vector $v$ (length m):**\n$$\nv = \\begin{pmatrix}\nv_1 \\\\\nv_2 \\\\\n\\vdots \\\\\nv_m\n\\end{pmatrix}\n$$\n\nThe dot product $A \\cdot v$ produces a new vector of length $n$:\n$$\nA \\cdot v = \\begin{pmatrix}\na_{11}v_1 + a_{12}v_2 + \\cdots + a_{1m}v_m \\\\\na_{21}v_1 + a_{22}v_2 + \\cdots + a_{2m}v_m \\\\\n\\vdots \\\\\na_{n1}v_1 + a_{n2}v_2 + \\cdots + a_{nm}v_m\n\\end{pmatrix}\n$$\n\n### Key Requirement:\nThe number of columns in the matrix ($m$) must equal the length of the vector ($m$). If not, the operation is undefined, and the function should return -1.",
+  "starter_code": "def matrix_dot_vector(a: list[list[int|float]], b: list[int|float]) -> list[int|float]:\n\t# Return a list where each element is the dot product of a row of 'a' with 'b'.\n\t# If the number of columns in 'a' does not match the length of 'b', return -1.\n\tpass",
+  "solution": "def matrix_dot_vector(a: list[list[int|float]], b: list[int|float]) -> list[int|float]:\n    if len(a[0]) != len(b):\n        return -1\n    result = []\n    for row in a:\n        total = 0\n        for i in range(len(row)):\n            total += row[i] * b[i]\n        result.append(total)\n    return result",
+  "example": {
+    "input": "a = [[1, 2], [2, 4]], b = [1, 2]",
+    "output": "[5, 10]",
+    "reasoning": "Row 1: (1 * 1) + (2 * 2) = 1 + 4 = 5; Row 2: (1 * 2) + (2 * 4) = 2 + 8 = 10"
+  },
+  "test_cases": [
+    {
+      "test": "print(matrix_dot_vector([[1, 2, 3], [2, 4, 5], [6, 8, 9]], [1, 2, 3]))",
+      "expected_output": "[14, 25, 49]"
+    },
+    {
+      "test": "print(matrix_dot_vector([[1, 2], [2, 4], [6, 8], [12, 4]], [1, 2, 3]))",
+      "expected_output": "-1"
+    },
+    {
+      "test": "print(matrix_dot_vector([[1.5, 2.5], [3.0, 4.0]], [2, 1]))",
+      "expected_output": "[5.5, 10.0]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef matrix_dot_vector_tg(a:Tensor, b:Tensor) -> Tensor:\n    \"\"\"\n    Compute the product of matrix `a` and vector `b` using tinygrad.\n    Will be tinygrad Tensors.\n    Returns a 1-D Tensor of length m, or Tensor(-1) if dimensions mismatch.\n    \"\"\"\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef matrix_dot_vector_tg(a: Tensor, b: Tensor) -> Tensor:\n    \"\"\"\n    Compute the product of matrix `a` and vector `b` using tinygrad.\n    Inputs will be tinygrad Tensors.\n    Returns a 1-D Tensor of length m, or Tensor(-1) if dimensions mismatch.\n    \"\"\"\n    if len(a[0]) != len(b):\n        return Tensor(-1)\n    return a @ b",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = matrix_dot_vector_tg(\n    Tensor([[1,2,3],[2,4,5],[6,8,9]]),\n    Tensor([1,2,3])\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[14.0, 25.0, 49.0]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = matrix_dot_vector_tg(\n    Tensor([[1,2,3],[2,4,5]]),\n    Tensor([1,2])\n)\nprint(res.numpy().tolist())",
+      "expected_output": "-1"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = matrix_dot_vector_tg(\n    Tensor([[1, 2], [2, 4]]),\n    Tensor([1, 2])\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[5, 10]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef matrix_dot_vector(a, b) -> torch.Tensor:\n    \"\"\"\n    Compute the product of matrix `a` and vector `b` using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a 1-D tensor of length m, or tensor(-1) if dimensions mismatch.\n    \"\"\"\n    a_t = torch.as_tensor(a, dtype=torch.float)\n    b_t = torch.as_tensor(b, dtype=torch.float)\n    # Dimension mismatch check\n    if a_t.size(1) != b_t.size(0):\n        return torch.tensor(-1)\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef matrix_dot_vector(a, b) -> torch.Tensor:\n    \"\"\"\n    Compute the product of matrix `a` and vector `b` using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a 1-D tensor of length m, or tensor(-1) if dimensions mismatch.\n    \"\"\"\n    a_t = torch.as_tensor(a, dtype=torch.float)\n    b_t = torch.as_tensor(b, dtype=torch.float)\n    if a_t.size(1) != b_t.size(0):\n        return torch.tensor(-1)\n    return torch.matmul(a_t, b_t)",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nres = matrix_dot_vector(\n    torch.tensor([[1,2,3],[2,4,5],[6,8,9]], dtype=torch.float),\n    torch.tensor([1,2,3], dtype=torch.float)\n)\nprint(res.numpy().tolist())",
+      "expected_output": "[14.0, 25.0, 49.0]"
+    },
+    {
+      "test": "import torch\nres = matrix_dot_vector(\n    torch.tensor([[1,2,3],[2,4,5]], dtype=torch.float),\n    torch.tensor([1,2], dtype=torch.float)\n)\nprint(res.numpy().tolist())",
+      "expected_output": "-1"
+    }
+  ]
+}

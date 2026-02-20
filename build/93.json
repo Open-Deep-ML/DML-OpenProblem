@@ -1,0 +1,42 @@
+{
+  "id": "93",
+  "title": "Calculate Mean Absolute Error (MAE)",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/rittik9",
+      "name": "rittik9"
+    }
+  ],
+  "description": "Implement a function to calculate the Mean Absolute Error (MAE) between two arrays of actual and predicted values. The MAE is a metric used to measure the average magnitude of errors in a set of predictions without considering their direction.",
+  "learn_section": "## Mean Absolute Error (MAE)\n\nThe Mean Absolute Error (MAE) is a measure of the average magnitude of errors between predicted and actual values. Here's how to express it mathematically:\n\n1. **Basic Formula**:\n   - The MAE formula can be written as: $MAE = \\frac{1}{n}\\sum_{i=1}^n |y_i - \\hat{y}_i|$\n\n   Where:\n   - $n$ is the number of observations\n   - $y_i$ is the true value\n   - $\\hat{y}_i$ is the predicted value\n   - $|...|$ represents the absolute value\n\n2. **Example Calculation**:\n   For the values:\n   ```\n   y_true = [3, -0.5, 2, 7]\n   y_pred = [2.5, 0.0, 2, 8]\n   ```\n\n   The calculation would be:\n   $$\n   \\begin{align*}\n   MAE &= \\frac{1}{4}(|3-2.5| + |-0.5-0.0| + |2-2| + |7-8|) \\\\\n   &= \\frac{1}{4}(0.5 + 0.5 + 0 + 1) \\\\\n   &= \\frac{2}{4} \\\\\n   &= 0.5\n   \\end{align*}\n   $$\n\n3. **Properties**:\n   - MAE is always non-negative: $MAE \\geq 0$\n   - Perfect predictions result in $MAE = 0$\n   - MAE is measured in the same units as the original data\n   - MAE treats all errors with equal weight (unlike Mean Squared Error)\n\n4. **Comparison with Other Metrics**:\n   The formula for Mean Squared Error (MSE) is:\n   $$MSE = \\frac{1}{n}\\sum_{i=1}^n (y_i - \\hat{y}_i)^2$$\n\n   While MAE uses absolute values, MSE squares the differences, which:\n   - Makes MSE more sensitive to outliers\n   - Results in MSE values that are not in the original unit of measurement",
+  "starter_code": "import numpy as np\n\ndef mae(y_true, y_pred):\n\t\"\"\"\n\tCalculate Mean Absolute Error between two arrays.\n\n\tParameters:\n\ty_true (numpy.ndarray): Array of true values\n    y_pred (numpy.ndarray): Array of predicted values\n\n\tReturns:\n\tfloat: Mean Absolute Error rounded to 3 decimal places\n\t\"\"\"\n\t# Your code here\n\tpass\n\treturn round(val,3)",
+  "solution": "import numpy as np\n\ndef mae(y_true, y_pred):\n    \"\"\"\n    Calculate Mean Absolute Error between two arrays.\n\n    Parameters:\n    y_true (numpy.ndarray): Array of true values\n    y_pred (numpy.ndarray): Array of predicted values\n\n    Returns:\n    float: Mean Absolute Error rounded to 3 decimal places\n    \"\"\"\n    if y_true.shape != y_pred.shape:\n        raise ValueError(\"Arrays must have the same shape\")\n    if y_true.size == 0:\n        raise ValueError(\"Arrays cannot be empty\")\n\n    return round(np.mean(np.abs(y_true - y_pred)), 3)",
+  "example": {
+    "input": "y_true = np.array([3, -0.5, 2, 7]), y_pred = np.array([2.5, 0.0, 2, 8])",
+    "output": "0.500",
+    "reasoning": "The MAE is calculated by taking the mean of the absolute differences between the predicted and true values. Using the formula, the result is 0.500."
+  },
+  "test_cases": [
+    {
+      "test": "print(mae(np.array([3, -0.5, 2, 7]), np.array([2.5, 0.0, 2, 8])))",
+      "expected_output": "0.500"
+    },
+    {
+      "test": "print(mae(np.array([[0.5, 1], [-1, 1], [7, -6]]), np.array([[0, 2], [-1, 2], [8, -5]])))",
+      "expected_output": "0.750"
+    },
+    {
+      "test": "print(mae(np.array([-1, -2, -3]), np.array([-1.5, -2.2, -2.8])))",
+      "expected_output": "0.300"
+    },
+    {
+      "test": "print(mae(np.array([1, -1, 0]), np.array([-1, 1, 0])))",
+      "expected_output": "1.333"
+    }
+  ]
+}

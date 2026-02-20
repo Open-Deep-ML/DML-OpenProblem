@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\ngp = GaussianProcessRegression(kernel='linear', kernel_params={'sigma_b': 0.0, 'sigma_v': 1.0}, noise=1e-8)\nX_train = np.array([[1], [2], [4]])\ny_train = np.array([3, 5, 9])\ngp.fit(X_train, y_train)\nX_test = np.array([[3.0]])\nmu = gp.predict(X_test)\nprint(f\"{mu[0]:.4f}\")",
+  "output": "7.0000",
+  "reasoning": "A Gaussian Process with a linear kernel is trained on perfectly linear data that follows the function y = 2x + 1. When asked to predict the value at x=3, the model perfectly interpolates the linear function it has learned, resulting in a prediction of 2*3 + 1 = 7. The near-zero noise ensures the prediction is exact."
+}

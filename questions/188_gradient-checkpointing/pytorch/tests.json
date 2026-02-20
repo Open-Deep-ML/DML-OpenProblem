@@ -1,0 +1,6 @@
+[
+  {
+    "test": "print(your_function(...))",
+    "expected_output": "..."
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "id": "4",
+  "title": "Calculate Mean by Row or Column",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/l7kQALZvS_c",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": "https://adityakhalkar.github.io/Deep-ML-x-Marimo/4",
+  "description": "Write a Python function that calculates the mean of a matrix either by row or by column, based on a given mode. The function should take a matrix (list of lists) and a mode ('row' or 'column') as input and return a list of means according to the specified mode.",
+  "learn_section": "\n## Calculate Mean by Row or Column\n\nCalculating the mean of a matrix by row or column involves averaging the elements across the specified dimension. This operation provides insights into the distribution of values within the dataset, useful for data normalization and scaling.\n\n### Row Mean\nThe mean of a row is computed by summing all elements in the row and dividing by the number of elements. For row $i$, the mean is:\n$$\n\\mu_{\\text{row } i} = \\frac{1}{n} \\sum_{j=1}^{n} a_{ij}\n$$\nwhere $a_{ij}$ is the matrix element in the $i^{\\text{th}}$ row and $j^{\\text{th}}$ column, and $n$ is the total number of columns.\n\n### Column Mean\nSimilarly, the mean of a column is found by summing all elements in the column and dividing by the number of elements. For column $j$, the mean is:\n$$\n\\mu_{\\text{column } j} = \\frac{1}{m} \\sum_{i=1}^{m} a_{ij}\n$$\nwhere $m$ is the total number of rows.\n\nThis mathematical formulation helps in understanding how data is aggregated across different dimensions, a critical step in various data preprocessing techniques.",
+  "starter_code": "def calculate_matrix_mean(matrix: list[list[float]], mode: str) -> list[float]:\n\treturn means",
+  "solution": "def calculate_matrix_mean(matrix: list[list[float]], mode: str) -> list[float]:\n    if mode == 'column':\n        return [sum(col) / len(matrix) for col in zip(*matrix)]\n    elif mode == 'row':\n        return [sum(row) / len(row) for row in matrix]\n    else:\n        raise ValueError(\"Mode must be 'row' or 'column'\")",
+  "example": {
+    "input": "matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], mode = 'column'",
+    "output": "[4.0, 5.0, 6.0]",
+    "reasoning": "Calculating the mean of each column results in [(1+4+7)/3, (2+5+8)/3, (3+6+9)/3]."
+  },
+  "test_cases": [
+    {
+      "test": "print(calculate_matrix_mean([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 'column'))",
+      "expected_output": "[4.0, 5.0, 6.0]"
+    },
+    {
+      "test": "print(calculate_matrix_mean([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 'row'))",
+      "expected_output": "[2.0, 5.0, 8.0]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef calculate_matrix_mean_tg(matrix, mode: str) -> Tensor:\n    \"\"\"\n    Calculate mean of a 2D matrix per row or per column using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a 1-D Tensor of means or raises ValueError on invalid mode.\n    \"\"\"\n    v_t = Tensor(matrix).float()\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef calculate_matrix_mean_tg(matrix, mode: str) -> Tensor:\n    \"\"\"\n    Calculate mean of a 2D matrix per row or per column using tinygrad.\n    Inputs can be Python lists, NumPy arrays, or tinygrad Tensors.\n    Returns a 1-D Tensor of means or raises ValueError on invalid mode.\n    \"\"\"\n    v_t = Tensor(matrix).float()\n    n_obs = v_t.shape[1]\n    n_feat = v_t.shape[0]\n    if mode == 'column':\n        return v_t.sum(axis=1) / n_obs\n    elif mode == 'row':\n        return v_t.sum(axis=0) / n_feat\n    else:\n        raise ValueError(\"Mode must be 'row' or 'column'\")",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nprint(calculate_matrix_mean_tg([[1.0,2.0,3.0],[4.0,5.0,6.0]], 'column').numpy().tolist())",
+      "expected_output": "[2.5, 3.5, 4.5]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nprint(calculate_matrix_mean_tg([[1.0,2.0,3.0],[4.0,5.0,6.0]], 'row').numpy().tolist())",
+      "expected_output": "[2.0, 5.0]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef calculate_matrix_mean(matrix, mode: str) -> torch.Tensor:\n    \"\"\"\n    Calculate mean of a 2D matrix per row or per column using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a 1-D tensor of means or raises ValueError on invalid mode.\n    \"\"\"\n    a_t = torch.as_tensor(matrix, dtype=torch.float)\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef calculate_matrix_mean(matrix, mode: str) -> torch.Tensor:\n    \"\"\"\n    Calculate mean of a 2D matrix per row or per column using PyTorch.\n    Inputs can be Python lists, NumPy arrays, or torch Tensors.\n    Returns a 1-D tensor of means or raises ValueError on invalid mode.\n    \"\"\"\n    a_t = torch.as_tensor(matrix, dtype=torch.float)\n    if mode == 'column':\n        return a_t.mean(dim=0)\n    elif mode == 'row':\n        return a_t.mean(dim=1)\n    else:\n        raise ValueError(\"Mode must be 'row' or 'column'\")",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nprint(calculate_matrix_mean([[1.0,2.0,3.0],[4.0,5.0,6.0]], 'column').numpy().tolist())",
+      "expected_output": "[2.5, 3.5, 4.5]"
+    },
+    {
+      "test": "import torch\nprint(calculate_matrix_mean([[1.0,2.0,3.0],[4.0,5.0,6.0]], 'row').numpy().tolist())",
+      "expected_output": "[2.0, 5.0]"
+    }
+  ]
+}

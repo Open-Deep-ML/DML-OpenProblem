@@ -1,0 +1,1 @@
+Implement the Instance Normalization operation for 4D tensors (B, C, H, W) using NumPy. For each instance in the batch and each channel, normalize the spatial dimensions (height and width) by subtracting the mean and dividing by the standard deviation, then apply a learned scale (gamma) and shift (beta).

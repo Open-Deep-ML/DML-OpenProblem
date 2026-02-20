@@ -1,0 +1,5 @@
+{
+  "input": "parameter = 1.0, grad = 0.1, G = 1.0",
+  "output": "(0.999, 1.01)",
+  "reasoning": "The Adagrad optimizer computes updated values for the parameter and the accumulated squared gradients. With input values parameter=1.0, grad=0.1, and G=1.0, the updated parameter becomes 0.999 and the updated G becomes 1.01."
+}

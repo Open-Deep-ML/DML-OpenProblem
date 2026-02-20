@@ -1,0 +1,5 @@
+{
+  "input": "parameter = 1.0, grad = 0.1, m = 0.0, u = 0.0, t = 1",
+  "output": "(0.998, 0.01, 0.1)",
+  "reasoning": "The Adamax optimizer computes updated values for the parameter, first moment (m), and infinity norm (u) using bias-corrected estimates of gradients. With input values parameter=1.0, grad=0.1, m=0.0, u=0.0, and t=1, the updated parameter becomes 0.998, the updated m becomes 0.01, and the updated u becomes 0.1."
+}

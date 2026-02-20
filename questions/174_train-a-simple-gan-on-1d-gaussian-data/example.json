@@ -1,0 +1,5 @@
+{
+  "input": "gen_forward = train_gan(4.0, 1.25, epochs=1000, seed=42)\nz = np.random.normal(0, 1, (500, 1))\nx_gen, _, _ = gen_forward(z)\n(round(np.mean(x_gen), 4), round(np.std(x_gen), 4))",
+  "output": "(0.0004, 0.0002)",
+  "reasoning": "The test cases call `gen_forward` after training, sample 500 points, and then compute the mean and std."
+}

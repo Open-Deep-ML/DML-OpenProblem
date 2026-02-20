@@ -1,0 +1,38 @@
+{
+  "id": "111",
+  "title": "Compute Pointwise Mutual Information",
+  "difficulty": "medium",
+  "category": "NLP",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/saitiger",
+      "name": "saitiger"
+    }
+  ],
+  "description": "Implement a function to compute the Pointwise Mutual Information (PMI) given the joint occurrence count of two events, their individual counts, and the total number of samples. PMI measures how much the actual joint occurrence of events differs from what we would expect by chance.",
+  "learn_section": "# Pointwise Mutual Information (PMI)\n\nPointwise Mutual Information (PMI) is a statistical measure used in information theory and Natural Language Processing (NLP) to quantify the association between two events. It measures how much the actual joint occurrence of two events differs from what would be expected if they were independent. PMI is commonly used for identifying word associations, feature selection in text classification, and calculating document similarity.\n\n## Implementation \n\n1. **Collect Count Data** for events $x$, $y$, and their joint occurrence $(x,y)$.\n\n2. **Calculate Individual Probabilities**:\n   - $P(x) = \\frac{\\text{Count}(x)}{\\text{Total Count}}$\n   - $P(y) = \\frac{\\text{Count}(y)}{\\text{Total Count}}$\n\n3. **Calculate Joint Probability**:\n   - $P(x,y) = \\frac{\\text{Count}(x,y)}{\\text{Total Count}}$\n\n4. **Calculate PMI**:\n   - $$\\text{PMI}(x,y) = \\log_2\\left(\\frac{P(x,y)}{P(x) \\cdot P(y)}\\right)$$\n\n## Interpretation of PMI Values\n\n- **Positive PMI**: Events co-occur more frequently than expected by chance.\n- **Zero PMI**: Events are statistically independent.\n- **Negative PMI**: Events co-occur less frequently than expected by chance.\n- **Undefined PMI**: Occurs when $P(x,y) = 0$ (the events never co-occur).\n\n## Variants of PMI\n\n### 1. Normalized PMI (NPMI)\n\nNPMI scales PMI to a range of [-1, 1] to account for dataset size variations:\n\n$$\n\\text{NPMI}(x,y) = \\frac{\\text{PMI}(x,y)}{-\\log_2 P(x,y)}\n$$\n\n### 2. Positive PMI (PPMI)\n\nPPMI sets negative PMI scores to zero, often used in word embeddings:\n\n$$\n\\text{PPMI}(x,y) = \\max(\\text{PMI}(x,y),\\,0)\n$$",
+  "starter_code": "import numpy as np\n\ndef compute_pmi(joint_counts, total_counts_x, total_counts_y, total_samples):\n\t# Implement PMI calculation here\n\tpass",
+  "solution": "import numpy as np\n\ndef compute_pmi(joint_counts, total_counts_x, total_counts_y, total_samples):\n\n    if not all(isinstance(x, int) and x >= 0 for x in [joint_counts, total_counts_x, total_counts_y, total_samples]):\n        raise ValueError(\"All inputs must be non-negative integers.\")\n\n    if total_samples == 0:\n        raise ValueError(\"Total samples cannot be zero.\")\n\n    if joint_counts > min(total_counts_x, total_counts_y):\n        raise ValueError(\"Joint counts cannot exceed individual counts.\")\n\n    p_x = total_counts_x / total_samples\n    p_y = total_counts_y / total_samples\n    p_xy = joint_counts / total_samples\n\n    if p_xy == 0:\n        return float('-inf')\n\n    pmi = np.log2(p_xy / (p_x * p_y))\n\n    return round(pmi, 3)",
+  "example": {
+    "input": "compute_pmi(50, 200, 300, 1000)",
+    "output": "-0.263",
+    "reasoning": "The PMI calculation compares the actual joint probability (50/1000 = 0.05) to the product of the individual probabilities (200/1000 * 300/1000 = 0.06). Thus, PMI = log₂(0.05 / (0.2 * 0.3)) ≈ -0.263, indicating the events co-occur slightly less than expected by chance."
+  },
+  "test_cases": [
+    {
+      "test": "print(compute_pmi(10, 50, 50, 200))",
+      "expected_output": "-0.322"
+    },
+    {
+      "test": "print(compute_pmi(100, 500, 500, 1000))",
+      "expected_output": "-1.322"
+    },
+    {
+      "test": "print(float(compute_pmi(100, 400, 600, 1200)))",
+      "expected_output": "-1."
+    }
+  ]
+}

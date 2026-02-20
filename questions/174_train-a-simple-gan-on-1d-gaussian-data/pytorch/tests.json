@@ -1,0 +1,10 @@
+[
+  {
+    "test": "gen_forward = train_gan(4.0, 1.25, epochs=100, seed=42)\nz = torch.randn(500, 1)\nx_gen = gen_forward(z)\nprint((round(x_gen.mean().item(), 4), round(x_gen.std().item(), 4)))",
+    "expected_output": "(0.4725, 0.3563)"
+  },
+  {
+    "test": "gen_forward = train_gan(0.0, 1.0, epochs=50, seed=0)\nz = torch.randn(300, 1)\nx_gen = gen_forward(z)\nprint((round(x_gen.mean().item(), 4), round(x_gen.std().item(), 4)))",
+    "expected_output": "(0.0644, 0.244)"
+  }
+]

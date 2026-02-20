@@ -1,0 +1,10 @@
+[
+  {
+    "test": "import numpy as np\ntransitions = [\n  # For state 0\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, False)]},\n  # For state 1\n  {0: [(1.0, 0, 0.0, False)], 1: [(1.0, 1, 1.0, True)]}\n]\nV = np.array([0.0, 0.0])\ngamma = 0.9\nnew_V = bellman_update(V, transitions, gamma)\nprint(np.round(new_V, 2))",
+    "expected_output": "[1., 1.]"
+  },
+  {
+    "test": "import numpy as np\ntransitions = [\n  {0: [(0.8, 0, 5, False), (0.2, 1, 10, False)], 1: [(1.0, 1, 2, False)]},\n  {0: [(1.0, 0, 0, False)], 1: [(1.0, 1, 0, True)]}\n]\nV = np.array([0.0, 0.0])\ngamma = 0.5\nnew_V = bellman_update(V, transitions, gamma)\nprint(np.round(new_V, 2))",
+    "expected_output": "[6.,  0.]"
+  }
+]

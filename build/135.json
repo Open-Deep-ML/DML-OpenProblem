@@ -1,0 +1,46 @@
+{
+  "id": "135",
+  "title": "Implement Early Stopping Based on Validation Loss",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/emharsha1812",
+      "name": "Harshwardhan Fartale"
+    }
+  ],
+  "description": "Create a function to decide when to stop training a model early based on a list of validation losses. The early stopping criterion should stop training if the validation loss hasn't improved for a specified number of epochs (patience), and only count as improvement if the loss decreases by more than a certain threshold (min_delta). Your function should return the epoch to stop at and the best epoch that achieved the lowest validation loss.",
+  "learn_section": "## Implementing Early Stopping Criterion\n\nEarly stopping is a regularization technique that helps prevent overfitting in machine learning models. Your task is to implement the early stopping decision logic based on the validation loss history.\n\n### Problem Description\n\nGiven a sequence of validation losses from model training, determine if training should be stopped based on the following criteria:\n\n- Training should stop if the validation loss hasn't improved (decreased) for a specified number of epochs (patience)\n- An improvement is only counted if the loss decreases by more than a minimum threshold (min_delta)\n- The best model is the one with the lowest validation loss\n\n### Example\n\nConsider the following validation losses: [0.9, 0.8, 0.75, 0.77, 0.76, 0.77, 0.78]\n\n- With patience=2 and min_delta=0.01:\n  - Best loss is 0.75 at epoch 2\n  - No improvement > 0.01 for next 2 epochs\n  - Should stop at epoch 4\n\n### Function Requirements\n\n- Return both the epoch to stop at and the best epoch\n- If no stopping is needed, return the last epoch\n- Epochs are 0-indexed",
+  "starter_code": "from typing import Tuple\n\ndef early_stopping(val_losses: list[float], patience: int, min_delta: float) -> Tuple[int, int]:\n    # Your code here\n    pass",
+  "solution": "from typing import Tuple\n\ndef early_stopping(val_losses: list[float], patience: int, min_delta: float) -> Tuple[int, int]:\n    best_loss = float('inf')\n    best_epoch = 0\n    epochs_without_improvement = 0\n\n    for epoch, loss in enumerate(val_losses):\n        if loss < best_loss - min_delta:\n            best_loss = loss\n            best_epoch = epoch\n            epochs_without_improvement = 0\n        else:\n            epochs_without_improvement += 1\n\n        if epochs_without_improvement >= patience:\n            return epoch, best_epoch\n\n    return len(val_losses) - 1, best_epoch",
+  "example": {
+    "input": "[0.9, 0.8, 0.75, 0.77, 0.76, 0.77, 0.78], patience=2, min_delta=0.01",
+    "output": "(4, 2)",
+    "reasoning": "The best validation loss is 0.75 at epoch 2. There is no improvement greater than 0.01 for the next 2 epochs. Therefore, training should stop at epoch 4."
+  },
+  "test_cases": [
+    {
+      "test": "print(early_stopping([0.9, 0.8, 0.75, 0.77, 0.76, 0.77, 0.78], 2, 0.01))",
+      "expected_output": "(4, 2)"
+    },
+    {
+      "test": "print(early_stopping([0.9, 0.8, 0.7, 0.6, 0.5], 2, 0.01))",
+      "expected_output": "(4, 4)"
+    },
+    {
+      "test": "print(early_stopping([0.9, 0.8, 0.79, 0.78, 0.77], 2, 0.1))",
+      "expected_output": "(4, 2)"
+    },
+    {
+      "test": "print(early_stopping([0.5, 0.4], 3, 0.01))",
+      "expected_output": "(1, 1)"
+    },
+    {
+      "test": "print(early_stopping([0.5, 0.4, 0.4, 0.4, 0.4], 2, 0.01))",
+      "expected_output": "(3, 1)"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "6",
+  "title": "Calculate Eigenvalues of a Matrix",
+  "difficulty": "medium",
+  "category": "Linear Algebra",
+  "video": "https://youtu.be/AMCFzIaHc4Y",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": "",
+  "description": "Write a Python function that calculates the eigenvalues of a 2x2 matrix. The function should return a list containing the eigenvalues, sort values from highest to lowest.",
+  "learn_section": "\n## Calculate Eigenvalues\n\nEigenvalues of a matrix offer significant insight into the matrix's behavior, particularly in the context of linear transformations and systems of linear equations.\n\n### Definition\nFor a square matrix $A$, eigenvalues are scalars $\\lambda$ that satisfy the equation for some non-zero vector $v$ (eigenvector):\n$$\nAv = \\lambda v\n$$\n\n### Calculation for a 2x2 Matrix\nThe eigenvalues of a 2x2 matrix $A$, given by:\n$$\nA = \\begin{pmatrix} \na & b \\\\ \nc & d \n\\end{pmatrix}\n$$\nare determined by solving the characteristic equation:\n$$\n\\det(A - \\lambda I) = 0\n$$\n\nThis simplifies to a quadratic equation:\n$$\n\\lambda^2 - \\text{tr}(A) \\lambda + \\det(A) = 0\n$$\n\nHere, the trace of $A$, denoted as $\\text{tr}(A)$, is $a + d$, and the determinant of $A$, denoted as $\\det(A)$, is $ad - bc$. Solving this equation yields the eigenvalues, $\\lambda$.\n\n### Significance\nUnderstanding eigenvalues is essential for analyzing the effects of linear transformations represented by the matrix. They are crucial in various applications, including stability analysis, vibration analysis, and Principal Component Analysis (PCA) in machine learning.",
+  "starter_code": "def calculate_eigenvalues(matrix: list[list[float|int]]) -> list[float]:\n\treturn eigenvalues",
+  "solution": "def calculate_eigenvalues(matrix: list[list[float]]) -> list[float]:\n    a, b, c, d = matrix[0][0], matrix[0][1], matrix[1][0], matrix[1][1]\n    trace = a + d\n    determinant = a * d - b * c\n    # Calculate the discriminant of the quadratic equation\n    discriminant = trace**2 - 4 * determinant\n    # Solve for eigenvalues\n    lambda_1 = (trace + discriminant**0.5) / 2\n    lambda_2 = (trace - discriminant**0.5) / 2\n    return [lambda_1, lambda_2]",
+  "example": {
+    "input": "matrix = [[2, 1], [1, 2]]",
+    "output": "[3.0, 1.0]",
+    "reasoning": "The eigenvalues of the matrix are calculated using the characteristic equation of the matrix, which for a 2x2 matrix is $\\lambda^2 - \ttrace(A)\\lambda + \tdet(A) = 0$, where $\\lambda$ are the eigenvalues."
+  },
+  "test_cases": [
+    {
+      "test": "print(calculate_eigenvalues([[2, 1], [1, 2]]))",
+      "expected_output": "[3.0, 1.0]"
+    },
+    {
+      "test": "print(calculate_eigenvalues([[4, -2], [1, 1]]))",
+      "expected_output": "[3.0, 2.0]"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\n\ndef calculate_eigenvalues_tg(matrix) -> Tensor:\n    \"\"\"\n    Compute eigenvalues of a 2×2 matrix using tinygrad.\n    Input: 2×2 list, NumPy array, or Tensor; Output: 1-D Tensor with eigenvalues in ascending order.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\n\ndef calculate_eigenvalues_tg(matrix) -> Tensor:\n    \"\"\"\n    Compute eigenvalues of a 2×2 matrix using tinygrad.\n    Input: 2×2 list, NumPy array, or Tensor; Output: 1-D Tensor with eigenvalues in ascending order.\n    \"\"\"\n    m = Tensor(matrix).float()\n    a = m[0,0]; b = m[0,1]\n    c = m[1,0]; d = m[1,1]\n    trace = a + d\n    det = a * d - b * c\n    disc = trace * trace - 4 * det\n    sqrt_disc = disc.pow(0.5)\n    lambda1 = (trace + sqrt_disc) / 2\n    lambda2 = (trace - sqrt_disc) / 2\n    vals = sorted([lambda1.numpy(), lambda2.numpy()])\n    return Tensor(vals)",
+  "tinygrad_test_cases": [
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = calculate_eigenvalues_tg([[2.0,0.0],[0.0,3.0]])\nprint(res.numpy().tolist())",
+      "expected_output": "[2.0, 3.0]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = calculate_eigenvalues_tg([[0.0,1.0],[1.0,0.0]])\nprint(res.numpy().tolist())",
+      "expected_output": "[-1.0, 1.0]"
+    },
+    {
+      "test": "from tinygrad.tensor import Tensor\nres = calculate_eigenvalues_tg([[4.0,2.0],[1.0,3.0]])\nprint(res.numpy().tolist())",
+      "expected_output": "[2.0, 5.0]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef calculate_eigenvalues(matrix: torch.Tensor) -> torch.Tensor:\n    \"\"\"\n    Compute eigenvalues of a 2×2 matrix using PyTorch.\n    Input: 2×2 tensor; Output: 1-D tensor with the two eigenvalues in ascending order.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\n\ndef calculate_eigenvalues(matrix: torch.Tensor) -> torch.Tensor:\n    \"\"\"\n    Compute eigenvalues of a 2×2 matrix using PyTorch.\n    Input: 2×2 tensor; Output: 1-D tensor with the two eigenvalues in ascending order.\n    \"\"\"\n    a = matrix[0,0]; b = matrix[0,1]\n    c = matrix[1,0]; d = matrix[1,1]\n    trace = a + d\n    det = a * d - b * c\n    disc = trace * trace - 4 * det\n    sqrt_disc = torch.sqrt(disc)\n    lambda1 = (trace + sqrt_disc) / 2\n    lambda2 = (trace - sqrt_disc) / 2\n    eig = torch.stack([lambda1, lambda2])\n    return torch.sort(eig).values",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nres = calculate_eigenvalues(torch.tensor([[2.0,0.0],[0.0,3.0]]))\nprint(res.detach().numpy().tolist())",
+      "expected_output": "[2.0, 3.0]"
+    },
+    {
+      "test": "import torch\nres = calculate_eigenvalues(torch.tensor([[0.0,1.0],[1.0,0.0]]))\nprint(res.detach().numpy().tolist())",
+      "expected_output": "[-1.0, 1.0]"
+    },
+    {
+      "test": "import torch\nres = calculate_eigenvalues(torch.tensor([[4.0,2.0],[1.0,3.0]]))\nprint(res.detach().numpy().tolist())",
+      "expected_output": "[2.0, 5.0]"
+    }
+  ]
+}

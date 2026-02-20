@@ -1,0 +1,5 @@
+{
+  "input": "parameter = 1.0, grad_fn = lambda x: x, velocity = 0.1",
+  "output": "(0.9009, 0.0991)",
+  "reasoning": "The Nesterov Accelerated Gradient optimizer computes updated values for the parameter and velocity using a look-ahead approach. With input values parameter=1.0, grad_fn=lambda x: x, and velocity=0.1, the updated parameter becomes 0.9009 and the updated velocity becomes 0.0991."
+}

@@ -1,0 +1,1 @@
+Implement the epsilon-greedy method for action selection in an n-armed bandit problem. Given a set of estimated action values (Q-values), select an action using the epsilon-greedy policy: with probability epsilon, choose a random action; with probability 1 - epsilon, choose the action with the highest estimated value.

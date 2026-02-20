@@ -26,7 +26,7 @@ A pure node (all one class) has \( G = 0 \), and higher values indicate more cla
 
 ---
 
-## Gini Gain for a Split
+## Weighted Gini Impurity
 
 Given a feature and a threshold to split the dataset into left and right subsets:
 

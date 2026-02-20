@@ -1,0 +1,55 @@
+{
+  "id": "151",
+  "title": "Implement SwiGLU activation function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/PT-10",
+      "name": "PT-10"
+    }
+  ],
+  "pytorch_difficulty": "easy",
+  "description": "## Problem\n\nImplement a Python function that applies the **SwiGLU activation function** to a NumPy array.\n\nAssume the input array has already been passed through a linear projection and has shape `(batch_size, 2d)`. Round each output to four decimal places and return the result as a NumPy array of the shape `(batch_size, d)`.",
+  "learn_section": "## Understanding the SwiGLU Activation Function\n\nAs the name suggests the SwiGLU activation function is a combination of two activations - Swish (implemented as SiLU in PyTorch) and GLU (Gated Linear Unit). It is important that we understand Swish and GLU because SwiGLU inherits properties from both — the smooth self-gating behavior of Swish, the decoupled gating structure of GLU.\n\n### Swish Activation (Self-Gating)\n\n**Swish**, introduced by Google Brain, is a smooth, self-gated activation function defined as:\n\n$$\n\\text{Swish}(x) = x \\cdot \\sigma(x)\n$$\n\nwhere the sigmoid function is:\n\n$$\n\\sigma(x) = \\frac{1}{1 + e^{-x}}\n$$\n\nIn Swish, the same input $x$ is used to:\n  - **Compute the gate**: $\\sigma(x)$\n  - **Modulate itself**: $x \\cdot \\sigma(x)$\n\nThis is called **self-gating** — the input both **creates** and **passes through** the gate. \\\n**Note:** When written in a PyTorch forward loop, it looks something like -\n```bash\nimport torch.nn.functional as F\n\ndef forward(self, x):\n   x1 = self.fc1(x)   # x1 = Wx + b where W, b are learnable params\n   output = F.silu(x) # output = x1 * sigmoid(x1) \n   return output      # output = (Wx + b) * sigmoid(Wx + b)\n```\nThis essentially means that the gate is learnable, and the model learns the best shape of the activation function.\n\n### Gated Linear Unit (GLU)\n\n**GLU**, introduced in *Language Modeling with Gated Convolutional Networks* (Dauphin et al., 2017), is a gated activation mechanism defined as:\n\n$$\n\\text{GLU}(x_1, x_2) = x_1 \\cdot \\sigma(x_2)\n$$\n\nHere:\n- $x_1$ is the **input signal**.\n- $x_2$ is used to **compute the gate** via the sigmoid function.\n\nIn practice, both $x_1$ and $x_2$ are obtained by **splitting the output of a single linear layer**:\n\n```bash\nimport torch.nn.functional as F\n\ndef forward(self, x):\n   x_proj = self.fc1(x)                \n   x1, x2 = x_proj.chunk(2, dim=-1)    # x1 = Wx + b, x2 = Vx + c\n   output = x1 * torch.sigmoid(x2)     # GLU = x1 · σ(x2)\n   return output\n```\nSo GLU can be rewritten as:\n\n$$\n\\text{GLU}(x) = x_1 \\cdot \\sigma(x_2)\n$$\nwhere:\n$$x_1 = W x + b$$\n $$x_2 = V x + c$$\n\n\nThis is a learned, cross-gating mechanism — the model learns different parameters for the signal and the gate.\n\n\n## SwiGLU\n\nWith Swish and GLU out of the way, it becomes very easy to understand **SwiGLU**. It is defined as:\n\n$$\n\\text{SwiGLU}(x) = x_1 \\cdot \\text{Swish}(x_2)\n$$\n\nWhere:\n- $x_1, x_2$ are typically obtained by splitting a linear projection of the input (inspired by GLU).\n\n- $\\text{Swish}(x_2) = x_2 \\cdot \\sigma(x_2)$ is the self-gated activation.\n\nSo putting it together:\n\n$$\n\\text{SwiGLU}(x) = x_1 \\cdot (x_2 \\cdot \\sigma(x_2))\n$$\n\nThis combines the **signal-gate decoupling** of GLU with the **smooth self-gating** of Swish, and is used in the feed-forward blocks of large-scale models like Google's PaLM, Meta's LLaMA.\n\n\n### Why Does It Work?\n> Noam Shazeer, the author in his paper writes: \"We offer no explanation as to why these architectures seem to work; we attribute their success, as all else, to divine benevolence.\"\n\nThe improvement in performance have only been proven *emprically* by observing faster convergence during training",
+  "starter_code": "import numpy as np\n\ndef SwiGLU(x: np.ndarray) -> np.ndarray:\n    \"\"\"\n    Args:\n        x: np.ndarray of shape (batch_size, 2d)\n\n    Returns:\n        np.ndarray of shape (batch_size, d)\n    \"\"\"\n    # Your code here\n    return scores",
+  "solution": "import numpy as np\n\ndef SwiGLU(x: np.ndarray) -> np.ndarray:\n    \"\"\"\n    Args:\n        x: np.ndarray of shape (batch_size, 2d)\n\n    Returns:\n        np.ndarray of shape (batch_size, d)\n    \"\"\"\n    def sigmoid(x):\n        return 1 / (1 + np.exp(-x))\n    \n    d = x.shape[1] // 2\n    x1 = x[:, :d]\n    x2 = x[:, d:]\n    return x1 * (x2 * sigmoid(x2))",
+  "example": {
+    "input": "np.array([[1, -1, 1000, -1000]])",
+    "output": "[[1000., 0.]]",
+    "reasoning": "The input is of shape (1, 4), so it is split into x1 = [1, -1] and x2 = [1000, -1000]. The sigmoid of 1000 is approximately 1, and the sigmoid of -1000 is approximately 0 due to saturation. Thus, Swish(1000) ≈ 1000 x 1 = 1000 and Swish(-1000) ≈ -1000 x 0 = 0. Then, SwiGLU = x1 * Swish(x2) = [1 x 1000, -1 x 0] = [1000, 0]."
+  },
+  "test_cases": [
+    {
+      "test": "print(np.round(SwiGLU(np.zeros((1, 4))), 4))",
+      "expected_output": "[[0., 0.]]"
+    },
+    {
+      "test": "print(np.round(SwiGLU(np.array([[1.0, -1.0, 2.0, -2.0]])), 4))",
+      "expected_output": "[[1.7616, 0.2384]]"
+    },
+    {
+      "test": "print(np.round(SwiGLU(np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])), 4))",
+      "expected_output": "[[2.8577, 7.8561], [34.9681, 47.9839], [98.9983, 119.9993]]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef swiglu(x: torch.Tensor) -> torch.Tensor:\n    \"\"\"\n    Apply the SwiGLU activation function.\n    Assumes:\n      - Input x is a torch tensor of shape (batch_size, 2d)\n      - x has already been passed through a linear projection layer\n\n    Returns:\n      - Tensor of shape (batch_size, d) after applying SwiGLU:\n    \"\"\"\n    return scores",
+  "pytorch_solution": "import torch\n\ndef SwiGLU(x: torch.Tensor) -> torch.Tensor:\n    \"\"\"\n    Apply the SwiGLU activation function.\n    Assumes:\n      - Input x is a torch tensor of shape (batch_size, 2d)\n      - x has already been passed through a linear projection layer\n\n    Returns:\n      - Tensor of shape (batch_size, d) after applying SwiGLU:\n        x1 * SiLU(x2), where [x1, x2] = split(x)\n    \"\"\"\n    x1, x2 = x.chunk(2, dim=-1)\n    return x1 * torch.nn.functional.silu(x2)",
+  "pytorch_test_cases": [
+    {
+      "test": "print(torch.round(SwiGLU(torch.tensor([[0., 0., 0., 0.]])), decimals=4))",
+      "expected_output": "tensor([[0., 0.]])"
+    },
+    {
+      "test": "print(torch.round(SwiGLU(torch.tensor([[1.0, -1.0, 2.0, -2.0]])), decimals=4))",
+      "expected_output": "tensor([[1.7616, 0.2384]])"
+    },
+    {
+      "test": "print(torch.round(SwiGLU(torch.tensor([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])), decimals=4))",
+      "expected_output": "tensor([[2.8577, 7.8561], [34.9681, 47.9839], [98.9984, 119.9992]])"
+    }
+  ]
+}

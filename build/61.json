@@ -1,0 +1,42 @@
+{
+  "id": "61",
+  "title": "Implement F-Score Calculation for Binary Classification",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/rafaelgreca",
+      "name": "Rafael Greca"
+    }
+  ],
+  "description": "## Task: Implement F-Score Calculation for Binary Classification\n\nYour task is to implement a function that calculates the F-Score for a binary classification task. The F-Score combines both Precision and Recall into a single metric, providing a balanced measure of a model's performance.\n\nWrite a function `f_score(y_true, y_pred, beta)` where:\n\n- `y_true`: A numpy array of true labels (binary).\n- `y_pred`: A numpy array of predicted labels (binary).\n- `beta`: A float value that adjusts the importance of Precision and Recall. When `beta=1`, it computes the F1-Score, a balanced measure of both Precision and Recall.\n\nThe function should return the F-Score rounded to three decimal places.\n\n    ",
+  "learn_section": "\n## Understanding F-Score in Classification\n\nF-Score, also called F-measure, is a measure of predictive performance that's calculated from the Precision and Recall metrics.\n\n### Mathematical Definition\n\nThe $F_{\\beta}$ score applies additional weights, valuing one of precision or recall more than the other. When $\\beta$ equals 1, also known as the **F1-Score**, it symmetrically represents both precision and recall in one metric. The F-Score can be calculated using the following formula:\n\n$$\nF_{\\beta} = (1 + \\beta^2) \\times \\frac{\\text{precision} \\times \\text{recall}}{(\\beta^2 \\times \\text{precision}) + \\text{recall}}\n$$\n\nWhere:\n\n- **Recall**: The number of true positive results divided by the number of all samples that should have been identified as positive.\n- **Precision**: The number of true positive results divided by the number of all samples predicted to be positive, including those not identified correctly.\n\n### Implementation Instructions\n\nIn this problem, you will implement a function to calculate the **F-Score** given the true labels, predicted labels, and the Beta value of a binary classification task. The results should be rounded to three decimal places.\n\n#### Special Case:\nIf the denominator is zero, the F-Score should be set to **0.0** to avoid division by zero.",
+  "starter_code": "import numpy as np\n\ndef f_score(y_true, y_pred, beta):\n\t\"\"\"\n\tCalculate F-Score for a binary classification task.\n\n\t:param y_true: Numpy array of true labels\n\t:param y_pred: Numpy array of predicted labels\n\t:param beta: The weight of precision in the harmonic mean\n\t:return: F-Score rounded to three decimal places\n\t\"\"\"\n\tpass",
+  "solution": "import numpy as np\n\ndef f_score(y_true, y_pred, beta):\n    tp = np.sum((y_true == 1) & (y_pred == 1))\n    fn = np.sum((y_true == 1) & (y_pred == 0))\n    fp = np.sum((y_true == 0) & (y_pred == 1))\n\n    recall = tp / (tp + fn) if (tp + fn) > 0 else 0\n    precision = tp / (tp + fp) if (tp + fp) > 0 else 0\n\n    op = precision * recall\n    div = ((beta**2) * precision) + recall\n\n    if div == 0 or op == 0:\n        return 0.0\n\n    score = (1 + (beta ** 2)) * op / div\n    return round(score, 3)",
+  "example": {
+    "input": "y_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([1, 0, 1, 0, 0, 1])\nbeta = 1\n\nprint(f_score(y_true, y_pred, beta))",
+    "output": "0.857",
+    "reasoning": "The F-Score for the binary classification task is calculated using the true labels, predicted labels, and beta value."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([1, 0, 1, 0, 0, 1])\nbeta = 1\nprint(f_score(y_true, y_pred, beta))",
+      "expected_output": "0.857"
+    },
+    {
+      "test": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 0])\ny_pred = np.array([1, 0, 0, 0, 0, 1])\nbeta = 1\nprint(f_score(y_true, y_pred, beta))",
+      "expected_output": "0.4"
+    },
+    {
+      "test": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 0])\ny_pred = np.array([1, 0, 1, 1, 0, 0])\nbeta = 2\nprint(f_score(y_true, y_pred, beta))",
+      "expected_output": "1.0"
+    },
+    {
+      "test": "import numpy as np\n\ny_true = np.array([1, 0, 1, 1, 0, 1])\ny_pred = np.array([0, 0, 0, 1, 0, 1])\nbeta = 2\nprint(f_score(y_true, y_pred, beta))",
+      "expected_output": "0.556"
+    }
+  ]
+}

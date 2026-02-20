@@ -1,0 +1,1 @@
+Implement the Adagrad optimizer update step function. Your function should take the current parameter value, gradient, and accumulated squared gradients as inputs, and return the updated parameter value and new accumulated squared gradients. The function should also handle scalar and array inputs, and include proper input validation.

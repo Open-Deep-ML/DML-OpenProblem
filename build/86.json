@@ -1,0 +1,46 @@
+{
+  "id": "86",
+  "title": "Detect Overfitting or Underfitting",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "description": "Write a Python function to determine whether a machine learning model is overfitting, underfitting, or performing well based on training and test accuracy values. The function should take two inputs: `training_accuracy` and `test_accuracy`. It should return one of three values: 1 if Overfitting, -1 if Underfitting, or 0 if a Good fit. The rules for determination are as follows: \n- **Overfitting**: The training accuracy is significantly higher than the test accuracy (difference > 0.2).\n- **Underfitting**: Both training and test accuracy are below 0.7.\n- **Good fit**: Neither of the above conditions is true.",
+  "learn_section": "## Understanding Overfitting and Underfitting\n\nOverfitting and underfitting are two common problems in machine learning models that affect their performance and generalization ability.\n\n### Overfitting\nOverfitting occurs when a model learns the training data too well, including noise and irrelevant patterns. This results in high training accuracy but poor performance on unseen data (low test accuracy).\n\n- **Indicators**: Training accuracy >> Test accuracy (large gap).\n\n### Underfitting\nUnderfitting occurs when a model is too simple to capture the underlying patterns in the data. This leads to poor performance on both training and test datasets.\n\n- **Indicators**: Both training and test accuracy are low.\n\n### Good Fit\nA good fit occurs when the model generalizes well to unseen data, with training and test accuracy being close and both reasonably high.\n\n### Remedies\n- **For Overfitting**:\n  - Use regularization techniques (e.g., L1, L2 regularization).\n  - Reduce model complexity by pruning unnecessary features.\n  - Add more training data to improve generalization.\n- **For Underfitting**:\n  - Increase model complexity (e.g., add layers or features).\n  - Train the model for more epochs.\n  - Enhance feature engineering or input data quality.\n\n### Mathematical Representation\n1. Overfitting:\n   $$ \\text{Training Accuracy} - \\text{Test Accuracy} > 0.2 $$\n\n2. Underfitting:\n   $$ \\text{Training Accuracy} < 0.7 \\, \\text{and} \\, \\text{Test Accuracy} < 0.7 $$\n\n3. Good Fit:\n   $$ \\text{Neither overfitting nor underfitting is true.} $$",
+  "starter_code": "def model_fit_quality(training_accuracy, test_accuracy):\n\t\"\"\"\n\tDetermine if the model is overfitting, underfitting, or a good fit based on training and test accuracy.\n\t:param training_accuracy: float, training accuracy of the model (0 <= training_accuracy <= 1)\n\t:param test_accuracy: float, test accuracy of the model (0 <= test_accuracy <= 1)\n\t:return: int, one of '1', '-1', or '0'.\n\t\"\"\"\n\t# Your code here\n\tpass",
+  "solution": "def model_fit_quality(training_accuracy, test_accuracy):\n    \"\"\"\n    Determine if the model is overfitting, underfitting, or a good fit based on training and test accuracy.\n    :param training_accuracy: float, training accuracy of the model (0 <= training_accuracy <= 1)\n    :param test_accuracy: float, test accuracy of the model (0 <= test_accuracy <= 1)\n    :return: int, one of '1', '-1', or '0'.\n    \"\"\"\n    if training_accuracy - test_accuracy > 0.2:\n        return 1\n    elif training_accuracy < 0.7 and test_accuracy < 0.7:\n        return -1\n    else:\n        return 0",
+  "example": {
+    "input": "training_accuracy = 0.95, test_accuracy = 0.65",
+    "output": "'1'",
+    "reasoning": "The training accuracy is much higher than the test accuracy (difference = 0.30 > 0.2). This indicates that the model is overfitting to the training data and generalizes poorly to unseen data."
+  },
+  "test_cases": [
+    {
+      "test": "print(model_fit_quality(0.95, 0.65))",
+      "expected_output": "1"
+    },
+    {
+      "test": "print(model_fit_quality(0.6, 0.5))",
+      "expected_output": "-1"
+    },
+    {
+      "test": "print(model_fit_quality(0.85, 0.8))",
+      "expected_output": "0"
+    },
+    {
+      "test": "print(model_fit_quality(0.5, 0.6))",
+      "expected_output": "-1"
+    },
+    {
+      "test": "print(model_fit_quality(0.75, 0.74))",
+      "expected_output": "0"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "91",
+  "title": "Calculate F1 Score from Predicted and True Labels",
+  "difficulty": "easy",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "description": "Implement a function to calculate the F1 score given predicted and true labels. The F1 score is a widely used metric in machine learning, combining precision and recall into a single measure. round your solution to the 3rd decimal place",
+  "learn_section": "## **F1 Score**\n\nThe F1 score is a widely used metric in machine learning and statistics, particularly for evaluating classification models. It is the harmonic mean of **precision** and **recall**, providing a single measure that balances the trade-off between these two metrics.\n\n### **Key Concepts**\n\n1. **Precision**: Precision is the fraction of true positive predictions out of all positive predictions made by the model. It measures how many of the predicted positive instances are actually correct.\n\n    $$\n    \\text{Precision} = \\frac{\\text{True Positives (TP)}}{\\text{True Positives (TP)} + \\text{False Positives (FP)}}\n    $$\n\n2. **Recall**: Recall is the fraction of true positive predictions out of all actual positive instances in the dataset. It measures how many of the actual positive instances were correctly predicted.\n\n    $$\n    \\text{Recall} = \\frac{\\text{True Positives (TP)}}{\\text{True Positives (TP)} + \\text{False Negatives (FN)}}\n    $$\n\n3. **F1 Score**: The F1 score is the harmonic mean of precision and recall, providing a balanced measure that takes both metrics into account:\n\n    $$\n    \\text{F1 Score} = 2 \\times \\frac{\\text{Precision} \\times \\text{Recall}}{\\text{Precision} + \\text{Recall}}\n    $$\n\n### **Why Use the F1 Score?**\n\nThe F1 score is particularly useful when the dataset is imbalanced, meaning the classes are not equally represented. It provides a single metric that balances the trade-off between precision and recall, especially in scenarios where maximizing one metric might lead to a significant drop in the other.\n\n### **Example Calculation**\n\nGiven:\ny_true = [1, 0, 1, 1, 0] \n\n\ny_pred = [1, 0, 0, 1, 1] \n\n1. **Calculate True Positives (TP), False Positives (FP), and False Negatives (FN)**:\n\n    $$\n    \\text{TP} = 2, \\quad \\text{FP} = 1, \\quad \\text{FN} = 1\n    $$\n\n2. **Calculate Precision**:\n\n    $$\n    \\text{Precision} = \\frac{2}{2 + 1} = \\frac{2}{3} \\approx 0.667\n    $$\n\n3. **Calculate Recall**:\n\n    $$\n    \\text{Recall} = \\frac{2}{2 + 1} = \\frac{2}{3} \\approx 0.667\n    $$\n\n4. **Calculate F1 Score**:\n\n    $$\n    \\text{F1 Score} = 2 \\times \\frac{0.667 \\times 0.667}{0.667 + 0.667} = 0.667\n    $$\n\n### **Applications**\n\nThe F1 score is widely used in:\n- Binary classification problems (e.g., spam detection, fraud detection).\n- Multi-class classification problems (evaluated per class and averaged).\n- Information retrieval tasks (e.g., search engines, recommendation systems).\n\nMastering the F1 score is essential for evaluating and comparing the performance of classification models.",
+  "starter_code": "def calculate_f1_score(y_true, y_pred):\n\t\"\"\"\n\tCalculate the F1 score based on true and predicted labels.\n\n\tArgs:\n\t\ty_true (list): True labels (ground truth).\n\t\ty_pred (list): Predicted labels.\n\n\tReturns:\n\t\tfloat: The F1 score rounded to three decimal places.\n\t\"\"\"\n\t# Your code here\n\tpass\n\treturn round(f1,3)",
+  "solution": "def calculate_f1_score(y_true, y_pred):\n    \"\"\"\n    Calculate the F1 score based on true and predicted labels.\n\n    Args:\n        y_true (list): True labels (ground truth).\n        y_pred (list): Predicted labels.\n\n    Returns:\n        float: The F1 score rounded to three decimal places.\n    \"\"\"\n    if len(y_true) != len(y_pred):\n        raise ValueError(\"Lengths of y_true and y_pred must be the same\")\n\n    tp = sum(1 for yt, yp in zip(y_true, y_pred) if yt == yp == 1)\n    fp = sum(1 for yt, yp in zip(y_true, y_pred) if yt == 0 and yp == 1)\n    fn = sum(1 for yt, yp in zip(y_true, y_pred) if yt == 1 and yp == 0)\n\n    if tp + fp == 0 or tp + fn == 0:\n        return 0.0\n\n    precision = tp / (tp + fp)\n    recall = tp / (tp + fn)\n\n    if precision + recall == 0:\n        return 0.0\n\n    f1_score = 2 * (precision * recall) / (precision + recall)\n    return round(f1_score, 3)",
+  "example": {
+    "input": "y_true = [1, 0, 1, 1, 0], y_pred = [1, 0, 0, 1, 1]",
+    "output": "0.667",
+    "reasoning": "The true positives, false positives, and false negatives are calculated from the given labels. Precision and recall are derived, and the F1 score is computed as their harmonic mean."
+  },
+  "test_cases": [
+    {
+      "test": "print(calculate_f1_score([1, 0, 1, 1, 0], [1, 0, 0, 1, 1]))",
+      "expected_output": "0.667"
+    },
+    {
+      "test": "print(calculate_f1_score([1, 1, 0, 0], [1, 0, 0, 1]))",
+      "expected_output": "0.5"
+    },
+    {
+      "test": "print(calculate_f1_score([0, 0, 0, 0], [1, 1, 1, 1]))",
+      "expected_output": "0.0"
+    }
+  ]
+}

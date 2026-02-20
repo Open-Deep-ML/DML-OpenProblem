@@ -1,0 +1,16 @@
+{
+  "id": "151",
+  "title": "Dropout Layer",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/mavleo96",
+      "name": "Vijayabharathi Murugan"
+    }
+  ],
+  "pytorch_difficulty": "easy"
+}

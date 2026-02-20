@@ -1,0 +1,46 @@
+{
+  "id": "84",
+  "title": "Phi Transformation for Polynomial Features",
+  "difficulty": "easy",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/changyy06",
+      "name": "changyy06"
+    }
+  ],
+  "description": "Write a Python function to perform a Phi Transformation that maps input features into a higher-dimensional space by generating polynomial features. The transformation allows models like linear regression to fit nonlinear data by introducing new feature dimensions that represent polynomial combinations of the original input features. The function should take a list of numerical data and a degree as inputs, and return a nested list where each inner list represents the transformed features of a data point. If the degree is less than 0, the function should return an empty list.",
+  "learn_section": "## Phi Transformation\n\nThe Phi Transformation maps input features into a higher-dimensional space by generating polynomial features. This allows models like linear regression to fit nonlinear data by introducing new feature dimensions that represent polynomial combinations of the original input features.\n\n### Why Use Phi Transformation?\n\n- To increase the expressive power of simple models such as linear models.\n- To enable better fitting of nonlinear relationships in the data.\n\n### Equations\n\nFor an input value $x$, the Phi Transformation expands it as:\n\n$$\n\\Phi(x) = [1, x, x^2, x^3, \\dots, x^d]\n$$\n\nWhere $d$ is the specified degree, and $\\Phi(x)$ represents the transformed feature vector.\n\n### Example 1: Polynomial Expansion for One Value\n\nGiven $x = 3$ and $d = 3$, the Phi Transformation is:\n\n$$\n\\Phi(3) = [1, 3, 9, 27]\n$$\n\n### Example 2: Transformation for Multiple Values\n\nFor $\\text{data} = [1, 2]$ and $d = 2$, the Phi Transformation is:\n\n$$\n\\Phi([1, 2]) = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 4 \\end{bmatrix}\n$$",
+  "starter_code": "import numpy as np\n\ndef phi_transform(data: list[float], degree: int) -> list[list[float]]:\n\t\"\"\"\n\tPerform a Phi Transformation to map input features into a higher-dimensional space by generating polynomial features.\n\n\tArgs:\n\t\tdata (list[float]): A list of numerical values to transform.\n\t\tdegree (int): The degree of the polynomial expansion.\n\n\t\"\"\"\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef phi_transform(data: list[float], degree: int) -> list[list[float]]:\n\t\"\"\"\n\tPerform a Phi Transformation to map input features into a higher-dimensional space by generating polynomial features.\n\n\tArgs:\n\t\tdata (list[float]): A list of numerical values to transform.\n\t\tdegree (int): The degree of the polynomial expansion.\n\n\tReturns:\n\t\tlist[list[float]]: A nested list where each inner list represents the transformed features of a data point.\n\t\"\"\"\n\tif degree < 0 or not data:\n\t\treturn []\n\treturn np.array([[x ** i for i in range(degree + 1)] for x in data]).tolist()",
+  "example": {
+    "input": "data = [1.0, 2.0], degree = 2",
+    "output": "[[1.0, 1.0, 1.0], [1.0, 2.0, 4.0]]",
+    "reasoning": "The Phi Transformation generates polynomial features for each data point up to the specified degree. For data = [1.0, 2.0] and degree = 2, the transformation creates a nested list where each row contains powers of the data point from 0 to 2."
+  },
+  "test_cases": [
+    {
+      "test": "print(phi_transform([], 2))",
+      "expected_output": "[]"
+    },
+    {
+      "test": "print(phi_transform([1.0, 2.0], -1))",
+      "expected_output": "[]"
+    },
+    {
+      "test": "print(phi_transform([1.0, 2.0], 2))",
+      "expected_output": "[[1.0, 1.0, 1.0], [1.0, 2.0, 4.0]]"
+    },
+    {
+      "test": "print(phi_transform([1.0, 3.0], 3))",
+      "expected_output": "[[1.0, 1.0, 1.0, 1.0], [1.0, 3.0, 9.0, 27.0]]"
+    },
+    {
+      "test": "print(phi_transform([2.0], 4))",
+      "expected_output": "[[1.0, 2.0, 4.0, 8.0, 16.0]]"
+    }
+  ]
+}

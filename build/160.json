@@ -1,0 +1,66 @@
+{
+  "id": "160",
+  "title": "Mixed Precision Training",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/komaksym",
+      "name": "komaksym"
+    }
+  ],
+  "description": "Write a Python class to implement Mixed Precision Training that uses both float32 and float16 data types to optimize memory usage and speed. Your class should have an `__init__(self, loss_scale=1024.0)` method to initialize with loss scaling factor. Implement `forward(self, weights, inputs, targets)` to perform forward pass with float16 computation and return Mean Squared Error (MSE) loss (scaled) in float32, and `backward(self, gradients)` to unscale gradients and check for overflow. Use float16 for computations but float32 for gradient accumulation. Return gradients as float32 and set them to zero if overflow is detected. Only use NumPy.",
+  "learn_section": "# **Mixed Precision Training**\n## **1. Definition**\nMixed Precision Training is a **deep learning optimization technique** that uses both **float16** (half precision) and **float32** (single precision) data types during training to reduce memory usage and increase training speed while maintaining model accuracy.\nThe technique works by:\n- **Using float16 for forward pass computations** to save memory and increase speed\n- **Using float32 for gradient accumulation** to maintain numerical precision\n- **Applying loss scaling** to prevent gradient underflow in float16\n---\n## **2. Key Components**\n### **Mean Squared Error (MSE) Loss**\nThe loss function must be computed as Mean Squared Error:\n$$\n\\text{MSE} = \\frac{1}{n} \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2\n$$\nwhere $y_i$ is the target and $\\hat{y}_i$ is the prediction for sample $i$.\n\n### **Loss Scaling**\nTo prevent gradient underflow in float16, gradients are scaled up during the forward pass:\n$$\n\\text{scaled\\_loss} = \\text{MSE} \\times \\text{scale\\_factor}\n$$\nThen unscaled during backward pass:\n$$\n\\text{gradient} = \\frac{\\text{scaled\\_gradient}}{\\text{scale\\_factor}}\n$$\n### **Overflow Detection**\nCheck for invalid gradients (NaN or Inf) that indicate numerical overflow:\n$$\n\\text{overflow} = \\text{any}(\\text{isnan}(\\text{gradients}) \\text{ or } \\text{isinf}(\\text{gradients}))\n$$\n---\n## **3. Precision Usage**\n- **float16**: Forward pass computations, activations, temporary calculations\n- **float32**: Gradient accumulation, parameter updates, loss scaling\n- **Automatic casting**: Convert between precisions as needed\n- **Loss computation**: Use MSE as the loss function before scaling\n---\n## **4. Benefits and Applications**\n- **Memory Efficiency**: Reduces memory usage by ~50% for activations\n- **Speed Improvement**: Faster computation on modern GPUs with Tensor Cores\n- **Training Stability**: Loss scaling prevents gradient underflow\n- **Model Accuracy**: Maintains comparable accuracy to full precision training\nCommon in training large neural networks where memory is a constraint and speed is critical.\n---",
+  "starter_code": "import numpy as np\n\nclass MixedPrecision:\n    def __init__(self, loss_scale=1024.0):\n        # Initialize loss scaling factor\n        pass\n    \n    def forward(self, weights, inputs, targets):\n        # Perform forward pass with float16, return scaled loss as float32\n        pass\n    \n    def backward(self, gradients):\n        # Unscale gradients and check for overflow, return as float32\n        pass",
+  "solution": "import numpy as np\n\nclass MixedPrecision:\n    def __init__(self, loss_scale=1024.0):\n        self.loss_scale = loss_scale\n\n    def forward(self, weights, inputs, targets):\n        # Convert ALL inputs to float16 for computation (regardless of input dtype)\n        weights_fp16 = weights.astype(np.float16)\n        inputs_fp16 = inputs.astype(np.float16)\n        targets_fp16 = targets.astype(np.float16)\n\n        # Simple forward pass: linear model + MSE loss\n        predictions = np.dot(inputs_fp16, weights_fp16)\n        loss = np.mean((targets_fp16 - predictions) ** 2)\n\n        # Scale loss and convert back to float32 (Python float)\n        scaled_loss = float(loss) * self.loss_scale\n        return scaled_loss\n\n    def backward(self, gradients):\n        # Convert gradients to float32 for precision (regardless of input dtype)\n        gradients_fp32 = gradients.astype(np.float32)\n\n        # Check for overflow (NaN or Inf)\n        overflow = np.any(np.isnan(gradients_fp32)) or np.any(np.isinf(gradients_fp32))\n\n        if overflow:\n            # Return zero gradients if overflow detected (must be float32)\n            return np.zeros_like(gradients_fp32, dtype=np.float32)\n\n        # Unscale gradients (ensure result is float32)\n        unscaled_gradients = gradients_fp32 / self.loss_scale\n        return unscaled_gradients.astype(np.float32)",
+  "example": {
+    "input": "import numpy as np\nmp = MixedPrecision(loss_scale=1024.0)\nweights = np.array([0.5, -0.3], dtype=np.float32)\ninputs = np.array([[1.0, 2.0], [3.0, 4.0]], dtype=np.float32)\ntargets = np.array([1.0, 0.0], dtype=np.float32)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.4f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")\ngrads = np.array([512.0, -256.0], dtype=np.float32)\nresult = mp.backward(grads)\nprint(f\"Gradients: {result}\")\nprint(f\"Grad dtype: {result.dtype}\")",
+    "output": "Loss: 665.0000\nLoss dtype: float\nGradients: [0.5 -0.25]\nGrad dtype: float32",
+    "reasoning": "Forward pass converts inputs to float16, computes loss, then scales and returns as Python float (float32). Backward converts gradients to float32 and unscales. Final gradients must be float32 type."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=1024.0)\nweights = np.array([0.5, -0.3], dtype=np.float32)\ninputs = np.array([[1.0, 2.0], [3.0, 4.0]], dtype=np.float32)\ntargets = np.array([1.0, 0.0], dtype=np.float32)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.4f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")",
+      "expected_output": "Loss: 665.0000\nLoss dtype: float"
+    },
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=1024.0)\ngrads = np.array([512.0, -256.0], dtype=np.float32)\nresult = mp.backward(grads)\nprint(f\"Gradients: {result}\")\nprint(f\"Grad dtype: {result.dtype}\")",
+      "expected_output": "Gradients: [ 0.5  -0.25]\nGrad dtype: float32"
+    },
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=512.0)\nweights = np.array([1.0, 0.5], dtype=np.float64)\ninputs = np.array([[2.0, 1.0]], dtype=np.float64)\ntargets = np.array([3.0], dtype=np.float64)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.1f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")",
+      "expected_output": "Loss: 128.0\nLoss dtype: float"
+    },
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=512.0)\ngrads = np.array([1024.0, 512.0], dtype=np.float16)\nresult = mp.backward(grads)\nprint(f\"Gradients: [{result[0]:.0f} {result[1]:.0f}]\")\nprint(f\"Grad dtype: {result.dtype}\")",
+      "expected_output": "Gradients: [2 1]\nGrad dtype: float32"
+    },
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=100.0)\nweights = np.array([0.1, 0.2], dtype=np.float32)\ninputs = np.array([[1.0, 1.0]], dtype=np.float32)\ntargets = np.array([0.5], dtype=np.float32)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.1f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")",
+      "expected_output": "Loss: 4.0\nLoss dtype: float"
+    },
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=100.0)\ngrads = np.array([200.0, 100.0], dtype=np.float64)\nresult = mp.backward(grads)\nprint(f\"Gradients: [{result[0]:.0f} {result[1]:.0f}]\")\nprint(f\"Grad dtype: {result.dtype}\")",
+      "expected_output": "Gradients: [2 1]\nGrad dtype: float32"
+    },
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=2048.0)\nweights = np.array([0.25], dtype=np.float64)\ninputs = np.array([[4.0]], dtype=np.float64)\ntargets = np.array([2.0], dtype=np.float64)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.1f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")",
+      "expected_output": "Loss: 2048.0\nLoss dtype: float"
+    },
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=2048.0)\ngrads = np.array([np.nan], dtype=np.float16)\nresult = mp.backward(grads)\nprint(f\"Gradients: [{result[0]:.0f}]\")\nprint(f\"Grad dtype: {result.dtype}\")",
+      "expected_output": "Gradients: [0]\nGrad dtype: float32"
+    },
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=256.0)\nweights = np.array([1.0], dtype=np.float16)\ninputs = np.array([[2.0]], dtype=np.float16)\ntargets = np.array([3.0], dtype=np.float16)\nloss = mp.forward(weights, inputs, targets)\nprint(f\"Loss: {loss:.1f}\")\nprint(f\"Loss dtype: {type(loss).__name__}\")",
+      "expected_output": "Loss: 256.0\nLoss dtype: float"
+    },
+    {
+      "test": "import numpy as np\nmp = MixedPrecision(loss_scale=256.0)\ngrads = np.array([np.inf], dtype=np.float64)\nresult = mp.backward(grads)\nprint(f\"Gradients: [{result[0]:.0f}]\")\nprint(f\"Grad dtype: {result.dtype}\")",
+      "expected_output": "Gradients: [0]\nGrad dtype: float32"
+    }
+  ]
+}

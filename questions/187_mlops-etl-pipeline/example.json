@@ -1,0 +1,5 @@
+{
+  "input": "run_etl(\"user_id,event_type,value\\n u1, purchase, 10.0\\n u2, view, 1.0\\n u1, purchase, 5\\n u3, purchase, not_a_number\\n u2, purchase, 3.5 \\n\\n\")",
+  "output": "[('u1', 15.0), ('u2', 3.5)]",
+  "reasoning": "Keep only purchases; convert values; drop invalid; aggregate per user; sort by user_id."
+}

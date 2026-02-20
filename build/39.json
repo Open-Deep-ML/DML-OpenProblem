@@ -1,0 +1,38 @@
+{
+  "id": "39",
+  "title": "Implementation of Log Softmax Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/MKFMIKU",
+      "name": "Kangfu MEI"
+    }
+  ],
+  "description": "In machine learning and statistics, the softmax function is a generalization of the logistic function that converts a vector of scores into probabilities. The log-softmax function is the logarithm of the softmax function, and it is often used for numerical stability when computing the softmax of large numbers.\n\nGiven a 1D numpy array of scores, implement a Python function to compute the log-softmax of the array.",
+  "learn_section": "\n## Understanding Log Softmax Function\n\nThe log softmax function is a numerically stable way of calculating the logarithm of the softmax function. The softmax function converts a vector of arbitrary values (logits) into a vector of probabilities, where each value lies between 0 and 1, and the values sum to 1.\n\n### Softmax Function\nThe softmax function is given by:\n$$\n\\text{softmax}(x_i) = \\frac{e^{x_i}}{\\sum_{j=1}^n e^{x_j}}\n$$\n\n### Log Softmax Function\nDirectly applying the logarithm to the softmax function can lead to numerical instability, especially when dealing with large numbers. To prevent this, we use the log-softmax function, which incorporates a shift by subtracting the maximum value from the input vector:\n$$\n\\text{log softmax}(x_i) = x_i - \\max(x) - \\log\\left(\\sum_{j=1}^n e^{x_j - \\max(x)}\\right)\n$$\n\nThis formulation helps to avoid overflow issues that can occur when exponentiating large numbers. The log-softmax function is particularly useful in machine learning for calculating probabilities in a stable manner, especially when used with cross-entropy loss functions.",
+  "starter_code": "import numpy as np\n\ndef log_softmax(scores: list) -> np.ndarray:\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef log_softmax(scores: list) -> np.ndarray:\n    # Subtract the maximum value for numerical stability\n    scores = scores - np.max(scores)\n    return scores - np.log(np.sum(np.exp(scores)))",
+  "example": {
+    "input": "A = np.array([1, 2, 3])\nprint(log_softmax(A))",
+    "output": "array([-2.4076, -1.4076, -0.4076])",
+    "reasoning": "The log-softmax function is applied to the input array [1, 2, 3]. The output array contains the log-softmax values for each element."
+  },
+  "test_cases": [
+    {
+      "test": "print(log_softmax([1, 2, 3]))",
+      "expected_output": "[-2.4076, -1.4076, -0.4076]"
+    },
+    {
+      "test": "print(log_softmax([1, 1, 1]))",
+      "expected_output": "[-1.0986, -1.0986, -1.0986]"
+    },
+    {
+      "test": "print(log_softmax([1, 1, .0000001]))",
+      "expected_output": "[-0.862, -0.862, -1.862]"
+    }
+  ]
+}

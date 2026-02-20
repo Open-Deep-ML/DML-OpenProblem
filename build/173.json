@@ -1,0 +1,38 @@
+{
+  "id": "173",
+  "title": "Implement K-Nearest Neighbors",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/kartik-git",
+      "name": "kartik-git"
+    }
+  ],
+  "description": "## Problem\n\nGiven a list of points in n-dimensional space represented as tuples and a query point, implement a function to find the k nearest neighbors to the query point using Euclidean distance.",
+  "learn_section": "## Solution Explanation\n\nThe key insight is to use numpy's vectorized operations to efficiently calculate distances between the query point and all data points simultaneously, then select the k smallest distances.\n\n## Algorithm Steps:\n\nConvert to numpy arrays - Transform the input tuples into numpy arrays for vectorized operations\nCalculate distances - Use broadcasting to compute Euclidean distance from query point to all points at once\nFind k nearest - Use np.argsort() to get indices of points sorted by distance, then take first k\nReturn as tuples - Convert the selected points back to tuple format",
+  "starter_code": "def k_nearest_neighbors(points, query_point, k):\n    \"\"\"\n    Find k nearest neighbors to a query point\n    \n    Args:\n        points: List of tuples representing points [(x1, y1), (x2, y2), ...]\n        query_point: Tuple representing query point (x, y)\n        k: Number of nearest neighbors to return\n    \n    Returns:\n        List of k nearest neighbor points as tuples\n    \"\"\"\n    pass",
+  "solution": "def k_nearest_neighbors(points, query_point, k):\n    \"\"\"\n    Find k nearest neighbors to a query point\n    \n    Args:\n        points: List of tuples representing points [(x1, y1), (x2, y2), ...]\n        query_point: Tuple representing query point (x, y)\n        k: Number of nearest neighbors to return\n    \n    Returns:\n        List of k nearest neighbor points as tuples\n    \"\"\"\n    if not points or k <= 0:\n        return []\n    \n    if k > len(points):\n        k = len(points)\n    \n    # Convert to numpy arrays for vectorized operations\n    points_array = np.array(points)\n    query_array = np.array(query_point)\n    \n    # Calculate Euclidean distances using broadcasting\n    distances = np.sqrt(np.sum((points_array - query_array) ** 2, axis=1))\n    \n    # Get indices of k smallest distances\n    k_nearest_indices = np.argsort(distances)[:k]\n    \n    # Return the k nearest points as tuples\n    return [tuple(points_array[i]) for i in k_nearest_indices]",
+  "example": {
+    "input": "points = [(1, 2), (3, 4), (1, 1), (5, 6), (2, 3)], query_point = (2, 2), k = 3",
+    "output": "[(1, 2), (2, 3), (1, 1)]",
+    "reasoning": "The 3 closest points to (2, 2) are (1, 2), (2, 3), and (1, 1), so the output is [(1, 2), (2, 3), (1, 1)]."
+  },
+  "test_cases": [
+    {
+      "test": "print(k_nearest_neighbors([(1, 2), (3, 4), (1, 1), (5, 6), (2, 3)], (2, 2), 3))",
+      "expected_output": "[(1, 2), (2, 3), (1, 1)]"
+    },
+    {
+      "test": "print(k_nearest_neighbors([(0, 0), (1, 1), (2, 2), (3, 3)], (1.5, 1.5), 2))",
+      "expected_output": "[(1, 1), (2, 2)]"
+    },
+    {
+      "test": "print(k_nearest_neighbors([(1, 1), (2, 2), (3, 3)], (0, 0), 1))",
+      "expected_output": "[(1, 1)]"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "150",
+  "title": "Nesterov Accelerated Gradient Optimizer",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/mavleo96",
+      "name": "Vijayabharathi Murugan"
+    }
+  ],
+  "description": "Implement the Nesterov Accelerated Gradient (NAG) optimizer update step function. Your function should take the current parameter value, gradient function, and velocity as inputs, and return the updated parameter value and new velocity. The function should use the \"look-ahead\" approach where momentum is applied before computing the gradient, and should handle both scalar and array inputs.",
+  "learn_section": "# Implementing Nesterov Accelerated Gradient (NAG) Optimizer\n\n## Introduction\nNesterov Accelerated Gradient (NAG) is an improvement over classical momentum optimization. While momentum helps accelerate gradient descent in the relevant direction, NAG takes this a step further by looking ahead in the direction of the momentum before computing the gradient. This \"look-ahead\" property helps NAG make more informed updates and often leads to better convergence.\n\n## Learning Objectives\n- Understand how Nesterov Accelerated Gradient optimization works\n- Learn to implement NAG-based gradient updates\n- Understand the advantages of NAG over classical momentum\n- Gain practical experience with advanced gradient-based optimization\n\n## Theory\nNesterov Accelerated Gradient uses a \"look-ahead\" approach where it first makes a momentum-based step and then computes the gradient at that position. The key equations are:\n\n$\\theta_{lookahead, t-1} = \\theta_{t-1} - \\gamma v_{t-1}$ (Look-ahead position)\n\n$v_t = \\gamma v_{t-1} + \\eta \\nabla_\\theta J(\\theta_{lookahead, t-1})$ (Velocity update)\n\n$\\theta_t = \\theta_{t-1} - v_t$ (Parameter update)\n\nWhere:\n- $v_t$ is the velocity at time t\n- $\\gamma$ is the momentum coefficient (typically 0.9)\n- $\\eta$ is the learning rate\n- $\\nabla_\\theta J(\\theta)$ is the gradient of the loss function\n\nThe key difference from classical momentum is that the gradient is evaluated at $\\theta_{lookahead, t-1}$ instead of $\\theta_{t-1}$\n\nRead more at:\n\n1. Nesterov, Y. (1983). A method for solving the convex programming problem with convergence rate O(1/k²). Doklady Akademii Nauk SSSR, 269(3), 543-547.\n2. Ruder, S. (2017). An overview of gradient descent optimization algorithms. [arXiv:1609.04747](https://arxiv.org/pdf/1609.04747)\n\n\n## Problem Statement\nImplement the Nesterov Accelerated Gradient optimizer update step function. Your function should take the current parameter value, gradient function, and velocity as inputs, and return the updated parameter value and new velocity.\n\n### Input Format\nThe function should accept:\n- parameter: Current parameter value\n- gradient function: A function that accepts parameters and returns gradient computed at that point\n- velocity: Current velocity\n- learning_rate: Learning rate (default=0.01)\n- momentum: Momentum coefficient (default=0.9)\n\n### Output Format\nReturn tuple: (updated_parameter, updated_velocity)\n\n## Example\n```python\n# Example usage:\ndef grad_func(parameter):\n    # Returns gradient\n    pass\n\nparameter = 1.0\nvelocity = 0.1\n\nnew_param, new_velocity = nag_optimizer(parameter, grad_func, velocity)\n```\n\n## Tips\n- Initialize velocity as zero\n- Use numpy for numerical operations\n- Test with both scalar and array inputs\n- Remember that the gradient should be computed at the look-ahead position\n\n---",
+  "starter_code": "import numpy as np\n\ndef nag_optimizer(parameter, grad_fn, velocity, learning_rate=0.01, momentum=0.9):\n    \"\"\"\n    Update parameters using the Nesterov Accelerated Gradient optimizer.\n    Uses a \"look-ahead\" approach to improve convergence by applying momentum before computing the gradient.\n\n    Args:\n        parameter: Current parameter value\n        grad_fn: Function that computes the gradient at a given position\n        velocity: Current velocity (momentum term)\n        learning_rate: Learning rate (default=0.01)\n        momentum: Momentum coefficient (default=0.9)\n\n    Returns:\n        tuple: (updated_parameter, updated_velocity)\n    \"\"\"\n    # Your code here\n    return np.round(parameter, 5), np.round(velocity, 5)",
+  "solution": "import numpy as np\n\ndef nag_optimizer(parameter, grad_fn, velocity, learning_rate=0.01, momentum=0.9):\n    \"\"\"\n    Update parameters using the Nesterov Accelerated Gradient optimizer.\n    Uses a \"look-ahead\" approach to improve convergence by applying momentum before computing the gradient.\n\n    Args:\n        parameter: Current parameter value\n        grad_fn: Function that computes the gradient at a given position\n        velocity: Current velocity (momentum term)\n        learning_rate: Learning rate (default=0.01)\n        momentum: Momentum coefficient (default=0.9)\n\n    Returns:\n        tuple: (updated_parameter, updated_velocity)\n    \"\"\"\n    assert 0 <= momentum < 1, \"Momentum must be between 0 and 1\"\n    assert learning_rate > 0, \"Learning rate must be positive\"\n\n    # Compute look-ahead position\n    look_ahead = parameter - momentum * velocity\n    \n    # Compute gradient at look-ahead position\n    grad = grad_fn(look_ahead)\n    \n    # Update velocity using momentum and gradient\n    velocity = momentum * velocity + learning_rate * grad\n    \n    # Update parameters using the new velocity\n    parameter = parameter - velocity\n\n    return np.round(parameter, 5), np.round(velocity, 5)",
+  "example": {
+    "input": "parameter = 1.0, grad_fn = lambda x: x, velocity = 0.1",
+    "output": "(0.9009, 0.0991)",
+    "reasoning": "The Nesterov Accelerated Gradient optimizer computes updated values for the parameter and velocity using a look-ahead approach. With input values parameter=1.0, grad_fn=lambda x: x, and velocity=0.1, the updated parameter becomes 0.9009 and the updated velocity becomes 0.0991."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\ndef gradient_function(x):\n    if isinstance(x, np.ndarray):\n        n = len(x)\n        return x - np.arange(n)\n    else:\n        return x - 0\nprint(nag_optimizer(1., gradient_function, 0.5, 0.01, 0.9))",
+      "expected_output": "(0.5445, 0.4555)"
+    },
+    {
+      "test": "import numpy as np\ndef gradient_function(x):\n    if isinstance(x, np.ndarray):\n        n = len(x)\n        return x - np.arange(n)\n    else:\n        return x - 0\nprint(nag_optimizer(np.array([1.0, 2.0]), gradient_function, np.array([0.5, 1.0]), 0.01, 0.9))",
+      "expected_output": "(array([0.5445, 1.099]), array([0.4555, 0.901]))"
+    },
+    {
+      "test": "import numpy as np\ndef gradient_function(x):\n    if isinstance(x, np.ndarray):\n        n = len(x)\n        return x - np.arange(n)\n    else:\n        return x - 0\nprint(nag_optimizer(np.array([1.0, 2.0]), gradient_function, np.array([0.5, 1.0]), 0.01, 0.0))",
+      "expected_output": "(array([0.99, 1.99]), array([0.01, 0.01]))"
+    },
+    {
+      "test": "import numpy as np\ndef gradient_function(x):\n    if isinstance(x, np.ndarray):\n        n = len(x)\n        return x - np.arange(n)\n    else:\n        return x - 0\nprint(nag_optimizer(0.9, gradient_function, 1, 0.01, 0.9))",
+      "expected_output": "(0.0, 0.9)"
+    }
+  ]
+}

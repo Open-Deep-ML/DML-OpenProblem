@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import numpy as np\nB, C, H, W = 2, 2, 2, 2\nnp.random.seed(42)\nX = np.random.randn(B, C, H, W)\ngamma = np.ones(C)\nbeta = np.zeros(C)\nout = instance_normalization(X, gamma, beta)\nprint(np.round(out[1][1], 4))",
+    "expected_output": "[[ 1.4005, -1.0503] [-0.8361, 0.486 ]]"
+  },
+  {
+    "test": "import numpy as np\nB, C, H, W = 2, 2, 2, 2\nnp.random.seed(101)\nX = np.random.randn(B, C, H, W)\ngamma = np.ones(C)\nbeta = np.zeros(C)\nout = instance_normalization(X, gamma, beta)\nprint(np.round(out[1][0], 4))",
+    "expected_output": "[[-1.537, 0.9811], [ 0.7882, -0.2323]]"
+  },
+  {
+    "test": "import numpy as np\nB, C, H, W = 2, 2, 2, 2\nnp.random.seed(101)\nX = np.random.randn(B, C, H, W)\ngamma = np.ones(C) * 0.5\nbeta = np.ones(C)\nout = instance_normalization(X, gamma, beta)\nprint(np.round(out[0][0], 4))",
+    "expected_output": "[[1.8542, 0.6861], [0.8434, 0.6163]]"
+  }
+]

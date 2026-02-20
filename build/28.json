@@ -1,0 +1,38 @@
+{
+  "id": "28",
+  "title": "SVD of a 2x2 Matrix using eigen values & vectors",
+  "difficulty": "hard",
+  "category": "Linear Algebra",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/brentspell",
+      "name": "brentspell"
+    },
+    {
+      "profile_link": "https://github.com/EpsIotaPi",
+      "name": "EpsIotaPi"
+    }
+  ],
+  "description": "Given a 2x2 matrix, write a Python function to compute its Singular Value Decomposition (SVD). The function should return the matrices U, S, and V such that A = U * S * V, use the method described in this post https://metamerist.blogspot.com/2006/10/linear-algebra-for-graphics-geeks-svd.html",
+  "learn_section": "\n## Understanding Singular Value Decomposition (SVD)\n\nSingular Value Decomposition (SVD) is a method in linear algebra for decomposing a matrix into three other matrices. For a given matrix \\( A \\), SVD is represented as:\n$$\nA = U \\cdot S \\cdot V^T\n$$\n\n### Step-by-Step Method to Calculate the SVD of a 2x2 Matrix by Hand\n\n1. **Calculate \\( A^T A \\) and \\( A A^T \\)**  \n   Compute the product of the matrix with its transpose and the transpose of the matrix with itself. These matrices share the same eigenvalues.\n\n2. **Find the Eigenvalues**  \n   To find the eigenvalues of a 2x2 matrix, solve the characteristic equation:\n   $$\n   \\det(A - \\lambda I) = 0\n   $$\n   This results in a quadratic equation.\n\n3. **Compute the Singular Values**  \n   The singular values, which form the diagonal elements of the matrix \\( S \\), are the square roots of the eigenvalues.\n\n4. **Calculate the Eigenvectors**  \n   For each eigenvalue, solve the equation:\n   $$\n   (A - \\lambda I) \\mathbf{x} = 0\n   $$\n   to find the corresponding eigenvector. Normalize these eigenvectors to form the columns of \\( U \\) and \\( V \\).\n\n5. **Form the Matrices \\( U \\), \\( S \\), and \\( V \\)**  \n   Combine the singular values and eigenvectors to construct the matrices \\( U \\), \\( S \\), and \\( V \\) such that:\n   $$\n   A = U \\cdot S \\cdot V^T\n   $$\n\n### Additional Notes\n- This method involves solving quadratic equations to find eigenvalues and eigenvectors and normalizing these vectors to unit length.\n- **Resources**:  \n  - *Linear Algebra for Graphics Geeks (SVD-IX) by METAMERIST* [Google Search]  \n  - *Robust Algorithm for 2×2 SVD*\n\nThis explanation provides a clear and structured overview of how to calculate the SVD of a 2x2 matrix by hand.",
+  "starter_code": "import numpy as np\n\ndef svd_2x2(A: np.ndarray) -> tuple:\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef svd_2x2(A: np.ndarray) -> tuple:\n    y1, x1 = (A[1, 0] + A[0, 1]), (A[0, 0] - A[1, 1])\n    y2, x2 = (A[1, 0] - A[0, 1]), (A[0, 0] + A[1, 1])\n\n    h1 = np.sqrt(y1**2 + x1**2)\n    h2 = np.sqrt(y2**2 + x2**2)\n\n    t1 = x1 / h1\n    t2 = x2 / h2\n\n    cc = np.sqrt((1.0 + t1) * (1.0 + t2))\n    ss = np.sqrt((1.0 - t1) * (1.0 - t2))\n    cs = np.sqrt((1.0 + t1) * (1.0 - t2))\n    sc = np.sqrt((1.0 - t1) * (1.0 + t2))\n\n    c1, s1 = (cc - ss) / 2.0, (sc + cs) / 2.0\n    U = np.array([[-c1, -s1], [-s1, c1]])\n\n    s = np.array([(h1 + h2) / 2.0, abs(h1 - h2) / 2.0])\n\n    V = np.diag(1.0 / s) @ U.T @ A\n\n    return U, s, V\n    ",
+  "example": {
+    "input": "A = [[-10, 8], \n         [10, -1]]",
+    "output": "(array([[  0.8, -0.6], [-0.6, -0.8]]), \n    array([15.65247584,  4.47213595]), \n    array([[ -0.89442719,  0.4472136], [ -0.4472136 , -0.89442719]]))",
+    "reasoning": "The SVD of the matrix A is calculated using the eigenvalues and eigenvectors of A^T A and A A^T. The singular values are the square roots of the eigenvalues, and the eigenvectors form the columns of matrices U and V."
+  },
+  "test_cases": [
+    {
+      "test": "U,s,V = svd_2x2(np.array([[-10, 8], [10, -1]]))\nresult = U @ np.diag(s) @ V\nprint(result)",
+      "expected_output": "[[-10, 8], [10, -1]]"
+    },
+    {
+      "test": "U,s,V = svd_2x2(np.array([[1, 2], [3, 4]]))\nresult = U @ np.diag(s) @ V\nprint(result)",
+      "expected_output": "[[1, 2], [3, 4]]"
+    }
+  ]
+}

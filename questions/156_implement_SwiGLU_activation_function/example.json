@@ -1,0 +1,5 @@
+{
+  "input": "np.array([[1, -1, 1000, -1000]])",
+  "output": "[[1000., 0.]]",
+  "reasoning": "The input is of shape (1, 4), so it is split into x1 = [1, -1] and x2 = [1000, -1000]. The sigmoid of 1000 is approximately 1, and the sigmoid of -1000 is approximately 0 due to saturation. Thus, Swish(1000) ≈ 1000 x 1 = 1000 and Swish(-1000) ≈ -1000 x 0 = 0. Then, SwiGLU = x1 * Swish(x2) = [1 x 1000, -1 x 0] = [1000, 0]."
+}

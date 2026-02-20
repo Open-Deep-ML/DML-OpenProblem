@@ -1,0 +1,5 @@
+{
+  "input": "policy = {(i, j): {'up': 0.25, 'down': 0.25, 'left': 0.25, 'right': 0.25} for i in range(5) for j in range(5)}\ngamma = 0.9\nthreshold = 0.001\nV = gridworld_policy_evaluation(policy, gamma, threshold)\nprint(round(V[2][2], 4))",
+  "output": "-7.0902",
+  "reasoning": "The policy is uniform (equal chance of each move). The agent receives -1 per step. After iterative updates, the center state value converges to about -7.09, and corners remain at 0."
+}

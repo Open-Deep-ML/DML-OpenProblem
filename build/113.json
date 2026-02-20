@@ -1,0 +1,38 @@
+{
+  "id": "113",
+  "title": "Implement a Simple Residual Block with Shortcut Connection",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/moe18",
+      "name": "Moe Chabot"
+    }
+  ],
+  "description": "Implement a function that creates a simple residual block using NumPy. The block should take a 1D input array, process it through two weight layers (using matrix multiplication), apply ReLU activations, and add the original input via a shortcut connection before a final ReLU activation.",
+  "learn_section": "## Understanding Residual Blocks in ResNet\n\nResidual blocks are the cornerstone of ResNet (Residual Network), a deep learning architecture designed to train very deep neural networks by addressing issues like vanishing gradients. The key idea is to allow the network to learn residuals differences between the input and the desired output rather than the full transformation.\n\n### Core Concept: Residual Learning\nIn a traditional neural network layer, the output is a direct transformation of the input, such as $H(x)$, where $x$ is the input. In a residual block, instead of learning $H(x)$ directly, the network learns the residual $F(x) = H(x) - x$. The output of the block is then:\n\n$$\ny = F(x) + x\n$$\n\nHere, $F(x)$ represents the transformation applied by the layers within the block (e.g., weight layers and activations), and $x$ is the input, added back via a shortcut connection. This structure allows the network to learn an identity function ($F(x) = 0$, so $y = x$) if needed, which helps in training deeper networks.\n\n### Mathematical Structure\nA typical residual block involves two weight layers with an activation function between them. The activation function used in ResNet is ReLU, defined as:\n\n$$\n\\text{ReLU}(z) = \\max(0, z)\n$$\n\nThe block takes an input $x$, applies a transformation $F(x)$ through the weight layers and activations, and then adds the input $x$ back. Mathematically, if the weight layers are represented by matrices $W_1$ and $W_2$, the transformation $F(x)$ might look like a composition of operations involving $W_1 \\cdot x$, a ReLU activation, and $W_2$ applied to the result. The final output $y$ is the sum of $F(x)$ and $x$, often followed by another ReLU activation to ensure non-negativity.\n\n### Why Shortcut Connections?\n- **Ease of Learning**: If the optimal transformation is close to an identity function, the block can learn $F(x) \\approx 0$, making $y \\approx x$.\n- **Gradient Flow**: The shortcut connection allows gradients to flow directly through the addition operation during backpropagation, helping to train deeper networks without vanishing gradients.\n\n### Conceptual Example\nSuppose the input $x$ is a vector of length 2, and the weight layers are matrices $W_1$ and $W_2$. The block computes $F(x)$ by applying $W_1$, a ReLU activation, and $W_2$, then adds $x$ to the result. The shortcut connection ensures that even if $F(x)$ is small, the output $y$ retains information from $x$, making it easier for the network to learn.\n\nThis structure is what enables ResNet to scale to hundreds of layers while maintaining performance, as shown in the diagram of the residual block.",
+  "starter_code": "import numpy as np\n\ndef residual_block(x: np.ndarray, w1: np.ndarray, w2: np.ndarray) -> np.ndarray:\n\t# Your code here\n\tpass",
+  "solution": "import numpy as np\n\ndef residual_block(x: np.ndarray, w1: np.ndarray, w2: np.ndarray) -> np.ndarray:\n    # First weight layer\n    y = np.dot(w1, x)\n    # First ReLU\n    y = np.maximum(0, y)\n    # Second weight layer\n    y = np.dot(w2, y)\n    # Add shortcut connection (x + F(x))\n    y = y + x\n    # Final ReLU\n    y = np.maximum(0, y)\n    return y",
+  "example": {
+    "input": "x = np.array([1.0, 2.0]), w1 = np.array([[1.0, 0.0], [0.0, 1.0]]), w2 = np.array([[0.5, 0.0], [0.0, 0.5]])",
+    "output": "[1.5, 3.0]",
+    "reasoning": "The input x is [1.0, 2.0]. First, compute w1 @ x = [1.0, 2.0], apply ReLU to get [1.0, 2.0]. Then, compute w2 @ [1.0, 2.0] = [0.5, 1.0]. Add the shortcut x to get [0.5 + 1.0, 1.0 + 2.0] = [1.5, 3.0]. Final ReLU gives [1.5, 3.0]."
+  },
+  "test_cases": [
+    {
+      "test": "x = np.array([1.0, 2.0])\nw1 = np.array([[1.0, 0.0], [0.0, 1.0]])\nw2 = np.array([[0.5, 0.0], [0.0, 0.5]])\nprint(residual_block(x, w1, w2))",
+      "expected_output": "[1.5,3.]"
+    },
+    {
+      "test": "x = np.array([-1.0, 2.0])\nw1 = np.array([[1.0, 0.0], [0.0, 1.0]])\nw2 = np.array([[0.5, 0.0], [0.0, 0.5]])\nprint(residual_block(x, w1, w2))",
+      "expected_output": "[0.,3.]"
+    },
+    {
+      "test": "x = np.array([0.0, 0.0])\nw1 = np.array([[1.0, 0.0], [0.0, 1.0]])\nw2 = np.array([[0.5, 0.0], [0.0, 0.5]])\nprint(residual_block(x, w1, w2))",
+      "expected_output": "[0.,0.]"
+    }
+  ]
+}

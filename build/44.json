@@ -1,0 +1,43 @@
+{
+  "id": "44",
+  "title": "Leaky ReLU Activation Function",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/V817IRW07vs",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/atharva-gite",
+      "name": "atharva-gite"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-4",
+  "description": "Write a Python function `leaky_relu` that implements the Leaky Rectified Linear Unit (Leaky ReLU) activation function. The function should take a float `z` as input and an optional float `alpha`, with a default value of 0.01, as the slope for negative inputs. The function should return the value after applying the Leaky ReLU function.",
+  "learn_section": "\n## Understanding the Leaky ReLU Activation Function\n\nThe Leaky ReLU (Leaky Rectified Linear Unit) activation function is a variant of the ReLU function used in neural networks. It addresses the \"dying ReLU\" problem by allowing a small, non-zero gradient when the input is negative. This small slope for negative inputs helps keep the function active and prevents neurons from becoming inactive.\n\n### Mathematical Definition\nThe Leaky ReLU function is mathematically defined as:\n$$\nf(z) = \\begin{cases} \nz & \\text{if } z > 0 \\\\ \n\\alpha z & \\text{if } z \\leq 0 \n\\end{cases}\n$$\nwhere $z$ is the input to the function and $\\alpha$ is a small positive constant, typically $\\alpha = 0.01$.\n\nIn this definition, the function returns $z$ for positive values, and for negative values, it returns $\\alpha z$, allowing a small gradient to pass through.\n\n### Characteristics\n- **Output Range**: The output is in the range $(-\\infty, \\infty)$. Positive values are retained, while negative values are scaled by the factor $\\alpha$, allowing them to be slightly negative.\n- **Shape**: The function has a similar \"L\" shaped curve as ReLU, but with a small negative slope on the left side for negative $z$, creating a small gradient for negative inputs.\n- **Gradient**: The gradient is 1 for positive values of $z$ and $\\alpha$ for non-positive values. This allows the function to remain active even for negative inputs, unlike ReLU, where the gradient is zero for negative inputs.\n\nThis function is particularly useful in deep learning models as it mitigates the issue of \"dead neurons\" in ReLU by ensuring that neurons can still propagate a gradient even when the input is negative, helping to improve learning dynamics in the network.",
+  "starter_code": "def leaky_relu(z: float, alpha: float = 0.01) -> float|int:\n\t# Your code here\n\tpass",
+  "solution": "def leaky_relu(z: float, alpha: float = 0.01) -> float|int:\n    return z if z > 0 else alpha * z",
+  "example": {
+    "input": "print(leaky_relu(0)) \nprint(leaky_relu(1))\nprint(leaky_relu(-1)) \nprint(leaky_relu(-2, alpha=0.1))",
+    "output": "0\n1\n-0.01\n-0.2",
+    "reasoning": "- For z = 0, the output is 0.\n- For z = 1, the output is 1.\n- For z = -1, the output is -0.01 (0.01 * -1).\n- For z = -2 with alpha = 0.1, the output is -0.2 (0.1 * -2)."
+  },
+  "test_cases": [
+    {
+      "test": "print(leaky_relu(5))",
+      "expected_output": "5"
+    },
+    {
+      "test": "print(leaky_relu(1))",
+      "expected_output": "1"
+    },
+    {
+      "test": "print(leaky_relu(-1))",
+      "expected_output": "-0.01"
+    }
+  ]
+}

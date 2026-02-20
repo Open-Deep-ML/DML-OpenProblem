@@ -1,0 +1,10 @@
+[
+  {
+    "test": "Q1 = 10.0\nrewards = [4.0, 7.0, 13.0]\nalpha = 0.5\nprint(round(exp_weighted_average(Q1, rewards, alpha), 4))",
+    "expected_output": "10.0"
+  },
+  {
+    "test": "Q1 = 0.0\nrewards = [1.0, 1.0, 1.0, 1.0]\nalpha = 0.1\nprint(round(exp_weighted_average(Q1, rewards, alpha), 4))",
+    "expected_output": "0.3439"
+  }
+]

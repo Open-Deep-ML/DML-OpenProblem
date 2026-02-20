@@ -11,12 +11,12 @@ $$
 $$
 
 ### Explanation of Terms
-1. \( \alpha \) is the learning rate.
-2. \( m \) is the number of training examples.
-3. \( h_{\theta}(x^{(i)}) \) is the hypothesis function at iteration \( i \).
-4. \( x^{(i)} \) is the feature vector of the \( i^{\text{th}} \) training example.
-5. \( y^{(i)} \) is the actual target value for the \( i^{\text{th}} \) training example.
-6. \( x_j^{(i)} \) is the value of feature \( j \) for the \( i^{\text{th}} \) training example.
+1. $\alpha$ is the learning rate.
+2. $m$ is the number of training examples.
+3. $h_{\theta}(x^{(i)})$ is the hypothesis function at iteration $i$.
+4. $x^{(i)}$ is the feature vector of the $i^{\text{th}}$ training example.
+5. $y^{(i)}$ is the actual target value for the $i^{\text{th}}$ training example.
+6. $x_j^{(i)}$ is the value of feature $j$ for the $i^{\text{th}}$ training example.
 
 ### Key Points
 - **Learning Rate**: The choice of learning rate is crucial for the convergence and performance of gradient descent. 
@@ -25,4 +25,8 @@ $$
 - **Number of Iterations**: The number of iterations determines how long the algorithm runs before it converges or stops.
 
 ### Practical Implementation
-Implementing gradient descent involves initializing the weights, computing the gradient of the cost function, and iteratively updating the weights according to the update rule.
+Implementing gradient descent involves:
+1. Initializing the weights theta ($\theta$), with 0s in our case, 
+2. Compute the predicted values for all training examples using the current weights
+3. Computing the gradient for each iteration step by aggregating the errors over all training examples and scaling it by the learning rate,
+4. and iteratively updating the weights according to the update rule.

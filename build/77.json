@@ -1,0 +1,42 @@
+{
+  "id": "77",
+  "title": "Calculate Performance Metrics for a Classification Model",
+  "difficulty": "medium",
+  "category": "Machine Learning",
+  "video": "https://youtu.be/W9YoUBZApcA?si=I8FTWXfH3EugaZhc",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/Selbl",
+      "name": "Selbl"
+    },
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "description": "\n### Task: Implement Performance Metrics Calculation\n\nIn this task, you are required to implement a function `performance_metrics(actual, predicted)` that computes various performance metrics for a binary classification problem. These metrics include:\n\n- Confusion Matrix\n- Accuracy\n- F1 Score\n- Specificity\n- Negative Predictive Value\n\nThe function should take in two lists:\n\n- `actual`: The actual class labels (1 for positive, 0 for negative).\n- `predicted`: The predicted class labels from the model.\n\n### Output\n\nThe function should return a tuple containing:\n\n1. `confusion_matrix`: A 2x2 matrix.\n2. `accuracy`: A float representing the accuracy of the model.\n3. `f1_score`: A float representing the F1 score of the model.\n4. `specificity`: A float representing the specificity of the model.\n5. `negative_predictive_value`: A float representing the negative predictive value.\n\n### Constraints\n\n- All elements in the `actual` and `predicted` lists must be either 0 or 1.\n- Both lists must have the same length.",
+  "learn_section": "\n## Performance Metrics\n\nPerformance metrics such as accuracy, F1 score, specificity, negative predictive value, precision, and recall are vital to understanding how a model is performing.\n\nHow many observations are correctly labeled? Are we mislabeling one category more than the other? Performance metrics can answer these questions and provide an idea of where to focus to improve a model's performance.\n\nFor this problem, starting with the confusion matrix is a helpful first step, as all the elements of the confusion matrix can help with calculating other performance metrics.\n\nFor a binary classification problem of a dataset with $n$ observations, the confusion matrix is a $2 \\times 2$ matrix with the following structure:\n\n$$\nM = \\begin{pmatrix} \nTP & FN \\\\\nFP & TN\n\\end{pmatrix}\n$$\n\nWhere:\n- **TP**: True positives, the number of observations from the positive label that were correctly labeled as positive.\n- **FN**: False negatives, the number of observations from the positive label that were incorrectly labeled as negative.\n- **FP**: False positives, the number of observations from the negative label that were incorrectly labeled as positive.\n- **TN**: True negatives, the number of observations from the negative label that were correctly labeled as negative.\n\n### Metrics\n\n#### Accuracy\nHow many observations are labeled as the actual category they belong to?\n\n$$\n\\text{Accuracy} = \\frac{TP + TN}{TP + TN + FP + FN}\n$$\n\n#### Precision\nHow many elements labeled as positive are actually positive?\n\n$$\n\\text{Precision} = \\frac{TP}{TP + FP}\n$$\n\n#### Negative Predictive Value\nHow many elements labeled as negative are actually negative?\n\n$$\n\\text{Negative Predictive Value} = \\frac{TN}{TN + FN}\n$$\n\n#### Recall\nOut of all positive elements, how many were correctly labeled?\n\n$$\n\\text{Recall} = \\frac{TP}{TP + FN}\n$$\n\n#### Specificity\nHow well are we labeling the negative elements correctly?\n\n$$\n\\text{Specificity} = \\frac{TN}{TN + FP}\n$$\n\n#### F1 Score\nHow to account for the trade-off of false negatives and positives? The F1 score is the harmonic mean of precision and recall.\n\n$$\n\\text{F1 Score} = 2 \\times \\frac{\\text{Precision} \\times \\text{Recall}}{\\text{Precision} + \\text{Recall}}\n$$",
+  "starter_code": "\ndef performance_metrics(actual: list[int], predicted: list[int]) -> tuple:\n\t# Implement your code here\n\treturn confusion_matrix, round(accuracy, 3), round(f1, 3), round(specificity, 3), round(negativePredictive, 3)",
+  "solution": "\nfrom collections import Counter\n\ndef performance_metrics(actual: list[int], predicted: list[int]) -> tuple:\n    data = list(zip(actual, predicted))\n    counts = Counter(tuple(pair) for pair in data)\n    TP, FN, FP, TN = counts[(1, 1)], counts[(1, 0)], counts[(0, 1)], counts[(0, 0)]\n    confusion_matrix = [[TP, FN], [FP, TN]]\n    accuracy = (TP + TN) / (TP + TN + FP + FN)\n    precision = TP / (TP + FP)\n    recall = TP / (TP + FN)\n    f1 = 2 * precision * recall / (precision + recall)\n    negativePredictive = TN / (TN + FN)\n    specificity = TN / (TN + FP)\n    return confusion_matrix, round(accuracy, 3), round(f1, 3), round(specificity, 3), round(negativePredictive, 3)",
+  "example": {
+    "input": "actual = [1, 0, 1, 0, 1]\npredicted = [1, 0, 0, 1, 1]\nprint(performance_metrics(actual, predicted))",
+    "output": "([[2, 1], [1, 1]], 0.6, 0.667, 0.5, 0.5)",
+    "reasoning": "The function calculates the confusion matrix, accuracy, F1 score, specificity, and negative predictive value based on the input labels. The resulting values are rounded to three decimal places as required."
+  },
+  "test_cases": [
+    {
+      "test": "\nactual = [1, 0, 1, 0, 1]\npredicted = [1, 0, 0, 1, 1]\nprint(performance_metrics(actual, predicted))\n",
+      "expected_output": "([[2, 1], [1, 1]], 0.6, 0.667, 0.5, 0.5)"
+    },
+    {
+      "test": "actual = [1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1]\npredicted = [0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0]\nprint(performance_metrics(actual, predicted))",
+      "expected_output": "([[6, 4], [2, 7]], 0.684, 0.667, 0.778, 0.636)"
+    },
+    {
+      "test": "actual = [0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0]\npredicted = [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1]\nprint(performance_metrics(actual, predicted))",
+      "expected_output": "([[4, 4], [5, 2]], 0.4, 0.471, 0.286, 0.333)"
+    }
+  ]
+}

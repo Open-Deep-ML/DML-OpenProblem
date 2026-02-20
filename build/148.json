@@ -1,0 +1,42 @@
+{
+  "id": "148",
+  "title": "Adamax Optimizer",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://github.com/mavleo96",
+      "name": "Vijayabharathi Murugan"
+    }
+  ],
+  "description": "Implement the Adamax optimizer update step function. Your function should take the current parameter value, gradient, and moving averages as inputs, and return the updated parameter value and new moving averages. The function should also handle scalar and array inputs and include bias correction for the moving averages.",
+  "learn_section": "# Implementing Adamax Optimizer\n\n## Introduction\nAdamax is a variant of Adam optimizer that uses the infinity norm (max) instead of the L2 norm for the second moment estimate. This makes it more robust in some cases and can lead to better convergence in certain scenarios, particularly when dealing with sparse gradients.\n\n## Learning Objectives\n- Understand how Adamax optimization works\n- Learn to implement Adamax-based gradient updates\n- Understand the effect of infinity norm on optimization\n\n## Theory\nAdamax maintains a moving average of gradients (first moment) and uses the infinity norm for the second moment estimate. The key equations are:\n\nFirst moment estimate (same as Adam):\n\n$m_t = \\beta_1 m_{t-1} + (1-\\beta_1)g_t$\n\nThe second moment estimate in Adam uses the $l_2$ norm:\n\n$v_t = \\beta_2 v_{t-1} + (1-\\beta_2)|g_t|^2$\n\nThis can be generalized to the $l_p$ norm, but norms for large p values are numerically unstable. However, Adamax uses the $l_\\infin$ norm (infinity norm), which converges to:\n\n$u_t = \\max(\\beta_2 \\cdot u_{t-1}, |g_t|)$\n\nUnlike Adam, Adamax doesn't require bias correction for $u_t$ because the max operation makes it less susceptible to bias towards zero.\n\nBias correction:\n$\\hat{m}_t = \\dfrac{m_t}{1-\\beta_1^t}$\n\nParameter update:\n$\\theta_t = \\theta_{t-1} - \\dfrac{\\eta}{u_t} \\hat{m}_t$\n\nWhere:\n- $m_t$ is the first moment estimate at time t\n- $u_t$ is the infinity norm estimate at time t\n- $\\beta_1$ is the first moment coefficient (typically 0.9)\n- $\\beta_2$ is the second moment coefficient (typically 0.999)\n- $\\eta$ is the learning rate\n- $g_t$ is the gradient at time t\n\nNote: Unlike Adam, Adamax doesn't require bias correction for $u_t$ because the max operation makes it less susceptible to bias towards zero.\n\nRead more at:\n\n1. Kingma, D. and Ba, J. (2015). Adam: A Method for Stochastic Optimization. [arXiv:1412.6980](https://arxiv.org/abs/1412.6980)\n2. Ruder, S. (2017). An overview of gradient descent optimization algorithms. [arXiv:1609.04747](https://arxiv.org/pdf/1609.04747)\n\n\n## Problem Statement\nImplement the Adamax optimizer update step function. Your function should take the current parameter value, gradient, and moment estimates as inputs, and return the updated parameter value and new moment estimates.\n\n### Input Format\nThe function should accept:\n- parameter: Current parameter value\n- grad: Current gradient\n- m: First moment estimate\n- u: Infinity norm estimate\n- t: Current timestep\n- learning_rate: Learning rate (default=0.002)\n- beta1: First moment decay rate (default=0.9)\n- beta2: Second moment decay rate (default=0.999)\n- epsilon: Small constant for numerical stability (default=1e-8)\n\n### Output Format\nReturn tuple: (updated_parameter, updated_m, updated_u)\n\n## Example\n```python\n# Example usage:\nparameter = 1.0\ngrad = 0.1\nm = 0.0\nu = 0.0\nt = 1\n\nnew_param, new_m, new_u = adamax_optimizer(parameter, grad, m, u, t)\n```\n\n## Tips\n- Initialize m and u as zeros\n- Keep track of timestep t for bias correction\n- Use numpy for numerical operations\n- Test with both scalar and array inputs\n- Remember to apply bias correction to the first moment estimate\n\n---",
+  "starter_code": "import numpy as np\n\ndef adamax_optimizer(parameter, grad, m, u, t, learning_rate=0.002, beta1=0.9, beta2=0.999, epsilon=1e-8):\n    \"\"\"\n    Update parameters using the Adamax optimizer.\n    Adamax is a variant of Adam based on the infinity norm.\n    It uses the maximum of past squared gradients instead of the exponential moving average.\n\n    Args:\n        parameter: Current parameter value\n        grad: Current gradient\n        m: First moment estimate\n        u: Infinity norm estimate\n        t: Current timestep\n        learning_rate: Learning rate (default=0.002)\n        beta1: First moment decay rate (default=0.9)\n        beta2: Infinity norm decay rate (default=0.999)\n        epsilon: Small constant for numerical stability (default=1e-8)\n\n    Returns:\n        tuple: (updated_parameter, updated_m, updated_u)\n    \"\"\"\n\t# Your code here\n    return np.round(parameter, 5), np.round(m, 5), np.round(u, 5)",
+  "solution": "import numpy as np\n\ndef adamax_optimizer(parameter, grad, m, u, t, learning_rate=0.002, beta1=0.9, beta2=0.999, epsilon=1e-8):\n    \"\"\"\n    Update parameters using the Adamax optimizer.\n    Adamax is a variant of Adam based on the infinity norm.\n    It uses the maximum of past squared gradients instead of the exponential moving average.\n\n    Args:\n        parameter: Current parameter value\n        grad: Current gradient\n        m: First moment estimate\n        u: Infinity norm estimate\n        t: Current timestep\n        learning_rate: Learning rate (default=0.002)\n        beta1: First moment decay rate (default=0.9)\n        beta2: Infinity norm decay rate (default=0.999)\n        epsilon: Small constant for numerical stability (default=1e-8)\n\n    Returns:\n        tuple: (updated_parameter, updated_m, updated_u)\n    \"\"\"\n    assert learning_rate > 0, \"Learning rate must be positive\"\n    assert 0 <= beta1 < 1, \"Beta1 must be between 0 and 1\"\n    assert 0 <= beta2 < 1, \"Beta2 must be between 0 and 1\"\n    assert epsilon > 0, \"Epsilon must be positive\"\n    assert all(u >= 0) if isinstance(u, np.ndarray) else u >= 0, \"u must be non-negative\"\n\n    # Update biased first moment estimate\n    m = beta1 * m + (1 - beta1) * grad\n\n    # Update infinity norm estimate\n    u = np.maximum(beta2 * u, np.abs(grad))\n\n    # Compute bias-corrected first moment estimate\n    m_hat = m / (1 - beta1**t)\n\n    # Update parameters\n    update = learning_rate * m_hat / (u + epsilon)\n    parameter = parameter - update\n\n    return np.round(parameter, 5), np.round(m, 5), np.round(u, 5)",
+  "example": {
+    "input": "parameter = 1.0, grad = 0.1, m = 0.0, u = 0.0, t = 1",
+    "output": "(0.998, 0.01, 0.1)",
+    "reasoning": "The Adamax optimizer computes updated values for the parameter, first moment (m), and infinity norm (u) using bias-corrected estimates of gradients. With input values parameter=1.0, grad=0.1, m=0.0, u=0.0, and t=1, the updated parameter becomes 0.998, the updated m becomes 0.01, and the updated u becomes 0.1."
+  },
+  "test_cases": [
+    {
+      "test": "print(adamax_optimizer(1., 0.1, 1., 1., 1, 0.002, 0.9, 0.999, 1e-8))",
+      "expected_output": "(0.98178, 0.91, 0.999)"
+    },
+    {
+      "test": "print(adamax_optimizer(np.array([1., 2.]), np.array([0.1, 0.2]), np.array([1., 1.]), np.array([1., 1.]), 1, 0.002, 0.9, 0.999, 1e-8))",
+      "expected_output": "(array([0.98178, 1.98158]), array([0.91, 0.92]), array([0.999, 0.999]))"
+    },
+    {
+      "test": "print(adamax_optimizer(np.array([1., 2.]), np.array([0.0, 0.0]), np.array([0.1, 0.1]), np.array([0., 0.]), 1, 0.002, 0.9, 0.999, 1e-8))",
+      "expected_output": "(array([-179999., -179998.]), array([0.09, 0.09]), array([0., 0.]))"
+    },
+    {
+      "test": "print(adamax_optimizer(1., 0.1, 1., 1., 1, 0.002, 0., 0., 1e-8))",
+      "expected_output": "(0.998, 0.1, 0.1)"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
   "title": "Implementing a Custom Dense Layer in Python",
   "difficulty": "hard",
   "category": "Deep Learning",
-  "video": null,
+  "video": "",
   "likes": "0",
   "dislikes": "0",
   "contributor": [
@@ -11,7 +11,5 @@
       "profile_link": "https://github.com/moe18",
       "name": "Moe Chabor"
     }
-  ],
-  "tinygrad_difficulty": null,
-  "pytorch_difficulty": null
+  ]
 }

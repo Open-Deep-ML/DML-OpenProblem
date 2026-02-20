@@ -1,0 +1,61 @@
+{
+  "id": "24",
+  "title": "Single Neuron",
+  "difficulty": "easy",
+  "category": "Deep Learning",
+  "video": "https://youtu.be/fK4QaDZ9UuU",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [
+    {
+      "profile_link": "https://www.youtube.com/@StoatScript/videos",
+      "name": "StoatScript"
+    }
+  ],
+  "tinygrad_difficulty": "easy",
+  "pytorch_difficulty": "easy",
+  "marimo_link": "https://open-deep-ml.github.io/DML-OpenProblem/problem-24",
+  "description": "Write a Python function that simulates a single neuron with a sigmoid activation function for binary classification, handling multidimensional input features. The function should take a list of feature vectors (each vector representing multiple features for an example), associated true binary labels, and the neuron's weights (one for each feature) and bias as input. It should return the predicted probabilities after sigmoid activation and the mean squared error between the predicted probabilities and the true labels, both rounded to four decimal places.",
+  "learn_section": "\n## Single Neuron Model with Multidimensional Input and Sigmoid Activation\n\nThis task involves a neuron model designed for binary classification with multidimensional input features, using the sigmoid activation function to output probabilities. It also involves calculating the mean squared error (MSE) to evaluate prediction accuracy.\n\n### Mathematical Background\n\n**Neuron Output Calculation:**\n$$\nz = \\sum (weight_i \\times feature_i) + bias\n$$\n$$\n\\sigma(z) = \\frac{1}{1 + e^{-z}}\n$$\n\n**MSE Calculation:**\n$$\nMSE = \\frac{1}{n} \\sum (predicted - true)^2\n$$\n\n### Explanation of Terms\n- **\\( z \\)**: The sum of weighted inputs plus bias.\n- **\\( \\sigma(z) \\)**: The sigmoid activation output.\n- **\\( predicted \\)**: The probabilities after sigmoid activation.\n- **\\( true \\)**: The true binary labels.\n\n### Practical Implementation\n- Each feature vector is processed to calculate a combined weighted sum, which is then passed through the sigmoid function to determine the probability of the input belonging to the positive class.\n- **MSE** provides a measure of error, offering insights into the model's performance and aiding in its optimization.",
+  "starter_code": "import math\n\ndef single_neuron_model(features: list[list[float]], labels: list[int], weights: list[float], bias: float) -> (list[float], float):\n\t# Your code here\n\treturn probabilities, mse",
+  "solution": "\nimport math\ndef single_neuron_model(features, labels, weights, bias):\n    probabilities = []\n    for feature_vector in features:\n        z = sum(weight * feature for weight, feature in zip(weights, feature_vector)) + bias\n        prob = 1 / (1 + math.exp(-z))\n        probabilities.append(round(prob, 4))\n    \n    mse = sum((prob - label) ** 2 for prob, label in zip(probabilities, labels)) / len(labels)\n    mse = round(mse, 4)\n    \n    return probabilities, mse",
+  "example": {
+    "input": "features = [[0.5, 1.0], [-1.5, -2.0], [2.0, 1.5]], labels = [0, 1, 0], weights = [0.7, -0.4], bias = -0.1",
+    "output": "([0.4626, 0.4134, 0.6682], 0.3349)",
+    "reasoning": "For each input vector, the weighted sum is calculated by multiplying each feature by its corresponding weight, adding these up along with the bias, then applying the sigmoid function to produce a probability. The MSE is calculated as the average squared difference between each predicted probability and the corresponding true label."
+  },
+  "test_cases": [
+    {
+      "test": "print(single_neuron_model([[0.5, 1.0], [-1.5, -2.0], [2.0, 1.5]], [0, 1, 0], [0.7, -0.4], -0.1))",
+      "expected_output": "([0.4626, 0.4134, 0.6682], 0.3349)"
+    },
+    {
+      "test": "print(single_neuron_model([[1, 2], [2, 3], [3, 1]], [1, 0, 1], [0.5, -0.2], 0))",
+      "expected_output": "([0.525, 0.5987, 0.7858], 0.21)"
+    }
+  ],
+  "tinygrad_starter_code": "from tinygrad.tensor import Tensor\nfrom typing import List, Tuple\n\ndef single_neuron_model_tg(\n    features: List[List[float]],\n    labels: List[float],\n    weights: List[float],\n    bias: float\n) -> Tuple[List[float], float]:\n    \"\"\"\n    Compute output probabilities and MSE for a single neuron using tinygrad.\n    Uses built-in sigmoid and mean operations.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "tinygrad_solution": "from tinygrad.tensor import Tensor\nfrom typing import List, Tuple\n\ndef single_neuron_model_tg(\n    features: List[List[float]],\n    labels: List[float],\n    weights: List[float],\n    bias: float\n) -> Tuple[List[float], float]:\n    X = Tensor(features)\n    w = Tensor(weights)\n    b = bias\n    probs: List[float] = []\n    for i in range(len(features)):\n        z = X[i].dot(w) + b\n        p = z.sigmoid().numpy().tolist()\n        probs.append(round(p, 4))\n\n    mse = sum((p - y)**2 for p, y in zip(probs, labels)) / len(labels)\n    mse = round(mse, 4)\n\n    return probs, mse",
+  "tinygrad_test_cases": [
+    {
+      "test": "print(single_neuron_model_tg(\n    [[0.5, 1.0], [-1.5, -2.0], [2.0, 1.5]],\n    [0, 1, 0],\n    [0.7, -0.4],\n    -0.1\n))",
+      "expected_output": "([0.4626, 0.4134, 0.6682], 0.3349)"
+    },
+    {
+      "test": "print(single_neuron_model_tg(\n    [[1, 2], [2, 3], [3, 1]],\n    [1, 0, 1],\n    [0.5, -0.2],\n    0\n))",
+      "expected_output": "([0.525, 0.5987, 0.7858], 0.21)"
+    }
+  ],
+  "pytorch_starter_code": "import torch\nimport torch.nn.functional as F\nfrom typing import List, Tuple\n\ndef single_neuron_model(\n    features: List[List[float]],\n    labels: List[float],\n    weights: List[float],\n    bias: float\n) -> Tuple[List[float], float]:\n    \"\"\"\n    Compute output probabilities and MSE for a single neuron.\n    Uses built-in sigmoid and MSE loss.\n    \"\"\"\n    # Your implementation here\n    pass",
+  "pytorch_solution": "import torch\nimport torch.nn.functional as F\nfrom typing import List, Tuple\n\ndef single_neuron_model(\n    features: List[List[float]],\n    labels: List[float],\n    weights: List[float],\n    bias: float\n) -> Tuple[List[float], float]:\n    X = torch.tensor(features, dtype=torch.float)\n    y = torch.tensor(labels, dtype=torch.float)\n    w = torch.tensor(weights, dtype=torch.float)\n    b = torch.tensor(bias, dtype=torch.float)\n\n    logits = X.matmul(w) + b\n    probs_t = torch.sigmoid(logits)\n    probs = probs_t.tolist()\n\n    mse = F.mse_loss(probs_t, y, reduction='mean').item()\n\n    return probs, mse",
+  "pytorch_test_cases": [
+    {
+      "test": "probs, mse = single_neuron_model(\n    [[0.5, 1.0], [-1.5, -2.0], [2.0, 1.5]],\n    [0, 1, 0],\n    [0.7, -0.4],\n    -0.1\n)\nprint(([round(p,4) for p in probs], round(mse,4)))",
+      "expected_output": "([0.4626, 0.4134, 0.6682], 0.3349)"
+    },
+    {
+      "test": "probs, mse = single_neuron_model(\n    [[1, 2], [2, 3], [3, 1]],\n    [1, 0, 1],\n    [0.5, -0.2],\n    0\n)\nprint(([round(p,4) for p in probs], round(mse,4)))",
+      "expected_output": "([0.525, 0.5987, 0.7858], 0.21)"
+    }
+  ]
+}
