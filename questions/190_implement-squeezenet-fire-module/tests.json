@@ -14,5 +14,13 @@
   {
     "test": "import numpy as np\n# Middle pixel full sum\n# Same setup as above, check middle pixel (1,1)\n# 9 neighbors are 1s -> Sum = 9\ninput = np.ones((3, 3, 1))\ns_w = np.ones((1, 1, 1, 1))\ns_b = np.zeros(1)\ne1_w = np.zeros((1, 1, 1, 1))\ne1_b = np.zeros(1)\ne3_w = np.ones((3, 3, 1, 1))\ne3_b = np.zeros(1)\nres = fire_module_forward(input, s_w, s_b, e1_w, e1_b, e3_w, e3_b)\nprint(res[1, 1, 1])",
     "expected_output": "9.0"
+  },
+  {
+    "test": "import numpy as np\n# Non-zero bias test\ninput = np.ones((2, 2, 1))\ns_w = np.zeros((1, 1, 1, 1))\ns_b = np.array([1.5])\ne1_w = np.zeros((1, 1, 1, 1))\ne1_b = np.array([2.0])\ne3_w = np.zeros((3, 3, 1, 1))\ne3_b = np.array([3.0])\nres = fire_module_forward(input, s_w, s_b, e1_w, e1_b, e3_w, e3_b)\nprint(f\"{res[0, 0, 0]}, {res[0, 0, 1]}\")",
+    "expected_output": "2.0, 3.0"
+  },
+  {
+    "test": "import numpy as np\n# ReLU test\ninput = np.ones((2, 2, 1))\ns_w = np.ones((1, 1, 1, 1))\ns_b = np.array([-5.0])\ne1_w = np.ones((1, 1, 1, 1))\ne1_b = np.array([2.0])\ne3_w = np.ones((3, 3, 1, 1))\ne3_b = np.array([-1.0])\nres = fire_module_forward(input, s_w, s_b, e1_w, e1_b, e3_w, e3_b)\nprint(f\"{res[0, 0, 0]}, {res[0, 0, 1]}\")",
+    "expected_output": "2.0, 0.0"
   }
 ]
