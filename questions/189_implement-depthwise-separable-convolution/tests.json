@@ -18,6 +18,10 @@
   {
     "test": "import numpy as np\ninput = np.arange(18).reshape(3, 3, 2).astype(float)\ndepthwise_filters = np.array([[[0.5, 0.5], [0.5, 0.5]], [[0.5, 0.5], [0.5, 0.5]]]).astype(float)\npointwise_filters = np.array([[[[1], [1]]]]).astype(float)\nresult = depthwise_separable_conv2d(input, depthwise_filters, pointwise_filters)\nprint(round(result[0, 0, 0], 2))",
     "expected_output": "18.0"
+  },
+  {
+    "test": "import numpy as np\n# Negative filter values test\ninput = np.ones((3, 3, 2))\ndepthwise_filters = np.array([[[1, -1]]]).astype(float)\npointwise_filters = np.array([[[[-1, 1], [1, -1]]]]).astype(float)\nresult = depthwise_separable_conv2d(input, depthwise_filters, pointwise_filters)\nprint(f\"{result[1, 1, 0]}, {result[1, 1, 1]}\")",
+    "expected_output": "-2.0, 2.0"
   }
 
 ]
