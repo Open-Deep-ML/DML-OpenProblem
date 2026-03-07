@@ -1,0 +1,5 @@
+{
+  "input": "input_tensor: (H=32, W=32, C_in=3)\nSqueeze 1x1: s1x1=16 filters\nExpand 1x1: e1x1=64 filters\nExpand 3x3: e3x3=64 filters",
+  "output": "Output Tensor Shape: (32, 32, 128)\nValues: Concatenation of [ReLU(Expand1x1), ReLU(Expand3x3)]",
+  "reasoning": "1. Squeeze layer reduces 3 channels to 16 channels using 1x1 convolution + ReLU.\n2. Expand layer splits into two branches:\n   - Branch A: Apply 64 1x1 filters to the 16-channel squeeze output -> Output shape (32, 32, 64).\n   - Branch B: Apply 64 3x3 filters (with padding) to the 16-channel squeeze output -> Output shape (32, 32, 64).\n3. Concatenate the outputs (64 + 64) to get a final depth of 128. Spatial dimensions (32x32) remain unchanged."
+}
