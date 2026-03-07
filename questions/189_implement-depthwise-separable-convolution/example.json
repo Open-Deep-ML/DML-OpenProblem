@@ -1,0 +1,5 @@
+{
+  "input": "input = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]]), input.shape = (2, 2, 2)\ndepthwise_filters = np.array([[[1, 0.5]]]), shape = (1, 1, 2)\npointwise_filters = np.array([[[[0.5, 1], [1, 0.5]]]]), shape = (1, 1, 2, 2)",
+  "output": "array([[[1.5, 1.5],\n        [3.5, 4.0]],\n       [[5.5, 6.5],\n        [7.5, 9.0]]])\nshape: (2, 2, 2)",
+  "reasoning": "Step 1 - Depthwise Convolution: With a 1x1 kernel, each spatial position is multiplied element-wise by its channel filter. Channel 0 filter=1.0, Channel 1 filter=0.5. At (0,0): [1*1, 2*0.5]=[1, 1]. At (0,1): [3*1, 4*0.5]=[3, 2]. At (1,0): [5*1, 6*0.5]=[5, 3]. At (1,1): [7*1, 8*0.5]=[7, 4]. Step 2 - Pointwise Convolution: Mixes channels using weights [[0.5, 1],[1, 0.5]]. At (0,0): out0=1*0.5+1*1=1.5, out1=1*1+1*0.5=1.5. At (0,1): out0=3*0.5+2*1=3.5, out1=3*1+2*0.5=4.0. At (1,0): out0=5*0.5+3*1=5.5, out1=5*1+3*0.5=6.5. At (1,1): out0=7*0.5+4*1=7.5, out1=7*1+4*0.5=9.0."
+}

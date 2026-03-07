@@ -1,0 +1,27 @@
+[
+  {
+    "test": "import numpy as np\ninput = np.ones((3, 3, 2))\ndepthwise_filters = np.ones((2, 2, 2))\npointwise_filters = np.ones((1, 1, 2, 3))\nresult = depthwise_separable_conv2d(input, depthwise_filters, pointwise_filters)\nprint(result.shape)",
+    "expected_output": "(2, 2, 3)"
+  },
+  {
+    "test": "import numpy as np\ninput = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]]).astype(float)\ndepthwise_filters = np.array([[[1, 1]]]).astype(float)\npointwise_filters = np.array([[[[1, 0], [0, 1]]]]).astype(float)\nresult = depthwise_separable_conv2d(input, depthwise_filters, pointwise_filters)\nprint(result[0, 0, :])",
+    "expected_output": "[1. 2.]"
+  },
+  {
+    "test": "import numpy as np\ninput = np.ones((4, 4, 3))\ndepthwise_filters = np.ones((3, 3, 3)) * 0.5\npointwise_filters = np.ones((1, 1, 3, 2))\nresult = depthwise_separable_conv2d(input, depthwise_filters, pointwise_filters)\nprint(result[0, 0, 0])",
+    "expected_output": "13.5"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\ninput = np.random.randn(5, 5, 4)\ndepthwise_filters = np.random.randn(2, 2, 4)\npointwise_filters = np.random.randn(1, 1, 4, 8)\nresult = depthwise_separable_conv2d(input, depthwise_filters, pointwise_filters)\nprint(result.shape)",
+    "expected_output": "(4, 4, 8)"
+  },
+  {
+    "test": "import numpy as np\ninput = np.arange(18).reshape(3, 3, 2).astype(float)\ndepthwise_filters = np.array([[[0.5, 0.5], [0.5, 0.5]], [[0.5, 0.5], [0.5, 0.5]]]).astype(float)\npointwise_filters = np.array([[[[1], [1]]]]).astype(float)\nresult = depthwise_separable_conv2d(input, depthwise_filters, pointwise_filters)\nprint(round(result[0, 0, 0], 2))",
+    "expected_output": "18.0"
+  },
+  {
+    "test": "import numpy as np\n# Negative filter values test\ninput = np.ones((3, 3, 2))\ndepthwise_filters = np.array([[[1, -1]]]).astype(float)\npointwise_filters = np.array([[[[-1, 1], [1, -1]]]]).astype(float)\nresult = depthwise_separable_conv2d(input, depthwise_filters, pointwise_filters)\nprint(f\"{result[1, 1, 0]}, {result[1, 1, 1]}\")",
+    "expected_output": "-2.0, 2.0"
+  }
+
+]
