@@ -1,0 +1,5 @@
+{
+  "input": "a = [3, 4]\nb = [1, 0]\nresult = project_vector(a, b)\nprint(result)",
+  "output": "[3.0, 0.0]",
+  "reasoning": "The vector [1, 0] points entirely along the x-axis, so projecting [3, 4] onto it keeps only the x-component. Using proj_b(a) = (dot(a, b) / dot(b, b)) * b gives [3.0, 0.0]."
+}
