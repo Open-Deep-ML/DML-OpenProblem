@@ -1,0 +1,54 @@
+{
+  "id": "193",
+  "title": "Implement Sigmoid MoE Router with Bias Correction",
+  "difficulty": "hard",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [],
+  "pytorch_difficulty": "hard",
+  "description": "## Problem\n\nWrite a Python function `sigmoid_moe_router(hidden_states, gate_weight, score_bias, top_k)` that implements the sigmoid-based Mixture of Experts routing used in MiniMax M2.5. The function takes:\n- `hidden_states`: array of shape `(num_tokens, hidden_dim)`\n- `gate_weight`: array of shape `(num_experts, hidden_dim)`\n- `score_bias`: array of shape `(num_experts,)` for expert load balancing\n- `top_k`: number of experts to select per token\n\nThe function should:\n1. Compute router logits via matrix multiplication\n2. Apply sigmoid activation (not softmax) to get routing weights\n3. Add the score bias to determine expert selection\n4. Select the top-k experts per token\n5. Gather the actual sigmoid weights (without bias) for selected experts\n6. Normalize the selected weights to sum to 1\n\nReturn a tuple of `(top_k_weights, top_k_indices)` where weights has shape `(num_tokens, top_k)` and indices has shape `(num_tokens, top_k)`. Only use numpy.",
+  "learn_section": "# **Sigmoid MoE Router with Bias Correction**\n\n## **1. Definition**\nThe Sigmoid MoE Router is the expert routing mechanism used in MiniMax M2.5. Unlike traditional MoE routers that use softmax scoring, this router uses **sigmoid activation** with a **learned bias correction** for expert selection, followed by weight normalization.\n\n## **2. Why Sigmoid Instead of Softmax?**\n- **Independent scoring:** Sigmoid scores each expert independently, while softmax creates competition between experts. This allows for more flexible expert utilization.\n- **Better load balancing:** The learned bias correction term helps distribute tokens more evenly across experts without auxiliary losses dominating training.\n- **Simpler gradient flow:** Sigmoid gradients don't depend on other experts' scores.\n\n## **3. Algorithm**\nGiven hidden states $H \\in \\mathbb{R}^{T \\times d}$, gate weights $W_g \\in \\mathbb{R}^{E \\times d}$, and bias correction $b \\in \\mathbb{R}^{E}$:\n\n**Step 1: Compute logits**\n$$\\text{logits} = H \\cdot W_g^T \\quad \\in \\mathbb{R}^{T \\times E}$$\n\n**Step 2: Apply sigmoid**\n$$w = \\sigma(\\text{logits}) = \\frac{1}{1 + e^{-\\text{logits}}} \\quad \\in \\mathbb{R}^{T \\times E}$$\n\n**Step 3: Bias-corrected scores for selection**\n$$s = w + b \\quad \\in \\mathbb{R}^{T \\times E}$$\n\n**Step 4: Top-k selection**\n$$\\text{indices} = \\text{argsort}(s, \\text{descending})[:, :k]$$\n\n**Step 5: Gather actual weights (without bias)**\n$$w_{\\text{selected}} = \\text{gather}(w, \\text{indices})$$\n\n**Step 6: Normalize**\n$$\\hat{w} = \\frac{w_{\\text{selected}}}{\\sum_{j=1}^{k} w_{\\text{selected}, j}}$$\n\n## **4. Key Design Choices**\n- The **bias is only used for selection**, not for the final weights. This decouples load balancing from the actual routing weights.\n- The bias $b$ is a **learned parameter** that adjusts which experts are preferred, compensating for natural imbalances.\n- The final weights are **normalized** so they sum to 1, making the weighted combination of expert outputs a proper convex combination.\n\n## **5. Role in MiniMax M2.5**\n- **256 experts** per layer, **top-8** selected per token\n- Gate: `Linear(3072, 256, bias=False)`\n- Bias correction: learned vector of size 256\n- Only ~3% of experts activated per token (8/256)",
+  "starter_code": "import numpy as np\n\n# Implement your function below.\ndef sigmoid_moe_router(hidden_states, gate_weight, score_bias, top_k):\n    \"\"\"\n    Implement sigmoid-based MoE routing with bias correction.\n\n    Args:\n        hidden_states (np.ndarray): Token representations, shape (num_tokens, hidden_dim).\n        gate_weight (np.ndarray): Gate projection weights, shape (num_experts, hidden_dim).\n        score_bias (np.ndarray): Learned bias for load balancing, shape (num_experts,).\n        top_k (int): Number of experts to select per token.\n\n    Returns:\n        tuple: (top_k_weights, top_k_indices)\n            - top_k_weights: Normalized routing weights, shape (num_tokens, top_k).\n            - top_k_indices: Selected expert indices, shape (num_tokens, top_k).\n    \"\"\"\n    pass",
+  "solution": "import numpy as np\n\ndef sigmoid_moe_router(hidden_states, gate_weight, score_bias, top_k):\n    logits = hidden_states @ gate_weight.T\n    routing_weights = 1.0 / (1.0 + np.exp(-logits))\n    scores_for_choice = routing_weights + score_bias\n\n    top_k_indices = np.argsort(-scores_for_choice, axis=-1)[:, :top_k]\n\n    top_k_weights = np.take_along_axis(routing_weights, top_k_indices, axis=-1)\n    top_k_weights = top_k_weights / np.sum(top_k_weights, axis=-1, keepdims=True)\n\n    return top_k_weights.astype(float), top_k_indices",
+  "example": {
+    "input": "import numpy as np\nhidden = np.array([[1.0, 0.0], [0.0, 1.0]])\ngate = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0]])\nbias = np.zeros(4)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(np.round(w, 4))\nprint(idx)",
+    "output": "[[0.5938 0.4062]\n [0.5938 0.4062]]\n[[0 1]\n [1 0]]",
+    "reasoning": "For token [1,0]: logits=[1,0,-1,0], sigmoid=[0.731,0.5,0.269,0.5]. Top-2 by score are experts 0,1 with weights [0.731,0.5]. Normalized: [0.731/1.231, 0.5/1.231] = [0.5938, 0.4062]."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nhidden = np.array([[1.0, 0.0], [0.0, 1.0]])\ngate = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0]])\nbias = np.zeros(4)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(np.round(w, 4))\nprint(idx)",
+      "expected_output": "[[0.5938 0.4062]\n [0.5938 0.4062]]\n[[0 1]\n [1 0]]"
+    },
+    {
+      "test": "import numpy as np\nhidden = np.array([[0.0, 0.0]])\ngate = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0]])\nbias = np.array([0.0, 0.0, 1.0])\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(np.round(w, 4))\nprint(idx)",
+      "expected_output": "[[0.5 0.5]]\n[[2 0]]"
+    },
+    {
+      "test": "import numpy as np\nnp.random.seed(42)\nhidden = np.random.randn(2, 4)\ngate = np.random.randn(6, 4)\nbias = np.array([0.1, -0.1, 0.2, -0.2, 0.0, 0.0])\nw, idx = sigmoid_moe_router(hidden, gate, bias, 3)\nprint(np.round(w, 4))\nprint(idx)",
+      "expected_output": "[[0.6001 0.2588 0.1412]\n [0.6644 0.2488 0.0868]]\n[[5 4 0]\n [5 0 2]]"
+    },
+    {
+      "test": "import numpy as np\nhidden = np.array([[1.0, 1.0]])\ngate = np.array([[1.0, 1.0], [2.0, 2.0], [0.0, 0.0]])\nbias = np.zeros(3)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 1)\nprint(np.round(w, 4))\nprint(idx)",
+      "expected_output": "[[1.]]\n[[1]]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef sigmoid_moe_router(hidden_states, gate_weight, score_bias, top_k):\n    \"\"\"\n    Implement sigmoid-based MoE routing with bias correction.\n\n    Args:\n        hidden_states (torch.Tensor): Token representations, shape (num_tokens, hidden_dim).\n        gate_weight (torch.Tensor): Gate projection weights, shape (num_experts, hidden_dim).\n        score_bias (torch.Tensor): Learned bias for load balancing, shape (num_experts,).\n        top_k (int): Number of experts to select per token.\n\n    Returns:\n        tuple: (top_k_weights, top_k_indices)\n    \"\"\"\n    pass",
+  "pytorch_solution": "import torch\n\ndef sigmoid_moe_router(hidden_states, gate_weight, score_bias, top_k):\n    logits = hidden_states @ gate_weight.T\n    routing_weights = torch.sigmoid(logits)\n    scores_for_choice = routing_weights + score_bias\n\n    top_k_indices = torch.topk(scores_for_choice, top_k, dim=-1).indices\n\n    top_k_weights = torch.gather(routing_weights, 1, top_k_indices)\n    top_k_weights = top_k_weights / top_k_weights.sum(dim=-1, keepdim=True)\n\n    return top_k_weights.float(), top_k_indices",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nhidden = torch.tensor([[1.0, 0.0], [0.0, 1.0]])\ngate = torch.tensor([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0]])\nbias = torch.zeros(4)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(torch.round(w, decimals=4))\nprint(idx)",
+      "expected_output": "tensor([[0.5938, 0.4062],\n        [0.5938, 0.4062]])\ntensor([[0, 1],\n        [1, 0]])"
+    },
+    {
+      "test": "import torch\nhidden = torch.tensor([[0.0, 0.0]])\ngate = torch.tensor([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0]])\nbias = torch.tensor([0.0, 0.0, 1.0])\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(torch.round(w, decimals=4))\nprint(idx)",
+      "expected_output": "tensor([[0.5000, 0.5000]])\ntensor([[2, 0]])"
+    },
+    {
+      "test": "import torch\nhidden = torch.tensor([[1.0, 1.0]])\ngate = torch.tensor([[1.0, 1.0], [2.0, 2.0], [0.0, 0.0]])\nbias = torch.zeros(3)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 1)\nprint(torch.round(w, decimals=4))\nprint(idx)",
+      "expected_output": "tensor([[1.]])\ntensor([[1]])"
+    }
+  ]
+}

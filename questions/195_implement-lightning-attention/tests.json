@@ -1,0 +1,22 @@
+[
+  {
+    "test": "import numpy as np\nQ = np.array([[1.0, 0.0]])\nK = np.array([[1.0, 0.0]])\nV = np.array([[1.0, 2.0]])\nprint(np.round(lightning_attention(Q, K, V, 0.9), 4))",
+    "expected_output": "[[1. 2.]]"
+  },
+  {
+    "test": "import numpy as np\nQ = np.array([[1.0, 0.0], [0.0, 1.0]])\nK = np.array([[1.0, 0.0], [0.0, 1.0]])\nV = np.array([[1.0, 2.0], [3.0, 4.0]])\nprint(np.round(lightning_attention(Q, K, V, 1.0), 4))",
+    "expected_output": "[[1. 2.]\n [3. 4.]]"
+  },
+  {
+    "test": "import numpy as np\nQ = np.ones((3, 2))\nK = np.ones((3, 2))\nV = np.ones((3, 2))\nprint(np.round(lightning_attention(Q, K, V, 0.5), 4))",
+    "expected_output": "[[2.  2. ]\n [3.  3. ]\n [3.5 3.5]]"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nQ = np.random.randn(4, 3)\nK = np.random.randn(4, 3)\nV = np.random.randn(4, 3)\nprint(np.round(lightning_attention(Q, K, V, 0.9), 4))",
+    "expected_output": "[[ 0.3988 -0.0812  0.8431]\n [-0.8582  0.538  -1.0621]\n [ 1.4379 -4.9831  0.7769]\n [-0.9745 -0.3103 -2.1484]]"
+  },
+  {
+    "test": "import numpy as np\nQ = np.array([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nK = np.array([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nV = np.array([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nprint(np.round(lightning_attention(Q, K, V, 0.0), 4))",
+    "expected_output": "[[1. 0.]\n [1. 0.]\n [1. 0.]]"
+  }
+]

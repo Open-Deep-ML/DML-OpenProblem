@@ -1,0 +1,22 @@
+[
+  {
+    "test": "import numpy as np\nx = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])\nweight = np.array([1.0, 1.0, 1.0])\nprint(np.round(rmsnorm(x, weight), 4))",
+    "expected_output": "[[0.4629 0.9258 1.3887]\n [0.7895 0.9869 1.1843]]"
+  },
+  {
+    "test": "import numpy as np\nx = np.array([[0.0, 0.0, 0.0]])\nweight = np.array([1.0, 1.0, 1.0])\nprint(np.round(rmsnorm(x, weight), 4))",
+    "expected_output": "[[0. 0. 0.]]"
+  },
+  {
+    "test": "import numpy as np\nx = np.array([[1.0, 1.0, 1.0, 1.0]])\nweight = np.array([2.0, 2.0, 2.0, 2.0])\nprint(np.round(rmsnorm(x, weight), 4))",
+    "expected_output": "[[2. 2. 2. 2.]]"
+  },
+  {
+    "test": "import numpy as np\nx = np.array([[3.0, -3.0]])\nweight = np.array([1.0, 1.0])\nprint(np.round(rmsnorm(x, weight), 4))",
+    "expected_output": "[[ 1. -1.]]"
+  },
+  {
+    "test": "import numpy as np\nx = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])\nweight = np.array([0.5, 2.0])\nprint(np.round(rmsnorm(x, weight), 4))",
+    "expected_output": "[[0.3162 2.5298]\n [0.4243 2.2627]\n [0.4527 2.1729]]"
+  }
+]

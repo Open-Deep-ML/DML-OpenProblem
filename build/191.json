@@ -1,0 +1,54 @@
+{
+  "id": "191",
+  "title": "Implement Grouped Query Attention (GQA)",
+  "difficulty": "medium",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [],
+  "pytorch_difficulty": "medium",
+  "description": "## Problem\n\nWrite a Python function `grouped_query_attention(Q, K, V, num_kv_heads)` that implements Grouped Query Attention. The function takes query `Q` of shape `(num_q_heads, seq_len, head_dim)`, key `K` and value `V` of shape `(num_kv_heads, seq_len, head_dim)`, and the number of key-value heads `num_kv_heads`. The number of query heads must be divisible by `num_kv_heads`. Each KV head is shared across a group of query heads. Return the attention output of shape `(num_q_heads, seq_len, head_dim)` as floats. Only use numpy.",
+  "learn_section": "# **Grouped Query Attention (GQA)**\n\n## **1. Definition**\nGrouped Query Attention (GQA) is an attention variant that uses fewer key-value heads than query heads. Instead of each query head having its own dedicated KV pair (Multi-Head Attention) or all query heads sharing a single KV pair (Multi-Query Attention), GQA groups multiple query heads to share the same KV head.\n\n## **2. Motivation**\n- **Memory efficiency:** Fewer KV heads means a smaller KV cache during inference, reducing memory usage.\n- **Speed:** Reduces the memory bandwidth bottleneck during autoregressive generation.\n- **Quality:** Retains most of the quality of full multi-head attention while being significantly more efficient.\n\n## **3. How It Works**\nGiven:\n- $n_q$ query heads\n- $n_{kv}$ key-value heads\n- Group size $g = n_q / n_{kv}$\n\nEach group of $g$ query heads shares the same key and value head:\n\n$$\n\\text{Group}_j = \\{Q_{j \\cdot g}, Q_{j \\cdot g + 1}, \\ldots, Q_{(j+1) \\cdot g - 1}\\}\n$$\n\nFor each query head $Q_i$ in group $j$:\n\n$$\n\\text{Attention}(Q_i, K_j, V_j) = \\text{softmax}\\left(\\frac{Q_i K_j^T}{\\sqrt{d_k}}\\right) V_j\n$$\n\n## **4. Spectrum of Attention Variants**\n\n| Variant | KV Heads | Description |\n|---|---|---|\n| Multi-Head Attention (MHA) | $n_q$ | Each Q head has its own KV |\n| Grouped Query Attention (GQA) | $n_q / g$ | Groups of Q heads share KV |\n| Multi-Query Attention (MQA) | 1 | All Q heads share one KV |\n\n## **5. Role in MiniMax M2.5**\nMiniMax M2.5 uses GQA with:\n- 48 query heads\n- 8 key-value heads\n- Group size: $48 / 8 = 6$ query heads per KV group\n- Head dimension: 128\n\nThis reduces the KV cache size by 6x compared to full MHA.",
+  "starter_code": "import numpy as np\n\n# Implement your function below.\ndef grouped_query_attention(Q, K, V, num_kv_heads):\n    \"\"\"\n    Implement Grouped Query Attention.\n\n    Args:\n        Q (np.ndarray): Query tensor of shape (num_q_heads, seq_len, head_dim).\n        K (np.ndarray): Key tensor of shape (num_kv_heads, seq_len, head_dim).\n        V (np.ndarray): Value tensor of shape (num_kv_heads, seq_len, head_dim).\n        num_kv_heads (int): Number of key-value heads.\n\n    Returns:\n        np.ndarray: Attention output of shape (num_q_heads, seq_len, head_dim).\n    \"\"\"\n    pass",
+  "solution": "import numpy as np\n\ndef grouped_query_attention(Q, K, V, num_kv_heads):\n    num_q_heads, seq_len, head_dim = Q.shape\n    group_size = num_q_heads // num_kv_heads\n\n    K_expanded = np.repeat(K, group_size, axis=0)\n    V_expanded = np.repeat(V, group_size, axis=0)\n\n    scores = np.matmul(Q, K_expanded.transpose(0, 2, 1)) / np.sqrt(head_dim)\n    attn_weights = np.exp(scores - np.max(scores, axis=-1, keepdims=True))\n    attn_weights = attn_weights / np.sum(attn_weights, axis=-1, keepdims=True)\n\n    output = np.matmul(attn_weights, V_expanded)\n    return output.astype(float)",
+  "example": {
+    "input": "import numpy as np\nQ = np.ones((4, 1, 2))\nK = np.ones((1, 1, 2))\nV = np.array([[[3.0, 4.0]]])\nout = grouped_query_attention(Q, K, V, 1)\nprint(np.round(out, 4))",
+    "output": "[[[3. 4.]]\n\n [[3. 4.]]\n\n [[3. 4.]]\n\n [[3. 4.]]]",
+    "reasoning": "With 4 query heads sharing 1 KV head (multi-query attention), all query heads attend to the same single KV pair and produce the same output [3, 4]."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nnp.random.seed(42)\nQ = np.random.randn(4, 2, 3)\nK = np.random.randn(2, 2, 3)\nV = np.random.randn(2, 2, 3)\nout = grouped_query_attention(Q, K, V, 2)\nprint(out.shape)\nprint(np.round(out[0, 0], 4))",
+      "expected_output": "(4, 2, 3)\n[ 0.201  -0.1918 -0.3457]"
+    },
+    {
+      "test": "import numpy as np\nQ = np.ones((4, 1, 2))\nK = np.ones((1, 1, 2))\nV = np.array([[[3.0, 4.0]]])\nout = grouped_query_attention(Q, K, V, 1)\nprint(np.round(out, 4))",
+      "expected_output": "[[[3. 4.]]\n\n [[3. 4.]]\n\n [[3. 4.]]\n\n [[3. 4.]]]"
+    },
+    {
+      "test": "import numpy as np\nQ = np.array([[[1.0, 0.0]], [[0.0, 1.0]]])\nK = np.array([[[1.0, 0.0]], [[0.0, 1.0]]])\nV = np.array([[[1.0, 2.0]], [[3.0, 4.0]]])\nout = grouped_query_attention(Q, K, V, 2)\nprint(np.round(out, 4))",
+      "expected_output": "[[[1. 2.]]\n\n [[3. 4.]]]"
+    },
+    {
+      "test": "import numpy as np\nnp.random.seed(0)\nQ = np.random.randn(6, 2, 4)\nK = np.random.randn(2, 2, 4)\nV = np.random.randn(2, 2, 4)\nout = grouped_query_attention(Q, K, V, 2)\nprint(out.shape)\nprint(np.round(out[0, 0], 4))",
+      "expected_output": "(6, 2, 4)\n[-0.6658 -0.0491  0.2037  0.2033]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef grouped_query_attention(Q, K, V, num_kv_heads):\n    \"\"\"\n    Implement Grouped Query Attention.\n\n    Args:\n        Q (torch.Tensor): Query tensor of shape (num_q_heads, seq_len, head_dim).\n        K (torch.Tensor): Key tensor of shape (num_kv_heads, seq_len, head_dim).\n        V (torch.Tensor): Value tensor of shape (num_kv_heads, seq_len, head_dim).\n        num_kv_heads (int): Number of key-value heads.\n\n    Returns:\n        torch.Tensor: Attention output of shape (num_q_heads, seq_len, head_dim).\n    \"\"\"\n    pass",
+  "pytorch_solution": "import torch\nimport torch.nn.functional as F\n\ndef grouped_query_attention(Q, K, V, num_kv_heads):\n    num_q_heads, seq_len, head_dim = Q.shape\n    group_size = num_q_heads // num_kv_heads\n\n    K_expanded = K.repeat_interleave(group_size, dim=0)\n    V_expanded = V.repeat_interleave(group_size, dim=0)\n\n    scores = torch.matmul(Q, K_expanded.transpose(-2, -1)) / (head_dim ** 0.5)\n    attn_weights = F.softmax(scores, dim=-1)\n\n    output = torch.matmul(attn_weights, V_expanded)\n    return output.float()",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nQ = torch.ones((4, 1, 2))\nK = torch.ones((1, 1, 2))\nV = torch.tensor([[[3.0, 4.0]]])\nout = grouped_query_attention(Q, K, V, 1)\nprint(torch.round(out, decimals=4))",
+      "expected_output": "tensor([[[3., 4.]],\n\n        [[3., 4.]],\n\n        [[3., 4.]],\n\n        [[3., 4.]]])"
+    },
+    {
+      "test": "import torch\nQ = torch.tensor([[[1.0, 0.0]], [[0.0, 1.0]]])\nK = torch.tensor([[[1.0, 0.0]], [[0.0, 1.0]]])\nV = torch.tensor([[[1.0, 2.0]], [[3.0, 4.0]]])\nout = grouped_query_attention(Q, K, V, 2)\nprint(torch.round(out, decimals=4))",
+      "expected_output": "tensor([[[1., 2.]],\n\n        [[3., 4.]]])"
+    },
+    {
+      "test": "import torch\ntorch.manual_seed(42)\nQ = torch.randn(4, 2, 3)\nK = torch.randn(2, 2, 3)\nV = torch.randn(2, 2, 3)\nout = grouped_query_attention(Q, K, V, 2)\nprint(out.shape)",
+      "expected_output": "torch.Size([4, 2, 3])"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\nhidden = np.array([[1.0, 0.0], [0.0, 1.0]])\ngate = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0]])\nbias = np.zeros(4)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(np.round(w, 4))\nprint(idx)",
+  "output": "[[0.5938 0.4062]\n [0.5938 0.4062]]\n[[0 1]\n [1 0]]",
+  "reasoning": "For token [1,0]: logits=[1,0,-1,0], sigmoid=[0.731,0.5,0.269,0.5]. Top-2 by score are experts 0,1 with weights [0.731,0.5]. Normalized: [0.731/1.231, 0.5/1.231] = [0.5938, 0.4062]."
+}

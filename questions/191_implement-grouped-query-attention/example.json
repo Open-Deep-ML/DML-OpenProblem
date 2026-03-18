@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\nQ = np.ones((4, 1, 2))\nK = np.ones((1, 1, 2))\nV = np.array([[[3.0, 4.0]]])\nout = grouped_query_attention(Q, K, V, 1)\nprint(np.round(out, 4))",
+  "output": "[[[3. 4.]]\n\n [[3. 4.]]\n\n [[3. 4.]]\n\n [[3. 4.]]]",
+  "reasoning": "With 4 query heads sharing 1 KV head (multi-query attention), all query heads attend to the same single KV pair and produce the same output [3, 4]."
+}

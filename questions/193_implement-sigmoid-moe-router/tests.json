@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import numpy as np\nhidden = np.array([[1.0, 0.0], [0.0, 1.0]])\ngate = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0]])\nbias = np.zeros(4)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(np.round(w, 4))\nprint(idx)",
+    "expected_output": "[[0.5938 0.4062]\n [0.5938 0.4062]]\n[[0 1]\n [1 0]]"
+  },
+  {
+    "test": "import numpy as np\nhidden = np.array([[0.0, 0.0]])\ngate = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0]])\nbias = np.array([0.0, 0.0, 1.0])\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(np.round(w, 4))\nprint(idx)",
+    "expected_output": "[[0.5 0.5]]\n[[2 0]]"
+  },
+  {
+    "test": "import numpy as np\nnp.random.seed(42)\nhidden = np.random.randn(2, 4)\ngate = np.random.randn(6, 4)\nbias = np.array([0.1, -0.1, 0.2, -0.2, 0.0, 0.0])\nw, idx = sigmoid_moe_router(hidden, gate, bias, 3)\nprint(np.round(w, 4))\nprint(idx)",
+    "expected_output": "[[0.6001 0.2588 0.1412]\n [0.6644 0.2488 0.0868]]\n[[5 4 0]\n [5 0 2]]"
+  },
+  {
+    "test": "import numpy as np\nhidden = np.array([[1.0, 1.0]])\ngate = np.array([[1.0, 1.0], [2.0, 2.0], [0.0, 0.0]])\nbias = np.zeros(3)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 1)\nprint(np.round(w, 4))\nprint(idx)",
+    "expected_output": "[[1.]]\n[[1]]"
+  }
+]

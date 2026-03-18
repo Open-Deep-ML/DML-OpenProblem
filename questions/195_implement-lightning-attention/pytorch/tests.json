@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import torch\nQ = torch.tensor([[1.0, 0.0]])\nK = torch.tensor([[1.0, 0.0]])\nV = torch.tensor([[1.0, 2.0]])\nprint(torch.round(lightning_attention(Q, K, V, 0.9), decimals=4))",
+    "expected_output": "tensor([[1., 2.]])"
+  },
+  {
+    "test": "import torch\nQ = torch.ones((3, 2))\nK = torch.ones((3, 2))\nV = torch.ones((3, 2))\nprint(torch.round(lightning_attention(Q, K, V, 0.5), decimals=4))",
+    "expected_output": "tensor([[2.0000, 2.0000],\n        [3.0000, 3.0000],\n        [3.5000, 3.5000]])"
+  },
+  {
+    "test": "import torch\nQ = torch.tensor([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nK = torch.tensor([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nV = torch.tensor([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nprint(torch.round(lightning_attention(Q, K, V, 0.0), decimals=4))",
+    "expected_output": "tensor([[1., 0.],\n        [1., 0.],\n        [1., 0.]])"
+  }
+]

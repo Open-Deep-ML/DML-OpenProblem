@@ -1,0 +1,22 @@
+[
+  {
+    "test": "import numpy as np\nq = np.array([[1.0, 0.0, 0.0, 0.0]])\nk = np.array([[1.0, 0.0, 0.0, 0.0]])\npositions = np.array([0])\nqr, kr = apply_rotary_embeddings(q, k, positions, dim=4)\nprint(np.round(qr, 4))\nprint(np.round(kr, 4))",
+    "expected_output": "[[1. 0. 0. 0.]]\n[[1. 0. 0. 0.]]"
+  },
+  {
+    "test": "import numpy as np\nq = np.array([[1.0, 0.0, 0.0, 0.0], [1.0, 0.0, 0.0, 0.0]])\nk = np.array([[1.0, 0.0, 0.0, 0.0], [1.0, 0.0, 0.0, 0.0]])\npositions = np.array([0, 1])\nqr, kr = apply_rotary_embeddings(q, k, positions, dim=4)\nprint(np.round(qr, 4))",
+    "expected_output": "[[1.     0.     0.     0.    ]\n [0.5403 0.     0.8415 0.    ]]"
+  },
+  {
+    "test": "import numpy as np\nq = np.array([[1.0, 2.0, 3.0, 4.0]])\nk = np.array([[5.0, 6.0, 7.0, 8.0]])\npositions = np.array([3])\nqr, kr = apply_rotary_embeddings(q, k, positions, dim=2)\nprint(np.round(qr, 4))\nprint(np.round(kr, 4))",
+    "expected_output": "[[-1.2722 -1.8389  3.      4.    ]]\n[[-5.7967 -5.2344  7.      8.    ]]"
+  },
+  {
+    "test": "import numpy as np\nq = np.array([[1.0, 2.0, 3.0, 4.0]])\nk = np.array([[5.0, 6.0, 7.0, 8.0]])\npositions = np.array([0])\nqr, kr = apply_rotary_embeddings(q, k, positions, dim=4)\nprint(np.round(qr, 4))\nprint(np.round(kr, 4))",
+    "expected_output": "[[1. 2. 3. 4.]]\n[[5. 6. 7. 8.]]"
+  },
+  {
+    "test": "import numpy as np\nq = np.ones((3, 4))\nk = np.ones((3, 4))\npositions = np.array([0, 1, 2])\nqr, kr = apply_rotary_embeddings(q, k, positions, dim=4)\nprint(np.round(qr[2], 4))",
+    "expected_output": "[-1.3254  0.9798  0.4932  1.0198]"
+  }
+]

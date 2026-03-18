@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\ncache = KVCache()\nq = np.array([[1.0, 0.0, 0.0, 0.0]])\nk = np.array([[1.0, 0.0, 0.0, 0.0]])\nv = np.array([[1.0, 2.0, 3.0, 4.0]])\nout, cache = attention_with_kv_cache(q, k, v, cache)\nprint(np.round(out, 4))",
+  "output": "[[1. 2. 3. 4.]]",
+  "reasoning": "With a single token in the cache, the query attends only to that one key-value pair, so the output is simply the value vector [1, 2, 3, 4]."
+}

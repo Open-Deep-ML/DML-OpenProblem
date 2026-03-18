@@ -1,0 +1,18 @@
+[
+  {
+    "test": "import torch\ncache = KVCache()\nprint(cache.get())",
+    "expected_output": "(None, None)"
+  },
+  {
+    "test": "import torch\ncache = KVCache()\nk = torch.tensor([[1.0, 0.0]])\nv = torch.tensor([[1.0, 2.0]])\nkeys, vals = cache.update(k, v)\nprint(keys)\nprint(vals)",
+    "expected_output": "tensor([[1., 0.]])\ntensor([[1., 2.]])"
+  },
+  {
+    "test": "import torch\ncache = KVCache()\nq = torch.tensor([[1.0, 0.0, 0.0, 0.0]])\nk = torch.tensor([[1.0, 0.0, 0.0, 0.0]])\nv = torch.tensor([[1.0, 2.0, 3.0, 4.0]])\nout, cache = attention_with_kv_cache(q, k, v, cache)\nprint(torch.round(out, decimals=4))",
+    "expected_output": "tensor([[1., 2., 3., 4.]])"
+  },
+  {
+    "test": "import torch\ncache = KVCache()\nq1 = torch.tensor([[1.0, 0.0, 0.0, 0.0]])\nk1 = torch.tensor([[1.0, 0.0, 0.0, 0.0]])\nv1 = torch.tensor([[1.0, 2.0, 3.0, 4.0]])\nout1, cache = attention_with_kv_cache(q1, k1, v1, cache)\nq2 = torch.tensor([[0.0, 1.0, 0.0, 0.0]])\nk2 = torch.tensor([[0.0, 1.0, 0.0, 0.0]])\nv2 = torch.tensor([[5.0, 6.0, 7.0, 8.0]])\nout2, cache = attention_with_kv_cache(q2, k2, v2, cache)\nprint(torch.round(out2, decimals=4))\nck, cv = cache.get()\nprint(ck.shape[0])",
+    "expected_output": "tensor([[3.4898, 4.4898, 5.4898, 6.4898]])\n2"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\nx = np.array([[1.0, 2.0]])\nW1 = np.eye(2)\nW3 = np.eye(2)\nW2 = np.eye(2)\nprint(np.round(swiglu_ffn(x, W1, W3, W2), 4))",
+  "output": "[[0.7311 3.5232]]",
+  "reasoning": "Gate = SiLU([1,2]) = [1*sigmoid(1), 2*sigmoid(2)] = [0.7311, 1.7616]. Up = [1,2]. Hidden = [0.7311*1, 1.7616*2] = [0.7311, 3.5232]. Output = hidden @ I = [0.7311, 3.5232]."
+}
