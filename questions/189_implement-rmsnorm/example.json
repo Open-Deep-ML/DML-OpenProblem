@@ -1,5 +1,0 @@
-{
-  "input": "import numpy as np\nx = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])\nweight = np.array([1.0, 1.0, 1.0])\nprint(rmsnorm(x, weight))",
-  "output": "[[0.46291005 0.9258201  1.38873015]\n [0.78954202 0.98692753 1.18431303]]",
-  "reasoning": "For the first row [1,2,3]: RMS = sqrt((1+4+9)/3 + 1e-6) ≈ 2.1602. Dividing by RMS gives [0.4629, 0.9258, 1.3887]. For the second row [4,5,6]: RMS = sqrt((16+25+36)/3 + 1e-6) ≈ 5.0662. Dividing gives [0.7895, 0.9869, 1.1843]. Weight is all ones so it has no effect."
-}

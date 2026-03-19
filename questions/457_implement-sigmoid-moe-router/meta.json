@@ -1,6 +1,6 @@
 {
-  "id": "196",
-  "title": "Implement Multi-Token Prediction",
+  "id": "457",
+  "title": "Implement Sigmoid MoE Router with Bias Correction",
   "difficulty": "hard",
   "category": "Deep Learning",
   "video": "",

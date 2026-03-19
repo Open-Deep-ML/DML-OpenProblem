@@ -1,5 +1,0 @@
-{
-  "input": "import numpy as np\nq = np.array([[1.0, 0.0, 0.0, 0.0], [1.0, 0.0, 0.0, 0.0]])\nk = np.array([[1.0, 0.0, 0.0, 0.0], [1.0, 0.0, 0.0, 0.0]])\npositions = np.array([0, 1])\nqr, kr = apply_rotary_embeddings(q, k, positions, dim=4)\nprint(np.round(qr, 4))",
-  "output": "[[1.     0.     0.     0.    ]\n [0.5403 0.     0.8415 0.    ]]",
-  "reasoning": "At position 0, angles are all 0 so no rotation occurs. At position 1, the first pair (1.0, 0.0) is rotated by angle theta_0=1.0, giving (cos(1), sin(1)) = (0.5403, 0.8415)."
-}
