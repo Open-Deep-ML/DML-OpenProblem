@@ -1,0 +1,5 @@
+{
+  "input": "import numpy as np\nnp.random.seed(42)\nhidden_dim = 4\nvocab_size = 10\nseq_len = 6\nnum_future = 2\nhidden_states = np.random.randn(seq_len, hidden_dim)\ntarget_ids = np.array([3, 1, 4, 1, 5, 9])\nembedding_weight = np.random.randn(vocab_size, hidden_dim)\nproj_weights = [np.random.randn(hidden_dim, 2*hidden_dim) for _ in range(num_future)]\nlm_head_weight = np.random.randn(vocab_size, hidden_dim)\nprint(round(multi_token_prediction(hidden_states, target_ids, embedding_weight, proj_weights, lm_head_weight, num_future), 4))",
+  "output": "6.5678",
+  "reasoning": "With 2 MTP heads over sequence length 6, each head predicts 4 tokens. Head 1 predicts targets[1:5] from hidden[0:4] + embed(targets[0:4]). Head 2 predicts targets[2:6]. The average cross-entropy loss across both heads is 6.5678."
+}

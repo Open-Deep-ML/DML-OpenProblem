@@ -1,0 +1,58 @@
+{
+  "id": "458",
+  "title": "Implement Lightning Attention (Linear Attention)",
+  "difficulty": "hard",
+  "category": "Deep Learning",
+  "video": "",
+  "likes": "0",
+  "dislikes": "0",
+  "contributor": [],
+  "pytorch_difficulty": "hard",
+  "description": "## Problem\n\nWrite a Python function `lightning_attention(Q, K, V, decay)` that implements causal linear attention with exponential decay, as used in Lightning Attention. The function takes:\n- `Q`: query array of shape `(seq_len, head_dim)`\n- `K`: key array of shape `(seq_len, head_dim)`\n- `V`: value array of shape `(seq_len, head_dim)`\n- `decay`: a float decay factor (lambda) between 0 and 1\n\nInstead of computing softmax(QK^T)V, compute the output using the recurrent form:\n- Maintain a state `S` of shape `(head_dim, head_dim)` initialized to zeros\n- At each timestep t: `S_t = decay * S_{t-1} + K_t^T @ V_t`, then `O_t = Q_t @ S_t`\n\nReturn the output array of shape `(seq_len, head_dim)` as floats. Only use numpy.",
+  "learn_section": "# **Lightning Attention (Linear Attention with Decay)**\n\n## **1. Definition**\nLightning Attention is a linear attention mechanism that replaces the quadratic softmax attention with a recurrent formulation. It achieves $O(nd^2)$ complexity instead of $O(n^2d)$, making it efficient for very long sequences. It was developed by the MiniMax team and used in MiniMax-01.\n\n## **2. Standard Attention vs Linear Attention**\n\n**Standard (Softmax) Attention:**\n$$O = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d}}\\right) V \\quad \\in O(n^2 d)$$\n\n**Linear Attention (kernel trick):**\n$$O_t = Q_t \\cdot \\sum_{s \\leq t} K_s^T V_s = Q_t \\cdot S_t \\quad \\in O(n d^2)$$\n\nWhere $S_t = \\sum_{s \\leq t} K_s^T V_s$ is a running state that accumulates key-value outer products.\n\n## **3. Adding Exponential Decay**\nTo prevent the state from growing unboundedly and to focus on more recent tokens, Lightning Attention adds an exponential decay factor $\\lambda$:\n\n$$S_t = \\lambda \\cdot S_{t-1} + K_t^T V_t$$\n$$O_t = Q_t \\cdot S_t$$\n\nWhere:\n- $S_t \\in \\mathbb{R}^{d \\times d}$ is the recurrent state\n- $\\lambda \\in (0, 1)$ is the decay factor\n- $K_t^T V_t$ is the outer product of key and value at position $t$\n\n## **4. Recurrent Interpretation**\nThe decay creates an exponentially weighted sum over history:\n\n$$S_t = \\sum_{s=1}^{t} \\lambda^{t-s} K_s^T V_s$$\n\nMore recent tokens contribute more strongly than distant ones, providing a natural notion of locality.\n\n## **5. Advantages**\n- **Linear complexity:** $O(nd^2)$ instead of $O(n^2d)$ — better for long sequences when $n \\gg d$\n- **Constant memory per step:** Only need to maintain the $d \\times d$ state matrix\n- **Streamable:** Can process tokens one at a time in a recurrent fashion\n- **Infinite context (in theory):** No fixed context window limitation\n\n## **6. Role in MiniMax Architecture**\nIn MiniMax-01, the predecessor to M2.5, Lightning Attention was used in a hybrid pattern: 7 linear attention layers followed by 1 softmax attention layer, repeated across the network. This combined the efficiency of linear attention with the expressiveness of softmax attention for long-range dependencies.",
+  "starter_code": "import numpy as np\n\n# Implement your function below.\ndef lightning_attention(Q, K, V, decay):\n    \"\"\"\n    Implement causal linear attention with exponential decay.\n\n    Args:\n        Q (np.ndarray): Query array of shape (seq_len, head_dim).\n        K (np.ndarray): Key array of shape (seq_len, head_dim).\n        V (np.ndarray): Value array of shape (seq_len, head_dim).\n        decay (float): Exponential decay factor (lambda), between 0 and 1.\n\n    Returns:\n        np.ndarray: Output array of shape (seq_len, head_dim).\n    \"\"\"\n    pass",
+  "solution": "import numpy as np\n\ndef lightning_attention(Q, K, V, decay):\n    seq_len, head_dim = Q.shape\n    S = np.zeros((head_dim, head_dim))\n    output = np.zeros((seq_len, head_dim))\n\n    for t in range(seq_len):\n        S = decay * S + np.outer(K[t], V[t])\n        output[t] = Q[t] @ S\n\n    return output.astype(float)",
+  "example": {
+    "input": "import numpy as np\nQ = np.ones((3, 2))\nK = np.ones((3, 2))\nV = np.ones((3, 2))\nprint(np.round(lightning_attention(Q, K, V, 0.5), 4))",
+    "output": "[[2.  2. ]\n [3.  3. ]\n [3.5 3.5]]",
+    "reasoning": "At t=0: S = outer([1,1],[1,1]) = [[1,1],[1,1]], O = [1,1]@S = [2,2]. At t=1: S = 0.5*S + outer = [[1.5,1.5],[1.5,1.5]], O = [3,3]. At t=2: S = 0.5*S + outer = [[1.75,1.75],[1.75,1.75]], O = [3.5,3.5]."
+  },
+  "test_cases": [
+    {
+      "test": "import numpy as np\nQ = np.array([[1.0, 0.0]])\nK = np.array([[1.0, 0.0]])\nV = np.array([[1.0, 2.0]])\nprint(np.round(lightning_attention(Q, K, V, 0.9), 4))",
+      "expected_output": "[[1. 2.]]"
+    },
+    {
+      "test": "import numpy as np\nQ = np.array([[1.0, 0.0], [0.0, 1.0]])\nK = np.array([[1.0, 0.0], [0.0, 1.0]])\nV = np.array([[1.0, 2.0], [3.0, 4.0]])\nprint(np.round(lightning_attention(Q, K, V, 1.0), 4))",
+      "expected_output": "[[1. 2.]\n [3. 4.]]"
+    },
+    {
+      "test": "import numpy as np\nQ = np.ones((3, 2))\nK = np.ones((3, 2))\nV = np.ones((3, 2))\nprint(np.round(lightning_attention(Q, K, V, 0.5), 4))",
+      "expected_output": "[[2.  2. ]\n [3.  3. ]\n [3.5 3.5]]"
+    },
+    {
+      "test": "import numpy as np\nnp.random.seed(42)\nQ = np.random.randn(4, 3)\nK = np.random.randn(4, 3)\nV = np.random.randn(4, 3)\nprint(np.round(lightning_attention(Q, K, V, 0.9), 4))",
+      "expected_output": "[[ 0.3988 -0.0812  0.8431]\n [-0.8582  0.538  -1.0621]\n [ 1.4379 -4.9831  0.7769]\n [-0.9745 -0.3103 -2.1484]]"
+    },
+    {
+      "test": "import numpy as np\nQ = np.array([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nK = np.array([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nV = np.array([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nprint(np.round(lightning_attention(Q, K, V, 0.0), 4))",
+      "expected_output": "[[1. 0.]\n [1. 0.]\n [1. 0.]]"
+    }
+  ],
+  "pytorch_starter_code": "import torch\n\ndef lightning_attention(Q, K, V, decay):\n    \"\"\"\n    Implement causal linear attention with exponential decay.\n\n    Args:\n        Q (torch.Tensor): Query tensor of shape (seq_len, head_dim).\n        K (torch.Tensor): Key tensor of shape (seq_len, head_dim).\n        V (torch.Tensor): Value tensor of shape (seq_len, head_dim).\n        decay (float): Exponential decay factor (lambda), between 0 and 1.\n\n    Returns:\n        torch.Tensor: Output tensor of shape (seq_len, head_dim).\n    \"\"\"\n    pass",
+  "pytorch_solution": "import torch\n\ndef lightning_attention(Q, K, V, decay):\n    seq_len, head_dim = Q.shape\n    S = torch.zeros((head_dim, head_dim), dtype=Q.dtype)\n    output = torch.zeros_like(Q)\n\n    for t in range(seq_len):\n        S = decay * S + torch.outer(K[t], V[t])\n        output[t] = Q[t] @ S\n\n    return output.float()",
+  "pytorch_test_cases": [
+    {
+      "test": "import torch\nQ = torch.tensor([[1.0, 0.0]])\nK = torch.tensor([[1.0, 0.0]])\nV = torch.tensor([[1.0, 2.0]])\nprint(torch.round(lightning_attention(Q, K, V, 0.9), decimals=4))",
+      "expected_output": "tensor([[1., 2.]])"
+    },
+    {
+      "test": "import torch\nQ = torch.ones((3, 2))\nK = torch.ones((3, 2))\nV = torch.ones((3, 2))\nprint(torch.round(lightning_attention(Q, K, V, 0.5), decimals=4))",
+      "expected_output": "tensor([[2.0000, 2.0000],\n        [3.0000, 3.0000],\n        [3.5000, 3.5000]])"
+    },
+    {
+      "test": "import torch\nQ = torch.tensor([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nK = torch.tensor([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nV = torch.tensor([[1.0, 0.0], [1.0, 0.0], [1.0, 0.0]])\nprint(torch.round(lightning_attention(Q, K, V, 0.0), decimals=4))",
+      "expected_output": "tensor([[1., 0.],\n        [1., 0.],\n        [1., 0.]])"
+    }
+  ]
+}

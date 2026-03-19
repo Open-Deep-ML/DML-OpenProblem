@@ -1,0 +1,14 @@
+[
+  {
+    "test": "import torch\nhidden = torch.tensor([[1.0, 0.0], [0.0, 1.0]])\ngate = torch.tensor([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -1.0]])\nbias = torch.zeros(4)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(torch.round(w, decimals=4))\nprint(idx)",
+    "expected_output": "tensor([[0.5938, 0.4062],\n        [0.5938, 0.4062]])\ntensor([[0, 1],\n        [1, 0]])"
+  },
+  {
+    "test": "import torch\nhidden = torch.tensor([[0.0, 0.0]])\ngate = torch.tensor([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0]])\nbias = torch.tensor([0.0, 0.0, 1.0])\nw, idx = sigmoid_moe_router(hidden, gate, bias, 2)\nprint(torch.round(w, decimals=4))\nprint(idx)",
+    "expected_output": "tensor([[0.5000, 0.5000]])\ntensor([[2, 0]])"
+  },
+  {
+    "test": "import torch\nhidden = torch.tensor([[1.0, 1.0]])\ngate = torch.tensor([[1.0, 1.0], [2.0, 2.0], [0.0, 0.0]])\nbias = torch.zeros(3)\nw, idx = sigmoid_moe_router(hidden, gate, bias, 1)\nprint(torch.round(w, decimals=4))\nprint(idx)",
+    "expected_output": "tensor([[1.]])\ntensor([[1]])"
+  }
+]
