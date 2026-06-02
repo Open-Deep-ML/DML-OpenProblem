@@ -21,8 +21,10 @@ def pegasos_kernel_svm(data, labels, kernel='linear', lambda_val=0.01, iteration
     
             decision = sum(alphas[j] * labels[j] * kernel_func(data[j], data[i]) for j in range(n_samples)) + b
             if labels[i] * decision < 1:
-                alphas[i] += eta * (labels[i] - lambda_val * alphas[i])
+                alphas[i] = (1 - (eta * lambda_val)) * alphas[i] + eta
                 b += eta * labels[i]
+            else:
+                alphas[i] = (1 - (eta * lambda_val)) * alphas[i]
 
     return np.round(alphas, 4).tolist(), np.round(b, 4)
 
@@ -31,11 +33,11 @@ def test_pegasos_kernel_svm():
     # Test case 1: Linear kernel
     data = np.array([[1, 2], [2, 3], [3, 1], [4, 1]])
     labels = np.array([1, 1, -1, -1])
-    expected_output = ([100.0, 0.0, -100.0, -100.0], -937.4755)
+    expected_output = ([2.0, 2.0, 6.0, 1.0], 36.2027)
     assert pegasos_kernel_svm(data, labels, kernel='linear', lambda_val=0.01, iterations=100) == expected_output, "Test case 1 failed"
     
     # Test case 2: RBF kernel
-    expected_output = ([100.0, 99.0, -100.0, -100.0], -115.0)
+    expected_output = ([1.0, 1.0, 1.0, 1.0], 0.0)
     assert pegasos_kernel_svm(data, labels, kernel='rbf', lambda_val=0.01, iterations=100, sigma=0.5) == expected_output, "Test case 2 failed"
 
 if __name__ == "__main__":
