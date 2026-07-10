@@ -50,41 +50,37 @@ the limitations in earlier metrics like BLEU.
 - Matches: 7
 
 ### 3. Unigram Precision and Recall Calculation
-- Precision = Matches / Candidate Length = 7 / 9 ~ 0.778
+- Precision = Matches / Candidate Length = 7 / 9 ≈ 0.778
 
-- Recall = Matches / Reference Length = 7 / 9 ~ 0.778
+- Recall = Matches / Reference Length = 7 / 9 ≈ 0.778
 
 ### 4. F-mean Calculation (alpha = 0.9)
 ```
 F_mean = (Precision * Recall) / 
 (alpha * Precision + (1 - alpha) * Recall)
-       = (0.778 * 0.778) / (0.9 * 0.778 + (1 - 0.9) * 0.778)
-       = 0.606 / (0.7 + 0.078)
-       = 0.606 / 0.778
-       ≈ 0.779
+       = ((7 / 9) * (7 / 9)) / (0.9 * (7 / 9) + 0.1 * (7 / 9))
+       = 7 / 9
+       ≈ 0.778
 ```
 
 ### 5. Chunk Calculation
 - Contiguous matched sequences:
-  1. ['quick', 'brown', 'fox']
-  2. ['jumps', 'over']
-  3. ['lazy', 'dog']
-- Number of Chunks: 3
+  1. ['quick', 'brown', 'fox', 'jumps', 'over']
+  2. ['lazy', 'dog']
+- Number of Chunks: 2
 - Total Number of Unigram Matches: 7
 
-### 6. Penalty Calculation (betta = 3, gamma = 0.5)
+### 6. Penalty Calculation (beta = 3, gamma = 0.5)
 ```
 Penalty = gamma * 
-(Number of Chunks / Total Number of Unigram Matches)^betta
-        = 0.5 * (3 / 7)^3
-        = 0.5 * (0.429)^3
-        ≈ 0.039
+(Number of Chunks / Total Number of Unigram Matches)^beta
+        = 0.5 * (2 / 7)^3
+        ≈ 0.012
 ```
 
 ### 7. Final METEOR Score
 ```
 METEOR = F_mean * (1 - Penalty)
-       = 0.779 * (1 - 0.039)
-       = 0.779 * 0.961
-       ≈ 0.749
+       = (7 / 9) * (1 - 0.012)
+       ≈ 0.769
 ```
