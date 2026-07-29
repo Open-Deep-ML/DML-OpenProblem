@@ -1,0 +1,22 @@
+[
+  {
+    "test": "print(pinball_loss(np.array([3, -0.5, 2, 7]), np.array([2.5, 0.0, 2, 8]), 0.5))",
+    "expected_output": "0.25"
+  },
+  {
+    "test": "print(pinball_loss(np.array([10, 20, 30]), np.array([12, 18, 32]), 0.9))",
+    "expected_output": "0.733"
+  },
+  {
+    "test": "print(pinball_loss(np.array([1, 2, 3, 4]), np.array([1.5, 2.5, 2.5, 5]), 0.1))",
+    "expected_output": "0.463"
+  },
+  {
+    "test": "print(pinball_loss(np.array([5, 5, 5]), np.array([5, 5, 5]), 0.5))",
+    "expected_output": "0.0"
+  },
+  {
+    "test": "print(pinball_loss(np.array([[1, 2], [3, 4]]), np.array([[1.5, 1], [2, 5]]), 0.7))",
+    "expected_output": "0.462"
+  }
+]
